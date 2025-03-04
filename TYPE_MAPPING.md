@@ -5,6 +5,14 @@ It serves as a definitive guide for maintaining consistency across different pla
 The mapping strategy detailed herein focuses on creating platform-agnostic representations of WebGPU types, facilitating seamless integration across various target platforms supported by Kotlin. 
 This documentation is essential for developers working on WebGPU implementations in Kotlin, particularly those dealing with cross-platform compatibility challenges.
 
+# Mapping input
+
+The WebGPU specifications referenced in this document are derived from the official website
+at [https://www.w3.org/TR/webgpu/](https://www.w3.org/TR/webgpu/), particularly the WebIDL definitions provided at the
+end of the webpage. These WebIDL definitions serve as the foundation for creating platform-agnostic type mappings and
+ensuring compliance with the WebGPU standard. By leveraging these authoritative specifications, the implementation
+remains consistent with the official WebGPU guidelines.
+
 # ArrayBuffer
 
 I would like to gather feedback on this point. Please let me know your thoughts or any suggestions.
