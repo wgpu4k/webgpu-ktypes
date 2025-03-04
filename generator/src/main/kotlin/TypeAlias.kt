@@ -1,0 +1,1 @@
+class TypeAlias(val name: String, val type: String)

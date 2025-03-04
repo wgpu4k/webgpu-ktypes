@@ -18,37 +18,7 @@ val idlExtraTyps = """
     };
 """.byteInputStream()
 
-val webUnwantedTypes = setOf(
-    // Types de navigateur
-    "NavigatorGPU",
-    "Navigator",
-    "WorkerNavigator",
 
-    // Types spécifiques au canvas web
-    "GPUCanvasContext",
-    "GPUCanvasConfiguration",
-    "GPUCanvasAlphaMode",
-    "GPUCanvasToneMappingMode",
-    "GPUCanvasToneMapping",
-
-    // Types dictionnaires redondants
-    "GPUColorDict",
-    "GPUOrigin2DDict",
-    "GPUOrigin3DDict",
-    "GPUExtent3DDict",
-
-    // Types d'événements web
-    "GPUUncapturedErrorEvent",
-    "GPUUncapturedErrorEventInit",
-
-    // Types liés aux workers web
-    "GPUExternalTexture",
-    "GPUExternalTextureDescriptor",
-    "GPUExternalTextureBindingLayout",
-    "GPUCopyExternalImageSource",
-    "GPUCopyExternalImageDestInfo",
-    "GPUCopyExternalImageSourceInfo"
-)
 
 val baseSourcePath = Paths.get("webgpu-ktypes").resolve("src").resolve("commonMain").resolve("kotlin")
 val typesPath = baseSourcePath.resolve("types.kt")
@@ -69,6 +39,10 @@ fun main() {
     val model = WebIdlParser.parseFromInputStream(
         SequenceInputStream(idlExtraTyps, resource.openStream())
     )
+    val context = MapperContext()
+    context.loadTypeDef(model.typeDefs)
+    context.loadInterfaces(model.interfaces)
+    context.loadDictionaries(model.dictionaries)
 
     //model.listTypes().joinToString(",").let { println(it) }
 
@@ -76,15 +50,25 @@ fun main() {
         delete()
         createNewFile()
 
-        model.interfaces
-            .forEach {
-                appendText("interface ${it.name.fixName()}\n")
-            }
+        context.typeAliases.forEach {
+            appendText("typealias ${it.name} = ${it.type}\n")
+        }
+        appendText("\n")
 
-        model.dictionaries
-            .forEach {
-                appendText("interface ${it.name.fixName()}\n")
+        context.interfaces.forEach {
+            appendText("interface ${it.name}")
+            if (it.extends.isNotEmpty()) {
+                appendText(" : ")
+                appendText(it.extends.joinToString(", "))
             }
+            appendText(" { \n")
+
+            it.attributes.forEach {
+                appendText("    var ${it.name}: ${it.type} \n")
+            }
+            appendText("}\n\n")
+
+        }
 
     }
 }
@@ -98,10 +82,6 @@ private fun URL.downloadToPath(paths: Path) {
         }
     }.onFailure { error(it)}
 }
-
-private fun String.fixName(): String = (if (contains(':')) substringBefore(':') else this)
-    .replace("\n", "")
-    .trim()
 
 private fun IdlModel.listTypes(): Set<String> = (enums.map { it.name } +
         interfaces.map { it.name } +
