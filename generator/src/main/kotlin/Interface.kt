@@ -1,5 +1,6 @@
 class Interface(
-    val name: String
+    val name: String,
+    val sealed: Boolean = false
 ) {
     var extends: Set<String> = emptySet()
     var attributes: List<Attribute> = emptyList()

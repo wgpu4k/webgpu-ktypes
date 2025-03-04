@@ -1,3 +1,5 @@
+package io.ygdrasil.webgpu
+
 /**
  * Represents a source of GPU buffers that can be used within a graphics or compute pipeline.
  * This interface acts as a common abstraction for managing GPU-related data sources.

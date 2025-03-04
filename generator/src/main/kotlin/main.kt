@@ -40,9 +40,10 @@ fun main() {
         SequenceInputStream(idlExtraTyps, resource.openStream())
     )
     val context = MapperContext()
-    context.loadTypeDef(model.typeDefs)
+    context.loadTypeDef(model)
     context.loadInterfaces(model.interfaces)
     context.loadDictionaries(model.dictionaries)
+    context.loadEnums(model.enums)
 
     //model.listTypes().joinToString(",").let { println(it) }
 
@@ -50,12 +51,22 @@ fun main() {
         delete()
         createNewFile()
 
+        appendText("package io.ygdrasil.webgpu\n\n")
+
         context.typeAliases.forEach {
             appendText("typealias ${it.name} = ${it.type}\n")
         }
         appendText("\n")
 
+        context.enumerations.forEach {
+            appendText("enum class  ${it.name}")
+            appendText("\n")
+        }
+
+        appendText("\n")
+
         context.interfaces.forEach {
+            if (it.sealed) appendText("sealed ")
             appendText("interface ${it.name}")
             if (it.extends.isNotEmpty()) {
                 appendText(" : ")

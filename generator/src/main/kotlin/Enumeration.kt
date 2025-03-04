@@ -1,0 +1,1 @@
+class Enumeration(val name: String)
