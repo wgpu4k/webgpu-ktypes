@@ -120,3 +120,35 @@ choice is made because the C specification names feel more natural in terms of l
 By following the conventions of the C headers, the implementation adopts a clearer and more intuitive
 representation of enumerations, making them easier for developers to work with and aligning better with the nature of
 the WebGPU API.
+
+# Constants
+
+Constants and their respective values will be transformed into enumerations to ensure type safety. 
+Unlike other types, the default type for these enumerations and their values will be explicitly set to `ULong`. 
+This decision is made to align with the data type used for constants in the native WebGPU headers. 
+By adhering to this approach, we ensure consistency with the official WebGPU implementation while 
+maintaining compatibility across supported platforms.
+
+# Dictionary and interface
+
+Dictionary types and interfaces in WebGPU will be transformed into Kotlin `interface` constructs. This design choice
+reflects the flexibility and extensibility offered by Kotlin interfaces, ensuring that implementations are both
+platform-agnostic and highly adaptable to various project requirements.
+
+For the initial target, the **wgpu4k** project (or a hypothetical **dawn4k** project), the transformation will primarily
+focus on providing basic and essential implementations of these interfaces. The objective here is to offer a
+straightforward and functional mapping of WebGPU dictionaries and interfaces, ensuring compatibility with the core
+WebGPU API.
+
+However, this is not a restrictive approach. Other projects or extensions can easily build upon these interfaces to
+deliver more advanced functionalities, such as offering domain-specific languages (DSLs) or rich utility methods for a
+more expressive developer experience. By relying on Kotlin's support for interface inheritance, any implementation can
+extend the base interfaces without restricting compatibility. This modular approach guarantees that developers can work
+with any compatible interface, whether it uses basic functionality or advanced DSLs, without being tightly coupled to a
+specific implementation.
+
+> **Note**: Each specification must implement default values as described in the corresponding IDL definitions. These
+> default values ensure consistency with the WebGPU standard and provide clear guidance for initialization behaviors. By
+> adhering to the default values in the IDL specifications, the implementation will maintain compliance and avoid
+> discrepancies across different platforms.
+
