@@ -4,6 +4,20 @@ class Interface(
 ) {
     var extends: Set<String> = emptySet()
     var attributes: List<Attribute> = emptyList()
+    var methods: List<Method> = emptyList()
+
+    class Method(
+        val name: String,
+        val returnType: String,
+        val parameters: List<Pair<String, String>>,
+        val isSuspend: Boolean
+    ) {
+        override fun toString(): String = StringBuilder().apply {
+            append("\tfun $name(")
+            append(parameters.joinToString(", ") { (name, type) -> "$name: $type" })
+            append("): $returnType")
+        }.toString()
+    }
 
     class Attribute(
         val name: String,
@@ -26,6 +40,8 @@ class Interface(
                 append(extends.joinToString(", "))
             }
             append(" {\n")
+            append(methods.joinToString("\n"))
+            if (methods.isNotEmpty()) append("\n")
             append(attributes.joinToString("\n"))
             if (attributes.isNotEmpty()) append("\n")
             append("}\n")

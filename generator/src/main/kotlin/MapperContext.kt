@@ -1,3 +1,5 @@
+import de.fabmax.webidl.model.IdlType
+
 class MapperContext {
     fun adaptToGuidelines() {
 
@@ -12,9 +14,15 @@ class MapperContext {
             }
         }
 
+        // Flag are Long type to keep native compatibility
+        typeAliases
+            .filter { it.name.endsWith("Flags") }
+            .forEach { typeAlias -> typeAlias.type = "ULong" }
+
     }
 
     val interfaces = mutableListOf<Interface>()
     val typeAliases = mutableListOf<TypeAlias>()
     var enumerations = emptyList<Enumeration>()
 }
+

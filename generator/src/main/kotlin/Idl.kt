@@ -2,6 +2,7 @@ import de.fabmax.webidl.model.IdlEnum
 import de.fabmax.webidl.model.IdlInterface
 import de.fabmax.webidl.model.IdlSimpleType
 import de.fabmax.webidl.model.IdlType
+import toKotlinType
 
 internal val webUnwantedTypes = setOf(
     // Types de navigateur
@@ -43,29 +44,13 @@ fun MapperContext.loadEnums(idlEnums: List<IdlEnum>) {
 }
 
 
-fun MapperContext.loadInterfaces(idlInterfaces: List<IdlInterface>) {
-    idlInterfaces
-        .filter { it.name.fixName() !in webUnwantedTypes }
-        .forEach { idlInterface ->
-            val name = idlInterface.name.fixName()
-            (interfaces.find { it.name == name } ?: Interface(name).also { interfaces.add(it) })
-                .also { kinterface ->
-                    kinterface.extends += idlInterface.superInterfaces
-
-                    idlInterface.attributes
-                        .filter { it.type is IdlSimpleType && (it.type as IdlSimpleType).typeName !in webUnwantedTypes }
-                        .forEach {
-                            kinterface.attributes += Interface.Attribute(it.name, it.type.toKotlinType(), it.isReadonly)
-                        }
-                }
-        }
-}
 
 
 internal fun IdlType.toKotlinType(): String = (this as IdlSimpleType).let {
     when (typeName) {
         "sequence", "FrozenArray" -> "List<${this.parameterTypes!!.first().toKotlinType()}>"
         "record" -> "Map<${this.parameterTypes!!.first().toKotlinType()}, ${this.parameterTypes!![1].toKotlinType()}>"
+        "Promise" -> this.parameterTypes!!.first().toKotlinType()
         else -> typeName.toKotlinType()
     }
 }
@@ -81,6 +66,9 @@ internal fun String.toKotlinType(): String = when (this) {
     "double" -> "Double"
     "DOMString", "USVString" -> "String"
     "boolean" -> "Boolean"
+    "undefined" -> "Unit"
+    "AllowSharedBufferSource" -> "GPUBufferSource"
+    "Uint32Array" -> "List<UInt>"
     else -> this
 }
 
