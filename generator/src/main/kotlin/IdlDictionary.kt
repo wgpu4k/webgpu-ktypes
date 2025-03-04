@@ -18,7 +18,7 @@ internal fun MapperContext.loadDictionary(name: String, idlDictionary: IdlDictio
             idlDictionary.members
                 .filter { it.type is IdlSimpleType && (it.type as IdlSimpleType).typeName !in webUnwantedTypes }
                 .forEach {
-                    kinterface.attributes += Interface.Attribute(it.name, it.type.toKotlinType())
+                    kinterface.attributes += Interface.Attribute(it.name, it.type.toKotlinType(), true)
                 }
         }
 }

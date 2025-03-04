@@ -55,7 +55,7 @@ fun MapperContext.loadInterfaces(idlInterfaces: List<IdlInterface>) {
                     idlInterface.attributes
                         .filter { it.type is IdlSimpleType && (it.type as IdlSimpleType).typeName !in webUnwantedTypes }
                         .forEach {
-                            kinterface.attributes += Interface.Attribute(it.name, it.type.toKotlinType())
+                            kinterface.attributes += Interface.Attribute(it.name, it.type.toKotlinType(), it.isReadonly)
                         }
                 }
         }

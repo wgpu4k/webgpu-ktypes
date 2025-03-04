@@ -46,6 +46,7 @@ fun main() {
     context.loadEnums(model.enums)
 
     //model.listTypes().joinToString(",").let { println(it) }
+    context.adaptToGuidelines()
 
     typesPath.toFile().apply {
         delete()
@@ -53,33 +54,11 @@ fun main() {
 
         appendText("package io.ygdrasil.webgpu\n\n")
 
-        context.typeAliases.forEach {
-            appendText("typealias ${it.name} = ${it.type}\n")
-        }
-        appendText("\n")
-
-        context.enumerations.forEach {
-            appendText("enum class  ${it.name}")
-            appendText("\n")
-        }
-
-        appendText("\n")
-
-        context.interfaces.forEach {
-            if (it.sealed) appendText("sealed ")
-            appendText("interface ${it.name}")
-            if (it.extends.isNotEmpty()) {
-                appendText(" : ")
-                appendText(it.extends.joinToString(", "))
-            }
-            appendText(" { \n")
-
-            it.attributes.forEach {
-                appendText("    var ${it.name}: ${it.type} \n")
-            }
-            appendText("}\n\n")
-
-        }
+        appendText(context.typeAliases.joinToString("\n"))
+        appendText("\n\n")
+        appendText(context.enumerations.joinToString("\n"))
+        appendText("\n\n")
+        appendText(context.interfaces.joinToString("\n"))
 
     }
 }
