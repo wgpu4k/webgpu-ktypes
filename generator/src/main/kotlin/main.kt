@@ -3,6 +3,7 @@ import de.fabmax.webidl.parser.WebIdlParser
 import java.net.URL
 import java.nio.file.Files
 import java.nio.file.Paths
+import kotlin.text.contains
 
 val webUnwantedTypes = setOf(
     // Types de navigateur
@@ -36,6 +37,8 @@ val webUnwantedTypes = setOf(
     "GPUCopyExternalImageSourceInfo"
 )
 
+val baseSourcePath = Paths.get("webgpu-ktypes").resolve("src").resolve("commonMain").resolve("kotlin")
+val typesPath = baseSourcePath.resolve("types.kt")
 
 fun main() {
     // Charger le fichier à partir des ressources
@@ -45,9 +48,13 @@ fun main() {
     // Parse le contenu du fichier avec `WebIdlParser`
     val model = WebIdlParser.parseFromInputStream(resource.openStream())
 
-    model.listTypes().joinToString(",").let { println(it) }
+    //model..listTypes().joinToString(",").let { println(it) }
 
-    downloadWebgpuDoc()
+    //downloadWebgpuDoc()
+
+    typesPath.toFile().apply {
+        createNewFile()
+    }
 }
 
 private fun IdlModel.listTypes(): Set<String> = (enums.map { it.name } +
@@ -85,3 +92,4 @@ fun downloadWebgpuDoc() {
         println("Erreur lors du téléchargement ou de l'enregistrement du fichier : ${e.message}")
     }
 }
+
