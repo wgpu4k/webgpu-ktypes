@@ -52,6 +52,8 @@ fun main() {
         delete()
         createNewFile()
 
+        appendText("@file:Suppress(\"unused\")\n")
+        appendText("// This file has been generated DO NO EDIT\n")
         appendText("package io.ygdrasil.webgpu\n\n")
 
         appendText(context.typeAliases.joinToString("\n"))

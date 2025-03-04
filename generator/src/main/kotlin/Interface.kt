@@ -1,3 +1,5 @@
+import jdk.javadoc.internal.doclets.formats.html.markup.HtmlStyle.returnType
+
 class Interface(
     val name: String,
     val sealed: Boolean = false
@@ -15,7 +17,8 @@ class Interface(
         override fun toString(): String = StringBuilder().apply {
             append("\tfun $name(")
             append(parameters.joinToString(", ") { (name, type) -> "$name: $type" })
-            append("): $returnType")
+            append(")")
+            if (returnType != "Unit") append(": $returnType")
         }.toString()
     }
 
@@ -39,12 +42,12 @@ class Interface(
                 append(" : ")
                 append(extends.joinToString(", "))
             }
-            append(" {\n")
-            append(methods.joinToString("\n"))
-            if (methods.isNotEmpty()) append("\n")
+            if (attributes.isNotEmpty() || methods.isNotEmpty()) append(" {\n")
             append(attributes.joinToString("\n"))
             if (attributes.isNotEmpty()) append("\n")
-            append("}\n")
+            append(methods.joinToString("\n"))
+            if (methods.isNotEmpty()) append("\n")
+            if (attributes.isNotEmpty() || methods.isNotEmpty()) append("}\n")
         }
         return builder.toString()
     }
