@@ -11,12 +11,22 @@ class Interface(
     class Method(
         val name: String,
         val returnType: String,
-        val parameters: List<Pair<String, String>>,
+        val parameters: List<Parameter>,
         val isSuspend: Boolean
     ) {
+
+        class Parameter(val name: String, val type: String, val defaultValue: String? = null) {
+            override fun toString(): String = StringBuilder().apply {
+                append("$name: $type")
+                if (defaultValue != null) append(" = $defaultValue")
+            }.toString()
+        }
+
         override fun toString(): String = StringBuilder().apply {
-            append("\tfun $name(")
-            append(parameters.joinToString(", ") { (name, type) -> "$name: $type" })
+            append("\t")
+            if (isSuspend) append("suspend ")
+            append("fun $name(")
+            append(parameters.joinToString(", "))
             append(")")
             if (returnType != "Unit") append(": $returnType")
         }.toString()

@@ -1,3 +1,4 @@
+import de.fabmax.webidl.model.IdlFunction
 import de.fabmax.webidl.model.IdlInterface
 import de.fabmax.webidl.model.IdlSimpleType
 import de.fabmax.webidl.model.IdlType
@@ -21,10 +22,28 @@ fun MapperContext.loadInterfaces(idlInterfaces: List<IdlInterface>) {
                         .filter { it.returnType is IdlSimpleType && (it.returnType as IdlSimpleType).typeName !in webUnwantedTypes  }
                         .filter { it.parameters.all { p -> p.type is IdlSimpleType && (p.type as IdlSimpleType).typeName !in webUnwantedTypes } }
                         .forEach { idlFunction ->
+                            removeOverloadedMethodWithFewerParams(kinterface, idlFunction)
+
                             kinterface.methods += Interface.Method(
                                 idlFunction.name,
                                 idlFunction.returnType.toKotlinType(),
-                                idlFunction.parameters.map { it.name to it.type.toKotlinType() },
+                                idlFunction.parameters.map {
+                                    var value = it.defaultValue
+                                    var type = it.type.toKotlinType()
+
+                                    if (value == "{}") {
+                                        value = "null"
+                                        if (type.endsWith("?").not()) {
+                                            type = "$type?"
+                                        }
+                                    }
+
+                                    Interface.Method.Parameter(
+                                        it.name,
+                                        type,
+                                        value
+                                    )
+                                },
                                 idlFunction.returnType.isPromise()
                             )
                         }
@@ -32,6 +51,16 @@ fun MapperContext.loadInterfaces(idlInterfaces: List<IdlInterface>) {
         }
 }
 
+private fun removeOverloadedMethodWithFewerParams(
+    kinterface: Interface,
+    targetFunction: IdlFunction
+) {
+    fun isOverloadedWithFewerParams(method: Interface.Method): Boolean =
+        method.name == targetFunction.name &&
+                method.parameters.size < targetFunction.parameters.size
+
+    kinterface.methods = kinterface.methods.filterNot(::isOverloadedWithFewerParams)
+}
 
 private fun IdlType.isPromise(): Boolean {
     return (this as? IdlSimpleType)?.typeName == "Promise"
