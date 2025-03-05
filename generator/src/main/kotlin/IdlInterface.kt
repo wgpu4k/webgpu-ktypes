@@ -36,6 +36,8 @@ fun MapperContext.loadInterfaces(idlInterfaces: List<IdlInterface>) {
                                         if (type.endsWith("?").not()) {
                                             type = "$type?"
                                         }
+                                    } else if (value != null && type.lowercase().contains("signed").not()) {
+                                        value = "${value}u"
                                     }
 
                                     Interface.Method.Parameter(
