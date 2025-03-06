@@ -20,8 +20,8 @@ val idlExtraTyps = """
 """.byteInputStream()
 
 
-val baseSourcePath = Paths.get("webgpu-ktypes").resolve("src").resolve("commonMain").resolve("kotlin")
-val typesPath = baseSourcePath.resolve("types.kt")
+val commonSourcePath = Paths.get("webgpu-ktypes").resolve("src").resolve("commonMain").resolve("kotlin")
+val typesPath = commonSourcePath.resolve("types.kt")
 
 
 val webgpuHtmlPath = Paths.get("webgpu.html")

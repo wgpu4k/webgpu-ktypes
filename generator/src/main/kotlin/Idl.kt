@@ -8,6 +8,9 @@ internal val webUnwantedTypes = setOf(
     "NavigatorGPU",
     "Navigator",
     "WorkerNavigator",
+    "GPUPipelineErrorInit",
+    "GPUPipelineError",
+    "GPUPipelineErrorReason",
 
     // Types spécifiques au canvas web
     "GPUCanvasContext",
@@ -26,7 +29,7 @@ internal val webUnwantedTypes = setOf(
     "GPUUncapturedErrorEvent",
     "GPUUncapturedErrorEventInit",
 
-    // Types liés aux workers web
+    // Types liés aux textures web
     "GPUExternalTexture",
     "GPUExternalTextureDescriptor",
     "GPUExternalTextureBindingLayout",
