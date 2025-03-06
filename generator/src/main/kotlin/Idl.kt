@@ -1,8 +1,7 @@
 import de.fabmax.webidl.model.IdlEnum
-import de.fabmax.webidl.model.IdlInterface
 import de.fabmax.webidl.model.IdlSimpleType
 import de.fabmax.webidl.model.IdlType
-import toKotlinType
+import domain.Enumeration
 
 internal val webUnwantedTypes = setOf(
     // Types de navigateur
@@ -35,14 +34,6 @@ internal val webUnwantedTypes = setOf(
     "GPUCopyExternalImageDestInfo",
     "GPUCopyExternalImageSourceInfo"
 )
-
-fun MapperContext.loadEnums(idlEnums: List<IdlEnum>) {
-    idlEnums.filter { it.name.fixName() !in webUnwantedTypes }
-        .forEach { idlEnum ->
-            enumerations += Enumeration(idlEnum.name)
-        }
-}
-
 
 
 

@@ -1,4 +1,6 @@
-import de.fabmax.webidl.model.IdlType
+import domain.Enumeration
+import domain.Interface
+import domain.TypeAlias
 
 class MapperContext {
     fun adaptToGuidelines() {

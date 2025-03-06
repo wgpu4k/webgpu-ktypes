@@ -2,6 +2,7 @@ import de.fabmax.webidl.model.IdlFunction
 import de.fabmax.webidl.model.IdlInterface
 import de.fabmax.webidl.model.IdlSimpleType
 import de.fabmax.webidl.model.IdlType
+import domain.Interface
 
 fun MapperContext.loadInterfaces(idlInterfaces: List<IdlInterface>) {
     idlInterfaces

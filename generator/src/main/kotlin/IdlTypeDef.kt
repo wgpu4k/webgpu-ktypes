@@ -1,6 +1,8 @@
 import de.fabmax.webidl.model.IdlModel
 import de.fabmax.webidl.model.IdlSimpleType
 import de.fabmax.webidl.model.IdlUnionType
+import domain.Interface
+import domain.TypeAlias
 
 internal fun MapperContext.loadTypeDef(model: IdlModel) {
     model.typeDefs

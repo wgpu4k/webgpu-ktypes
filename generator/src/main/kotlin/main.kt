@@ -1,5 +1,6 @@
 import de.fabmax.webidl.model.IdlModel
 import de.fabmax.webidl.parser.WebIdlParser
+import mapper.loadEnums
 import java.io.SequenceInputStream
 import java.net.URI
 import java.net.URL
@@ -19,7 +20,6 @@ val idlExtraTyps = """
 """.byteInputStream()
 
 
-
 val baseSourcePath = Paths.get("webgpu-ktypes").resolve("src").resolve("commonMain").resolve("kotlin")
 val typesPath = baseSourcePath.resolve("types.kt")
 
@@ -30,20 +30,19 @@ val webgpuIdlPath = Paths.get("webgpu.idl")
 val webgpuIdlUrl = URI("https://gpuweb.github.io/gpuweb/webgpu.idl").toURL()
 
 fun main() {
-    // Charger le fichier à partir des ressources
-    val resource = webgpuIdlUrl
     webgpuHtmlUrl.downloadToPath(webgpuHtmlPath)
     webgpuIdlUrl.downloadToPath(webgpuIdlPath)
 
-    // Parse le contenu du fichier avec `WebIdlParser`
-    val model = WebIdlParser.parseFromInputStream(
-        SequenceInputStream(idlExtraTyps, resource.openStream())
+    val idlModel = WebIdlParser.parseFromInputStream(
+        SequenceInputStream(idlExtraTyps, Files.newInputStream(webgpuIdlPath))
     )
+    val yamlModel = loadWebGPUYaml()
     val context = MapperContext()
-    context.loadTypeDef(model)
-    context.loadInterfaces(model.interfaces)
-    context.loadDictionaries(model.dictionaries)
-    context.loadEnums(model.enums)
+
+    context.loadTypeDef(idlModel)
+    context.loadInterfaces(idlModel.interfaces)
+    context.loadDictionaries(idlModel.dictionaries)
+    context.loadEnums(idlModel, yamlModel)
 
     //model.listTypes().joinToString(",").let { println(it) }
     context.adaptToGuidelines()
@@ -66,6 +65,7 @@ fun main() {
 }
 
 private fun URL.downloadToPath(paths: Path) {
+    if (Files.exists(paths)) return
     runCatching {
         openStream().use { inputStream ->
             Files.newOutputStream(paths).use { outputStream ->

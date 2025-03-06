@@ -1,5 +1,6 @@
 import de.fabmax.webidl.model.IdlDictionary
 import de.fabmax.webidl.model.IdlSimpleType
+import domain.Interface
 
 internal fun MapperContext.loadDictionaries(idlDictionaries: List<IdlDictionary>) {
     idlDictionaries

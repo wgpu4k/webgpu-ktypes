@@ -1,4 +1,4 @@
-import jdk.javadoc.internal.doclets.formats.html.markup.HtmlStyle.returnType
+package domain
 
 class Interface(
     val name: String,
