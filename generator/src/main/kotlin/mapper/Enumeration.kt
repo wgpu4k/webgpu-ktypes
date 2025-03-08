@@ -38,7 +38,14 @@ fun MapperContext.loadEnums(idlModel: IdlModel, yamlModel: YamlModel) {
                 }
             )
             commonNativeEnumerations += enumeration.copy(
-                isExpect = false, isActual = true
+                isExpect = false, isActual = true,
+                parameters = listOf("val value: UInt"),
+                values = enumeration.values.map { enumerationValue ->
+                    val nativeValue = yamlEnum.values.first {
+                        enumerationValue.lowercase() == it.name.convertToKotlinClassName().fixNameStartingWithNumeric().lowercase()
+                    }.let { it.value ?: (yamlEnum.values.indexOf(it) + if(yamlEnum.values.first().name == "undefined") 0 else 1) }
+                    "$enumerationValue(${nativeValue}u)"
+                }
             )
         }
 
