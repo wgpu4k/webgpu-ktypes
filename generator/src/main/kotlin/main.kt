@@ -1,12 +1,14 @@
 import de.fabmax.webidl.model.IdlModel
 import de.fabmax.webidl.parser.WebIdlParser
 import mapper.loadEnums
+import java.io.File
 import java.io.SequenceInputStream
 import java.net.URI
 import java.net.URL
 import java.nio.file.Files
 import java.nio.file.Path
 import java.nio.file.Paths
+import kotlin.io.path.createDirectories
 
 val idlExtraTyps = """
     interface mixin NavigatorGPU {
@@ -19,10 +21,9 @@ val idlExtraTyps = """
     };
 """.byteInputStream()
 
-
 val commonSourcePath = Paths.get("webgpu-ktypes").resolve("src").resolve("commonMain").resolve("kotlin")
-val typesPath = commonSourcePath.resolve("types.kt")
-
+val commonWebSourcePath = Paths.get("webgpu-ktypes").resolve("src").resolve("commonWebMain").resolve("kotlin")
+val commonNativeSourcePath = Paths.get("webgpu-ktypes").resolve("src").resolve("commonNativeMain").resolve("kotlin")
 
 val webgpuHtmlPath = Paths.get("webgpu.html")
 val webgpuHtmlUrl = URI("https://www.w3.org/TR/webgpu/").toURL()
@@ -47,20 +48,36 @@ fun main() {
     //model.listTypes().joinToString(",").let { println(it) }
     context.adaptToGuidelines()
 
-    typesPath.toFile().apply {
+
+    commonSourcePath.createSourceFile("enumerations.kt") {
+        appendText(context.commonEnumerations.joinToString("\n"))
+    }
+
+    commonWebSourcePath.createSourceFile("enumerations.kt") {
+        appendText(context.commonWebEnumerations.joinToString("\n"))
+    }
+
+    commonNativeSourcePath.createSourceFile("enumerations.kt") {
+        appendText(context.commonNativeEnumerations.joinToString("\n"))
+    }
+
+    commonSourcePath.createSourceFile("types.kt") {
+        appendText(context.typeAliases.joinToString("\n"))
+        appendText("\n\n")
+        appendText(context.interfaces.joinToString("\n"))
+    }
+}
+
+private fun Path.createSourceFile(fileName: String, block: File.() -> Unit) {
+    createDirectories()
+    resolve(fileName).toFile().apply {
         delete()
         createNewFile()
 
         appendText("@file:Suppress(\"unused\")\n")
         appendText("// This file has been generated DO NO EDIT\n")
         appendText("package io.ygdrasil.webgpu\n\n")
-
-        appendText(context.typeAliases.joinToString("\n"))
-        appendText("\n\n")
-        appendText(context.enumerations.joinToString("\n"))
-        appendText("\n\n")
-        appendText(context.interfaces.joinToString("\n"))
-
+        block()
     }
 }
 

@@ -8,26 +8,34 @@ import fixName
 import webUnwantedTypes
 import kotlin.collections.plus
 
-fun MapperContext.loadEnums(model: IdlModel, yamlModel: YamlModel) {
+fun MapperContext.loadEnums(idlModel: IdlModel, yamlModel: YamlModel) {
 
     yamlModel.enums.forEach { yamlEnum ->
         val name = "GPU${yamlEnum.name.convertToKotlinClassName()}"
-        if (model.enums.none { it.name == name }) return@forEach
-        enumerations += Enumeration(
+        val idlEnum = idlModel.enums.find { it.name == name }
+        if (idlEnum == null) {
+            println("Skipping native enumeration = $name")
+            return@forEach
+        }
+        commonEnumerations += Enumeration(
             name,
             yamlEnum.values
                 .filter { it.name != "undefined" }
                 .map { value ->
                     value.name.convertToKotlinClassName()
                         .fixNameStartingWithNumeric()
-                }
-        )
+                },
+            isExpect = true
+        ).also {
+            commonWebEnumerations += it.copy(isExpect = false, isActual = true)
+            commonNativeEnumerations += it.copy(isExpect = false, isActual = true)
+        }
 
     }
 
-    model.enums.filter { it.name.fixName() !in webUnwantedTypes }
+    idlModel.enums.filter { it.name.fixName() !in webUnwantedTypes }
         .forEach { idlEnum ->
-            if (enumerations.none { it.name == idlEnum.name }) println("Enum from Idl not found: ${idlEnum.name}")
+            if (commonEnumerations.none { it.name == idlEnum.name }) println("Enum from Idl not found: ${idlEnum.name}")
         }
 }
 

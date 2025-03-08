@@ -2,8 +2,14 @@
 webidl-util = "0.10.0"
 wgpu4k-native = "v24.0.1"
 kaml = "0.71.0"
+kotlin = "2.1.10"
+agp = "8.5.2"
 
 [libraries]
 webidl-util = { module = "de.fabmax:webidl-util", version.ref = "webidl-util" }
 wgpu-specs = { module = "io.ygdrasil:wgpu4k-native-specs-jvm", version.ref = "wgpu4k-native" }
 kaml = { module = "com.charleskorn.kaml:kaml", version.ref = "kaml" }
+
+[plugins]
+kotlin-multiplatform = { id = "org.jetbrains.kotlin.multiplatform", version.ref = "kotlin" }
+android-library = { id = "com.android.library", version.ref = "agp" }

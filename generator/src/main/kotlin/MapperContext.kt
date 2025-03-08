@@ -25,6 +25,8 @@ class MapperContext {
 
     val interfaces = mutableListOf<Interface>()
     val typeAliases = mutableListOf<TypeAlias>()
-    var enumerations = emptyList<Enumeration>()
+    var commonEnumerations = emptyList<Enumeration>()
+    var commonWebEnumerations = emptyList<Enumeration>()
+    var commonNativeEnumerations = emptyList<Enumeration>()
 }
 
