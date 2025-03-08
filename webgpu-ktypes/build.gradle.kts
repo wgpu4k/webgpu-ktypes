@@ -10,7 +10,6 @@ plugins {
     id("com.android.library")
 }
 
-
 private val hierarchyTemplate = KotlinHierarchyTemplate {
     /* natural hierarchy is only applied to default 'main'/'test' compilations (by default) */
     withSourceSetTree(KotlinSourceSetTree.main, KotlinSourceSetTree.test)

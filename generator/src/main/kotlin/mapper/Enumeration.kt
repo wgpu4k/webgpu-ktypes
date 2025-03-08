@@ -26,9 +26,20 @@ fun MapperContext.loadEnums(idlModel: IdlModel, yamlModel: YamlModel) {
                         .fixNameStartingWithNumeric()
                 },
             isExpect = true
-        ).also {
-            commonWebEnumerations += it.copy(isExpect = false, isActual = true)
-            commonNativeEnumerations += it.copy(isExpect = false, isActual = true)
+        ).also { enumeration ->
+            commonWebEnumerations += enumeration.copy(
+                isExpect = false, isActual = true,
+                parameters = listOf("val value: String"),
+                values = enumeration.values.map { enumerationValue ->
+                    val webValue = idlEnum.values.firstOrNull {
+                        enumerationValue.lowercase() == it.replace("-", "").lowercase()
+                    } ?: "unsupported"
+                    "$enumerationValue(\"$webValue\")"
+                }
+            )
+            commonNativeEnumerations += enumeration.copy(
+                isExpect = false, isActual = true
+            )
         }
 
     }
