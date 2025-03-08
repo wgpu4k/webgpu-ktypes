@@ -6,6 +6,7 @@ import org.jetbrains.kotlin.gradle.plugin.KotlinHierarchyTemplate
 import org.jetbrains.kotlin.gradle.plugin.KotlinSourceSetTree
 
 plugins {
+    publish
     kotlin("multiplatform")
     id("com.android.library")
 }
