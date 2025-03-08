@@ -61,9 +61,11 @@ fun main() {
         appendText(context.commonNativeEnumerations.joinToString("\n"))
     }
 
-    commonSourcePath.createSourceFile("types.kt") {
+    commonSourcePath.createSourceFile("typealiases.kt") {
         appendText(context.typeAliases.joinToString("\n"))
-        appendText("\n\n")
+    }
+
+    commonSourcePath.createSourceFile("interfaces.kt") {
         appendText(context.interfaces.joinToString("\n"))
     }
 }
