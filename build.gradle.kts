@@ -3,5 +3,7 @@ plugins {
     alias(libs.plugins.android.library) apply false
 }
 
-group = "org.example"
-version = "1.0-SNAPSHOT"
+allprojects {
+    group = "io.ygdrasil"
+    version = System.getenv("VERSION")?.takeIf { it.isNotBlank() } ?: "0.0.0-SNAPSHOT"
+}
