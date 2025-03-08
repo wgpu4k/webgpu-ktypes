@@ -6,6 +6,20 @@ actual enum class GPUAddressMode(val value: UInt) {
 	ClampToEdge(1u),
 	Repeat(2u),
 	MirrorRepeat(3u);
+
+
+	companion object {
+		/**
+		 * Retrieves the corresponding [UInt] for the given value.
+		 *
+		 * @param value The dependent platform value representing the WebGPU value.
+		 * @return The matching [UInt] or `null` if no match is found.
+		 */
+		fun of(value: UInt): GPUAddressMode? {
+			return entries.find { it.value == value }
+		}
+    }
+
 }
 
 actual enum class GPUBlendFactor(val value: UInt) {
@@ -26,6 +40,20 @@ actual enum class GPUBlendFactor(val value: UInt) {
 	OneMinusSrc1(15u),
 	Src1Alpha(16u),
 	OneMinusSrc1Alpha(17u);
+
+
+	companion object {
+		/**
+		 * Retrieves the corresponding [UInt] for the given value.
+		 *
+		 * @param value The dependent platform value representing the WebGPU value.
+		 * @return The matching [UInt] or `null` if no match is found.
+		 */
+		fun of(value: UInt): GPUBlendFactor? {
+			return entries.find { it.value == value }
+		}
+    }
+
 }
 
 actual enum class GPUBlendOperation(val value: UInt) {
@@ -34,6 +62,20 @@ actual enum class GPUBlendOperation(val value: UInt) {
 	ReverseSubtract(3u),
 	Min(4u),
 	Max(5u);
+
+
+	companion object {
+		/**
+		 * Retrieves the corresponding [UInt] for the given value.
+		 *
+		 * @param value The dependent platform value representing the WebGPU value.
+		 * @return The matching [UInt] or `null` if no match is found.
+		 */
+		fun of(value: UInt): GPUBlendOperation? {
+			return entries.find { it.value == value }
+		}
+    }
+
 }
 
 actual enum class GPUBufferBindingType(val value: UInt) {
@@ -41,12 +83,40 @@ actual enum class GPUBufferBindingType(val value: UInt) {
 	Uniform(3u),
 	Storage(4u),
 	ReadOnlyStorage(5u);
+
+
+	companion object {
+		/**
+		 * Retrieves the corresponding [UInt] for the given value.
+		 *
+		 * @param value The dependent platform value representing the WebGPU value.
+		 * @return The matching [UInt] or `null` if no match is found.
+		 */
+		fun of(value: UInt): GPUBufferBindingType? {
+			return entries.find { it.value == value }
+		}
+    }
+
 }
 
 actual enum class GPUBufferMapState(val value: UInt) {
 	Unmapped(1u),
 	Pending(2u),
 	Mapped(3u);
+
+
+	companion object {
+		/**
+		 * Retrieves the corresponding [UInt] for the given value.
+		 *
+		 * @param value The dependent platform value representing the WebGPU value.
+		 * @return The matching [UInt] or `null` if no match is found.
+		 */
+		fun of(value: UInt): GPUBufferMapState? {
+			return entries.find { it.value == value }
+		}
+    }
+
 }
 
 actual enum class GPUCompareFunction(val value: UInt) {
@@ -58,18 +128,60 @@ actual enum class GPUCompareFunction(val value: UInt) {
 	NotEqual(6u),
 	GreaterEqual(7u),
 	Always(8u);
+
+
+	companion object {
+		/**
+		 * Retrieves the corresponding [UInt] for the given value.
+		 *
+		 * @param value The dependent platform value representing the WebGPU value.
+		 * @return The matching [UInt] or `null` if no match is found.
+		 */
+		fun of(value: UInt): GPUCompareFunction? {
+			return entries.find { it.value == value }
+		}
+    }
+
 }
 
 actual enum class GPUCompilationMessageType(val value: UInt) {
 	Error(1u),
 	Warning(2u),
 	Info(3u);
+
+
+	companion object {
+		/**
+		 * Retrieves the corresponding [UInt] for the given value.
+		 *
+		 * @param value The dependent platform value representing the WebGPU value.
+		 * @return The matching [UInt] or `null` if no match is found.
+		 */
+		fun of(value: UInt): GPUCompilationMessageType? {
+			return entries.find { it.value == value }
+		}
+    }
+
 }
 
 actual enum class GPUCullMode(val value: UInt) {
 	None(1u),
 	Front(2u),
 	Back(3u);
+
+
+	companion object {
+		/**
+		 * Retrieves the corresponding [UInt] for the given value.
+		 *
+		 * @param value The dependent platform value representing the WebGPU value.
+		 * @return The matching [UInt] or `null` if no match is found.
+		 */
+		fun of(value: UInt): GPUCullMode? {
+			return entries.find { it.value == value }
+		}
+    }
+
 }
 
 actual enum class GPUDeviceLostReason(val value: UInt) {
@@ -77,12 +189,40 @@ actual enum class GPUDeviceLostReason(val value: UInt) {
 	Destroyed(2u),
 	InstanceDropped(3u),
 	FailedCreation(4u);
+
+
+	companion object {
+		/**
+		 * Retrieves the corresponding [UInt] for the given value.
+		 *
+		 * @param value The dependent platform value representing the WebGPU value.
+		 * @return The matching [UInt] or `null` if no match is found.
+		 */
+		fun of(value: UInt): GPUDeviceLostReason? {
+			return entries.find { it.value == value }
+		}
+    }
+
 }
 
 actual enum class GPUErrorFilter(val value: UInt) {
 	Validation(1u),
 	OutOfMemory(2u),
 	Internal(3u);
+
+
+	companion object {
+		/**
+		 * Retrieves the corresponding [UInt] for the given value.
+		 *
+		 * @param value The dependent platform value representing the WebGPU value.
+		 * @return The matching [UInt] or `null` if no match is found.
+		 */
+		fun of(value: UInt): GPUErrorFilter? {
+			return entries.find { it.value == value }
+		}
+    }
+
 }
 
 actual enum class GPUFeatureName(val value: UInt) {
@@ -102,36 +242,134 @@ actual enum class GPUFeatureName(val value: UInt) {
 	Float32Blendable(14u),
 	ClipDistances(15u),
 	DualSourceBlending(16u);
+
+
+	companion object {
+		/**
+		 * Retrieves the corresponding [UInt] for the given value.
+		 *
+		 * @param value The dependent platform value representing the WebGPU value.
+		 * @return The matching [UInt] or `null` if no match is found.
+		 */
+		fun of(value: UInt): GPUFeatureName? {
+			return entries.find { it.value == value }
+		}
+    }
+
 }
 
 actual enum class GPUFilterMode(val value: UInt) {
 	Nearest(1u),
 	Linear(2u);
+
+
+	companion object {
+		/**
+		 * Retrieves the corresponding [UInt] for the given value.
+		 *
+		 * @param value The dependent platform value representing the WebGPU value.
+		 * @return The matching [UInt] or `null` if no match is found.
+		 */
+		fun of(value: UInt): GPUFilterMode? {
+			return entries.find { it.value == value }
+		}
+    }
+
 }
 
 actual enum class GPUFrontFace(val value: UInt) {
 	CCW(1u),
 	CW(2u);
+
+
+	companion object {
+		/**
+		 * Retrieves the corresponding [UInt] for the given value.
+		 *
+		 * @param value The dependent platform value representing the WebGPU value.
+		 * @return The matching [UInt] or `null` if no match is found.
+		 */
+		fun of(value: UInt): GPUFrontFace? {
+			return entries.find { it.value == value }
+		}
+    }
+
 }
 
 actual enum class GPUIndexFormat(val value: UInt) {
 	Uint16(1u),
 	Uint32(2u);
+
+
+	companion object {
+		/**
+		 * Retrieves the corresponding [UInt] for the given value.
+		 *
+		 * @param value The dependent platform value representing the WebGPU value.
+		 * @return The matching [UInt] or `null` if no match is found.
+		 */
+		fun of(value: UInt): GPUIndexFormat? {
+			return entries.find { it.value == value }
+		}
+    }
+
 }
 
 actual enum class GPULoadOp(val value: UInt) {
 	Load(1u),
 	Clear(2u);
+
+
+	companion object {
+		/**
+		 * Retrieves the corresponding [UInt] for the given value.
+		 *
+		 * @param value The dependent platform value representing the WebGPU value.
+		 * @return The matching [UInt] or `null` if no match is found.
+		 */
+		fun of(value: UInt): GPULoadOp? {
+			return entries.find { it.value == value }
+		}
+    }
+
 }
 
 actual enum class GPUMipmapFilterMode(val value: UInt) {
 	Nearest(1u),
 	Linear(2u);
+
+
+	companion object {
+		/**
+		 * Retrieves the corresponding [UInt] for the given value.
+		 *
+		 * @param value The dependent platform value representing the WebGPU value.
+		 * @return The matching [UInt] or `null` if no match is found.
+		 */
+		fun of(value: UInt): GPUMipmapFilterMode? {
+			return entries.find { it.value == value }
+		}
+    }
+
 }
 
 actual enum class GPUPowerPreference(val value: UInt) {
 	LowPower(1u),
 	HighPerformance(2u);
+
+
+	companion object {
+		/**
+		 * Retrieves the corresponding [UInt] for the given value.
+		 *
+		 * @param value The dependent platform value representing the WebGPU value.
+		 * @return The matching [UInt] or `null` if no match is found.
+		 */
+		fun of(value: UInt): GPUPowerPreference? {
+			return entries.find { it.value == value }
+		}
+    }
+
 }
 
 actual enum class GPUPrimitiveTopology(val value: UInt) {
@@ -140,11 +378,39 @@ actual enum class GPUPrimitiveTopology(val value: UInt) {
 	LineStrip(3u),
 	TriangleList(4u),
 	TriangleStrip(5u);
+
+
+	companion object {
+		/**
+		 * Retrieves the corresponding [UInt] for the given value.
+		 *
+		 * @param value The dependent platform value representing the WebGPU value.
+		 * @return The matching [UInt] or `null` if no match is found.
+		 */
+		fun of(value: UInt): GPUPrimitiveTopology? {
+			return entries.find { it.value == value }
+		}
+    }
+
 }
 
 actual enum class GPUQueryType(val value: UInt) {
 	Occlusion(1u),
 	Timestamp(2u);
+
+
+	companion object {
+		/**
+		 * Retrieves the corresponding [UInt] for the given value.
+		 *
+		 * @param value The dependent platform value representing the WebGPU value.
+		 * @return The matching [UInt] or `null` if no match is found.
+		 */
+		fun of(value: UInt): GPUQueryType? {
+			return entries.find { it.value == value }
+		}
+    }
+
 }
 
 actual enum class GPUSamplerBindingType(val value: UInt) {
@@ -152,6 +418,20 @@ actual enum class GPUSamplerBindingType(val value: UInt) {
 	Filtering(3u),
 	NonFiltering(4u),
 	Comparison(5u);
+
+
+	companion object {
+		/**
+		 * Retrieves the corresponding [UInt] for the given value.
+		 *
+		 * @param value The dependent platform value representing the WebGPU value.
+		 * @return The matching [UInt] or `null` if no match is found.
+		 */
+		fun of(value: UInt): GPUSamplerBindingType? {
+			return entries.find { it.value == value }
+		}
+    }
+
 }
 
 actual enum class GPUStencilOperation(val value: UInt) {
@@ -163,6 +443,20 @@ actual enum class GPUStencilOperation(val value: UInt) {
 	DecrementClamp(6u),
 	IncrementWrap(7u),
 	DecrementWrap(8u);
+
+
+	companion object {
+		/**
+		 * Retrieves the corresponding [UInt] for the given value.
+		 *
+		 * @param value The dependent platform value representing the WebGPU value.
+		 * @return The matching [UInt] or `null` if no match is found.
+		 */
+		fun of(value: UInt): GPUStencilOperation? {
+			return entries.find { it.value == value }
+		}
+    }
+
 }
 
 actual enum class GPUStorageTextureAccess(val value: UInt) {
@@ -170,23 +464,79 @@ actual enum class GPUStorageTextureAccess(val value: UInt) {
 	WriteOnly(3u),
 	ReadOnly(4u),
 	ReadWrite(5u);
+
+
+	companion object {
+		/**
+		 * Retrieves the corresponding [UInt] for the given value.
+		 *
+		 * @param value The dependent platform value representing the WebGPU value.
+		 * @return The matching [UInt] or `null` if no match is found.
+		 */
+		fun of(value: UInt): GPUStorageTextureAccess? {
+			return entries.find { it.value == value }
+		}
+    }
+
 }
 
 actual enum class GPUStoreOp(val value: UInt) {
 	Store(1u),
 	Discard(2u);
+
+
+	companion object {
+		/**
+		 * Retrieves the corresponding [UInt] for the given value.
+		 *
+		 * @param value The dependent platform value representing the WebGPU value.
+		 * @return The matching [UInt] or `null` if no match is found.
+		 */
+		fun of(value: UInt): GPUStoreOp? {
+			return entries.find { it.value == value }
+		}
+    }
+
 }
 
 actual enum class GPUTextureAspect(val value: UInt) {
 	All(1u),
 	StencilOnly(2u),
 	DepthOnly(3u);
+
+
+	companion object {
+		/**
+		 * Retrieves the corresponding [UInt] for the given value.
+		 *
+		 * @param value The dependent platform value representing the WebGPU value.
+		 * @return The matching [UInt] or `null` if no match is found.
+		 */
+		fun of(value: UInt): GPUTextureAspect? {
+			return entries.find { it.value == value }
+		}
+    }
+
 }
 
 actual enum class GPUTextureDimension(val value: UInt) {
 	OneD(1u),
 	TwoD(2u),
 	ThreeD(3u);
+
+
+	companion object {
+		/**
+		 * Retrieves the corresponding [UInt] for the given value.
+		 *
+		 * @param value The dependent platform value representing the WebGPU value.
+		 * @return The matching [UInt] or `null` if no match is found.
+		 */
+		fun of(value: UInt): GPUTextureDimension? {
+			return entries.find { it.value == value }
+		}
+    }
+
 }
 
 actual enum class GPUTextureFormat(val value: UInt) {
@@ -285,6 +635,20 @@ actual enum class GPUTextureFormat(val value: UInt) {
 	ASTC12x10UnormSrgb(93u),
 	ASTC12x12Unorm(94u),
 	ASTC12x12UnormSrgb(95u);
+
+
+	companion object {
+		/**
+		 * Retrieves the corresponding [UInt] for the given value.
+		 *
+		 * @param value The dependent platform value representing the WebGPU value.
+		 * @return The matching [UInt] or `null` if no match is found.
+		 */
+		fun of(value: UInt): GPUTextureFormat? {
+			return entries.find { it.value == value }
+		}
+    }
+
 }
 
 actual enum class GPUTextureSampleType(val value: UInt) {
@@ -294,6 +658,20 @@ actual enum class GPUTextureSampleType(val value: UInt) {
 	Depth(5u),
 	Sint(6u),
 	Uint(7u);
+
+
+	companion object {
+		/**
+		 * Retrieves the corresponding [UInt] for the given value.
+		 *
+		 * @param value The dependent platform value representing the WebGPU value.
+		 * @return The matching [UInt] or `null` if no match is found.
+		 */
+		fun of(value: UInt): GPUTextureSampleType? {
+			return entries.find { it.value == value }
+		}
+    }
+
 }
 
 actual enum class GPUTextureViewDimension(val value: UInt) {
@@ -303,6 +681,20 @@ actual enum class GPUTextureViewDimension(val value: UInt) {
 	Cube(4u),
 	CubeArray(5u),
 	ThreeD(6u);
+
+
+	companion object {
+		/**
+		 * Retrieves the corresponding [UInt] for the given value.
+		 *
+		 * @param value The dependent platform value representing the WebGPU value.
+		 * @return The matching [UInt] or `null` if no match is found.
+		 */
+		fun of(value: UInt): GPUTextureViewDimension? {
+			return entries.find { it.value == value }
+		}
+    }
+
 }
 
 actual enum class GPUVertexFormat(val value: UInt) {
@@ -347,10 +739,38 @@ actual enum class GPUVertexFormat(val value: UInt) {
 	Sint32x4(39u),
 	Unorm1010102(40u),
 	Unorm8x4BGRA(41u);
+
+
+	companion object {
+		/**
+		 * Retrieves the corresponding [UInt] for the given value.
+		 *
+		 * @param value The dependent platform value representing the WebGPU value.
+		 * @return The matching [UInt] or `null` if no match is found.
+		 */
+		fun of(value: UInt): GPUVertexFormat? {
+			return entries.find { it.value == value }
+		}
+    }
+
 }
 
 actual enum class GPUVertexStepMode(val value: UInt) {
 	VertexBufferNotUsed(1u),
 	Vertex(3u),
 	Instance(4u);
+
+
+	companion object {
+		/**
+		 * Retrieves the corresponding [UInt] for the given value.
+		 *
+		 * @param value The dependent platform value representing the WebGPU value.
+		 * @return The matching [UInt] or `null` if no match is found.
+		 */
+		fun of(value: UInt): GPUVertexStepMode? {
+			return entries.find { it.value == value }
+		}
+    }
+
 }

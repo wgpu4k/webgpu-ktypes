@@ -30,6 +30,7 @@ fun MapperContext.loadEnums(idlModel: IdlModel, yamlModel: YamlModel) {
             commonWebEnumerations += enumeration.copy(
                 isExpect = false, isActual = true,
                 parameters = listOf("val value: String"),
+                extra = generateExtra(name, "String"),
                 values = enumeration.values.map { enumerationValue ->
                     val webValue = idlEnum.values.firstOrNull {
                         enumerationValue.lowercase() == it.replace("-", "").lowercase()
@@ -40,6 +41,7 @@ fun MapperContext.loadEnums(idlModel: IdlModel, yamlModel: YamlModel) {
             commonNativeEnumerations += enumeration.copy(
                 isExpect = false, isActual = true,
                 parameters = listOf("val value: UInt"),
+                extra = generateExtra(name, "UInt"),
                 values = enumeration.values.map { enumerationValue ->
                     val nativeValue = yamlEnum.values.first {
                         enumerationValue.lowercase() == it.name.convertToKotlinClassName().fixNameStartingWithNumeric().lowercase()
@@ -57,6 +59,21 @@ fun MapperContext.loadEnums(idlModel: IdlModel, yamlModel: YamlModel) {
         }
 }
 
+private fun generateExtra(name: String, type: String): String = """
+
+	companion object {
+		/**
+		 * Retrieves the corresponding [$type] for the given value.
+		 *
+		 * @param value The dependent platform value representing the WebGPU value.
+		 * @return The matching [$type] or `null` if no match is found.
+		 */
+		fun of(value: $type): $name? {
+			return entries.find { it.value == value }
+		}
+    }
+
+"""
 
 private fun String.convertToKotlinClassName() = split("_")
         .joinToString("") { component -> component.replaceFirstChar { it.uppercase() } }

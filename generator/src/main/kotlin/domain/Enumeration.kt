@@ -4,7 +4,8 @@ data class Enumeration(
     val name: String,
     val values: List<String>,
     val parameters: List<String> = emptyList(),
-    val isActual: Boolean = false, val isExpect: Boolean = false
+    val isActual: Boolean = false, val isExpect: Boolean = false,
+    val extra: String? = null
 ) {
 
     init {
@@ -19,6 +20,9 @@ data class Enumeration(
         append(" {\n\t")
         append(values.joinToString(",\n\t"))
         append(";\n")
+
+        if (extra != null) append(extra)
+
         append("}\n")
     }.toString()
 }

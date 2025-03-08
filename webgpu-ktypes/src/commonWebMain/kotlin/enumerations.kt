@@ -6,6 +6,20 @@ actual enum class GPUAddressMode(val value: String) {
 	ClampToEdge("clamp-to-edge"),
 	Repeat("repeat"),
 	MirrorRepeat("mirror-repeat");
+
+
+	companion object {
+		/**
+		 * Retrieves the corresponding [String] for the given value.
+		 *
+		 * @param value The dependent platform value representing the WebGPU value.
+		 * @return The matching [String] or `null` if no match is found.
+		 */
+		fun of(value: String): GPUAddressMode? {
+			return entries.find { it.value == value }
+		}
+    }
+
 }
 
 actual enum class GPUBlendFactor(val value: String) {
@@ -26,6 +40,20 @@ actual enum class GPUBlendFactor(val value: String) {
 	OneMinusSrc1("one-minus-src1"),
 	Src1Alpha("src1-alpha"),
 	OneMinusSrc1Alpha("one-minus-src1-alpha");
+
+
+	companion object {
+		/**
+		 * Retrieves the corresponding [String] for the given value.
+		 *
+		 * @param value The dependent platform value representing the WebGPU value.
+		 * @return The matching [String] or `null` if no match is found.
+		 */
+		fun of(value: String): GPUBlendFactor? {
+			return entries.find { it.value == value }
+		}
+    }
+
 }
 
 actual enum class GPUBlendOperation(val value: String) {
@@ -34,6 +62,20 @@ actual enum class GPUBlendOperation(val value: String) {
 	ReverseSubtract("reverse-subtract"),
 	Min("min"),
 	Max("max");
+
+
+	companion object {
+		/**
+		 * Retrieves the corresponding [String] for the given value.
+		 *
+		 * @param value The dependent platform value representing the WebGPU value.
+		 * @return The matching [String] or `null` if no match is found.
+		 */
+		fun of(value: String): GPUBlendOperation? {
+			return entries.find { it.value == value }
+		}
+    }
+
 }
 
 actual enum class GPUBufferBindingType(val value: String) {
@@ -41,12 +83,40 @@ actual enum class GPUBufferBindingType(val value: String) {
 	Uniform("uniform"),
 	Storage("storage"),
 	ReadOnlyStorage("read-only-storage");
+
+
+	companion object {
+		/**
+		 * Retrieves the corresponding [String] for the given value.
+		 *
+		 * @param value The dependent platform value representing the WebGPU value.
+		 * @return The matching [String] or `null` if no match is found.
+		 */
+		fun of(value: String): GPUBufferBindingType? {
+			return entries.find { it.value == value }
+		}
+    }
+
 }
 
 actual enum class GPUBufferMapState(val value: String) {
 	Unmapped("unmapped"),
 	Pending("pending"),
 	Mapped("mapped");
+
+
+	companion object {
+		/**
+		 * Retrieves the corresponding [String] for the given value.
+		 *
+		 * @param value The dependent platform value representing the WebGPU value.
+		 * @return The matching [String] or `null` if no match is found.
+		 */
+		fun of(value: String): GPUBufferMapState? {
+			return entries.find { it.value == value }
+		}
+    }
+
 }
 
 actual enum class GPUCompareFunction(val value: String) {
@@ -58,18 +128,60 @@ actual enum class GPUCompareFunction(val value: String) {
 	NotEqual("not-equal"),
 	GreaterEqual("greater-equal"),
 	Always("always");
+
+
+	companion object {
+		/**
+		 * Retrieves the corresponding [String] for the given value.
+		 *
+		 * @param value The dependent platform value representing the WebGPU value.
+		 * @return The matching [String] or `null` if no match is found.
+		 */
+		fun of(value: String): GPUCompareFunction? {
+			return entries.find { it.value == value }
+		}
+    }
+
 }
 
 actual enum class GPUCompilationMessageType(val value: String) {
 	Error("error"),
 	Warning("warning"),
 	Info("info");
+
+
+	companion object {
+		/**
+		 * Retrieves the corresponding [String] for the given value.
+		 *
+		 * @param value The dependent platform value representing the WebGPU value.
+		 * @return The matching [String] or `null` if no match is found.
+		 */
+		fun of(value: String): GPUCompilationMessageType? {
+			return entries.find { it.value == value }
+		}
+    }
+
 }
 
 actual enum class GPUCullMode(val value: String) {
 	None("none"),
 	Front("front"),
 	Back("back");
+
+
+	companion object {
+		/**
+		 * Retrieves the corresponding [String] for the given value.
+		 *
+		 * @param value The dependent platform value representing the WebGPU value.
+		 * @return The matching [String] or `null` if no match is found.
+		 */
+		fun of(value: String): GPUCullMode? {
+			return entries.find { it.value == value }
+		}
+    }
+
 }
 
 actual enum class GPUDeviceLostReason(val value: String) {
@@ -77,12 +189,40 @@ actual enum class GPUDeviceLostReason(val value: String) {
 	Destroyed("destroyed"),
 	InstanceDropped("unsupported"),
 	FailedCreation("unsupported");
+
+
+	companion object {
+		/**
+		 * Retrieves the corresponding [String] for the given value.
+		 *
+		 * @param value The dependent platform value representing the WebGPU value.
+		 * @return The matching [String] or `null` if no match is found.
+		 */
+		fun of(value: String): GPUDeviceLostReason? {
+			return entries.find { it.value == value }
+		}
+    }
+
 }
 
 actual enum class GPUErrorFilter(val value: String) {
 	Validation("validation"),
 	OutOfMemory("out-of-memory"),
 	Internal("internal");
+
+
+	companion object {
+		/**
+		 * Retrieves the corresponding [String] for the given value.
+		 *
+		 * @param value The dependent platform value representing the WebGPU value.
+		 * @return The matching [String] or `null` if no match is found.
+		 */
+		fun of(value: String): GPUErrorFilter? {
+			return entries.find { it.value == value }
+		}
+    }
+
 }
 
 actual enum class GPUFeatureName(val value: String) {
@@ -102,36 +242,134 @@ actual enum class GPUFeatureName(val value: String) {
 	Float32Blendable("float32-blendable"),
 	ClipDistances("clip-distances"),
 	DualSourceBlending("dual-source-blending");
+
+
+	companion object {
+		/**
+		 * Retrieves the corresponding [String] for the given value.
+		 *
+		 * @param value The dependent platform value representing the WebGPU value.
+		 * @return The matching [String] or `null` if no match is found.
+		 */
+		fun of(value: String): GPUFeatureName? {
+			return entries.find { it.value == value }
+		}
+    }
+
 }
 
 actual enum class GPUFilterMode(val value: String) {
 	Nearest("nearest"),
 	Linear("linear");
+
+
+	companion object {
+		/**
+		 * Retrieves the corresponding [String] for the given value.
+		 *
+		 * @param value The dependent platform value representing the WebGPU value.
+		 * @return The matching [String] or `null` if no match is found.
+		 */
+		fun of(value: String): GPUFilterMode? {
+			return entries.find { it.value == value }
+		}
+    }
+
 }
 
 actual enum class GPUFrontFace(val value: String) {
 	CCW("ccw"),
 	CW("cw");
+
+
+	companion object {
+		/**
+		 * Retrieves the corresponding [String] for the given value.
+		 *
+		 * @param value The dependent platform value representing the WebGPU value.
+		 * @return The matching [String] or `null` if no match is found.
+		 */
+		fun of(value: String): GPUFrontFace? {
+			return entries.find { it.value == value }
+		}
+    }
+
 }
 
 actual enum class GPUIndexFormat(val value: String) {
 	Uint16("uint16"),
 	Uint32("uint32");
+
+
+	companion object {
+		/**
+		 * Retrieves the corresponding [String] for the given value.
+		 *
+		 * @param value The dependent platform value representing the WebGPU value.
+		 * @return The matching [String] or `null` if no match is found.
+		 */
+		fun of(value: String): GPUIndexFormat? {
+			return entries.find { it.value == value }
+		}
+    }
+
 }
 
 actual enum class GPULoadOp(val value: String) {
 	Load("load"),
 	Clear("clear");
+
+
+	companion object {
+		/**
+		 * Retrieves the corresponding [String] for the given value.
+		 *
+		 * @param value The dependent platform value representing the WebGPU value.
+		 * @return The matching [String] or `null` if no match is found.
+		 */
+		fun of(value: String): GPULoadOp? {
+			return entries.find { it.value == value }
+		}
+    }
+
 }
 
 actual enum class GPUMipmapFilterMode(val value: String) {
 	Nearest("nearest"),
 	Linear("linear");
+
+
+	companion object {
+		/**
+		 * Retrieves the corresponding [String] for the given value.
+		 *
+		 * @param value The dependent platform value representing the WebGPU value.
+		 * @return The matching [String] or `null` if no match is found.
+		 */
+		fun of(value: String): GPUMipmapFilterMode? {
+			return entries.find { it.value == value }
+		}
+    }
+
 }
 
 actual enum class GPUPowerPreference(val value: String) {
 	LowPower("low-power"),
 	HighPerformance("high-performance");
+
+
+	companion object {
+		/**
+		 * Retrieves the corresponding [String] for the given value.
+		 *
+		 * @param value The dependent platform value representing the WebGPU value.
+		 * @return The matching [String] or `null` if no match is found.
+		 */
+		fun of(value: String): GPUPowerPreference? {
+			return entries.find { it.value == value }
+		}
+    }
+
 }
 
 actual enum class GPUPrimitiveTopology(val value: String) {
@@ -140,11 +378,39 @@ actual enum class GPUPrimitiveTopology(val value: String) {
 	LineStrip("line-strip"),
 	TriangleList("triangle-list"),
 	TriangleStrip("triangle-strip");
+
+
+	companion object {
+		/**
+		 * Retrieves the corresponding [String] for the given value.
+		 *
+		 * @param value The dependent platform value representing the WebGPU value.
+		 * @return The matching [String] or `null` if no match is found.
+		 */
+		fun of(value: String): GPUPrimitiveTopology? {
+			return entries.find { it.value == value }
+		}
+    }
+
 }
 
 actual enum class GPUQueryType(val value: String) {
 	Occlusion("occlusion"),
 	Timestamp("timestamp");
+
+
+	companion object {
+		/**
+		 * Retrieves the corresponding [String] for the given value.
+		 *
+		 * @param value The dependent platform value representing the WebGPU value.
+		 * @return The matching [String] or `null` if no match is found.
+		 */
+		fun of(value: String): GPUQueryType? {
+			return entries.find { it.value == value }
+		}
+    }
+
 }
 
 actual enum class GPUSamplerBindingType(val value: String) {
@@ -152,6 +418,20 @@ actual enum class GPUSamplerBindingType(val value: String) {
 	Filtering("filtering"),
 	NonFiltering("non-filtering"),
 	Comparison("comparison");
+
+
+	companion object {
+		/**
+		 * Retrieves the corresponding [String] for the given value.
+		 *
+		 * @param value The dependent platform value representing the WebGPU value.
+		 * @return The matching [String] or `null` if no match is found.
+		 */
+		fun of(value: String): GPUSamplerBindingType? {
+			return entries.find { it.value == value }
+		}
+    }
+
 }
 
 actual enum class GPUStencilOperation(val value: String) {
@@ -163,6 +443,20 @@ actual enum class GPUStencilOperation(val value: String) {
 	DecrementClamp("decrement-clamp"),
 	IncrementWrap("increment-wrap"),
 	DecrementWrap("decrement-wrap");
+
+
+	companion object {
+		/**
+		 * Retrieves the corresponding [String] for the given value.
+		 *
+		 * @param value The dependent platform value representing the WebGPU value.
+		 * @return The matching [String] or `null` if no match is found.
+		 */
+		fun of(value: String): GPUStencilOperation? {
+			return entries.find { it.value == value }
+		}
+    }
+
 }
 
 actual enum class GPUStorageTextureAccess(val value: String) {
@@ -170,23 +464,79 @@ actual enum class GPUStorageTextureAccess(val value: String) {
 	WriteOnly("write-only"),
 	ReadOnly("read-only"),
 	ReadWrite("read-write");
+
+
+	companion object {
+		/**
+		 * Retrieves the corresponding [String] for the given value.
+		 *
+		 * @param value The dependent platform value representing the WebGPU value.
+		 * @return The matching [String] or `null` if no match is found.
+		 */
+		fun of(value: String): GPUStorageTextureAccess? {
+			return entries.find { it.value == value }
+		}
+    }
+
 }
 
 actual enum class GPUStoreOp(val value: String) {
 	Store("store"),
 	Discard("discard");
+
+
+	companion object {
+		/**
+		 * Retrieves the corresponding [String] for the given value.
+		 *
+		 * @param value The dependent platform value representing the WebGPU value.
+		 * @return The matching [String] or `null` if no match is found.
+		 */
+		fun of(value: String): GPUStoreOp? {
+			return entries.find { it.value == value }
+		}
+    }
+
 }
 
 actual enum class GPUTextureAspect(val value: String) {
 	All("all"),
 	StencilOnly("stencil-only"),
 	DepthOnly("depth-only");
+
+
+	companion object {
+		/**
+		 * Retrieves the corresponding [String] for the given value.
+		 *
+		 * @param value The dependent platform value representing the WebGPU value.
+		 * @return The matching [String] or `null` if no match is found.
+		 */
+		fun of(value: String): GPUTextureAspect? {
+			return entries.find { it.value == value }
+		}
+    }
+
 }
 
 actual enum class GPUTextureDimension(val value: String) {
 	OneD("unsupported"),
 	TwoD("unsupported"),
 	ThreeD("unsupported");
+
+
+	companion object {
+		/**
+		 * Retrieves the corresponding [String] for the given value.
+		 *
+		 * @param value The dependent platform value representing the WebGPU value.
+		 * @return The matching [String] or `null` if no match is found.
+		 */
+		fun of(value: String): GPUTextureDimension? {
+			return entries.find { it.value == value }
+		}
+    }
+
 }
 
 actual enum class GPUTextureFormat(val value: String) {
@@ -285,6 +635,20 @@ actual enum class GPUTextureFormat(val value: String) {
 	ASTC12x10UnormSrgb("astc-12x10-unorm-srgb"),
 	ASTC12x12Unorm("astc-12x12-unorm"),
 	ASTC12x12UnormSrgb("astc-12x12-unorm-srgb");
+
+
+	companion object {
+		/**
+		 * Retrieves the corresponding [String] for the given value.
+		 *
+		 * @param value The dependent platform value representing the WebGPU value.
+		 * @return The matching [String] or `null` if no match is found.
+		 */
+		fun of(value: String): GPUTextureFormat? {
+			return entries.find { it.value == value }
+		}
+    }
+
 }
 
 actual enum class GPUTextureSampleType(val value: String) {
@@ -294,6 +658,20 @@ actual enum class GPUTextureSampleType(val value: String) {
 	Depth("depth"),
 	Sint("sint"),
 	Uint("uint");
+
+
+	companion object {
+		/**
+		 * Retrieves the corresponding [String] for the given value.
+		 *
+		 * @param value The dependent platform value representing the WebGPU value.
+		 * @return The matching [String] or `null` if no match is found.
+		 */
+		fun of(value: String): GPUTextureSampleType? {
+			return entries.find { it.value == value }
+		}
+    }
+
 }
 
 actual enum class GPUTextureViewDimension(val value: String) {
@@ -303,6 +681,20 @@ actual enum class GPUTextureViewDimension(val value: String) {
 	Cube("cube"),
 	CubeArray("cube-array"),
 	ThreeD("unsupported");
+
+
+	companion object {
+		/**
+		 * Retrieves the corresponding [String] for the given value.
+		 *
+		 * @param value The dependent platform value representing the WebGPU value.
+		 * @return The matching [String] or `null` if no match is found.
+		 */
+		fun of(value: String): GPUTextureViewDimension? {
+			return entries.find { it.value == value }
+		}
+    }
+
 }
 
 actual enum class GPUVertexFormat(val value: String) {
@@ -347,10 +739,38 @@ actual enum class GPUVertexFormat(val value: String) {
 	Sint32x4("sint32x4"),
 	Unorm1010102("unorm10-10-10-2"),
 	Unorm8x4BGRA("unorm8x4-bgra");
+
+
+	companion object {
+		/**
+		 * Retrieves the corresponding [String] for the given value.
+		 *
+		 * @param value The dependent platform value representing the WebGPU value.
+		 * @return The matching [String] or `null` if no match is found.
+		 */
+		fun of(value: String): GPUVertexFormat? {
+			return entries.find { it.value == value }
+		}
+    }
+
 }
 
 actual enum class GPUVertexStepMode(val value: String) {
 	VertexBufferNotUsed("unsupported"),
 	Vertex("vertex"),
 	Instance("instance");
+
+
+	companion object {
+		/**
+		 * Retrieves the corresponding [String] for the given value.
+		 *
+		 * @param value The dependent platform value representing the WebGPU value.
+		 * @return The matching [String] or `null` if no match is found.
+		 */
+		fun of(value: String): GPUVertexStepMode? {
+			return entries.find { it.value == value }
+		}
+    }
+
 }
