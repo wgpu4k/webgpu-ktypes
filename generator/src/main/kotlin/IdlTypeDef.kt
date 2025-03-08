@@ -3,6 +3,7 @@ import de.fabmax.webidl.model.IdlSimpleType
 import de.fabmax.webidl.model.IdlUnionType
 import domain.Interface
 import domain.TypeAlias
+import mapper.loadDescriptor
 
 internal fun MapperContext.loadTypeDef(model: IdlModel) {
     model.typeDefs
@@ -21,6 +22,7 @@ internal fun MapperContext.loadTypeDef(model: IdlModel) {
                 val typeToInline = type.types[1]
                 model.dictionaries.find { it.name == typeToInline.typeName }?.let { dictionary ->
                     loadDictionary(idlTypeDef.name, dictionary)
+                    loadDescriptor(idlTypeDef.name, dictionary)
                 }
             } else if(type.types.all { it.typeName.startsWith("GPU") }){
                 interfaces += Interface(idlTypeDef.name, sealed = true)

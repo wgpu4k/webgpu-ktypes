@@ -28,5 +28,6 @@ class MapperContext {
     var commonEnumerations = emptyList<Enumeration>()
     var commonWebEnumerations = emptyList<Enumeration>()
     var commonNativeEnumerations = emptyList<Enumeration>()
+    val descriptors = mutableListOf<domain.DescriptorClass>()
 }
 

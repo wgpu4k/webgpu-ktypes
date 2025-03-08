@@ -1,6 +1,7 @@
 import de.fabmax.webidl.model.IdlModel
 import de.fabmax.webidl.parser.WebIdlParser
 import mapper.loadEnums
+import mapper.loadDescriptors
 import java.io.File
 import java.io.SequenceInputStream
 import java.net.URI
@@ -44,6 +45,7 @@ fun main() {
     context.loadInterfaces(idlModel.interfaces)
     context.loadDictionaries(idlModel.dictionaries)
     context.loadEnums(idlModel, yamlModel)
+    context.loadDescriptors(idlModel)
 
     //model.listTypes().joinToString(",").let { println(it) }
     context.adaptToGuidelines()
@@ -67,6 +69,10 @@ fun main() {
 
     commonSourcePath.createSourceFile("interfaces.kt") {
         appendText(context.interfaces.joinToString("\n"))
+    }
+
+    commonSourcePath.createSourceFile("descriptor.kt") {
+        appendText(context.descriptors.joinToString("\n"))
     }
 
     /*context.commonEnumerations.forEach { enumeration ->
