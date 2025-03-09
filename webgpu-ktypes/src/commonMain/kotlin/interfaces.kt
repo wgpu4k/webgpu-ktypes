@@ -251,9 +251,9 @@ interface GPUError {
 	val message: String
 }
 
-interface GPUValidationError
-interface GPUOutOfMemoryError
-interface GPUInternalError
+interface GPUValidationError : GPUError
+interface GPUOutOfMemoryError : GPUError
+interface GPUInternalError : GPUError
 interface GPUObjectDescriptorBase {
 	val label: String
 }

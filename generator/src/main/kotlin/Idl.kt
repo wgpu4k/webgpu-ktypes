@@ -5,6 +5,7 @@ import domain.Enumeration
 
 internal val webUnwantedTypes = setOf(
     // Types de navigateur
+    "EventTarget",
     "NavigatorGPU",
     "Navigator",
     "WorkerNavigator",
@@ -66,7 +67,9 @@ internal fun String.toKotlinType(): String = when (this) {
     else -> this
 }
 
-
+/**
+ * Error on parser, some interface name is on format Type : ExtendType instead of Type
+ */
 internal fun String.fixName(): String = (if (contains(':')) substringBefore(':') else this)
     .replace("\n", "")
     .trim()
