@@ -8,7 +8,7 @@ import fixName
 import webUnwantedTypes
 import kotlin.collections.plus
 
-fun MapperContext.loadEnums(idlModel: IdlModel, yamlModel: YamlModel) {
+fun MapperContext.loadEnums() {
 
     yamlModel.enums.forEach { yamlEnum ->
         val name = "GPU${yamlEnum.name.convertToKotlinClassName()}"

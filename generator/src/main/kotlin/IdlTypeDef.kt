@@ -1,18 +1,17 @@
-import de.fabmax.webidl.model.IdlModel
 import de.fabmax.webidl.model.IdlSimpleType
 import de.fabmax.webidl.model.IdlUnionType
 import domain.Interface
 import domain.TypeAlias
 import mapper.loadDescriptor
 
-internal fun MapperContext.loadTypeDef(model: IdlModel) {
-    model.typeDefs
+internal fun MapperContext.loadTypeDef() {
+    idlModel.typeDefs
         .filter { it.name.fixName() !in webUnwantedTypes }
         .filter { it.type is IdlSimpleType }
         .forEach { idlTypeDef ->
             typeAliases += TypeAlias(idlTypeDef.name, idlTypeDef.type.toKotlinType())
         }
-    model.typeDefs
+    idlModel.typeDefs
         .filter { it.name.fixName() !in webUnwantedTypes }
         .filter { it.type is IdlUnionType }
         .forEach { idlTypeDef ->
@@ -20,7 +19,7 @@ internal fun MapperContext.loadTypeDef(model: IdlModel) {
             // Special cases
             if (type.types.size == 2 && type.types.first().typeName == "sequence" && type.types[1].typeName.startsWith("GPU")) {
                 val typeToInline = type.types[1]
-                model.dictionaries.find { it.name == typeToInline.typeName }?.let { dictionary ->
+                idlModel.dictionaries.find { it.name == typeToInline.typeName }?.let { dictionary ->
                     loadDictionary(idlTypeDef.name, dictionary)
                     loadDescriptor(idlTypeDef.name, dictionary)
                 }

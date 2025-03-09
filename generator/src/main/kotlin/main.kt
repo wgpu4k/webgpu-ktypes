@@ -39,13 +39,13 @@ fun main() {
         SequenceInputStream(idlExtraTyps, Files.newInputStream(webgpuIdlPath))
     )
     val yamlModel = loadWebGPUYaml()
-    val context = MapperContext()
+    val context = MapperContext(idlModel, yamlModel)
 
-    context.loadTypeDef(idlModel)
-    context.loadInterfaces(idlModel.interfaces)
-    context.loadDictionaries(idlModel.dictionaries)
-    context.loadEnums(idlModel, yamlModel)
-    context.loadDescriptors(idlModel)
+    context.loadTypeDef()
+    context.loadInterfaces()
+    context.loadDictionaries()
+    context.loadEnums()
+    context.loadDescriptors()
 
     //model.listTypes().joinToString(",").let { println(it) }
     context.adaptToGuidelines()

@@ -1,8 +1,13 @@
+import de.fabmax.webidl.model.IdlModel
 import domain.Enumeration
 import domain.Interface
 import domain.TypeAlias
+import domain.YamlModel
 
-class MapperContext {
+class MapperContext(
+    val idlModel: IdlModel,
+    val yamlModel: YamlModel
+) {
     fun adaptToGuidelines() {
 
         interfaces.find { it.name == "GPUDevice" }!!.apply {

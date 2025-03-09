@@ -1,11 +1,10 @@
 import de.fabmax.webidl.model.IdlFunction
-import de.fabmax.webidl.model.IdlInterface
 import de.fabmax.webidl.model.IdlSimpleType
 import de.fabmax.webidl.model.IdlType
 import domain.Interface
 
-fun MapperContext.loadInterfaces(idlInterfaces: List<IdlInterface>) {
-    idlInterfaces
+fun MapperContext.loadInterfaces() {
+    idlModel.interfaces
         .filter { it.name.fixName() !in webUnwantedTypes }
         .forEach { idlInterface ->
             val name = idlInterface.name.fixName()

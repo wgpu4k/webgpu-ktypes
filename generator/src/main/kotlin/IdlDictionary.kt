@@ -2,8 +2,8 @@ import de.fabmax.webidl.model.IdlDictionary
 import de.fabmax.webidl.model.IdlSimpleType
 import domain.Interface
 
-internal fun MapperContext.loadDictionaries(idlDictionaries: List<IdlDictionary>) {
-    idlDictionaries
+internal fun MapperContext.loadDictionaries() {
+    idlModel.dictionaries
         .filter { it.name.fixName() !in webUnwantedTypes }
         .forEach { idlDictionary ->
             val name = idlDictionary.name.fixName()
