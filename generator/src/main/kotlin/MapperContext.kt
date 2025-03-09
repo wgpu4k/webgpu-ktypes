@@ -31,6 +31,10 @@ class MapperContext(
             }
         }
 
+        // Add AutoCloseable trait to specific classes as they require to be release on native
+        interfaces.filter { it.name in interfaceToAddAutocloseableTrait }
+            .forEach { it.extends += "AutoCloseable" }
+
         // Flag are Long type to keep native compatibility
         typeAliases
             .filter { it.name.endsWith("Flags") }
@@ -97,3 +101,5 @@ internal fun String.fixNameStartingWithNumeric(): String {
         }
     } else this
 }
+
+private val interfaceToAddAutocloseableTrait = listOf("GPUAdapter", "GPUBindGroup", "GPUBindGroupLayout", "GPUCommandBuffer")

@@ -91,7 +91,7 @@ interface GPU {
 	fun getPreferredCanvasFormat(): GPUTextureFormat
 }
 
-interface GPUAdapter {
+interface GPUAdapter : AutoCloseable {
 	val features: GPUSupportedFeatures
 	val limits: GPUSupportedLimits
 	val info: GPUAdapterInfo
@@ -143,8 +143,8 @@ interface GPUTexture : GPUObjectBase, AutoCloseable {
 	fun createView(descriptor: GPUTextureViewDescriptor? = null): GPUTextureView
 }
 
-interface GPUBindGroupLayout : GPUObjectBase
-interface GPUBindGroup : GPUObjectBase
+interface GPUBindGroupLayout : GPUObjectBase, AutoCloseable
+interface GPUBindGroup : GPUObjectBase, AutoCloseable
 interface GPUPipelineLayout : GPUObjectBase
 interface GPUShaderModule : GPUObjectBase {
 	suspend fun getCompilationInfo(): GPUCompilationInfo
@@ -169,7 +169,7 @@ interface GPUPipelineBase {
 
 interface GPUComputePipeline : GPUObjectBase, GPUPipelineBase
 interface GPURenderPipeline : GPUObjectBase, GPUPipelineBase
-interface GPUCommandBuffer : GPUObjectBase
+interface GPUCommandBuffer : GPUObjectBase, AutoCloseable
 interface GPUCommandsMixin
 interface GPUCommandEncoder : GPUObjectBase, GPUCommandsMixin, GPUDebugCommandsMixin {
 	fun beginRenderPass(descriptor: GPURenderPassDescriptor): GPURenderPassEncoder
