@@ -1,5 +1,6 @@
 import de.fabmax.webidl.model.IdlDictionary
 import de.fabmax.webidl.model.IdlSimpleType
+import de.fabmax.webidl.model.IdlUnionType
 import domain.Interface
 
 internal fun MapperContext.loadDictionaries() {
@@ -25,9 +26,11 @@ internal fun MapperContext.loadDictionary(name: String, idlDictionary: IdlDictio
             kinterface.extends += idlDictionary.superDictionaries
 
             idlDictionary.members
-                .filter { it.type is IdlSimpleType && (it.type as IdlSimpleType).typeName !in webUnwantedTypes }
+                .filter { it.type is IdlSimpleType && (it.type as IdlSimpleType).typeName !in webUnwantedTypes || it.name == "layout" }
                 .forEach {
-                    var type = it.type.toKotlinType()
+                    var type = if((it.type is IdlSimpleType)) it.type.toKotlinType() else {
+                        "${(it.type as IdlUnionType).types.first().toKotlinType()}?"
+                    }
                     if (it.defaultValue == null && it.isRequired.not()) { type += "?" }
                     kinterface.attributes += Interface.Attribute(it.name, type, true)
                 }

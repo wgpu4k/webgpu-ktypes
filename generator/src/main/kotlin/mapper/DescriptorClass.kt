@@ -7,6 +7,7 @@ import webUnwantedTypes
 import de.fabmax.webidl.model.IdlDictionary
 import de.fabmax.webidl.model.IdlMember
 import de.fabmax.webidl.model.IdlSimpleType
+import de.fabmax.webidl.model.IdlUnionType
 
 fun MapperContext.loadDescriptors() {
     idlModel.dictionaries
@@ -15,49 +16,31 @@ fun MapperContext.loadDescriptors() {
 }
 
 internal fun MapperContext.loadDescriptor(name: String, idlDictionary: IdlDictionary) {
-    val parameters = getMembers(idlDictionary).map {
-        var value = it.defaultValue
-        println("$name ${it.type}")
-        var type = if(it.type is IdlSimpleType) it.type.toKotlinType() else {
-            println("not supported: ${it.type}")
-            "FakeType"
-        }
-
-        when {
-            value == null -> if (it.isRequired.not()) {
+    val parameters = getMembers(idlDictionary)
+        // Layout is a special case
+        .filter { (it.type as? IdlSimpleType)?.toKotlinType() !in webUnwantedTypes || it.name == "layout"}
+        .map {
+            var value = it.defaultValue
+            var type = if (it.type is IdlSimpleType) it.type.toKotlinType() else {
                 value = "null"
-                type += "?"
+                "${(it.type as IdlUnionType).types.first().toKotlinType()}?"
             }
-            value == "{}" -> {
-                value = "${type.removePrefix("GPU")}()"
+
+            when {
+                value == null -> if (it.isRequired.not()) {
+                    value = "null"
+                    type += "?"
+                }
+                value == "{}" && type.startsWith("Map<") -> value = "emptyMap()"
+                value == "{}" -> value = "${type.removePrefix("GPU")}()"
+                isUnsignedNumericType(type) -> value = "${value}u"
+                isFloatType(type) -> value = "${value}f"
+                value == "[]" -> value = "emptyList()"
+                isEnumeration(type) -> value = "$type.${getEnumerationValueNameOnKotlin(type, value)}"
             }
-            value.isUnsignedNumericType(type) -> {
-                value = "${value}u"
-            }
-            value == "[]" -> {
-                value = "emptyList()"
-            }
-            isEnumeration(type) -> {
-                value = "$type.${getEnumerationValueNameOnKotlin(type, value)}"
-            }
+            domain.DescriptorClass.Parameter(it.name, type, value)
         }
-        domain.DescriptorClass.Parameter(it.name, type, value)
-    }
     descriptors += domain.DescriptorClass(name, parameters)
-}
-
-private fun String?.isUnsignedNumericType(type: String): Boolean = this?.let {
-    runCatching {
-        Integer.parseInt(it)
-    }
-        .mapCatching { isHexadecimal() }
-        .map { type.lowercase().contains("signed").not() }
-        .getOrElse { false }
-} ?: false
-
-private fun String.isHexadecimal(): Boolean {
-    val hexRegex = Regex("^0[xX][0-9a-fA-F]+\$")
-    return hexRegex.matches(this)
 }
 
 fun MapperContext.getMembers(idlDictionary: IdlDictionary): List<IdlMember> {
@@ -85,7 +68,9 @@ fun MapperContext.getGhostMembers(idlDictionary: IdlDictionary): List<IdlMember>
                 .split(",")
                 .map { it.trim() }
                 .filter { it !in webUnwantedTypes }
-                .also { println("Ghost members for ${idlDictionary.name}: $it") }
-                .flatMap { getMembers(idlModel.dictionaries.find { dictionary -> dictionary.name.fixName() == it } ?: error("Ghost member not found: $it")) }
+                .flatMap {
+                    getMembers(idlModel.dictionaries.find { dictionary -> dictionary.name.fixName() == it }
+                        ?: error("Ghost member not found: $it"))
+                }
         } ?: emptyList()
 }

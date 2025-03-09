@@ -267,7 +267,7 @@ interface GPURequestAdapterOptions {
 
 interface GPUDeviceDescriptor : GPUObjectDescriptorBase {
 	val requiredFeatures: List<GPUFeatureName>
-	val requiredLimits: GPUSupportedLimits
+	val requiredLimits: GPUSupportedLimits?
 	val defaultQueue: GPUQueueDescriptor
 }
 
@@ -367,9 +367,13 @@ interface GPUShaderModuleDescriptor : GPUObjectDescriptorBase {
 
 interface GPUShaderModuleCompilationHint {
 	val entryPoint: String
+	val layout: GPUPipelineLayout??
 }
 
-interface GPUPipelineDescriptorBase : GPUObjectDescriptorBase
+interface GPUPipelineDescriptorBase : GPUObjectDescriptorBase {
+	val layout: GPUPipelineLayout?
+}
+
 interface GPUProgrammableStage {
 	val module: GPUShaderModule
 	val entryPoint: String?

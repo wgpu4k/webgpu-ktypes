@@ -23,16 +23,25 @@ class MapperContext(
             attributes = attributes.filter { it.name !in listOf("lost", "onuncapturederror") }
         }
 
-        interfaces.find { it.name == "GPUDeviceDescriptor" }!!.apply {
-            attributes.find { it.name == "requiredLimits" }!!.apply {
-                this.type = "GPUSupportedLimits"
-            }
-        }
-
         // Flag are Long type to keep native compatibility
         typeAliases
             .filter { it.name.endsWith("Flags") }
             .forEach { typeAlias -> typeAlias.type = "ULong" }
+
+        // Change GPUDeviceDescriptor#requiredLimits type to GPUSupportedLimits?
+        descriptors.first { it.name == "GPUDeviceDescriptor" }
+            .also { descriptor ->
+                descriptor.parameter.first { it.name == "requiredLimits" }.apply {
+                    type = "GPUSupportedLimits?"
+                    defaultValue = "null"
+                }
+            }
+
+        interfaces.find { it.name == "GPUDeviceDescriptor" }!!.apply {
+            attributes.find { it.name == "requiredLimits" }!!.apply {
+                this.type = "GPUSupportedLimits?"
+            }
+        }
 
     }
 
@@ -47,6 +56,18 @@ class MapperContext(
         return commonEnumerations.find { it.name == typeName }
             ?.let { enum -> enum.values.find { it.lowercase() == fixedValue }}
             ?: error("enumeration not found with type $typeName and value $fixedValue")
+    }
+
+    fun MapperContext.isUnsignedNumericType(type: String): Boolean {
+        return (typeAliases.find { it.name == type }
+            ?.let { isUnsignedNumericType(it.type) })
+            ?: (type in listOf("UInt", "ULong", "UShort"))
+    }
+
+    fun MapperContext.isFloatType(type: String): Boolean {
+        return (typeAliases.find { it.name == type }
+            ?.let { isUnsignedNumericType(it.type) })
+            ?: (type in listOf("Float"))
     }
 }
 

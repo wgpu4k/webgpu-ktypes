@@ -2,7 +2,7 @@ package domain
 
 class DescriptorClass(val name: String, val parameter: List<Parameter>) {
 
-    class Parameter(val name: String, val type: String, val defaultValue: String? = null) {
+    class Parameter(val name: String, var type: String, var defaultValue: String? = null) {
 
         override fun toString(): String = StringBuilder().apply {
             append("override val $name: $type")
@@ -11,8 +11,8 @@ class DescriptorClass(val name: String, val parameter: List<Parameter>) {
     }
 
     override fun toString(): String = StringBuilder().apply {
-        append("data class ${name.removePrefix("GPU")}(")
-        append(parameter.joinToString(", "))
-        append("): $name")
+        append("data class ${name.removePrefix("GPU")}(\n")
+        append(parameter.joinToString(",\n") {"\t$it" })
+        append("\n): $name\n")
     }.toString()
 }
