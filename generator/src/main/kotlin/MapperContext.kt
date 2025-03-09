@@ -23,6 +23,14 @@ class MapperContext(
             attributes = attributes.filter { it.name !in listOf("lost", "onuncapturederror") }
         }
 
+        // If interface contains destroy, we set it as AutoCloseable
+        interfaces.forEach { kinterface ->
+            if (kinterface.methods.any { it.name == "destroy" }) {
+                kinterface.methods = kinterface.methods.filter { it.name != "destroy" }
+                kinterface.extends += "AutoCloseable"
+            }
+        }
+
         // Flag are Long type to keep native compatibility
         typeAliases
             .filter { it.name.endsWith("Flags") }

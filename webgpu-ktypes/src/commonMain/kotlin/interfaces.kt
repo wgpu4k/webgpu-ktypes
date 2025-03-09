@@ -99,12 +99,11 @@ interface GPUAdapter {
 	suspend fun requestDevice(descriptor: GPUDeviceDescriptor? = null): GPUDevice
 }
 
-interface GPUDevice : GPUObjectBase {
+interface GPUDevice : GPUObjectBase, AutoCloseable {
 	val features: GPUSupportedFeatures
 	val limits: GPUSupportedLimits
 	val adapterInfo: GPUAdapterInfo
 	val queue: GPUQueue
-	fun destroy()
 	fun createBuffer(descriptor: GPUBufferDescriptor): GPUBuffer
 	fun createTexture(descriptor: GPUTextureDescriptor): GPUTexture
 	fun createSampler(descriptor: GPUSamplerDescriptor? = null): GPUSampler
@@ -123,17 +122,16 @@ interface GPUDevice : GPUObjectBase {
 	suspend fun popErrorScope(): GPUError?
 }
 
-interface GPUBuffer : GPUObjectBase {
+interface GPUBuffer : GPUObjectBase, AutoCloseable {
 	val size: GPUSize64Out
 	val usage: GPUFlagsConstant
 	val mapState: GPUBufferMapState
 	suspend fun mapAsync(mode: GPUMapModeFlags, offset: GPUSize64 = 0u, size: GPUSize64)
 	fun getMappedRange(offset: GPUSize64 = 0u, size: GPUSize64): ArrayBuffer
 	fun unmap()
-	fun destroy()
 }
 
-interface GPUTexture : GPUObjectBase {
+interface GPUTexture : GPUObjectBase, AutoCloseable {
 	val width: GPUIntegerCoordinateOut
 	val height: GPUIntegerCoordinateOut
 	val depthOrArrayLayers: GPUIntegerCoordinateOut
@@ -143,7 +141,6 @@ interface GPUTexture : GPUObjectBase {
 	val format: GPUTextureFormat
 	val usage: GPUFlagsConstant
 	fun createView(descriptor: GPUTextureViewDescriptor? = null): GPUTextureView
-	fun destroy()
 }
 
 interface GPUBindGroupLayout : GPUObjectBase
@@ -236,10 +233,9 @@ interface GPUQueue : GPUObjectBase {
 	fun writeTexture(destination: GPUTexelCopyTextureInfo, data: GPUBufferSource, dataLayout: GPUTexelCopyBufferLayout, size: GPUExtent3D)
 }
 
-interface GPUQuerySet : GPUObjectBase {
+interface GPUQuerySet : GPUObjectBase, AutoCloseable {
 	val type: GPUQueryType
 	val count: GPUSize32Out
-	fun destroy()
 }
 
 interface GPUDeviceLostInfo {
