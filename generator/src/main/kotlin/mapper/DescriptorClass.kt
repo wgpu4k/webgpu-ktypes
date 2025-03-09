@@ -22,21 +22,36 @@ internal fun MapperContext.loadDescriptor(name: String, idlDictionary: IdlDictio
             "FakeType"
         }
 
-        if (value == "{}") {
-            value = "$type()"
-        } else if (value.isUnsignedNumericType(type)) {
-            value = "${value}u"
-        } else if (value == "[]") {
-            value = "emptyList()"
+        when {
+            value == null -> {}
+            value == "{}" -> {
+                value = "${type.removePrefix("GPU")}()"
+            }
+            value.isUnsignedNumericType(type) -> {
+                value = "${value}u"
+            }
+            value == "[]" -> {
+                value = "emptyList()"
+            }
+            isEnumeration(type) -> {
+                value = "$type.${getEnumerationValueNameOnKotlin(type, value)}"
+            }
         }
         domain.DescriptorClass.Parameter(it.name, type, value)
     }
     descriptors += domain.DescriptorClass(name, parameters)
 }
 
-fun String?.isUnsignedNumericType(type: String): Boolean = this?.let {
+private fun String?.isUnsignedNumericType(type: String): Boolean = this?.let {
     runCatching {
         Integer.parseInt(it)
-    }.map { type.lowercase().contains("signed").not() }
+    }
+        .mapCatching { isHexadecimal() }
+        .map { type.lowercase().contains("signed").not() }
         .getOrElse { false }
 } ?: false
+
+private fun String.isHexadecimal(): Boolean {
+    val hexRegex = Regex("^0[xX][0-9a-fA-F]+\$")
+    return hexRegex.matches(this)
+}

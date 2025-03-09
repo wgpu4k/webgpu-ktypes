@@ -8,6 +8,14 @@ class MapperContext(
     val idlModel: IdlModel,
     val yamlModel: YamlModel
 ) {
+
+    val interfaces = mutableListOf<Interface>()
+    val typeAliases = mutableListOf<TypeAlias>()
+    var commonEnumerations = emptyList<Enumeration>()
+    var commonWebEnumerations = emptyList<Enumeration>()
+    var commonNativeEnumerations = emptyList<Enumeration>()
+    val descriptors = mutableListOf<domain.DescriptorClass>()
+
     fun adaptToGuidelines() {
 
         interfaces.find { it.name == "GPUDevice" }!!.apply {
@@ -28,11 +36,35 @@ class MapperContext(
 
     }
 
-    val interfaces = mutableListOf<Interface>()
-    val typeAliases = mutableListOf<TypeAlias>()
-    var commonEnumerations = emptyList<Enumeration>()
-    var commonWebEnumerations = emptyList<Enumeration>()
-    var commonNativeEnumerations = emptyList<Enumeration>()
-    val descriptors = mutableListOf<domain.DescriptorClass>()
+    fun isEnumeration(typeName: String) = idlModel.enums.any { it.name == typeName }
+
+    fun getEnumerationValueNameOnKotlin(typeName: String, value: String): String {
+        val fixedValue = value
+            .replace("\"", "")
+            .replace("-", "")
+            .fixNameStartingWithNumeric()
+            .lowercase()
+        return commonEnumerations.find { it.name == typeName }
+            ?.let { enum -> enum.values.find { it.lowercase() == fixedValue }}
+            ?: error("enumeration not found with type $typeName and value $fixedValue")
+    }
 }
 
+
+internal fun String.fixNameStartingWithNumeric(): String {
+    return if (first().isDigit()) {
+        when (first()) {
+            '1' -> "One${substring(1)}"
+            '2' -> "Two${substring(1)}"
+            '3' -> "Three${substring(1)}"
+            '4' -> "Four${substring(1)}"
+            '5' -> "Five${substring(1)}"
+            '6' -> "Six${substring(1)}"
+            '7' -> "Seven${substring(1)}"
+            '8' -> "Eight${substring(1)}"
+            '9' -> "Nine${substring(1)}"
+            '0' -> "Zero${substring(1)}"
+            else -> error("Invalid name starting with numeric: $this")
+        }
+    } else this
+}
