@@ -8,7 +8,7 @@ interface GPUTextureView : GPUBindingResource, GPUObjectBase
 interface GPUBufferBinding : GPUBindingResource {
 	val buffer: GPUBuffer
 	val offset: GPUSize64
-	val size: GPUSize64
+	val size: GPUSize64?
 }
 
 interface GPUExternalTexture : GPUBindingResource
@@ -260,7 +260,7 @@ interface GPUObjectDescriptorBase {
 
 interface GPURequestAdapterOptions {
 	val featureLevel: String
-	val powerPreference: GPUPowerPreference
+	val powerPreference: GPUPowerPreference?
 	val forceFallbackAdapter: Boolean
 	val xrCompatible: Boolean
 }
@@ -288,14 +288,14 @@ interface GPUTextureDescriptor : GPUObjectDescriptorBase {
 }
 
 interface GPUTextureViewDescriptor : GPUObjectDescriptorBase {
-	val format: GPUTextureFormat
-	val dimension: GPUTextureViewDimension
+	val format: GPUTextureFormat?
+	val dimension: GPUTextureViewDimension?
 	val usage: GPUTextureUsageFlags
 	val aspect: GPUTextureAspect
 	val baseMipLevel: GPUIntegerCoordinate
-	val mipLevelCount: GPUIntegerCoordinate
+	val mipLevelCount: GPUIntegerCoordinate?
 	val baseArrayLayer: GPUIntegerCoordinate
-	val arrayLayerCount: GPUIntegerCoordinate
+	val arrayLayerCount: GPUIntegerCoordinate?
 }
 
 interface GPUSamplerDescriptor : GPUObjectDescriptorBase {
@@ -307,7 +307,7 @@ interface GPUSamplerDescriptor : GPUObjectDescriptorBase {
 	val mipmapFilter: GPUMipmapFilterMode
 	val lodMinClamp: Float
 	val lodMaxClamp: Float
-	val compare: GPUCompareFunction
+	val compare: GPUCompareFunction?
 	val maxAnisotropy: UShort
 }
 
@@ -318,10 +318,10 @@ interface GPUBindGroupLayoutDescriptor : GPUObjectDescriptorBase {
 interface GPUBindGroupLayoutEntry {
 	val binding: GPUIndex32
 	val visibility: GPUShaderStageFlags
-	val buffer: GPUBufferBindingLayout
-	val sampler: GPUSamplerBindingLayout
-	val texture: GPUTextureBindingLayout
-	val storageTexture: GPUStorageTextureBindingLayout
+	val buffer: GPUBufferBindingLayout?
+	val sampler: GPUSamplerBindingLayout?
+	val texture: GPUTextureBindingLayout?
+	val storageTexture: GPUStorageTextureBindingLayout?
 }
 
 interface GPUBufferBindingLayout {
@@ -372,7 +372,7 @@ interface GPUShaderModuleCompilationHint {
 interface GPUPipelineDescriptorBase : GPUObjectDescriptorBase
 interface GPUProgrammableStage {
 	val module: GPUShaderModule
-	val entryPoint: String
+	val entryPoint: String?
 	val constants: Map<String, GPUPipelineConstantValue>
 }
 
@@ -383,14 +383,14 @@ interface GPUComputePipelineDescriptor : GPUPipelineDescriptorBase {
 interface GPURenderPipelineDescriptor : GPUPipelineDescriptorBase {
 	val vertex: GPUVertexState
 	val primitive: GPUPrimitiveState
-	val depthStencil: GPUDepthStencilState
+	val depthStencil: GPUDepthStencilState?
 	val multisample: GPUMultisampleState
-	val fragment: GPUFragmentState
+	val fragment: GPUFragmentState?
 }
 
 interface GPUPrimitiveState {
 	val topology: GPUPrimitiveTopology
-	val stripIndexFormat: GPUIndexFormat
+	val stripIndexFormat: GPUIndexFormat?
 	val frontFace: GPUFrontFace
 	val cullMode: GPUCullMode
 	val unclippedDepth: Boolean
@@ -408,7 +408,7 @@ interface GPUFragmentState : GPUProgrammableStage {
 
 interface GPUColorTargetState {
 	val format: GPUTextureFormat
-	val blend: GPUBlendState
+	val blend: GPUBlendState?
 	val writeMask: GPUColorWriteFlags
 }
 
@@ -425,8 +425,8 @@ interface GPUBlendComponent {
 
 interface GPUDepthStencilState {
 	val format: GPUTextureFormat
-	val depthWriteEnabled: Boolean
-	val depthCompare: GPUCompareFunction
+	val depthWriteEnabled: Boolean?
+	val depthCompare: GPUCompareFunction?
 	val stencilFront: GPUStencilFaceState
 	val stencilBack: GPUStencilFaceState
 	val stencilReadMask: GPUStencilValue
@@ -461,8 +461,8 @@ interface GPUVertexAttribute {
 
 interface GPUTexelCopyBufferLayout {
 	val offset: GPUSize64
-	val bytesPerRow: GPUSize32
-	val rowsPerImage: GPUSize32
+	val bytesPerRow: GPUSize32?
+	val rowsPerImage: GPUSize32?
 }
 
 interface GPUTexelCopyBufferInfo : GPUTexelCopyBufferLayout {
@@ -480,52 +480,52 @@ interface GPUCommandBufferDescriptor : GPUObjectDescriptorBase
 interface GPUCommandEncoderDescriptor : GPUObjectDescriptorBase
 interface GPUComputePassTimestampWrites {
 	val querySet: GPUQuerySet
-	val beginningOfPassWriteIndex: GPUSize32
-	val endOfPassWriteIndex: GPUSize32
+	val beginningOfPassWriteIndex: GPUSize32?
+	val endOfPassWriteIndex: GPUSize32?
 }
 
 interface GPUComputePassDescriptor : GPUObjectDescriptorBase {
-	val timestampWrites: GPUComputePassTimestampWrites
+	val timestampWrites: GPUComputePassTimestampWrites?
 }
 
 interface GPURenderPassTimestampWrites {
 	val querySet: GPUQuerySet
-	val beginningOfPassWriteIndex: GPUSize32
-	val endOfPassWriteIndex: GPUSize32
+	val beginningOfPassWriteIndex: GPUSize32?
+	val endOfPassWriteIndex: GPUSize32?
 }
 
 interface GPURenderPassDescriptor : GPUObjectDescriptorBase {
 	val colorAttachments: List<GPURenderPassColorAttachment?>
-	val depthStencilAttachment: GPURenderPassDepthStencilAttachment
-	val occlusionQuerySet: GPUQuerySet
-	val timestampWrites: GPURenderPassTimestampWrites
+	val depthStencilAttachment: GPURenderPassDepthStencilAttachment?
+	val occlusionQuerySet: GPUQuerySet?
+	val timestampWrites: GPURenderPassTimestampWrites?
 	val maxDrawCount: GPUSize64
 }
 
 interface GPURenderPassColorAttachment {
 	val view: GPUTextureView
-	val depthSlice: GPUIntegerCoordinate
-	val resolveTarget: GPUTextureView
-	val clearValue: GPUColor
+	val depthSlice: GPUIntegerCoordinate?
+	val resolveTarget: GPUTextureView?
+	val clearValue: GPUColor?
 	val loadOp: GPULoadOp
 	val storeOp: GPUStoreOp
 }
 
 interface GPURenderPassDepthStencilAttachment {
 	val view: GPUTextureView
-	val depthClearValue: Float
-	val depthLoadOp: GPULoadOp
-	val depthStoreOp: GPUStoreOp
+	val depthClearValue: Float?
+	val depthLoadOp: GPULoadOp?
+	val depthStoreOp: GPUStoreOp?
 	val depthReadOnly: Boolean
 	val stencilClearValue: GPUStencilValue
-	val stencilLoadOp: GPULoadOp
-	val stencilStoreOp: GPUStoreOp
+	val stencilLoadOp: GPULoadOp?
+	val stencilStoreOp: GPUStoreOp?
 	val stencilReadOnly: Boolean
 }
 
 interface GPURenderPassLayout : GPUObjectDescriptorBase {
 	val colorFormats: List<GPUTextureFormat?>
-	val depthStencilFormat: GPUTextureFormat
+	val depthStencilFormat: GPUTextureFormat?
 	val sampleCount: GPUSize32
 }
 
