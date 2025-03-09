@@ -265,19 +265,19 @@ interface GPURequestAdapterOptions {
 	val xrCompatible: Boolean
 }
 
-interface GPUDeviceDescriptor {
+interface GPUDeviceDescriptor : GPUObjectDescriptorBase {
 	val requiredFeatures: List<GPUFeatureName>
 	val requiredLimits: GPUSupportedLimits
 	val defaultQueue: GPUQueueDescriptor
 }
 
-interface GPUBufferDescriptor {
+interface GPUBufferDescriptor : GPUObjectDescriptorBase {
 	val size: GPUSize64
 	val usage: GPUBufferUsageFlags
 	val mappedAtCreation: Boolean
 }
 
-interface GPUTextureDescriptor {
+interface GPUTextureDescriptor : GPUObjectDescriptorBase {
 	val size: GPUExtent3D
 	val mipLevelCount: GPUIntegerCoordinate
 	val sampleCount: GPUSize32
@@ -287,7 +287,7 @@ interface GPUTextureDescriptor {
 	val viewFormats: List<GPUTextureFormat>
 }
 
-interface GPUTextureViewDescriptor {
+interface GPUTextureViewDescriptor : GPUObjectDescriptorBase {
 	val format: GPUTextureFormat
 	val dimension: GPUTextureViewDimension
 	val usage: GPUTextureUsageFlags
@@ -298,7 +298,7 @@ interface GPUTextureViewDescriptor {
 	val arrayLayerCount: GPUIntegerCoordinate
 }
 
-interface GPUSamplerDescriptor {
+interface GPUSamplerDescriptor : GPUObjectDescriptorBase {
 	val addressModeU: GPUAddressMode
 	val addressModeV: GPUAddressMode
 	val addressModeW: GPUAddressMode
@@ -311,7 +311,7 @@ interface GPUSamplerDescriptor {
 	val maxAnisotropy: UShort
 }
 
-interface GPUBindGroupLayoutDescriptor {
+interface GPUBindGroupLayoutDescriptor : GPUObjectDescriptorBase {
 	val entries: List<GPUBindGroupLayoutEntry>
 }
 
@@ -346,7 +346,7 @@ interface GPUStorageTextureBindingLayout {
 	val viewDimension: GPUTextureViewDimension
 }
 
-interface GPUBindGroupDescriptor {
+interface GPUBindGroupDescriptor : GPUObjectDescriptorBase {
 	val layout: GPUBindGroupLayout
 	val entries: List<GPUBindGroupEntry>
 }
@@ -356,11 +356,11 @@ interface GPUBindGroupEntry {
 	val resource: GPUBindingResource
 }
 
-interface GPUPipelineLayoutDescriptor {
+interface GPUPipelineLayoutDescriptor : GPUObjectDescriptorBase {
 	val bindGroupLayouts: List<GPUBindGroupLayout?>
 }
 
-interface GPUShaderModuleDescriptor {
+interface GPUShaderModuleDescriptor : GPUObjectDescriptorBase {
 	val code: String
 	val compilationHints: List<GPUShaderModuleCompilationHint>
 }
@@ -369,18 +369,18 @@ interface GPUShaderModuleCompilationHint {
 	val entryPoint: String
 }
 
-interface GPUPipelineDescriptorBase
+interface GPUPipelineDescriptorBase : GPUObjectDescriptorBase
 interface GPUProgrammableStage {
 	val module: GPUShaderModule
 	val entryPoint: String
 	val constants: Map<String, GPUPipelineConstantValue>
 }
 
-interface GPUComputePipelineDescriptor {
+interface GPUComputePipelineDescriptor : GPUPipelineDescriptorBase {
 	val compute: GPUProgrammableStage
 }
 
-interface GPURenderPipelineDescriptor {
+interface GPURenderPipelineDescriptor : GPUPipelineDescriptorBase {
 	val vertex: GPUVertexState
 	val primitive: GPUPrimitiveState
 	val depthStencil: GPUDepthStencilState
@@ -402,7 +402,7 @@ interface GPUMultisampleState {
 	val alphaToCoverageEnabled: Boolean
 }
 
-interface GPUFragmentState {
+interface GPUFragmentState : GPUProgrammableStage {
 	val targets: List<GPUColorTargetState?>
 }
 
@@ -443,7 +443,7 @@ interface GPUStencilFaceState {
 	val passOp: GPUStencilOperation
 }
 
-interface GPUVertexState {
+interface GPUVertexState : GPUProgrammableStage {
 	val buffers: List<GPUVertexBufferLayout?>
 }
 
@@ -465,7 +465,7 @@ interface GPUTexelCopyBufferLayout {
 	val rowsPerImage: GPUSize32
 }
 
-interface GPUTexelCopyBufferInfo {
+interface GPUTexelCopyBufferInfo : GPUTexelCopyBufferLayout {
 	val buffer: GPUBuffer
 }
 
@@ -476,15 +476,15 @@ interface GPUTexelCopyTextureInfo {
 	val aspect: GPUTextureAspect
 }
 
-interface GPUCommandBufferDescriptor
-interface GPUCommandEncoderDescriptor
+interface GPUCommandBufferDescriptor : GPUObjectDescriptorBase
+interface GPUCommandEncoderDescriptor : GPUObjectDescriptorBase
 interface GPUComputePassTimestampWrites {
 	val querySet: GPUQuerySet
 	val beginningOfPassWriteIndex: GPUSize32
 	val endOfPassWriteIndex: GPUSize32
 }
 
-interface GPUComputePassDescriptor {
+interface GPUComputePassDescriptor : GPUObjectDescriptorBase {
 	val timestampWrites: GPUComputePassTimestampWrites
 }
 
@@ -494,7 +494,7 @@ interface GPURenderPassTimestampWrites {
 	val endOfPassWriteIndex: GPUSize32
 }
 
-interface GPURenderPassDescriptor {
+interface GPURenderPassDescriptor : GPUObjectDescriptorBase {
 	val colorAttachments: List<GPURenderPassColorAttachment?>
 	val depthStencilAttachment: GPURenderPassDepthStencilAttachment
 	val occlusionQuerySet: GPUQuerySet
@@ -523,20 +523,20 @@ interface GPURenderPassDepthStencilAttachment {
 	val stencilReadOnly: Boolean
 }
 
-interface GPURenderPassLayout {
+interface GPURenderPassLayout : GPUObjectDescriptorBase {
 	val colorFormats: List<GPUTextureFormat?>
 	val depthStencilFormat: GPUTextureFormat
 	val sampleCount: GPUSize32
 }
 
-interface GPURenderBundleDescriptor
-interface GPURenderBundleEncoderDescriptor {
+interface GPURenderBundleDescriptor : GPUObjectDescriptorBase
+interface GPURenderBundleEncoderDescriptor : GPURenderPassLayout {
 	val depthReadOnly: Boolean
 	val stencilReadOnly: Boolean
 }
 
-interface GPUQueueDescriptor
-interface GPUQuerySetDescriptor {
+interface GPUQueueDescriptor : GPUObjectDescriptorBase
+interface GPUQuerySetDescriptor : GPUObjectDescriptorBase {
 	val type: GPUQueryType
 	val count: GPUSize32
 }
