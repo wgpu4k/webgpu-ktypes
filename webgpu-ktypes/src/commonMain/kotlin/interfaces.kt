@@ -11,7 +11,6 @@ interface GPUBufferBinding : GPUBindingResource {
 	val size: GPUSize64?
 }
 
-interface GPUExternalTexture : GPUBindingResource
 interface GPUColor {
 	val r: Double
 	val g: Double

@@ -24,8 +24,9 @@ internal fun MapperContext.loadTypeDef() {
                     loadDescriptor(idlTypeDef.name, dictionary)
                 }
             } else if(type.types.all { it.typeName.startsWith("GPU") }){
+                val types = type.types.filter { it.toKotlinType() !in webUnwantedTypes }
                 interfaces += Interface(idlTypeDef.name, sealed = true)
-                type.types.forEach { subType ->
+                types.forEach { subType ->
                     (interfaces.find { it.name == subType.typeName } ?: Interface(subType.typeName).also { interfaces.add(it) })
                         .extends += idlTypeDef.name
                 }
