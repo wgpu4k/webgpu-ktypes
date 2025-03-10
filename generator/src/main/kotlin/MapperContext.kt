@@ -3,6 +3,7 @@ import domain.Enumeration
 import domain.Interface
 import domain.TypeAlias
 import domain.YamlModel
+import org.gradle.internal.impldep.kotlinx.metadata.KmClassifier
 
 class MapperContext(
     val idlModel: IdlModel,
@@ -55,6 +56,18 @@ class MapperContext(
             }
         }
 
+        // Convert setlike to typealias
+        val setLikes = idlModel.interfaces
+            .filter { it.setLike != null }
+            .map { it.name }
+        interfaces.toList()
+            .forEach {
+            if ( it.name in setLikes) {
+                interfaces -= it
+            }
+        }
+
+        typeAliases += TypeAlias("GPUSupportedFeatures", "Set<GPUFeatureName>")
     }
 
     fun isEnumeration(typeName: String) = idlModel.enums.any { it.name == typeName }

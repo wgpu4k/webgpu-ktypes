@@ -74,8 +74,6 @@ interface GPUSupportedLimits {
 	val maxComputeWorkgroupsPerDimension: UInt
 }
 
-interface GPUSupportedFeatures
-interface WGSLLanguageFeatures
 interface GPUAdapterInfo {
 	val vendor: String
 	val architecture: String
@@ -83,12 +81,6 @@ interface GPUAdapterInfo {
 	val description: String
 	val subgroupMinSize: UInt
 	val subgroupMaxSize: UInt
-}
-
-interface GPU {
-	val wgslLanguageFeatures: WGSLLanguageFeatures
-	suspend fun requestAdapter(options: GPURequestAdapterOptions? = null): GPUAdapter?
-	fun getPreferredCanvasFormat(): GPUTextureFormat
 }
 
 interface GPUAdapter : AutoCloseable {

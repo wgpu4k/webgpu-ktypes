@@ -21,3 +21,4 @@ typealias GPUSize64Out = ULong
 typealias GPUIntegerCoordinateOut = UInt
 typealias GPUSize32Out = UInt
 typealias GPUFlagsConstant = UInt
+typealias GPUSupportedFeatures = Set<GPUFeatureName>

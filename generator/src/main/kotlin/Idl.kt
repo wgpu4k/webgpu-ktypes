@@ -5,6 +5,7 @@ import domain.Enumeration
 
 internal val webUnwantedTypes = setOf(
     // Types de navigateur
+    "GPU",
     "EventTarget",
     "NavigatorGPU",
     "Navigator",
