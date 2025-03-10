@@ -4,7 +4,7 @@ package io.ygdrasil.webgpu
 
 sealed interface GPUBindingResource
 interface GPUSampler : GPUBindingResource, GPUObjectBase, AutoCloseable
-interface GPUTextureView : GPUBindingResource, GPUObjectBase
+interface GPUTextureView : GPUBindingResource, GPUObjectBase, AutoCloseable
 interface GPUBufferBinding : GPUBindingResource {
 	val buffer: GPUBuffer
 	val offset: GPUSize64
