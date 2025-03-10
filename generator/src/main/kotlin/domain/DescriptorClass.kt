@@ -12,7 +12,10 @@ class DescriptorClass(val name: String, val parameter: List<Parameter>) {
 
     override fun toString(): String = StringBuilder().apply {
         append("data class ${name.removePrefix("GPU")}(\n")
-        append(parameter.joinToString(",\n") {"\t$it" })
+        (parameter.filter { it.defaultValue == null } +
+        parameter.filter { it.defaultValue != null }).let {
+            append(it.joinToString(",\n") { "\t$it" })
+        }
         append("\n): $name\n")
     }.toString()
 }

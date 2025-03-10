@@ -53,11 +53,11 @@ data class BufferDescriptor(
 
 data class TextureDescriptor(
 	override val size: GPUExtent3D,
+	override val format: GPUTextureFormat,
+	override val usage: GPUTextureUsageFlags,
 	override val mipLevelCount: GPUIntegerCoordinate = 1u,
 	override val sampleCount: GPUSize32 = 1u,
 	override val dimension: GPUTextureDimension = GPUTextureDimension.TwoD,
-	override val format: GPUTextureFormat,
-	override val usage: GPUTextureUsageFlags,
 	override val viewFormats: List<GPUTextureFormat> = emptyList(),
 	override val label: String = ""
 ): GPUTextureDescriptor
@@ -119,8 +119,8 @@ data class TextureBindingLayout(
 ): GPUTextureBindingLayout
 
 data class StorageTextureBindingLayout(
-	override val access: GPUStorageTextureAccess = GPUStorageTextureAccess.WriteOnly,
 	override val format: GPUTextureFormat,
+	override val access: GPUStorageTextureAccess = GPUStorageTextureAccess.WriteOnly,
 	override val viewDimension: GPUTextureViewDimension = GPUTextureViewDimension.TwoD
 ): GPUStorageTextureBindingLayout
 
@@ -243,16 +243,16 @@ data class StencilFaceState(
 ): GPUStencilFaceState
 
 data class VertexState(
-	override val buffers: List<GPUVertexBufferLayout?> = emptyList(),
 	override val module: GPUShaderModule,
+	override val buffers: List<GPUVertexBufferLayout?> = emptyList(),
 	override val entryPoint: String? = null,
 	override val constants: Map<String, GPUPipelineConstantValue> = emptyMap()
 ): GPUVertexState
 
 data class VertexBufferLayout(
 	override val arrayStride: GPUSize64,
-	override val stepMode: GPUVertexStepMode = GPUVertexStepMode.Vertex,
-	override val attributes: List<GPUVertexAttribute>
+	override val attributes: List<GPUVertexAttribute>,
+	override val stepMode: GPUVertexStepMode = GPUVertexStepMode.Vertex
 ): GPUVertexBufferLayout
 
 data class VertexAttribute(
@@ -317,11 +317,11 @@ data class RenderPassDescriptor(
 
 data class RenderPassColorAttachment(
 	override val view: GPUTextureView,
+	override val loadOp: GPULoadOp,
+	override val storeOp: GPUStoreOp,
 	override val depthSlice: GPUIntegerCoordinate? = null,
 	override val resolveTarget: GPUTextureView? = null,
-	override val clearValue: GPUColor? = null,
-	override val loadOp: GPULoadOp,
-	override val storeOp: GPUStoreOp
+	override val clearValue: GPUColor? = null
 ): GPURenderPassColorAttachment
 
 data class RenderPassDepthStencilAttachment(
@@ -348,9 +348,9 @@ data class RenderBundleDescriptor(
 ): GPURenderBundleDescriptor
 
 data class RenderBundleEncoderDescriptor(
+	override val colorFormats: List<GPUTextureFormat?>,
 	override val depthReadOnly: Boolean = false,
 	override val stencilReadOnly: Boolean = false,
-	override val colorFormats: List<GPUTextureFormat?>,
 	override val depthStencilFormat: GPUTextureFormat? = null,
 	override val sampleCount: GPUSize32 = 1u,
 	override val label: String = ""
