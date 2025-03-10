@@ -1,7 +1,7 @@
 package domain
 
 data class Enumeration(
-    val name: String,
+    var name: String,
     val values: List<String>,
     val parameters: List<String> = emptyList(),
     val isActual: Boolean = false, val isExpect: Boolean = false,

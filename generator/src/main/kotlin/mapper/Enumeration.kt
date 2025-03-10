@@ -19,7 +19,7 @@ private fun MapperContext.loadBitFlagEnums() {
     yamlModel.bitflags.forEach { bitflag ->
         val name = bitflag.name.convertToKotlinClassName()
         bitflagEnumerations += Enumeration(
-            name,
+            "GPU$name",
             bitflag.entries
                 .mapIndexed { index, entry ->
                     // Calculate first if that a combination
@@ -108,6 +108,6 @@ private fun generateExtra(name: String, type: String): String = """
 
 """
 
-private fun String.convertToKotlinClassName() = split("_")
+internal fun String.convertToKotlinClassName() = split("_")
         .joinToString("") { component -> component.replaceFirstChar { it.uppercase() } }
 

@@ -2,12 +2,12 @@
 // This file has been generated DO NO EDIT
 package io.ygdrasil.webgpu
 
-typealias GPUBufferUsageFlags = ULong
-typealias GPUMapModeFlags = ULong
-typealias GPUTextureUsageFlags = ULong
-typealias GPUShaderStageFlags = ULong
+typealias GPUBufferUsageFlags = Set<GPUBufferUsage>
+typealias GPUMapModeFlags = Set<GPUMapMode>
+typealias GPUTextureUsageFlags = Set<GPUTextureUsage>
+typealias GPUShaderStageFlags = Set<GPUShaderStage>
 typealias GPUPipelineConstantValue = Double
-typealias GPUColorWriteFlags = ULong
+typealias GPUColorWriteFlags = Set<GPUColorWrite>
 typealias GPUBufferDynamicOffset = UInt
 typealias GPUStencilValue = UInt
 typealias GPUSampleMask = UInt

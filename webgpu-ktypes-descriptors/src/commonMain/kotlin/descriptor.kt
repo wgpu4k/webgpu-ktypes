@@ -65,7 +65,7 @@ data class TextureDescriptor(
 data class TextureViewDescriptor(
 	override val format: GPUTextureFormat? = null,
 	override val dimension: GPUTextureViewDimension? = null,
-	override val usage: GPUTextureUsageFlags = 0u,
+	override val usage: GPUTextureUsageFlags = emptySet(),
 	override val aspect: GPUTextureAspect = GPUTextureAspect.All,
 	override val baseMipLevel: GPUIntegerCoordinate = 0u,
 	override val mipLevelCount: GPUIntegerCoordinate? = null,
@@ -208,7 +208,7 @@ data class FragmentState(
 data class ColorTargetState(
 	override val format: GPUTextureFormat,
 	override val blend: GPUBlendState? = null,
-	override val writeMask: GPUColorWriteFlags = 0xFu
+	override val writeMask: GPUColorWriteFlags = setOf(GPUColorWrite.All)
 ): GPUColorTargetState
 
 data class BlendState(

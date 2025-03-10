@@ -3,6 +3,7 @@ import domain.Enumeration
 import domain.Interface
 import domain.TypeAlias
 import domain.YamlModel
+import mapper.convertToKotlinClassName
 import org.gradle.internal.impldep.kotlinx.metadata.KmClassifier
 
 class MapperContext(
@@ -37,11 +38,6 @@ class MapperContext(
         interfaces.filter { it.name in interfaceToAddAutocloseableTrait }
             .forEach { it.extends += "AutoCloseable" }
 
-        // Flag are Long type to keep native compatibility
-        typeAliases
-            .filter { it.name.endsWith("Flags") }
-            .forEach { typeAlias -> typeAlias.type = "ULong" }
-
         // Change GPUDeviceDescriptor#requiredLimits type to GPUSupportedLimits?
         descriptors.first { it.name == "GPUDeviceDescriptor" }
             .also { descriptor ->
@@ -69,6 +65,30 @@ class MapperContext(
         }
 
         typeAliases += TypeAlias("GPUSupportedFeatures", "Set<GPUFeatureName>")
+        typeAliases.filter { it.name.endsWith("Flags") }
+            .forEach { it.type = "Set<${it.name.removeSuffix("Flags")}>" }
+
+        interfaces.first { it.name == "GPUBuffer" }.apply {
+            attributes.find { it.name == "usage" }!!.apply {
+                type = "GPUBufferUsageFlags"
+            }
+        }
+        interfaces.first { it.name == "GPUTexture" }.apply {
+            attributes.find { it.name == "usage" }!!.apply {
+                type = "GPUTextureUsageFlags"
+            }
+        }
+
+        bitflagEnumerations.first { it.name == "GPUColorWriteMask" }.apply {
+            name = "GPUColorWrite"
+        }
+
+        descriptors.first { it.name == "GPUColorTargetState" }.apply {
+            parameter.first { it.name == "writeMask" }.apply { defaultValue = "setOf(GPUColorWrite.All)"}
+        }
+        descriptors.first { it.name == "GPUTextureViewDescriptor" }.apply {
+            parameter.first { it.name == "usage" }.apply { defaultValue = "emptySet()"}
+        }
     }
 
     fun isEnumeration(typeName: String) = idlModel.enums.any { it.name == typeName }

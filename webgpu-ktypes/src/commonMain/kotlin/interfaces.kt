@@ -115,7 +115,7 @@ interface GPUDevice : GPUObjectBase, AutoCloseable {
 
 interface GPUBuffer : GPUObjectBase, AutoCloseable {
 	val size: GPUSize64Out
-	val usage: GPUFlagsConstant
+	val usage: GPUBufferUsageFlags
 	val mapState: GPUBufferMapState
 	suspend fun mapAsync(mode: GPUMapModeFlags, offset: GPUSize64 = 0u, size: GPUSize64): Result<Unit>
 	fun getMappedRange(offset: GPUSize64 = 0u, size: GPUSize64): ArrayBuffer
@@ -130,7 +130,7 @@ interface GPUTexture : GPUObjectBase, AutoCloseable {
 	val sampleCount: GPUSize32Out
 	val dimension: GPUTextureDimension
 	val format: GPUTextureFormat
-	val usage: GPUFlagsConstant
+	val usage: GPUTextureUsageFlags
 	fun createView(descriptor: GPUTextureViewDescriptor? = null): GPUTextureView
 }
 
