@@ -51,6 +51,9 @@ fun main() {
     //model.listTypes().joinToString(",").let { println(it) }
     context.adaptToGuidelines()
 
+    commonSourcePath.createSourceFile("bitflags.kt") {
+        appendText(context.bitflagEnumerations.joinToString("\n"))
+    }
 
     commonSourcePath.createSourceFile("enumerations.kt") {
         appendText(context.commonEnumerations.joinToString("\n"))

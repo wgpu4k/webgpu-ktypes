@@ -1,14 +1,44 @@
 package mapper
 
 import MapperContext
+import builder.templateBuilder
 import fixNameStartingWithNumeric
 import domain.Enumeration
+import domain.YamlModel
 import fixName
 import webUnwantedTypes
+import kotlin.collections.forEach
 import kotlin.collections.plus
 
 fun MapperContext.loadEnums() {
+    loadBitFlagEnums()
+    loadConventionalEnums()
+}
 
+private fun MapperContext.loadBitFlagEnums() {
+    yamlModel.bitflags.forEach { bitflag ->
+        val name = bitflag.name.convertToKotlinClassName()
+        bitflagEnumerations += Enumeration(
+            name,
+            bitflag.entries
+                .mapIndexed { index, entry ->
+                    // Calculate first if that a combination
+                    val value = entry.value_combination?.sumOf { subPart -> indexToFlagValue(bitflag.entries.indexOfFirst { it.name == subPart }) }
+                        ?: indexToFlagValue(index)
+
+                    val name = entry.name.convertToKotlinClassName()
+                    "$name(${value}uL)"
+                },
+            parameters = listOf("override val value: ULong"),
+            extends = listOf("EnumerationWithValue"),
+
+        )
+    }
+}
+
+private fun indexToFlagValue(base: Int): Int = if (base == 0) 0 else 1 shl (base - 1)
+
+private fun MapperContext.loadConventionalEnums() {
     yamlModel.enums.forEach { yamlEnum ->
         val name = "GPU${yamlEnum.name.convertToKotlinClassName()}"
         val idlEnum = idlModel.enums.find { it.name == name }
@@ -43,8 +73,12 @@ fun MapperContext.loadEnums() {
                 extra = generateExtra(name, "UInt"),
                 values = enumeration.values.map { enumerationValue ->
                     val nativeValue = yamlEnum.values.first {
-                        enumerationValue.lowercase() == it.name.convertToKotlinClassName().fixNameStartingWithNumeric().lowercase()
-                    }.let { it.value ?: (yamlEnum.values.indexOf(it) + if(yamlEnum.values.first().name == "undefined") 0 else 1) }
+                        enumerationValue.lowercase() == it.name.convertToKotlinClassName().fixNameStartingWithNumeric()
+                            .lowercase()
+                    }.let {
+                        it.value
+                            ?: (yamlEnum.values.indexOf(it) + if (yamlEnum.values.first().name == "undefined") 0 else 1)
+                    }
                     "$enumerationValue(${nativeValue}u)"
                 }
             )

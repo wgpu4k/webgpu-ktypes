@@ -15,6 +15,7 @@ class MapperContext(
     var commonEnumerations = emptyList<Enumeration>()
     var commonWebEnumerations = emptyList<Enumeration>()
     var commonNativeEnumerations = emptyList<Enumeration>()
+    var bitflagEnumerations = emptyList<Enumeration>()
     val descriptors = mutableListOf<domain.DescriptorClass>()
 
     fun adaptToGuidelines() {

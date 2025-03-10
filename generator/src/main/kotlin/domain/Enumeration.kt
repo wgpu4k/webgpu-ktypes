@@ -5,7 +5,8 @@ data class Enumeration(
     val values: List<String>,
     val parameters: List<String> = emptyList(),
     val isActual: Boolean = false, val isExpect: Boolean = false,
-    val extra: String? = null
+    val extra: String? = null,
+    val extends: List<String> = emptyList()
 ) {
 
     init {
@@ -17,6 +18,10 @@ data class Enumeration(
         if (isExpect) append("expect ")
         append("enum class $name")
         if (parameters.isNotEmpty()) append("(${parameters.joinToString(", ")})")
+        if (extends.isNotEmpty()) {
+            append(": ")
+            append(extends.joinToString(", "))
+        }
         append(" {\n\t")
         append(values.joinToString(",\n\t"))
         append(";\n")
