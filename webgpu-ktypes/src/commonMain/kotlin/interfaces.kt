@@ -3,7 +3,7 @@
 package io.ygdrasil.webgpu
 
 sealed interface GPUBindingResource
-interface GPUSampler : GPUBindingResource, GPUObjectBase
+interface GPUSampler : GPUBindingResource, GPUObjectBase, AutoCloseable
 interface GPUTextureView : GPUBindingResource, GPUObjectBase
 interface GPUBufferBinding : GPUBindingResource {
 	val buffer: GPUBuffer
@@ -145,8 +145,8 @@ interface GPUTexture : GPUObjectBase, AutoCloseable {
 
 interface GPUBindGroupLayout : GPUObjectBase, AutoCloseable
 interface GPUBindGroup : GPUObjectBase, AutoCloseable
-interface GPUPipelineLayout : GPUObjectBase
-interface GPUShaderModule : GPUObjectBase {
+interface GPUPipelineLayout : GPUObjectBase, AutoCloseable
+interface GPUShaderModule : GPUObjectBase, AutoCloseable {
 	suspend fun getCompilationInfo(): GPUCompilationInfo
 }
 
@@ -167,8 +167,8 @@ interface GPUPipelineBase {
 	fun getBindGroupLayout(index: UInt): GPUBindGroupLayout
 }
 
-interface GPUComputePipeline : GPUObjectBase, GPUPipelineBase
-interface GPURenderPipeline : GPUObjectBase, GPUPipelineBase
+interface GPUComputePipeline : GPUObjectBase, GPUPipelineBase, AutoCloseable
+interface GPURenderPipeline : GPUObjectBase, GPUPipelineBase, AutoCloseable
 interface GPUCommandBuffer : GPUObjectBase, AutoCloseable
 interface GPUCommandsMixin
 interface GPUCommandEncoder : GPUObjectBase, GPUCommandsMixin, GPUDebugCommandsMixin {

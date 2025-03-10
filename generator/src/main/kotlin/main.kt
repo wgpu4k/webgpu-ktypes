@@ -22,6 +22,7 @@ val idlExtraTyps = """
     };
 """.byteInputStream()
 
+val descriptorCommonSourcePath = Paths.get("webgpu-ktypes-descriptors").resolve("src").resolve("commonMain").resolve("kotlin")
 val commonSourcePath = Paths.get("webgpu-ktypes").resolve("src").resolve("commonMain").resolve("kotlin")
 val commonWebSourcePath = Paths.get("webgpu-ktypes").resolve("src").resolve("commonWebMain").resolve("kotlin")
 val commonNativeSourcePath = Paths.get("webgpu-ktypes").resolve("src").resolve("commonNativeMain").resolve("kotlin")
@@ -71,7 +72,7 @@ fun main() {
         appendText(context.interfaces.joinToString("\n"))
     }
 
-    commonSourcePath.createSourceFile("descriptor.kt") {
+    descriptorCommonSourcePath.createSourceFile("descriptor.kt") {
         appendText(context.descriptors.joinToString("\n"))
     }
 
