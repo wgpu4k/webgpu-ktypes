@@ -2,7 +2,7 @@
 // This file has been generated DO NO EDIT
 package io.ygdrasil.webgpu
 
-enum class GPUBufferUsage(override val value: ULong): EnumerationWithValue {
+enum class GPUBufferUsage(override val value: ULong): FlagEnumeration {
 	None(0uL),
 	MapRead(1uL),
 	MapWrite(2uL),
@@ -16,7 +16,7 @@ enum class GPUBufferUsage(override val value: ULong): EnumerationWithValue {
 	QueryResolve(512uL);
 }
 
-enum class GPUColorWrite(override val value: ULong): EnumerationWithValue {
+enum class GPUColorWrite(override val value: ULong): FlagEnumeration {
 	None(0uL),
 	Red(1uL),
 	Green(2uL),
@@ -25,20 +25,20 @@ enum class GPUColorWrite(override val value: ULong): EnumerationWithValue {
 	All(15uL);
 }
 
-enum class GPUMapMode(override val value: ULong): EnumerationWithValue {
+enum class GPUMapMode(override val value: ULong): FlagEnumeration {
 	None(0uL),
 	Read(1uL),
 	Write(2uL);
 }
 
-enum class GPUShaderStage(override val value: ULong): EnumerationWithValue {
+enum class GPUShaderStage(override val value: ULong): FlagEnumeration {
 	None(0uL),
 	Vertex(1uL),
 	Fragment(2uL),
 	Compute(4uL);
 }
 
-enum class GPUTextureUsage(override val value: ULong): EnumerationWithValue {
+enum class GPUTextureUsage(override val value: ULong): FlagEnumeration {
 	None(0uL),
 	CopySrc(1uL),
 	CopyDst(2uL),
