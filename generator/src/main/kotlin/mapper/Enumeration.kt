@@ -30,7 +30,7 @@ private fun MapperContext.loadBitFlagEnums() {
                     "$name(${value}uL)"
                 },
             parameters = listOf("override val value: ULong"),
-            extends = listOf("EnumerationWithValue"),
+            extends = listOf("FlagEnumeration"),
 
         )
     }
