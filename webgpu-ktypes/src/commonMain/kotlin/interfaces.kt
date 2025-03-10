@@ -87,7 +87,7 @@ interface GPUAdapter : AutoCloseable {
 	val limits: GPUSupportedLimits
 	val info: GPUAdapterInfo
 	val isFallbackAdapter: Boolean
-	suspend fun requestDevice(descriptor: GPUDeviceDescriptor? = null): GPUDevice
+	suspend fun requestDevice(descriptor: GPUDeviceDescriptor? = null): Result<GPUDevice>
 }
 
 interface GPUDevice : GPUObjectBase, AutoCloseable {
@@ -104,20 +104,20 @@ interface GPUDevice : GPUObjectBase, AutoCloseable {
 	fun createShaderModule(descriptor: GPUShaderModuleDescriptor): GPUShaderModule
 	fun createComputePipeline(descriptor: GPUComputePipelineDescriptor): GPUComputePipeline
 	fun createRenderPipeline(descriptor: GPURenderPipelineDescriptor): GPURenderPipeline
-	suspend fun createComputePipelineAsync(descriptor: GPUComputePipelineDescriptor): GPUComputePipeline
-	suspend fun createRenderPipelineAsync(descriptor: GPURenderPipelineDescriptor): GPURenderPipeline
+	suspend fun createComputePipelineAsync(descriptor: GPUComputePipelineDescriptor): Result<GPUComputePipeline>
+	suspend fun createRenderPipelineAsync(descriptor: GPURenderPipelineDescriptor): Result<GPURenderPipeline>
 	fun createCommandEncoder(descriptor: GPUCommandEncoderDescriptor? = null): GPUCommandEncoder
 	fun createRenderBundleEncoder(descriptor: GPURenderBundleEncoderDescriptor): GPURenderBundleEncoder
 	fun createQuerySet(descriptor: GPUQuerySetDescriptor): GPUQuerySet
 	fun pushErrorScope(filter: GPUErrorFilter)
-	suspend fun popErrorScope(): GPUError?
+	suspend fun popErrorScope(): Result<GPUError?>
 }
 
 interface GPUBuffer : GPUObjectBase, AutoCloseable {
 	val size: GPUSize64Out
 	val usage: GPUFlagsConstant
 	val mapState: GPUBufferMapState
-	suspend fun mapAsync(mode: GPUMapModeFlags, offset: GPUSize64 = 0u, size: GPUSize64)
+	suspend fun mapAsync(mode: GPUMapModeFlags, offset: GPUSize64 = 0u, size: GPUSize64): Result<Unit>
 	fun getMappedRange(offset: GPUSize64 = 0u, size: GPUSize64): ArrayBuffer
 	fun unmap()
 }
@@ -138,7 +138,7 @@ interface GPUBindGroupLayout : GPUObjectBase, AutoCloseable
 interface GPUBindGroup : GPUObjectBase, AutoCloseable
 interface GPUPipelineLayout : GPUObjectBase, AutoCloseable
 interface GPUShaderModule : GPUObjectBase, AutoCloseable {
-	suspend fun getCompilationInfo(): GPUCompilationInfo
+	suspend fun getCompilationInfo(): Result<GPUCompilationInfo>
 }
 
 interface GPUCompilationMessage {
@@ -219,7 +219,7 @@ interface GPURenderBundleEncoder : GPUObjectBase, GPUCommandsMixin, GPUDebugComm
 
 interface GPUQueue : GPUObjectBase {
 	fun submit(commandBuffers: List<GPUCommandBuffer>)
-	suspend fun onSubmittedWorkDone()
+	suspend fun onSubmittedWorkDone(): Result<Unit>
 	fun writeBuffer(buffer: GPUBuffer, bufferOffset: GPUSize64, data: GPUBufferSource, dataOffset: GPUSize64 = 0u, size: GPUSize64)
 	fun writeTexture(destination: GPUTexelCopyTextureInfo, data: GPUBufferSource, dataLayout: GPUTexelCopyBufferLayout, size: GPUExtent3D)
 }
