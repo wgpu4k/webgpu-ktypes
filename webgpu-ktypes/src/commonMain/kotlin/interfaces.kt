@@ -214,7 +214,7 @@ interface GPURenderCommandsMixin {
 }
 
 interface GPURenderBundle : GPUObjectBase
-interface GPURenderBundleEncoder : GPUObjectBase, GPUCommandsMixin, GPUDebugCommandsMixin, GPUBindingCommandsMixin, GPURenderCommandsMixin {
+interface GPURenderBundleEncoder : GPUObjectBase, GPUCommandsMixin, GPUDebugCommandsMixin, GPUBindingCommandsMixin, GPURenderCommandsMixin, AutoCloseable {
 	fun finish(descriptor: GPURenderBundleDescriptor? = null): GPURenderBundle
 }
 
