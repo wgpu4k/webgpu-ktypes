@@ -138,6 +138,5 @@ internal fun String.fixNameStartingWithNumeric(): String {
 
 private val interfaceToAddAutocloseableTrait = listOf(
     "GPUAdapter", "GPUBindGroup", "GPUBindGroupLayout", "GPUCommandBuffer", "GPUComputePipeline", "GPUPipelineLayout",
-    "GPURenderPipeline", "GPUSampler", "GPUShaderModule", "GPUTextureView", "GPUCommandEncoder", "GPURenderBundleEncoder",
-    "GPUComputePassEncoder"
+    "GPURenderPipeline", "GPUSampler", "GPUShaderModule", "GPUTextureView", "GPURenderBundleEncoder"
 )

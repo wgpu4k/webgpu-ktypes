@@ -162,7 +162,7 @@ interface GPUComputePipeline : GPUObjectBase, GPUPipelineBase, AutoCloseable
 interface GPURenderPipeline : GPUObjectBase, GPUPipelineBase, AutoCloseable
 interface GPUCommandBuffer : GPUObjectBase, AutoCloseable
 interface GPUCommandsMixin
-interface GPUCommandEncoder : GPUObjectBase, GPUCommandsMixin, GPUDebugCommandsMixin, AutoCloseable {
+interface GPUCommandEncoder : GPUObjectBase, GPUCommandsMixin, GPUDebugCommandsMixin {
 	fun beginRenderPass(descriptor: GPURenderPassDescriptor): GPURenderPassEncoder
 	fun beginComputePass(descriptor: GPUComputePassDescriptor? = null): GPUComputePassEncoder
 	fun copyBufferToBuffer(source: GPUBuffer, sourceOffset: GPUSize64, destination: GPUBuffer, destinationOffset: GPUSize64, size: GPUSize64)
@@ -184,7 +184,7 @@ interface GPUDebugCommandsMixin {
 	fun insertDebugMarker(markerLabel: String)
 }
 
-interface GPUComputePassEncoder : GPUObjectBase, GPUCommandsMixin, GPUDebugCommandsMixin, GPUBindingCommandsMixin, AutoCloseable {
+interface GPUComputePassEncoder : GPUObjectBase, GPUCommandsMixin, GPUDebugCommandsMixin, GPUBindingCommandsMixin {
 	fun setPipeline(pipeline: GPUComputePipeline)
 	fun dispatchWorkgroups(workgroupCountX: GPUSize32, workgroupCountY: GPUSize32 = 1u, workgroupCountZ: GPUSize32 = 1u)
 	fun dispatchWorkgroupsIndirect(indirectBuffer: GPUBuffer, indirectOffset: GPUSize64)
