@@ -15,7 +15,7 @@ class Interface(
         val isSuspend: Boolean
     ) {
 
-        class Parameter(val name: String, val type: String, val defaultValue: String? = null) {
+        class Parameter(val name: String, val type: String, var defaultValue: String? = null) {
             override fun toString(): String = StringBuilder().apply {
                 append("$name: $type")
                 if (defaultValue != null) append(" = $defaultValue")

@@ -117,8 +117,8 @@ interface GPUBuffer : GPUObjectBase, AutoCloseable {
 	val size: GPUSize64Out
 	val usage: GPUBufferUsageFlags
 	val mapState: GPUBufferMapState
-	suspend fun mapAsync(mode: GPUMapModeFlags, offset: GPUSize64 = 0u, size: GPUSize64): Result<Unit>
-	fun getMappedRange(offset: GPUSize64 = 0u, size: GPUSize64): ArrayBuffer
+	suspend fun mapAsync(mode: GPUMapModeFlags, offset: GPUSize64 = 0u, size: GPUSize64 = this.size): Result<Unit>
+	fun getMappedRange(offset: GPUSize64 = 0u, size: GPUSize64 = this.size): ArrayBuffer
 	fun unmap()
 }
 

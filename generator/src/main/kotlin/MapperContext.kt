@@ -89,6 +89,21 @@ class MapperContext(
         descriptors.first { it.name == "GPUTextureViewDescriptor" }.apply {
             parameter.first { it.name == "usage" }.apply { defaultValue = "emptySet()"}
         }
+
+
+        // Add default value on Buffer size
+        interfaces.first { it.name == "GPUBuffer" }.apply {
+            methods.first { it.name == "mapAsync" }.apply {
+                parameters.first { it.name == "size" }.apply {
+                    defaultValue = "this.size"
+                }
+            }
+            methods.first { it.name == "getMappedRange" }.apply {
+                parameters.first { it.name == "size" }.apply {
+                    defaultValue = "this.size"
+                }
+            }
+        }
     }
 
     fun isEnumeration(typeName: String) = idlModel.enums.any { it.name == typeName }
