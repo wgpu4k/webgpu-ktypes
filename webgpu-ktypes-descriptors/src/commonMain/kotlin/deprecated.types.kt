@@ -4,5 +4,5 @@ package io.ygdrasil.webgpu
 typealias Size3D = Extent3D
 @Deprecated("Use TexelCopyTextureInfo instead")
 typealias ImageCopyTexture = TexelCopyTextureInfo
-@Deprecated("Use GPUAddressMode instead")
+@Deprecated("Use TexelCopyBufferInfo instead")
 typealias ImageCopyBuffer = TexelCopyBufferInfo
