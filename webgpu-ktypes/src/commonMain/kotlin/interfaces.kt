@@ -220,8 +220,8 @@ interface GPURenderBundleEncoder : GPUObjectBase, GPUCommandsMixin, GPUDebugComm
 interface GPUQueue : GPUObjectBase {
 	fun submit(commandBuffers: List<GPUCommandBuffer>)
 	suspend fun onSubmittedWorkDone(): Result<Unit>
-	fun writeBuffer(buffer: GPUBuffer, bufferOffset: GPUSize64, data: GPUBufferSource, dataOffset: GPUSize64 = 0u, size: GPUSize64)
-	fun writeTexture(destination: GPUTexelCopyTextureInfo, data: GPUBufferSource, dataLayout: GPUTexelCopyBufferLayout, size: GPUExtent3D)
+	fun writeBuffer(buffer: GPUBuffer, bufferOffset: GPUSize64, data: ArrayBuffer, dataOffset: GPUSize64 = 0u, size: GPUSize64)
+	fun writeTexture(destination: GPUTexelCopyTextureInfo, data: ArrayBuffer, dataLayout: GPUTexelCopyBufferLayout, size: GPUExtent3D)
 }
 
 interface GPUQuerySet : GPUObjectBase, AutoCloseable {

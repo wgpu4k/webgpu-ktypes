@@ -15,14 +15,11 @@ remains consistent with the official WebGPU guidelines.
 
 # ArrayBuffer
 
-I would like to gather feedback on this point. Please let me know your thoughts or any suggestions.
+ArrayBuffer will be mapped as Js ArrayBuffer on browser and a raw pointer on other platform
 
 # AllowSharedBufferSource
 
-`AllowSharedBufferSource` will be mapped to a `BufferSource` type. This type will be implemented with a companion method
-that accepts a list of primitives and memory sources, depending on the platform. The companion method will provide a
-consistent and platform-agnostic way to initialize `BufferSource` while ensuring compatibility with the underlying
-memory management requirements of the target environment.
+`AllowSharedBufferSource` will be mapped to a `ArrayBuffer` type.
 
 # Primitive Type Mapping
 

@@ -63,7 +63,7 @@ internal fun String.toKotlinType(): String = when (this) {
     "DOMString", "USVString" -> "String"
     "boolean" -> "Boolean"
     "undefined" -> "Unit"
-    "AllowSharedBufferSource" -> "GPUBufferSource"
+    "AllowSharedBufferSource" -> "ArrayBuffer"
     "Uint32Array" -> "List<UInt>"
     else -> this
 }

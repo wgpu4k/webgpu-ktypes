@@ -118,6 +118,16 @@ kotlin {
         allWarningsAsErrors = true
         freeCompilerArgs.add("-Xexpect-actual-classes")
     }
+
+    sourceSets {
+
+        wasmJsMain {
+            dependencies {
+                api(libs.kotlinx.browser)
+            }
+        }
+
+    }
 }
 
 android {

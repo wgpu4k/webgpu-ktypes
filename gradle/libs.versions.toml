@@ -4,8 +4,10 @@ wgpu4k-native = "v24.0.1"
 kaml = "0.71.0"
 kotlin = "2.1.10"
 agp = "8.5.2"
+kotlinx-browser = "0.3"
 
 [libraries]
+kotlinx-browser = { module = "org.jetbrains.kotlinx:kotlinx-browser", version.ref = "kotlinx-browser" }
 webidl-util = { module = "de.fabmax:webidl-util", version.ref = "webidl-util" }
 wgpu-specs = { module = "io.ygdrasil:wgpu4k-native-specs-jvm", version.ref = "wgpu4k-native" }
 kaml = { module = "com.charleskorn.kaml:kaml", version.ref = "kaml" }
