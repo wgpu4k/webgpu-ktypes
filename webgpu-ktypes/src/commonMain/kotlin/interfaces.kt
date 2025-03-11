@@ -162,7 +162,7 @@ interface GPUComputePipeline : GPUObjectBase, GPUPipelineBase, AutoCloseable
 interface GPURenderPipeline : GPUObjectBase, GPUPipelineBase, AutoCloseable
 interface GPUCommandBuffer : GPUObjectBase, AutoCloseable
 interface GPUCommandsMixin
-interface GPUCommandEncoder : GPUObjectBase, GPUCommandsMixin, GPUDebugCommandsMixin {
+interface GPUCommandEncoder : GPUObjectBase, GPUCommandsMixin, GPUDebugCommandsMixin, AutoCloseable {
 	fun beginRenderPass(descriptor: GPURenderPassDescriptor): GPURenderPassEncoder
 	fun beginComputePass(descriptor: GPUComputePassDescriptor? = null): GPUComputePassEncoder
 	fun copyBufferToBuffer(source: GPUBuffer, sourceOffset: GPUSize64, destination: GPUBuffer, destinationOffset: GPUSize64, size: GPUSize64)
