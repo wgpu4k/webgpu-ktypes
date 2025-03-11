@@ -142,7 +142,7 @@ data class BufferBinding(
 ): GPUBufferBinding
 
 data class PipelineLayoutDescriptor(
-	override val bindGroupLayouts: List<GPUBindGroupLayout?>,
+	override val bindGroupLayouts: List<GPUBindGroupLayout>,
 	override val label: String = ""
 ): GPUPipelineLayoutDescriptor
 
@@ -199,7 +199,7 @@ data class MultisampleState(
 ): GPUMultisampleState
 
 data class FragmentState(
-	override val targets: List<GPUColorTargetState?>,
+	override val targets: List<GPUColorTargetState>,
 	override val module: GPUShaderModule,
 	override val entryPoint: String? = null,
 	override val constants: Map<String, GPUPipelineConstantValue> = emptyMap()
@@ -244,7 +244,7 @@ data class StencilFaceState(
 
 data class VertexState(
 	override val module: GPUShaderModule,
-	override val buffers: List<GPUVertexBufferLayout?> = emptyList(),
+	override val buffers: List<GPUVertexBufferLayout> = emptyList(),
 	override val entryPoint: String? = null,
 	override val constants: Map<String, GPUPipelineConstantValue> = emptyMap()
 ): GPUVertexState
@@ -307,7 +307,7 @@ data class RenderPassTimestampWrites(
 ): GPURenderPassTimestampWrites
 
 data class RenderPassDescriptor(
-	override val colorAttachments: List<GPURenderPassColorAttachment?>,
+	override val colorAttachments: List<GPURenderPassColorAttachment>,
 	override val depthStencilAttachment: GPURenderPassDepthStencilAttachment? = null,
 	override val occlusionQuerySet: GPUQuerySet? = null,
 	override val timestampWrites: GPURenderPassTimestampWrites? = null,
@@ -337,7 +337,7 @@ data class RenderPassDepthStencilAttachment(
 ): GPURenderPassDepthStencilAttachment
 
 data class RenderPassLayout(
-	override val colorFormats: List<GPUTextureFormat?>,
+	override val colorFormats: List<GPUTextureFormat>,
 	override val depthStencilFormat: GPUTextureFormat? = null,
 	override val sampleCount: GPUSize32 = 1u,
 	override val label: String = ""
@@ -348,7 +348,7 @@ data class RenderBundleDescriptor(
 ): GPURenderBundleDescriptor
 
 data class RenderBundleEncoderDescriptor(
-	override val colorFormats: List<GPUTextureFormat?>,
+	override val colorFormats: List<GPUTextureFormat>,
 	override val depthReadOnly: Boolean = false,
 	override val stencilReadOnly: Boolean = false,
 	override val depthStencilFormat: GPUTextureFormat? = null,

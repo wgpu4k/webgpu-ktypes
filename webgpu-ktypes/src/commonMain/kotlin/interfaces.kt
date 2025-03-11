@@ -344,7 +344,7 @@ interface GPUBindGroupEntry {
 }
 
 interface GPUPipelineLayoutDescriptor : GPUObjectDescriptorBase {
-	val bindGroupLayouts: List<GPUBindGroupLayout?>
+	val bindGroupLayouts: List<GPUBindGroupLayout>
 }
 
 interface GPUShaderModuleDescriptor : GPUObjectDescriptorBase {
@@ -394,7 +394,7 @@ interface GPUMultisampleState {
 }
 
 interface GPUFragmentState : GPUProgrammableStage {
-	val targets: List<GPUColorTargetState?>
+	val targets: List<GPUColorTargetState>
 }
 
 interface GPUColorTargetState {
@@ -435,7 +435,7 @@ interface GPUStencilFaceState {
 }
 
 interface GPUVertexState : GPUProgrammableStage {
-	val buffers: List<GPUVertexBufferLayout?>
+	val buffers: List<GPUVertexBufferLayout>
 }
 
 interface GPUVertexBufferLayout {
@@ -486,7 +486,7 @@ interface GPURenderPassTimestampWrites {
 }
 
 interface GPURenderPassDescriptor : GPUObjectDescriptorBase {
-	val colorAttachments: List<GPURenderPassColorAttachment?>
+	val colorAttachments: List<GPURenderPassColorAttachment>
 	val depthStencilAttachment: GPURenderPassDepthStencilAttachment?
 	val occlusionQuerySet: GPUQuerySet?
 	val timestampWrites: GPURenderPassTimestampWrites?
@@ -515,7 +515,7 @@ interface GPURenderPassDepthStencilAttachment {
 }
 
 interface GPURenderPassLayout : GPUObjectDescriptorBase {
-	val colorFormats: List<GPUTextureFormat?>
+	val colorFormats: List<GPUTextureFormat>
 	val depthStencilFormat: GPUTextureFormat?
 	val sampleCount: GPUSize32
 }
