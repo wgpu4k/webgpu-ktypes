@@ -117,8 +117,8 @@ interface GPUBuffer : GPUObjectBase, AutoCloseable {
 	val size: GPUSize64Out
 	val usage: GPUBufferUsageFlags
 	val mapState: GPUBufferMapState
-	suspend fun mapAsync(mode: GPUMapModeFlags, offset: GPUSize64 = 0u, size: GPUSize64 = this.size): Result<Unit>
-	fun getMappedRange(offset: GPUSize64 = 0u, size: GPUSize64 = this.size): ArrayBuffer
+	suspend fun mapAsync(mode: GPUMapModeFlags, offset: GPUSize64 = 0u, size: GPUSize64? = null): Result<Unit>
+	fun getMappedRange(offset: GPUSize64 = 0u, size: GPUSize64? = null): ArrayBuffer
 	fun unmap()
 }
 
@@ -169,7 +169,7 @@ interface GPUCommandEncoder : GPUObjectBase, GPUCommandsMixin, GPUDebugCommandsM
 	fun copyBufferToTexture(source: GPUTexelCopyBufferInfo, destination: GPUTexelCopyTextureInfo, copySize: GPUExtent3D)
 	fun copyTextureToBuffer(source: GPUTexelCopyTextureInfo, destination: GPUTexelCopyBufferInfo, copySize: GPUExtent3D)
 	fun copyTextureToTexture(source: GPUTexelCopyTextureInfo, destination: GPUTexelCopyTextureInfo, copySize: GPUExtent3D)
-	fun clearBuffer(buffer: GPUBuffer, offset: GPUSize64 = 0u, size: GPUSize64)
+	fun clearBuffer(buffer: GPUBuffer, offset: GPUSize64 = 0u, size: GPUSize64? = null)
 	fun resolveQuerySet(querySet: GPUQuerySet, firstQuery: GPUSize32, queryCount: GPUSize32, destination: GPUBuffer, destinationOffset: GPUSize64)
 	fun finish(descriptor: GPUCommandBufferDescriptor? = null): GPUCommandBuffer
 }
@@ -204,8 +204,8 @@ interface GPURenderPassEncoder : GPUObjectBase, GPUCommandsMixin, GPUDebugComman
 
 interface GPURenderCommandsMixin {
 	fun setPipeline(pipeline: GPURenderPipeline)
-	fun setIndexBuffer(buffer: GPUBuffer, indexFormat: GPUIndexFormat, offset: GPUSize64 = 0u, size: GPUSize64)
-	fun setVertexBuffer(slot: GPUIndex32, buffer: GPUBuffer?, offset: GPUSize64 = 0u, size: GPUSize64)
+	fun setIndexBuffer(buffer: GPUBuffer, indexFormat: GPUIndexFormat, offset: GPUSize64 = 0u, size: GPUSize64? = null)
+	fun setVertexBuffer(slot: GPUIndex32, buffer: GPUBuffer?, offset: GPUSize64 = 0u, size: GPUSize64? = null)
 	fun draw(vertexCount: GPUSize32, instanceCount: GPUSize32 = 1u, firstVertex: GPUSize32 = 0u, firstInstance: GPUSize32 = 0u)
 	fun drawIndexed(indexCount: GPUSize32, instanceCount: GPUSize32 = 1u, firstIndex: GPUSize32 = 0u, baseVertex: GPUSignedOffset32 = 0, firstInstance: GPUSize32 = 0u)
 	fun drawIndirect(indirectBuffer: GPUBuffer, indirectOffset: GPUSize64)
@@ -220,7 +220,7 @@ interface GPURenderBundleEncoder : GPUObjectBase, GPUCommandsMixin, GPUDebugComm
 interface GPUQueue : GPUObjectBase {
 	fun submit(commandBuffers: List<GPUCommandBuffer>)
 	suspend fun onSubmittedWorkDone(): Result<Unit>
-	fun writeBuffer(buffer: GPUBuffer, bufferOffset: GPUSize64, data: ArrayBuffer, dataOffset: GPUSize64 = 0u, size: GPUSize64)
+	fun writeBuffer(buffer: GPUBuffer, bufferOffset: GPUSize64, data: ArrayBuffer, dataOffset: GPUSize64 = 0u, size: GPUSize64? = null)
 	fun writeTexture(destination: GPUTexelCopyTextureInfo, data: ArrayBuffer, dataLayout: GPUTexelCopyBufferLayout, size: GPUExtent3D)
 }
 

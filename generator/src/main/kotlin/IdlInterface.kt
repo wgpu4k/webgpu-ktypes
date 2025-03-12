@@ -1,4 +1,5 @@
 import de.fabmax.webidl.model.IdlFunction
+import de.fabmax.webidl.model.IdlFunctionParameter
 import de.fabmax.webidl.model.IdlInterface
 import de.fabmax.webidl.model.IdlSimpleType
 import de.fabmax.webidl.model.IdlType
@@ -29,17 +30,7 @@ private fun injectFunctions(idlInterface: IdlInterface, kinterface: Interface) {
                 idlFunction.name,
                 idlFunction.returnType.toKotlinType(),
                 idlFunction.parameters.map {
-                    var value = it.defaultValue
-                    var type = it.type.toKotlinType()
-
-                    if (value == "{}") {
-                        value = "null"
-                        if (type.endsWith("?").not()) {
-                            type = "$type?"
-                        }
-                    } else if (value != null && type.lowercase().contains("signed").not()) {
-                        value = "${value}u"
-                    }
+                    var (value, type) = computeValueAndType(it)
 
                     Interface.Method.Parameter(
                         it.name,
@@ -50,6 +41,26 @@ private fun injectFunctions(idlInterface: IdlInterface, kinterface: Interface) {
                 idlFunction.returnType.isPromise()
             )
         }
+}
+
+private fun computeValueAndType(parameter: IdlFunctionParameter): Pair<String?, String> {
+    var value = parameter.defaultValue
+    var type = parameter.type.toKotlinType()
+
+    if (value == "{}") {
+        value = "null"
+        if (type.endsWith("?").not()) {
+            type = "$type?"
+        }
+    } else if (value != null && type.lowercase().contains("signed").not()) {
+        value = "${value}u"
+    }
+
+    if (parameter.isOptional && parameter.defaultValue == null) {
+        value = "null"
+        type = "$type?"
+    }
+    return Pair(value, type)
 }
 
 private fun injectAttributes(idlInterface: IdlInterface, kinterface: Interface) {
