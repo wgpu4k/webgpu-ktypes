@@ -79,11 +79,6 @@ fun main() {
         appendText(context.descriptors.joinToString("\n"))
     }
 
-    /*context.commonEnumerations.forEach { enumeration ->
-        println("@Deprecated(\"Use ${enumeration.name} instead\")")
-        println("typealias ${enumeration.name.removePrefix("GPU")} = ${enumeration.name}")
-    }*/
-
 }
 
 private fun Path.createSourceFile(fileName: String, block: File.() -> Unit) {
