@@ -79,10 +79,10 @@ actual enum class GPUBlendOperation(val value: UInt) {
 }
 
 actual enum class GPUBufferBindingType(val value: UInt) {
-	BindingNotUsed(1u),
-	Uniform(3u),
-	Storage(4u),
-	ReadOnlyStorage(5u);
+	BindingNotUsed(0u),
+	Uniform(2u),
+	Storage(3u),
+	ReadOnlyStorage(4u);
 
 
 	companion object {
@@ -414,10 +414,10 @@ actual enum class GPUQueryType(val value: UInt) {
 }
 
 actual enum class GPUSamplerBindingType(val value: UInt) {
-	BindingNotUsed(1u),
-	Filtering(3u),
-	NonFiltering(4u),
-	Comparison(5u);
+	BindingNotUsed(0u),
+	Filtering(2u),
+	NonFiltering(3u),
+	Comparison(4u);
 
 
 	companion object {
@@ -460,10 +460,10 @@ actual enum class GPUStencilOperation(val value: UInt) {
 }
 
 actual enum class GPUStorageTextureAccess(val value: UInt) {
-	BindingNotUsed(1u),
-	WriteOnly(3u),
-	ReadOnly(4u),
-	ReadWrite(5u);
+	BindingNotUsed(0u),
+	WriteOnly(2u),
+	ReadOnly(3u),
+	ReadWrite(4u);
 
 
 	companion object {
@@ -652,12 +652,12 @@ actual enum class GPUTextureFormat(val value: UInt) {
 }
 
 actual enum class GPUTextureSampleType(val value: UInt) {
-	BindingNotUsed(1u),
-	Float(3u),
-	UnfilterableFloat(4u),
-	Depth(5u),
-	Sint(6u),
-	Uint(7u);
+	BindingNotUsed(0u),
+	Float(2u),
+	UnfilterableFloat(3u),
+	Depth(4u),
+	Sint(5u),
+	Uint(6u);
 
 
 	companion object {
@@ -756,9 +756,9 @@ actual enum class GPUVertexFormat(val value: UInt) {
 }
 
 actual enum class GPUVertexStepMode(val value: UInt) {
-	VertexBufferNotUsed(1u),
-	Vertex(3u),
-	Instance(4u);
+	VertexBufferNotUsed(0u),
+	Vertex(2u),
+	Instance(3u);
 
 
 	companion object {

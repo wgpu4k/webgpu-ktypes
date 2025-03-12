@@ -49,7 +49,7 @@ private fun MapperContext.loadConventionalEnums() {
         commonEnumerations += Enumeration(
             name,
             yamlEnum.values
-                .filter { it.name != "undefined" }
+                .filter { it.name != "undefined" && it.name != "null" }
                 .map { value ->
                     value.name.convertToKotlinClassName()
                         .fixNameStartingWithNumeric()
@@ -77,7 +77,7 @@ private fun MapperContext.loadConventionalEnums() {
                             .lowercase()
                     }.let {
                         it.value
-                            ?: (yamlEnum.values.indexOf(it) + if (yamlEnum.values.first().name == "undefined") 0 else 1)
+                            ?: yamlEnum.values.indexOf(it)
                     }
                     "$enumerationValue(${nativeValue}u)"
                 }
