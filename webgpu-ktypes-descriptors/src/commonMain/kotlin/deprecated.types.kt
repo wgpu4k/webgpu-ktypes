@@ -6,3 +6,7 @@ typealias Size3D = Extent3D
 typealias ImageCopyTexture = TexelCopyTextureInfo
 @Deprecated("Use TexelCopyBufferInfo instead")
 typealias ImageCopyBuffer = TexelCopyBufferInfo
+@Deprecated("Use RenderPassColorAttachment instead")
+typealias ColorAttachment = RenderPassColorAttachment
+@Deprecated("Use RenderPassDepthStencilAttachment instead")
+typealias DepthStencilAttachment = RenderPassDepthStencilAttachment
