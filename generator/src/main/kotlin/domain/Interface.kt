@@ -11,7 +11,7 @@ class Interface(
     class Method(
         val name: String,
         val returnType: String,
-        val parameters: List<Parameter>,
+        var parameters: List<Parameter>,
         val isSuspend: Boolean
     ) {
 

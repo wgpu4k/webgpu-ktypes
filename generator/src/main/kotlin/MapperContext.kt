@@ -90,6 +90,13 @@ class MapperContext(
             parameter.first { it.name == "usage" }.apply { defaultValue = "emptySet()"}
         }
 
+        interfaces.first { it.name == "GPUBindingCommandsMixin" }.apply {
+            methods.first { it.name == "setBindGroup" }.apply {
+                // remove dynamicOffsetsStart and dynamicOffsetsLength
+                parameters = parameters.filter { it.name in listOf("index", "bindGroup", "dynamicOffsetsData") }
+                parameters.first { it.name == "dynamicOffsetsData"}.defaultValue = "emptyList()"
+            }
+        }
     }
 
     fun isEnumeration(typeName: String) = idlModel.enums.any { it.name == typeName }

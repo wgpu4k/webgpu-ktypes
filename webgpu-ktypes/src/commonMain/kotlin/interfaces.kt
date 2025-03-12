@@ -175,7 +175,7 @@ interface GPUCommandEncoder : GPUObjectBase, GPUCommandsMixin, GPUDebugCommandsM
 }
 
 interface GPUBindingCommandsMixin {
-	fun setBindGroup(index: GPUIndex32, bindGroup: GPUBindGroup?, dynamicOffsetsData: List<UInt>, dynamicOffsetsDataStart: GPUSize64, dynamicOffsetsDataLength: GPUSize32)
+	fun setBindGroup(index: GPUIndex32, bindGroup: GPUBindGroup?, dynamicOffsetsData: List<UInt> = emptyList())
 }
 
 interface GPUDebugCommandsMixin {
