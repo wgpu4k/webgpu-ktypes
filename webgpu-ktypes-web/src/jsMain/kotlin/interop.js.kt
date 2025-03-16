@@ -1,5 +1,8 @@
 package io.ygdrasil.webgpu
 
+import kotlinx.coroutines.await
+import kotlin.js.Promise
+
 
 /**
  * This is a just placeholder for the compiler
@@ -25,3 +28,11 @@ internal actual fun <A, B : JsObject> Set<A>.mapJsArray(converter: (A) -> B): Js
         .toTypedArray()
         .unsafeCast<JsObject>()
 }
+
+actual suspend fun <T : JsObject> JsObject.wait(): T {
+    return unsafeCast<Promise<T>>().await()
+}
+
+actual fun <T : JsObject> JsObject.castAs(): T = unsafeCast<T>()
+
+actual fun JsNumber.asDouble(): Double = toDouble()

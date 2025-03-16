@@ -7,12 +7,16 @@ plugins {
 
 kotlin {
     js {
+        // TODO remove when poc ended
+        binaries.executable()
         browser()
         nodejs()
     }
 
     @OptIn(org.jetbrains.kotlin.gradle.ExperimentalWasmDsl::class)
     wasmJs {
+        // TODO remove when poc ended
+        binaries.executable()
         browser()
         nodejs()
     }
@@ -24,6 +28,13 @@ kotlin {
 
     sourceSets.commonMain.dependencies {
         implementation(project(":webgpu-ktypes"))
+    }
+    sourceSets {
+        commonMain {
+            dependencies {
+                implementation(libs.coroutines)
+            }
+        }
     }
 }
 
