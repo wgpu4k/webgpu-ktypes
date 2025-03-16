@@ -50,30 +50,30 @@ suspend fun run(canvas: HTMLCanvasElement) {
     context.configure(canvasConfig)
 
     // Create shader modules for vertex and fragment shaders
-    val vertexShaderModuleDesc = createJsObject<JsObject>()
+    val vertexShaderModuleDesc = createJsObject<WGPUShaderModuleDescriptor>()
     vertexShaderModuleDesc.code = triangleVertWGSL
     val vertexShaderModule = device.createShaderModule(vertexShaderModuleDesc)
 
-    val fragmentShaderModuleDesc = createJsObject<JsObject>()
+    val fragmentShaderModuleDesc = createJsObject<WGPUShaderModuleDescriptor>()
     fragmentShaderModuleDesc.code = redFragWGSL
     val fragmentShaderModule = device.createShaderModule(fragmentShaderModuleDesc)
 
     // Create render pipeline
-    val pipelineDesc = createJsObject<JsObject>()
+    val pipelineDesc = createJsObject<WGPURenderPipelineDescriptor>()
     pipelineDesc.layout = "auto"
 
     // Set vertex state
-    val vertexState = createJsObject<JsObject>()
+    val vertexState = createJsObject<WGPUVertexState>()
     vertexState.module = vertexShaderModule
     pipelineDesc.vertex = vertexState
 
     // Set fragment state
-    val fragmentState = createJsObject<JsObject>()
+    val fragmentState = createJsObject<WGPUFragmentState>()
     fragmentState.module = fragmentShaderModule
 
     // Create targets array with one element
-    val targetArray = createJsObject<JsObject>()
-    val target = createJsObject<JsObject>()
+    val targetArray = createJsObject<JsArray>()
+    val target = createJsObject<WGPUColorTargetState>()
     target.format = presentationFormat
     targetArray.push(target)
 
@@ -81,7 +81,7 @@ suspend fun run(canvas: HTMLCanvasElement) {
     pipelineDesc.fragment = fragmentState
 
     // Set primitive state
-    val primitiveState = createJsObject<JsObject>()
+    val primitiveState = createJsObject<WGPUPrimitiveState>()
     primitiveState.topology = "triangle-list"
     pipelineDesc.primitive = primitiveState
 
@@ -93,15 +93,15 @@ suspend fun run(canvas: HTMLCanvasElement) {
         val textureView = context.getCurrentTexture().createView()
 
         // Create render pass descriptor
-        val renderPassDesc = createJsObject<JsObject>()
+        val renderPassDesc = createJsObject<WGPURenderPassDescriptor>()
 
         // Create color attachments array with one element
-        val colorAttachmentsArray = createJsObject<JsObject>()
-        val colorAttachment = createJsObject<JsObject>()
+        val colorAttachmentsArray = createJsObject<JsArray>()
+        val colorAttachment = createJsObject<WGPUColorAttachment>()
         colorAttachment.view = textureView
 
         // Create clear value array [0, 0, 0, 0]
-        val clearValueArray = createJsObject<JsObject>()
+        val clearValueArray = createJsObject<JsArray>()
         clearValueArray.push(0)
         clearValueArray.push(0)
         clearValueArray.push(0)
@@ -123,7 +123,7 @@ suspend fun run(canvas: HTMLCanvasElement) {
         // Submit command buffer
         val commandBuffer = commandEncoder.finish()
 
-        val commandBuffersArray = createJsObject<JsObject>()
+        val commandBuffersArray = createJsObject<JsArray>()
         commandBuffersArray.push(commandBuffer)
 
         device.queue.submit(commandBuffersArray)

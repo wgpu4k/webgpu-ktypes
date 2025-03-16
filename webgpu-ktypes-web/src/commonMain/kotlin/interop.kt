@@ -7,7 +7,7 @@ expect fun <T : JsObject> JsObject.castAs(): T
 expect fun JsNumber.asDouble(): Double
 expect fun Double.asJsNumber(): JsNumber
 
-
 expect class JsNumber
 expect class JsString
 expect interface JsObject
+

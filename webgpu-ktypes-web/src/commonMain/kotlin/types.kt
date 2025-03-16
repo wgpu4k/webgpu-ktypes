@@ -19,7 +19,7 @@ external interface WGPUCommandEncoder: JsObject {
 
 external interface WGPURenderPassEncoder: JsObject {
     fun setPipeline(pipeline: JsObject)
-    fun draw(vertexCount: Int, instanceCount: Int = 1, firstVertex: Int = 0, firstInstance: Int = 0)
+    fun draw(vertexCount: Int, instanceCount: Int, firstVertex: Int, firstInstance: Int)
     fun end()
 }
 
@@ -70,19 +70,25 @@ external interface WGPUCanvasContext : JsObject {
 external interface WGPUCanvasConfiguration: JsObject {
     // GPUDevice
     var device: JsObject
-    var format: JsString
+    var format: String
     // GPUTextureUsageFlags
     var usage: JsNumber?
     // Array<String>
     var viewFormats: JsObject
-    var colorSpace: JsString?
-    var alphaMode: JsString?
+    var colorSpace: String?
+    var alphaMode: String?
 }
 
 // Additional interfaces for JavaScript array manipulation
 external interface JsArray: JsObject {
     fun push(item: JsObject)
+    fun push(item: Int)
     val length: Int
+}
+
+// Interface for target object in fragment state
+external interface WGPUColorTargetState: JsObject {
+    var format: String
 }
 
 // More specific WebGPU interfaces
