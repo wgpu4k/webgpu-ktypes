@@ -26,3 +26,4 @@ actual suspend fun <T : JsObject> JsObject.wait(): T {
 actual fun <T : JsObject> JsObject.castAs(): T = unsafeCast()
 
 actual fun JsNumber.asDouble(): Double = toDouble()
+actual fun Double.asJsNumber(): JsNumber = this.toJsNumber()

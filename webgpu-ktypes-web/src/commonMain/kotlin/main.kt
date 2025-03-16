@@ -1,7 +1,7 @@
 package io.ygdrasil.webgpu
 
 suspend fun run(canvas: HTMLCanvasElement) {
-    val desc = createJsObject<AdapterDescriptor>().also {
+    val desc = createJsObject<WGPUAdapterDescriptor>().also {
         it.featureLevel = "compatibility"
     }
     val gpu = navigator.gpu ?: error("fail to get GPU")
@@ -16,12 +16,12 @@ suspend fun run(canvas: HTMLCanvasElement) {
         .castAs<WGPUCanvasContext>()
 
     val devicePixelRatio = window.devicePixelRatio.asDouble()
-    canvas.width = (canvas.clientWidth.asDouble() * devicePixelRatio) as JsNumber
-    canvas.height = (canvas.clientHeight.asDouble() * devicePixelRatio) as JsNumber
+    canvas.width = (canvas.clientWidth.asDouble() * devicePixelRatio).asJsNumber()
+    canvas.height = (canvas.clientHeight.asDouble() * devicePixelRatio).asJsNumber()
     val presentationFormat = navigator.gpu.getPreferredCanvasFormat()
 
-    println("next $presentationFormat")
 }
+
 
 /*
 

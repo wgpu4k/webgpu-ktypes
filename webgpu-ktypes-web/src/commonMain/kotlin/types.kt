@@ -17,7 +17,7 @@ external interface WGPUAdapter: JsObject {
     fun requestDevice(): JsObject
 }
 
-external interface AdapterDescriptor: JsObject {
+external interface WGPUAdapterDescriptor: JsObject {
     var featureLevel: String
 }
 
