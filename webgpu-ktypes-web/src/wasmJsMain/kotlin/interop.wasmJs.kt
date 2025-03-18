@@ -11,19 +11,22 @@ actual typealias JsObject = kotlin.js.JsAny
 
 actual fun <T : JsObject> createJsObject(): T = js("({ })")
 
-internal actual fun <A, B : JsObject> Set<A>.mapJsArray(converter: (A) -> B): JsObject {
-    val output: JsArray<B> = JsArray()
+inline actual fun <A, B : JsObject> Collection<A>.mapJsArray(converter: (A) -> B): JsObject {
+    val output = JsArray<B>()
     forEachIndexed { index, value ->
         output[index] = converter(value)
     }
     return output
 }
-
-actual suspend fun <T : JsObject> JsObject.wait(): T {
+@Suppress("NOTHING_TO_INLINE")
+actual inline suspend fun <T : JsObject> JsObject.wait(): T {
     return unsafeCast<Promise<T>>().await()
 }
-
-actual fun <T : JsObject> JsObject.castAs(): T = unsafeCast()
-
-actual fun JsNumber.asDouble(): Double = toDouble()
-actual fun Double.asJsNumber(): JsNumber = this.toJsNumber()
+@Suppress("NOTHING_TO_INLINE")
+actual inline fun <T : JsObject> JsObject.castAs(): T = unsafeCast()
+@Suppress("NOTHING_TO_INLINE")
+actual inline fun JsNumber.asDouble(): Double = toDouble()
+@Suppress("NOTHING_TO_INLINE")
+actual inline fun Double.asJsNumber(): JsNumber = this.toJsNumber()
+@Suppress("NOTHING_TO_INLINE")
+actual inline fun Int.asJsNumber(): JsNumber = this.toJsNumber()

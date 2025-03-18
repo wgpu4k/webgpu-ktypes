@@ -19,7 +19,7 @@ external interface WGPUCommandEncoder: JsObject {
 
 external interface WGPURenderPassEncoder: JsObject {
     fun setPipeline(pipeline: JsObject)
-    fun draw(vertexCount: Int, instanceCount: Int, firstVertex: Int, firstInstance: Int)
+    fun draw(vertexCount: Int)
     fun end()
 }
 

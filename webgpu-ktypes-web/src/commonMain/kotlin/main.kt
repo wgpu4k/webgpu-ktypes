@@ -72,10 +72,10 @@ suspend fun run(canvas: HTMLCanvasElement) {
     fragmentState.module = fragmentShaderModule
 
     // Create targets array with one element
-    val targetArray = createJsObject<JsArray>()
     val target = createJsObject<WGPUColorTargetState>()
     target.format = presentationFormat
-    targetArray.push(target)
+    val targetArray = listOf(target)
+        .mapJsArray { it }
 
     fragmentState.targets = targetArray
     pipelineDesc.fragment = fragmentState
@@ -96,23 +96,20 @@ suspend fun run(canvas: HTMLCanvasElement) {
         val renderPassDesc = createJsObject<WGPURenderPassDescriptor>()
 
         // Create color attachments array with one element
-        val colorAttachmentsArray = createJsObject<JsArray>()
         val colorAttachment = createJsObject<WGPUColorAttachment>()
         colorAttachment.view = textureView
 
         // Create clear value array [0, 0, 0, 0]
-        val clearValueArray = createJsObject<JsArray>()
-        clearValueArray.push(0)
-        clearValueArray.push(0)
-        clearValueArray.push(0)
-        clearValueArray.push(0)
+        val clearValueArray = listOf(0, 0, 0, 0)
+            .mapJsArray { it.asJsNumber() }
+
 
         colorAttachment.clearValue = clearValueArray
         colorAttachment.loadOp = "clear"
         colorAttachment.storeOp = "store"
 
-        colorAttachmentsArray.push(colorAttachment)
-        renderPassDesc.colorAttachments = colorAttachmentsArray
+        renderPassDesc.colorAttachments = listOf(colorAttachment)
+            .mapJsArray { it }
 
         // Begin render pass
         val passEncoder = commandEncoder.beginRenderPass(renderPassDesc)
@@ -123,8 +120,8 @@ suspend fun run(canvas: HTMLCanvasElement) {
         // Submit command buffer
         val commandBuffer = commandEncoder.finish()
 
-        val commandBuffersArray = createJsObject<JsArray>()
-        commandBuffersArray.push(commandBuffer)
+        val commandBuffersArray = listOf(commandBuffer)
+            .mapJsArray { it }
 
         device.queue.submit(commandBuffersArray)
 
