@@ -51,7 +51,7 @@ fun MapperContext.convertType(type: String): String = when {
     type.startsWith("GPU") -> when {
         webInterfaces.any { "W${type}" == it.name } -> "W${type}"
         commonEnumerations.any { type == it.name } -> "String"
-        else -> "JsObject"
+        else -> "JsObject /* $type */"
     }
 
     else -> type
@@ -111,12 +111,8 @@ private fun MapperContext.loadWebDictionary(idlDictionary: IdlDictionary): Inter
                 }
 
             idlDictionary.members
-                .filter { it.type is IdlSimpleType && (it.type as IdlSimpleType).typeName !in unwantedTypesOnCommon || it.name == "layout" }
                 .forEach {
-                    var type = if((it.type is IdlSimpleType)) it.type.toWebKotlinType() else {
-                        "${(it.type as IdlUnionType).types.first().toWebKotlinType()}?"
-                    }
-                    kinterface.attributes += Interface.Attribute(it.name, type, false)
+                    kinterface.attributes += Interface.Attribute(it.name, it.type.toWebKotlinType() , false)
                 }
         }
 }

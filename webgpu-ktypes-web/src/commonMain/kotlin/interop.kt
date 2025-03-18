@@ -7,7 +7,14 @@ expect fun <A, B : JsObject> Collection<A>.mapJsArray(converter: (A) -> B): JsAr
 expect inline suspend fun <T: JsObject> JsObject.wait(): T
 expect inline fun <T : JsObject> JsObject.castAs(): T
 expect inline fun JsString.castAs(): JsObject
+expect inline fun JsNumber.asFloat(): Float
 expect inline fun JsNumber.asDouble(): Double
+expect inline fun JsNumber.asInt(): Int
+@Suppress("NOTHING_TO_INLINE")
+inline fun JsNumber.asUInt(): UInt = asInt().toUInt()
+expect inline fun JsNumber.asLong(): Long
+@Suppress("NOTHING_TO_INLINE")
+inline fun JsNumber.asULong(): ULong = asLong().toULong()
 expect inline fun Double.asJsNumber(): JsNumber
 expect inline fun Int.asJsNumber(): JsNumber
 expect inline fun String.asJsString(): JsString

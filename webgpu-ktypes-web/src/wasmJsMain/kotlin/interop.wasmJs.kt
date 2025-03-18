@@ -1,3 +1,4 @@
+@file:Suppress("unused")
 package io.ygdrasil.webgpu
 
 import kotlinx.coroutines.await
@@ -30,10 +31,34 @@ actual inline fun <T : JsObject> JsObject.castAs(): T = unsafeCast()
 @Suppress("NOTHING_TO_INLINE")
 actual inline fun JsString.castAs(): JsObject = unsafeCast<JsObject>()
 @Suppress("NOTHING_TO_INLINE")
+actual inline fun JsNumber.asFloat(): Float = toFloat()
+@Suppress("NOTHING_TO_INLINE")
 actual inline fun JsNumber.asDouble(): Double = toDouble()
 @Suppress("NOTHING_TO_INLINE")
-actual inline fun Double.asJsNumber(): JsNumber = this.toJsNumber()
+actual inline fun JsNumber.asInt(): Int = toInt()
 @Suppress("NOTHING_TO_INLINE")
-actual inline fun Int.asJsNumber(): JsNumber = this.toJsNumber()
+actual inline fun JsNumber.asLong(): Long = toLong()
+@Suppress("NOTHING_TO_INLINE")
+actual inline fun Double.asJsNumber(): JsNumber = toJsNumber()
+@Suppress("NOTHING_TO_INLINE")
+actual inline fun Int.asJsNumber(): JsNumber = toJsNumber()
 @Suppress("NOTHING_TO_INLINE")
 actual inline fun String.asJsString(): JsString = toJsString()
+
+public fun kotlin.js.JsNumber.toFloat(): Float =
+    externRefToKotlinFloatAdapter(this)
+
+internal fun externRefToKotlinFloatAdapter(x: JsAny): Float =
+    externrefToFloat(x)
+
+private fun externrefToFloat(ref: JsAny): Float =
+    js("Number(ref)")
+
+public fun kotlin.js.JsNumber.toLong(): Long =
+    externRefToKotlinLongAdapter(this)
+
+internal fun externRefToKotlinLongAdapter(x: JsAny): Long =
+    externrefToLong(x)
+
+private fun externrefToLong(ref: JsAny): Long =
+    js("Number(ref)")
