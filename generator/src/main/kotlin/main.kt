@@ -27,6 +27,7 @@ val descriptorCommonSourcePath = Paths.get("webgpu-ktypes-descriptors").resolve(
 val commonSourcePath = Paths.get("webgpu-ktypes").resolve("src").resolve("commonMain").resolve("kotlin")
 val commonWebSourcePath = Paths.get("webgpu-ktypes").resolve("src").resolve("commonWebMain").resolve("kotlin")
 val commonNativeSourcePath = Paths.get("webgpu-ktypes").resolve("src").resolve("commonNativeMain").resolve("kotlin")
+val webSourcePath = Paths.get("webgpu-ktypes-web").resolve("src").resolve("commonMain").resolve("kotlin")
 
 val webgpuHtmlPath = Paths.get("webgpu.html")
 val webgpuHtmlUrl = URI("https://www.w3.org/TR/webgpu/").toURL()
@@ -81,6 +82,10 @@ fun main() {
         appendText(context.descriptors.joinToString("\n"))
     }
 
+    webSourcePath.createSourceFile("types.kt") {
+        appendText(context.webInterfaces.joinToString("\n"))
+    }
+
 }
 
 private fun Path.createSourceFile(fileName: String, block: File.() -> Unit) {
@@ -112,6 +117,6 @@ private fun IdlModel.listTypes(): Set<String> = (enums.map { it.name } +
         typeDefs.map { it.name } +
         dictionaries.map { it.name })
     .map { it.fixName() }
-    .filter { it !in webUnwantedTypes }
+    .filter { it !in unwantedTypesOnCommon }
     .toSet()
 

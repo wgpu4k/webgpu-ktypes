@@ -5,7 +5,7 @@ import domain.Interface
 
 internal fun MapperContext.loadDictionaries() {
     idlModel.dictionaries
-        .filter { it.name.fixName() !in webUnwantedTypes }
+        .filter { it.name.fixName() !in unwantedTypesOnCommon }
         .forEach { idlDictionary ->
             val name = idlDictionary.name.fixName()
             loadDictionary(name, idlDictionary).also { kinterface ->
@@ -14,7 +14,7 @@ internal fun MapperContext.loadDictionaries() {
                         kinterface.extends += it.substringAfter(":")
                             .split(",")
                             .map { it.trim() }
-                            .filter { it !in webUnwantedTypes }
+                            .filter { it !in unwantedTypesOnCommon }
                     }
             }
         }
@@ -26,7 +26,7 @@ internal fun MapperContext.loadDictionary(name: String, idlDictionary: IdlDictio
             kinterface.extends += idlDictionary.superDictionaries
 
             idlDictionary.members
-                .filter { it.type is IdlSimpleType && (it.type as IdlSimpleType).typeName !in webUnwantedTypes || it.name == "layout" }
+                .filter { it.type is IdlSimpleType && (it.type as IdlSimpleType).typeName !in unwantedTypesOnCommon || it.name == "layout" }
                 .forEach {
                     var type = if((it.type is IdlSimpleType)) it.type.toKotlinType() else {
                         "${(it.type as IdlUnionType).types.first().toKotlinType()}?"

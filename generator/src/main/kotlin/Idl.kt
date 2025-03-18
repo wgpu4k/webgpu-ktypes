@@ -1,9 +1,8 @@
-import de.fabmax.webidl.model.IdlEnum
 import de.fabmax.webidl.model.IdlSimpleType
 import de.fabmax.webidl.model.IdlType
-import domain.Enumeration
+import de.fabmax.webidl.model.IdlUnionType
 
-internal val webUnwantedTypes = setOf(
+internal val unwantedTypesOnCommon = setOf(
     // Types de navigateur
     "GPU",
     "EventTarget",
@@ -41,6 +40,16 @@ internal val webUnwantedTypes = setOf(
 )
 
 
+internal fun IdlType.toWebKotlinType(): String = when (this) {
+    is IdlSimpleType -> when (typeName) {
+        //"sequence", "FrozenArray" -> "JsArray<JsObject>"
+        //"record" -> "JsMap<JsObject, JsObject>"
+        //"Promise" -> "Promise<JsObject>"
+        else -> "JsObject"
+    }
+    is IdlUnionType -> "JsObject"
+    else -> "JsObject"
+}
 
 internal fun IdlType.toKotlinType(): String = (this as IdlSimpleType).let {
     when (typeName) {

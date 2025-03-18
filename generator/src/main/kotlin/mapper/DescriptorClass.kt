@@ -3,7 +3,7 @@ package mapper
 import toKotlinType
 import MapperContext
 import fixName
-import webUnwantedTypes
+import unwantedTypesOnCommon
 import de.fabmax.webidl.model.IdlDictionary
 import de.fabmax.webidl.model.IdlMember
 import de.fabmax.webidl.model.IdlSimpleType
@@ -11,14 +11,14 @@ import de.fabmax.webidl.model.IdlUnionType
 
 fun MapperContext.loadDescriptors() {
     idlModel.dictionaries
-        .filter { it.name.fixName() !in webUnwantedTypes }
+        .filter { it.name.fixName() !in unwantedTypesOnCommon }
         .forEach { loadDescriptor(it.name.fixName(), it) }
 }
 
 internal fun MapperContext.loadDescriptor(name: String, idlDictionary: IdlDictionary) {
     val parameters = getMembers(idlDictionary)
         // Layout is a special case
-        .filter { (it.type as? IdlSimpleType)?.toKotlinType() !in webUnwantedTypes || it.name == "layout"}
+        .filter { (it.type as? IdlSimpleType)?.toKotlinType() !in unwantedTypesOnCommon || it.name == "layout"}
         .map {
             var value = it.defaultValue
             var type = if (it.type is IdlSimpleType) it.type.toKotlinType() else {
@@ -67,7 +67,7 @@ fun MapperContext.getGhostMembers(idlDictionary: IdlDictionary): List<IdlMember>
             it.substringAfter(":")
                 .split(",")
                 .map { it.trim() }
-                .filter { it !in webUnwantedTypes }
+                .filter { it !in unwantedTypesOnCommon }
                 .flatMap {
                     getMembers(idlModel.dictionaries.find { dictionary -> dictionary.name.fixName() == it }
                         ?: error("Ghost member not found: $it"))

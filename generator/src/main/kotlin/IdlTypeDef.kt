@@ -6,13 +6,13 @@ import mapper.loadDescriptor
 
 internal fun MapperContext.loadTypeDef() {
     idlModel.typeDefs
-        .filter { it.name.fixName() !in webUnwantedTypes }
+        .filter { it.name.fixName() !in unwantedTypesOnCommon }
         .filter { it.type is IdlSimpleType }
         .forEach { idlTypeDef ->
             typeAliases += TypeAlias(idlTypeDef.name, idlTypeDef.type.toKotlinType())
         }
     idlModel.typeDefs
-        .filter { it.name.fixName() !in webUnwantedTypes }
+        .filter { it.name.fixName() !in unwantedTypesOnCommon }
         .filter { it.type is IdlUnionType }
         .forEach { idlTypeDef ->
             val type = (idlTypeDef.type as IdlUnionType)
@@ -24,7 +24,7 @@ internal fun MapperContext.loadTypeDef() {
                     loadDescriptor(idlTypeDef.name, dictionary)
                 }
             } else if(type.types.all { it.typeName.startsWith("GPU") }){
-                val types = type.types.filter { it.toKotlinType() !in webUnwantedTypes }
+                val types = type.types.filter { it.toKotlinType() !in unwantedTypesOnCommon }
                 interfaces += Interface(idlTypeDef.name, sealed = true)
                 types.forEach { subType ->
                     (interfaces.find { it.name == subType.typeName } ?: Interface(subType.typeName).also { interfaces.add(it) })

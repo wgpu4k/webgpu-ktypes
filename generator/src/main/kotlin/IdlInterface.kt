@@ -7,7 +7,7 @@ import domain.Interface
 
 fun MapperContext.loadInterfaces() {
     idlModel.interfaces
-        .filter { it.name.fixName() !in webUnwantedTypes }
+        .filter { it.name.fixName() !in unwantedTypesOnCommon }
         .forEach { idlInterface ->
             val name = idlInterface.name.fixName()
             (interfaces.find { it.name == name } ?: Interface(name).also { interfaces.add(it) })
@@ -21,8 +21,8 @@ fun MapperContext.loadInterfaces() {
 
 private fun injectFunctions(idlInterface: IdlInterface, kinterface: Interface) {
     idlInterface.functions
-        .filter { it.returnType is IdlSimpleType && (it.returnType as IdlSimpleType).typeName !in webUnwantedTypes }
-        .filter { it.parameters.all { p -> p.type is IdlSimpleType && (p.type as IdlSimpleType).typeName !in webUnwantedTypes } }
+        .filter { it.returnType is IdlSimpleType && (it.returnType as IdlSimpleType).typeName !in unwantedTypesOnCommon }
+        .filter { it.parameters.all { p -> p.type is IdlSimpleType && (p.type as IdlSimpleType).typeName !in unwantedTypesOnCommon } }
         .forEach { idlFunction ->
             removeOverloadedMethodWithFewerParams(kinterface, idlFunction)
 
@@ -65,7 +65,7 @@ private fun computeValueAndType(parameter: IdlFunctionParameter): Pair<String?, 
 
 private fun injectAttributes(idlInterface: IdlInterface, kinterface: Interface) {
     idlInterface.attributes
-        .filter { it.type is IdlSimpleType && (it.type as IdlSimpleType).typeName !in webUnwantedTypes }
+        .filter { it.type is IdlSimpleType && (it.type as IdlSimpleType).typeName !in unwantedTypesOnCommon }
         .forEach {
             kinterface.attributes += Interface.Attribute(it.name, it.type.toKotlinType(), it.isReadonly)
         }
@@ -78,7 +78,7 @@ private fun injectSuperInterfaces(kinterface: Interface, idlInterface: IdlInterf
             kinterface.extends += it.substringAfter(":")
                 .split(",")
                 .map { it.trim() }
-                .filter { it !in webUnwantedTypes }
+                .filter { it !in unwantedTypesOnCommon }
         }
 }
 

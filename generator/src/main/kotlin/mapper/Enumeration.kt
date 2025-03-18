@@ -1,12 +1,10 @@
 package mapper
 
 import MapperContext
-import builder.templateBuilder
 import fixNameStartingWithNumeric
 import domain.Enumeration
-import domain.YamlModel
 import fixName
-import webUnwantedTypes
+import unwantedTypesOnCommon
 import kotlin.collections.forEach
 import kotlin.collections.plus
 
@@ -86,7 +84,7 @@ private fun MapperContext.loadConventionalEnums() {
 
     }
 
-    idlModel.enums.filter { it.name.fixName() !in webUnwantedTypes }
+    idlModel.enums.filter { it.name.fixName() !in unwantedTypesOnCommon }
         .forEach { idlEnum ->
             if (commonEnumerations.none { it.name == idlEnum.name }) println("Enum from Idl not found: ${idlEnum.name}")
         }
