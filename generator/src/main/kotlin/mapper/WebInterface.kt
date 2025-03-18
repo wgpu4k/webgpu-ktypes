@@ -6,29 +6,63 @@ import de.fabmax.webidl.model.IdlInterface
 import de.fabmax.webidl.model.IdlSimpleType
 import de.fabmax.webidl.model.IdlUnionType
 import domain.Interface
-import loadDictionary
 import fixName
-import toKotlinType
 import toWebKotlinType
 import unwantedTypesOnCommon
 
 internal fun MapperContext.loadWebInterfaces() {
     // Load web-specific interfaces from the IDL model
-    idlModel.interfaces.forEach { idlInterface ->
+    idlModel.interfaces
+        .filter { it.name.startsWith("GPU") }
+        .forEach { idlInterface ->
             loadWebInterface(idlInterface)
         }
 
     // Load web-specific dictionaries from the IDL model
     idlModel.dictionaries
+        .filter { it.name.startsWith("GPU") }
         .forEach { idlDictionary ->
             loadWebDictionary(idlDictionary)
         }
+
+    webInterfaces.forEach {  kinterface ->
+        kinterface.extends = kinterface.extends
+            .map { if(it.startsWith("GPU")) "W$it" else it }
+            .toSet()
+
+        kinterface.attributes
+            .forEach {  attribute ->
+                attribute.type = convertType(attribute.type)
+            }
+
+        kinterface.methods
+            .forEach { method ->
+                method.parameters.
+                    forEach { parameter ->
+                        parameter.type = convertType(parameter.type)
+                    }
+
+                method.returnType = convertType(method.returnType)
+            }
+    }
+}
+
+fun MapperContext.convertType(type: String): String = when {
+    type.startsWith("GPU") -> when {
+        webInterfaces.any { "W${type}" == it.name } -> "W${type}"
+        commonEnumerations.any { type == it.name } -> "String"
+        else -> "JsObject"
+    }
+
+    else -> type
 }
 
 private fun MapperContext.loadWebInterface(idlInterface: IdlInterface) {
-    val name = idlInterface.name.fixName()
-    (webInterfaces.find { it.name == "W$name" } ?: Interface("W$name", external = true).also { webInterfaces.add(it) })
+    val name = "W" + idlInterface.name.fixName()
+    (webInterfaces.find { it.name == name } ?: Interface(name, external = true).also { webInterfaces.add(it) })
         .also { kinterface ->
+            if (kinterface.extends.contains("JsObject").not()) kinterface.extends += "JsObject"
+
             // Add extends
             kinterface.extends += idlInterface.superInterfaces
             idlInterface.name.takeIf { it.contains(":") }
@@ -41,7 +75,7 @@ private fun MapperContext.loadWebInterface(idlInterface: IdlInterface) {
             // Add attributes
             idlInterface.attributes
                 .forEach {
-                    kinterface.attributes += Interface.Attribute(it.name, it.type.toWebKotlinType(), it.isReadonly)
+                    kinterface.attributes += Interface.Attribute(it.name, it.type.toWebKotlinType(), false)
                 }
 
             // Add methods
@@ -53,31 +87,28 @@ private fun MapperContext.loadWebInterface(idlInterface: IdlInterface) {
                         idlFunction.parameters.map {
                             Interface.Method.Parameter(
                                 it.name,
-                                it.type.toWebKotlinType(),
-                                it.defaultValue
+                                it.type.toWebKotlinType()
                             )
                         },
-                        // No isSuspend on Web
+                        // No suspend on Web
                         isSuspend = false
                     )
                 }
         }
 }
 
-private fun MapperContext.loadWebDictionary(idlDictionary: IdlDictionary) {
-    val name = idlDictionary.name.fixName()
-    val kinterface = loadDictionary("W$name", idlDictionary)
-
-    // Add to webInterfaces if not already present
-    if (webInterfaces.none { it.name == name }) {
-        webInterfaces.add(kinterface)
-    }
-}
-
-private fun MapperContext.loadWebDictionary(name: String, idlDictionary: IdlDictionary): Interface {
-    return (webInterfaces.find { it.name == name } ?: Interface(name).also { webInterfaces.add(it) })
+private fun MapperContext.loadWebDictionary(idlDictionary: IdlDictionary): Interface {
+    val name = "W" + idlDictionary.name.fixName()
+    return (webInterfaces.find { it.name == name } ?: Interface(name, external = true).also { webInterfaces.add(it) })
         .also { kinterface ->
+            if (kinterface.extends.contains("JsObject").not()) kinterface.extends += "JsObject"
             kinterface.extends += idlDictionary.superDictionaries
+            idlDictionary.name.takeIf { it.contains(":") }
+                ?.let {
+                    kinterface.extends += it.substringAfter(":")
+                        .split(",")
+                        .map { it.trim() }
+                }
 
             idlDictionary.members
                 .filter { it.type is IdlSimpleType && (it.type as IdlSimpleType).typeName !in unwantedTypesOnCommon || it.name == "layout" }
@@ -85,8 +116,7 @@ private fun MapperContext.loadWebDictionary(name: String, idlDictionary: IdlDict
                     var type = if((it.type is IdlSimpleType)) it.type.toWebKotlinType() else {
                         "${(it.type as IdlUnionType).types.first().toWebKotlinType()}?"
                     }
-                    if (it.defaultValue == null && it.isRequired.not()) { type += "?" }
-                    kinterface.attributes += Interface.Attribute(it.name, type, true)
+                    kinterface.attributes += Interface.Attribute(it.name, type, false)
                 }
         }
 }

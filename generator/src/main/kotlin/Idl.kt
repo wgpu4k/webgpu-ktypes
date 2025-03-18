@@ -42,13 +42,26 @@ internal val unwantedTypesOnCommon = setOf(
 
 internal fun IdlType.toWebKotlinType(): String = when (this) {
     is IdlSimpleType -> when (typeName) {
-        //"sequence", "FrozenArray" -> "JsArray<JsObject>"
-        //"record" -> "JsMap<JsObject, JsObject>"
-        //"Promise" -> "Promise<JsObject>"
-        else -> "JsObject"
+        "unsigned long",
+        "unsigned long long",
+        "short",
+        "unsigned short",
+        "long",
+        "long long",
+        "float",
+        "double" -> "JsNumber  /* $this */"
+
+        "undefined" -> "Unit"
+        "DOMString", "USVString" -> "String"
+        "sequence", "FrozenArray" -> "JsArray<JsObject> /* $this<${this.parameterTypes?.get(0)}> */"
+        "record" -> "JsMap<JsObject, JsObject>  /* $this<${this.parameterTypes?.get(0)}, ${this.parameterTypes?.get(1)}>  */"
+        "Promise" -> "JsObject /* $this */"
+        else -> when {
+            typeName.startsWith("GPU") -> typeName
+            else -> "JsObject /* $this */"
+        }
     }
-    is IdlUnionType -> "JsObject"
-    else -> "JsObject"
+    is IdlUnionType ->  "JsObject /* $this */"
 }
 
 internal fun IdlType.toKotlinType(): String = (this as IdlSimpleType).let {

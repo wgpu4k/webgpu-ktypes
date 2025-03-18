@@ -24,7 +24,7 @@ const val redFragWGSL = """
 external fun requestAnimationFrame(callback: () -> Unit)
 
 suspend fun run(canvas: HTMLCanvasElement) {
-    val desc = createJsObject<WGPUAdapterDescriptor>().also {
+    val desc = createJsObject<WGPURequestAdapterOptions>().also {
         it.featureLevel = "compatibility"
     }
     val gpu = navigator.gpu ?: error("fail to get GPU")
@@ -60,7 +60,7 @@ suspend fun run(canvas: HTMLCanvasElement) {
 
     // Create render pipeline
     val pipelineDesc = createJsObject<WGPURenderPipelineDescriptor>()
-    pipelineDesc.layout = "auto"
+    pipelineDesc.layout = "auto".asJsString().castAs()
 
     // Set vertex state
     val vertexState = createJsObject<WGPUVertexState>()
@@ -74,10 +74,9 @@ suspend fun run(canvas: HTMLCanvasElement) {
     // Create targets array with one element
     val target = createJsObject<WGPUColorTargetState>()
     target.format = presentationFormat
-    val targetArray = listOf(target)
-        .mapJsArray { it }
+    val targetArray = jsArray(target)
 
-    fragmentState.targets = targetArray
+    fragmentState.targets = targetArray.castAs()
     pipelineDesc.fragment = fragmentState
 
     // Set primitive state
@@ -96,7 +95,7 @@ suspend fun run(canvas: HTMLCanvasElement) {
         val renderPassDesc = createJsObject<WGPURenderPassDescriptor>()
 
         // Create color attachments array with one element
-        val colorAttachment = createJsObject<WGPUColorAttachment>()
+        val colorAttachment = createJsObject<WGPURenderPassColorAttachment>()
         colorAttachment.view = textureView
 
         // Create clear value array [0, 0, 0, 0]
@@ -114,7 +113,7 @@ suspend fun run(canvas: HTMLCanvasElement) {
         // Begin render pass
         val passEncoder = commandEncoder.beginRenderPass(renderPassDesc)
         passEncoder.setPipeline(pipeline)
-        passEncoder.draw(3)
+        passEncoder.draw(3.asJsNumber())
         passEncoder.end()
 
         // Submit command buffer
@@ -123,7 +122,7 @@ suspend fun run(canvas: HTMLCanvasElement) {
         val commandBuffersArray = listOf(commandBuffer)
             .mapJsArray { it }
 
-        device.queue.submit(commandBuffersArray)
+        device.queue.submit(commandBuffersArray.castAs())
 
         // Schedule next frame
         requestAnimationFrame(::frame)

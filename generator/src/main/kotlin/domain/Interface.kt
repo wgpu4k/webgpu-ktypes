@@ -11,12 +11,12 @@ class Interface(
 
     class Method(
         val name: String,
-        val returnType: String,
+        var returnType: String,
         var parameters: List<Parameter>,
         val isSuspend: Boolean
     ) {
 
-        class Parameter(val name: String, val type: String, var defaultValue: String? = null) {
+        class Parameter(val name: String, var type: String, var defaultValue: String? = null) {
             override fun toString(): String = StringBuilder().apply {
                 append("$name: $type")
                 if (defaultValue != null) append(" = $defaultValue")

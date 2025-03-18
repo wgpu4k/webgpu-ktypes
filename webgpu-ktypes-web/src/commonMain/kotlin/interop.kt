@@ -1,15 +1,48 @@
+@file:Suppress("unused")
 package io.ygdrasil.webgpu
 
 expect fun <T: JsObject> createJsObject(): T
-expect inline fun <A: JsObject> jsArray(vararg values: A): JsObject
-expect inline fun <A, B : JsObject> Collection<A>.mapJsArray(crossinline converter: (A) -> B): JsObject
+expect fun <A: JsObject> jsArray(vararg values: A): JsArray<A>
+expect fun <A, B : JsObject> Collection<A>.mapJsArray(converter: (A) -> B): JsArray<B>
 expect inline suspend fun <T: JsObject> JsObject.wait(): T
 expect inline fun <T : JsObject> JsObject.castAs(): T
+expect inline fun JsString.castAs(): JsObject
 expect inline fun JsNumber.asDouble(): Double
 expect inline fun Double.asJsNumber(): JsNumber
 expect inline fun Int.asJsNumber(): JsNumber
+expect inline fun String.asJsString(): JsString
+
 
 expect class JsNumber : JsObject
 expect class JsString
 expect interface JsObject
+external interface JsArray<T: JsObject> : JsObject
+external interface JsMap<a: JsObject, B: JsObject> : JsObject
 
+external interface EventTarget: JsObject
+external interface DOMException: JsObject
+external interface Event: JsObject
+external interface EventInit: JsObject
+
+external object navigator {
+    val gpu: GPU?
+}
+
+external object window {
+    var devicePixelRatio: JsNumber
+}
+
+external interface GPU: JsObject {
+    fun getPreferredCanvasFormat(): String
+    fun requestAdapter(descriptor: WGPURequestAdapterOptions): JsObject
+    var wgslLanguageFeatures: JsObject /* WGSLLanguageFeatures */
+}
+
+external interface HTMLCanvasElement: JsObject {
+    fun getContext(name: String): JsObject
+
+    var clientHeight: JsNumber
+    var clientWidth: JsNumber
+    var width: JsNumber
+    var height: JsNumber
+}

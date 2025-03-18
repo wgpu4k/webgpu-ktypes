@@ -22,17 +22,15 @@ actual external interface JsObject
 
 actual fun <T : JsObject> createJsObject(): T = js("({ })")
 
-@Suppress("NOTHING_TO_INLINE")
-actual inline fun <A, B : JsObject> Collection<A>.mapJsArray(crossinline converter: (A) -> B): JsObject {
+actual fun <A, B : JsObject> Collection<A>.mapJsArray(converter: (A) -> B): JsArray<B> {
     return map { converter(it) }
         .toList()
         .toTypedArray()
-        .unsafeCast<JsObject>()
+        .unsafeCast<JsArray<B>>()
 }
 
-@Suppress("NOTHING_TO_INLINE")
-actual inline fun <A: JsObject> jsArray(vararg values: A): JsObject {
-    return js("Array.from(values)").unsafeCast<JsObject>()
+actual fun <A: JsObject> jsArray(vararg values: A): JsArray<A> {
+    return js("Array.from(values)").unsafeCast<JsArray<A>>()
 }
 
 @Suppress("NOTHING_TO_INLINE")
@@ -43,9 +41,12 @@ actual inline suspend fun <T : JsObject> JsObject.wait(): T {
 @Suppress("NOTHING_TO_INLINE")
 actual inline fun <T : JsObject> JsObject.castAs(): T = unsafeCast<T>()
 @Suppress("NOTHING_TO_INLINE")
-actual inline fun JsNumber.asDouble(): Double = this.unsafeCast<Double>()
+actual inline fun JsString.castAs(): JsObject = unsafeCast<JsObject>()
 @Suppress("NOTHING_TO_INLINE")
-actual inline fun Double.asJsNumber(): JsNumber = this.unsafeCast<JsNumber>()
+actual inline fun JsNumber.asDouble(): Double = unsafeCast<Double>()
 @Suppress("NOTHING_TO_INLINE")
-actual inline fun Int.asJsNumber(): JsNumber = this.unsafeCast<JsNumber>()
-
+actual inline fun Double.asJsNumber(): JsNumber = unsafeCast<JsNumber>()
+@Suppress("NOTHING_TO_INLINE")
+actual inline fun Int.asJsNumber(): JsNumber = unsafeCast<JsNumber>()
+@Suppress("NOTHING_TO_INLINE")
+actual inline fun String.asJsString(): JsString = unsafeCast<JsString>()
