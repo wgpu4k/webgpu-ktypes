@@ -2,6 +2,7 @@ import de.fabmax.webidl.model.IdlModel
 import de.fabmax.webidl.parser.WebIdlParser
 import mapper.loadEnums
 import mapper.loadDescriptors
+import mapper.loadWebInterfaces
 import java.io.File
 import java.io.SequenceInputStream
 import java.net.URI
@@ -47,6 +48,7 @@ fun main() {
     context.loadDictionaries()
     context.loadEnums()
     context.loadDescriptors()
+    context.loadWebInterfaces()
 
     //model.listTypes().joinToString(",").let { println(it) }
     context.adaptToGuidelines()

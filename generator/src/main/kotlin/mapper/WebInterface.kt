@@ -2,6 +2,6 @@ package mapper
 
 import MapperContext
 
-private fun MapperContext.loadWebInterfaces() {
+internal fun MapperContext.loadWebInterfaces() {
 
 }
