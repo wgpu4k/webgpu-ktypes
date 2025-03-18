@@ -21,12 +21,18 @@ actual typealias JsString = String
 actual external interface JsObject
 
 actual fun <T : JsObject> createJsObject(): T = js("({ })")
+
 @Suppress("NOTHING_TO_INLINE")
 actual inline fun <A, B : JsObject> Collection<A>.mapJsArray(crossinline converter: (A) -> B): JsObject {
     return map { converter(it) }
         .toList()
         .toTypedArray()
         .unsafeCast<JsObject>()
+}
+
+@Suppress("NOTHING_TO_INLINE")
+actual inline fun <A: JsObject> jsArray(vararg values: A): JsObject {
+    return js("Array.from(values)").unsafeCast<JsObject>()
 }
 
 @Suppress("NOTHING_TO_INLINE")

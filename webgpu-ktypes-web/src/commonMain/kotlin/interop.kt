@@ -1,6 +1,7 @@
 package io.ygdrasil.webgpu
 
 expect fun <T: JsObject> createJsObject(): T
+expect inline fun <A: JsObject> jsArray(vararg values: A): JsObject
 expect inline fun <A, B : JsObject> Collection<A>.mapJsArray(crossinline converter: (A) -> B): JsObject
 expect inline suspend fun <T: JsObject> JsObject.wait(): T
 expect inline fun <T : JsObject> JsObject.castAs(): T

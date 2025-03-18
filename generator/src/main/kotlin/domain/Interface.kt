@@ -2,7 +2,8 @@ package domain
 
 class Interface(
     val name: String,
-    val sealed: Boolean = false
+    val sealed: Boolean = false,
+    val external: Boolean = false
 ) {
     var extends: Set<String> = emptySet()
     var attributes: List<Attribute> = emptyList()
@@ -47,6 +48,7 @@ class Interface(
     override fun toString(): String {
         val builder = StringBuilder().apply {
             if (sealed) append("sealed ")
+            if (external) append("external ")
             append("interface $name")
             if (extends.isNotEmpty()) {
                 append(" : ")

@@ -11,6 +11,7 @@ actual typealias JsObject = kotlin.js.JsAny
 
 actual fun <T : JsObject> createJsObject(): T = js("({ })")
 
+@Suppress("NOTHING_TO_INLINE")
 inline actual fun <A, B : JsObject> Collection<A>.mapJsArray(converter: (A) -> B): JsObject {
     val output = JsArray<B>()
     forEachIndexed { index, value ->
@@ -18,6 +19,13 @@ inline actual fun <A, B : JsObject> Collection<A>.mapJsArray(converter: (A) -> B
     }
     return output
 }
+
+@Suppress("NOTHING_TO_INLINE")
+actual inline fun <A: JsObject> jsArray(vararg values: A): JsObject {
+    return js("Array.from(values)").unsafeCast<JsObject>()
+}
+
+
 @Suppress("NOTHING_TO_INLINE")
 actual inline suspend fun <T : JsObject> JsObject.wait(): T {
     return unsafeCast<Promise<T>>().await()
