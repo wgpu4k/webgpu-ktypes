@@ -43,25 +43,25 @@ actual inline fun <T : JsObject> JsObject.castAs(): T = unsafeCast<T>()
 @Suppress("NOTHING_TO_INLINE")
 actual inline fun JsString.castAs(): JsObject = unsafeCast<JsObject>()
 @Suppress("NOTHING_TO_INLINE")
-actual inline fun JsNumber.asFloat(): Float = unsafeCast<Float>()
+actual inline fun JsNumber.asFloat(): Float = js("Number(this)").unsafeCast<Float>()
 @Suppress("NOTHING_TO_INLINE")
-actual inline fun JsNumber.asDouble(): Double = unsafeCast<Double>()
+actual inline fun JsNumber.asDouble(): Double = js("Number(this)").unsafeCast<Double>()
 @Suppress("NOTHING_TO_INLINE")
-actual inline fun JsNumber.asLong(): Long = unsafeCast<Long>()
+actual inline fun JsNumber.asLong(): Long = js("Number(this)").unsafeCast<Long>()
 @Suppress("NOTHING_TO_INLINE")
-actual inline fun JsNumber.asInt(): Int = unsafeCast<Int>()
+actual inline fun JsNumber.asInt(): Int = js("Number(this)").unsafeCast<Int>()
 @Suppress("NOTHING_TO_INLINE")
-actual inline fun JsNumber.asShort(): Short = unsafeCast<Short>()
+actual inline fun JsNumber.asShort(): Short = js("Number(this)").unsafeCast<Short>()
 @Suppress("NOTHING_TO_INLINE")
-actual inline fun JsNumber.asBoolean(): Boolean = unsafeCast<Boolean>()
+actual inline fun JsNumber.asBoolean(): Boolean = js("Boolean(Number(this))").unsafeCast<Boolean>()
 @Suppress("NOTHING_TO_INLINE")
-actual inline fun Double.asJsNumber(): JsNumber = unsafeCast<JsNumber>()
+actual inline fun Double.asJsNumber(): JsNumber = js("Number(this)").unsafeCast<JsNumber>()
 @Suppress("NOTHING_TO_INLINE")
-actual inline fun Int.asJsNumber(): JsNumber = unsafeCast<JsNumber>()
+actual inline fun Int.asJsNumber(): JsNumber = js("Number(this)").unsafeCast<JsNumber>()
 @Suppress("NOTHING_TO_INLINE")
-actual inline fun Short.asJsNumber(): JsNumber = unsafeCast<JsNumber>()
+actual inline fun Short.asJsNumber(): JsNumber = js("Number(this)").unsafeCast<JsNumber>()
 @Suppress("NOTHING_TO_INLINE")
-actual inline fun Boolean.asJsNumber(): JsNumber = unsafeCast<JsNumber>()
+actual inline fun Boolean.asJsNumber(): JsNumber = js("Number(this ? 1 : 0)").unsafeCast<JsNumber>()
 @Suppress("NOTHING_TO_INLINE")
 actual inline fun String.asJsString(): JsString = unsafeCast<JsString>()
 
@@ -70,7 +70,10 @@ actual fun <K: JsObject, V: JsObject> jsMap(): JsMap<K, V> = js("new Map()").uns
 actual fun <K: JsObject, V: JsObject> Map<K, V>.toJsMap(): JsMap<K, V> {
     val jsMap = jsMap<K, V>()
     forEach { (key, value) ->
-        js("jsMap.set(key, value)")
+        val map = jsMap
+        val k = key
+        val v = value
+        js("map.set(k, v)")
     }
     return jsMap
 }

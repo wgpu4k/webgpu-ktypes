@@ -53,14 +53,11 @@ actual inline fun Boolean.asJsNumber(): JsNumber = if (this) 1.toJsNumber() else
 @Suppress("NOTHING_TO_INLINE")
 actual inline fun String.asJsString(): JsString = toJsString()
 
-// Simplified implementation for WasmJS
 actual fun <K: JsObject, V: JsObject> jsMap(): JsMap<K, V> {
-    // Create an empty object and cast it to JsMap
-    return createJsObject<JsMap<K, V>>()
+    return js("new Map()").unsafeCast<JsMap<K, V>>()
 }
 
 actual fun <K: JsObject, V: JsObject> Map<K, V>.toJsMap(): JsMap<K, V> {
-    // Create an empty JsMap
     val jsMap = jsMap<K, V>()
     forEach { (key, value) ->
         set<K, V>(jsMap, key, value)
