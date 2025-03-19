@@ -50,6 +50,7 @@ internal fun IdlType.toWebKotlinType(): String = when (this) {
         "long long",
         "float",
         "double" -> "JsNumber  /* $this */"
+        "boolean" -> "Boolean"
 
         "undefined" -> "Unit"
         "DOMString", "USVString" -> "String"

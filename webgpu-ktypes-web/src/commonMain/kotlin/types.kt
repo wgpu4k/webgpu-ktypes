@@ -2,6 +2,7 @@
 // This file has been generated DO NO EDIT
 package io.ygdrasil.webgpu
 
+typealias WGPUSupportedFeatures = JsArray<JsObject> /* DOMString */
 external interface WGPUObjectBase : JsObject {
 	var label: String
 }
@@ -40,7 +41,6 @@ external interface WGPUSupportedLimits : JsObject {
 	var maxComputeWorkgroupsPerDimension: JsNumber  /* unsigned long */
 }
 
-external interface WGPUSupportedFeatures : JsObject
 external interface WGPUAdapterInfo : JsObject {
 	var vendor: String
 	var architecture: String
@@ -61,7 +61,7 @@ external interface WGPUAdapter : JsObject {
 	var features: WGPUSupportedFeatures
 	var limits: WGPUSupportedLimits
 	var info: WGPUAdapterInfo
-	var isFallbackAdapter: JsObject /* boolean */
+	var isFallbackAdapter: Boolean
 	fun requestDevice(): JsObject /* Promise */
 	fun requestDevice(descriptor: WGPUDeviceDescriptor): JsObject /* Promise */
 }
@@ -280,8 +280,8 @@ external interface WGPUObjectDescriptorBase : JsObject {
 external interface WGPURequestAdapterOptions : JsObject {
 	var featureLevel: String
 	var powerPreference: String
-	var forceFallbackAdapter: JsObject /* boolean */
-	var xrCompatible: JsObject /* boolean */
+	var forceFallbackAdapter: Boolean
+	var xrCompatible: Boolean
 }
 
 external interface WGPUDeviceDescriptor : JsObject, WGPUObjectDescriptorBase {
@@ -293,7 +293,7 @@ external interface WGPUDeviceDescriptor : JsObject, WGPUObjectDescriptorBase {
 external interface WGPUBufferDescriptor : JsObject, WGPUObjectDescriptorBase {
 	var size: JsObject /* GPUSize64 */
 	var usage: JsObject /* GPUBufferUsageFlags */
-	var mappedAtCreation: JsObject /* boolean */
+	var mappedAtCreation: Boolean
 }
 
 external interface WGPUTextureDescriptor : JsObject, WGPUObjectDescriptorBase {
@@ -351,7 +351,7 @@ external interface WGPUBindGroupLayoutEntry : JsObject {
 
 external interface WGPUBufferBindingLayout : JsObject {
 	var type: String
-	var hasDynamicOffset: JsObject /* boolean */
+	var hasDynamicOffset: Boolean
 	var minBindingSize: JsObject /* GPUSize64 */
 }
 
@@ -362,7 +362,7 @@ external interface WGPUSamplerBindingLayout : JsObject {
 external interface WGPUTextureBindingLayout : JsObject {
 	var sampleType: String
 	var viewDimension: String
-	var multisampled: JsObject /* boolean */
+	var multisampled: Boolean
 }
 
 external interface WGPUStorageTextureBindingLayout : JsObject {
@@ -433,13 +433,13 @@ external interface WGPUPrimitiveState : JsObject {
 	var stripIndexFormat: String
 	var frontFace: String
 	var cullMode: String
-	var unclippedDepth: JsObject /* boolean */
+	var unclippedDepth: Boolean
 }
 
 external interface WGPUMultisampleState : JsObject {
 	var count: JsObject /* GPUSize32 */
 	var mask: JsObject /* GPUSampleMask */
-	var alphaToCoverageEnabled: JsObject /* boolean */
+	var alphaToCoverageEnabled: Boolean
 }
 
 external interface WGPUFragmentState : JsObject, WGPUProgrammableStage {
@@ -465,7 +465,7 @@ external interface WGPUBlendComponent : JsObject {
 
 external interface WGPUDepthStencilState : JsObject {
 	var format: String
-	var depthWriteEnabled: JsObject /* boolean */
+	var depthWriteEnabled: Boolean
 	var depthCompare: String
 	var stencilFront: WGPUStencilFaceState
 	var stencilBack: WGPUStencilFaceState
@@ -518,13 +518,13 @@ external interface WGPUTexelCopyTextureInfo : JsObject {
 
 external interface WGPUCopyExternalImageDestInfo : JsObject, WGPUTexelCopyTextureInfo {
 	var colorSpace: JsObject /* PredefinedColorSpace */
-	var premultipliedAlpha: JsObject /* boolean */
+	var premultipliedAlpha: Boolean
 }
 
 external interface WGPUCopyExternalImageSourceInfo : JsObject {
 	var source: JsObject /* GPUCopyExternalImageSource */
 	var origin: JsObject /* GPUOrigin2D */
-	var flipY: JsObject /* boolean */
+	var flipY: Boolean
 }
 
 external interface WGPUCommandBufferDescriptor : JsObject, WGPUObjectDescriptorBase
@@ -567,11 +567,11 @@ external interface WGPURenderPassDepthStencilAttachment : JsObject {
 	var depthClearValue: JsNumber  /* float */
 	var depthLoadOp: String
 	var depthStoreOp: String
-	var depthReadOnly: JsObject /* boolean */
+	var depthReadOnly: Boolean
 	var stencilClearValue: JsObject /* GPUStencilValue */
 	var stencilLoadOp: String
 	var stencilStoreOp: String
-	var stencilReadOnly: JsObject /* boolean */
+	var stencilReadOnly: Boolean
 }
 
 external interface WGPURenderPassLayout : JsObject, WGPUObjectDescriptorBase {
@@ -582,8 +582,8 @@ external interface WGPURenderPassLayout : JsObject, WGPUObjectDescriptorBase {
 
 external interface WGPURenderBundleDescriptor : JsObject, WGPUObjectDescriptorBase
 external interface WGPURenderBundleEncoderDescriptor : JsObject, WGPURenderPassLayout {
-	var depthReadOnly: JsObject /* boolean */
-	var stencilReadOnly: JsObject /* boolean */
+	var depthReadOnly: Boolean
+	var stencilReadOnly: Boolean
 }
 
 external interface WGPUQueueDescriptor : JsObject, WGPUObjectDescriptorBase

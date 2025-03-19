@@ -31,6 +31,8 @@ suspend fun run(canvas: HTMLCanvasElement) {
     val adapter = gpu.requestAdapter(desc.castAs())
         .wait<WGPUAdapter>()
 
+    println("adapter ${adapter.isFallbackAdapter} ${adapter.features}")
+
     val device = adapter.requestDevice()
         .wait<WGPUDevice>()
 

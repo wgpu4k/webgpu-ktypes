@@ -19,6 +19,7 @@ class MapperContext(
     var bitflagEnumerations = emptyList<Enumeration>()
     val descriptors = mutableListOf<domain.DescriptorClass>()
     val webInterfaces = mutableListOf<Interface>()
+    val webTypeAlias = mutableListOf<TypeAlias>()
 
     fun adaptToGuidelines() {
 

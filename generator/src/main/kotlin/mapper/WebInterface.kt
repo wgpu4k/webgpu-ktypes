@@ -6,6 +6,7 @@ import de.fabmax.webidl.model.IdlInterface
 import de.fabmax.webidl.model.IdlSimpleType
 import de.fabmax.webidl.model.IdlUnionType
 import domain.Interface
+import domain.TypeAlias
 import fixName
 import toWebKotlinType
 import unwantedTypesOnCommon
@@ -13,7 +14,7 @@ import unwantedTypesOnCommon
 internal fun MapperContext.loadWebInterfaces() {
     // Load web-specific interfaces from the IDL model
     idlModel.interfaces
-        .filter { it.name.startsWith("GPU") }
+        .filter { it.name.startsWith("GPU") && it.setLike == null}
         .forEach { idlInterface ->
             loadWebInterface(idlInterface)
         }
@@ -25,6 +26,16 @@ internal fun MapperContext.loadWebInterfaces() {
             loadWebDictionary(idlDictionary)
         }
 
+    // transform setlike as Typealias
+    idlModel.interfaces
+        .filter { it.name.startsWith("GPU") && it.setLike != null}
+        .forEach { idlInterface ->
+            val name = "W" + idlInterface.name.fixName()
+            // TODO replace JsArray by JsSet when available
+            (webTypeAlias.find { it.name == name } ?: TypeAlias(name, "JsArray<JsObject> /* ${idlInterface.setLike?.type} */").also { webTypeAlias.add(it) })
+        }
+
+    //
     webInterfaces.forEach {  kinterface ->
         kinterface.extends = kinterface.extends
             .map { if(it.startsWith("GPU")) "W$it" else it }
@@ -50,10 +61,10 @@ internal fun MapperContext.loadWebInterfaces() {
 fun MapperContext.convertType(type: String): String = when {
     type.startsWith("GPU") -> when {
         webInterfaces.any { "W${type}" == it.name } -> "W${type}"
+        webTypeAlias.any { "W${type}" == it.name } -> "W${type}"
         commonEnumerations.any { type == it.name } -> "String"
         else -> "JsObject /* $type */"
     }
-
     else -> type
 }
 

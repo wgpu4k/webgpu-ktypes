@@ -83,6 +83,8 @@ fun main() {
     }
 
     webSourcePath.createSourceFile("types.kt") {
+        appendText(context.webTypeAlias.joinToString("\n"))
+        appendText("\n")
         appendText(context.webInterfaces.joinToString("\n"))
     }
 
