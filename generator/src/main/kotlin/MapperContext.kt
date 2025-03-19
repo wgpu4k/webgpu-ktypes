@@ -3,8 +3,6 @@ import domain.Enumeration
 import domain.Interface
 import domain.TypeAlias
 import domain.YamlModel
-import mapper.convertToKotlinClassName
-import org.gradle.internal.impldep.kotlinx.metadata.KmClassifier
 
 class MapperContext(
     val idlModel: IdlModel,

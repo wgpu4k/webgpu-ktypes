@@ -31,8 +31,7 @@ internal fun MapperContext.loadWebInterfaces() {
         .filter { it.name.startsWith("GPU") && it.setLike != null}
         .forEach { idlInterface ->
             val name = "W" + idlInterface.name.fixName()
-            // TODO replace JsArray by JsSet when available
-            (webTypeAlias.find { it.name == name } ?: TypeAlias(name, "JsArray<JsObject> /* ${idlInterface.setLike?.type} */").also { webTypeAlias.add(it) })
+            (webTypeAlias.find { it.name == name } ?: TypeAlias(name, "JsSet<JsObject> /* ${idlInterface.setLike?.type} */").also { webTypeAlias.add(it) })
         }
 
     //
