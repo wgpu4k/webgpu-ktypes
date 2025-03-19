@@ -2,7 +2,7 @@
 // This file has been generated DO NO EDIT
 package io.ygdrasil.webgpu
 
-typealias WGPUSupportedFeatures = JsArray<JsObject> /* DOMString */
+typealias WGPUSupportedFeatures = JsSet<JsObject> /* DOMString */
 external interface WGPUObjectBase : JsObject {
 	var label: String
 }

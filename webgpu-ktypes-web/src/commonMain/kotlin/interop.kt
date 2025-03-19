@@ -2,8 +2,6 @@
 package io.ygdrasil.webgpu
 
 expect fun <T: JsObject> createJsObject(): T
-expect fun <A: JsObject> jsArray(vararg values: A): JsArray<A>
-expect fun <A, B : JsObject> Collection<A>.mapJsArray(converter: (A) -> B): JsArray<B>
 expect inline suspend fun <T: JsObject> JsObject.wait(): T
 expect inline fun <T : JsObject> JsObject.castAs(): T
 expect inline fun JsString.castAs(): JsObject
@@ -31,7 +29,6 @@ expect fun <K: JsObject, V: JsObject> Map<K, V>.toJsMap(): JsMap<K, V>
 expect class JsNumber : JsObject
 expect class JsString
 expect interface JsObject
-external interface JsArray<T: JsObject> : JsObject
 external interface JsMap<a: JsObject, B: JsObject> : JsObject
 
 external interface EventTarget: JsObject
