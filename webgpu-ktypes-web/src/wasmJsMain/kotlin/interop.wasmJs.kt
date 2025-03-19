@@ -54,8 +54,11 @@ actual inline fun Boolean.asJsNumber(): JsNumber = if (this) 1.toJsNumber() else
 actual inline fun String.asJsString(): JsString = toJsString()
 
 actual fun <K: JsObject, V: JsObject> jsMap(): JsMap<K, V> {
-    return js("new Map()").unsafeCast<JsMap<K, V>>()
+    return newMap().unsafeCast<JsMap<K, V>>()
 }
+
+private fun newMap(): JsObject = js("new Map()")
+
 
 actual fun <K: JsObject, V: JsObject> Map<K, V>.toJsMap(): JsMap<K, V> {
     val jsMap = jsMap<K, V>()
