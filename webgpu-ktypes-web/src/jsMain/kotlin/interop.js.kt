@@ -51,8 +51,26 @@ actual inline fun JsNumber.asLong(): Long = unsafeCast<Long>()
 @Suppress("NOTHING_TO_INLINE")
 actual inline fun JsNumber.asInt(): Int = unsafeCast<Int>()
 @Suppress("NOTHING_TO_INLINE")
+actual inline fun JsNumber.asShort(): Short = unsafeCast<Short>()
+@Suppress("NOTHING_TO_INLINE")
+actual inline fun JsNumber.asBoolean(): Boolean = unsafeCast<Boolean>()
+@Suppress("NOTHING_TO_INLINE")
 actual inline fun Double.asJsNumber(): JsNumber = unsafeCast<JsNumber>()
 @Suppress("NOTHING_TO_INLINE")
 actual inline fun Int.asJsNumber(): JsNumber = unsafeCast<JsNumber>()
 @Suppress("NOTHING_TO_INLINE")
+actual inline fun Short.asJsNumber(): JsNumber = unsafeCast<JsNumber>()
+@Suppress("NOTHING_TO_INLINE")
+actual inline fun Boolean.asJsNumber(): JsNumber = unsafeCast<JsNumber>()
+@Suppress("NOTHING_TO_INLINE")
 actual inline fun String.asJsString(): JsString = unsafeCast<JsString>()
+
+actual fun <K: JsObject, V: JsObject> jsMap(): JsMap<K, V> = js("new Map()").unsafeCast<JsMap<K, V>>()
+
+actual fun <K: JsObject, V: JsObject> Map<K, V>.toJsMap(): JsMap<K, V> {
+    val jsMap = jsMap<K, V>()
+    forEach { (key, value) ->
+        js("jsMap.set(key, value)")
+    }
+    return jsMap
+}
