@@ -59,12 +59,21 @@ internal fun MapperContext.loadWebInterfaces() {
 
 fun MapperContext.convertType(type: String): String = when {
     type.startsWith("GPU") -> when {
-        webInterfaces.any { "W${type}" == it.name } -> "W${type}"
-        webTypeAlias.any { "W${type}" == it.name } -> "W${type}"
-        commonEnumerations.any { type == it.name } -> "String"
+        webInterfaces.any { "W${type}" == it.name } -> "W${type}  /* $type */"
+        webTypeAlias.any { "W${type}" == it.name } -> "W${type}  /* $type */"
+        commonEnumerations.any { type == it.name } -> "String  /* $type */"
+        isNumberTypeAlias(type) -> "JsNumber  /* $type */"
         else -> "JsObject /* $type */"
     }
     else -> type
+}
+
+fun MapperContext.isNumberTypeAlias(type: String): Boolean {
+    typeAliases.find { it.name == type }?.let {
+        return it.type in listOf("Float", "Double", "Short", "UShort", "Int", "UInt", "Long", "ULong")
+    }
+
+    return false
 }
 
 private fun MapperContext.loadWebInterface(idlInterface: IdlInterface) {
