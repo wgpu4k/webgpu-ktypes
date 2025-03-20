@@ -4,6 +4,7 @@ external interface JsArray<T: JsObject> : JsObject {
     val length: Int
 }
 
+expect fun <T: JsObject> set(array: JsArray<T>, index: Int, value: T)
 expect fun <T: JsObject> get(array: JsArray<T>, index: Int): T?
 
 fun <A: JsObject, B> JsArray<A>.map(converter: (A) -> B): List<B> = sequence<B> {

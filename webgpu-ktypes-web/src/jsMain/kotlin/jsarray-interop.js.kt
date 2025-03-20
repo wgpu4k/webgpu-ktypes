@@ -12,4 +12,5 @@ actual fun <A: JsObject> jsArray(vararg values: A): JsArray<A> {
     return js("Array.from(values)").unsafeCast<JsArray<A>>()
 }
 
+actual fun <T: JsObject> set(array: JsArray<T>, index: Int, value: T): Unit = js("array[index] = value")
 actual fun <T : JsObject> get(array: JsArray<T>, index: Int): T? = js("array[index]")
