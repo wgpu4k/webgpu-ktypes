@@ -16,11 +16,7 @@ inline fun JsNumber.asULong(): ULong = asLong().toULong()
 expect inline fun JsNumber.asShort(): Short
 @Suppress("NOTHING_TO_INLINE")
 inline fun JsNumber.asUShort(): UShort = asShort().toUShort()
-expect inline fun JsNumber.asBoolean(): Boolean
-expect inline fun Double.asJsNumber(): JsNumber
-expect inline fun Int.asJsNumber(): JsNumber
-expect inline fun Short.asJsNumber(): JsNumber
-expect inline fun Boolean.asJsNumber(): JsNumber
+
 expect inline fun String.asJsString(): JsString
 expect fun <K: JsObject, V: JsObject> jsMap(): JsMap<K, V>
 expect fun <K: JsObject, V: JsObject> Map<K, V>.toJsMap(): JsMap<K, V>

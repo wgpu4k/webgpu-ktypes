@@ -31,16 +31,6 @@ actual inline fun JsNumber.asLong(): Long = toLong()
 @Suppress("NOTHING_TO_INLINE")
 actual inline fun JsNumber.asShort(): Short = externRefToKotlinShortAdapter(this)
 @Suppress("NOTHING_TO_INLINE")
-actual inline fun JsNumber.asBoolean(): Boolean = this.toInt() != 0
-@Suppress("NOTHING_TO_INLINE")
-actual inline fun Double.asJsNumber(): JsNumber = toJsNumber()
-@Suppress("NOTHING_TO_INLINE")
-actual inline fun Int.asJsNumber(): JsNumber = toJsNumber()
-@Suppress("NOTHING_TO_INLINE")
-actual inline fun Short.asJsNumber(): JsNumber = this.toInt().toJsNumber()
-@Suppress("NOTHING_TO_INLINE")
-actual inline fun Boolean.asJsNumber(): JsNumber = if (this) 1.toJsNumber() else 0.toJsNumber()
-@Suppress("NOTHING_TO_INLINE")
 actual inline fun String.asJsString(): JsString = toJsString()
 
 actual fun <K: JsObject, V: JsObject> jsMap(): JsMap<K, V> {

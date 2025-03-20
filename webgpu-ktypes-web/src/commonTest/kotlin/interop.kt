@@ -35,19 +35,7 @@ class InteropTest {
         assertEquals(42f, jsNumber.asFloat())
         assertEquals(42L, jsNumber.asLong())
         assertEquals(42.toShort(), jsNumber.asShort())
-        assertTrue(jsNumber.asBoolean())
 
-        val jsZero = 0.asJsNumber()
-        assertEquals(false, jsZero.asBoolean())
-    }
-
-    @Test
-    fun testBooleanConversions() {
-        val jsTrue = true.asJsNumber()
-        val jsFalse = false.asJsNumber()
-
-        assertTrue(jsTrue.asBoolean())
-        assertEquals(false, jsFalse.asBoolean())
     }
 
     @Test
