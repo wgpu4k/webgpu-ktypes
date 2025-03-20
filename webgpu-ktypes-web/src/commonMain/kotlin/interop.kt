@@ -2,7 +2,7 @@
 package io.ygdrasil.webgpu
 
 expect fun <T: JsObject> createJsObject(): T
-expect inline suspend fun <T: JsObject> JsObject.wait(): T
+expect inline suspend fun <T> JsObject.wait(): T
 expect inline fun <T : JsObject> JsObject.castAs(): T
 expect inline fun JsString.castAs(): JsObject
 expect inline fun JsNumber.asFloat(): Float
@@ -46,6 +46,7 @@ external object window {
 
 external interface GPU: JsObject {
     fun getPreferredCanvasFormat(): String
+    fun requestAdapter(): JsObject
     fun requestAdapter(descriptor: WGPURequestAdapterOptions): JsObject
     var wgslLanguageFeatures: JsObject /* WGSLLanguageFeatures */
 }

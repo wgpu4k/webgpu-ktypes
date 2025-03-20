@@ -24,8 +24,8 @@ actual fun <T : JsObject> createJsObject(): T = js("({ })")
 
 
 @Suppress("NOTHING_TO_INLINE")
-actual inline suspend fun <T : JsObject> JsObject.wait(): T {
-    return unsafeCast<Promise<T>>().await()
+actual inline suspend fun <T> JsObject.wait(): T {
+    return unsafeCast<Promise<JsObject>>().await().unsafeCast<T>()
 }
 
 @Suppress("NOTHING_TO_INLINE")
