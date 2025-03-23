@@ -2,7 +2,7 @@
 webidl-util = "0.10.0"
 wgpu4k-native = "v24.0.1"
 kaml = "0.71.0"
-kotlin = "2.1.10"
+kotlin = "2.1.20"
 agp = "8.5.2"
 kotlinx-browser = "0.3"
 coroutines = "1.10.1"
