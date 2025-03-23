@@ -98,12 +98,13 @@ suspend fun run(canvas: HTMLCanvasElement) {
         val colorAttachment = createJsObject<WGPURenderPassColorAttachment>()
         colorAttachment.view = textureView
 
-        // Create clear value array [0, 0, 0, 0]
-        val clearValueArray = listOf(0, 0, 0, 0)
-            .mapJsArray { it.asJsNumber() }
-
-
-        colorAttachment.clearValue = clearValueArray
+        // Create clear value [0, 0, 0, 0]
+        colorAttachment.clearValue = createJsObject<WGPUColor>().apply {
+            r = 0.asJsNumber()
+            g = 0.asJsNumber()
+            b = 0.asJsNumber()
+            a = 0.asJsNumber()
+        }
         colorAttachment.loadOp = "clear"
         colorAttachment.storeOp = "store"
 
