@@ -4,6 +4,8 @@ package io.ygdrasil.webgpu
 actual inline fun Float.asJsNumber(): JsNumber = unsafeCast<JsNumber>()
 @Suppress("NOTHING_TO_INLINE")
 actual inline fun Double.asJsNumber(): JsNumber = unsafeCast<JsNumber>()
+@Suppress(names = ["NOTHING_TO_INLINE"])
+actual inline fun Byte.asJsNumber(): JsNumber = unsafeCast<JsNumber>()
 @Suppress("NOTHING_TO_INLINE")
 actual inline fun Short.asJsNumber(): JsNumber = unsafeCast<JsNumber>()
 @Suppress("NOTHING_TO_INLINE")
