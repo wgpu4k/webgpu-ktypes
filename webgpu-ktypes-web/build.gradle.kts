@@ -5,8 +5,6 @@ plugins {
 
 kotlin {
     js {
-        // TODO remove when poc ended
-        binaries.executable()
         browser {
             testTask {
                 useKarma {
@@ -20,8 +18,6 @@ kotlin {
 
     @OptIn(org.jetbrains.kotlin.gradle.ExperimentalWasmDsl::class)
     wasmJs {
-        // TODO remove when poc ended
-        binaries.executable()
         browser {
             testTask {
                 useKarma {
