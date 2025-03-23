@@ -23,23 +23,23 @@ actual enum class GPUAddressMode(val value: String) {
 }
 
 actual enum class GPUBlendFactor(val value: String) {
-	Zero("zero"),
-	One("one"),
+	Zero("unsupported"),
+	One("unsupported"),
 	Src("src"),
-	OneMinusSrc("one-minus-src"),
+	OneMinusSrc("unsupported"),
 	SrcAlpha("src-alpha"),
-	OneMinusSrcAlpha("one-minus-src-alpha"),
+	OneMinusSrcAlpha("unsupported"),
 	Dst("dst"),
-	OneMinusDst("one-minus-dst"),
+	OneMinusDst("unsupported"),
 	DstAlpha("dst-alpha"),
-	OneMinusDstAlpha("one-minus-dst-alpha"),
+	OneMinusDstAlpha("unsupported"),
 	SrcAlphaSaturated("src-alpha-saturated"),
 	Constant("constant"),
-	OneMinusConstant("one-minus-constant"),
+	OneMinusConstant("unsupported"),
 	Src1("src1"),
-	OneMinusSrc1("one-minus-src1"),
+	OneMinusSrc1("unsupported"),
 	Src1Alpha("src1-alpha"),
-	OneMinusSrc1Alpha("one-minus-src1-alpha");
+	OneMinusSrc1Alpha("unsupported");
 
 
 	companion object {
@@ -436,7 +436,7 @@ actual enum class GPUSamplerBindingType(val value: String) {
 
 actual enum class GPUStencilOperation(val value: String) {
 	Keep("keep"),
-	Zero("zero"),
+	Zero("unsupported"),
 	Replace("replace"),
 	Invert("invert"),
 	IncrementClamp("increment-clamp"),
@@ -520,9 +520,9 @@ actual enum class GPUTextureAspect(val value: String) {
 }
 
 actual enum class GPUTextureDimension(val value: String) {
-	OneD("unsupported"),
-	TwoD("unsupported"),
-	ThreeD("unsupported");
+	OneD("1d"),
+	TwoD("2d"),
+	ThreeD("3d");
 
 
 	companion object {
@@ -675,12 +675,12 @@ actual enum class GPUTextureSampleType(val value: String) {
 }
 
 actual enum class GPUTextureViewDimension(val value: String) {
-	OneD("unsupported"),
-	TwoD("unsupported"),
-	TwoDArray("unsupported"),
+	OneD("1d"),
+	TwoD("2d"),
+	TwoDArray("2d-array"),
 	Cube("cube"),
 	CubeArray("cube-array"),
-	ThreeD("unsupported");
+	ThreeD("3d");
 
 
 	companion object {

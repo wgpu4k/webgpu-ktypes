@@ -60,7 +60,7 @@ private fun MapperContext.loadConventionalEnums() {
                 extra = generateExtra(name, "String"),
                 values = enumeration.values.map { enumerationValue ->
                     val webValue = idlEnum.values.firstOrNull {
-                        enumerationValue.lowercase() == it.replace("-", "").lowercase()
+                        enumerationValue.adaptToWebValue() == it.replace("-", "").lowercase()
                     } ?: "unsupported"
                     "$enumerationValue(\"$webValue\")"
                 }
@@ -108,4 +108,16 @@ private fun generateExtra(name: String, type: String): String = """
 
 internal fun String.convertToKotlinClassName() = split("_")
         .joinToString("") { component -> component.replaceFirstChar { it.uppercase() } }
+
+private fun String.adaptToWebValue(): String {
+    var newValue = this
+    listOf("Zero", "One", "Two", "Three", "Four", "Five", "Six", "Seven", "Eight", "Nine").forEachIndexed { index, prefix ->
+        if (newValue.startsWith(prefix)) {
+            newValue = "$index${newValue.substringAfter(prefix)}"
+        }
+    }
+
+    return newValue.lowercase()
+}
+
 

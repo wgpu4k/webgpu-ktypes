@@ -1,4 +1,4 @@
-import de.fabmax.webidl.model.IdlModel
+
 import de.fabmax.webidl.parser.WebIdlParser
 import mapper.loadEnums
 import mapper.loadDescriptors
@@ -51,7 +51,6 @@ fun main() {
     context.loadDescriptors()
     context.loadWebInterfaces()
 
-    //model.listTypes().joinToString(",").let { println(it) }
     context.adaptToGuidelines()
 
     commonSourcePath.createSourceFile("bitflags.kt") {
@@ -113,12 +112,3 @@ private fun URL.downloadToPath(paths: Path) {
         }
     }.onFailure { error(it)}
 }
-
-private fun IdlModel.listTypes(): Set<String> = (enums.map { it.name } +
-        interfaces.map { it.name } +
-        typeDefs.map { it.name } +
-        dictionaries.map { it.name })
-    .map { it.fixName() }
-    .filter { it !in unwantedTypesOnCommon }
-    .toSet()
-
