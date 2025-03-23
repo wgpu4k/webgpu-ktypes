@@ -102,9 +102,9 @@ external interface WGPUBuffer : JsObject, WGPUObjectBase {
 	fun mapAsync(mode: JsNumber  /* GPUMapModeFlags */): JsObject /* Promise */
 	fun mapAsync(mode: JsNumber  /* GPUMapModeFlags */, offset: JsNumber  /* GPUSize64 */): JsObject /* Promise */
 	fun mapAsync(mode: JsNumber  /* GPUMapModeFlags */, offset: JsNumber  /* GPUSize64 */, size: JsNumber  /* GPUSize64 */): JsObject /* Promise */
-	fun getMappedRange(): JsObject /* ArrayBuffer */
-	fun getMappedRange(offset: JsNumber  /* GPUSize64 */): JsObject /* ArrayBuffer */
-	fun getMappedRange(offset: JsNumber  /* GPUSize64 */, size: JsNumber  /* GPUSize64 */): JsObject /* ArrayBuffer */
+	fun getMappedRange(): ArrayBuffer
+	fun getMappedRange(offset: JsNumber  /* GPUSize64 */): ArrayBuffer
+	fun getMappedRange(offset: JsNumber  /* GPUSize64 */, size: JsNumber  /* GPUSize64 */): ArrayBuffer
 	fun unmap()
 	fun destroy()
 }
