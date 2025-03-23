@@ -18,6 +18,10 @@ actual fun IntArray.asArrayBuffer(): ArrayBuffer
         = unsafeCast<Int32Array>().buffer
 actual fun UIntArray.asArrayBuffer(): ArrayBuffer
         = unsafeCast<Int32Array>().buffer
+actual fun LongArray.asArrayBuffer(): ArrayBuffer
+        = unsafeCast<Int32Array>().buffer
+actual fun ULongArray.asArrayBuffer(): ArrayBuffer
+        = unsafeCast<Int32Array>().buffer
 actual fun FloatArray.asArrayBuffer(): ArrayBuffer
         = unsafeCast<Float32Array>().buffer
 actual fun DoubleArray.asArrayBuffer(): ArrayBuffer

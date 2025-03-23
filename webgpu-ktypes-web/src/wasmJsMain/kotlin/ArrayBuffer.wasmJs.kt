@@ -51,6 +51,22 @@ actual fun UIntArray.asArrayBuffer(): ArrayBuffer {
     return Int32Array(array.unsafeCast<JsArray<JsNumber>>()).buffer
 }
 
+actual fun LongArray.asArrayBuffer(): ArrayBuffer {
+    val array = jsArray<JsNumber>()
+    forEachIndexed { index, value ->
+        set(array, index, value.toJsNumber())
+    }
+    return Int32Array(array.unsafeCast<JsArray<JsNumber>>()).buffer
+}
+
+actual fun ULongArray.asArrayBuffer(): ArrayBuffer {
+    val array = jsArray<JsNumber>()
+    forEachIndexed { index, value ->
+        set(array, index, value.asJsNumber())
+    }
+    return Int32Array(array.unsafeCast<JsArray<JsNumber>>()).buffer
+}
+
 actual fun FloatArray.asArrayBuffer(): ArrayBuffer {
     val array = jsArray<JsNumber>()
     forEachIndexed { index, value ->
