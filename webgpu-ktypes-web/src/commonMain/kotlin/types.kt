@@ -4,50 +4,50 @@ package io.ygdrasil.webgpu
 
 typealias WGPUSupportedFeatures = JsSet<JsObject> /* DOMString */
 external interface WGPUObjectBase : JsObject {
-	var label: String
+	var label: String /* USVString */
 }
 
 external interface WGPUSupportedLimits : JsObject {
-	var maxTextureDimension1D: JsNumber  /* unsigned long */
-	var maxTextureDimension2D: JsNumber  /* unsigned long */
-	var maxTextureDimension3D: JsNumber  /* unsigned long */
-	var maxTextureArrayLayers: JsNumber  /* unsigned long */
-	var maxBindGroups: JsNumber  /* unsigned long */
-	var maxBindGroupsPlusVertexBuffers: JsNumber  /* unsigned long */
-	var maxBindingsPerBindGroup: JsNumber  /* unsigned long */
-	var maxDynamicUniformBuffersPerPipelineLayout: JsNumber  /* unsigned long */
-	var maxDynamicStorageBuffersPerPipelineLayout: JsNumber  /* unsigned long */
-	var maxSampledTexturesPerShaderStage: JsNumber  /* unsigned long */
-	var maxSamplersPerShaderStage: JsNumber  /* unsigned long */
-	var maxStorageBuffersPerShaderStage: JsNumber  /* unsigned long */
-	var maxStorageTexturesPerShaderStage: JsNumber  /* unsigned long */
-	var maxUniformBuffersPerShaderStage: JsNumber  /* unsigned long */
-	var maxUniformBufferBindingSize: JsNumber  /* unsigned long long */
-	var maxStorageBufferBindingSize: JsNumber  /* unsigned long long */
-	var minUniformBufferOffsetAlignment: JsNumber  /* unsigned long */
-	var minStorageBufferOffsetAlignment: JsNumber  /* unsigned long */
-	var maxVertexBuffers: JsNumber  /* unsigned long */
-	var maxBufferSize: JsNumber  /* unsigned long long */
-	var maxVertexAttributes: JsNumber  /* unsigned long */
-	var maxVertexBufferArrayStride: JsNumber  /* unsigned long */
-	var maxInterStageShaderVariables: JsNumber  /* unsigned long */
-	var maxColorAttachments: JsNumber  /* unsigned long */
-	var maxColorAttachmentBytesPerSample: JsNumber  /* unsigned long */
-	var maxComputeWorkgroupStorageSize: JsNumber  /* unsigned long */
-	var maxComputeInvocationsPerWorkgroup: JsNumber  /* unsigned long */
-	var maxComputeWorkgroupSizeX: JsNumber  /* unsigned long */
-	var maxComputeWorkgroupSizeY: JsNumber  /* unsigned long */
-	var maxComputeWorkgroupSizeZ: JsNumber  /* unsigned long */
-	var maxComputeWorkgroupsPerDimension: JsNumber  /* unsigned long */
+	var maxTextureDimension1D: JsNumber /* unsigned long */
+	var maxTextureDimension2D: JsNumber /* unsigned long */
+	var maxTextureDimension3D: JsNumber /* unsigned long */
+	var maxTextureArrayLayers: JsNumber /* unsigned long */
+	var maxBindGroups: JsNumber /* unsigned long */
+	var maxBindGroupsPlusVertexBuffers: JsNumber /* unsigned long */
+	var maxBindingsPerBindGroup: JsNumber /* unsigned long */
+	var maxDynamicUniformBuffersPerPipelineLayout: JsNumber /* unsigned long */
+	var maxDynamicStorageBuffersPerPipelineLayout: JsNumber /* unsigned long */
+	var maxSampledTexturesPerShaderStage: JsNumber /* unsigned long */
+	var maxSamplersPerShaderStage: JsNumber /* unsigned long */
+	var maxStorageBuffersPerShaderStage: JsNumber /* unsigned long */
+	var maxStorageTexturesPerShaderStage: JsNumber /* unsigned long */
+	var maxUniformBuffersPerShaderStage: JsNumber /* unsigned long */
+	var maxUniformBufferBindingSize: JsNumber /* unsigned long long */
+	var maxStorageBufferBindingSize: JsNumber /* unsigned long long */
+	var minUniformBufferOffsetAlignment: JsNumber /* unsigned long */
+	var minStorageBufferOffsetAlignment: JsNumber /* unsigned long */
+	var maxVertexBuffers: JsNumber /* unsigned long */
+	var maxBufferSize: JsNumber /* unsigned long long */
+	var maxVertexAttributes: JsNumber /* unsigned long */
+	var maxVertexBufferArrayStride: JsNumber /* unsigned long */
+	var maxInterStageShaderVariables: JsNumber /* unsigned long */
+	var maxColorAttachments: JsNumber /* unsigned long */
+	var maxColorAttachmentBytesPerSample: JsNumber /* unsigned long */
+	var maxComputeWorkgroupStorageSize: JsNumber /* unsigned long */
+	var maxComputeInvocationsPerWorkgroup: JsNumber /* unsigned long */
+	var maxComputeWorkgroupSizeX: JsNumber /* unsigned long */
+	var maxComputeWorkgroupSizeY: JsNumber /* unsigned long */
+	var maxComputeWorkgroupSizeZ: JsNumber /* unsigned long */
+	var maxComputeWorkgroupsPerDimension: JsNumber /* unsigned long */
 }
 
 external interface WGPUAdapterInfo : JsObject {
-	var vendor: String
-	var architecture: String
-	var device: String
-	var description: String
-	var subgroupMinSize: JsNumber  /* unsigned long */
-	var subgroupMaxSize: JsNumber  /* unsigned long */
+	var vendor: String /* DOMString */
+	var architecture: String /* DOMString */
+	var device: String /* DOMString */
+	var description: String /* DOMString */
+	var subgroupMinSize: JsNumber /* unsigned long */
+	var subgroupMaxSize: JsNumber /* unsigned long */
 }
 
 external interface WGPU : JsObject {
@@ -134,12 +134,12 @@ external interface WGPUShaderModule : JsObject, WGPUObjectBase {
 }
 
 external interface WGPUCompilationMessage : JsObject {
-	var message: String
+	var message: String /* DOMString */
 	var type: String  /* GPUCompilationMessageType */
-	var lineNum: JsNumber  /* unsigned long long */
-	var linePos: JsNumber  /* unsigned long long */
-	var offset: JsNumber  /* unsigned long long */
-	var length: JsNumber  /* unsigned long long */
+	var lineNum: JsNumber /* unsigned long long */
+	var linePos: JsNumber /* unsigned long long */
+	var offset: JsNumber /* unsigned long long */
+	var length: JsNumber /* unsigned long long */
 }
 
 external interface WGPUCompilationInfo : JsObject {
@@ -151,7 +151,7 @@ external interface WGPUPipelineError : JsObject, DOMException {
 }
 
 external interface WGPUPipelineBase : JsObject {
-	fun getBindGroupLayout(index: JsNumber  /* unsigned long */): WGPUBindGroupLayout  /* GPUBindGroupLayout */
+	fun getBindGroupLayout(index: JsNumber /* unsigned long */): WGPUBindGroupLayout  /* GPUBindGroupLayout */
 }
 
 external interface WGPUComputePipeline : JsObject, WGPUObjectBase, WGPUPipelineBase
@@ -181,9 +181,9 @@ external interface WGPUBindingCommandsMixin : JsObject {
 }
 
 external interface WGPUDebugCommandsMixin : JsObject {
-	fun pushDebugGroup(groupLabel: String)
+	fun pushDebugGroup(groupLabel: String /* USVString */)
 	fun popDebugGroup()
-	fun insertDebugMarker(markerLabel: String)
+	fun insertDebugMarker(markerLabel: String /* USVString */)
 }
 
 external interface WGPUComputePassEncoder : JsObject, WGPUObjectBase, WGPUCommandsMixin, WGPUDebugCommandsMixin, WGPUBindingCommandsMixin {
@@ -196,7 +196,7 @@ external interface WGPUComputePassEncoder : JsObject, WGPUObjectBase, WGPUComman
 }
 
 external interface WGPURenderPassEncoder : JsObject, WGPUObjectBase, WGPUCommandsMixin, WGPUDebugCommandsMixin, WGPUBindingCommandsMixin, WGPURenderCommandsMixin {
-	fun setViewport(x: JsNumber  /* float */, y: JsNumber  /* float */, width: JsNumber  /* float */, height: JsNumber  /* float */, minDepth: JsNumber  /* float */, maxDepth: JsNumber  /* float */)
+	fun setViewport(x: JsNumber /* float */, y: JsNumber /* float */, width: JsNumber /* float */, height: JsNumber /* float */, minDepth: JsNumber /* float */, maxDepth: JsNumber /* float */)
 	fun setScissorRect(x: JsNumber  /* GPUIntegerCoordinate */, y: JsNumber  /* GPUIntegerCoordinate */, width: JsNumber  /* GPUIntegerCoordinate */, height: JsNumber  /* GPUIntegerCoordinate */)
 	fun setBlendConstant(color: WGPUColor  /* GPUColor */)
 	fun setStencilReference(reference: JsNumber  /* GPUStencilValue */)
@@ -236,10 +236,10 @@ external interface WGPURenderBundleEncoder : JsObject, WGPUObjectBase, WGPUComma
 external interface WGPUQueue : JsObject, WGPUObjectBase {
 	fun submit(commandBuffers: JsArray<JsObject> /* sequence<GPUCommandBuffer> */)
 	fun onSubmittedWorkDone(): JsObject /* Promise */
-	fun writeBuffer(buffer: WGPUBuffer  /* GPUBuffer */, bufferOffset: JsNumber  /* GPUSize64 */, data: JsObject /* AllowSharedBufferSource */)
-	fun writeBuffer(buffer: WGPUBuffer  /* GPUBuffer */, bufferOffset: JsNumber  /* GPUSize64 */, data: JsObject /* AllowSharedBufferSource */, dataOffset: JsNumber  /* GPUSize64 */)
-	fun writeBuffer(buffer: WGPUBuffer  /* GPUBuffer */, bufferOffset: JsNumber  /* GPUSize64 */, data: JsObject /* AllowSharedBufferSource */, dataOffset: JsNumber  /* GPUSize64 */, size: JsNumber  /* GPUSize64 */)
-	fun writeTexture(destination: WGPUTexelCopyTextureInfo  /* GPUTexelCopyTextureInfo */, data: JsObject /* AllowSharedBufferSource */, dataLayout: WGPUTexelCopyBufferLayout  /* GPUTexelCopyBufferLayout */, size: WGPUExtent3D  /* GPUExtent3D */)
+	fun writeBuffer(buffer: WGPUBuffer  /* GPUBuffer */, bufferOffset: JsNumber  /* GPUSize64 */, data: ArrayBuffer /* AllowSharedBufferSource */)
+	fun writeBuffer(buffer: WGPUBuffer  /* GPUBuffer */, bufferOffset: JsNumber  /* GPUSize64 */, data: ArrayBuffer /* AllowSharedBufferSource */, dataOffset: JsNumber  /* GPUSize64 */)
+	fun writeBuffer(buffer: WGPUBuffer  /* GPUBuffer */, bufferOffset: JsNumber  /* GPUSize64 */, data: ArrayBuffer /* AllowSharedBufferSource */, dataOffset: JsNumber  /* GPUSize64 */, size: JsNumber  /* GPUSize64 */)
+	fun writeTexture(destination: WGPUTexelCopyTextureInfo  /* GPUTexelCopyTextureInfo */, data: ArrayBuffer /* AllowSharedBufferSource */, dataLayout: WGPUTexelCopyBufferLayout  /* GPUTexelCopyBufferLayout */, size: WGPUExtent3D  /* GPUExtent3D */)
 	fun copyExternalImageToTexture(source: WGPUCopyExternalImageSourceInfo  /* GPUCopyExternalImageSourceInfo */, destination: WGPUCopyExternalImageDestInfo  /* GPUCopyExternalImageDestInfo */, copySize: WGPUExtent3D  /* GPUExtent3D */)
 }
 
@@ -259,11 +259,11 @@ external interface WGPUCanvasContext : JsObject {
 
 external interface WGPUDeviceLostInfo : JsObject {
 	var reason: String  /* GPUDeviceLostReason */
-	var message: String
+	var message: String /* DOMString */
 }
 
 external interface WGPUError : JsObject {
-	var message: String
+	var message: String /* DOMString */
 }
 
 external interface WGPUValidationError : JsObject, WGPUError
@@ -274,11 +274,11 @@ external interface WGPUUncapturedErrorEvent : JsObject, Event {
 }
 
 external interface WGPUObjectDescriptorBase : JsObject {
-	var label: String
+	var label: String /* USVString */
 }
 
 external interface WGPURequestAdapterOptions : JsObject {
-	var featureLevel: String
+	var featureLevel: String /* DOMString */
 	var powerPreference: String  /* GPUPowerPreference */
 	var forceFallbackAdapter: Boolean
 	var xrCompatible: Boolean
@@ -286,7 +286,7 @@ external interface WGPURequestAdapterOptions : JsObject {
 
 external interface WGPUDeviceDescriptor : JsObject, WGPUObjectDescriptorBase {
 	var requiredFeatures: JsArray<JsObject> /* sequence<GPUFeatureName> */
-	var requiredLimits: JsMap<JsObject, JsObject>  /* record<DOMString, (GPUSize64orundefined)>  */
+	var requiredLimits: JsMap<JsObject, JsObject> /* record<DOMString, (GPUSize64orundefined)>  */
 	var defaultQueue: WGPUQueueDescriptor  /* GPUQueueDescriptor */
 }
 
@@ -329,10 +329,10 @@ external interface WGPUSamplerDescriptor : JsObject, WGPUObjectDescriptorBase {
 	var magFilter: String  /* GPUFilterMode */
 	var minFilter: String  /* GPUFilterMode */
 	var mipmapFilter: String  /* GPUMipmapFilterMode */
-	var lodMinClamp: JsNumber  /* float */
-	var lodMaxClamp: JsNumber  /* float */
+	var lodMinClamp: JsNumber /* float */
+	var lodMaxClamp: JsNumber /* float */
 	var compare: String  /* GPUCompareFunction */
-	var maxAnisotropy: JsNumber  /* unsigned short */
+	var maxAnisotropy: JsNumber /* unsigned short */
 }
 
 external interface WGPUBindGroupLayoutDescriptor : JsObject, WGPUObjectDescriptorBase {
@@ -393,12 +393,12 @@ external interface WGPUPipelineLayoutDescriptor : JsObject, WGPUObjectDescriptor
 }
 
 external interface WGPUShaderModuleDescriptor : JsObject, WGPUObjectDescriptorBase {
-	var code: String
+	var code: String /* USVString */
 	var compilationHints: JsArray<JsObject> /* sequence<GPUShaderModuleCompilationHint> */
 }
 
 external interface WGPUShaderModuleCompilationHint : JsObject {
-	var entryPoint: String
+	var entryPoint: String /* USVString */
 	var layout: JsObject /* (GPUPipelineLayout or GPUAutoLayoutMode) */
 }
 
@@ -412,8 +412,8 @@ external interface WGPUPipelineDescriptorBase : JsObject, WGPUObjectDescriptorBa
 
 external interface WGPUProgrammableStage : JsObject {
 	var module: WGPUShaderModule  /* GPUShaderModule */
-	var entryPoint: String
-	var constants: JsMap<JsObject, JsObject>  /* record<USVString, GPUPipelineConstantValue>  */
+	var entryPoint: String /* USVString */
+	var constants: JsMap<JsObject, JsObject> /* record<USVString, GPUPipelineConstantValue>  */
 }
 
 external interface WGPUComputePipelineDescriptor : JsObject, WGPUPipelineDescriptorBase {
@@ -472,8 +472,8 @@ external interface WGPUDepthStencilState : JsObject {
 	var stencilReadMask: JsNumber  /* GPUStencilValue */
 	var stencilWriteMask: JsNumber  /* GPUStencilValue */
 	var depthBias: JsNumber  /* GPUDepthBias */
-	var depthBiasSlopeScale: JsNumber  /* float */
-	var depthBiasClamp: JsNumber  /* float */
+	var depthBiasSlopeScale: JsNumber /* float */
+	var depthBiasClamp: JsNumber /* float */
 }
 
 external interface WGPUStencilFaceState : JsObject {
@@ -564,7 +564,7 @@ external interface WGPURenderPassColorAttachment : JsObject {
 
 external interface WGPURenderPassDepthStencilAttachment : JsObject {
 	var view: WGPUTextureView  /* GPUTextureView */
-	var depthClearValue: JsNumber  /* float */
+	var depthClearValue: JsNumber /* float */
 	var depthLoadOp: String  /* GPULoadOp */
 	var depthStoreOp: String  /* GPUStoreOp */
 	var depthReadOnly: Boolean
@@ -611,10 +611,10 @@ external interface WGPUUncapturedErrorEventInit : JsObject, EventInit {
 }
 
 external interface WGPUColor : JsObject {
-	var r: JsNumber  /* double */
-	var g: JsNumber  /* double */
-	var b: JsNumber  /* double */
-	var a: JsNumber  /* double */
+	var r: JsNumber /* double */
+	var g: JsNumber /* double */
+	var b: JsNumber /* double */
+	var a: JsNumber /* double */
 }
 
 external interface WGPUOrigin2D : JsObject {
