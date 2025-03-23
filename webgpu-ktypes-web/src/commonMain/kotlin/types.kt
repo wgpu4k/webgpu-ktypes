@@ -163,9 +163,9 @@ external interface WGPUCommandEncoder : JsObject, WGPUObjectBase, WGPUCommandsMi
 	fun beginComputePass(): WGPUComputePassEncoder  /* GPUComputePassEncoder */
 	fun beginComputePass(descriptor: WGPUComputePassDescriptor  /* GPUComputePassDescriptor */): WGPUComputePassEncoder  /* GPUComputePassEncoder */
 	fun copyBufferToBuffer(source: WGPUBuffer  /* GPUBuffer */, sourceOffset: JsNumber  /* GPUSize64 */, destination: WGPUBuffer  /* GPUBuffer */, destinationOffset: JsNumber  /* GPUSize64 */, size: JsNumber  /* GPUSize64 */)
-	fun copyBufferToTexture(source: WGPUTexelCopyBufferInfo  /* GPUTexelCopyBufferInfo */, destination: WGPUTexelCopyTextureInfo  /* GPUTexelCopyTextureInfo */, copySize: JsObject /* GPUExtent3D */)
-	fun copyTextureToBuffer(source: WGPUTexelCopyTextureInfo  /* GPUTexelCopyTextureInfo */, destination: WGPUTexelCopyBufferInfo  /* GPUTexelCopyBufferInfo */, copySize: JsObject /* GPUExtent3D */)
-	fun copyTextureToTexture(source: WGPUTexelCopyTextureInfo  /* GPUTexelCopyTextureInfo */, destination: WGPUTexelCopyTextureInfo  /* GPUTexelCopyTextureInfo */, copySize: JsObject /* GPUExtent3D */)
+	fun copyBufferToTexture(source: WGPUTexelCopyBufferInfo  /* GPUTexelCopyBufferInfo */, destination: WGPUTexelCopyTextureInfo  /* GPUTexelCopyTextureInfo */, copySize: WGPUExtent3D  /* GPUExtent3D */)
+	fun copyTextureToBuffer(source: WGPUTexelCopyTextureInfo  /* GPUTexelCopyTextureInfo */, destination: WGPUTexelCopyBufferInfo  /* GPUTexelCopyBufferInfo */, copySize: WGPUExtent3D  /* GPUExtent3D */)
+	fun copyTextureToTexture(source: WGPUTexelCopyTextureInfo  /* GPUTexelCopyTextureInfo */, destination: WGPUTexelCopyTextureInfo  /* GPUTexelCopyTextureInfo */, copySize: WGPUExtent3D  /* GPUExtent3D */)
 	fun clearBuffer(buffer: WGPUBuffer  /* GPUBuffer */)
 	fun clearBuffer(buffer: WGPUBuffer  /* GPUBuffer */, offset: JsNumber  /* GPUSize64 */)
 	fun clearBuffer(buffer: WGPUBuffer  /* GPUBuffer */, offset: JsNumber  /* GPUSize64 */, size: JsNumber  /* GPUSize64 */)
@@ -198,7 +198,7 @@ external interface WGPUComputePassEncoder : JsObject, WGPUObjectBase, WGPUComman
 external interface WGPURenderPassEncoder : JsObject, WGPUObjectBase, WGPUCommandsMixin, WGPUDebugCommandsMixin, WGPUBindingCommandsMixin, WGPURenderCommandsMixin {
 	fun setViewport(x: JsNumber  /* float */, y: JsNumber  /* float */, width: JsNumber  /* float */, height: JsNumber  /* float */, minDepth: JsNumber  /* float */, maxDepth: JsNumber  /* float */)
 	fun setScissorRect(x: JsNumber  /* GPUIntegerCoordinate */, y: JsNumber  /* GPUIntegerCoordinate */, width: JsNumber  /* GPUIntegerCoordinate */, height: JsNumber  /* GPUIntegerCoordinate */)
-	fun setBlendConstant(color: JsObject /* GPUColor */)
+	fun setBlendConstant(color: WGPUColor  /* GPUColor */)
 	fun setStencilReference(reference: JsNumber  /* GPUStencilValue */)
 	fun beginOcclusionQuery(queryIndex: JsNumber  /* GPUSize32 */)
 	fun endOcclusionQuery()
@@ -239,8 +239,8 @@ external interface WGPUQueue : JsObject, WGPUObjectBase {
 	fun writeBuffer(buffer: WGPUBuffer  /* GPUBuffer */, bufferOffset: JsNumber  /* GPUSize64 */, data: JsObject /* AllowSharedBufferSource */)
 	fun writeBuffer(buffer: WGPUBuffer  /* GPUBuffer */, bufferOffset: JsNumber  /* GPUSize64 */, data: JsObject /* AllowSharedBufferSource */, dataOffset: JsNumber  /* GPUSize64 */)
 	fun writeBuffer(buffer: WGPUBuffer  /* GPUBuffer */, bufferOffset: JsNumber  /* GPUSize64 */, data: JsObject /* AllowSharedBufferSource */, dataOffset: JsNumber  /* GPUSize64 */, size: JsNumber  /* GPUSize64 */)
-	fun writeTexture(destination: WGPUTexelCopyTextureInfo  /* GPUTexelCopyTextureInfo */, data: JsObject /* AllowSharedBufferSource */, dataLayout: WGPUTexelCopyBufferLayout  /* GPUTexelCopyBufferLayout */, size: JsObject /* GPUExtent3D */)
-	fun copyExternalImageToTexture(source: WGPUCopyExternalImageSourceInfo  /* GPUCopyExternalImageSourceInfo */, destination: WGPUCopyExternalImageDestInfo  /* GPUCopyExternalImageDestInfo */, copySize: JsObject /* GPUExtent3D */)
+	fun writeTexture(destination: WGPUTexelCopyTextureInfo  /* GPUTexelCopyTextureInfo */, data: JsObject /* AllowSharedBufferSource */, dataLayout: WGPUTexelCopyBufferLayout  /* GPUTexelCopyBufferLayout */, size: WGPUExtent3D  /* GPUExtent3D */)
+	fun copyExternalImageToTexture(source: WGPUCopyExternalImageSourceInfo  /* GPUCopyExternalImageSourceInfo */, destination: WGPUCopyExternalImageDestInfo  /* GPUCopyExternalImageDestInfo */, copySize: WGPUExtent3D  /* GPUExtent3D */)
 }
 
 external interface WGPUQuerySet : JsObject, WGPUObjectBase {
@@ -297,7 +297,7 @@ external interface WGPUBufferDescriptor : JsObject, WGPUObjectDescriptorBase {
 }
 
 external interface WGPUTextureDescriptor : JsObject, WGPUObjectDescriptorBase {
-	var size: JsObject /* GPUExtent3D */
+	var size: WGPUExtent3D  /* GPUExtent3D */
 	var mipLevelCount: JsNumber  /* GPUIntegerCoordinate */
 	var sampleCount: JsNumber  /* GPUSize32 */
 	var dimension: String  /* GPUTextureDimension */
@@ -512,7 +512,7 @@ external interface WGPUTexelCopyBufferInfo : JsObject, WGPUTexelCopyBufferLayout
 external interface WGPUTexelCopyTextureInfo : JsObject {
 	var texture: WGPUTexture  /* GPUTexture */
 	var mipLevel: JsNumber  /* GPUIntegerCoordinate */
-	var origin: JsObject /* GPUOrigin3D */
+	var origin: WGPUOrigin3D  /* GPUOrigin3D */
 	var aspect: String  /* GPUTextureAspect */
 }
 
@@ -523,7 +523,7 @@ external interface WGPUCopyExternalImageDestInfo : JsObject, WGPUTexelCopyTextur
 
 external interface WGPUCopyExternalImageSourceInfo : JsObject {
 	var source: JsObject /* GPUCopyExternalImageSource */
-	var origin: JsObject /* GPUOrigin2D */
+	var origin: WGPUOrigin2D  /* GPUOrigin2D */
 	var flipY: Boolean
 }
 
@@ -557,7 +557,7 @@ external interface WGPURenderPassColorAttachment : JsObject {
 	var view: WGPUTextureView  /* GPUTextureView */
 	var depthSlice: JsNumber  /* GPUIntegerCoordinate */
 	var resolveTarget: WGPUTextureView  /* GPUTextureView */
-	var clearValue: JsObject /* GPUColor */
+	var clearValue: WGPUColor  /* GPUColor */
 	var loadOp: String  /* GPULoadOp */
 	var storeOp: String  /* GPUStoreOp */
 }
@@ -610,25 +610,25 @@ external interface WGPUUncapturedErrorEventInit : JsObject, EventInit {
 	var error: WGPUError  /* GPUError */
 }
 
-external interface WGPUColorDict : JsObject {
+external interface WGPUColor : JsObject {
 	var r: JsNumber  /* double */
 	var g: JsNumber  /* double */
 	var b: JsNumber  /* double */
 	var a: JsNumber  /* double */
 }
 
-external interface WGPUOrigin2DDict : JsObject {
+external interface WGPUOrigin2D : JsObject {
 	var x: JsNumber  /* GPUIntegerCoordinate */
 	var y: JsNumber  /* GPUIntegerCoordinate */
 }
 
-external interface WGPUOrigin3DDict : JsObject {
+external interface WGPUOrigin3D : JsObject {
 	var x: JsNumber  /* GPUIntegerCoordinate */
 	var y: JsNumber  /* GPUIntegerCoordinate */
 	var z: JsNumber  /* GPUIntegerCoordinate */
 }
 
-external interface WGPUExtent3DDict : JsObject {
+external interface WGPUExtent3D : JsObject {
 	var width: JsNumber  /* GPUIntegerCoordinate */
 	var height: JsNumber  /* GPUIntegerCoordinate */
 	var depthOrArrayLayers: JsNumber  /* GPUIntegerCoordinate */

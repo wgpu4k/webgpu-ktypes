@@ -118,6 +118,7 @@ private fun MapperContext.loadWebInterface(idlInterface: IdlInterface) {
 
 private fun MapperContext.loadWebDictionary(idlDictionary: IdlDictionary): Interface {
     val name = "W" + idlDictionary.name.fixName()
+        .let { if (it.endsWith("Dict")) it.substringBeforeLast("Dict") else it }
     return (webInterfaces.find { it.name == name } ?: Interface(name, external = true).also { webInterfaces.add(it) })
         .also { kinterface ->
             if (kinterface.extends.contains("JsObject").not()) kinterface.extends += "JsObject"
