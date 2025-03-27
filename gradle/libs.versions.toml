@@ -1,7 +1,8 @@
 [versions]
+ktor = "3.1.0"
 webidl-util = "0.10.0"
 wgpu4k-native = "v24.0.1"
-kaml = "0.71.0"
+kaml = "0.73.0"
 kotlin = "2.1.20"
 agp = "8.5.2"
 kotlinx-browser = "0.3"
@@ -13,6 +14,12 @@ kotlinx-browser = { module = "org.jetbrains.kotlinx:kotlinx-browser", version.re
 webidl-util = { module = "de.fabmax:webidl-util", version.ref = "webidl-util" }
 wgpu-specs = { module = "io.ygdrasil:wgpu4k-native-specs-jvm", version.ref = "wgpu4k-native" }
 kaml = { module = "com.charleskorn.kaml:kaml", version.ref = "kaml" }
+
+# LLM
+ktor-client-cio = { module = "io.ktor:ktor-client-cio", version.ref = "ktor" }
+ktor-client-core = { module = "io.ktor:ktor-client-core", version.ref = "ktor" }
+ktor-serialization-kotlinx-json = { module = "io.ktor:ktor-serialization-kotlinx-json", version.ref = "ktor" }
+ktor-client-content-negotiation = { module = "io.ktor:ktor-client-content-negotiation", version.ref = "ktor" }
 
 # Release
 zip4j = { module = "net.lingala.zip4j:zip4j", version = "2.11.5" }

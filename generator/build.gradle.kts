@@ -17,6 +17,15 @@ dependencies {
     implementation(libs.webidl.util)
     implementation(libs.kaml)
     implementation(libs.wgpu.specs)
+
+    implementation(libs.ktor.client.core)
+    implementation(libs.ktor.client.cio)
+    implementation(libs.ktor.serialization.kotlinx.json)
+    implementation(libs.ktor.client.content.negotiation)
+
+
+    implementation("org.jetbrains.kotlinx:kotlinx-serialization-json:1.7.3")
+
 }
 
 kotlin {
