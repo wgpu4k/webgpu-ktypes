@@ -3,17 +3,17 @@ package lm
 import io.ktor.client.*
 import io.ktor.client.call.*
 import io.ktor.client.engine.cio.*
+import io.ktor.client.plugins.*
 import io.ktor.client.plugins.contentnegotiation.*
+import io.ktor.client.plugins.sse.*
 import io.ktor.client.request.*
-import io.ktor.client.statement.bodyAsText
 import io.ktor.http.*
 import io.ktor.serialization.kotlinx.json.*
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flow
-import kotlinx.coroutines.runBlocking
-import kotlinx.serialization.Serializable
 import kotlinx.serialization.json.Json
-class OpenAIClient(
+
+class LLMClient(
     private val baseUrl: String = "http://127.0.0.1:1234/v1",
     private val apiKey: String? = null
 ) {
@@ -27,12 +27,11 @@ class OpenAIClient(
         }
     }
 
-    // Méthode pour les appels standards (non streaming)
     suspend fun chatCompletion(
         messages: List<Message>,
         model: String = "mistral-small-3.1-24b-instruct-2503",
-        maxTokens: Int = 150,
-        temperature: Double = 0.7,
+        maxTokens: Int = 1000,
+        temperature: Double = 0.1,
         topP: Double = 1.0,
         n: Int = 1,
         stop: List<String>? = null,
@@ -55,6 +54,7 @@ class OpenAIClient(
         )
 
         return client.post("$baseUrl/chat/completions") {
+            timeout{ HttpTimeoutConfig(requestTimeoutMillis = 60_000) }
             contentType(ContentType.Application.Json)
             apiKey?.let { header("Authorization", "Bearer $it") }
             setBody(request)
@@ -93,17 +93,28 @@ class OpenAIClient(
             stream = true
         )
 
-        val response = client.preparePost("$baseUrl/chat/completions") {
-            contentType(ContentType.Application.Json)
-            apiKey?.let { header("Authorization", "Bearer $it") }
-            setBody(request)
-        }.execute()
 
-        response.bodyAsText().lineSequence()
-            .filter { it.startsWith("data:") && it.contains("{") }
-            .map { it.removePrefix("data:").trim() }
-            .filter { it.isNotBlank() && it != "[DONE]" }
+
+        client.sse("$baseUrl/chat/completions", {
+            HttpRequestBuilder().apply {
+                contentType(ContentType.Application.Json)
+                setBody(request)
+            }
+        }) {
+            while (true) {
+                incoming.collect { event ->
+                    println("Event from server:")
+                    println(event)
+                }
+            }
+        }
+
+        /*response.bodyAsText().lineSequence()
+            //.filter { it.startsWith("data:") && it.contains("{") }
+            //.map { it.removePrefix("data:").trim() }
+            //.filter { it.isNotBlank() && it != "[DONE]" }
             .forEach { line ->
+                print(line)
                 try {
                     val chunk = Json.decodeFromString<ChatCompletionChunk>(line)
                     chunk.choices.firstOrNull()?.delta?.content?.let { content ->
@@ -114,7 +125,7 @@ class OpenAIClient(
                 } catch (e: Exception) {
                     // Ignorer les lignes malformées
                 }
-            }
+            }*/
     }
 
     // Support des embeddings

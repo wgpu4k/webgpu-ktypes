@@ -114,7 +114,7 @@ data class ModelsResponse(
 @Serializable
 data class ModelInfo(
     val id: String,
-    val created: Long,
-    val owned_by: String,
-    val `object`: String
+    val created: Long? = null,
+    val owned_by: String? = null,
+    val `object`: String? = null
 )

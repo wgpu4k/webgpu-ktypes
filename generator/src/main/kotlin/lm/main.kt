@@ -1,58 +1,86 @@
 package lm
 
-import kotlinx.coroutines.flow.collect
-import kotlinx.coroutines.launch
 import kotlinx.coroutines.runBlocking
+import org.jsoup.Jsoup
+import java.io.File
+
+private val client = LLMClient()
+private val documentationWriterAgent = DocumentationWriterAgent(client)
+private val documentationExplorerAgent = DocumentationExplorerAgent(client)
 
 fun main() = runBlocking {
-    val client = OpenAIClient(
-        baseUrl = "http://127.0.0.1:1234/v1",
-        apiKey = null // Pas nécessaire pour LM Studio local
-    )
 
-    // Exemple 1: Chat completion standard
-    try {
-        val messages = listOf(
-            Message("system", "Tu es un assistant français utile et concis."),
-            Message("user", "Explique-moi comment fonctionne l'API OpenAI en trois points.")
-        )
+    val fichierHTML = File("webgpu.html")
 
-        val response = client.chatCompletion(messages = messages)
-        println("Réponse: ${response.choices.firstOrNull()?.message?.content}")
-        println("Tokens utilisés: ${response.usage.total_tokens}")
-    } catch (e: Exception) {
-        println("Erreur: ${e.message}")
-    }
+    val body = Jsoup.parse(fichierHTML, "UTF-8")
+        .select("main")
+        .also { it.select("script").remove() }
 
-    // Exemple 2: Streaming pour des réponses progressives
-    try {
-        val messages = listOf(
-            Message("system", "Tu es un assistant français utile et concis."),
-            Message("user", "Raconter une histoire courte à propos d'un robot.")
-        )
+    val htmlDocumentation = body.select("dfn[id=dictdef-gpucolordict]")
+        .first()!!
+        .parent()
 
-        println("Réponse en streaming:")
-        launch {
-            client.streamChatCompletion(messages).collect { chunk ->
-                print(chunk)
-            }
-            println("\n--- Fin du streaming ---")
+    val selectedDocumentation = mutableListOf(htmlDocumentation)
+
+    // Parse before
+    var shouldContinue = true
+    var currentElement = htmlDocumentation.previousElementSibling()
+    println("Parse before $currentElement")
+    while (shouldContinue && currentElement != null) {
+        shouldContinue = documentationExplorerAgent.isRevelant(
+            selectedDocumentation.toString(),
+            currentElement.toString()
+        ).map { it.lowercase() == "yes" }.getOrElse { false}
+
+        if (shouldContinue) {
+            selectedDocumentation.addFirst(currentElement)
+            currentElement = currentElement.previousElementSibling()
         }
-    } catch (e: Exception) {
-        println("Erreur de streaming: ${e.message}")
+        println("shouldContinue: $shouldContinue and currentElement is null ?: ${currentElement == null}")
     }
+    // Parse after
+    shouldContinue = true
+    currentElement = htmlDocumentation.nextElementSibling()
+    println("Parse after $currentElement")
+    while (shouldContinue && currentElement != null) {
+        shouldContinue = documentationExplorerAgent.isRevelant(
+            selectedDocumentation.toString(),
+            currentElement.toString()
+        ).map { it.lowercase() == "yes" }.getOrElse { false}
 
-    // Exemple 3: Liste des modèles disponibles
-    try {
-        val models = client.listModels()
-        println("\nModèles disponibles:")
-        models.data.forEach { model ->
-            println("- ${model.id}")
+        if (shouldContinue) {
+            selectedDocumentation.add(currentElement)
+            currentElement = currentElement.nextElementSibling()
         }
-    } catch (e: Exception) {
-        println("Erreur lors de la récupération des modèles: ${e.message}")
+        println("shouldContinue: $shouldContinue and currentElement is null ?: ${currentElement == null}")
     }
 
-    // Attendre la fin des coroutines
-    kotlinx.coroutines.delay(10000)
+
+
+    println("doc: ${selectedDocumentation}")
+
+    val userPrompt = """
+        Provide only the documentation.
+        This is the kotlin code :
+        
+        interface GPUColor {
+            val r: Double
+            val g: Double
+            val b: Double
+            val a: Double
+        }
+        
+        This is the HTML specification
+        $selectedDocumentation
+           
+    """.trimIndent()
+
+
+    val responseAsJson = documentationWriterAgent.generateDocumentation(userPrompt)
+        .getOrThrow()
+    val responseAsMap = kotlinx.serialization.json.Json.decodeFromString<Map<String, String>>(responseAsJson)
+
+    println("as map $responseAsMap")
 }
+
+

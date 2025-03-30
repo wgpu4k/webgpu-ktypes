@@ -25,6 +25,8 @@ dependencies {
 
 
     implementation("org.jetbrains.kotlinx:kotlinx-serialization-json:1.7.3")
+    implementation("org.jsoup:jsoup:1.17.2")
+
 
 }
 
