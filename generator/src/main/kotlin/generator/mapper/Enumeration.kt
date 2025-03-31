@@ -16,7 +16,7 @@ fun MapperContext.loadEnums() {
 private fun MapperContext.loadBitFlagEnums() {
     yamlModel.bitflags.forEach { bitflag ->
         val name = bitflag.name.convertToKotlinClassName()
-        bitflagEnumerations + Enumeration(
+        bitflagEnumerations += Enumeration(
             "GPU$name",
             bitflag.entries
                 .mapIndexed { index, entry ->
