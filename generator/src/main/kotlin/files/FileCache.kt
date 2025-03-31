@@ -11,12 +11,12 @@ data class FileCache(
 
     @Serializable
     data class CachedFile(
-        val path: String,
+        val name: String,
         val hash: String,
         @Serializable(with = LocalDateTimeSerializer::class)
         val updateDate: LocalDateTime
     )
 
-    fun findFile(name: String) = cachedFiles.find { File(it.path).name == name }
+    fun findFile(name: String) = cachedFiles.find { File(it.name).name == name }
     fun addFile(name: String, hash: String) = FileCache(cachedFiles + CachedFile(name, hash, LocalDateTime.now()))
 }

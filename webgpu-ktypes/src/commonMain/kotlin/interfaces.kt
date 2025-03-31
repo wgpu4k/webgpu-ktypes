@@ -80,13 +80,13 @@ interface GPUAdapterInfo {
 	val description: String
 	val subgroupMinSize: UInt
 	val subgroupMaxSize: UInt
+	val isFallbackAdapter: Boolean
 }
 
 interface GPUAdapter : AutoCloseable {
 	val features: GPUSupportedFeatures
 	val limits: GPUSupportedLimits
 	val info: GPUAdapterInfo
-	val isFallbackAdapter: Boolean
 	suspend fun requestDevice(descriptor: GPUDeviceDescriptor? = null): Result<GPUDevice>
 }
 
@@ -165,7 +165,7 @@ interface GPUCommandsMixin
 interface GPUCommandEncoder : GPUObjectBase, GPUCommandsMixin, GPUDebugCommandsMixin, AutoCloseable {
 	fun beginRenderPass(descriptor: GPURenderPassDescriptor): GPURenderPassEncoder
 	fun beginComputePass(descriptor: GPUComputePassDescriptor? = null): GPUComputePassEncoder
-	fun copyBufferToBuffer(source: GPUBuffer, sourceOffset: GPUSize64, destination: GPUBuffer, destinationOffset: GPUSize64, size: GPUSize64)
+	fun copyBufferToBuffer(source: GPUBuffer, sourceOffset: GPUSize64, destination: GPUBuffer, destinationOffset: GPUSize64, size: GPUSize64? = null)
 	fun copyBufferToTexture(source: GPUTexelCopyBufferInfo, destination: GPUTexelCopyTextureInfo, copySize: GPUExtent3D)
 	fun copyTextureToBuffer(source: GPUTexelCopyTextureInfo, destination: GPUTexelCopyBufferInfo, copySize: GPUExtent3D)
 	fun copyTextureToTexture(source: GPUTexelCopyTextureInfo, destination: GPUTexelCopyTextureInfo, copySize: GPUExtent3D)

@@ -48,6 +48,7 @@ external interface WGPUAdapterInfo : JsObject {
 	var description: String /* DOMString */
 	var subgroupMinSize: JsNumber /* unsigned long */
 	var subgroupMaxSize: JsNumber /* unsigned long */
+	var isFallbackAdapter: Boolean
 }
 
 external interface WGPU : JsObject {
@@ -61,7 +62,6 @@ external interface WGPUAdapter : JsObject {
 	var features: WGPUSupportedFeatures  /* GPUSupportedFeatures */
 	var limits: WGPUSupportedLimits  /* GPUSupportedLimits */
 	var info: WGPUAdapterInfo  /* GPUAdapterInfo */
-	var isFallbackAdapter: Boolean
 	fun requestDevice(): JsObject /* Promise */
 	fun requestDevice(descriptor: WGPUDeviceDescriptor  /* GPUDeviceDescriptor */): JsObject /* Promise */
 }
@@ -162,6 +162,9 @@ external interface WGPUCommandEncoder : JsObject, WGPUObjectBase, WGPUCommandsMi
 	fun beginRenderPass(descriptor: WGPURenderPassDescriptor  /* GPURenderPassDescriptor */): WGPURenderPassEncoder  /* GPURenderPassEncoder */
 	fun beginComputePass(): WGPUComputePassEncoder  /* GPUComputePassEncoder */
 	fun beginComputePass(descriptor: WGPUComputePassDescriptor  /* GPUComputePassDescriptor */): WGPUComputePassEncoder  /* GPUComputePassEncoder */
+	fun copyBufferToBuffer(source: WGPUBuffer  /* GPUBuffer */, destination: WGPUBuffer  /* GPUBuffer */)
+	fun copyBufferToBuffer(source: WGPUBuffer  /* GPUBuffer */, destination: WGPUBuffer  /* GPUBuffer */, size: JsNumber  /* GPUSize64 */)
+	fun copyBufferToBuffer(source: WGPUBuffer  /* GPUBuffer */, sourceOffset: JsNumber  /* GPUSize64 */, destination: WGPUBuffer  /* GPUBuffer */, destinationOffset: JsNumber  /* GPUSize64 */)
 	fun copyBufferToBuffer(source: WGPUBuffer  /* GPUBuffer */, sourceOffset: JsNumber  /* GPUSize64 */, destination: WGPUBuffer  /* GPUBuffer */, destinationOffset: JsNumber  /* GPUSize64 */, size: JsNumber  /* GPUSize64 */)
 	fun copyBufferToTexture(source: WGPUTexelCopyBufferInfo  /* GPUTexelCopyBufferInfo */, destination: WGPUTexelCopyTextureInfo  /* GPUTexelCopyTextureInfo */, copySize: WGPUExtent3D  /* GPUExtent3D */)
 	fun copyTextureToBuffer(source: WGPUTexelCopyTextureInfo  /* GPUTexelCopyTextureInfo */, destination: WGPUTexelCopyBufferInfo  /* GPUTexelCopyBufferInfo */, copySize: WGPUExtent3D  /* GPUExtent3D */)

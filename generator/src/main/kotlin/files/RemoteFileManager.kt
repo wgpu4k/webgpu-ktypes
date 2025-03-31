@@ -23,7 +23,7 @@ object RemoteFileManager {
         val webgpuIdl = "webgpu.idl"
     }
 
-    private val specificationsSourcePath = Paths.get("webgpu-ktypes-specifications").resolve("src").resolve("jvmMain").resolve("resources")
+    val specificationsSourcePath = Paths.get("webgpu-ktypes-specifications").resolve("src").resolve("jvmMain").resolve("resources")
     private val cachePath = specificationsSourcePath.resolve("cache.json").absolutePathString()
 
     var fileCache: FileCache = loadFileCache()
@@ -101,6 +101,14 @@ object RemoteFileManager {
                 }
             }
         }.onFailure { error(it)}
+    }
+
+    fun findFile(fileName: String): FileCache.CachedFile? {
+        return fileCache.findFile(fileName)
+    }
+
+    fun findFilePath(fileName: String): Path? {
+        return fileCache.findFile(fileName)?.let { specificationsSourcePath.resolve(it.name) }
     }
 
 }
