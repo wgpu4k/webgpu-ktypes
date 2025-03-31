@@ -1,5 +1,7 @@
+package generator
+
 import com.charleskorn.kaml.Yaml
-import domain.YamlModel
+import generator.domain.YamlModel
 
 fun loadWebGPUYaml() = readFileFromClasspath("webgpu.yml")
     .let { text -> parser.decodeFromString(YamlModel.serializer(), text) }

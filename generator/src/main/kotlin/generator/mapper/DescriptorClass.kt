@@ -1,13 +1,15 @@
-package mapper
+package generator.mapper
 
-import toKotlinType
-import MapperContext
-import fixName
-import unwantedTypesOnCommon
+import generator.MapperContext
+import generator.unwantedTypesOnCommon
 import de.fabmax.webidl.model.IdlDictionary
 import de.fabmax.webidl.model.IdlMember
 import de.fabmax.webidl.model.IdlSimpleType
 import de.fabmax.webidl.model.IdlUnionType
+import generator.domain.DescriptorClass
+import generator.fixName
+import generator.toKotlinType
+import kotlin.collections.plusAssign
 
 fun MapperContext.loadDescriptors() {
     idlModel.dictionaries
@@ -38,9 +40,9 @@ internal fun MapperContext.loadDescriptor(name: String, idlDictionary: IdlDictio
                 value == "[]" -> value = "emptyList()"
                 isEnumeration(type) -> value = "$type.${getEnumerationValueNameOnKotlin(type, value)}"
             }
-            domain.DescriptorClass.Parameter(it.name, type, value)
+            DescriptorClass.Parameter(it.name, type, value)
         }
-    descriptors += domain.DescriptorClass(name, parameters)
+    descriptors += DescriptorClass(name, parameters)
 }
 
 fun MapperContext.getMembers(idlDictionary: IdlDictionary): List<IdlMember> {

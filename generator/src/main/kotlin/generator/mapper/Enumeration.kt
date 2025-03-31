@@ -1,10 +1,10 @@
-package mapper
+package generator.mapper
 
-import MapperContext
-import fixNameStartingWithNumeric
-import domain.Enumeration
-import fixName
-import unwantedTypesOnCommon
+import generator.MapperContext
+import generator.domain.Enumeration
+import generator.fixName
+import generator.fixNameStartingWithNumeric
+import generator.unwantedTypesOnCommon
 import kotlin.collections.forEach
 import kotlin.collections.plus
 
@@ -16,13 +16,14 @@ fun MapperContext.loadEnums() {
 private fun MapperContext.loadBitFlagEnums() {
     yamlModel.bitflags.forEach { bitflag ->
         val name = bitflag.name.convertToKotlinClassName()
-        bitflagEnumerations += Enumeration(
+        bitflagEnumerations + Enumeration(
             "GPU$name",
             bitflag.entries
                 .mapIndexed { index, entry ->
                     // Calculate first if that a combination
-                    val value = entry.value_combination?.sumOf { subPart -> indexToFlagValue(bitflag.entries.indexOfFirst { it.name == subPart }) }
-                        ?: indexToFlagValue(index)
+                    val value =
+                        entry.value_combination?.sumOf { subPart -> indexToFlagValue(bitflag.entries.indexOfFirst { it.name == subPart }) }
+                            ?: indexToFlagValue(index)
 
                     val name = entry.name.convertToKotlinClassName()
                     "$name(${value}uL)"
@@ -30,7 +31,7 @@ private fun MapperContext.loadBitFlagEnums() {
             parameters = listOf("override val value: ULong"),
             extends = listOf("FlagEnumeration"),
 
-        )
+            )
     }
 }
 

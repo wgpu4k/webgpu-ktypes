@@ -1,4 +1,4 @@
-package domain
+package generator.domain
 
 class TypeAlias(val name: String, var type: String) {
     override fun toString(): String {

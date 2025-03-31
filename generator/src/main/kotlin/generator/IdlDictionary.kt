@@ -1,7 +1,9 @@
+package generator
+
 import de.fabmax.webidl.model.IdlDictionary
 import de.fabmax.webidl.model.IdlSimpleType
 import de.fabmax.webidl.model.IdlUnionType
-import domain.Interface
+import generator.domain.Interface
 
 internal fun MapperContext.loadDictionaries() {
     idlModel.dictionaries

@@ -1,4 +1,4 @@
-package domain
+package generator.domain
 
 class Interface(
     val name: String,

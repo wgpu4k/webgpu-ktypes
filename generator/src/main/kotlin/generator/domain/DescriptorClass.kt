@@ -1,4 +1,4 @@
-package domain
+package generator.domain
 
 class DescriptorClass(val name: String, val parameter: List<Parameter>) {
 

@@ -1,8 +1,11 @@
+package generator
+
 import de.fabmax.webidl.model.IdlSimpleType
 import de.fabmax.webidl.model.IdlUnionType
-import domain.Interface
-import domain.TypeAlias
-import mapper.loadDescriptor
+import generator.domain.Interface
+import generator.domain.TypeAlias
+import generator.mapper.loadDescriptor
+import kotlin.collections.plusAssign
 
 internal fun MapperContext.loadTypeDef() {
     idlModel.typeDefs

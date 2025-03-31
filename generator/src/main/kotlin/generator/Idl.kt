@@ -1,3 +1,5 @@
+package generator
+
 import de.fabmax.webidl.model.IdlSimpleType
 import de.fabmax.webidl.model.IdlType
 import de.fabmax.webidl.model.IdlUnionType
@@ -93,7 +95,7 @@ internal fun String.toKotlinType(): String = when (this) {
 }
 
 /**
- * Error on parser, some interface name is on format Type : ExtendType instead of Type
+ * Error on generator.parser, some interface name is on format Type : ExtendType instead of Type
  */
 internal fun String.fixName(): String = (if (contains(':')) substringBefore(':') else this)
     .replace("\n", "")

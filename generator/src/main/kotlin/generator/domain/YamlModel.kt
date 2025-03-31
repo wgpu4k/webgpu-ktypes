@@ -1,4 +1,4 @@
-package domain
+package generator.domain
 
 import com.charleskorn.kaml.YamlList
 import com.charleskorn.kaml.YamlNode

@@ -1,15 +1,12 @@
-package mapper
+package generator.mapper
 
-import MapperContext
+import generator.MapperContext
 import de.fabmax.webidl.model.IdlDictionary
 import de.fabmax.webidl.model.IdlInterface
-import de.fabmax.webidl.model.IdlSimpleType
-import de.fabmax.webidl.model.IdlUnionType
-import domain.Interface
-import domain.TypeAlias
-import fixName
-import toWebKotlinType
-import unwantedTypesOnCommon
+import generator.domain.Interface
+import generator.domain.TypeAlias
+import generator.fixName
+import generator.toWebKotlinType
 
 internal fun MapperContext.loadWebInterfaces() {
     // Load web-specific interfaces from the IDL model
@@ -31,7 +28,10 @@ internal fun MapperContext.loadWebInterfaces() {
         .filter { it.name.startsWith("GPU") && it.setLike != null}
         .forEach { idlInterface ->
             val name = "W" + idlInterface.name.fixName()
-            (webTypeAlias.find { it.name == name } ?: TypeAlias(name, "JsSet<JsObject> /* ${idlInterface.setLike?.type} */").also { webTypeAlias.add(it) })
+            (webTypeAlias.find { it.name == name } ?: TypeAlias(
+                name,
+                "JsSet<JsObject> /* ${idlInterface.setLike?.type} */"
+            ).also { webTypeAlias.add(it) })
         }
 
     //

@@ -1,8 +1,12 @@
+package generator
+
 import de.fabmax.webidl.model.IdlModel
-import domain.Enumeration
-import domain.Interface
-import domain.TypeAlias
-import domain.YamlModel
+import generator.domain.Enumeration
+import generator.domain.Interface
+import generator.domain.TypeAlias
+import generator.domain.YamlModel
+import generator.domain.DescriptorClass
+import kotlin.collections.plusAssign
 
 class MapperContext(
     val idlModel: IdlModel,
@@ -15,7 +19,7 @@ class MapperContext(
     var commonWebEnumerations = emptyList<Enumeration>()
     var commonNativeEnumerations = emptyList<Enumeration>()
     var bitflagEnumerations = emptyList<Enumeration>()
-    val descriptors = mutableListOf<domain.DescriptorClass>()
+    val descriptors = mutableListOf<DescriptorClass>()
     val webInterfaces = mutableListOf<Interface>()
     val webTypeAlias = mutableListOf<TypeAlias>()
 

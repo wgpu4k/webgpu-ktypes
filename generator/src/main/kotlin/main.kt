@@ -1,8 +1,13 @@
 
 import de.fabmax.webidl.parser.WebIdlParser
-import mapper.loadEnums
-import mapper.loadDescriptors
-import mapper.loadWebInterfaces
+import generator.MapperContext
+import generator.loadDictionaries
+import generator.loadInterfaces
+import generator.loadTypeDef
+import generator.loadWebGPUYaml
+import generator.mapper.loadEnums
+import generator.mapper.loadDescriptors
+import generator.mapper.loadWebInterfaces
 import java.io.File
 import java.io.SequenceInputStream
 import java.net.URI

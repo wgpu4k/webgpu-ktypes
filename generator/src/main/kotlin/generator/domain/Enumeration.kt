@@ -1,4 +1,4 @@
-package domain
+package generator.domain
 
 data class Enumeration(
     var name: String,
