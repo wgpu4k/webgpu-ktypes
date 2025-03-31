@@ -1,4 +1,6 @@
 [versions]
+jsoup = "1.17.2"
+kotlinx-serialization-json = "1.8.0"
 ktor = "3.1.0"
 webidl-util = "0.10.0"
 wgpu4k-native = "v24.0.1"
@@ -10,7 +12,9 @@ coroutines = "1.10.1"
 
 [libraries]
 coroutines = { module = "org.jetbrains.kotlinx:kotlinx-coroutines-core", version.ref = "coroutines" }
+jsoup = { module = "org.jsoup:jsoup", version.ref = "jsoup" }
 kotlinx-browser = { module = "org.jetbrains.kotlinx:kotlinx-browser", version.ref = "kotlinx-browser" }
+kotlinx-serialization-json = { module = "org.jetbrains.kotlinx:kotlinx-serialization-json", version.ref = "kotlinx-serialization-json" }
 webidl-util = { module = "de.fabmax:webidl-util", version.ref = "webidl-util" }
 wgpu-specs = { module = "io.ygdrasil:wgpu4k-native-specs-jvm", version.ref = "wgpu4k-native" }
 kaml = { module = "com.charleskorn.kaml:kaml", version.ref = "kaml" }

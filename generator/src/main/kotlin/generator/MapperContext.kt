@@ -83,10 +83,6 @@ class MapperContext(
             }
         }
 
-        bitflagEnumerations.first { it.name == "GPUColorWriteMask" }.apply {
-            name = "GPUColorWrite"
-        }
-
         descriptors.first { it.name == "GPUColorTargetState" }.apply {
             parameter.first { it.name == "writeMask" }.apply { defaultValue = "setOf(GPUColorWrite.All)"}
         }

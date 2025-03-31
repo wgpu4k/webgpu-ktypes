@@ -24,8 +24,8 @@ dependencies {
     implementation(libs.ktor.client.content.negotiation)
 
 
-    implementation("org.jetbrains.kotlinx:kotlinx-serialization-json:1.7.3")
-    implementation("org.jsoup:jsoup:1.17.2")
+    implementation(libs.kotlinx.serialization.json)
+    implementation(libs.jsoup)
 
 
 }
