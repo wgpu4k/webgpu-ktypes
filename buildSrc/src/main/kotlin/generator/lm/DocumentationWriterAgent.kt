@@ -1,4 +1,4 @@
-package lm
+package generator.lm
 
 
 class DocumentationWriterAgent(private val client: LLMClient) {

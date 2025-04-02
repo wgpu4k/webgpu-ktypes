@@ -1,4 +1,4 @@
-package lm
+package generator.lm
 
 class DocumentationExplorerAgent(private val client: LLMClient) {
 

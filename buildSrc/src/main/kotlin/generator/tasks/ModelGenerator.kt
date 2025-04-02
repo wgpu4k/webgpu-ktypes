@@ -1,6 +1,7 @@
-import de.fabmax.webidl.parser.WebIdlParser
-import files.RemoteFileManager
+package generator.tasks
+
 import generator.MapperContext
+import generator.files.RemoteFileManager
 import generator.loadDictionaries
 import generator.loadInterfaces
 import generator.loadTypeDef
@@ -28,7 +29,7 @@ object ModelGenerator {
         RemoteFileManager.checkCache()
         val ildPath = RemoteFileManager.findFilePath(RemoteFileManager.Files.webgpuIdl) ?: error("fail to get cached file")
 
-        val idlModel = WebIdlParser.parseFromInputStream(
+        val idlModel = de.fabmax.webidl.parser.WebIdlParser.Companion.parseFromInputStream(
             SequenceInputStream(idlExtraTyps, Files.newInputStream(ildPath))
         )
         val yamlModel = loadWebGPUYaml()

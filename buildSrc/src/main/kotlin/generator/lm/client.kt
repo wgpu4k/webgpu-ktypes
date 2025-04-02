@@ -1,14 +1,22 @@
-package lm
+package generator.lm
 
 import io.ktor.client.*
 import io.ktor.client.call.*
+import io.ktor.client.call.body
 import io.ktor.client.engine.cio.*
 import io.ktor.client.plugins.*
 import io.ktor.client.plugins.contentnegotiation.*
 import io.ktor.client.plugins.sse.*
+import io.ktor.client.plugins.sse.sse
+import io.ktor.client.plugins.timeout
 import io.ktor.client.request.*
+import io.ktor.client.request.header
+import io.ktor.client.request.post
+import io.ktor.client.request.setBody
 import io.ktor.http.*
+import io.ktor.http.contentType
 import io.ktor.serialization.kotlinx.json.*
+import io.ktor.serialization.kotlinx.json.json
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flow
 import kotlinx.serialization.json.Json
@@ -54,7 +62,7 @@ class LLMClient(
         )
 
         return client.post("$baseUrl/chat/completions") {
-            timeout{ HttpTimeoutConfig(requestTimeoutMillis = 60_000) }
+            timeout { HttpTimeoutConfig(requestTimeoutMillis = 60_000) }
             contentType(ContentType.Application.Json)
             apiKey?.let { header("Authorization", "Bearer $it") }
             setBody(request)
@@ -96,7 +104,7 @@ class LLMClient(
 
 
         client.sse("$baseUrl/chat/completions", {
-            HttpRequestBuilder().apply {
+            io.ktor.client.request.HttpRequestBuilder().apply {
                 contentType(ContentType.Application.Json)
                 setBody(request)
             }

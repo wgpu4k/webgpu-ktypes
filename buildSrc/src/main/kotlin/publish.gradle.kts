@@ -98,3 +98,4 @@ if (!isSnapshot()) {
  */
 fun isSnapshot(): Boolean =
     System.getenv("SNAPSHOT")?.equals("false")?.not() ?: true
+

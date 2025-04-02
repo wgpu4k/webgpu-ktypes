@@ -1,19 +1,19 @@
-package files
+package generator.files
 
 import kotlinx.serialization.Serializable
 import java.io.File
 import java.time.LocalDateTime
 
-@Serializable
+@kotlinx.serialization.Serializable
 data class FileCache(
     val cachedFiles: List<CachedFile>
 ) {
 
-    @Serializable
+    @kotlinx.serialization.Serializable
     data class CachedFile(
         val name: String,
         val hash: String,
-        @Serializable(with = LocalDateTimeSerializer::class)
+        @kotlinx.serialization.Serializable(with = LocalDateTimeSerializer::class)
         val updateDate: LocalDateTime
     )
 

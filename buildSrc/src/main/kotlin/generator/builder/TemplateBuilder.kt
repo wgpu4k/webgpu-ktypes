@@ -1,4 +1,4 @@
-package builder
+package generator.builder
 
 
 class Builder(

@@ -26,10 +26,10 @@ dependencies {
 
     implementation(libs.kotlinx.serialization.json)
     implementation(libs.jsoup)
-
-
+    
 }
 
 kotlin {
     jvmToolchain(21)
 }
+

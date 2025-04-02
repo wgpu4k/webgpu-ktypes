@@ -3,8 +3,9 @@ package generator
 import com.charleskorn.kaml.Yaml
 import generator.domain.YamlModel
 
-fun loadWebGPUYaml() = readFileFromClasspath("webgpu.yml")
-    .let { text -> parser.decodeFromString(YamlModel.serializer(), text) }
+fun loadWebGPUYaml(): YamlModel = readFileFromClasspath("webgpu.yml")
+    .let { TODO() }
+    //.let { text -> parser.decodeFromString(YamlModel.serializer(), text) }
 
 val parser = Yaml(
     configuration = Yaml.default.configuration.copy(strictMode = false)

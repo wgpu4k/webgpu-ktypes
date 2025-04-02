@@ -1,4 +1,4 @@
-package files
+package generator.files
 
 import kotlinx.serialization.json.Json
 import java.io.File
@@ -9,7 +9,6 @@ import java.nio.file.Path
 import java.nio.file.Paths
 import java.security.MessageDigest
 import java.time.LocalDateTime
-import kotlin.io.path.Path
 import kotlin.io.path.absolutePathString
 
 object RemoteFileManager {
@@ -69,13 +68,13 @@ object RemoteFileManager {
     }
 
     private fun saveFileCache(fileCache: FileCache, filePath: String) {
-        val jsonString = Json.encodeToString(fileCache)
+        val jsonString = kotlinx.serialization.json.Json.Default.encodeToString(fileCache)
         java.nio.file.Files.write(Paths.get(filePath), jsonString.toByteArray())
     }
 
     private fun loadFileCache(filePath: String): Result<FileCache> = runCatching {
         val jsonString = java.nio.file.Files.readString(Paths.get(filePath))
-        Json.decodeFromString<FileCache>(jsonString)
+        kotlinx.serialization.json.Json.Default.decodeFromString<FileCache>(jsonString)
     }
 
     private fun File.calculateHash(algorithm: String = "SHA-256"): String {

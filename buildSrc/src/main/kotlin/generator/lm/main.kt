@@ -1,4 +1,4 @@
-package lm
+package generator.lm
 
 import kotlinx.coroutines.runBlocking
 import org.jsoup.Jsoup
@@ -8,11 +8,11 @@ private val client = LLMClient()
 private val documentationWriterAgent = DocumentationWriterAgent(client)
 private val documentationExplorerAgent = DocumentationExplorerAgent(client)
 
-fun main() = runBlocking {
+fun main() = kotlinx.coroutines.runBlocking {
 
     val fichierHTML = File("webgpu.html")
 
-    val body = Jsoup.parse(fichierHTML, "UTF-8")
+    val body = org.jsoup.Jsoup.parse(fichierHTML, "UTF-8")
         .select("main")
         .also { it.select("script").remove() }
 
@@ -30,7 +30,7 @@ fun main() = runBlocking {
         shouldContinue = documentationExplorerAgent.isRevelant(
             selectedDocumentation.toString(),
             currentElement.toString()
-        ).map { it.lowercase() == "yes" }.getOrElse { false}
+        ).map { it.lowercase() == "yes" }.getOrElse { false }
 
         if (shouldContinue) {
             selectedDocumentation.addFirst(currentElement)
@@ -46,7 +46,7 @@ fun main() = runBlocking {
         shouldContinue = documentationExplorerAgent.isRevelant(
             selectedDocumentation.toString(),
             currentElement.toString()
-        ).map { it.lowercase() == "yes" }.getOrElse { false}
+        ).map { it.lowercase() == "yes" }.getOrElse { false }
 
         if (shouldContinue) {
             selectedDocumentation.add(currentElement)
@@ -78,7 +78,7 @@ fun main() = runBlocking {
 
     val responseAsJson = documentationWriterAgent.generateDocumentation(userPrompt)
         .getOrThrow()
-    val responseAsMap = kotlinx.serialization.json.Json.decodeFromString<Map<String, String>>(responseAsJson)
+    val responseAsMap = kotlinx.serialization.json.Json.Default.decodeFromString<Map<String, String>>(responseAsJson)
 
     println("as map $responseAsMap")
 }
