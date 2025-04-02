@@ -1,10 +1,8 @@
+import generator.CheckCacheTask
+import generator.GenerateBindingTask
+import generator.files.RemoteFileManager
 import generator.tasks.ModelGenerator
 import generator.tasks.ModelWriter
 
-tasks.register("generate-binding") {
-    group = "generator"
-    doLast {
-        val context = ModelGenerator.context
-        ModelWriter.write(context)
-    }
-}
+tasks.register<GenerateBindingTask>("generate-binding")
+tasks.register<CheckCacheTask>("check-cache")

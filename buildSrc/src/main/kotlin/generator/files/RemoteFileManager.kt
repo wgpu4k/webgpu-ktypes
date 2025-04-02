@@ -11,7 +11,8 @@ import java.security.MessageDigest
 import java.time.LocalDateTime
 import kotlin.io.path.absolutePathString
 
-object RemoteFileManager {
+class RemoteFileManager(private val basePath: Path) {
+
     object Urls {
         val webgpuHtml = URI("https://www.w3.org/TR/webgpu/").toURL()
         val webgpuIdl = URI("https://gpuweb.github.io/gpuweb/webgpu.idl").toURL()
@@ -22,8 +23,13 @@ object RemoteFileManager {
         val webgpuIdl = "webgpu.idl"
     }
 
-    val specificationsSourcePath = Paths.get("webgpu-ktypes-specifications").resolve("src").resolve("jvmMain").resolve("resources")
-    private val cachePath = specificationsSourcePath.resolve("cache.json").absolutePathString()
+    val specificationsSourcePath by lazy {
+        basePath.resolve("webgpu-ktypes-specifications").resolve("src").resolve("jvmMain").resolve("resources")
+    }
+    private val cachePath by lazy {
+        specificationsSourcePath.resolve("cache.json").absolutePathString()
+            .also { println("Using cache file at $it") }
+    }
 
     var fileCache: FileCache = loadFileCache()
     val files = listOf(
@@ -54,8 +60,9 @@ object RemoteFileManager {
     }
 
     private fun updateCache(fileName: String, uRL: URL) {
-        uRL.downloadToPath(specificationsSourcePath.resolve(fileName))
-        val hash = File(fileName).calculateHash()
+        val targetPath = specificationsSourcePath.resolve(fileName)
+        uRL.downloadToPath(targetPath)
+        val hash = File(targetPath.absolutePathString()).calculateHash()
         fileCache = fileCache.addFile(fileName, hash)
         saveFileCache(fileCache, cachePath)
     }
@@ -68,13 +75,13 @@ object RemoteFileManager {
     }
 
     private fun saveFileCache(fileCache: FileCache, filePath: String) {
-        val jsonString = kotlinx.serialization.json.Json.Default.encodeToString(fileCache)
+        val jsonString = Json.Default.encodeToString(fileCache)
         java.nio.file.Files.write(Paths.get(filePath), jsonString.toByteArray())
     }
 
     private fun loadFileCache(filePath: String): Result<FileCache> = runCatching {
         val jsonString = java.nio.file.Files.readString(Paths.get(filePath))
-        kotlinx.serialization.json.Json.Default.decodeFromString<FileCache>(jsonString)
+        Json.Default.decodeFromString<FileCache>(jsonString)
     }
 
     private fun File.calculateHash(algorithm: String = "SHA-256"): String {
@@ -110,10 +117,4 @@ object RemoteFileManager {
         return fileCache.findFile(fileName)?.let { specificationsSourcePath.resolve(it.name) }
     }
 
-}
-
-fun main() {
-    println(RemoteFileManager.fileCache)
-    RemoteFileManager.checkCache()
-    println(RemoteFileManager.fileCache)
 }

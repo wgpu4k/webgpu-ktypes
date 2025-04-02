@@ -12,7 +12,9 @@ import generator.mapper.loadWebInterfaces
 import java.io.SequenceInputStream
 import java.nio.file.Files
 
-object ModelGenerator {
+class ModelGenerator(
+    val remoteFileManager: RemoteFileManager,
+) {
 
     private val idlExtraTyps = """
         interface mixin NavigatorGPU {
@@ -26,8 +28,7 @@ object ModelGenerator {
     """.byteInputStream()
 
     val context: MapperContext by lazy {
-        RemoteFileManager.checkCache()
-        val ildPath = RemoteFileManager.findFilePath(RemoteFileManager.Files.webgpuIdl) ?: error("fail to get cached file")
+        val ildPath = remoteFileManager.findFilePath(RemoteFileManager.Files.webgpuIdl) ?: error("fail to get cached file")
 
         val idlModel = de.fabmax.webidl.parser.WebIdlParser.Companion.parseFromInputStream(
             SequenceInputStream(idlExtraTyps, Files.newInputStream(ildPath))

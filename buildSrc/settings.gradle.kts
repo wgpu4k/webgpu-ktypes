@@ -5,5 +5,3 @@ dependencyResolutionManagement {
 		}
 	}
 }
-
-includeBuild("../generator")
