@@ -21,6 +21,7 @@ class RemoteFileManager(private val basePath: Path) {
     object Files {
         val webgpuHtml = "webgpu.html"
         val webgpuIdl = "webgpu.idl"
+        val documentation = "documentation.json"
     }
 
     val specificationsSourcePath by lazy {
