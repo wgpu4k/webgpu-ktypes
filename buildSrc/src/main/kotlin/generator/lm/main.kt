@@ -8,12 +8,13 @@ private val client = LLMClient()
 private val documentationWriterAgent = DocumentationWriterAgent(client)
 private val documentationExplorerAgent = DocumentationExplorerAgent(client)
 
-fun main() = kotlinx.coroutines.runBlocking {
+fun main() = runBlocking {
 
     val fichierHTML = File("webgpu.html")
 
-    val body = org.jsoup.Jsoup.parse(fichierHTML, "UTF-8")
+    val body = Jsoup.parse(fichierHTML, "UTF-8")
         .select("main")
+        .first()!!
         .also { it.select("script").remove() }
 
     val htmlDocumentation = body.select("dfn[id=dictdef-gpucolordict]")
