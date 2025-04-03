@@ -22,10 +22,13 @@ class DocumentGeneratorManager(
         val documentation = mutableMapOf<String, String>()
         context.interfaces.forEach { kInterface ->
             val name = kInterface.name.lowercase()
-            val htmlDocumentation = body.select("dfn[id=dictdef-$name]")
-                .first()!!
-                .parent()
-            println("$name htmlDocumentation: $htmlDocumentation")
+            //println("will infer $name")
+            val htmlNode = (body.select("dfn[id=dictdef-$name]").first()
+                ?: body.select("dfn[id=typedefdef-$name]").first()
+                ?: body.select("a[href=$name]").first()
+                    )?.parent()
+            if (htmlNode != null) { println("fail to find $name") }
+            //println("$name htmlDocumentation: $htmlNode")
         }
     }
 }

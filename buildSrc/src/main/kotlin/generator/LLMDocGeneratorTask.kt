@@ -4,11 +4,10 @@ import generator.files.RemoteFileManager
 import generator.lm.DocumentGeneratorManager
 import generator.tasks.ModelGenerator
 import kotlinx.coroutines.runBlocking
+import org.gradle.api.DefaultTask
 import org.gradle.api.tasks.TaskAction
-import org.jsoup.Jsoup
-import publish.AbstractTask
 
-open class LLMDocGeneratorTask : AbstractTask() {
+open class LLMDocGeneratorTask : DefaultTask() {
 
     init {
         group = "generator"
