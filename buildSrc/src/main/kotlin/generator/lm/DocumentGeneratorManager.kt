@@ -9,9 +9,6 @@ class DocumentGeneratorManager(
     htmlDocumentation: Path
 ) {
     private val body = Jsoup.parse(htmlDocumentation.toFile(), "UTF-8")
-        .select("main")
-        .first()
-        ?.also { it.select("script").remove() }
         ?: error("fail to parse html")
 
     private val llmClient = LLMClient()
@@ -19,15 +16,17 @@ class DocumentGeneratorManager(
     private val documentationWriterAgent = DocumentationWriterAgent(llmClient)
 
     fun inferDocumentation() {
-        val documentation = mutableMapOf<String, String>()
+       val documentation = mutableMapOf<String, String>()
         context.interfaces.forEach { kInterface ->
             val name = kInterface.name.lowercase()
             //println("will infer $name")
             val htmlNode = (body.select("dfn[id=dictdef-$name]").first()
                 ?: body.select("dfn[id=typedefdef-$name]").first()
-                ?: body.select("a[href=$name]").first()
+                ?: body.select("a[href=#$name]").first()
                     )?.parent()
-            if (htmlNode != null) { println("fail to find $name") }
+            if (htmlNode == null) {
+                println("fail to find $name")
+            }
             //println("$name htmlDocumentation: $htmlNode")
         }
     }
