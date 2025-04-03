@@ -2,9 +2,15 @@ package generator.lm
 
 class DocumentationExplorerAgent(private val client: LLMClient) {
 
-    suspend fun isRevelant(source: String, nextNode: String): Result<String> = runCatching {
+    suspend fun isRelevant(source: String, nextNode: String, subject: String): Result<String> = runCatching {
         val prompt = """
-            We have already selected this part of the documentation: 
+            Given this kotlin code :
+            
+            ```kotlin
+            $subject
+            ```
+            
+            We have already selected this part of the documentation to talk about it : 
             
             ```html
             $source

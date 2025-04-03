@@ -28,9 +28,10 @@ fun main() = runBlocking {
     var currentElement = htmlDocumentation.previousElementSibling()
     println("Parse before $currentElement")
     while (shouldContinue && currentElement != null) {
-        shouldContinue = documentationExplorerAgent.isRevelant(
+        shouldContinue = documentationExplorerAgent.isRelevant(
             selectedDocumentation.toString(),
-            currentElement.toString()
+            currentElement.toString(),
+            ""
         ).map { it.lowercase() == "yes" }.getOrElse { false }
 
         if (shouldContinue) {
@@ -44,9 +45,10 @@ fun main() = runBlocking {
     currentElement = htmlDocumentation.nextElementSibling()
     println("Parse after $currentElement")
     while (shouldContinue && currentElement != null) {
-        shouldContinue = documentationExplorerAgent.isRevelant(
+        shouldContinue = documentationExplorerAgent.isRelevant(
             selectedDocumentation.toString(),
-            currentElement.toString()
+            currentElement.toString(),
+            ""
         ).map { it.lowercase() == "yes" }.getOrElse { false }
 
         if (shouldContinue) {
