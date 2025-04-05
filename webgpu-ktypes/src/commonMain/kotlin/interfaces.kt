@@ -2,6 +2,23 @@
 // This file has been generated DO NO EDIT
 package io.ygdrasil.webgpu
 
+/**
+ * A sealed interface representing a binding resource in WebGPU. This can be one of the following types:
+ * - [GPUSampler] [1]: A sampler object used for sampling textures.
+ * - [GPUTextureView] [2]: A view into a texture, representing a specific format and aspect of the texture.
+ * - [GPUBufferBinding] [3]: A binding to a buffer, specifying how the buffer should be accessed.
+ * - [GPUExternalTexture] [4]: An external texture object, typically used for interoperability with other APIs.
+ *
+ * This interface is used in the context of bind groups, where resources are bound to specific bindings within a shader module. For more details, refer to the
+ * [WebGPU specification on GPUBindingResource][5].
+ *
+ * [1]: https://www.w3.org/TR/webgpu/#gpusampler
+ * [2]: https://www.w3.org/TR/webgpu/#gputextureview
+ * [3]: https://www.w3.org/TR/webgpu/#dictdef-gpubufferbinding
+ * [4]: https://www.w3.org/TR/webgpu/#gpuexternaltexture
+ * [5]: https://www.w3.org/TR/webgpu/#typedefdef-gpubindingresource"
+ *
+ */
 sealed interface GPUBindingResource
 interface GPUSampler : GPUBindingResource, GPUObjectBase, AutoCloseable
 interface GPUTextureView : GPUBindingResource, GPUObjectBase, AutoCloseable

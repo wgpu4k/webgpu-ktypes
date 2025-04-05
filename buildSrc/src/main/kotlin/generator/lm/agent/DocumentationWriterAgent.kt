@@ -1,4 +1,7 @@
-package generator.lm
+package generator.lm.agent
+
+import generator.lm.LLMClient
+import generator.lm.Message
 
 
 class DocumentationWriterAgent(private val client: LLMClient) {

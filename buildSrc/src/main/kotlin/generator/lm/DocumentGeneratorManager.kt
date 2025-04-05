@@ -3,6 +3,10 @@ package generator.lm
 import generator.domain.Interface
 import generator.domain.MapperContext
 import generator.files.RemoteFileManager
+import generator.lm.agent.DocumentationExplorerAgent
+import generator.lm.agent.DocumentationRefinerAgent
+import generator.lm.agent.DocumentationWriterAgent
+import generator.lm.agent.JSonRefinerAgent
 import kotlinx.coroutines.runBlocking
 import kotlinx.serialization.json.Json
 import org.jsoup.Jsoup
@@ -21,35 +25,50 @@ class DocumentGeneratorManager(
     private val body = Jsoup.parse(htmlDocumentation.toFile(), "UTF-8")
         ?: error("fail to parse html")
 
-    private val currentDocumentation = mutableMapOf<String, String>()
+    private var currentDocumentation = emptyMap<String, String>()
 
     private val llmClient = LLMClient()
     private val documentationExplorerAgent = DocumentationExplorerAgent(llmClient)
     private val documentationWriterAgent = DocumentationWriterAgent(llmClient)
     private val jSonRefinerAgent = JSonRefinerAgent(llmClient)
+    private val documentationRefinerAgent = DocumentationRefinerAgent(llmClient)
 
     val documentationFile = remoteFileManager.specificationsSourcePath.resolve(RemoteFileManager.Files.documentation)
 
     fun inferHtmlDocumentation() = runBlocking {
-       val documentation = mutableMapOf<String, String>()
+        currentDocumentation = getActualDocumentation()
         context.interfaces.forEach { kInterface ->
             runCatching {
+                val expectedKeys = kInterface.getDocumentationKeys()
+                if (currentDocumentation.keys.containsAll(expectedKeys)) return@forEach
                 val name = kInterface.name.lowercase()
                 val htmlNode = findRootNode(name) ?: error("fail to find root node for declaration $name")
                 val htmlDocumentation = inferHtmlDocumentation(htmlNode, name)
-                val kdocDocumentation = inferKdocDocumentation(kInterface, htmlDocumentation)
+                val kdocDocumentation = inferKdocDocumentation(kInterface, htmlDocumentation, expectedKeys)
+                    .filterKeys { it in expectedKeys }
                 currentDocumentation += kdocDocumentation
                 val jsonString = prettyJson.encodeToString(currentDocumentation)
                 java.nio.file.Files.write(documentationFile, jsonString.toByteArray())
             }
         }
-
-        println(currentDocumentation)
     }
+
+    private fun Interface.getDocumentationKeys(): List<String> {
+        val prefix = name
+        return listOf(name) +
+                attributes.map { "$prefix#${it.name}" } +
+                methods.map { "$prefix#${it.name}(${it.parameters.joinToString(", ") { it.name }})" }
+    }
+
+    private fun getActualDocumentation(): Map<String, String> = runCatching {
+        java.nio.file.Files.readString(documentationFile)
+            .let { prettyJson.decodeFromString<Map<String, String>>(it) }
+    }.getOrElse { emptyMap<String, String>() }
 
     private suspend fun inferKdocDocumentation(
         kInterface: Interface,
-        htmlDocumentation: MutableList<Element>
+        htmlDocumentation: MutableList<Element>,
+        expectedKeys: List<String>
     ): Map<String, String> {
         val userPrompt = """
             Provide only the documentation for the kotlin code and skip the rest.
@@ -57,6 +76,13 @@ class DocumentGeneratorManager(
             
             ```kotlin
             $kInterface
+            ```
+            
+            We expect the following keys : 
+            ```json
+            {
+                ${expectedKeys.joinToString(", ") { "\"$it\" : \"insert documentation here\""}}
+            }
             ```
                     
             This is the HTML specification
@@ -68,6 +94,7 @@ class DocumentGeneratorManager(
 
 
         var responseAsJson = documentationWriterAgent.generateDocumentation(userPrompt)
+            .map { documentationRefinerAgent.refine(it).getOrThrow() }
             .getOrThrow()
 
         var remainingTry = 5
@@ -133,7 +160,7 @@ class DocumentGeneratorManager(
 }
 
 private fun Element.findRootNode(): Element? = parent().let {
-    when(it?.tagName()) {
+    when (it?.tagName()) {
         null, "main" -> this
         else -> it.findRootNode()
     }
