@@ -19,7 +19,7 @@ open class LLMDocGeneratorTask : DefaultTask() {
         val context = ModelGenerator(remoteFileManager).context
         val htmlDocumentation = remoteFileManager.findFilePath(RemoteFileManager.Files.webgpuHtml)
             ?: error("Cannot find the html documentation")
-         DocumentGeneratorManager(context, remoteFileManager, htmlDocumentation)
+         DocumentGeneratorManager(context, remoteFileManager, htmlDocumentation, logger)
             .also { it.inferHtmlDocumentation() }
     }
 }

@@ -9,6 +9,7 @@ import generator.lm.agent.DocumentationWriterAgent
 import generator.lm.agent.JSonRefinerAgent
 import kotlinx.coroutines.runBlocking
 import kotlinx.serialization.json.Json
+import org.gradle.api.logging.Logger
 import org.jsoup.Jsoup
 import org.jsoup.nodes.Element
 import java.nio.file.Path
@@ -20,7 +21,8 @@ private val prettyJson = Json {
 class DocumentGeneratorManager(
     private val context: MapperContext,
     private val remoteFileManager: RemoteFileManager,
-    htmlDocumentation: Path
+    htmlDocumentation: Path,
+    private val logger: Logger
 ) {
     private val body = Jsoup.parse(htmlDocumentation.toFile(), "UTF-8")
         ?: error("fail to parse html")
@@ -36,21 +38,24 @@ class DocumentGeneratorManager(
     val documentationFile = remoteFileManager.specificationsSourcePath.resolve(RemoteFileManager.Files.documentation)
 
     fun inferHtmlDocumentation() = runBlocking {
+        logger.info("Start inferHtmlDocumentation")
         currentDocumentation = getActualDocumentation()
-        context.interfaces.forEach { kInterface ->
-            runCatching {
-                val expectedKeys = kInterface.getDocumentationKeys()
-                if (currentDocumentation.keys.containsAll(expectedKeys)) return@forEach
-                val name = kInterface.name.lowercase()
-                val htmlNode = findRootNode(name) ?: error("fail to find root node for declaration $name")
-                val htmlDocumentation = inferHtmlDocumentation(htmlNode, name)
-                val kdocDocumentation = inferKdocDocumentation(kInterface, htmlDocumentation, expectedKeys)
-                    .filterKeys { it in expectedKeys }
-                currentDocumentation += kdocDocumentation
-                val jsonString = prettyJson.encodeToString(currentDocumentation)
-                java.nio.file.Files.write(documentationFile, jsonString.toByteArray())
+        context.interfaces
+            .map { it to it.getDocumentationKeys() }
+            .filter { (_, expectedKeys) -> expectedKeys.filter { it in currentDocumentation.keys }.size != expectedKeys.size}
+            .forEach { (kInterface, expectedKeys) ->
+                logger.info("Infer for $kInterface")
+                runCatching {
+                    val name = kInterface.name.lowercase()
+                    val htmlNode = findRootNode(name) ?: error("fail to find root node for declaration $name")
+                    val htmlDocumentation = inferHtmlDocumentation(htmlNode, name)
+                    val kdocDocumentation = inferKdocDocumentation(kInterface, htmlDocumentation, expectedKeys)
+                        .filterKeys { it in expectedKeys }
+                    currentDocumentation += kdocDocumentation
+                    val jsonString = prettyJson.encodeToString(currentDocumentation)
+                    java.nio.file.Files.write(documentationFile, jsonString.toByteArray())
+                }
             }
-        }
     }
 
     private fun Interface.getDocumentationKeys(): List<String> {
@@ -81,7 +86,7 @@ class DocumentGeneratorManager(
             We expect the following keys : 
             ```json
             {
-                ${expectedKeys.joinToString(", ") { "\"$it\" : \"insert documentation here\""}}
+                ${expectedKeys.joinToString(", ") { "\"$it\" : \"insert documentation here\"" }}
             }
             ```
                     
