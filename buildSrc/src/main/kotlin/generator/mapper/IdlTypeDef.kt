@@ -1,10 +1,11 @@
-package generator
+package generator.mapper
 
 import de.fabmax.webidl.model.IdlSimpleType
 import de.fabmax.webidl.model.IdlUnionType
 import generator.domain.Interface
+import generator.domain.MapperContext
 import generator.domain.TypeAlias
-import generator.mapper.loadDescriptor
+import kotlin.collections.plus
 import kotlin.collections.plusAssign
 
 internal fun MapperContext.loadTypeDef() {
@@ -31,7 +32,7 @@ internal fun MapperContext.loadTypeDef() {
                 interfaces += Interface(idlTypeDef.name, sealed = true)
                 types.forEach { subType ->
                     (interfaces.find { it.name == subType.typeName } ?: Interface(subType.typeName).also { interfaces.add(it) })
-                        .extends += idlTypeDef.name
+                        .extends + idlTypeDef.name
                 }
             } else {
                 error("Unhandled union type: ${idlTypeDef.name}: ${type.types.joinToString { it.typeName }}")

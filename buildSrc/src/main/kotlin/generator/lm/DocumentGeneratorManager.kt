@@ -1,7 +1,7 @@
 package generator.lm
 
-import generator.MapperContext
 import generator.domain.Interface
+import generator.domain.MapperContext
 import generator.files.RemoteFileManager
 import kotlinx.coroutines.runBlocking
 import kotlinx.serialization.json.Json

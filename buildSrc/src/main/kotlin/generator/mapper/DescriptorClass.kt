@@ -1,14 +1,11 @@
 package generator.mapper
 
-import generator.MapperContext
-import generator.unwantedTypesOnCommon
 import de.fabmax.webidl.model.IdlDictionary
 import de.fabmax.webidl.model.IdlMember
 import de.fabmax.webidl.model.IdlSimpleType
 import de.fabmax.webidl.model.IdlUnionType
 import generator.domain.DescriptorClass
-import generator.fixName
-import generator.toKotlinType
+import generator.domain.MapperContext
 import kotlin.collections.plusAssign
 
 fun MapperContext.loadDescriptors() {

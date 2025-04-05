@@ -1,12 +1,9 @@
 package generator.mapper
 
-import generator.MapperContext
 import generator.domain.Enumeration
-import generator.fixName
-import generator.fixNameStartingWithNumeric
-import generator.unwantedTypesOnCommon
+import generator.domain.MapperContext
+import generator.domain.fixNameStartingWithNumeric
 import kotlin.collections.forEach
-import kotlin.collections.plus
 
 fun MapperContext.loadEnums() {
     loadBitFlagEnums()

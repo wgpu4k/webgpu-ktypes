@@ -1,11 +1,6 @@
-package generator
+package generator.domain
 
 import de.fabmax.webidl.model.IdlModel
-import generator.domain.Enumeration
-import generator.domain.Interface
-import generator.domain.TypeAlias
-import generator.domain.YamlModel
-import generator.domain.DescriptorClass
 import kotlin.collections.plusAssign
 
 class MapperContext(

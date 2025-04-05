@@ -1,4 +1,4 @@
-package generator
+package generator.mapper
 
 import de.fabmax.webidl.model.IdlSimpleType
 import de.fabmax.webidl.model.IdlType

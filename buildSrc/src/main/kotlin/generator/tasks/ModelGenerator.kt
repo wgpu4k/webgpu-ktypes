@@ -1,13 +1,13 @@
 package generator.tasks
 
-import generator.MapperContext
+import generator.domain.MapperContext
 import generator.files.RemoteFileManager
-import generator.loadDictionaries
-import generator.loadInterfaces
-import generator.loadTypeDef
-import generator.loadWebGPUYaml
 import generator.mapper.loadDescriptors
+import generator.mapper.loadDictionaries
 import generator.mapper.loadEnums
+import generator.mapper.loadInterfaces
+import generator.mapper.loadTypeDef
+import generator.mapper.loadWebGPUYaml
 import generator.mapper.loadWebInterfaces
 import java.io.SequenceInputStream
 import java.nio.file.Files

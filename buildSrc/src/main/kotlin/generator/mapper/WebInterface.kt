@@ -1,12 +1,10 @@
 package generator.mapper
 
-import generator.MapperContext
 import de.fabmax.webidl.model.IdlDictionary
 import de.fabmax.webidl.model.IdlInterface
 import generator.domain.Interface
+import generator.domain.MapperContext
 import generator.domain.TypeAlias
-import generator.fixName
-import generator.toWebKotlinType
 
 internal fun MapperContext.loadWebInterfaces() {
     // Load web-specific interfaces from the IDL model

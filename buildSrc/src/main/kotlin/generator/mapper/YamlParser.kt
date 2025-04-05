@@ -1,4 +1,4 @@
-package generator
+package generator.mapper
 
 import com.charleskorn.kaml.Yaml
 import generator.domain.YamlModel

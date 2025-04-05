@@ -1,4 +1,4 @@
-package generator
+package generator.mapper
 
 import de.fabmax.webidl.model.IdlFunction
 import de.fabmax.webidl.model.IdlFunctionParameter
@@ -6,6 +6,7 @@ import de.fabmax.webidl.model.IdlInterface
 import de.fabmax.webidl.model.IdlSimpleType
 import de.fabmax.webidl.model.IdlType
 import generator.domain.Interface
+import generator.domain.MapperContext
 
 fun MapperContext.loadInterfaces() {
     idlModel.interfaces

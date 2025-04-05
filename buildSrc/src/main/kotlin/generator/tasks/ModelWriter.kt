@@ -1,6 +1,6 @@
 package generator.tasks
 
-import generator.MapperContext
+import generator.domain.MapperContext
 import java.io.File
 import java.nio.file.Path
 import java.nio.file.Paths
