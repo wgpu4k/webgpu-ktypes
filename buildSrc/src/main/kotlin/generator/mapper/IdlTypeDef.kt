@@ -32,7 +32,7 @@ internal fun MapperContext.loadTypeDef() {
                 interfaces += Interface(idlTypeDef.name, sealed = true)
                 types.forEach { subType ->
                     (interfaces.find { it.name == subType.typeName } ?: Interface(subType.typeName).also { interfaces.add(it) })
-                        .extends + idlTypeDef.name
+                        .extends += idlTypeDef.name
                 }
             } else {
                 error("Unhandled union type: ${idlTypeDef.name}: ${type.types.joinToString { it.typeName }}")
