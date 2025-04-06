@@ -54,6 +54,8 @@ class DocumentGeneratorManager(
                     currentDocumentation += kdocDocumentation
                     val jsonString = prettyJson.encodeToString(currentDocumentation)
                     java.nio.file.Files.write(documentationFile, jsonString.toByteArray())
+                }.onFailure {
+                    logger.error("fail to infer for $kInterface", it)
                 }
             }
     }
@@ -160,7 +162,7 @@ class DocumentGeneratorManager(
 
     private fun findRootNode(name: String): Element? = (body.select("dfn[id=dictdef-$name]").first()
         ?: body.select("dfn[id=typedefdef-$name]").first()
-        ?: body.select("a[href=#$name]").first()
+        ?: body.select("a[href=#$name]").select("a[class=self-link]").first()
             )?.findRootNode()
 }
 
