@@ -152,6 +152,7 @@ class DocumentGeneratorManager(
 
     private fun findRootNode(name: String): Element? = (body.select("dfn[id=dictdef-$name]").first()
         ?: body.select("dfn[id=typedefdef-$name]").first()
+        ?: body.select("dfn[id=enumdef-$name]").first()
         ?: body.select("a[href=#$name]").select("a[class=self-link]").first()
         ?: body.select("dfn[id=$name]").first()
             )?.findRootNode()
