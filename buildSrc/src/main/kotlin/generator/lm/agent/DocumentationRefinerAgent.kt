@@ -8,7 +8,7 @@ class DocumentationRefinerAgent(private val client: LLMClient)  {
     suspend fun refine(source: String): Result<String> = runCatching {
 
         val userPrompt = """
-            refine the following KDoc:
+            refine the following KDoc and return it as JSON:
             
             $source
         """.trimIndent()

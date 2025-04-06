@@ -6,9 +6,15 @@ import generator.lm.Message
 class JSonRefinerAgent(private val client: LLMClient) {
 
     suspend fun refine(source: String): Result<String> = runCatching {
+
+        val userPrompt = """
+            This following JSON is not passing the parsing, fix it and return it as JSON:
+            $source
+        """.trimIndent()
+
         val messages = listOf(
             Message("system", systemPrompt),
-            Message("user", source)
+            Message("user", userPrompt)
         )
 
         val response = client.chatCompletion(messages = messages)
