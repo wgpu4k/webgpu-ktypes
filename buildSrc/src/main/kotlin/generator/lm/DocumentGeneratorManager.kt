@@ -14,7 +14,7 @@ import org.jsoup.Jsoup
 import org.jsoup.nodes.Element
 import java.nio.file.Path
 
-private val prettyJson = Json {
+internal val prettyJson = Json {
     prettyPrint = true
 }
 
@@ -60,17 +60,7 @@ class DocumentGeneratorManager(
             }
     }
 
-    private fun Interface.getDocumentationKeys(): List<String> {
-        val prefix = name
-        return listOf(name) +
-                attributes.map { "$prefix#${it.name}" } +
-                methods.map { "$prefix#${it.name}(${it.parameters.joinToString(", ") { it.name }})" }
-    }
-
-    private fun getActualDocumentation(): Map<String, String> = runCatching {
-        java.nio.file.Files.readString(documentationFile)
-            .let { prettyJson.decodeFromString<Map<String, String>>(it) }
-    }.getOrElse { emptyMap<String, String>() }
+    private fun getActualDocumentation(): Map<String, String> = getActualDocumentation(documentationFile)
 
     private suspend fun inferKdocDocumentation(
         kInterface: Interface,
@@ -171,4 +161,16 @@ private fun Element.findRootNode(): Element? = parent().let {
         null, "main" -> this
         else -> it.findRootNode()
     }
+}
+
+internal fun getActualDocumentation(documentationFile: Path): Map<String, String> = runCatching {
+    java.nio.file.Files.readString(documentationFile)
+        .let { prettyJson.decodeFromString<Map<String, String>>(it) }
+}.getOrElse { emptyMap<String, String>() }
+
+internal fun Interface.getDocumentationKeys(): List<String> {
+    val prefix = name
+    return listOf(name) +
+            attributes.map { "$prefix#${it.name}" } +
+            methods.map { "$prefix#${it.name}(${it.parameters.joinToString(", ") { it.name }})" }
 }

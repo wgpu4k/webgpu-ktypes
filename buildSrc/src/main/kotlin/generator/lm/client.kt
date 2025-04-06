@@ -1,12 +1,10 @@
 package generator.lm
 
 import io.ktor.client.*
-import io.ktor.client.call.*
 import io.ktor.client.call.body
 import io.ktor.client.engine.cio.*
 import io.ktor.client.plugins.*
 import io.ktor.client.plugins.contentnegotiation.*
-import io.ktor.client.plugins.sse.*
 import io.ktor.client.plugins.sse.sse
 import io.ktor.client.plugins.timeout
 import io.ktor.client.request.*
@@ -37,7 +35,7 @@ class LLMClient(
     suspend fun chatCompletion(
         messages: List<Message>,
         model: String = "mistral-small-3.1-24b-instruct-2503",
-        maxTokens: Int = 1000,
+        maxTokens: Int = 8192,
         temperature: Double = 0.1,
         topP: Double = 1.0,
         n: Int = 1,
