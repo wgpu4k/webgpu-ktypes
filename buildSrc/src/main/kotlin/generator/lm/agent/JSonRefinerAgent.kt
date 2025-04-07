@@ -9,6 +9,7 @@ class JSonRefinerAgent(private val client: LLMClient) {
 
         val userPrompt = """
             This following JSON is not passing the parsing, fix it and return it as JSON:
+            The key must remain with format "GPUSomething" or "GPUSomething#other" or "GPUSomething#other(another)"
             $source
         """.trimIndent()
 
