@@ -1,5 +1,6 @@
 package generator.lm
 
+import generator.domain.Enumeration
 import generator.domain.Interface
 import generator.domain.MapperContext
 import generator.files.RemoteFileManager
@@ -40,13 +41,15 @@ class DocumentGeneratorManager(
     fun inferHtmlDocumentation() = runBlocking {
         logger.info("Start inferHtmlDocumentation")
         currentDocumentation = getActualDocumentation()
+        (context.commonEnumerations
+            .map { Triple(it.toString(), it.name.lowercase() ,it.getDocumentationKeys()) }
+            .filter { (_, _, expectedKeys) -> expectedKeys.filter { it in currentDocumentation.keys }.size != expectedKeys.size} +
         context.interfaces
-            .map { it to it.getDocumentationKeys() }
-            .filter { (_, expectedKeys) -> expectedKeys.filter { it in currentDocumentation.keys }.size != expectedKeys.size}
-            .forEach { (kInterface, expectedKeys) ->
+            .map { Triple(it.toString(), it.name.lowercase() ,it.getDocumentationKeys()) }
+            .filter { (_, _, expectedKeys) -> expectedKeys.filter { it in currentDocumentation.keys }.size != expectedKeys.size})
+            .forEach { (kInterface, name, expectedKeys) ->
                 logger.info("Infer for $kInterface")
                 runCatching {
-                    val name = kInterface.name.lowercase()
                     val htmlNode = findRootNode(name) ?: error("fail to find root node for declaration $name")
                     val htmlDocumentation = inferHtmlDocumentation(htmlNode, name)
                     val kdocDocumentation = inferKdocDocumentation(kInterface, htmlDocumentation, expectedKeys)
@@ -63,7 +66,7 @@ class DocumentGeneratorManager(
     private fun getActualDocumentation(): Map<String, String> = getActualDocumentation(documentationFile)
 
     private suspend fun inferKdocDocumentation(
-        kInterface: Interface,
+        kotlinDefinition: String,
         htmlDocumentation: MutableList<Element>,
         expectedKeys: List<String>
     ): Map<String, String> {
@@ -72,7 +75,7 @@ class DocumentGeneratorManager(
             This is the kotlin code :
             
             ```kotlin
-            $kInterface
+            $kotlinDefinition
             ```
             
             We expect the following keys : 
@@ -87,7 +90,7 @@ class DocumentGeneratorManager(
                        
             """.trimIndent()
 
-        println("infer: $kInterface")
+        println("infer: $kotlinDefinition")
 
 
         var responseAsJson = documentationWriterAgent.generateDocumentation(userPrompt)
@@ -175,4 +178,10 @@ internal fun Interface.getDocumentationKeys(): List<String> {
     return listOf(name) +
             attributes.map { "$prefix#${it.name}" } +
             methods.map { "$prefix#${it.name}(${it.parameters.joinToString(", ") { it.name }})" }
+}
+
+internal fun Enumeration.getDocumentationKeys(): List<String> {
+    val prefix = name
+    return listOf(name) +
+            values.map { "$prefix#$it" }
 }
