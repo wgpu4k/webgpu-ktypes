@@ -48,12 +48,13 @@ class DocumentGeneratorManager(
             .map { Triple(it.toString(), it.name.lowercase() ,it.getDocumentationKeys()) }
             .filter { (_, _, expectedKeys) -> expectedKeys.filter { it in currentDocumentation.keys }.size != expectedKeys.size})
             .forEach { (kInterface, name, expectedKeys) ->
+                val missingKeys = expectedKeys.filter { it !in currentDocumentation.keys }
                 logger.info("Infer for $kInterface")
                 runCatching {
                     val htmlNode = findRootNode(name) ?: error("fail to find root node for declaration $name")
                     val htmlDocumentation = inferHtmlDocumentation(htmlNode, name)
-                    val kdocDocumentation = inferKdocDocumentation(kInterface, htmlDocumentation, expectedKeys)
-                        .filterKeys { it in expectedKeys }
+                    val kdocDocumentation = inferKdocDocumentation(kInterface, htmlDocumentation, missingKeys)
+                        .filterKeys { it in missingKeys }
                     currentDocumentation += kdocDocumentation
                     val jsonString = prettyJson.encodeToString(currentDocumentation)
                     java.nio.file.Files.write(documentationFile, jsonString.toByteArray())
@@ -78,7 +79,7 @@ class DocumentGeneratorManager(
             $kotlinDefinition
             ```
             
-            We expect the following keys : 
+            We expect the following keys, only provide the documentation for this keys : 
             ```json
             {
                 ${expectedKeys.joinToString(", ") { "\"$it\" : \"insert documentation here\"" }}
