@@ -36,7 +36,7 @@ class DocumentGeneratorManager(
     private val jSonRefinerAgent = JSonRefinerAgent(llmClient)
     private val documentationRefinerAgent = DocumentationRefinerAgent(llmClient)
 
-    val documentationFile = remoteFileManager.specificationsSourcePath.resolve(RemoteFileManager.Files.documentation)
+    val documentationFile = remoteFileManager.specificationsSourcePath.resolve(RemoteFileManager.Files.documentationJson)
 
     fun inferHtmlDocumentation() = runBlocking {
         logger.info("Start inferHtmlDocumentation")

@@ -19,7 +19,7 @@ open class CheckMissingDocumentationTask : DefaultTask() {
         val remoteFileManager = RemoteFileManager(project.projectDir.toPath())
         val context = ModelGenerator(remoteFileManager).context
         val documentationFile =
-            remoteFileManager.specificationsSourcePath.resolve(RemoteFileManager.Files.documentation)
+            remoteFileManager.specificationsSourcePath.resolve(RemoteFileManager.Files.documentationJson)
         val currentDocumentation = getActualDocumentation(documentationFile)
         val missingKeys = context.interfaces
             .map { it to it.getDocumentationKeys() }

@@ -15,7 +15,9 @@ open class GenerateBindingTask : DefaultTask() {
     @TaskAction
     fun launch() {
         val remoteFileManager = RemoteFileManager(project.projectDir.toPath())
-        val context = ModelGenerator(remoteFileManager).context
+        val context = ModelGenerator(remoteFileManager)
+            .also { it.injectDocumentation() }
+            .context
         ModelWriter.write(context)
     }
 }

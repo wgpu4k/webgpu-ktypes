@@ -8,6 +8,7 @@ class Interface(
     var extends: Set<String> = emptySet()
     var attributes: List<Attribute> = emptyList()
     var methods: List<Method> = emptyList()
+    var kDoc: KDoc? = null
 
     class Method(
         val name: String,
@@ -47,6 +48,7 @@ class Interface(
 
     override fun toString(): String {
         val builder = StringBuilder().apply {
+            kDoc?.let { append(it) }
             if (sealed) append("sealed ")
             if (external) append("external ")
             append("interface $name")
