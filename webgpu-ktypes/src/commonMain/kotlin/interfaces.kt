@@ -15,14 +15,11 @@ package io.ygdrasil.webgpu
  */
 sealed interface GPUBindingResource
 /**
- * /**
- *  * The `GPUSampler` interface encodes transformations and filtering information that can be used in a shader to interpret texture resource data.
- *  * 
- *  * This interface is created via the [GPUDevice.createSampler()] method.
- *  * 
- *  * For more details, refer to the [WebGPU specification](https://www.w3.org/TR/webgpu/#gpusampler).
- *  */
- * interface GPUSampler : GPUBindingResource, GPUObjectBase, AutoCloseable
+ * The `GPUSampler` interface encodes transformations and filtering information that can be used in a shader to interpret texture resource data.
+ *   
+ * This interface is created via the [GPUDevice.createSampler()] method.
+ *  
+ * For more details, refer to the [WebGPU specification](https://www.w3.org/TR/webgpu/#gpusampler).
  * 
  */
 interface GPUSampler : GPUBindingResource, GPUObjectBase, AutoCloseable
@@ -1586,14 +1583,11 @@ interface GPURenderCommandsMixin {
 }
 
 /**
- * /**
- *  * Represents a render bundle in the WebGPU API. A `GPURenderBundle` encapsulates a list of GPU commands that can be executed by a [GPURenderPassEncoder](https://www.w3.org/TR/webgpu/#dom-gpurenderpassencoder).
- *  * 
- *  * This interface is part of the WebGPU API, which provides a low-level, cross-platform graphics API for the web. For more details, refer to the [official W3C specification](https://www.w3.org/TR/webgpu/#gpurenderbundle).
- *  * 
- *  * @see [GPUObjectBase](https://www.w3.org/TR/webgpu/#dom-gpuobjectbase)
- *  */
- * interface GPURenderBundle : GPUObjectBase
+ * Represents a render bundle in the WebGPU API. A `GPURenderBundle` encapsulates a list of GPU commands that can be executed by a [GPURenderPassEncoder](https://www.w3.org/TR/webgpu/#dom-gpurenderpassencoder).
+ *   
+ * This interface is part of the WebGPU API, which provides a low-level, cross-platform graphics API for the web. For more details, refer to the [official W3C specification](https://www.w3.org/TR/webgpu/#gpurenderbundle).
+ *   
+ * @see [GPUObjectBase](https://www.w3.org/TR/webgpu/#dom-gpuobjectbase)
  * 
  */
 interface GPURenderBundle : GPUObjectBase

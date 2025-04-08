@@ -897,14 +897,11 @@
   
   @return The depth or number of array layers as a [GPUIntegerCoordinate](https://www.w3.org/TR/webgpu/#typedefdef-gpuintegercoordinate).
 "GPUSampler": |
-  /**
-   * The `GPUSampler` interface encodes transformations and filtering information that can be used in a shader to interpret texture resource data.
-   * 
-   * This interface is created via the [GPUDevice.createSampler()] method.
-   * 
-   * For more details, refer to the [WebGPU specification](https://www.w3.org/TR/webgpu/#gpusampler).
-   */
-  interface GPUSampler : GPUBindingResource, GPUObjectBase, AutoCloseable
+  The `GPUSampler` interface encodes transformations and filtering information that can be used in a shader to interpret texture resource data.
+    
+  This interface is created via the [GPUDevice.createSampler()] method.
+   
+  For more details, refer to the [WebGPU specification](https://www.w3.org/TR/webgpu/#gpusampler).
 "GPUTextureView": |
   A `GPUTextureView` represents a view onto some subset of the texture subresources defined by a particular [GPUTexture]. This interface allows for efficient access and manipulation of specific portions of a texture, enabling optimized rendering and data processing.
   
@@ -2047,14 +2044,11 @@
   **References:**
   - [WebGPU Specification: GPUCommandsMixin](https://www.w3.org/TR/webgpu/#gpucommandsmixin)
 "GPURenderBundle": |
-  /**
-   * Represents a render bundle in the WebGPU API. A `GPURenderBundle` encapsulates a list of GPU commands that can be executed by a [GPURenderPassEncoder](https://www.w3.org/TR/webgpu/#dom-gpurenderpassencoder).
-   * 
-   * This interface is part of the WebGPU API, which provides a low-level, cross-platform graphics API for the web. For more details, refer to the [official W3C specification](https://www.w3.org/TR/webgpu/#gpurenderbundle).
-   * 
-   * @see [GPUObjectBase](https://www.w3.org/TR/webgpu/#dom-gpuobjectbase)
-   */
-  interface GPURenderBundle : GPUObjectBase
+  Represents a render bundle in the WebGPU API. A `GPURenderBundle` encapsulates a list of GPU commands that can be executed by a [GPURenderPassEncoder](https://www.w3.org/TR/webgpu/#dom-gpurenderpassencoder).
+    
+  This interface is part of the WebGPU API, which provides a low-level, cross-platform graphics API for the web. For more details, refer to the [official W3C specification](https://www.w3.org/TR/webgpu/#gpurenderbundle).
+    
+  @see [GPUObjectBase](https://www.w3.org/TR/webgpu/#dom-gpuobjectbase)
 "GPURequestAdapterOptions": |
   The `GPURequestAdapterOptions` interface provides hints to the user agent indicating what configuration is suitable for the application. This interface allows developers to specify preferences and constraints for the GPU adapter selection process.
   
