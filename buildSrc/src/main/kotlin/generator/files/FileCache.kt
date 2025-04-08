@@ -4,16 +4,16 @@ import kotlinx.serialization.Serializable
 import java.io.File
 import java.time.LocalDateTime
 
-@kotlinx.serialization.Serializable
+@Serializable
 data class FileCache(
     val cachedFiles: List<CachedFile>
 ) {
 
-    @kotlinx.serialization.Serializable
+    @Serializable
     data class CachedFile(
         val name: String,
         val hash: String,
-        @kotlinx.serialization.Serializable(with = LocalDateTimeSerializer::class)
+        @Serializable(with = LocalDateTimeSerializer::class)
         val updateDate: LocalDateTime
     )
 
