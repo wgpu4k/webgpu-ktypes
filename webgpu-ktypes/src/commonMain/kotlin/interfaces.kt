@@ -549,6 +549,12 @@ interface GPUAdapter : AutoCloseable {
 	 * 
 	 */
 	val info: GPUAdapterInfo
+	/**
+	 * Asynchronously requests a `GPUDevice` from the adapter. This method returns a `Result<GPUDevice>`, which resolves to a `GPUDevice` instance if successful.
+	 * 
+	 * The `descriptor` parameter is optional and allows specifying configuration options for the device, such as enabling specific features or setting default queue properties.
+	 * 
+	 */
 	suspend fun requestDevice(descriptor: GPUDeviceDescriptor? = null): Result<GPUDevice>
 }
 
@@ -602,21 +608,208 @@ interface GPUDevice : GPUObjectBase, AutoCloseable {
 	 * 
 	 */
 	val queue: GPUQueue
+	/**
+	 * Creates a new buffer object based on the provided descriptor.
+	 * 
+	 * **Parameters:**
+	 * - `descriptor`: A [GPUBufferDescriptor] that specifies the properties of the buffer to be created.
+	 * 
+	 * **Returns:** A new [GPUBuffer] object.
+	 * 
+	 * **See also:**
+	 * - [WebGPU Specification: createBuffer](https://www.w3.org/TR/webgpu/#dom-gpudevice-createbuffer)
+	 * 
+	 */
 	fun createBuffer(descriptor: GPUBufferDescriptor): GPUBuffer
+	/**
+	 * Creates a new texture object based on the provided descriptor.
+	 * 
+	 * **Parameters:**
+	 * - `descriptor`: A [GPUTextureDescriptor] that specifies the properties of the texture to be created.
+	 * 
+	 * **Returns:** A new [GPUTexture] object.
+	 * 
+	 * **See also:**
+	 * - [WebGPU Specification: createTexture](https://www.w3.org/TR/webgpu/#dom-gpudevice-createtexture)
+	 * 
+	 */
 	fun createTexture(descriptor: GPUTextureDescriptor): GPUTexture
+	/**
+	 * Creates a new sampler object based on the provided descriptor.
+	 * 
+	 * **Parameters:**
+	 * - `descriptor`: An optional [GPUSamplerDescriptor] that specifies the properties of the sampler to be created. If not provided, default values are used.
+	 * 
+	 * **Returns:** A new [GPUSampler] object.
+	 * 
+	 * **See also:**
+	 * - [WebGPU Specification: createSampler](https://www.w3.org/TR/webgpu/#dom-gpudevice-createsampler)
+	 * 
+	 */
 	fun createSampler(descriptor: GPUSamplerDescriptor? = null): GPUSampler
+	/**
+	 * Creates a new bind group layout object based on the provided descriptor.
+	 * 
+	 * **Parameters:**
+	 * - `descriptor`: A [GPUBindGroupLayoutDescriptor] that specifies the properties of the bind group layout to be created.
+	 * 
+	 * **Returns:** A new [GPUBindGroupLayout] object.
+	 * 
+	 * **See also:**
+	 * - [WebGPU Specification: createBindGroupLayout](https://www.w3.org/TR/webgpu/#dom-gpudevice-createbindgrouplayout)
+	 * 
+	 */
 	fun createBindGroupLayout(descriptor: GPUBindGroupLayoutDescriptor): GPUBindGroupLayout
+	/**
+	 * Creates a new pipeline layout object based on the provided descriptor.
+	 * 
+	 * **Parameters:**
+	 * - `descriptor`: A [GPUPipelineLayoutDescriptor] that specifies the properties of the pipeline layout to be created.
+	 * 
+	 * **Returns:** A new [GPUPipelineLayout] object.
+	 * 
+	 * **See also:**
+	 * - [WebGPU Specification: createPipelineLayout](https://www.w3.org/TR/webgpu/#dom-gpudevice-createpipelinelayout)
+	 * 
+	 */
 	fun createPipelineLayout(descriptor: GPUPipelineLayoutDescriptor): GPUPipelineLayout
+	/**
+	 * Creates a new bind group object based on the provided descriptor.
+	 * 
+	 * **Parameters:**
+	 * - `descriptor`: A [GPUBindGroupDescriptor] that specifies the properties of the bind group to be created.
+	 * 
+	 * **Returns:** A new [GPUBindGroup] object.
+	 * 
+	 * **See also:**
+	 * - [WebGPU Specification: createBindGroup](https://www.w3.org/TR/webgpu/#dom-gpudevice-createbindgroup)
+	 * 
+	 */
 	fun createBindGroup(descriptor: GPUBindGroupDescriptor): GPUBindGroup
+	/**
+	 * Creates a new shader module object based on the provided descriptor.
+	 * 
+	 * **Parameters:**
+	 * - `descriptor`: A [GPUShaderModuleDescriptor] that specifies the properties of the shader module to be created.
+	 * 
+	 * **Returns:** A new [GPUShaderModule] object.
+	 * 
+	 * **See also:**
+	 * - [WebGPU Specification: createShaderModule](https://www.w3.org/TR/webgpu/#dom-gpudevice-createshadermodule)
+	 * 
+	 */
 	fun createShaderModule(descriptor: GPUShaderModuleDescriptor): GPUShaderModule
+	/**
+	 * Creates a new compute pipeline object based on the provided descriptor.
+	 * 
+	 * **Parameters:**
+	 * - `descriptor`: A [GPUComputePipelineDescriptor] that specifies the properties of the compute pipeline to be created.
+	 * 
+	 * **Returns:** A new [GPUComputePipeline] object.
+	 * 
+	 * **See also:**
+	 * - [WebGPU Specification: createComputePipeline](https://www.w3.org/TR/webgpu/#dom-gpudevice-createcomputepipeline)
+	 * 
+	 */
 	fun createComputePipeline(descriptor: GPUComputePipelineDescriptor): GPUComputePipeline
+	/**
+	 * Creates a new render pipeline object based on the provided descriptor.
+	 * 
+	 * **Parameters:**
+	 * - `descriptor`: A [GPURenderPipelineDescriptor] that specifies the properties of the render pipeline to be created.
+	 * 
+	 * **Returns:** A new [GPURenderPipeline] object.
+	 * 
+	 * **See also:**
+	 * - [WebGPU Specification: createRenderPipeline](https://www.w3.org/TR/webgpu/#dom-gpudevice-createrenderpipeline)
+	 * 
+	 */
 	fun createRenderPipeline(descriptor: GPURenderPipelineDescriptor): GPURenderPipeline
+	/**
+	 * Asynchronously creates a new compute pipeline object based on the provided descriptor.
+	 * 
+	 * **Parameters:**
+	 * - `descriptor`: A [GPUComputePipelineDescriptor] that specifies the properties of the compute pipeline to be created.
+	 * 
+	 * **Returns:** A [Result] containing the newly created [GPUComputePipeline] object or an error if the creation fails.
+	 * 
+	 * **See also:**
+	 * - [WebGPU Specification: createComputePipelineAsync](https://www.w3.org/TR/webgpu/#dom-gpudevice-createcomputepipelineasync)
+	 * 
+	 */
 	suspend fun createComputePipelineAsync(descriptor: GPUComputePipelineDescriptor): Result<GPUComputePipeline>
+	/**
+	 * Asynchronously creates a new render pipeline object based on the provided descriptor.
+	 * 
+	 * **Parameters:**
+	 * - `descriptor`: A [GPURenderPipelineDescriptor] that specifies the properties of the render pipeline to be created.
+	 * 
+	 * **Returns:** A [Result] containing the newly created [GPURenderPipeline] object or an error if the creation fails.
+	 * 
+	 * **See also:**
+	 * - [WebGPU Specification: createRenderPipelineAsync](https://www.w3.org/TR/webgpu/#dom-gpudevice-createrenderpipelineasync)
+	 * 
+	 */
 	suspend fun createRenderPipelineAsync(descriptor: GPURenderPipelineDescriptor): Result<GPURenderPipeline>
+	/**
+	 * Creates a new command encoder object based on the provided descriptor.
+	 * 
+	 * **Parameters:**
+	 * - `descriptor`: An optional [GPUCommandEncoderDescriptor] that specifies the properties of the command encoder to be created. If not provided, default values are used.
+	 * 
+	 * **Returns:** A new [GPUCommandEncoder] object.
+	 * 
+	 * **See also:**
+	 * - [WebGPU Specification: createCommandEncoder](https://www.w3.org/TR/webgpu/#dom-gpudevice-createcommandencoder)
+	 * 
+	 */
 	fun createCommandEncoder(descriptor: GPUCommandEncoderDescriptor? = null): GPUCommandEncoder
+	/**
+	 * Creates a new render bundle encoder object based on the provided descriptor.
+	 * 
+	 * **Parameters:**
+	 * - `descriptor`: A [GPURenderBundleEncoderDescriptor] that specifies the properties of the render bundle encoder to be created.
+	 * 
+	 * **Returns:** A new [GPURenderBundleEncoder] object.
+	 * 
+	 * **See also:**
+	 * - [WebGPU Specification: createRenderBundleEncoder](https://www.w3.org/TR/webgpu/#dom-gpudevice-createrenderbundleencoder)
+	 * 
+	 */
 	fun createRenderBundleEncoder(descriptor: GPURenderBundleEncoderDescriptor): GPURenderBundleEncoder
+	/**
+	 * Creates a new query set object based on the provided descriptor.
+	 * 
+	 * **Parameters:**
+	 * - `descriptor`: A [GPUQuerySetDescriptor] that specifies the properties of the query set to be created.
+	 * 
+	 * **Returns:** A new [GPUQuerySet] object.
+	 * 
+	 * **See also:**
+	 * - [WebGPU Specification: createQuerySet](https://www.w3.org/TR/webgpu/#dom-gpudevice-createqueryset)
+	 * 
+	 */
 	fun createQuerySet(descriptor: GPUQuerySetDescriptor): GPUQuerySet
+	/**
+	 * Pushes an error scope onto the device's error stack with the specified filter.
+	 * 
+	 * **Parameters:**
+	 * - `filter`: A [GPUErrorFilter] that specifies which errors should be captured within this scope.
+	 * 
+	 * **See also:**
+	 * - [WebGPU Specification: pushErrorScope](https://www.w3.org/TR/webgpu/#dom-gpudevice-pusherrorscope)
+	 * 
+	 */
 	fun pushErrorScope(filter: GPUErrorFilter)
+	/**
+	 * Pops the top error scope from the device's error stack and returns any captured errors.
+	 * 
+	 * **Returns:** A [Result] containing a [GPUError] object if an error was captured, or `null` if no error occurred.
+	 * 
+	 * **See also:**
+	 * - [WebGPU Specification: popErrorScope](https://www.w3.org/TR/webgpu/#dom-gpudevice-poperrorscope)
+	 * 
+	 */
 	suspend fun popErrorScope(): Result<GPUError?>
 }
 
@@ -650,8 +843,33 @@ interface GPUBuffer : GPUObjectBase, AutoCloseable {
 	 * 
 	 */
 	val mapState: GPUBufferMapState
+	/**
+	 * The `mapAsync` function asynchronously maps the buffer into an `ArrayBuffer`. This operation is non-blocking and returns a [Result](https://kotlinlang.org/api/latest/kotlinx-coroutines/kotlinx-coroutines-core/kotlinx.coroutines/-result/) indicating success or failure.
+	 * 
+	 * **Parameters:**
+	 * - `mode`: The mapping mode, which can be either [GPUMapModeRead] or [GPUMapModeWrite].
+	 * - `offset`: (Optional) The offset within the buffer to start mapping. Defaults to 0.
+	 * - `size`: (Optional) The size of the range to map. If null, maps from the offset to the end of the buffer.
+	 * 
+	 * **Returns:** A [Result](https://kotlinlang.org/api/latest/kotlinx-coroutines/kotlinx-coroutines-core/kotlinx.coroutines/-result/) indicating success or failure.
+	 * 
+	 */
 	suspend fun mapAsync(mode: GPUMapModeFlags, offset: GPUSize64 = 0u, size: GPUSize64? = null): Result<Unit>
+	/**
+	 * The `getMappedRange` function returns an `ArrayBuffer` representing the mapped range of the buffer. This method can only be called when the buffer is in the `mapped` state.
+	 * 
+	 * **Parameters:**
+	 * - `offset`: (Optional) The offset within the buffer to start mapping. Defaults to 0.
+	 * - `size`: (Optional) The size of the range to map. If null, maps from the offset to the end of the buffer.
+	 * 
+	 * **Returns:** An [ArrayBuffer](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/ArrayBuffer) containing the mapped data.
+	 * 
+	 */
 	fun getMappedRange(offset: GPUSize64 = 0u, size: GPUSize64? = null): ArrayBuffer
+	/**
+	 * The `unmap` function unmaps the buffer, making it no longer accessible via an `ArrayBuffer`. This method can only be called when the buffer is in the `mapped` state.
+	 * 
+	 */
 	fun unmap()
 }
 
@@ -719,6 +937,15 @@ interface GPUTexture : GPUObjectBase, AutoCloseable {
 	 * 
 	 */
 	val usage: GPUTextureUsageFlags
+	/**
+	 * Creates a view of the texture.
+	 * 
+	 * **Parameters:**
+	 * - `descriptor`: An optional [GPUTextureViewDescriptor](https://www.w3.org/TR/webgpu/#dictdef-gputextureviewdescriptor) that specifies the parameters for creating the texture view. If not provided, default values are used.
+	 * 
+	 * **Return Type:** [GPUTextureView](https://www.w3.org/TR/webgpu/#gputextureview)
+	 * 
+	 */
 	fun createView(descriptor: GPUTextureViewDescriptor? = null): GPUTextureView
 }
 
@@ -774,6 +1001,13 @@ interface GPUPipelineLayout : GPUObjectBase, AutoCloseable
  * 
  */
 interface GPUShaderModule : GPUObjectBase, AutoCloseable {
+	/**
+	 * Retrieves the compilation information for the shader module. This method returns a `Result` object that contains either the `GPUCompilationInfo` or an error indicating why the compilation failed.
+	 * 
+	 * **Returns:**
+	 * - A `Result<GPUCompilationInfo>` containing the compilation information if successful, or an error otherwise.
+	 * 
+	 */
 	suspend fun getCompilationInfo(): Result<GPUCompilationInfo>
 }
 
@@ -853,6 +1087,21 @@ interface GPUCompilationInfo {
  * 
  */
 interface GPUPipelineBase {
+	/**
+	 * Retrieves a `GPUBindGroupLayout` object at the specified index from the pipeline.
+	 * 
+	 * **Parameters:**
+	 * - `index`: A `UInt` representing the index of the bind group layout to retrieve. This value must be within the range of valid indices for the pipeline's bind group layouts.
+	 * 
+	 * **Returns:**
+	 * - A `GPUBindGroupLayout` object that describes the bindings for a specific set of resources used by the shader stages in the pipeline.
+	 * 
+	 * This method is crucial for setting up resource bindings that shaders will use during execution. The `GPUBindGroupLayout` objects define how resources are bound to the pipeline, including buffers, textures, and samplers.
+	 * 
+	 * **See also:**
+	 * - [WebGPU Specification: GPUPipelineBase](https://www.w3.org/TR/webgpu/#gpupipelinebase)
+	 * 
+	 */
 	fun getBindGroupLayout(index: UInt): GPUBindGroupLayout
 }
 
@@ -933,14 +1182,131 @@ interface GPUCommandsMixin
  * 
  */
 interface GPUCommandEncoder : GPUObjectBase, GPUCommandsMixin, GPUDebugCommandsMixin, AutoCloseable {
+	/**
+	 * Begins a render pass using the specified descriptor. This method returns a `GPURenderPassEncoder` that can be used to record rendering commands.
+	 * 
+	 * **Parameters:**
+	 * - `descriptor`: A `GPURenderPassDescriptor` object that specifies the configuration for the render pass.
+	 * 
+	 * **Returns:**
+	 * - A `GPURenderPassEncoder` instance that can be used to record rendering commands within the render pass.
+	 * 
+	 * **See Also:**
+	 * - [GPURenderPassDescriptor](https://www.w3.org/TR/webgpu/#dictdef-gpurenderpassdescriptor)
+	 * 
+	 */
 	fun beginRenderPass(descriptor: GPURenderPassDescriptor): GPURenderPassEncoder
+	/**
+	 * Begins a compute pass using the specified descriptor. This method returns a `GPUComputePassEncoder` that can be used to record compute commands.
+	 * 
+	 * **Parameters:**
+	 * - `descriptor`: An optional `GPUComputePassDescriptor` object that specifies the configuration for the compute pass. If not provided, default values are used.
+	 * 
+	 * **Returns:**
+	 * - A `GPUComputePassEncoder` instance that can be used to record compute commands within the compute pass.
+	 * 
+	 * **See Also:**
+	 * - [GPUComputePassDescriptor](https://www.w3.org/TR/webgpu/#dictdef-gpucomputepassdescriptor)
+	 * 
+	 */
 	fun beginComputePass(descriptor: GPUComputePassDescriptor? = null): GPUComputePassEncoder
+	/**
+	 * Copies data from one buffer to another. This method allows for efficient data transfer between GPU buffers.
+	 * 
+	 * **Parameters:**
+	 * - `source`: The source `GPUBuffer` from which data will be copied.
+	 * - `sourceOffset`: The offset within the source buffer where the copy operation will start.
+	 * - `destination`: The destination `GPUBuffer` to which data will be copied.
+	 * - `destinationOffset`: The offset within the destination buffer where the copy operation will start.
+	 * - `size`: An optional parameter specifying the size of the data to be copied. If not provided, the entire range from `sourceOffset` to the end of the source buffer is copied.
+	 * 
+	 * **See Also:**
+	 * - [GPUBuffer](https://www.w3.org/TR/webgpu/#gpubuffer)
+	 * 
+	 */
 	fun copyBufferToBuffer(source: GPUBuffer, sourceOffset: GPUSize64, destination: GPUBuffer, destinationOffset: GPUSize64, size: GPUSize64? = null)
+	/**
+	 * Copies data from a buffer to a texture. This method allows for efficient transfer of data from a GPU buffer to a GPU texture.
+	 * 
+	 * **Parameters:**
+	 * - `source`: A `GPUTexelCopyBufferInfo` object that specifies the source buffer and its layout.
+	 * - `destination`: A `GPUTexelCopyTextureInfo` object that specifies the destination texture and its layout.
+	 * - `copySize`: A `GPUExtent3D` object that specifies the size of the data to be copied.
+	 * 
+	 * **See Also:**
+	 * - [GPUTexelCopyBufferInfo](https://www.w3.org/TR/webgpu/#gputexelcopybufferinfo)
+	 * - [GPUTexelCopyTextureInfo](https://www.w3.org/TR/webgpu/#gputexelcopytextureinfo)
+	 * 
+	 */
 	fun copyBufferToTexture(source: GPUTexelCopyBufferInfo, destination: GPUTexelCopyTextureInfo, copySize: GPUExtent3D)
+	/**
+	 * Copies data from a texture to a buffer. This method allows for efficient transfer of data from a GPU texture to a GPU buffer.
+	 * 
+	 * **Parameters:**
+	 * - `source`: A `GPUTexelCopyTextureInfo` object that specifies the source texture and its layout.
+	 * - `destination`: A `GPUTexelCopyBufferInfo` object that specifies the destination buffer and its layout.
+	 * - `copySize`: A `GPUExtent3D` object that specifies the size of the data to be copied.
+	 * 
+	 * **See Also:**
+	 * - [GPUTexelCopyTextureInfo](https://www.w3.org/TR/webgpu/#gputexelcopytextureinfo)
+	 * - [GPUTexelCopyBufferInfo](https://www.w3.org/TR/webgpu/#gputexelcopybufferinfo)
+	 * 
+	 */
 	fun copyTextureToBuffer(source: GPUTexelCopyTextureInfo, destination: GPUTexelCopyBufferInfo, copySize: GPUExtent3D)
+	/**
+	 * Copies data from one texture to another. This method allows for efficient transfer of data between GPU textures.
+	 * 
+	 * **Parameters:**
+	 * - `source`: A `GPUTexelCopyTextureInfo` object that specifies the source texture and its layout.
+	 * - `destination`: A `GPUTexelCopyTextureInfo` object that specifies the destination texture and its layout.
+	 * - `copySize`: A `GPUExtent3D` object that specifies the size of the data to be copied.
+	 * 
+	 * **See Also:**
+	 * - [GPUTexelCopyTextureInfo](https://www.w3.org/TR/webgpu/#gputexelcopytextureinfo)
+	 * 
+	 */
 	fun copyTextureToTexture(source: GPUTexelCopyTextureInfo, destination: GPUTexelCopyTextureInfo, copySize: GPUExtent3D)
+	/**
+	 * Clears the contents of a buffer. This method sets the specified range of the buffer to zero.
+	 * 
+	 * **Parameters:**
+	 * - `buffer`: The `GPUBuffer` to be cleared.
+	 * - `offset`: An optional parameter specifying the starting offset within the buffer where the clear operation will begin. Defaults to 0 if not provided.
+	 * - `size`: An optional parameter specifying the size of the range to be cleared. If not provided, the entire range from `offset` to the end of the buffer is cleared.
+	 * 
+	 * **See Also:**
+	 * - [GPUBuffer](https://www.w3.org/TR/webgpu/#gpubuffer)
+	 * 
+	 */
 	fun clearBuffer(buffer: GPUBuffer, offset: GPUSize64 = 0u, size: GPUSize64? = null)
+	/**
+	 * Resolves a set of queries and writes the results to a buffer. This method is used for performance monitoring and debugging.
+	 * 
+	 * **Parameters:**
+	 * - `querySet`: The `GPUQuerySet` containing the queries to be resolved.
+	 * - `firstQuery`: The index of the first query in the query set to resolve.
+	 * - `queryCount`: The number of queries to resolve starting from `firstQuery`.
+	 * - `destination`: The `GPUBuffer` where the results of the resolved queries will be written.
+	 * - `destinationOffset`: The offset within the destination buffer where the results will be written.
+	 * 
+	 * **See Also:**
+	 * - [GPUQuerySet](https://www.w3.org/TR/webgpu/#gpuqueryset)
+	 * 
+	 */
 	fun resolveQuerySet(querySet: GPUQuerySet, firstQuery: GPUSize32, queryCount: GPUSize32, destination: GPUBuffer, destinationOffset: GPUSize64)
+	/**
+	 * Finishes the command encoding process and returns a `GPUCommandBuffer` that can be submitted to the GPU for execution.
+	 * 
+	 * **Parameters:**
+	 * - `descriptor`: An optional `GPUCommandBufferDescriptor` object that specifies configuration options for the command buffer. If not provided, default values are used.
+	 * 
+	 * **Returns:**
+	 * - A `GPUCommandBuffer` instance that contains all the recorded commands and can be submitted to the GPU.
+	 * 
+	 * **See Also:**
+	 * - [GPUCommandBuffer](https://www.w3.org/TR/webgpu/#gpucommandbuffer)
+	 * 
+	 */
 	fun finish(descriptor: GPUCommandBufferDescriptor? = null): GPUCommandBuffer
 }
 
@@ -953,6 +1319,18 @@ interface GPUCommandEncoder : GPUObjectBase, GPUCommandsMixin, GPUDebugCommandsM
  * 
  */
 interface GPUBindingCommandsMixin {
+	/**
+	 * Sets a bind group for a specific index in the rendering pipeline.
+	 * 
+	 * @param index The index at which to set the bind group. This must be a valid `GPUIndex32` value.
+	 * @param bindGroup The `GPUBindGroup` to set at the specified index. If `null`, the bind group at the specified index is unset.
+	 * @param dynamicOffsetsData A list of unsigned integers representing dynamic offsets for the bind group. This parameter is optional and defaults to an empty list.
+	 * 
+	 * This method updates the internal state of the command encoder to include the specified bind group and dynamic offsets at the given index. The `bind_group` parameter allows for flexible binding configurations, enabling efficient resource management in the rendering pipeline.
+	 * 
+	 * For more information, see the [WebGPU specification on GPUBindingCommandsMixin](https://www.w3.org/TR/webgpu/#gpubindingcommandsmixin).
+	 * 
+	 */
 	fun setBindGroup(index: GPUIndex32, bindGroup: GPUBindGroup?, dynamicOffsetsData: List<UInt> = emptyList())
 }
 
@@ -965,8 +1343,26 @@ interface GPUBindingCommandsMixin {
  * 
  */
 interface GPUDebugCommandsMixin {
+	/**
+	 * Pushes a debug group onto the command buffer with the specified label.
+	 * 
+	 * @param groupLabel The label for the debug group. This is a string that will be used to identify the group in debugging tools. @throws IllegalArgumentException if `groupLabel` is null or empty.
+	 * 
+	 */
 	fun pushDebugGroup(groupLabel: String)
+	/**
+	 * Pops the topmost debug group from the command buffer.
+	 * 
+	 * This method must be called after a corresponding `pushDebugGroup` call to maintain a well-balanced hierarchy of debug groups. @throws IllegalStateException if there is no debug group to pop (i.e., the stack is empty).
+	 * 
+	 */
 	fun popDebugGroup()
+	/**
+	 * Inserts a debug marker into the command buffer with the specified label.
+	 * 
+	 * This method is useful for inserting single labels at specific points in the command sequence, which can be helpful for debugging and profiling. @param markerLabel The label for the debug marker. This is a string that will be used to identify the marker in debugging tools. @throws IllegalArgumentException if `markerLabel` is null or empty.
+	 * 
+	 */
 	fun insertDebugMarker(markerLabel: String)
 }
 
@@ -988,9 +1384,47 @@ interface GPUDebugCommandsMixin {
  * 
  */
 interface GPUComputePassEncoder : GPUObjectBase, GPUCommandsMixin, GPUDebugCommandsMixin, GPUBindingCommandsMixin {
+	/**
+	 * Sets the compute pipeline for this compute pass encoder.
+	 * 
+	 * **Parameters:**
+	 * - `pipeline`: The [GPUComputePipeline] to set for this compute pass encoder.
+	 * 
+	 * **Returns:** Nothing
+	 * 
+	 */
 	fun setPipeline(pipeline: GPUComputePipeline)
+	/**
+	 * Dispatches the specified number of workgroups to be executed by the compute pipeline.
+	 * 
+	 * **Parameters:**
+	 * - `workgroupCountX`: The number of workgroups to dispatch in the X dimension. Must be greater than 0.
+	 * - `workgroupCountY`: (Optional) The number of workgroups to dispatch in the Y dimension. Defaults to 1 if not specified.
+	 * - `workgroupCountZ`: (Optional) The number of workgroups to dispatch in the Z dimension. Defaults to 1 if not specified.
+	 * 
+	 * **Returns:** Nothing
+	 * 
+	 */
 	fun dispatchWorkgroups(workgroupCountX: GPUSize32, workgroupCountY: GPUSize32 = 1u, workgroupCountZ: GPUSize32 = 1u)
+	/**
+	 * Dispatches the specified number of workgroups to be executed by the compute pipeline using an indirect buffer.
+	 * 
+	 * **Parameters:**
+	 * - `indirectBuffer`: The [GPUBuffer] containing the indirect parameters.
+	 * - `indirectOffset`: The offset in bytes within the indirect buffer where the indirect parameters start.
+	 * 
+	 * **Returns:** Nothing
+	 * 
+	 */
 	fun dispatchWorkgroupsIndirect(indirectBuffer: GPUBuffer, indirectOffset: GPUSize64)
+	/**
+	 * Ends the compute pass encoder.
+	 * 
+	 * **Returns:** Nothing
+	 * 
+	 * This method finalizes the commands recorded by the `GPUComputePassEncoder`. It must be called to complete the encoding of a compute pass. After calling this method, no further commands can be added to the encoder.
+	 * 
+	 */
 	fun end()
 }
 
@@ -1003,13 +1437,71 @@ interface GPUComputePassEncoder : GPUObjectBase, GPUCommandsMixin, GPUDebugComma
  * 
  */
 interface GPURenderPassEncoder : GPUObjectBase, GPUCommandsMixin, GPUDebugCommandsMixin, GPUBindingCommandsMixin, GPURenderCommandsMixin {
+	/**
+	 * Sets the viewport for the render pass. The viewport defines a clipping rectangle in normalized device coordinates (NDC) that specifies the region of the render target to which rendering commands are directed.
+	 * 
+	 * **Parameters:**
+	 * - `x`: The x-coordinate of the viewport's origin.
+	 * - `y`: The y-coordinate of the viewport's origin.
+	 * - `width`: The width of the viewport.
+	 * - `height`: The height of the viewport.
+	 * - `minDepth`: The minimum depth value for the viewport.
+	 * - `maxDepth`: The maximum depth value for the viewport.
+	 * 
+	 */
 	fun setViewport(x: Float, y: Float, width: Float, height: Float, minDepth: Float, maxDepth: Float)
+	/**
+	 * Sets the scissor rectangle for the render pass. The scissor rectangle defines a clipping region in pixel coordinates that restricts rendering to a specific area of the render target.
+	 * 
+	 * **Parameters:**
+	 * - `x`: The x-coordinate of the scissor rectangle's origin.
+	 * - `y`: The y-coordinate of the scissor rectangle's origin.
+	 * - `width`: The width of the scissor rectangle.
+	 * - `height`: The height of the scissor rectangle.
+	 * 
+	 */
 	fun setScissorRect(x: GPUIntegerCoordinate, y: GPUIntegerCoordinate, width: GPUIntegerCoordinate, height: GPUIntegerCoordinate)
+	/**
+	 * Sets the blend constant color for the render pass. The blend constant color is used in blending operations to provide a constant color value that can be blended with the source and destination colors.
+	 * 
+	 * **Parameters:**
+	 * - `color`: The blend constant color, represented as a [GPUColor](https://www.w3.org/TR/webgpu/#typedefdef-gpucolor).
+	 * 
+	 */
 	fun setBlendConstant(color: GPUColor)
+	/**
+	 * Sets the stencil reference value for the render pass. The stencil reference value is used in stencil testing to compare against the stencil buffer values.
+	 * 
+	 * **Parameters:**
+	 * - `reference`: The stencil reference value, represented as a [GPUStencilValue](https://www.w3.org/TR/webgpu/#typedefdef-gpustencilvalue).
+	 * 
+	 */
 	fun setStencilReference(reference: GPUStencilValue)
+	/**
+	 * Begins an occlusion query at the specified index. Occlusion queries are used to determine whether a specific region of the render target is visible or occluded by other geometry.
+	 * 
+	 * **Parameters:**
+	 * - `queryIndex`: The index of the occlusion query, represented as a [GPUSize32](https://www.w3.org/TR/webgpu/#typedefdef-gpusize32).
+	 * 
+	 */
 	fun beginOcclusionQuery(queryIndex: GPUSize32)
+	/**
+	 * Ends the current occlusion query. This method should be called after the commands that are to be tested for occlusion have been recorded.
+	 * 
+	 */
 	fun endOcclusionQuery()
+	/**
+	 * Executes a list of render bundles within the render pass. Render bundles are pre-recorded sequences of commands that can be executed multiple times with different parameters.
+	 * 
+	 * **Parameters:**
+	 * - `bundles`: A list of [GPURenderBundle](https://www.w3.org/TR/webgpu/#gpurenderbundle) objects to execute.
+	 * 
+	 */
 	fun executeBundles(bundles: List<GPURenderBundle>)
+	/**
+	 * Ends the render pass. This method should be called after all rendering commands have been recorded to finalize the render pass.
+	 * 
+	 */
 	fun end()
 }
 
@@ -1020,12 +1512,76 @@ interface GPURenderPassEncoder : GPUObjectBase, GPUCommandsMixin, GPUDebugComman
  * 
  */
 interface GPURenderCommandsMixin {
+	/**
+	 * Sets the rendering pipeline to be used for subsequent drawing commands.
+	 * 
+	 * **Parameters:**
+	 * - `pipeline`: The [GPURenderPipeline](https://www.w3.org/TR/webgpu/#gpurenderpipeline) to set as the current pipeline.
+	 * 
+	 */
 	fun setPipeline(pipeline: GPURenderPipeline)
+	/**
+	 * Sets the index buffer to be used for indexed drawing commands.
+	 * 
+	 * **Parameters:**
+	 * - `buffer`: The [GPUBuffer](https://www.w3.org/TR/webgpu/#gpubuffer) containing the index data.
+	 * - `indexFormat`: The format of the indices in the buffer, specified as a [GPUIndexFormat](https://www.w3.org/TR/webgpu/#enumdef-gpuindexformat).
+	 * - `offset`: An optional offset within the buffer where the index data starts. Defaults to 0.
+	 * - `size`: An optional size of the index data in bytes. If not specified, the entire buffer is used.
+	 * 
+	 */
 	fun setIndexBuffer(buffer: GPUBuffer, indexFormat: GPUIndexFormat, offset: GPUSize64 = 0u, size: GPUSize64? = null)
+	/**
+	 * Sets the vertex buffer at a specific slot to be used for subsequent drawing commands.
+	 * 
+	 * **Parameters:**
+	 * - `slot`: The index of the vertex buffer slot.
+	 * - `buffer`: The [GPUBuffer](https://www.w3.org/TR/webgpu/#gpubuffer) containing the vertex data. Can be null to unset the buffer.
+	 * - `offset`: An optional offset within the buffer where the vertex data starts. Defaults to 0.
+	 * - `size`: An optional size of the vertex data in bytes. If not specified, the entire buffer is used.
+	 * 
+	 */
 	fun setVertexBuffer(slot: GPUIndex32, buffer: GPUBuffer?, offset: GPUSize64 = 0u, size: GPUSize64? = null)
+	/**
+	 * Issues a draw command to render vertices.
+	 * 
+	 * **Parameters:**
+	 * - `vertexCount`: The number of vertices to draw.
+	 * - `instanceCount`: An optional number of instances to draw. Defaults to 1.
+	 * - `firstVertex`: An optional offset into the vertex buffer. Defaults to 0.
+	 * - `firstInstance`: An optional offset into the instance data. Defaults to 0.
+	 * 
+	 */
 	fun draw(vertexCount: GPUSize32, instanceCount: GPUSize32 = 1u, firstVertex: GPUSize32 = 0u, firstInstance: GPUSize32 = 0u)
+	/**
+	 * Issues an indexed draw command to render vertices using indices.
+	 * 
+	 * **Parameters:**
+	 * - `indexCount`: The number of indices to draw.
+	 * - `instanceCount`: An optional number of instances to draw. Defaults to 1.
+	 * - `firstIndex`: An optional offset into the index buffer. Defaults to 0.
+	 * - `baseVertex`: An optional base vertex offset. Defaults to 0.
+	 * - `firstInstance`: An optional offset into the instance data. Defaults to 0.
+	 * 
+	 */
 	fun drawIndexed(indexCount: GPUSize32, instanceCount: GPUSize32 = 1u, firstIndex: GPUSize32 = 0u, baseVertex: GPUSignedOffset32 = 0, firstInstance: GPUSize32 = 0u)
+	/**
+	 * Issues an indirect draw command to render vertices using data from a buffer.
+	 * 
+	 * **Parameters:**
+	 * - `indirectBuffer`: The [GPUBuffer](https://www.w3.org/TR/webgpu/#gpubuffer) containing the indirect draw parameters.
+	 * - `indirectOffset`: The offset within the buffer where the indirect draw parameters start.
+	 * 
+	 */
 	fun drawIndirect(indirectBuffer: GPUBuffer, indirectOffset: GPUSize64)
+	/**
+	 * Issues an indirect indexed draw command to render vertices using data from a buffer.
+	 * 
+	 * **Parameters:**
+	 * - `indirectBuffer`: The [GPUBuffer](https://www.w3.org/TR/webgpu/#gpubuffer) containing the indirect indexed draw parameters.
+	 * - `indirectOffset`: The offset within the buffer where the indirect indexed draw parameters start.
+	 * 
+	 */
 	fun drawIndexedIndirect(indirectBuffer: GPUBuffer, indirectOffset: GPUSize64)
 }
 
@@ -1056,6 +1612,19 @@ interface GPURenderBundle : GPUObjectBase
  * 
  */
 interface GPURenderBundleEncoder : GPUObjectBase, GPUCommandsMixin, GPUDebugCommandsMixin, GPUBindingCommandsMixin, GPURenderCommandsMixin, AutoCloseable {
+	/**
+	 * Encodes the render commands into a `GPURenderBundle` and finalizes the encoder.
+	 * 
+	 * **Parameters:**
+	 * - `descriptor`: An optional `GPURenderBundleDescriptor` that specifies additional parameters for creating the render bundle. If not provided, default values are used.
+	 * 
+	 * **Returns:**
+	 * - A `GPURenderBundle` object containing the encoded render commands.
+	 * 
+	 * **See also:**
+	 * - [WebGPU Specification: finish](https://www.w3.org/TR/webgpu/#dom-gpurenderbundleencoder-finish)
+	 * 
+	 */
 	fun finish(descriptor: GPURenderBundleDescriptor? = null): GPURenderBundle
 }
 
@@ -1068,9 +1637,40 @@ interface GPURenderBundleEncoder : GPUObjectBase, GPUCommandsMixin, GPUDebugComm
  * 
  */
 interface GPUQueue : GPUObjectBase {
+	/**
+	 * Submits a list of command buffers to the GPU queue for execution. This method allows you to enqueue commands that will be processed by the GPU in the order they are submitted.
+	 * 
+	 * @param commandBuffers A list of [GPUCommandBuffer](https://www.w3.org/TR/webgpu/#gpucommandbuffer) objects to be executed.
+	 * 
+	 */
 	fun submit(commandBuffers: List<GPUCommandBuffer>)
+	/**
+	 * Returns a promise that resolves when all previously submitted work is complete. This method can be used to synchronize GPU operations and ensure that certain tasks have finished executing before proceeding with other operations.
+	 * 
+	 * @return A [Result](https://kotlinlang.org/api/latest/kotlinx-coroutines/core/kotlinx.coroutines/-result/) object that completes when the submitted work is done.
+	 * 
+	 */
 	suspend fun onSubmittedWorkDone(): Result<Unit>
+	/**
+	 * Writes data from a buffer source to a GPU buffer. This method allows you to transfer data from a host buffer (e.g., an ArrayBuffer) to a GPU buffer for use in GPU operations.
+	 * 
+	 * @param buffer The [GPUBuffer](https://www.w3.org/TR/webgpu/#gpubuffer) object to which the data will be written.
+	 * @param bufferOffset The offset within the GPU buffer where the data will be written.
+	 * @param data The source data to be written to the GPU buffer. This can be an [ArrayBuffer](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/ArrayBuffer).
+	 * @param dataOffset The offset within the source data from which to start reading. Defaults to 0.
+	 * @param size The number of bytes to write. If null, the entire buffer is written.
+	 * 
+	 */
 	fun writeBuffer(buffer: GPUBuffer, bufferOffset: GPUSize64, data: ArrayBuffer, dataOffset: GPUSize64 = 0u, size: GPUSize64? = null)
+	/**
+	 * Writes texture data from a buffer source to a GPU texture. This method allows you to transfer texture data from a host buffer to a GPU texture for use in rendering operations.
+	 * 
+	 * @param destination The [GPUTexelCopyTextureInfo](https://www.w3.org/TR/webgpu/#gputexelcopytextureinfo) object specifying the destination texture and its properties.
+	 * @param data The source data to be written to the GPU texture. This can be an [ArrayBuffer](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/ArrayBuffer).
+	 * @param dataLayout The [GPUTexelCopyBufferLayout](https://www.w3.org/TR/webgpu/#gputexelcopybufferlayout) object specifying the layout of the source data.
+	 * @param size The extent of the texture data to be written.
+	 * 
+	 */
 	fun writeTexture(destination: GPUTexelCopyTextureInfo, data: ArrayBuffer, dataLayout: GPUTexelCopyBufferLayout, size: GPUExtent3D)
 }
 

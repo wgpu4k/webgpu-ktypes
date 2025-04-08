@@ -14,5 +14,11 @@ internal fun MapperContext.injectDocumentation(documentation: Map<String, String
                 attribute.kDoc = KDoc(it, 1)
             }
         }
+
+        kInterface.methods.forEach { attribute ->
+            documentation.get("${kInterface.name}#${attribute.name}(${attribute.parameters.joinToString(", ") { it.name }})")?.let {
+                attribute.kDoc = KDoc(it, 1)
+            }
+        }
     }
 }
