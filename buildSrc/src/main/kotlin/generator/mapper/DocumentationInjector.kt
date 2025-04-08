@@ -21,4 +21,16 @@ internal fun MapperContext.injectDocumentation(documentation: Map<String, String
             }
         }
     }
+
+    commonEnumerations.forEach { enumeration ->
+        documentation.get(enumeration.name)?.let {
+            enumeration.kDoc = KDoc(it)
+        }
+
+        enumeration.values.forEach { value ->
+            documentation.get("${enumeration.name}#${value.name}")?.let {
+                value.kDoc = KDoc(it, 1)
+            }
+        }
+    }
 }

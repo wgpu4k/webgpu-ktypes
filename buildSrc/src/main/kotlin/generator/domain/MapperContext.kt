@@ -107,7 +107,7 @@ class MapperContext(
             .fixNameStartingWithNumeric()
             .lowercase()
         return commonEnumerations.find { it.name == typeName }
-            ?.let { enum -> enum.values.find { it.lowercase() == fixedValue }}
+            ?.let { enum -> enum.values.find { it.name.lowercase() == fixedValue }?.name}
             ?: error("enumeration not found with type $typeName and value $fixedValue")
     }
 

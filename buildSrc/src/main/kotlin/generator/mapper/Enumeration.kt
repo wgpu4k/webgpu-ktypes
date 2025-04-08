@@ -23,7 +23,7 @@ private fun MapperContext.loadBitFlagEnums() {
                             ?: indexToFlagValue(index)
 
                     val name = entry.name.convertToKotlinClassName()
-                    "$name(${value}uL)"
+                    Enumeration.Value("$name(${value}uL)")
                 },
             parameters = listOf("override val value: ULong"),
             extends = listOf("FlagEnumeration"),
@@ -47,8 +47,8 @@ private fun MapperContext.loadConventionalEnums() {
             yamlEnum.values
                 .filter { it.name != "undefined" && it.name != "null" }
                 .map { value ->
-                    value.name.convertToKotlinClassName()
-                        .fixNameStartingWithNumeric()
+                    Enumeration.Value(value.name.convertToKotlinClassName()
+                        .fixNameStartingWithNumeric())
                 },
             isExpect = true
         ).also { enumeration ->
@@ -58,9 +58,9 @@ private fun MapperContext.loadConventionalEnums() {
                 extra = generateExtra(name, "String"),
                 values = enumeration.values.map { enumerationValue ->
                     val webValue = idlEnum.values.firstOrNull {
-                        enumerationValue.adaptToWebValue() == it.replace("-", "").lowercase()
+                        enumerationValue.name.adaptToWebValue() == it.replace("-", "").lowercase()
                     } ?: "unsupported"
-                    "$enumerationValue(\"$webValue\")"
+                    Enumeration.Value("${enumerationValue.name}(\"$webValue\")")
                 }
             )
             commonNativeEnumerations += enumeration.copy(
@@ -69,13 +69,13 @@ private fun MapperContext.loadConventionalEnums() {
                 extra = generateExtra(name, "UInt"),
                 values = enumeration.values.map { enumerationValue ->
                     val nativeValue = yamlEnum.values.first {
-                        enumerationValue.lowercase() == it.name.convertToKotlinClassName().fixNameStartingWithNumeric()
+                        enumerationValue.name.lowercase() == it.name.convertToKotlinClassName().fixNameStartingWithNumeric()
                             .lowercase()
                     }.let {
                         it.value
                             ?: yamlEnum.values.indexOf(it)
                     }
-                    "$enumerationValue(${nativeValue}u)"
+                    Enumeration.Value("${enumerationValue.name}(${nativeValue}u)")
                 }
             )
         }
