@@ -119,24 +119,7 @@ class DocumentGeneratorManager(
 
         // Parse before
         var shouldContinue = true
-        var currentElement = htmlNode.previousElementSibling()
-        /*println("Parse before $currentElement")
-        while (shouldContinue && currentElement != null) {
-            shouldContinue = documentationExplorerAgent.isRelevant(
-                selectedDocumentation.toString(),
-                currentElement.toString(),
-                subject
-            ).map { it.lowercase() == "yes" }.getOrElse { false }
-
-            if (shouldContinue) {
-                selectedDocumentation.addFirst(currentElement)
-                currentElement = currentElement.previousElementSibling()
-            }
-            println("shouldContinue: $shouldContinue and currentElement is null ?: ${currentElement == null}")
-        }*/
-        // Parse after
-        shouldContinue = true
-        currentElement = htmlNode.nextElementSibling()
+        var currentElement = htmlNode.nextElementSibling()
         while (shouldContinue && currentElement != null) {
             shouldContinue = documentationExplorerAgent.isRelevant(
                 selectedDocumentation.toString(),
