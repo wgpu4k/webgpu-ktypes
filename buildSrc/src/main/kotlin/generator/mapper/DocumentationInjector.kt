@@ -8,5 +8,11 @@ internal fun MapperContext.injectDocumentation(documentation: Map<String, String
         documentation.get(kInterface.name)?.let {
             kInterface.kDoc = KDoc(it)
         }
+
+        kInterface.attributes.forEach { attribute ->
+            documentation.get("${kInterface.name}#${attribute.name}")?.let {
+                attribute.kDoc = KDoc(it, 1)
+            }
+        }
     }
 }

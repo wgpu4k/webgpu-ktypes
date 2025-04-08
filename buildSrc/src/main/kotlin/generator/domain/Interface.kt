@@ -16,6 +16,7 @@ class Interface(
         var parameters: List<Parameter>,
         val isSuspend: Boolean
     ) {
+        var kDoc: KDoc? = null
 
         class Parameter(val name: String, var type: String, var defaultValue: String? = null) {
             override fun toString(): String = StringBuilder().apply {
@@ -25,6 +26,7 @@ class Interface(
         }
 
         override fun toString(): String = StringBuilder().apply {
+            kDoc?.let { append(it) }
             append("\t")
             if (isSuspend) append("suspend ")
             append("fun $name(")
@@ -39,7 +41,11 @@ class Interface(
         var type: String,
         val isConstant: Boolean
     ) {
+
+        var kDoc: KDoc? = null
+
         override fun toString(): String = StringBuilder().apply {
+            kDoc?.let { append(it) }
             append("\t")
             if (isConstant) append("val") else append("var")
             append(" $name: $type")
