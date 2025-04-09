@@ -66,7 +66,7 @@ internal fun externRefToKotlinLongAdapter(x: JsAny): Long =
     externrefToLong(x)
 
 private fun externrefToLong(ref: JsAny): Long =
-    js("Number(ref)")
+    js("BigInt(ref)")
 
 public fun kotlin.js.JsNumber.toShort(): Short =
     externRefToKotlinShortAdapter(this)
