@@ -21,6 +21,8 @@ actual inline fun UInt.asJsNumber(): JsNumber = toJsNumber()
 @Suppress(names = ["NOTHING_TO_INLINE"])
 actual inline fun ULong.asJsNumber(): JsNumber = toUInt().toJsNumber()
 
+fun UByte.toJsNumber(): kotlin.js.JsNumber = toJsNumber(this)
+private fun toJsNumber(x: UByte): kotlin.js.JsNumber = js("x")
 
 fun UShort.toJsNumber(): kotlin.js.JsNumber = toJsNumber(this)
 private fun toJsNumber(x: UShort): kotlin.js.JsNumber = js("x")

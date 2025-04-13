@@ -8,6 +8,8 @@ expect inline fun Int.asJsNumber(): JsNumber
 expect inline fun Long.asJsNumber(): JsNumber
 
 @Suppress("NOTHING_TO_INLINE")
+expect inline fun UByte.asJsNumber(): JsNumber
+@Suppress("NOTHING_TO_INLINE")
 expect inline fun UShort.asJsNumber(): JsNumber
 @Suppress("NOTHING_TO_INLINE")
 expect inline fun UInt.asJsNumber(): JsNumber

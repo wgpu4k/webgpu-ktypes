@@ -14,6 +14,8 @@ actual inline fun Int.asJsNumber(): JsNumber = unsafeCast<JsNumber>()
 actual inline fun Long.asJsNumber(): JsNumber = unsafeCast<JsNumber>()
 
 @Suppress(names = ["NOTHING_TO_INLINE"])
+actual inline fun UByte.asJsNumber(): JsNumber = toShort().asJsNumber()
+@Suppress(names = ["NOTHING_TO_INLINE"])
 actual inline fun UShort.asJsNumber(): JsNumber = toInt().asJsNumber()
 @Suppress(names = ["NOTHING_TO_INLINE"])
 actual inline fun UInt.asJsNumber(): JsNumber = toLong().asJsNumber()
