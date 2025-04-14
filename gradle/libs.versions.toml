@@ -1,7 +1,7 @@
 [versions]
 jsoup = "1.17.2"
 kotlinx-serialization-json = "1.8.0"
-ktor = "3.1.0"
+ktor = "3.1.2"
 webidl-util = "0.10.0"
 wgpu4k-native = "v24.0.2"
 kaml = "0.74.0"
