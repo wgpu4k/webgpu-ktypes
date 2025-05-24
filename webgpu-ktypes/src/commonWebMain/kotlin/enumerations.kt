@@ -54,12 +54,12 @@ actual enum class GPUBlendFactor(val value: String) {
 	 * Specifies a blend factor where all RGBA components are set to (0, 0, 0, 0). This effectively disables the blending for the specified component.
 	 * 
 	 */
-	Zero("unsupported"),
+	Zero("zero"),
 	/**
 	 * Specifies a blend factor where all RGBA components are set to (1, 1, 1, 1). This fully enables the blending for the specified component.
 	 * 
 	 */
-	One("unsupported"),
+	One("one"),
 	/**
 	 * Specifies a blend factor where the RGBA components are taken from the source color. The values are (R<sub>src</sub>, G<sub>src</sub>, B<sub>src</sub>, A<sub>src</sub>).
 	 * 
@@ -69,7 +69,7 @@ actual enum class GPUBlendFactor(val value: String) {
 	 * Specifies a blend factor where the RGBA components are the inverse of the source color. The values are (1 - R<sub>src</sub>, 1 - G<sub>src</sub>, 1 - B<sub>src</sub>, 1 - A<sub>src</sub>).
 	 * 
 	 */
-	OneMinusSrc("unsupported"),
+	OneMinusSrc("one-minus-src"),
 	/**
 	 * Specifies a blend factor where the RGBA components are taken from the source alpha. The values are (A<sub>src</sub>, A<sub>src</sub>, A<sub>src</sub>, A<sub>src</sub>).
 	 * 
@@ -79,7 +79,7 @@ actual enum class GPUBlendFactor(val value: String) {
 	 * Specifies a blend factor where the RGBA components are the inverse of the source alpha. The values are (1 - A<sub>src</sub>, 1 - A<sub>src</sub>, 1 - A<sub>src</sub>, 1 - A<sub>src</sub>).
 	 * 
 	 */
-	OneMinusSrcAlpha("unsupported"),
+	OneMinusSrcAlpha("one-minus-src-alpha"),
 	/**
 	 * Specifies a blend factor where the RGBA components are taken from the destination color. The values are (R<sub>dst</sub>, G<sub>dst</sub>, B<sub>dst</sub>, A<sub>dst</sub>).
 	 * 
@@ -89,7 +89,7 @@ actual enum class GPUBlendFactor(val value: String) {
 	 * Specifies a blend factor where the RGBA components are the inverse of the destination color. The values are (1 - R<sub>dst</sub>, 1 - G<sub>dst</sub>, 1 - B<sub>dst</sub>, 1 - A<sub>dst</sub>).
 	 * 
 	 */
-	OneMinusDst("unsupported"),
+	OneMinusDst("one-minus-dst"),
 	/**
 	 * Specifies a blend factor where the RGBA components are taken from the destination alpha. The values are (A<sub>dst</sub>, A<sub>dst</sub>, A<sub>dst</sub>, A<sub>dst</sub>).
 	 * 
@@ -99,7 +99,7 @@ actual enum class GPUBlendFactor(val value: String) {
 	 * Specifies a blend factor where the RGBA components are the inverse of the destination alpha. The values are (1 - A<sub>dst</sub>, 1 - A<sub>dst</sub>, 1 - A<sub>dst</sub>, 1 - A<sub>dst</sub>).
 	 * 
 	 */
-	OneMinusDstAlpha("unsupported"),
+	OneMinusDstAlpha("one-minus-dst-alpha"),
 	/**
 	 * Specifies a blend factor where the RGBA components are the minimum of the source alpha and the inverse of the destination alpha. The values are (min(A<sub>src</sub>, 1 - A<sub>dst</sub>), min(A<sub>src</sub>, 1 - A<sub>dst</sub>), min(A<sub>src</sub>, 1 - A<sub>dst</sub>), 1).
 	 * 
@@ -114,7 +114,7 @@ actual enum class GPUBlendFactor(val value: String) {
 	 * Specifies a blend factor where the RGBA components are the inverse of a constant color. The values are (1 - R<sub>const</sub>, 1 - G<sub>const</sub>, 1 - B<sub>const</sub>, 1 - A<sub>const</sub>).
 	 * 
 	 */
-	OneMinusConstant("unsupported"),
+	OneMinusConstant("one-minus-constant"),
 	/**
 	 * Specifies a blend factor where the RGBA components are taken from an additional source color (src1). The values are (R<sub>src1</sub>, G<sub>src1</sub>, B<sub>src1</sub>, A<sub>src1</sub>). This feature requires [dual-source blending](https://www.w3.org/TR/webgpu/#dom-gpufeaturename-dual-source-blending).
 	 * 
@@ -124,7 +124,7 @@ actual enum class GPUBlendFactor(val value: String) {
 	 * Specifies a blend factor where the RGBA components are the inverse of an additional source color (src1). The values are (1 - R<sub>src1</sub>, 1 - G<sub>src1</sub>, 1 - B<sub>src1</sub>, 1 - A<sub>src1</sub>). This feature requires [dual-source blending](https://www.w3.org/TR/webgpu/#dom-gpufeaturename-dual-source-blending).
 	 * 
 	 */
-	OneMinusSrc1("unsupported"),
+	OneMinusSrc1("one-minus-src1"),
 	/**
 	 * Specifies a blend factor where the RGBA components are taken from an additional source alpha (src1). The values are (A<sub>src1</sub>, A<sub>src1</sub>, A<sub>src1</sub>, A<sub>src1</sub>). This feature requires [dual-source blending](https://www.w3.org/TR/webgpu/#dom-gpufeaturename-dual-source-blending).
 	 * 
@@ -134,7 +134,7 @@ actual enum class GPUBlendFactor(val value: String) {
 	 * Specifies a blend factor where the RGBA components are the inverse of an additional source alpha (src1). The values are (1 - A<sub>src1</sub>, 1 - A<sub>src1</sub>, 1 - A<sub>src1</sub>, 1 - A<sub>src1</sub>). This feature requires [dual-source blending](https://www.w3.org/TR/webgpu/#dom-gpufeaturename-dual-source-blending).
 	 * 
 	 */
-	OneMinusSrc1Alpha("unsupported");
+	OneMinusSrc1Alpha("one-minus-src1-alpha");
 
 
 	companion object {
@@ -1024,7 +1024,7 @@ actual enum class GPUStencilOperation(val value: String) {
 	 * Sets the stencil value to `0`. This operation replaces the current stencil value with zero.
 	 * 
 	 */
-	Zero("unsupported"),
+	Zero("zero"),
 	/**
 	 * Sets the stencil value to the reference value specified in the [render state](https://www.w3.org/TR/webgpu/#dom-renderstate-stencilreference-slot). This operation replaces the current stencil value with the reference value.
 	 * 
