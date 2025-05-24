@@ -65,6 +65,7 @@ class RemoteFileManager(private val basePath: Path) {
         val targetPath = specificationsSourcePath.resolve(fileName)
         uRL.downloadToPath(targetPath)
         val hash = File(targetPath.absolutePathString()).calculateHash()
+        fileCache = fileCache.removeFile(fileName)
         fileCache = fileCache.addFile(fileName, hash)
         saveFileCache(fileCache, cachePath)
     }

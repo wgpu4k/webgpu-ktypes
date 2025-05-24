@@ -17,6 +17,7 @@ data class FileCache(
         val updateDate: LocalDateTime
     )
 
-    fun findFile(name: String) = cachedFiles.find { File(it.name).name == name }
+    fun findFile(name: String) = cachedFiles.find { it.name == name }
     fun addFile(name: String, hash: String) = FileCache(cachedFiles + CachedFile(name, hash, LocalDateTime.now()))
+    fun removeFile(fileName: String) = FileCache(findFile(fileName)?.let { cachedFiles - it } ?: cachedFiles)
 }
