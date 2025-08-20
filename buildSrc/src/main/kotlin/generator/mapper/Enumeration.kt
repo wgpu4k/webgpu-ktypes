@@ -48,7 +48,7 @@ private fun MapperContext.loadBitFlagEnums() {
                         }
                     )
                     .addProperty(
-                        PropertySpec.builder("values", ClassName("kotlin.collections", "Set").parameterizedBy(className))
+                        PropertySpec.builder("entries", ClassName("kotlin.collections", "Set").parameterizedBy(className))
                             .initializer("setOf(${bitflag.entries.joinToString { it.name.convertToKotlinClassName() }})")
                             .build()
                     )

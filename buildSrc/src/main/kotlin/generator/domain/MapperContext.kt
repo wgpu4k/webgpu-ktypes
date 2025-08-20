@@ -9,7 +9,7 @@ class MapperContext(
 ) {
 
     val interfaces = mutableListOf<Interface>()
-    val typeAliases = mutableListOf<TypeAlias>()
+    var typeAliases = emptyList<TypeAlias>()
     var commonEnumerations = emptyList<Enumeration>()
     var commonWebEnumerations = emptyList<Enumeration>()
     var commonNativeEnumerations = emptyList<Enumeration>()
@@ -62,32 +62,57 @@ class MapperContext(
             }
 
         typeAliases += TypeAlias("GPUSupportedFeatures", "Set<GPUFeatureName>")
-        typeAliases.filter { it.name.endsWith("Flags") }
-            .forEach { it.type = "Set<${it.name.removeSuffix("Flags")}>" }
-
-        interfaces.first { it.name == "GPUBuffer" }.apply {
-            attributes.find { it.name == "usage" }!!.apply {
-                type = "GPUBufferUsageFlags"
-            }
-        }
-        interfaces.first { it.name == "GPUTexture" }.apply {
-            attributes.find { it.name == "usage" }!!.apply {
-                type = "GPUTextureUsageFlags"
-            }
-        }
-
-        descriptors.first { it.name == "GPUColorTargetState" }.apply {
-            parameter.first { it.name == "writeMask" }.apply { defaultValue = "setOf(GPUColorWrite.All)" }
-        }
-        descriptors.first { it.name == "GPUTextureViewDescriptor" }.apply {
-            parameter.first { it.name == "usage" }.apply { defaultValue = "emptySet()" }
-        }
 
         interfaces.first { it.name == "GPUBindingCommandsMixin" }.apply {
             methods.first { it.name == "setBindGroup" }.apply {
                 // remove dynamicOffsetsStart and dynamicOffsetsLength
                 parameters = parameters.filter { it.name in listOf("index", "bindGroup", "dynamicOffsetsData") }
                 parameters.first { it.name == "dynamicOffsetsData" }.defaultValue = "emptyList()"
+            }
+        }
+
+        replaceBitFlagsReferences()
+    }
+
+    private fun replaceBitFlagsReferences() {
+        typeAliases = typeAliases.filter { !it.name.endsWith("Flags") }
+
+        interfaces.first { it.name == "GPUBuffer" }.apply {
+            attributes.find { it.name == "usage" }!!.apply {
+                type = "Set<GPUBufferUsage>"
+            }
+        }
+        interfaces.first { it.name == "GPUTexture" }.apply {
+            attributes.find { it.name == "usage" }!!.apply {
+                type = "Set<GPUTextureUsage>"
+            }
+        }
+
+        interfaces.first { it.name == "GPUBuffer" }.apply {
+            methods.first { it.name == "mapAsync" }.apply {
+                parameters.first { it.name == "mode" }.apply {
+                    type = "GPUMapMode"
+                }
+            }
+        }
+
+        replaceDescriptorFieldType("GPUBufferDescriptor", "usage", "GPUBufferUsage")
+        replaceDescriptorFieldType("GPUBindGroupLayoutEntry", "visibility", "GPUShaderStage")
+        replaceDescriptorFieldType("GPUTextureDescriptor", "usage", "GPUTextureUsage")
+        replaceDescriptorFieldType("GPUColorTargetState", "writeMask", "GPUColorWrite", "GPUColorWrite.All")
+        replaceDescriptorFieldType("GPUTextureViewDescriptor", "usage", "GPUTextureUsage", "GPUTextureUsage.None")
+    }
+
+    private fun replaceDescriptorFieldType(className: String, fieldName: String, newType: String, newDefaultValue: String? = null) {
+        interfaces.first { it.name == className }.apply {
+            attributes.first { it.name == fieldName }.apply {
+                type = newType
+            }
+        }
+        descriptors.first { it.name == className }.apply {
+            parameter.first { it.name == fieldName }.apply {
+                defaultValue = newDefaultValue
+                type = newType
             }
         }
     }

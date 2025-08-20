@@ -725,7 +725,7 @@ interface GPUBuffer : GPUObjectBase, AutoCloseable {
 	 * The `usage` property specifies how the buffer can be used. This value is read-only and represents a combination of flags indicating the allowed operations on this buffer.
 	 * 
 	 */
-	val usage: GPUBufferUsageFlags
+	val usage: Set<GPUBufferUsage>
 	/**
 	 * The `mapState` property indicates the current mapping state of the buffer. This value is read-only and can be one of the following: `unmapped`, `pending`, or `mapped`.
 	 * 
@@ -742,7 +742,7 @@ interface GPUBuffer : GPUObjectBase, AutoCloseable {
 	 * **Returns:** A [Result](https://kotlinlang.org/api/latest/kotlinx-coroutines/kotlinx-coroutines-core/kotlinx.coroutines/-result/) indicating success or failure.
 	 * 
 	 */
-	suspend fun mapAsync(mode: GPUMapModeFlags, offset: GPUSize64 = 0u, size: GPUSize64? = null): Result<Unit>
+	suspend fun mapAsync(mode: GPUMapMode, offset: GPUSize64 = 0u, size: GPUSize64? = null): Result<Unit>
 	/**
 	 * The `getMappedRange` function returns an `ArrayBuffer` representing the mapped range of the buffer. This method can only be called when the buffer is in the `mapped` state.
 	 * 
@@ -808,7 +808,7 @@ interface GPUTexture : GPUObjectBase, AutoCloseable {
 	 * Specifies the usage flags for the texture, indicating how it can be used (e.g., as a render target, sampler, etc.).
 	 * 
 	 */
-	val usage: GPUTextureUsageFlags
+	val usage: Set<GPUTextureUsage>
 	/**
 	 * Creates a view of the texture.
 	 * 
@@ -1773,7 +1773,7 @@ interface GPUBufferDescriptor : GPUObjectDescriptorBase {
 	 * Specifies the allowed usages for the buffer. This is a bitmask of [GPUBufferUsageFlags](https://www.w3.org/TR/webgpu/#typedefdef-gpubufferusageflags) that indicates how the buffer will be used.
 	 * 
 	 */
-	val usage: GPUBufferUsageFlags
+	val usage: GPUBufferUsage
 	/**
 	 * Indicates whether the buffer should be created in an already mapped state. If `true`, the buffer can be immediately accessed using [getMappedRange()](https://www.w3.org/TR/webgpu/#dom-gpubuffer-getmappedrange). This is useful for setting the buffer's initial data.
 	 * 
@@ -1817,7 +1817,7 @@ interface GPUTextureDescriptor : GPUObjectDescriptorBase {
 	 * Specifies the usage flags for the texture. This is a required property.
 	 * 
 	 */
-	val usage: GPUTextureUsageFlags
+	val usage: GPUTextureUsage
 	/**
 	 * Specifies a list of formats that can be used to create views of the texture. The default value is an empty list.
 	 * 
@@ -1852,7 +1852,7 @@ interface GPUTextureViewDescriptor : GPUObjectDescriptorBase {
 	 * See also: [WebGPU Specification - GPUTextureUsageFlags](https://www.w3.org/TR/webgpu/#typedefdef-gputextureusageflags).
 	 * 
 	 */
-	val usage: GPUTextureUsageFlags
+	val usage: GPUTextureUsage
 	/**
 	 * `aspect` specifies which aspects of the texture are accessible to the texture view. This property determines whether the view can access color, depth, stencil, or all aspects of the texture.
 	 * 
@@ -2007,7 +2007,7 @@ interface GPUBindGroupLayoutEntry {
 	 * A bitset of the members of [GPUShaderStage](https://www.w3.org/TR/webgpu/#namespacedef-gpushaderstage). Each set bit indicates that a `GPUBindGroupLayoutEntry`'s resource will be accessible from the associated shader stage.
 	 * 
 	 */
-	val visibility: GPUShaderStageFlags
+	val visibility: GPUShaderStage
 	/**
 	 * When provided, indicates that the binding resource type for this `GPUBindGroupLayoutEntry` is [GPUBufferBinding](https://www.w3.org/TR/webgpu/#dictdef-gpubufferbinding).
 	 * 
@@ -2494,7 +2494,7 @@ interface GPUColorTargetState {
 	 * For more details, refer to the [W3C WebGPU specification](https://www.w3.org/TR/webgpu/#dom-gpucolortargetstate-writemask).
 	 * 
 	 */
-	val writeMask: GPUColorWriteFlags
+	val writeMask: GPUColorWrite
 }
 
 /**

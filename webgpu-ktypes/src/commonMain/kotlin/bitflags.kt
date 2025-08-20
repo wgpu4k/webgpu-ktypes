@@ -31,7 +31,7 @@ public value class GPUBufferUsage private constructor(
 
     public val QueryResolve: io.ygdrasil.webgpu.GPUBufferUsage = GPUBufferUsage(512uL)
 
-    public val values: kotlin.collections.Set<io.ygdrasil.webgpu.GPUBufferUsage> = setOf(None, MapRead, MapWrite, CopySrc, CopyDst, Index, Vertex, Uniform, Storage, Indirect, QueryResolve)
+    public val entries: kotlin.collections.Set<io.ygdrasil.webgpu.GPUBufferUsage> = setOf(None, MapRead, MapWrite, CopySrc, CopyDst, Index, Vertex, Uniform, Storage, Indirect, QueryResolve)
   }
 }
 
@@ -54,7 +54,7 @@ public value class GPUColorWrite private constructor(
 
     public val All: io.ygdrasil.webgpu.GPUColorWrite = GPUColorWrite(15uL)
 
-    public val values: kotlin.collections.Set<io.ygdrasil.webgpu.GPUColorWrite> = setOf(None, Red, Green, Blue, Alpha, All)
+    public val entries: kotlin.collections.Set<io.ygdrasil.webgpu.GPUColorWrite> = setOf(None, Red, Green, Blue, Alpha, All)
   }
 }
 
@@ -71,7 +71,7 @@ public value class GPUMapMode private constructor(
 
     public val Write: io.ygdrasil.webgpu.GPUMapMode = GPUMapMode(2uL)
 
-    public val values: kotlin.collections.Set<io.ygdrasil.webgpu.GPUMapMode> = setOf(None, Read, Write)
+    public val entries: kotlin.collections.Set<io.ygdrasil.webgpu.GPUMapMode> = setOf(None, Read, Write)
   }
 }
 
@@ -90,7 +90,7 @@ public value class GPUShaderStage private constructor(
 
     public val Compute: io.ygdrasil.webgpu.GPUShaderStage = GPUShaderStage(4uL)
 
-    public val values: kotlin.collections.Set<io.ygdrasil.webgpu.GPUShaderStage> = setOf(None, Vertex, Fragment, Compute)
+    public val entries: kotlin.collections.Set<io.ygdrasil.webgpu.GPUShaderStage> = setOf(None, Vertex, Fragment, Compute)
   }
 }
 
@@ -113,6 +113,6 @@ public value class GPUTextureUsage private constructor(
 
     public val RenderAttachment: io.ygdrasil.webgpu.GPUTextureUsage = GPUTextureUsage(16uL)
 
-    public val values: kotlin.collections.Set<io.ygdrasil.webgpu.GPUTextureUsage> = setOf(None, CopySrc, CopyDst, TextureBinding, StorageBinding, RenderAttachment)
+    public val entries: kotlin.collections.Set<io.ygdrasil.webgpu.GPUTextureUsage> = setOf(None, CopySrc, CopyDst, TextureBinding, StorageBinding, RenderAttachment)
   }
 }
