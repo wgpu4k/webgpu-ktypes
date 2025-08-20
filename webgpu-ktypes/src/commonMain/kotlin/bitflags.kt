@@ -2,47 +2,172 @@
 // This file has been generated DO NO EDIT
 package io.ygdrasil.webgpu
 
-enum class GPUBufferUsage(override val value: ULong): FlagEnumeration {
-	None(0uL),
-	MapRead(1uL),
-	MapWrite(2uL),
-	CopySrc(4uL),
-	CopyDst(8uL),
-	Index(16uL),
-	Vertex(32uL),
-	Uniform(64uL),
-	Storage(128uL),
-	Indirect(256uL),
-	QueryResolve(512uL);
+public sealed interface GPUBufferUsage {
+  public val `value`: kotlin.ULong
+
+  public infix fun or(other: io.ygdrasil.webgpu.GPUBufferUsage): io.ygdrasil.webgpu.GPUBufferUsage = GPUBufferUsageComposedFlag(value or other.value)
+
+  public object None : io.ygdrasil.webgpu.GPUBufferUsage {
+    override val `value`: kotlin.ULong = 0uL
+  }
+
+  public object MapRead : io.ygdrasil.webgpu.GPUBufferUsage {
+    override val `value`: kotlin.ULong = 1uL
+  }
+
+  public object MapWrite : io.ygdrasil.webgpu.GPUBufferUsage {
+    override val `value`: kotlin.ULong = 2uL
+  }
+
+  public object CopySrc : io.ygdrasil.webgpu.GPUBufferUsage {
+    override val `value`: kotlin.ULong = 4uL
+  }
+
+  public object CopyDst : io.ygdrasil.webgpu.GPUBufferUsage {
+    override val `value`: kotlin.ULong = 8uL
+  }
+
+  public object Index : io.ygdrasil.webgpu.GPUBufferUsage {
+    override val `value`: kotlin.ULong = 16uL
+  }
+
+  public object Vertex : io.ygdrasil.webgpu.GPUBufferUsage {
+    override val `value`: kotlin.ULong = 32uL
+  }
+
+  public object Uniform : io.ygdrasil.webgpu.GPUBufferUsage {
+    override val `value`: kotlin.ULong = 64uL
+  }
+
+  public object Storage : io.ygdrasil.webgpu.GPUBufferUsage {
+    override val `value`: kotlin.ULong = 128uL
+  }
+
+  public object Indirect : io.ygdrasil.webgpu.GPUBufferUsage {
+    override val `value`: kotlin.ULong = 256uL
+  }
+
+  public object QueryResolve : io.ygdrasil.webgpu.GPUBufferUsage {
+    override val `value`: kotlin.ULong = 512uL
+  }
 }
 
-enum class GPUColorWrite(override val value: ULong): FlagEnumeration {
-	None(0uL),
-	Red(1uL),
-	Green(2uL),
-	Blue(4uL),
-	Alpha(8uL),
-	All(15uL);
+internal value class GPUBufferUsageComposedFlag(
+  override val `value`: kotlin.ULong,
+) : io.ygdrasil.webgpu.GPUBufferUsage
+
+public sealed interface GPUColorWriteMask {
+  public val `value`: kotlin.ULong
+
+  public infix fun or(other: io.ygdrasil.webgpu.GPUColorWriteMask): io.ygdrasil.webgpu.GPUColorWriteMask = GPUColorWriteMaskComposedFlag(value or other.value)
+
+  public object None : io.ygdrasil.webgpu.GPUColorWriteMask {
+    override val `value`: kotlin.ULong = 0uL
+  }
+
+  public object Red : io.ygdrasil.webgpu.GPUColorWriteMask {
+    override val `value`: kotlin.ULong = 1uL
+  }
+
+  public object Green : io.ygdrasil.webgpu.GPUColorWriteMask {
+    override val `value`: kotlin.ULong = 2uL
+  }
+
+  public object Blue : io.ygdrasil.webgpu.GPUColorWriteMask {
+    override val `value`: kotlin.ULong = 4uL
+  }
+
+  public object Alpha : io.ygdrasil.webgpu.GPUColorWriteMask {
+    override val `value`: kotlin.ULong = 8uL
+  }
+
+  public object All : io.ygdrasil.webgpu.GPUColorWriteMask {
+    override val `value`: kotlin.ULong = 15uL
+  }
 }
 
-enum class GPUMapMode(override val value: ULong): FlagEnumeration {
-	None(0uL),
-	Read(1uL),
-	Write(2uL);
+internal value class GPUColorWriteMaskComposedFlag(
+  override val `value`: kotlin.ULong,
+) : io.ygdrasil.webgpu.GPUColorWriteMask
+
+public sealed interface GPUMapMode {
+  public val `value`: kotlin.ULong
+
+  public infix fun or(other: io.ygdrasil.webgpu.GPUMapMode): io.ygdrasil.webgpu.GPUMapMode = GPUMapModeComposedFlag(value or other.value)
+
+  public object None : io.ygdrasil.webgpu.GPUMapMode {
+    override val `value`: kotlin.ULong = 0uL
+  }
+
+  public object Read : io.ygdrasil.webgpu.GPUMapMode {
+    override val `value`: kotlin.ULong = 1uL
+  }
+
+  public object Write : io.ygdrasil.webgpu.GPUMapMode {
+    override val `value`: kotlin.ULong = 2uL
+  }
 }
 
-enum class GPUShaderStage(override val value: ULong): FlagEnumeration {
-	None(0uL),
-	Vertex(1uL),
-	Fragment(2uL),
-	Compute(4uL);
+internal value class GPUMapModeComposedFlag(
+  override val `value`: kotlin.ULong,
+) : io.ygdrasil.webgpu.GPUMapMode
+
+public sealed interface GPUShaderStage {
+  public val `value`: kotlin.ULong
+
+  public infix fun or(other: io.ygdrasil.webgpu.GPUShaderStage): io.ygdrasil.webgpu.GPUShaderStage = GPUShaderStageComposedFlag(value or other.value)
+
+  public object None : io.ygdrasil.webgpu.GPUShaderStage {
+    override val `value`: kotlin.ULong = 0uL
+  }
+
+  public object Vertex : io.ygdrasil.webgpu.GPUShaderStage {
+    override val `value`: kotlin.ULong = 1uL
+  }
+
+  public object Fragment : io.ygdrasil.webgpu.GPUShaderStage {
+    override val `value`: kotlin.ULong = 2uL
+  }
+
+  public object Compute : io.ygdrasil.webgpu.GPUShaderStage {
+    override val `value`: kotlin.ULong = 4uL
+  }
 }
 
-enum class GPUTextureUsage(override val value: ULong): FlagEnumeration {
-	None(0uL),
-	CopySrc(1uL),
-	CopyDst(2uL),
-	TextureBinding(4uL),
-	StorageBinding(8uL),
-	RenderAttachment(16uL);
+internal value class GPUShaderStageComposedFlag(
+  override val `value`: kotlin.ULong,
+) : io.ygdrasil.webgpu.GPUShaderStage
+
+public sealed interface GPUTextureUsage {
+  public val `value`: kotlin.ULong
+
+  public infix fun or(other: io.ygdrasil.webgpu.GPUTextureUsage): io.ygdrasil.webgpu.GPUTextureUsage = GPUTextureUsageComposedFlag(value or other.value)
+
+  public object None : io.ygdrasil.webgpu.GPUTextureUsage {
+    override val `value`: kotlin.ULong = 0uL
+  }
+
+  public object CopySrc : io.ygdrasil.webgpu.GPUTextureUsage {
+    override val `value`: kotlin.ULong = 1uL
+  }
+
+  public object CopyDst : io.ygdrasil.webgpu.GPUTextureUsage {
+    override val `value`: kotlin.ULong = 2uL
+  }
+
+  public object TextureBinding : io.ygdrasil.webgpu.GPUTextureUsage {
+    override val `value`: kotlin.ULong = 4uL
+  }
+
+  public object StorageBinding : io.ygdrasil.webgpu.GPUTextureUsage {
+    override val `value`: kotlin.ULong = 8uL
+  }
+
+  public object RenderAttachment : io.ygdrasil.webgpu.GPUTextureUsage {
+    override val `value`: kotlin.ULong = 16uL
+  }
 }
+
+internal value class GPUTextureUsageComposedFlag(
+  override val `value`: kotlin.ULong,
+) : io.ygdrasil.webgpu.GPUTextureUsage
