@@ -2,6 +2,7 @@
 // This file has been generated DO NO EDIT
 package io.ygdrasil.webgpu
 
+@kotlin.jvm.JvmInline
 public value class GPUBufferUsage private constructor(
   public val `value`: kotlin.ULong,
 ) {
@@ -34,28 +35,30 @@ public value class GPUBufferUsage private constructor(
   }
 }
 
-public value class GPUColorWriteMask private constructor(
+@kotlin.jvm.JvmInline
+public value class GPUColorWrite private constructor(
   public val `value`: kotlin.ULong,
 ) {
-  public infix fun or(other: io.ygdrasil.webgpu.GPUColorWriteMask): io.ygdrasil.webgpu.GPUColorWriteMask = GPUColorWriteMask(value or other.value)
+  public infix fun or(other: io.ygdrasil.webgpu.GPUColorWrite): io.ygdrasil.webgpu.GPUColorWrite = GPUColorWrite(value or other.value)
 
   public companion object {
-    public val None: io.ygdrasil.webgpu.GPUColorWriteMask = GPUColorWriteMask(0uL)
+    public val None: io.ygdrasil.webgpu.GPUColorWrite = GPUColorWrite(0uL)
 
-    public val Red: io.ygdrasil.webgpu.GPUColorWriteMask = GPUColorWriteMask(1uL)
+    public val Red: io.ygdrasil.webgpu.GPUColorWrite = GPUColorWrite(1uL)
 
-    public val Green: io.ygdrasil.webgpu.GPUColorWriteMask = GPUColorWriteMask(2uL)
+    public val Green: io.ygdrasil.webgpu.GPUColorWrite = GPUColorWrite(2uL)
 
-    public val Blue: io.ygdrasil.webgpu.GPUColorWriteMask = GPUColorWriteMask(4uL)
+    public val Blue: io.ygdrasil.webgpu.GPUColorWrite = GPUColorWrite(4uL)
 
-    public val Alpha: io.ygdrasil.webgpu.GPUColorWriteMask = GPUColorWriteMask(8uL)
+    public val Alpha: io.ygdrasil.webgpu.GPUColorWrite = GPUColorWrite(8uL)
 
-    public val All: io.ygdrasil.webgpu.GPUColorWriteMask = GPUColorWriteMask(15uL)
+    public val All: io.ygdrasil.webgpu.GPUColorWrite = GPUColorWrite(15uL)
 
-    public val values: kotlin.collections.Set<io.ygdrasil.webgpu.GPUColorWriteMask> = setOf(None, Red, Green, Blue, Alpha, All)
+    public val values: kotlin.collections.Set<io.ygdrasil.webgpu.GPUColorWrite> = setOf(None, Red, Green, Blue, Alpha, All)
   }
 }
 
+@kotlin.jvm.JvmInline
 public value class GPUMapMode private constructor(
   public val `value`: kotlin.ULong,
 ) {
@@ -72,6 +75,7 @@ public value class GPUMapMode private constructor(
   }
 }
 
+@kotlin.jvm.JvmInline
 public value class GPUShaderStage private constructor(
   public val `value`: kotlin.ULong,
 ) {
@@ -90,6 +94,7 @@ public value class GPUShaderStage private constructor(
   }
 }
 
+@kotlin.jvm.JvmInline
 public value class GPUTextureUsage private constructor(
   public val `value`: kotlin.ULong,
 ) {

@@ -17,9 +17,11 @@ fun MapperContext.loadEnums() {
 
 private fun MapperContext.loadBitFlagEnums() {
     yamlModel.bitflags.forEach { bitflag ->
-        val name = bitflag.name.convertToKotlinClassName()
+        val name = bitflag.name.convertToKotlinClassName().let { if (it.endsWith("Mask")) it.substringBeforeLast("Mask") else it  }
+
         val className = ClassName("io.ygdrasil.webgpu", "GPU$name")
         bitflagEnumerations += TypeSpec.classBuilder(className)
+            .addAnnotation(JvmInline::class)
             .addModifiers(KModifier.VALUE)
             .primaryConstructor(
                 FunSpec.constructorBuilder()
