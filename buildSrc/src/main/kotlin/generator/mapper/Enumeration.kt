@@ -3,6 +3,7 @@ package generator.mapper
 import com.squareup.kotlinpoet.ClassName
 import com.squareup.kotlinpoet.FunSpec
 import com.squareup.kotlinpoet.KModifier
+import com.squareup.kotlinpoet.ParameterizedTypeName.Companion.parameterizedBy
 import com.squareup.kotlinpoet.PropertySpec
 import com.squareup.kotlinpoet.TypeSpec
 import generator.domain.Enumeration
@@ -18,48 +19,47 @@ private fun MapperContext.loadBitFlagEnums() {
     yamlModel.bitflags.forEach { bitflag ->
         val name = bitflag.name.convertToKotlinClassName()
         val className = ClassName("io.ygdrasil.webgpu", "GPU$name")
-        val composedFlagClassName = ClassName("io.ygdrasil.webgpu", "GPU${name}ComposedFlag")
-        bitflagEnumerations += TypeSpec.interfaceBuilder(className)
-            .addModifiers(KModifier.SEALED)
-            .addProperty("value", ULong::class)
-            .addTypes(bitflag.entries.mapIndexed { index, entry ->
-                val value =
-                    entry.value_combination?.sumOf { subPart -> indexToFlagValue(bitflag.entries.indexOfFirst { it.name == subPart }) }
-                        ?: indexToFlagValue(index)
-
-                TypeSpec.objectBuilder(entry.name.convertToKotlinClassName())
-                    .addSuperinterface(className)
-                    .addProperty(
-                        PropertySpec.builder("value", ULong::class)
-                        .addModifiers(KModifier.OVERRIDE)
-                        .initializer("${value}uL")
-                        .build())
-                    .build()
-            })
-            .addFunction(
-                FunSpec.builder("or")
-                    .addModifiers(KModifier.INFIX)
-                    .addParameter("other", className)
-                    .returns(className)
-                    .addCode("return ${composedFlagClassName.simpleName}(value or other.value)")
-                    .build()
-            ).build()
-        bitflagEnumerations += TypeSpec.classBuilder(composedFlagClassName)
-            .addModifiers(KModifier.INTERNAL)
+        bitflagEnumerations += TypeSpec.classBuilder(className)
+            .addModifiers(KModifier.VALUE)
             .primaryConstructor(
                 FunSpec.constructorBuilder()
                     .addParameter("value", ULong::class)
+                    .addModifiers(KModifier.PRIVATE)
                     .build()
             )
             .addProperty(
                 PropertySpec.builder("value", ULong::class)
                     .initializer("value")
-                    .addModifiers(KModifier.OVERRIDE)
                     .build()
             )
-            .addSuperinterface(className)
-            .addModifiers(KModifier.VALUE)
-            .build()
+            .addType(
+                TypeSpec.companionObjectBuilder()
+                    .addProperties(
+                        bitflag.entries.mapIndexed { index, entry ->
+                            val value =
+                                entry.value_combination?.sumOf { subPart -> indexToFlagValue(bitflag.entries.indexOfFirst { it.name == subPart }) }
+                                    ?: indexToFlagValue(index)
+
+                            PropertySpec.builder(entry.name.convertToKotlinClassName(), className)
+                                .initializer("${className.simpleName}(${value}uL)")
+                                .build()
+                        }
+                    )
+                    .addProperty(
+                        PropertySpec.builder("values", ClassName("kotlin.collections", "Set").parameterizedBy(className))
+                            .initializer("setOf(${bitflag.entries.joinToString { it.name.convertToKotlinClassName() }})")
+                            .build()
+                    )
+                    .build()
+            )
+            .addFunction(
+                FunSpec.builder("or")
+                    .addModifiers(KModifier.INFIX)
+                    .addParameter("other", className)
+                    .returns(className)
+                    .addCode("return ${className.simpleName}(value or other.value)")
+                    .build()
+            ).build()
 
         /*bitflagEnumerations += Interface(
             "GPU$name",
