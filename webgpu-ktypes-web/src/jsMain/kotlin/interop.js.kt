@@ -50,10 +50,7 @@ actual fun <K: JsObject, V: JsObject> jsMap(): JsMap<K, V> = js("new Map()").uns
 actual fun <K: JsObject, V: JsObject> Map<K, V>.toJsMap(): JsMap<K, V> {
     val jsMap = jsMap<K, V>()
     forEach { (key, value) ->
-        val map = jsMap
-        val k = key
-        val v = value
-        js("map.set(k, v)")
+        jsMap.asDynamic().set(key, value)
     }
     return jsMap
 }

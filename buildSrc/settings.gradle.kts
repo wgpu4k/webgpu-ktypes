@@ -1,3 +1,5 @@
+rootProject.name = "webgpu-ktypes-buildSrc"
+
 dependencyResolutionManagement {
 	versionCatalogs {
 		create("libs") {
