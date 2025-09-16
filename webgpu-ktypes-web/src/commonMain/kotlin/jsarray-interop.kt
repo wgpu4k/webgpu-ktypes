@@ -1,5 +1,8 @@
+@file:OptIn(ExperimentalWasmJsInterop::class)
+
 package io.ygdrasil.webgpu
 
+import kotlin.js.ExperimentalWasmJsInterop
 import kotlin.js.JsAny
 
 external interface JsArray<T: JsAny> : JsAny {
