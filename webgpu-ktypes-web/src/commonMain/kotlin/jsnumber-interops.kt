@@ -1,5 +1,7 @@
 package io.ygdrasil.webgpu
 
+import kotlin.js.JsNumber
+
 expect inline fun Float.asJsNumber(): JsNumber
 expect inline fun Double.asJsNumber(): JsNumber
 expect inline fun Byte.asJsNumber(): JsNumber

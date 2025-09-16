@@ -65,7 +65,7 @@ internal fun IdlType.toWebKotlinType(): String = when (this) {
             else -> "JsAny /* $this */"
         }
     }
-    is IdlUnionType ->  "JsObject /* $this */"
+    is IdlUnionType ->  "JsAny /* $this */"
 }
 
 internal fun IdlType.toKotlinType(): String = (this as IdlSimpleType).let {

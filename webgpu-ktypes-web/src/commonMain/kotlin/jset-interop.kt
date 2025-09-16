@@ -1,6 +1,8 @@
 package io.ygdrasil.webgpu
 
-external interface JsSet<T: JsObject> : JsObject {
+import kotlin.js.JsAny
+
+external interface JsSet<T: JsAny> : JsAny {
     val size: Int
     fun has(value: T): Boolean
 }

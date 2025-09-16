@@ -6,20 +6,6 @@ package io.ygdrasil.webgpu
 import kotlinx.coroutines.await
 import kotlin.js.Promise
 
-actual typealias JsNumber = kotlin.js.JsNumber
-
-actual typealias JsString = kotlin.js.JsString
-
-actual typealias JsObject = kotlin.js.JsAny
-
-@Suppress("NOTHING_TO_INLINE")
-actual inline suspend fun <T> JsObject.wait(): T {
-    return unsafeCast<Promise<JsObject>>().await()
-}
-@Suppress("NOTHING_TO_INLINE")
-actual inline fun <T : JsObject> JsObject.castAs(): T = unsafeCast()
-@Suppress("NOTHING_TO_INLINE")
-actual inline fun JsString.castAs(): JsObject = unsafeCast<JsObject>()
 @Suppress("NOTHING_TO_INLINE")
 actual inline fun JsNumber.asFloat(): Float = toFloat()
 @Suppress("NOTHING_TO_INLINE")

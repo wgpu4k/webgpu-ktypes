@@ -28,7 +28,7 @@ internal fun MapperContext.loadWebInterfaces() {
             val name = "W" + idlInterface.name.fixName()
             (webTypeAlias.find { it.name == name } ?: TypeAlias(
                 name,
-                "JsSet<JsObject> /* ${idlInterface.setLike?.type} */"
+                "JsSet<JsAny /* ${idlInterface.setLike?.type} */>"
             ).also { webTypeAlias.add(it) })
         }
 
@@ -61,7 +61,7 @@ fun MapperContext.convertType(type: String): String = when {
         webTypeAlias.any { "W${type}" == it.name } -> "W${type}  /* $type */"
         commonEnumerations.any { type == it.name } -> "String  /* $type */"
         isNumberTypeAlias(type) -> "JsNumber  /* $type */"
-        else -> "JsObject /* $type */"
+        else -> "JsAny /* $type */"
     }
     else -> type
 }
@@ -78,7 +78,7 @@ private fun MapperContext.loadWebInterface(idlInterface: IdlInterface) {
     val name = "W" + idlInterface.name.fixName()
     (webInterfaces.find { it.name == name } ?: Interface(name, external = true).also { webInterfaces.add(it) })
         .also { kinterface ->
-            if (kinterface.extends.contains("JsObject").not()) kinterface.extends += "JsObject"
+            if (kinterface.extends.contains("JsAny").not()) kinterface.extends += "JsAny"
 
             // Add extends
             kinterface.extends += idlInterface.superInterfaces
@@ -119,7 +119,7 @@ private fun MapperContext.loadWebDictionary(idlDictionary: IdlDictionary): Inter
         .let { if (it.endsWith("Dict")) it.substringBeforeLast("Dict") else it }
     return (webInterfaces.find { it.name == name } ?: Interface(name, external = true).also { webInterfaces.add(it) })
         .also { kinterface ->
-            if (kinterface.extends.contains("JsObject").not()) kinterface.extends += "JsObject"
+            if (kinterface.extends.contains("JsAny").not()) kinterface.extends += "JsAny"
             kinterface.extends += idlDictionary.superDictionaries
             idlDictionary.name.takeIf { it.contains(":") }
                 ?.let {

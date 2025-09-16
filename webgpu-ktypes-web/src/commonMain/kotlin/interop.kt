@@ -2,10 +2,9 @@
 package io.ygdrasil.webgpu
 
 import kotlin.js.JsAny
+import kotlin.js.JsNumber
+import kotlin.js.JsString
 
-expect inline suspend fun <T> JsObject.wait(): T
-expect inline fun <T : JsObject> JsObject.castAs(): T
-expect inline fun JsString.castAs(): JsObject
 expect inline fun JsNumber.asFloat(): Float
 expect inline fun JsNumber.asDouble(): Double
 expect inline fun JsNumber.asInt(): Int
@@ -23,15 +22,12 @@ expect fun <K: JsAny, V: JsAny> jsMap(): JsMap<K, V>
 expect fun <K: JsAny, V: JsAny> Map<K, V>.toJsMap(): JsMap<K, V>
 
 
-expect class JsNumber : JsAny
-expect class JsString
-expect interface JsObject
 external interface JsMap<a: JsAny, B: JsAny> : JsAny
 
-external interface EventTarget: JsObject
-external interface DOMException: JsObject
-external interface Event: JsObject
-external interface EventInit: JsObject
+external interface EventTarget: JsAny
+external interface DOMException: JsAny
+external interface Event: JsAny
+external interface EventInit: JsAny
 
 external object navigator {
     val gpu: GPU?
@@ -41,15 +37,15 @@ external object window {
     var devicePixelRatio: JsNumber
 }
 
-external interface GPU: JsObject {
+external interface GPU: JsAny {
     fun getPreferredCanvasFormat(): String
-    fun requestAdapter(): JsObject
-    fun requestAdapter(descriptor: WGPURequestAdapterOptions): JsObject
-    var wgslLanguageFeatures: JsObject /* WGSLLanguageFeatures */
+    fun requestAdapter(): JsAny
+    fun requestAdapter(descriptor: WGPURequestAdapterOptions): JsAny
+    var wgslLanguageFeatures: JsAny /* WGSLLanguageFeatures */
 }
 
-external interface HTMLCanvasElement: JsObject {
-    fun getContext(name: String): JsObject
+external interface HTMLCanvasElement: JsAny {
+    fun getContext(name: String): JsAny
 
     var clientHeight: JsNumber
     var clientWidth: JsNumber
