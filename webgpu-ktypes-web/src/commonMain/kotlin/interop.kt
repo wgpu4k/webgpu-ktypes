@@ -1,6 +1,9 @@
 @file:Suppress("unused")
+@file:OptIn(ExperimentalWasmJsInterop::class)
+
 package io.ygdrasil.webgpu
 
+import kotlin.js.ExperimentalWasmJsInterop
 import kotlin.js.JsAny
 import kotlin.js.JsNumber
 import kotlin.js.JsString
