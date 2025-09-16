@@ -12,8 +12,6 @@ actual typealias JsString = kotlin.js.JsString
 
 actual typealias JsObject = kotlin.js.JsAny
 
-actual fun <T : JsObject> createJsObject(): T = js("({ })")
-
 @Suppress("NOTHING_TO_INLINE")
 actual inline suspend fun <T> JsObject.wait(): T {
     return unsafeCast<Promise<JsObject>>().await()

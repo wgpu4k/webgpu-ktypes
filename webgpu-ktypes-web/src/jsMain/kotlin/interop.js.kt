@@ -20,7 +20,7 @@ actual typealias JsString = String
 
 actual external interface JsObject
 
-actual fun <T : JsObject> createJsObject(): T = js("({ })")
+
 
 
 @Suppress("NOTHING_TO_INLINE")
