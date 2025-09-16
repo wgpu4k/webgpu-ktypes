@@ -57,12 +57,12 @@ internal fun IdlType.toWebKotlinType(): String = when (this) {
         "ArrayBuffer" -> "ArrayBuffer"
         "undefined" -> "Unit"
         "DOMString", "USVString" -> "String /* $this */"
-        "sequence", "FrozenArray" -> "JsArray<JsObject> /* $this<${this.parameterTypes?.get(0)}> */"
-        "record" -> "JsMap<JsObject, JsObject> /* $this<${this.parameterTypes?.get(0)}, ${this.parameterTypes?.get(1)}>  */"
-        "Promise" -> "JsObject /* $this */"
+        "sequence", "FrozenArray" -> "JsArray<JsAny> /* $this<${this.parameterTypes?.get(0)}> */"
+        "record" -> "JsMap<JsAny, JsAny> /* $this<${this.parameterTypes?.get(0)}, ${this.parameterTypes?.get(1)}>  */"
+        "Promise" -> "Promise<JsAny> /* $this */"
         else -> when {
             typeName.startsWith("GPU") -> typeName
-            else -> "JsObject /* $this */"
+            else -> "JsAny /* $this */"
         }
     }
     is IdlUnionType ->  "JsObject /* $this */"

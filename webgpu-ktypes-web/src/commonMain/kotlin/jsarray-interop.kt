@@ -1,11 +1,13 @@
 package io.ygdrasil.webgpu
 
-external interface JsArray<T: JsObject> : JsObject {
+import kotlin.js.JsAny
+
+external interface JsArray<T: JsAny> : JsAny {
     val length: Int
 }
 
-expect fun <T: JsObject> set(array: JsArray<T>, index: Int, value: T)
-expect fun <T: JsObject> get(array: JsArray<T>, index: Int): T?
+expect fun <T: JsAny> set(array: JsArray<T>, index: Int, value: T)
+expect fun <T: JsAny> get(array: JsArray<T>, index: Int): T?
 
 fun <A: JsObject, B> JsArray<A>.map(converter: (A) -> B): List<B> = sequence<B> {
     (0 until length).forEach { index ->

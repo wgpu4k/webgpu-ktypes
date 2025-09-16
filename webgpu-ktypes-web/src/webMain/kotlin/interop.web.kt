@@ -3,6 +3,7 @@
 package io.ygdrasil.webgpu
 
 import kotlin.js.ExperimentalWasmJsInterop
+import kotlin.js.JsAny
 import kotlin.js.js
 
-actual fun <T : JsObject> createJsObject(): T = js("({ })")
+fun <T : JsAny> createJsObject(): T = js("({ })")

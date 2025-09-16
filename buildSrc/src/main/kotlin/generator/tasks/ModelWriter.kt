@@ -9,7 +9,7 @@ import kotlin.io.path.createDirectories
 object ModelWriter {
     private val descriptorCommonSourcePath = Paths.get("webgpu-ktypes-descriptors").resolve("src").resolve("commonMain").resolve("kotlin")
     private val commonSourcePath = Paths.get("webgpu-ktypes").resolve("src").resolve("commonMain").resolve("kotlin")
-    private val commonWebSourcePath = Paths.get("webgpu-ktypes").resolve("src").resolve("commonWebMain").resolve("kotlin")
+    private val commonWebSourcePath = Paths.get("webgpu-ktypes").resolve("src").resolve("webMain").resolve("kotlin")
     private val commonNativeSourcePath = Paths.get("webgpu-ktypes").resolve("src").resolve("commonNativeMain").resolve("kotlin")
     private val webSourcePath = Paths.get("webgpu-ktypes-web").resolve("src").resolve("commonMain").resolve("kotlin")
 
@@ -43,7 +43,11 @@ object ModelWriter {
             appendText(context.descriptors.joinToString("\n"))
         }
 
-        webSourcePath.createSourceFile("types.kt") {
+        webSourcePath.createWebSourceFile("types.kt") {
+            appendText("import kotlin.js.ExperimentalWasmJsInterop\n")
+            appendText("import kotlin.js.JsAny\n")
+            appendText("import kotlin.js.Promise\n")
+            appendText("\n")
             appendText(context.webTypeAlias.joinToString("\n"))
             appendText("\n")
             appendText(context.webInterfaces.joinToString("\n"))
@@ -57,6 +61,20 @@ object ModelWriter {
             createNewFile()
 
             appendText("@file:Suppress(\"unused\")\n")
+            appendText("// This file has been generated DO NO EDIT\n")
+            appendText("package io.ygdrasil.webgpu\n\n")
+            block()
+        }
+    }
+
+    private fun Path.createWebSourceFile(fileName: String, block: File.() -> Unit) {
+        createDirectories()
+        resolve(fileName).toFile().apply {
+            delete()
+            createNewFile()
+
+            appendText("@file:Suppress(\"unused\")\n")
+            appendText("@file:OptIn(ExperimentalWasmJsInterop::class)")
             appendText("// This file has been generated DO NO EDIT\n")
             appendText("package io.ygdrasil.webgpu\n\n")
             block()

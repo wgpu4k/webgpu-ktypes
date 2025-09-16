@@ -33,14 +33,14 @@ actual inline fun JsNumber.asShort(): Short = externRefToKotlinShortAdapter(this
 @Suppress("NOTHING_TO_INLINE")
 actual inline fun String.asJsString(): JsString = toJsString()
 
-actual fun <K: JsObject, V: JsObject> jsMap(): JsMap<K, V> {
+actual fun <K: JsAny, V: JsAny> jsMap(): JsMap<K, V> {
     return newMap().unsafeCast<JsMap<K, V>>()
 }
 
-private fun newMap(): JsObject = js("new Map()")
+private fun newMap(): JsAny = js("new Map()")
 
 
-actual fun <K: JsObject, V: JsObject> Map<K, V>.toJsMap(): JsMap<K, V> {
+actual fun <K: JsAny, V: JsAny> Map<K, V>.toJsMap(): JsMap<K, V> {
     val jsMap = jsMap<K, V>()
     forEach { (key, value) ->
         set<K, V>(jsMap, key, value)
@@ -48,7 +48,7 @@ actual fun <K: JsObject, V: JsObject> Map<K, V>.toJsMap(): JsMap<K, V> {
     return jsMap
 }
 
-private fun <K: JsObject, V: JsObject> set(map: JsMap<K, V>, key: K, value: V): Nothing = js("map.set(key, value)")
+private fun <K: JsAny, V: JsAny> set(map: JsMap<K, V>, key: K, value: V): Nothing = js("map.set(key, value)")
 
 public fun kotlin.js.JsNumber.toFloat(): Float =
     externRefToKotlinFloatAdapter(this)

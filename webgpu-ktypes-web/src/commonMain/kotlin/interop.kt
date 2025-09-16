@@ -1,7 +1,8 @@
 @file:Suppress("unused")
 package io.ygdrasil.webgpu
 
-expect fun <T: JsObject> createJsObject(): T
+import kotlin.js.JsAny
+
 expect inline suspend fun <T> JsObject.wait(): T
 expect inline fun <T : JsObject> JsObject.castAs(): T
 expect inline fun JsString.castAs(): JsObject
@@ -18,14 +19,14 @@ expect inline fun JsNumber.asShort(): Short
 inline fun JsNumber.asUShort(): UShort = asShort().toUShort()
 
 expect inline fun String.asJsString(): JsString
-expect fun <K: JsObject, V: JsObject> jsMap(): JsMap<K, V>
-expect fun <K: JsObject, V: JsObject> Map<K, V>.toJsMap(): JsMap<K, V>
+expect fun <K: JsAny, V: JsAny> jsMap(): JsMap<K, V>
+expect fun <K: JsAny, V: JsAny> Map<K, V>.toJsMap(): JsMap<K, V>
 
 
-expect class JsNumber : JsObject
+expect class JsNumber : JsAny
 expect class JsString
 expect interface JsObject
-external interface JsMap<a: JsObject, B: JsObject> : JsObject
+external interface JsMap<a: JsAny, B: JsAny> : JsAny
 
 external interface EventTarget: JsObject
 external interface DOMException: JsObject

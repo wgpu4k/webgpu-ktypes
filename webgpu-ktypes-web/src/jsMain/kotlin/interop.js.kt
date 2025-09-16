@@ -45,9 +45,9 @@ actual inline fun JsNumber.asShort(): Short = unsafeCast<Short>()
 @Suppress("NOTHING_TO_INLINE")
 actual inline fun String.asJsString(): JsString = unsafeCast<JsString>()
 
-actual fun <K: JsObject, V: JsObject> jsMap(): JsMap<K, V> = js("new Map()").unsafeCast<JsMap<K, V>>()
+actual fun <K: JsAny, V: JsAny> jsMap(): JsMap<K, V> = js("new Map()").unsafeCast<JsMap<K, V>>()
 
-actual fun <K: JsObject, V: JsObject> Map<K, V>.toJsMap(): JsMap<K, V> {
+actual fun <K: JsAny, V: JsAny> Map<K, V>.toJsMap(): JsMap<K, V> {
     val jsMap = jsMap<K, V>()
     forEach { (key, value) ->
         val map = jsMap
