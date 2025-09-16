@@ -1,4 +1,6 @@
 @file:Suppress("unused")
+@file:OptIn(ExperimentalWasmJsInterop::class)
+
 package io.ygdrasil.webgpu
 
 import kotlinx.coroutines.await

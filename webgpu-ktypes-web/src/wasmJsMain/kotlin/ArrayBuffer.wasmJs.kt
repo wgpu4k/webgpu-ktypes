@@ -1,4 +1,4 @@
-@file:OptIn(ExperimentalUnsignedTypes::class)
+@file:OptIn(ExperimentalUnsignedTypes::class, ExperimentalWasmJsInterop::class)
 
 package io.ygdrasil.webgpu
 

@@ -1,3 +1,5 @@
+@file:OptIn(ExperimentalWasmJsInterop::class)
+
 package io.ygdrasil.webgpu
 
 actual fun <A, B : JsObject> Collection<A>.mapJsArray(converter: (A) -> B): JsArray<B> {

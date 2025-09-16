@@ -1,3 +1,5 @@
+@file:OptIn(ExperimentalWasmJsInterop::class)
+
 package io.ygdrasil.webgpu
 
 import kotlin.js.toJsNumber
