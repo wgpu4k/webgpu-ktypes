@@ -6,8 +6,9 @@ import kotlin.js.ExperimentalWasmJsInterop
 import kotlin.js.JsAny
 import kotlin.js.Promise
 import kotlin.js.JsNumber
+import kotlin.js.JsArray
 
-typealias WGPUSupportedFeatures = JsSet<JsAny> /* DOMString */
+typealias WGPUSupportedFeatures = JsSet<JsAny /* DOMString */>
 external interface WGPUObjectBase : JsAny {
 	var label: String /* USVString */
 }

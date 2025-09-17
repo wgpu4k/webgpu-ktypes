@@ -48,6 +48,7 @@ object ModelWriter {
             appendText("import kotlin.js.JsAny\n")
             appendText("import kotlin.js.Promise\n")
             appendText("import kotlin.js.JsNumber\n")
+            appendText("import kotlin.js.JsArray\n")
             appendText("\n")
             appendText(context.webTypeAlias.joinToString("\n"))
             appendText("\n")
