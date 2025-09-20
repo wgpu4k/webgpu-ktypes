@@ -4,9 +4,10 @@ package io.ygdrasil.webgpu
 
 import kotlin.js.ExperimentalWasmJsInterop
 import kotlin.js.JsAny
-import kotlin.js.Promise
 import kotlin.js.JsNumber
 import kotlin.js.JsArray
+import js.promise.Promise
+import js.collections.JsSet
 
 typealias WGPUSupportedFeatures = JsSet<JsAny /* DOMString */>
 external interface WGPUObjectBase : JsAny {

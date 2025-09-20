@@ -46,9 +46,10 @@ object ModelWriter {
         webSourcePath.createWebSourceFile("types.kt") {
             appendText("import kotlin.js.ExperimentalWasmJsInterop\n")
             appendText("import kotlin.js.JsAny\n")
-            appendText("import kotlin.js.Promise\n")
             appendText("import kotlin.js.JsNumber\n")
             appendText("import kotlin.js.JsArray\n")
+            appendText("import js.promise.Promise\n")
+            appendText("import js.collections.JsSet\n")
             appendText("\n")
             appendText(context.webTypeAlias.joinToString("\n"))
             appendText("\n")
