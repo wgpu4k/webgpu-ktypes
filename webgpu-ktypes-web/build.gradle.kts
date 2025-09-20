@@ -48,7 +48,7 @@ kotlin {
         commonMain {
             dependencies {
                 implementation(libs.coroutines)
-                implementation(kotlinWrappers.js)
+                api(kotlinWrappers.js)
             }
         }
 

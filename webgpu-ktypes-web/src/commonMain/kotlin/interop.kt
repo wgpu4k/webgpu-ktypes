@@ -3,6 +3,7 @@
 
 package io.ygdrasil.webgpu
 
+import js.promise.Promise
 import kotlin.js.ExperimentalWasmJsInterop
 import kotlin.js.JsAny
 import kotlin.js.JsNumber
@@ -42,8 +43,8 @@ external object window {
 
 external interface GPU: JsAny {
     fun getPreferredCanvasFormat(): String
-    fun requestAdapter(): JsAny
-    fun requestAdapter(descriptor: WGPURequestAdapterOptions): JsAny
+    fun requestAdapter(): Promise<JsAny>
+    fun requestAdapter(descriptor: WGPURequestAdapterOptions): Promise<JsAny>
     var wgslLanguageFeatures: JsAny /* WGSLLanguageFeatures */
 }
 
