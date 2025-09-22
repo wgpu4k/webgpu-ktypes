@@ -66,7 +66,7 @@ kotlin {
 
         webMain {
             dependencies {
-                api(libs.kotlinx.browser)
+                api(kotlinWrappers.js)
             }
         }
 

@@ -21,13 +21,6 @@ expect inline fun JsNumber.asShort(): Short
 @Suppress("NOTHING_TO_INLINE")
 inline fun JsNumber.asUShort(): UShort = asShort().toUShort()
 
-expect inline fun String.asJsString(): JsString
-expect fun <K: JsAny, V: JsAny> jsMap(): JsMap<K, V>
-expect fun <K: JsAny, V: JsAny> Map<K, V>.toJsMap(): JsMap<K, V>
-
-
-external interface JsMap<a: JsAny, B: JsAny> : JsAny
-
 external interface EventTarget: JsAny
 external interface DOMException: JsAny
 external interface Event: JsAny
@@ -48,11 +41,3 @@ external interface GPU: JsAny {
     var wgslLanguageFeatures: JsAny /* WGSLLanguageFeatures */
 }
 
-external interface HTMLCanvasElement: JsAny {
-    fun getContext(name: String): JsAny
-
-    var clientHeight: JsNumber
-    var clientWidth: JsNumber
-    var width: JsNumber
-    var height: JsNumber
-}

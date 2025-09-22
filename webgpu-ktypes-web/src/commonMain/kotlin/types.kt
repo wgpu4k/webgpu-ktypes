@@ -8,6 +8,7 @@ import kotlin.js.JsNumber
 import kotlin.js.JsArray
 import js.promise.Promise
 import js.collections.JsSet
+import js.collections.JsMap
 
 typealias WGPUSupportedFeatures = JsSet<JsAny /* DOMString */>
 external interface WGPUObjectBase : JsAny {
