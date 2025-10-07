@@ -24,7 +24,7 @@ fun <A, B : JsAny> Collection<A>.mapJsArray(converter: (A) -> B): JsArray<B> {
     forEachIndexed { index, value ->
         output[index] = converter(value)
     }
-    return output.unsafeCast()
+    return output.unsafeCast<JsArray<B>>()
 }
 
 fun <T : JsAny> createJsObject(): T = js("({ })")
