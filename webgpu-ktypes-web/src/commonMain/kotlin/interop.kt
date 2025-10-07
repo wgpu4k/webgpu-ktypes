@@ -1,36 +1,25 @@
 @file:Suppress("unused")
+@file:OptIn(ExperimentalWasmJsInterop::class)
+
 package io.ygdrasil.webgpu
 
-expect fun <T: JsObject> createJsObject(): T
-expect inline suspend fun <T> JsObject.wait(): T
-expect inline fun <T : JsObject> JsObject.castAs(): T
-expect inline fun JsString.castAs(): JsObject
-expect inline fun JsNumber.asFloat(): Float
-expect inline fun JsNumber.asDouble(): Double
-expect inline fun JsNumber.asInt(): Int
-@Suppress("NOTHING_TO_INLINE")
-inline fun JsNumber.asUInt(): UInt = asInt().toUInt()
-expect inline fun JsNumber.asLong(): Long
-@Suppress("NOTHING_TO_INLINE")
-inline fun JsNumber.asULong(): ULong = asLong().toULong()
-expect inline fun JsNumber.asShort(): Short
-@Suppress("NOTHING_TO_INLINE")
-inline fun JsNumber.asUShort(): UShort = asShort().toUShort()
+import js.promise.Promise
+import kotlin.js.ExperimentalWasmJsInterop
+import kotlin.js.JsAny
+import kotlin.js.JsNumber
+import kotlin.js.js
 
-expect inline fun String.asJsString(): JsString
-expect fun <K: JsObject, V: JsObject> jsMap(): JsMap<K, V>
-expect fun <K: JsObject, V: JsObject> Map<K, V>.toJsMap(): JsMap<K, V>
+@Suppress("EXTENSION_SHADOWED_BY_MEMBER")
+fun JsNumber.toLong(): Long = toLong(this)
+fun JsNumber.toULong(): Long = toLong(this)
 
+private fun toLong(ref: JsNumber): Long = js("BigInt(ref)")
+private fun toULong(ref: JsNumber): ULong = js("BigInt(ref)")
 
-expect class JsNumber : JsObject
-expect class JsString
-expect interface JsObject
-external interface JsMap<a: JsObject, B: JsObject> : JsObject
-
-external interface EventTarget: JsObject
-external interface DOMException: JsObject
-external interface Event: JsObject
-external interface EventInit: JsObject
+external interface EventTarget: JsAny
+external interface DOMException: JsAny
+external interface Event: JsAny
+external interface EventInit: JsAny
 
 external object navigator {
     val gpu: GPU?
@@ -40,18 +29,10 @@ external object window {
     var devicePixelRatio: JsNumber
 }
 
-external interface GPU: JsObject {
+external interface GPU: JsAny {
     fun getPreferredCanvasFormat(): String
-    fun requestAdapter(): JsObject
-    fun requestAdapter(descriptor: WGPURequestAdapterOptions): JsObject
-    var wgslLanguageFeatures: JsObject /* WGSLLanguageFeatures */
+    fun requestAdapter(): Promise<JsAny>
+    fun requestAdapter(descriptor: WGPURequestAdapterOptions): Promise<JsAny>
+    var wgslLanguageFeatures: JsAny /* WGSLLanguageFeatures */
 }
 
-external interface HTMLCanvasElement: JsObject {
-    fun getContext(name: String): JsObject
-
-    var clientHeight: JsNumber
-    var clientWidth: JsNumber
-    var width: JsNumber
-    var height: JsNumber
-}

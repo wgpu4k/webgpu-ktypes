@@ -1,4 +1,9 @@
+@file:OptIn(ExperimentalWasmJsInterop::class)
+
 package io.ygdrasil.webgpu
+
+import kotlin.js.ExperimentalWasmJsInterop
+import kotlin.js.JsNumber
 
 expect inline fun Float.asJsNumber(): JsNumber
 expect inline fun Double.asJsNumber(): JsNumber

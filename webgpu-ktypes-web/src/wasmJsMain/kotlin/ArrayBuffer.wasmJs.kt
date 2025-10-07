@@ -1,84 +1,82 @@
-@file:OptIn(ExperimentalUnsignedTypes::class)
+@file:OptIn(ExperimentalUnsignedTypes::class, ExperimentalWasmJsInterop::class)
 
 package io.ygdrasil.webgpu
 
-import org.khronos.webgl.Float32Array
-import org.khronos.webgl.Float64Array
-import org.khronos.webgl.Int16Array
-import org.khronos.webgl.Int32Array
-import org.khronos.webgl.Int8Array
-import kotlin.js.JsArray
+import js.typedarrays.Float32Array
+import js.typedarrays.Float64Array
+import js.typedarrays.Int16Array
+import js.typedarrays.Int32Array
+import js.typedarrays.Int8Array
 import kotlin.js.JsNumber
-import kotlin.js.toJsNumber
 
 actual fun ByteArray.asArrayBuffer(): ArrayBuffer {
     val array = jsArray<JsNumber>()
     forEachIndexed { index, value ->
-        set(array, index, value.toJsNumber())
+        array[index] = value.asJsNumber()
     }
-    return Int8Array(array.unsafeCast<JsArray<JsNumber>>()).buffer
+    return Int8Array<ArrayBuffer>(array).buffer
 }
 
 actual fun UShortArray.asArrayBuffer(): ArrayBuffer {
     val array = jsArray<JsNumber>()
     forEachIndexed { index, value ->
-        set(array, index, value.asJsNumber())
+        array[index] = value.asJsNumber()
     }
-    return Int16Array(array.unsafeCast<JsArray<JsNumber>>()).buffer
+    return Int16Array<ArrayBuffer>(array).buffer
 }
 
 actual fun ShortArray.asArrayBuffer(): ArrayBuffer {
     val array = jsArray<JsNumber>()
     forEachIndexed { index, value ->
-        set(array, index, value.toJsNumber())
+        array[index] = value.asJsNumber()
     }
-    return Int16Array(array.unsafeCast<JsArray<JsNumber>>()).buffer
+    return Int16Array<ArrayBuffer>(array).buffer
 }
 
 actual fun IntArray.asArrayBuffer(): ArrayBuffer {
     val array = jsArray<JsNumber>()
     forEachIndexed { index, value ->
-        set(array, index, value.toJsNumber())
+        array[index] = value.asJsNumber()
     }
-    return Int32Array(array.unsafeCast<JsArray<JsNumber>>()).buffer
+    return Int32Array<ArrayBuffer>(array).buffer
 }
 
 actual fun UIntArray.asArrayBuffer(): ArrayBuffer {
     val array = jsArray<JsNumber>()
     forEachIndexed { index, value ->
-        set(array, index, value.asJsNumber())
+        array[index] = value.asJsNumber()
     }
-    return Int32Array(array.unsafeCast<JsArray<JsNumber>>()).buffer
+    return Int32Array<ArrayBuffer>(array).buffer
 }
 
 actual fun LongArray.asArrayBuffer(): ArrayBuffer {
     val array = jsArray<JsNumber>()
     forEachIndexed { index, value ->
-        set(array, index, value.toJsNumber())
+        array[index] = value.asJsNumber()
     }
-    return Int32Array(array.unsafeCast<JsArray<JsNumber>>()).buffer
+    return Int32Array<ArrayBuffer>(array).buffer
 }
 
 actual fun ULongArray.asArrayBuffer(): ArrayBuffer {
     val array = jsArray<JsNumber>()
     forEachIndexed { index, value ->
-        set(array, index, value.asJsNumber())
+        array[index] = value.asJsNumber()
     }
-    return Int32Array(array.unsafeCast<JsArray<JsNumber>>()).buffer
+    return Int32Array<ArrayBuffer>(array).buffer
 }
 
 actual fun FloatArray.asArrayBuffer(): ArrayBuffer {
     val array = jsArray<JsNumber>()
     forEachIndexed { index, value ->
-        set(array, index, value.toJsNumber())
+        array[index] = value.asJsNumber()
     }
-    return Float32Array(array.unsafeCast<JsArray<JsNumber>>()).buffer
+    return Float32Array<ArrayBuffer>(array).buffer
 }
 
 actual fun DoubleArray.asArrayBuffer(): ArrayBuffer {
     val array = jsArray<JsNumber>()
     forEachIndexed { index, value ->
-        set(array, index, value.toJsNumber())
+        array[index] = value.asJsNumber()
     }
-    return Float64Array(array.unsafeCast<JsArray<JsNumber>>()).buffer
+    return Float64Array<ArrayBuffer>(array).buffer
 }

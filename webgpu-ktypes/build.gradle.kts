@@ -11,63 +11,6 @@ plugins {
     id("com.android.library")
 }
 
-private val hierarchyTemplate = KotlinHierarchyTemplate {
-    /* natural hierarchy is only applied to default 'main'/'test' compilations (by default) */
-    withSourceSetTree(KotlinSourceSetTree.main, KotlinSourceSetTree.test)
-
-    common {
-        /* All compilations shall be added to the common group by default */
-        withCompilations { true }
-
-        group("commonNative") {
-            group("native") {
-                withNative()
-
-                group("apple") {
-                    withApple()
-
-                    group("ios") {
-                        withIos()
-                    }
-
-                    group("tvos") {
-                        withTvos()
-                    }
-
-                    group("watchos") {
-                        withWatchos()
-                    }
-
-                    group("macos") {
-                        withMacos()
-                    }
-                }
-
-                group("linux") {
-                    withLinux()
-                }
-
-                group("mingw") {
-                    withMingw()
-                }
-
-                group("androidNative") {
-                    withAndroidNative()
-                }
-            }
-
-            withJvm()
-            withAndroidTarget()
-        }
-
-
-        group("commonWeb") {
-            withJs()
-            withWasmJs()
-        }
-    }
-}
-
 kotlin {
     js {
         browser()
@@ -112,7 +55,7 @@ kotlin {
         nodejs()
     }
 
-    applyHierarchyTemplate(hierarchyTemplate)
+    applyDefaultHierarchyTemplate()
 
     compilerOptions {
         allWarningsAsErrors = true
@@ -121,12 +64,20 @@ kotlin {
 
     sourceSets {
 
-        wasmJsMain {
+        webMain {
             dependencies {
-                api(libs.kotlinx.browser)
+                api(kotlinWrappers.js)
             }
         }
 
+
+        val commonNativeMain by creating {
+            dependsOn(commonMain.get())
+        }
+
+        nativeMain.get().dependsOn(commonNativeMain)
+        jvmMain.get().dependsOn(commonNativeMain)
+        androidMain.get().dependsOn(commonNativeMain)
     }
 }
 

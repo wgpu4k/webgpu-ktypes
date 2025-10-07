@@ -33,5 +33,7 @@ jobs:
           restore-keys: ${{ runner.os }}-gradle
       - name: Build
         run: |
-          ./gradlew assemble
-          ./gradlew build
+          ./gradlew check
+      - name: Summarize tests results
+        uses: jeantessier/test-summary-action@v1
+        if: ${{ runner.os == 'Linux' }}
