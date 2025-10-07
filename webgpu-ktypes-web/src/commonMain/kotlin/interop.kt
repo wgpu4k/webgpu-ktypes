@@ -11,7 +11,7 @@ import kotlin.js.js
 
 @Suppress("EXTENSION_SHADOWED_BY_MEMBER")
 fun JsNumber.toLong(): Long = toLong(this)
-fun JsNumber.toULong(): Long = toLong(this)
+fun JsNumber.toULong(): ULong = toULong(this)
 
 private fun toLong(ref: JsNumber): Long = js("BigInt(ref)")
 private fun toULong(ref: JsNumber): ULong = js("BigInt(ref)")
