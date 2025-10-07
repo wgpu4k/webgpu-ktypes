@@ -7,11 +7,14 @@ import js.promise.Promise
 import kotlin.js.ExperimentalWasmJsInterop
 import kotlin.js.JsAny
 import kotlin.js.JsNumber
-import kotlin.js.JsString
+import kotlin.js.js
 
-expect inline fun JsNumber.asLong(): Long
-@Suppress("NOTHING_TO_INLINE")
-inline fun JsNumber.asULong(): ULong = asLong().toULong()
+@Suppress("EXTENSION_SHADOWED_BY_MEMBER")
+fun JsNumber.toLong(): Long = toLong(this)
+fun JsNumber.toULong(): Long = toLong(this)
+
+private fun toLong(ref: JsNumber): Long = js("BigInt(ref)")
+private fun toULong(ref: JsNumber): ULong = js("BigInt(ref)")
 
 external interface EventTarget: JsAny
 external interface DOMException: JsAny
