@@ -1,5 +1,6 @@
 package generator.mapper
 
+import com.squareup.kotlinpoet.ARRAY
 import com.squareup.kotlinpoet.ClassName
 import com.squareup.kotlinpoet.FunSpec
 import com.squareup.kotlinpoet.KModifier
@@ -61,26 +62,17 @@ private fun MapperContext.loadBitFlagEnums() {
                     .returns(className)
                     .addCode("return ${className.simpleName}(value or other.value)")
                     .build()
-            ).build()
+            )
+            .addFunction(
+                FunSpec.builder("of")
+                    .addModifiers(KModifier.INFIX)
+                    .addParameter("values", ARRAY.parameterizedBy(className))
+                    .returns(className)
+                    .addCode("return values.fold(${className.simpleName}.None) { acc, enumeration -> acc or enumeration }")
+                    .build()
+            )
+            .build()
 
-        /*bitflagEnumerations += Interface(
-            "GPU$name",
-            true,
-
-            bitflag.entries
-                .mapIndexed { index, entry ->
-                    // Calculate first if that a combination
-                    val value =
-                        entry.value_combination?.sumOf { subPart -> indexToFlagValue(bitflag.entries.indexOfFirst { it.name == subPart }) }
-                            ?: indexToFlagValue(index)
-
-                    val name = entry.name.convertToKotlinClassName()
-                    Enumeration.Value("$name(${value}uL)")
-                },
-            parameters = listOf("override val value: ULong"),
-            extends = listOf("FlagEnumeration"),
-
-            )*/
     }
 }
 
