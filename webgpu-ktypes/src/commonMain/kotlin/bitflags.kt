@@ -8,6 +8,8 @@ public value class GPUBufferUsage private constructor(
 ) {
   public infix fun or(other: io.ygdrasil.webgpu.GPUBufferUsage): io.ygdrasil.webgpu.GPUBufferUsage = GPUBufferUsage(value or other.value)
 
+  public infix fun of(values: kotlin.Array<io.ygdrasil.webgpu.GPUBufferUsage>): io.ygdrasil.webgpu.GPUBufferUsage = values.fold(GPUBufferUsage.None) { acc, enumeration -> acc or enumeration }
+
   public companion object {
     public val None: io.ygdrasil.webgpu.GPUBufferUsage = GPUBufferUsage(0uL)
 
@@ -41,6 +43,8 @@ public value class GPUColorWrite private constructor(
 ) {
   public infix fun or(other: io.ygdrasil.webgpu.GPUColorWrite): io.ygdrasil.webgpu.GPUColorWrite = GPUColorWrite(value or other.value)
 
+  public infix fun of(values: kotlin.Array<io.ygdrasil.webgpu.GPUColorWrite>): io.ygdrasil.webgpu.GPUColorWrite = values.fold(GPUColorWrite.None) { acc, enumeration -> acc or enumeration }
+
   public companion object {
     public val None: io.ygdrasil.webgpu.GPUColorWrite = GPUColorWrite(0uL)
 
@@ -64,6 +68,8 @@ public value class GPUMapMode private constructor(
 ) {
   public infix fun or(other: io.ygdrasil.webgpu.GPUMapMode): io.ygdrasil.webgpu.GPUMapMode = GPUMapMode(value or other.value)
 
+  public infix fun of(values: kotlin.Array<io.ygdrasil.webgpu.GPUMapMode>): io.ygdrasil.webgpu.GPUMapMode = values.fold(GPUMapMode.None) { acc, enumeration -> acc or enumeration }
+
   public companion object {
     public val None: io.ygdrasil.webgpu.GPUMapMode = GPUMapMode(0uL)
 
@@ -80,6 +86,8 @@ public value class GPUShaderStage private constructor(
   public val `value`: kotlin.ULong,
 ) {
   public infix fun or(other: io.ygdrasil.webgpu.GPUShaderStage): io.ygdrasil.webgpu.GPUShaderStage = GPUShaderStage(value or other.value)
+
+  public infix fun of(values: kotlin.Array<io.ygdrasil.webgpu.GPUShaderStage>): io.ygdrasil.webgpu.GPUShaderStage = values.fold(GPUShaderStage.None) { acc, enumeration -> acc or enumeration }
 
   public companion object {
     public val None: io.ygdrasil.webgpu.GPUShaderStage = GPUShaderStage(0uL)
@@ -99,6 +107,8 @@ public value class GPUTextureUsage private constructor(
   public val `value`: kotlin.ULong,
 ) {
   public infix fun or(other: io.ygdrasil.webgpu.GPUTextureUsage): io.ygdrasil.webgpu.GPUTextureUsage = GPUTextureUsage(value or other.value)
+
+  public infix fun of(values: kotlin.Array<io.ygdrasil.webgpu.GPUTextureUsage>): io.ygdrasil.webgpu.GPUTextureUsage = values.fold(GPUTextureUsage.None) { acc, enumeration -> acc or enumeration }
 
   public companion object {
     public val None: io.ygdrasil.webgpu.GPUTextureUsage = GPUTextureUsage(0uL)
