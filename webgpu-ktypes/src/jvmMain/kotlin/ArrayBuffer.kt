@@ -1,5 +1,6 @@
 package io.ygdrasil.webgpu
 
+import java.nio.ByteBuffer
 
 /**
  * Represents a fixed-length structure that holds raw binary data.
@@ -21,4 +22,6 @@ package io.ygdrasil.webgpu
  * println("Raw Pointer: ${buffer.rawPointer}, Size: ${buffer.size} bytes")
  * ```
  */
-//actual class ArrayBuffer(val rawPointer: ULong, val size: ULong)
+actual sealed interface ArrayBuffer
+@JvmInline
+value class JvmArrayBuffer(val buffer: ByteBuffer): ArrayBuffer

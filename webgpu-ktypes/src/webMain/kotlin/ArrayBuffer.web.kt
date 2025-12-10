@@ -8,4 +8,7 @@ package io.ygdrasil.webgpu
  * It is used to represent raw binary data for interoperability between
  * WebGPU Buffer functionality in a Kotlin multiplatform context.
  */
-actual typealias ArrayBuffer = js.buffer.ArrayBuffer
+actual sealed interface ArrayBuffer
+
+value class WebArrayBuffer(val buffer: js.buffer.ArrayBuffer): ArrayBuffer
+
