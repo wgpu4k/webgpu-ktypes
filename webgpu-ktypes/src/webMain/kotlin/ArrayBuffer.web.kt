@@ -1,14 +1,28 @@
 package io.ygdrasil.webgpu
 
 /**
- * Typealias for the WebGL implementation of ArrayBuffer in Kotlin.
+ * A platform-independent representation of a fixed-length raw binary data buffer.
  *
- * This provides a platform-specific definition of the `ArrayBuffer` class,
- * aligning it with the `org.khronos.webgl.ArrayBuffer` implementation.
- * It is used to represent raw binary data for interoperability between
- * WebGPU Buffer functionality in a Kotlin multiplatform context.
+ * The `ArrayBuffer` interface provides the ability to efficiently handle and store
+ * binary data in memory, often as the underlying storage for typed arrays. It is
+ * immutable, meaning its size cannot be adjusted once created.
+ *
+ * This abstraction is commonly used for processing low-level binary data, enabling
+ * tasks such as file handling, network communication, or interfacing with Web APIs
+ * that require binary data storage.
  */
 actual sealed interface ArrayBuffer
 
+
+/**
+ * A Kotlin/JS value class that serves as a wrapper for the JavaScript `ArrayBuffer`.
+ *
+ * This class allows for interoperability between Kotlin and JavaScript by embedding
+ * the `js.buffer.ArrayBuffer` instance, enabling the handling of binary data in
+ * scenarios such as Web API interactions, file operations, or low-level binary data
+ * processing.
+ *
+ * @property buffer The underlying `js.buffer.ArrayBuffer` instance being wrapped.
+ */
 value class WebArrayBuffer(val buffer: js.buffer.ArrayBuffer): ArrayBuffer
 

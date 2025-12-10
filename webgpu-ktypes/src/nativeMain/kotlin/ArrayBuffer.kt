@@ -5,26 +5,36 @@ import kotlinx.cinterop.COpaquePointer
 import kotlinx.cinterop.ExperimentalForeignApi
 
 /**
- * Represents a fixed-length structure that holds raw binary data.
+ * Represents a platform-specific abstraction over raw binary data stored in an ArrayBuffer.
  *
- * ArrayBuffer is commonly used to handle low-level memory manipulation,
- * often for Web APIs or interoperability with native or system-level code.
- * It acts as a generic container for binary data, allowing a variety
- * of typed views to be created over the data it encapsulates.
+ * This interface provides a unified way to interact with binary data across platforms,
+ * allowing efficient manipulation and processing of raw buffers. It is primarily used
+ * in contexts where native interop or web functionalities like WebGPU and WebGL require
+ * a representation of binary buffers.
  *
- * @constructor Creates an ArrayBuffer with a given raw pointer to memory and size.
- * @property rawPointer A ULong representing the raw memory pointer this buffer wraps.
- * It is typically used to point to memory allocated for binary data.
- * @property size A ULong representing the total length of the memory block
- * in bytes that this buffer encapsulates. This helps define the usable range in memory.
+ * Implementations of this interface may vary depending on the target platform, such as
+ * browser environments or native environments. They typically map to platform-native
+ * concepts like `org.khronos.webgl.ArrayBuffer` in JavaScript or analogous native
+ * structures in other environments.
  *
- * Example usage:
- * ```Kotlin
- * val buffer = ArrayBuffer(rawPointer = 12345678uL, size = 1024uL)
- * println("Raw Pointer: ${buffer.rawPointer}, Size: ${buffer.size} bytes")
- * ```
+ * Intended for use with platform-specific operations where binary data transfer or
+ * manipulation is necessary.
  */
 actual sealed interface ArrayBuffer
+
+
+/**
+ * Represents a native array buffer backed by a byte array, providing platform-specific
+ * functionality for handling raw binary data efficiently.
+ *
+ * This value class wraps a `ByteArray` and implements the `ArrayBuffer` interface,
+ * serving as a lightweight representation of binary data. It is primarily intended
+ * for use cases that require interoperation with native systems or other low-level
+ * data processing tasks where buffers are commonly utilized.
+ *
+ * The use of `@OptIn(ExperimentalForeignApi::class)` indicates that this class makes
+ * use of experimental API functionality, which may be subject to change in future versions.
+ */
 @OptIn(ExperimentalForeignApi::class)
 value class NativeArrayBuffer(val pointer: ByteArray): ArrayBuffer
 

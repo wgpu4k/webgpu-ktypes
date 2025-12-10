@@ -3,25 +3,31 @@ package io.ygdrasil.webgpu
 import java.nio.ByteBuffer
 
 /**
- * Represents a fixed-length structure that holds raw binary data.
+ * Represents a platform-specific abstraction for handling raw binary data buffers.
  *
- * ArrayBuffer is commonly used to handle low-level memory manipulation,
- * often for Web APIs or interoperability with native or system-level code.
- * It acts as a generic container for binary data, allowing a variety
- * of typed views to be created over the data it encapsulates.
+ * `ArrayBuffer` is a sealed interface that provides a common type for working with
+ * binary data across multiple platforms. It is typically associated with use cases
+ * such as data transfer, WebGPU operations, or interfacing with native libraries.
  *
- * @constructor Creates an ArrayBuffer with a given raw pointer to memory and size.
- * @property rawPointer A ULong representing the raw memory pointer this buffer wraps.
- * It is typically used to point to memory allocated for binary data.
- * @property size A ULong representing the total length of the memory block
- * in bytes that this buffer encapsulates. This helps define the usable range in memory.
- *
- * Example usage:
- * ```Kotlin
- * val buffer = ArrayBuffer(rawPointer = 12345678uL, size = 1024uL)
- * println("Raw Pointer: ${buffer.rawPointer}, Size: ${buffer.size} bytes")
- * ```
+ * This interface is intended to be implemented by platform-specific classes
+ * or value types that wrap the underlying buffer implementation, such as `ByteBuffer`
+ * on JVM or `org.khronos.webgl.ArrayBuffer` on JavaScript or Wasm.
  */
 actual sealed interface ArrayBuffer
+
+
+/**
+ * A JVM-specific implementation of the `ArrayBuffer` interface.
+ *
+ * `JvmArrayBuffer` provides a lightweight wrapper around the `ByteBuffer` class, allowing
+ * JVM platforms to manage, access, and manipulate raw binary data in a way that conforms
+ * to the `ArrayBuffer` abstraction.
+ *
+ * This class leverages the `@JvmInline` annotation, making it a value class. This ensures
+ * minimal runtime overhead and allows the `ByteBuffer` instance to be used with improved
+ * performance due to inlining and reduced object allocations.
+ *
+ * @param buffer The underlying `ByteBuffer` instance that serves as the basis for this array buffer.
+ */
 @JvmInline
 value class JvmArrayBuffer(val buffer: ByteBuffer): ArrayBuffer
