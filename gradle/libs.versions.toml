@@ -6,7 +6,7 @@ webidl-util = "0.10.2"
 wgpu4k-native = "v25.0.2"
 kaml = "0.92.0"
 kotlin = "2.2.21"
-agp = "8.13.0"
+agp = "8.13.2"
 coroutines = "1.10.2"
 kotlinpoet = "2.2.0"
 
