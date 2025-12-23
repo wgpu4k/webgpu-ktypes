@@ -380,15 +380,15 @@ value class JvmArrayBuffer internal constructor(val buffer: MemorySegment): Arra
 
     override fun getByte(offset: Int): Byte = buffer.get(java.lang.foreign.ValueLayout.JAVA_BYTE, offset.toLong())
 
-    override fun getShort(offset: Int): Short = buffer.get(java.lang.foreign.ValueLayout.JAVA_SHORT, offset.toLong())
+    override fun getShort(offset: Int): Short = buffer.get(java.lang.foreign.ValueLayout.JAVA_SHORT_UNALIGNED, offset.toLong())
 
-    override fun getInt(offset: Int): Int = buffer.get(java.lang.foreign.ValueLayout.JAVA_INT, offset.toLong())
+    override fun getInt(offset: Int): Int = buffer.get(java.lang.foreign.ValueLayout.JAVA_INT_UNALIGNED, offset.toLong())
 
-    override fun getLong(offset: Int): Long = buffer.get(java.lang.foreign.ValueLayout.JAVA_LONG, offset.toLong())
+    override fun getLong(offset: Int): Long = buffer.get(java.lang.foreign.ValueLayout.JAVA_LONG_UNALIGNED, offset.toLong())
 
-    override fun getFloat(offset: Int): Float = buffer.get(java.lang.foreign.ValueLayout.JAVA_FLOAT, offset.toLong())
+    override fun getFloat(offset: Int): Float = buffer.get(java.lang.foreign.ValueLayout.JAVA_FLOAT_UNALIGNED, offset.toLong())
 
-    override fun getDouble(offset: Int): Double = buffer.get(java.lang.foreign.ValueLayout.JAVA_DOUBLE, offset.toLong())
+    override fun getDouble(offset: Int): Double = buffer.get(java.lang.foreign.ValueLayout.JAVA_DOUBLE_UNALIGNED, offset.toLong())
 
     override fun getUByte(offset: Int): UByte = getByte(offset).toUByte()
 
@@ -405,23 +405,23 @@ value class JvmArrayBuffer internal constructor(val buffer: MemorySegment): Arra
     }
 
     override fun setShort(offset: Int, value: Short) {
-        buffer.set(java.lang.foreign.ValueLayout.JAVA_SHORT, offset.toLong(), value)
+        buffer.set(java.lang.foreign.ValueLayout.JAVA_SHORT_UNALIGNED, offset.toLong(), value)
     }
 
     override fun setInt(offset: Int, value: Int) {
-        buffer.set(java.lang.foreign.ValueLayout.JAVA_INT, offset.toLong(), value)
+        buffer.set(java.lang.foreign.ValueLayout.JAVA_INT_UNALIGNED, offset.toLong(), value)
     }
 
     override fun setLong(offset: Int, value: Long) {
-        buffer.set(java.lang.foreign.ValueLayout.JAVA_LONG, offset.toLong(), value)
+        buffer.set(java.lang.foreign.ValueLayout.JAVA_LONG_UNALIGNED, offset.toLong(), value)
     }
 
     override fun setFloat(offset: Int, value: Float) {
-        buffer.set(java.lang.foreign.ValueLayout.JAVA_FLOAT, offset.toLong(), value)
+        buffer.set(java.lang.foreign.ValueLayout.JAVA_FLOAT_UNALIGNED, offset.toLong(), value)
     }
 
     override fun setDouble(offset: Int, value: Double) {
-        buffer.set(java.lang.foreign.ValueLayout.JAVA_DOUBLE, offset.toLong(), value)
+        buffer.set(java.lang.foreign.ValueLayout.JAVA_DOUBLE_UNALIGNED, offset.toLong(), value)
     }
 
     override fun setUByte(offset: Int, value: UByte) {
