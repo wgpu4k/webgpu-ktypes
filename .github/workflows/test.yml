@@ -36,4 +36,5 @@ jobs:
           ./gradlew check
       - name: Summarize tests results
         uses: jeantessier/test-summary-action@v1
-        if: always()
+        if: ${{ runner.os == 'Linux' }}
+
