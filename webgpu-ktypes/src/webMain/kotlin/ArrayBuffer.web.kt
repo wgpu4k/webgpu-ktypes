@@ -327,6 +327,40 @@ internal expect inline fun UShortArray.toArrayBuffer(): ArrayBuffer
 internal expect inline fun UIntArray.toArrayBuffer(): ArrayBuffer
 internal expect inline fun ULongArray.toArrayBuffer(): ArrayBuffer
 
+// Platform-specific extension methods
+internal expect fun js.buffer.ArrayBuffer.readByteArray(): ByteArray
+internal expect fun js.buffer.ArrayBuffer.readShortArray(): ShortArray
+internal expect fun js.buffer.ArrayBuffer.readIntArray(): IntArray
+internal expect fun js.buffer.ArrayBuffer.readLongArray(): LongArray
+internal expect fun js.buffer.ArrayBuffer.readFloatArray(): FloatArray
+internal expect fun js.buffer.ArrayBuffer.readDoubleArray(): DoubleArray
+internal expect fun js.buffer.ArrayBuffer.readUByteArray(): UByteArray
+internal expect fun js.buffer.ArrayBuffer.readUShortArray(): UShortArray
+internal expect fun js.buffer.ArrayBuffer.readUIntArray(): UIntArray
+internal expect fun js.buffer.ArrayBuffer.readULongArray(): ULongArray
+
+internal expect fun js.buffer.ArrayBuffer.readByte(offset: Int): Byte
+internal expect fun js.buffer.ArrayBuffer.readShort(offset: Int): Short
+internal expect fun js.buffer.ArrayBuffer.readInt(offset: Int): Int
+internal expect fun js.buffer.ArrayBuffer.readLong(offset: Int): Long
+internal expect fun js.buffer.ArrayBuffer.readFloat(offset: Int): Float
+internal expect fun js.buffer.ArrayBuffer.readDouble(offset: Int): Double
+internal expect fun js.buffer.ArrayBuffer.readUByte(offset: Int): UByte
+internal expect fun js.buffer.ArrayBuffer.readUShort(offset: Int): UShort
+internal expect fun js.buffer.ArrayBuffer.readUInt(offset: Int): UInt
+internal expect fun js.buffer.ArrayBuffer.readULong(offset: Int): ULong
+
+internal expect fun js.buffer.ArrayBuffer.writeByte(offset: Int, value: Byte)
+internal expect fun js.buffer.ArrayBuffer.writeShort(offset: Int, value: Short)
+internal expect fun js.buffer.ArrayBuffer.writeInt(offset: Int, value: Int)
+internal expect fun js.buffer.ArrayBuffer.writeLong(offset: Int, value: Long)
+internal expect fun js.buffer.ArrayBuffer.writeFloat(offset: Int, value: Float)
+internal expect fun js.buffer.ArrayBuffer.writeDouble(offset: Int, value: Double)
+internal expect fun js.buffer.ArrayBuffer.writeUByte(offset: Int, value: UByte)
+internal expect fun js.buffer.ArrayBuffer.writeUShort(offset: Int, value: UShort)
+internal expect fun js.buffer.ArrayBuffer.writeUInt(offset: Int, value: UInt)
+internal expect fun js.buffer.ArrayBuffer.writeULong(offset: Int, value: ULong)
+
 /**
  * A Kotlin/JS value class that serves as a wrapper for the JavaScript `ArrayBuffer`.
  *
@@ -342,159 +376,39 @@ value class WebArrayBuffer internal constructor(val buffer: js.buffer.ArrayBuffe
         get() = buffer.byteLength.toLong()
 
     // Read methods - convert entire buffer to typed arrays
-
-    override fun toByteArray(): ByteArray {
-        val view = js.typedarrays.Int8Array<js.buffer.ArrayBuffer>(buffer)
-        return ByteArray(view.length) { view[it] }
-    }
-
-    override fun toShortArray(): ShortArray {
-        val view = js.typedarrays.Int16Array<js.buffer.ArrayBuffer>(buffer)
-        return ShortArray(view.length) { view[it] }
-    }
-
-    override fun toIntArray(): IntArray {
-        val view = js.typedarrays.Int32Array<js.buffer.ArrayBuffer>(buffer)
-        return IntArray(view.length) { view[it] }
-    }
-
-    override fun toLongArray(): LongArray {
-        val view = js.typedarrays.BigInt64Array<js.buffer.ArrayBuffer>(buffer)
-        return LongArray(view.length) { view[it].toLong() }
-    }
-
-    override fun toFloatArray(): FloatArray {
-        val view = js.typedarrays.Float32Array<js.buffer.ArrayBuffer>(buffer)
-        return FloatArray(view.length) { view[it] }
-    }
-
-    override fun toDoubleArray(): DoubleArray {
-        val view = js.typedarrays.Float64Array<js.buffer.ArrayBuffer>(buffer)
-        return DoubleArray(view.length) { view[it] }
-    }
-
-    override fun toUByteArray(): UByteArray {
-        val view = js.typedarrays.Uint8Array<js.buffer.ArrayBuffer>(buffer)
-        return UByteArray(view.length) { view[it].toUByte() }
-    }
-
-    override fun toUShortArray(): UShortArray {
-        val view = js.typedarrays.Uint16Array<js.buffer.ArrayBuffer>(buffer)
-        return UShortArray(view.length) { view[it].toUShort() }
-    }
-
-    override fun toUIntArray(): UIntArray {
-        val view = js.typedarrays.Uint32Array<js.buffer.ArrayBuffer>(buffer)
-        return UIntArray(view.length) { view[it].toUInt() }
-    }
-
-    override fun toULongArray(): ULongArray {
-        val view = js.typedarrays.BigUint64Array<js.buffer.ArrayBuffer>(buffer)
-        return ULongArray(view.length) { view[it].toULong() }
-    }
+    override fun toByteArray(): ByteArray = buffer.readByteArray()
+    override fun toShortArray(): ShortArray = buffer.readShortArray()
+    override fun toIntArray(): IntArray = buffer.readIntArray()
+    override fun toLongArray(): LongArray = buffer.readLongArray()
+    override fun toFloatArray(): FloatArray = buffer.readFloatArray()
+    override fun toDoubleArray(): DoubleArray = buffer.readDoubleArray()
+    override fun toUByteArray(): UByteArray = buffer.readUByteArray()
+    override fun toUShortArray(): UShortArray = buffer.readUShortArray()
+    override fun toUIntArray(): UIntArray = buffer.readUIntArray()
+    override fun toULongArray(): ULongArray = buffer.readULongArray()
 
     // Indexed read methods
-
-    override fun getByte(offset: Int): Byte {
-        val view = js.typedarrays.Int8Array<js.buffer.ArrayBuffer>(buffer)
-        return view[offset]
-    }
-
-    override fun getShort(offset: Int): Short {
-        val view = js.typedarrays.Int16Array<js.buffer.ArrayBuffer>(buffer)
-        return view[offset / Short.SIZE_BYTES]
-    }
-
-    override fun getInt(offset: Int): Int {
-        val view = js.typedarrays.Int32Array<js.buffer.ArrayBuffer>(buffer)
-        return view[offset / Int.SIZE_BYTES]
-    }
-
-    override fun getLong(offset: Int): Long {
-        val view = js.typedarrays.BigInt64Array<js.buffer.ArrayBuffer>(buffer)
-        return view[offset / Long.SIZE_BYTES].toLong()
-    }
-
-    override fun getFloat(offset: Int): Float {
-        val view = js.typedarrays.Float32Array<js.buffer.ArrayBuffer>(buffer)
-        return view[offset / Float.SIZE_BYTES]
-    }
-
-    override fun getDouble(offset: Int): Double {
-        val view = js.typedarrays.Float64Array<js.buffer.ArrayBuffer>(buffer)
-        return view[offset / Double.SIZE_BYTES]
-    }
-
-    override fun getUByte(offset: Int): UByte {
-        val view = js.typedarrays.Uint8Array<js.buffer.ArrayBuffer>(buffer)
-        return view[offset].toUByte()
-    }
-
-    override fun getUShort(offset: Int): UShort {
-        val view = js.typedarrays.Uint16Array<js.buffer.ArrayBuffer>(buffer)
-        return view[offset / Short.SIZE_BYTES].toUShort()
-    }
-
-    override fun getUInt(offset: Int): UInt {
-        val view = js.typedarrays.Uint32Array<js.buffer.ArrayBuffer>(buffer)
-        return view[offset / Int.SIZE_BYTES].toUInt()
-    }
-
-    override fun getULong(offset: Int): ULong {
-        val view = js.typedarrays.BigUint64Array<js.buffer.ArrayBuffer>(buffer)
-        return view[offset / Long.SIZE_BYTES].toULong()
-    }
+    override fun getByte(offset: Int): Byte = buffer.readByte(offset)
+    override fun getShort(offset: Int): Short = buffer.readShort(offset)
+    override fun getInt(offset: Int): Int = buffer.readInt(offset)
+    override fun getLong(offset: Int): Long = buffer.readLong(offset)
+    override fun getFloat(offset: Int): Float = buffer.readFloat(offset)
+    override fun getDouble(offset: Int): Double = buffer.readDouble(offset)
+    override fun getUByte(offset: Int): UByte = buffer.readUByte(offset)
+    override fun getUShort(offset: Int): UShort = buffer.readUShort(offset)
+    override fun getUInt(offset: Int): UInt = buffer.readUInt(offset)
+    override fun getULong(offset: Int): ULong = buffer.readULong(offset)
 
     // Indexed write methods
-
-    override fun setByte(offset: Int, value: Byte) {
-        val view = js.typedarrays.Int8Array<js.buffer.ArrayBuffer>(buffer)
-        view[offset] = value
-    }
-
-    override fun setShort(offset: Int, value: Short) {
-        val view = js.typedarrays.Int16Array<js.buffer.ArrayBuffer>(buffer)
-        view[offset / Short.SIZE_BYTES] = value
-    }
-
-    override fun setInt(offset: Int, value: Int) {
-        val view = js.typedarrays.Int32Array<js.buffer.ArrayBuffer>(buffer)
-        view[offset / Int.SIZE_BYTES] = value
-    }
-
-    override fun setLong(offset: Int, value: Long) {
-        val view = js.typedarrays.BigInt64Array<js.buffer.ArrayBuffer>(buffer)
-        view[offset / Long.SIZE_BYTES] = js.core.BigInt(value)
-    }
-
-    override fun setFloat(offset: Int, value: Float) {
-        val view = js.typedarrays.Float32Array<js.buffer.ArrayBuffer>(buffer)
-        view[offset / Float.SIZE_BYTES] = value
-    }
-
-    override fun setDouble(offset: Int, value: Double) {
-        val view = js.typedarrays.Float64Array<js.buffer.ArrayBuffer>(buffer)
-        view[offset / Double.SIZE_BYTES] = value
-    }
-
-    override fun setUByte(offset: Int, value: UByte) {
-        val view = js.typedarrays.Uint8Array<js.buffer.ArrayBuffer>(buffer)
-        view[offset] = value.toInt()
-    }
-
-    override fun setUShort(offset: Int, value: UShort) {
-        val view = js.typedarrays.Uint16Array<js.buffer.ArrayBuffer>(buffer)
-        view[offset / Short.SIZE_BYTES] = value.toInt()
-    }
-
-    override fun setUInt(offset: Int, value: UInt) {
-        val view = js.typedarrays.Uint32Array<js.buffer.ArrayBuffer>(buffer)
-        view[offset / Int.SIZE_BYTES] = value.toInt()
-    }
-
-    override fun setULong(offset: Int, value: ULong) {
-        val view = js.typedarrays.BigUint64Array<js.buffer.ArrayBuffer>(buffer)
-        view[offset / Long.SIZE_BYTES] = js.core.BigInt(value.toLong())
-    }
+    override fun setByte(offset: Int, value: Byte) = buffer.writeByte(offset, value)
+    override fun setShort(offset: Int, value: Short) = buffer.writeShort(offset, value)
+    override fun setInt(offset: Int, value: Int) = buffer.writeInt(offset, value)
+    override fun setLong(offset: Int, value: Long) = buffer.writeLong(offset, value)
+    override fun setFloat(offset: Int, value: Float) = buffer.writeFloat(offset, value)
+    override fun setDouble(offset: Int, value: Double) = buffer.writeDouble(offset, value)
+    override fun setUByte(offset: Int, value: UByte) = buffer.writeUByte(offset, value)
+    override fun setUShort(offset: Int, value: UShort) = buffer.writeUShort(offset, value)
+    override fun setUInt(offset: Int, value: UInt) = buffer.writeUInt(offset, value)
+    override fun setULong(offset: Int, value: ULong) = buffer.writeULong(offset, value)
 }
 
