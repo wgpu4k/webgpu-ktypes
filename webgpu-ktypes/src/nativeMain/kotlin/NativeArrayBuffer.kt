@@ -13,6 +13,14 @@ import kotlinx.cinterop.ByteVar
 import kotlinx.cinterop.CPointed
 import kotlinx.cinterop.NativePtr
 import kotlinx.cinterop.ShortVar
+import kotlinx.cinterop.IntVar
+import kotlinx.cinterop.LongVar
+import kotlinx.cinterop.FloatVar
+import kotlinx.cinterop.DoubleVar
+import kotlinx.cinterop.UByteVar
+import kotlinx.cinterop.UShortVar
+import kotlinx.cinterop.UIntVar
+import kotlinx.cinterop.ULongVar
 import kotlinx.cinterop.get
 import kotlinx.cinterop.interpretCPointer
 import kotlinx.cinterop.set
@@ -98,10 +106,11 @@ value class NativeArrayBuffer internal constructor(val buffer: Any): ArrayBuffer
 
     // Indexed read methods
 
-    override fun getByte(offset: Int): Byte = when (buffer) {
-        is ByteArray -> buffer[offset]
-        is UByteArray -> buffer[offset].toByte()
-        else -> error("Cannot read byte from ${buffer::class}")
+    override fun getByte(offset: Int): Byte {
+        buffer.useOpaquePinned(offset) { buffer ->
+            val ptr = buffer.reinterpret<ByteVar>()
+            return ptr[0]
+        }
     }
 
     override fun getShort(offset: Int): Short {
@@ -111,50 +120,60 @@ value class NativeArrayBuffer internal constructor(val buffer: Any): ArrayBuffer
         }
     }
 
-    override fun getInt(offset: Int): Int = when (buffer) {
-        is IntArray -> buffer[offset / Int.SIZE_BYTES]
-        is UIntArray -> buffer[offset / Int.SIZE_BYTES].toInt()
-        else -> error("Cannot read int from ${buffer::class}")
+    override fun getInt(offset: Int): Int {
+        buffer.useOpaquePinned(offset) { buffer ->
+            val ptr = buffer.reinterpret<IntVar>()
+            return ptr[0]
+        }
     }
 
-    override fun getLong(offset: Int): Long = when (buffer) {
-        is LongArray -> buffer[offset / Long.SIZE_BYTES]
-        is ULongArray -> buffer[offset / Long.SIZE_BYTES].toLong()
-        else -> error("Cannot read long from ${buffer::class}")
+    override fun getLong(offset: Int): Long {
+        buffer.useOpaquePinned(offset) { buffer ->
+            val ptr = buffer.reinterpret<LongVar>()
+            return ptr[0]
+        }
     }
 
-    override fun getFloat(offset: Int): Float = when (buffer) {
-        is FloatArray -> buffer[offset / Float.SIZE_BYTES]
-        else -> error("Cannot read float from ${buffer::class}")
+    override fun getFloat(offset: Int): Float {
+        buffer.useOpaquePinned(offset) { buffer ->
+            val ptr = buffer.reinterpret<FloatVar>()
+            return ptr[0]
+        }
     }
 
-    override fun getDouble(offset: Int): Double = when (buffer) {
-        is DoubleArray -> buffer[offset / Double.SIZE_BYTES]
-        else -> error("Cannot read double from ${buffer::class}")
+    override fun getDouble(offset: Int): Double {
+        buffer.useOpaquePinned(offset) { buffer ->
+            val ptr = buffer.reinterpret<DoubleVar>()
+            return ptr[0]
+        }
     }
 
-    override fun getUByte(offset: Int): UByte = when (buffer) {
-        is UByteArray -> buffer[offset]
-        is ByteArray -> buffer[offset].toUByte()
-        else -> error("Cannot read unsigned byte from ${buffer::class}")
+    override fun getUByte(offset: Int): UByte {
+        buffer.useOpaquePinned(offset) { buffer ->
+            val ptr = buffer.reinterpret<UByteVar>()
+            return ptr[0]
+        }
     }
 
-    override fun getUShort(offset: Int): UShort = when (buffer) {
-        is UShortArray -> buffer[offset / Short.SIZE_BYTES]
-        is ShortArray -> buffer[offset / Short.SIZE_BYTES].toUShort()
-        else -> error("Cannot read unsigned short from ${buffer::class}")
+    override fun getUShort(offset: Int): UShort {
+        buffer.useOpaquePinned(offset) { buffer ->
+            val ptr = buffer.reinterpret<UShortVar>()
+            return ptr[0]
+        }
     }
 
-    override fun getUInt(offset: Int): UInt = when (buffer) {
-        is UIntArray -> buffer[offset / Int.SIZE_BYTES]
-        is IntArray -> buffer[offset / Int.SIZE_BYTES].toUInt()
-        else -> error("Cannot read unsigned int from ${buffer::class}")
+    override fun getUInt(offset: Int): UInt {
+        buffer.useOpaquePinned(offset) { buffer ->
+            val ptr = buffer.reinterpret<UIntVar>()
+            return ptr[0]
+        }
     }
 
-    override fun getULong(offset: Int): ULong = when (buffer) {
-        is ULongArray -> buffer[offset / Long.SIZE_BYTES]
-        is LongArray -> buffer[offset / Long.SIZE_BYTES].toULong()
-        else -> error("Cannot read unsigned long from ${buffer::class}")
+    override fun getULong(offset: Int): ULong {
+        buffer.useOpaquePinned(offset) { buffer ->
+            val ptr = buffer.reinterpret<ULongVar>()
+            return ptr[0]
+        }
     }
 
     // Indexed write methods
@@ -174,64 +193,58 @@ value class NativeArrayBuffer internal constructor(val buffer: Any): ArrayBuffer
     }
 
     override fun setInt(offset: Int, value: Int) {
-        when (buffer) {
-            is IntArray -> buffer[offset / Int.SIZE_BYTES] = value
-            is UIntArray -> buffer[offset / Int.SIZE_BYTES] = value.toUInt()
-            else -> error("Cannot write int to ${buffer::class}")
+        buffer.useOpaquePinned(offset) { buffer ->
+            val ptr = buffer.reinterpret<IntVar>()
+            ptr[0] = value
         }
     }
 
     override fun setLong(offset: Int, value: Long) {
-        when (buffer) {
-            is LongArray -> buffer[offset / Long.SIZE_BYTES] = value
-            is ULongArray -> buffer[offset / Long.SIZE_BYTES] = value.toULong()
-            else -> error("Cannot write long to ${buffer::class}")
+        buffer.useOpaquePinned(offset) { buffer ->
+            val ptr = buffer.reinterpret<LongVar>()
+            ptr[0] = value
         }
     }
 
     override fun setFloat(offset: Int, value: Float) {
-        when (buffer) {
-            is FloatArray -> buffer[offset / Float.SIZE_BYTES] = value
-            else -> error("Cannot write float to ${buffer::class}")
+        buffer.useOpaquePinned(offset) { buffer ->
+            val ptr = buffer.reinterpret<FloatVar>()
+            ptr[0] = value
         }
     }
 
     override fun setDouble(offset: Int, value: Double) {
-        when (buffer) {
-            is DoubleArray -> buffer[offset / Double.SIZE_BYTES] = value
-            else -> error("Cannot write double to ${buffer::class}")
+        buffer.useOpaquePinned(offset) { buffer ->
+            val ptr = buffer.reinterpret<DoubleVar>()
+            ptr[0] = value
         }
     }
 
     override fun setUByte(offset: Int, value: UByte) {
-        when (buffer) {
-            is UByteArray -> buffer[offset] = value
-            is ByteArray -> buffer[offset] = value.toByte()
-            else -> error("Cannot write unsigned byte to ${buffer::class}")
+        buffer.useOpaquePinned(offset) { buffer ->
+            val ptr = buffer.reinterpret<UByteVar>()
+            ptr[0] = value
         }
     }
 
     override fun setUShort(offset: Int, value: UShort) {
-        when (buffer) {
-            is UShortArray -> buffer[offset / Short.SIZE_BYTES] = value
-            is ShortArray -> buffer[offset / Short.SIZE_BYTES] = value.toShort()
-            else -> error("Cannot write unsigned short to ${buffer::class}")
+        buffer.useOpaquePinned(offset) { buffer ->
+            val ptr = buffer.reinterpret<UShortVar>()
+            ptr[0] = value
         }
     }
 
     override fun setUInt(offset: Int, value: UInt) {
-        when (buffer) {
-            is UIntArray -> buffer[offset / Int.SIZE_BYTES] = value
-            is IntArray -> buffer[offset / Int.SIZE_BYTES] = value.toInt()
-            else -> error("Cannot write unsigned int to ${buffer::class}")
+        buffer.useOpaquePinned(offset) { buffer ->
+            val ptr = buffer.reinterpret<UIntVar>()
+            ptr[0] = value
         }
     }
 
     override fun setULong(offset: Int, value: ULong) {
-        when (buffer) {
-            is ULongArray -> buffer[offset / Long.SIZE_BYTES] = value
-            is LongArray -> buffer[offset / Long.SIZE_BYTES] = value.toLong()
-            else -> error("Cannot write unsigned long to ${buffer::class}")
+        buffer.useOpaquePinned(offset) { buffer ->
+            val ptr = buffer.reinterpret<ULongVar>()
+            ptr[0] = value
         }
     }
 }
