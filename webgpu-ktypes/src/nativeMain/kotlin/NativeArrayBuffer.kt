@@ -10,6 +10,11 @@ import kotlinx.cinterop.reinterpret
 import kotlinx.cinterop.usePinned
 import kotlinx.cinterop.CPointer
 import kotlinx.cinterop.ByteVar
+import kotlinx.cinterop.CPointed
+import kotlinx.cinterop.NativePtr
+import kotlinx.cinterop.ShortVar
+import kotlinx.cinterop.get
+import kotlinx.cinterop.interpretCPointer
 import kotlinx.cinterop.set
 
 /**
@@ -99,10 +104,11 @@ value class NativeArrayBuffer internal constructor(val buffer: Any): ArrayBuffer
         else -> error("Cannot read byte from ${buffer::class}")
     }
 
-    override fun getShort(offset: Int): Short = when (buffer) {
-        is ShortArray -> buffer[offset / Short.SIZE_BYTES]
-        is UShortArray -> buffer[offset / Short.SIZE_BYTES].toShort()
-        else -> error("Cannot read short from ${buffer::class}")
+    override fun getShort(offset: Int): Short {
+        buffer.useOpaquePinned(offset) { buffer ->
+            val ptr = buffer.reinterpret<ShortVar>()
+            return ptr[0]
+        }
     }
 
     override fun getInt(offset: Int): Int = when (buffer) {
@@ -154,15 +160,16 @@ value class NativeArrayBuffer internal constructor(val buffer: Any): ArrayBuffer
     // Indexed write methods
 
     override fun setByte(offset: Int, value: Byte) {
-        buffer.useOpaquePinned { buffer ->
+        buffer.useOpaquePinned(offset) { buffer ->
             val ptr = buffer.reinterpret<ByteVar>()
-            ptr[offset] = value
+            ptr[0] = value
         }
     }
 
     override fun setShort(offset: Int, value: Short) {
-        buffer.useOpaquePinned { buffer ->
-
+        buffer.useOpaquePinned(offset) { buffer ->
+            val ptr = (buffer).reinterpret<ShortVar>()
+            ptr[0] = value
         }
     }
 
@@ -244,16 +251,18 @@ private fun Any.getSizeInBytes(): Long = when (this) {
 }
 
 
-private inline fun <R> Any.useOpaquePinned(block: (COpaquePointer) -> R): R = when (this) {
-    is ByteArray -> this.usePinned { block(it.addressOf(0).reinterpret<COpaque>()) }
-    is ShortArray -> this.usePinned { block(it.addressOf(0).reinterpret<COpaque>()) }
-    is IntArray -> this.usePinned { block(it.addressOf(0).reinterpret<COpaque>()) }
-    is LongArray -> this.usePinned { block(it.addressOf(0).reinterpret<COpaque>()) }
-    is FloatArray -> this.usePinned { block(it.addressOf(0).reinterpret<COpaque>()) }
-    is DoubleArray -> this.usePinned { block(it.addressOf(0).reinterpret<COpaque>()) }
-    is UByteArray -> this.usePinned { block(it.addressOf(0).reinterpret<COpaque>()) }
-    is UShortArray -> this.usePinned { block(it.addressOf(0).reinterpret<COpaque>()) }
-    is UIntArray -> this.usePinned { block(it.addressOf(0).reinterpret<COpaque>()) }
-    is ULongArray -> this.usePinned { block(it.addressOf(0).reinterpret<COpaque>()) }
+private inline fun <R> Any.useOpaquePinned(offset: Int, block: (COpaquePointer) -> R): R = when (this) {
+    is ByteArray -> this.usePinned { block(it.addressOf(0).rawValue.withOffset(offset)) }
+    is ShortArray -> this.usePinned { block(it.addressOf(0).rawValue.withOffset(offset)) }
+    is IntArray -> this.usePinned { block(it.addressOf(0).rawValue.withOffset(offset)) }
+    is LongArray -> this.usePinned { block(it.addressOf(0).rawValue.withOffset(offset)) }
+    is FloatArray -> this.usePinned { block(it.addressOf(0).rawValue.withOffset(offset)) }
+    is DoubleArray -> this.usePinned { block(it.addressOf(0).rawValue.withOffset(offset)) }
+    is UByteArray -> this.usePinned { block(it.addressOf(0).rawValue.withOffset(offset)) }
+    is UShortArray -> this.usePinned { block(it.addressOf(0).rawValue.withOffset(offset)) }
+    is UIntArray -> this.usePinned { block(it.addressOf(0).rawValue.withOffset(offset)) }
+    is ULongArray -> this.usePinned { block(it.addressOf(0).rawValue.withOffset(offset)) }
     else -> error("Unsupported buffer type: ${this::class}")
 }
+
+fun NativePtr.withOffset(offset: Int) = interpretCPointer<CPointed>(this + offset.toLong())!!
