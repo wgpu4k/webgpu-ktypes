@@ -1,5 +1,6 @@
 @file:OptIn(ExperimentalKotlinGradlePluginApi::class)
 
+import com.android.build.api.dsl.androidLibrary
 import org.jetbrains.kotlin.gradle.ExperimentalKotlinGradlePluginApi
 import org.jetbrains.kotlin.gradle.dsl.JvmTarget
 import org.jetbrains.kotlin.gradle.plugin.KotlinHierarchyTemplate
@@ -8,7 +9,7 @@ import org.jetbrains.kotlin.gradle.plugin.KotlinSourceSetTree
 plugins {
     publish
     kotlin("multiplatform")
-    id("com.android.library")
+    alias(libs.plugins.android.library)
 }
 
 kotlin {
@@ -19,7 +20,7 @@ kotlin {
 
     jvm {
         compilerOptions {
-            jvmTarget = JvmTarget.JVM_21
+            jvmTarget = JvmTarget.JVM_25
         }
     }
 
@@ -40,12 +41,14 @@ kotlin {
     androidNativeX86()
     androidNativeX64()
 
-    androidTarget {
+    androidLibrary {
         compilerOptions {
-            jvmTarget = JvmTarget.JVM_21
+            jvmTarget = JvmTarget.JVM_17
         }
 
-        publishLibraryVariants("release", "debug")
+        namespace = "io.ygdrasil.webgpu.ktypes"
+        compileSdk = 36
+        minSdk = 28
     }
 
 
@@ -81,18 +84,8 @@ kotlin {
     }
 }
 
-android {
-    namespace = "io.ygdrasil.webgpu.ktypes"
-    compileSdk = 35
-
-    defaultConfig {
-        minSdk = 28
-    }
-
-}
-
 java {
     toolchain {
-        languageVersion.set(JavaLanguageVersion.of(21))
+        languageVersion.set(JavaLanguageVersion.of(25))
     }
 }
