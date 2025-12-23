@@ -10,6 +10,8 @@ plugins {
     publish
     kotlin("multiplatform")
     alias(libs.plugins.android.library)
+    alias(libs.plugins.kotest)
+    alias(libs.plugins.ksp)
 }
 
 kotlin {
@@ -81,11 +83,44 @@ kotlin {
         nativeMain.get().dependsOn(commonNativeMain)
         jvmMain.get().dependsOn(commonNativeMain)
         androidMain.get().dependsOn(commonNativeMain)
+
+        commonTest {
+            dependencies {
+                implementation(libs.bundles.kotest)
+            }
+        }
+
+        jvmTest {
+            dependencies {
+                implementation(libs.kotest.runner.junit5)
+                implementation(libs.kotlin.reflect)
+            }
+        }
     }
 }
 
 java {
     toolchain {
         languageVersion.set(JavaLanguageVersion.of(25))
+    }
+}
+
+
+tasks.withType<Test>().configureEach {
+    filter {
+        failOnNoDiscoveredTests = false
+    }
+}
+
+tasks.named<Test>("jvmTest") {
+    useJUnitPlatform()
+    testLogging {
+        showExceptions = true
+        showStandardStreams = true
+        events = setOf(
+            org.gradle.api.tasks.testing.logging.TestLogEvent.FAILED,
+            org.gradle.api.tasks.testing.logging.TestLogEvent.PASSED
+        )
+        exceptionFormat = org.gradle.api.tasks.testing.logging.TestExceptionFormat.FULL
     }
 }
