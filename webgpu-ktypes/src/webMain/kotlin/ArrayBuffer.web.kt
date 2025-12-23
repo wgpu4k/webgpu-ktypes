@@ -1,3 +1,5 @@
+@file:OptIn(ExperimentalUnsignedTypes::class)
+
 package io.ygdrasil.webgpu
 
 /**
@@ -11,8 +13,53 @@ package io.ygdrasil.webgpu
  * tasks such as file handling, network communication, or interfacing with Web APIs
  * that require binary data storage.
  */
-actual sealed interface ArrayBuffer
+actual sealed interface ArrayBuffer {
+    actual companion object {
+        fun from(buffer: js.buffer.ArrayBuffer)
+            = WebArrayBuffer(buffer)
 
+        actual fun from(array: ByteArray): ArrayBuffer
+            = array.toArrayBuffer()
+
+        actual fun from(array: ShortArray): ArrayBuffer {
+            TODO("Not yet implemented")
+        }
+
+        actual fun from(array: IntArray): ArrayBuffer {
+            TODO("Not yet implemented")
+        }
+
+        actual fun from(array: LongArray): ArrayBuffer {
+            TODO("Not yet implemented")
+        }
+
+        actual fun from(array: FloatArray): ArrayBuffer {
+            TODO("Not yet implemented")
+        }
+
+        actual fun from(array: DoubleArray): ArrayBuffer {
+            TODO("Not yet implemented")
+        }
+
+        actual fun from(array: UByteArray): ArrayBuffer {
+            TODO("Not yet implemented")
+        }
+
+        actual fun from(array: UShortArray): ArrayBuffer {
+            TODO("Not yet implemented")
+        }
+
+        actual fun from(array: UIntArray): ArrayBuffer {
+            TODO("Not yet implemented")
+        }
+
+        actual fun from(array: ULongArray): ArrayBuffer {
+            TODO("Not yet implemented")
+        }
+    }
+}
+
+inline internal expect fun ByteArray.toArrayBuffer(): ArrayBuffer
 
 /**
  * A Kotlin/JS value class that serves as a wrapper for the JavaScript `ArrayBuffer`.
@@ -24,5 +71,5 @@ actual sealed interface ArrayBuffer
  *
  * @property buffer The underlying `js.buffer.ArrayBuffer` instance being wrapped.
  */
-value class WebArrayBuffer(val buffer: js.buffer.ArrayBuffer): ArrayBuffer
+value class WebArrayBuffer internal constructor(val buffer: js.buffer.ArrayBuffer): ArrayBuffer
 

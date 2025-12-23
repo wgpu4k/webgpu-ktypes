@@ -1,29 +1,29 @@
+@file:OptIn(ExperimentalUnsignedTypes::class)
+
 package io.ygdrasil.webgpu
 
 import java.nio.ByteBuffer
 
 /**
- * Represents a fixed-length structure that holds raw binary data.
+ * Represents a platform-specific abstraction for handling raw binary data buffers.
  *
- * ArrayBuffer is commonly used to handle low-level memory manipulation,
- * often for Web APIs or interoperability with native or system-level code.
- * It acts as a generic container for binary data, allowing a variety
- * of typed views to be created over the data it encapsulates.
+ * `ArrayBuffer` is a sealed interface that provides a common type for working with
+ * binary data across multiple platforms. It is typically associated with use cases
+ * such as data transfer, WebGPU operations, or interfacing with native libraries.
  *
- * @constructor Creates an ArrayBuffer with a given raw pointer to memory and size.
- * @property rawPointer A ULong representing the raw memory pointer this buffer wraps.
- * It is typically used to point to memory allocated for binary data.
- * @property size A ULong representing the total length of the memory block
- * in bytes that this buffer encapsulates. This helps define the usable range in memory.
+ * This interface is intended to be implemented by platform-specific classes
+ * or value types that wrap the underlying buffer implementation, such as direct
+ * `ByteBuffer` on Android.
  *
  * Example usage:
- * ```Kotlin
- * val buffer = ArrayBuffer(rawPointer = 12345678uL, size = 1024uL)
- * println("Raw Pointer: ${buffer.rawPointer}, Size: ${buffer.size} bytes")
+ * ```kotlin
+ * val buffer = ArrayBuffer.from(byteArrayOf(1, 2, 3, 4))
+ * val intBuffer = ArrayBuffer.from(intArrayOf(100, 200, 300))
  * ```
  */
 actual sealed interface ArrayBuffer {
     actual companion object {
+
         /**
          * Creates an ArrayBuffer from a ByteBuffer.
          * @param buffer the byte buffer to wrap (must be a direct buffer)

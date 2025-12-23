@@ -67,10 +67,6 @@ kotlin {
 
     sourceSets {
 
-        androidMain {
-
-        }
-
         webMain {
             dependencies {
                 api(kotlinWrappers.js)

@@ -14,7 +14,7 @@ actual fun ByteArray.asArrayBuffer(): ArrayBuffer {
     forEachIndexed { index, value ->
         array[index] = value.asJsNumber()
     }
-    return WebArrayBuffer(Int8Array<js.buffer.ArrayBuffer>(array).buffer)
+    return ArrayBuffer.from(Int8Array<js.buffer.ArrayBuffer>(array).buffer)
 }
 
 actual fun UShortArray.asArrayBuffer(): ArrayBuffer {
@@ -22,7 +22,7 @@ actual fun UShortArray.asArrayBuffer(): ArrayBuffer {
     forEachIndexed { index, value ->
         array[index] = value.asJsNumber()
     }
-    return WebArrayBuffer(Int16Array<js.buffer.ArrayBuffer>(array).buffer)
+    return ArrayBuffer.from(Int16Array<js.buffer.ArrayBuffer>(array).buffer)
 }
 
 actual fun ShortArray.asArrayBuffer(): ArrayBuffer {
@@ -30,7 +30,7 @@ actual fun ShortArray.asArrayBuffer(): ArrayBuffer {
     forEachIndexed { index, value ->
         array[index] = value.asJsNumber()
     }
-    return WebArrayBuffer(Int16Array<js.buffer.ArrayBuffer>(array).buffer)
+    return ArrayBuffer.from(Int16Array<js.buffer.ArrayBuffer>(array).buffer)
 }
 
 actual fun IntArray.asArrayBuffer(): ArrayBuffer {
@@ -38,7 +38,7 @@ actual fun IntArray.asArrayBuffer(): ArrayBuffer {
     forEachIndexed { index, value ->
         array[index] = value.asJsNumber()
     }
-    return WebArrayBuffer(Int32Array<js.buffer.ArrayBuffer>(array).buffer)
+    return ArrayBuffer.from(Int32Array<js.buffer.ArrayBuffer>(array).buffer)
 }
 
 actual fun UIntArray.asArrayBuffer(): ArrayBuffer {
@@ -46,7 +46,7 @@ actual fun UIntArray.asArrayBuffer(): ArrayBuffer {
     forEachIndexed { index, value ->
         array[index] = value.asJsNumber()
     }
-    return WebArrayBuffer(Int32Array<js.buffer.ArrayBuffer>(array).buffer)
+    return ArrayBuffer.from(Int32Array<js.buffer.ArrayBuffer>(array).buffer)
 }
 
 actual fun LongArray.asArrayBuffer(): ArrayBuffer {
@@ -54,7 +54,7 @@ actual fun LongArray.asArrayBuffer(): ArrayBuffer {
     forEachIndexed { index, value ->
         array[index] = value.asJsNumber()
     }
-    return WebArrayBuffer(Int32Array<js.buffer.ArrayBuffer>(array).buffer)
+    return ArrayBuffer.from(Int32Array<js.buffer.ArrayBuffer>(array).buffer)
 }
 
 actual fun ULongArray.asArrayBuffer(): ArrayBuffer {
@@ -62,7 +62,7 @@ actual fun ULongArray.asArrayBuffer(): ArrayBuffer {
     forEachIndexed { index, value ->
         array[index] = value.asJsNumber()
     }
-    return WebArrayBuffer(Int32Array<js.buffer.ArrayBuffer>(array).buffer)
+    return ArrayBuffer.from(Int32Array<js.buffer.ArrayBuffer>(array).buffer)
 }
 
 actual fun FloatArray.asArrayBuffer(): ArrayBuffer {
@@ -70,7 +70,7 @@ actual fun FloatArray.asArrayBuffer(): ArrayBuffer {
     forEachIndexed { index, value ->
         array[index] = value.asJsNumber()
     }
-    return WebArrayBuffer(Float32Array<js.buffer.ArrayBuffer>(array).buffer)
+    return ArrayBuffer.from(Float32Array<js.buffer.ArrayBuffer>(array).buffer)
 }
 
 actual fun DoubleArray.asArrayBuffer(): ArrayBuffer {
@@ -78,5 +78,5 @@ actual fun DoubleArray.asArrayBuffer(): ArrayBuffer {
     forEachIndexed { index, value ->
         array[index] = value.asJsNumber()
     }
-    return WebArrayBuffer(Float64Array<js.buffer.ArrayBuffer>(array).buffer)
+    return ArrayBuffer.from(Float64Array<js.buffer.ArrayBuffer>(array).buffer)
 }
