@@ -9,4 +9,8 @@ package io.ygdrasil.webgpu
  * This class is an abstraction for handling binary data in a format compatible with WebGPU,
  * allowing interoperability with GPU resources like buffers and textures.
  */
-expect sealed interface ArrayBuffer
+expect sealed interface ArrayBuffer {
+    companion object {
+
+    }
+}

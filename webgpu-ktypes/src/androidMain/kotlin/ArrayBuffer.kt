@@ -22,8 +22,12 @@ import java.nio.ByteBuffer
  * println("Raw Pointer: ${buffer.rawPointer}, Size: ${buffer.size} bytes")
  * ```
  */
-actual sealed interface ArrayBuffer
+actual sealed interface ArrayBuffer {
+    companion object {
+        fun from(buffer: ByteBuffer): ArrayBuffer = AndroidArrayBuffer(buffer)
+    }
+}
 
-@kotlin.jvm.JvmInline
-value class AndroidArrayBuffer(val buffer: ByteBuffer): ArrayBuffer
+@JvmInline
+value class AndroidArrayBuffer internal constructor(val buffer: ByteBuffer): ArrayBuffer
 

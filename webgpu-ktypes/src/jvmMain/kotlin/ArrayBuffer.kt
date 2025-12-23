@@ -1,5 +1,6 @@
 package io.ygdrasil.webgpu
 
+import java.lang.foreign.MemorySegment
 import java.nio.ByteBuffer
 
 /**
@@ -13,7 +14,13 @@ import java.nio.ByteBuffer
  * or value types that wrap the underlying buffer implementation, such as `ByteBuffer`
  * on JVM or `org.khronos.webgl.ArrayBuffer` on JavaScript or Wasm.
  */
-actual sealed interface ArrayBuffer
+actual sealed interface ArrayBuffer {
+    companion object {
+        fun from(segment: MemorySegment): ArrayBuffer = JvmArrayBuffer(segment)
+
+        fun from(buffer: ByteBuffer): ArrayBuffer = JvmArrayBuffer(MemorySegment.ofBuffer(buffer))
+    }
+}
 
 
 /**
@@ -30,4 +37,4 @@ actual sealed interface ArrayBuffer
  * @param buffer The underlying `ByteBuffer` instance that serves as the basis for this array buffer.
  */
 @JvmInline
-value class JvmArrayBuffer(val buffer: ByteBuffer): ArrayBuffer
+value class JvmArrayBuffer internal constructor(val buffer: MemorySegment): ArrayBuffer
