@@ -1,6 +1,7 @@
 package io.ygdrasil.webgpu
 
-import kotlinx.cinterop.ExperimentalForeignApi
+import kotlinx.cinterop.*
+import kotlin.experimental.ExperimentalNativeApi
 
 /**
  * Represents a platform-specific abstraction over raw binary data stored in an ArrayBuffer.
@@ -324,233 +325,382 @@ actual sealed interface ArrayBuffer {
 
 
 /**
- * Represents a native array buffer backed by a primitive array, providing platform-specific
- * functionality for handling raw binary data efficiently.
+ * Represents a native array buffer backed by an opaque C pointer, providing direct access
+ * to unmanaged memory for efficient interop with native C libraries.
  *
- * This value class wraps a primitive array (such as `ByteArray`, `IntArray`, `FloatArray`, etc.)
- * and implements the `ArrayBuffer` interface, serving as a lightweight representation of binary data.
- * It is primarily intended for use cases that require interoperation with native systems or other
- * low-level data processing tasks where buffers are commonly utilized.
+ * This class wraps a raw C pointer (COpaquePointer) and manages the lifecycle of the allocated
+ * memory. It implements the `ArrayBuffer` interface to provide a unified API for buffer operations
+ * while allowing direct manipulation of native memory.
  *
- * The use of `@OptIn(ExperimentalForeignApi::class)` indicates that this class makes
- * use of experimental API functionality, which may be subject to change in future versions.
+ * The buffer automatically manages memory allocation and deallocation using Kotlin/Native's
+ * Arena or manual memory management. This is particularly useful when interfacing with WebGPU
+ * or other graphics APIs that expect native memory pointers.
  *
- * @param buffer The underlying primitive array stored as `Any` to support various array types
+ * @param pointer The opaque C pointer to the native memory
+ * @param size The size of the buffer in bytes
+ * @param ownsMemory Whether this buffer owns the memory and should free it on cleanup
  */
-@OptIn(ExperimentalForeignApi::class)
-value class NativeArrayBuffer internal constructor(val buffer: Any): ArrayBuffer {
-    override val size: Long
-        get() = when (buffer) {
-            is ByteArray -> buffer.size.toLong()
-            is ShortArray -> (buffer.size * Short.SIZE_BYTES).toLong()
-            is IntArray -> (buffer.size * Int.SIZE_BYTES).toLong()
-            is LongArray -> (buffer.size * Long.SIZE_BYTES).toLong()
-            is FloatArray -> (buffer.size * Float.SIZE_BYTES).toLong()
-            is DoubleArray -> (buffer.size * Double.SIZE_BYTES).toLong()
-            is UByteArray -> buffer.size.toLong()
-            is UShortArray -> (buffer.size * Short.SIZE_BYTES).toLong()
-            is UIntArray -> (buffer.size * Int.SIZE_BYTES).toLong()
-            is ULongArray -> (buffer.size * Long.SIZE_BYTES).toLong()
-            else -> error("Unsupported buffer type: ${buffer::class}")
-        }
+@OptIn(ExperimentalForeignApi::class, ExperimentalNativeApi::class)
+class OpaquePointerArrayBuffer internal constructor(
+    private val pointer: COpaquePointer,
+    override val size: Long,
+    private val ownsMemory: Boolean = true
+) : ArrayBuffer {
+
+    /**
+     * Creates a new buffer by allocating native memory of the specified size.
+     * @param sizeInBytes The size of the buffer in bytes
+     */
+    constructor(sizeInBytes: Long) : this(
+        pointer = nativeHeap.allocArray<ByteVar>(sizeInBytes.toInt()).reinterpret(),
+        size = sizeInBytes,
+        ownsMemory = true
+    )
+
+    /**
+     * Creates a new buffer from an existing pointer without taking ownership.
+     * @param pointer The opaque C pointer
+     * @param sizeInBytes The size of the buffer in bytes
+     */
+    constructor(pointer: COpaquePointer, sizeInBytes: Long) : this(
+        pointer = pointer,
+        size = sizeInBytes,
+        ownsMemory = false
+    )
+
+    private val bytePtr: CPointer<ByteVar>
+        get() = pointer.reinterpret()
 
     // Read methods - convert entire buffer to typed arrays
 
-    override fun toByteArray(): ByteArray = when (buffer) {
-        is ByteArray -> buffer
-        is UByteArray -> buffer.asByteArray()
-        else -> error("Cannot convert ${buffer::class} to ByteArray")
+    override fun toByteArray(): ByteArray {
+        val array = ByteArray(size.toInt())
+        for (i in 0 until size.toInt()) {
+            array[i] = bytePtr[i]
+        }
+        return array
     }
 
-    override fun toShortArray(): ShortArray = when (buffer) {
-        is ShortArray -> buffer
-        is UShortArray -> buffer.asShortArray()
-        else -> error("Cannot convert ${buffer::class} to ShortArray")
+    override fun toShortArray(): ShortArray {
+        require(size % Short.SIZE_BYTES == 0L) { "Buffer size must be multiple of ${Short.SIZE_BYTES}" }
+        val array = ShortArray((size / Short.SIZE_BYTES).toInt())
+        val shortPtr = pointer.reinterpret<ShortVar>()
+        for (i in array.indices) {
+            array[i] = shortPtr[i]
+        }
+        return array
     }
 
-    override fun toIntArray(): IntArray = when (buffer) {
-        is IntArray -> buffer
-        is UIntArray -> buffer.asIntArray()
-        else -> error("Cannot convert ${buffer::class} to IntArray")
+    override fun toIntArray(): IntArray {
+        require(size % Int.SIZE_BYTES == 0L) { "Buffer size must be multiple of ${Int.SIZE_BYTES}" }
+        val array = IntArray((size / Int.SIZE_BYTES).toInt())
+        val intPtr = pointer.reinterpret<IntVar>()
+        for (i in array.indices) {
+            array[i] = intPtr[i]
+        }
+        return array
     }
 
-    override fun toLongArray(): LongArray = when (buffer) {
-        is LongArray -> buffer
-        is ULongArray -> buffer.asLongArray()
-        else -> error("Cannot convert ${buffer::class} to LongArray")
+    override fun toLongArray(): LongArray {
+        require(size % Long.SIZE_BYTES == 0L) { "Buffer size must be multiple of ${Long.SIZE_BYTES}" }
+        val array = LongArray((size / Long.SIZE_BYTES).toInt())
+        val longPtr = pointer.reinterpret<LongVar>()
+        for (i in array.indices) {
+            array[i] = longPtr[i]
+        }
+        return array
     }
 
-    override fun toFloatArray(): FloatArray = when (buffer) {
-        is FloatArray -> buffer
-        else -> error("Cannot convert ${buffer::class} to FloatArray")
+    override fun toFloatArray(): FloatArray {
+        require(size % Float.SIZE_BYTES == 0L) { "Buffer size must be multiple of ${Float.SIZE_BYTES}" }
+        val array = FloatArray((size / Float.SIZE_BYTES).toInt())
+        val floatPtr = pointer.reinterpret<FloatVar>()
+        for (i in array.indices) {
+            array[i] = floatPtr[i]
+        }
+        return array
     }
 
-    override fun toDoubleArray(): DoubleArray = when (buffer) {
-        is DoubleArray -> buffer
-        else -> error("Cannot convert ${buffer::class} to DoubleArray")
+    override fun toDoubleArray(): DoubleArray {
+        require(size % Double.SIZE_BYTES == 0L) { "Buffer size must be multiple of ${Double.SIZE_BYTES}" }
+        val array = DoubleArray((size / Double.SIZE_BYTES).toInt())
+        val doublePtr = pointer.reinterpret<DoubleVar>()
+        for (i in array.indices) {
+            array[i] = doublePtr[i]
+        }
+        return array
     }
 
-    override fun toUByteArray(): UByteArray = when (buffer) {
-        is UByteArray -> buffer
-        is ByteArray -> buffer.asUByteArray()
-        else -> error("Cannot convert ${buffer::class} to UByteArray")
+    override fun toUByteArray(): UByteArray {
+        return toByteArray().asUByteArray()
     }
 
-    override fun toUShortArray(): UShortArray = when (buffer) {
-        is UShortArray -> buffer
-        is ShortArray -> buffer.asUShortArray()
-        else -> error("Cannot convert ${buffer::class} to UShortArray")
+    override fun toUShortArray(): UShortArray {
+        return toShortArray().asUShortArray()
     }
 
-    override fun toUIntArray(): UIntArray = when (buffer) {
-        is UIntArray -> buffer
-        is IntArray -> buffer.asUIntArray()
-        else -> error("Cannot convert ${buffer::class} to UIntArray")
+    override fun toUIntArray(): UIntArray {
+        return toIntArray().asUIntArray()
     }
 
-    override fun toULongArray(): ULongArray = when (buffer) {
-        is ULongArray -> buffer
-        is LongArray -> buffer.asULongArray()
-        else -> error("Cannot convert ${buffer::class} to ULongArray")
+    override fun toULongArray(): ULongArray {
+        return toLongArray().asULongArray()
     }
 
     // Indexed read methods
 
-    override fun getByte(offset: Int): Byte = when (buffer) {
-        is ByteArray -> buffer[offset]
-        is UByteArray -> buffer[offset].toByte()
-        else -> error("Cannot read byte from ${buffer::class}")
+    override fun getByte(offset: Int): Byte {
+        require(offset >= 0 && offset < size) { "Offset out of bounds: $offset" }
+        return bytePtr[offset]
     }
 
-    override fun getShort(offset: Int): Short = when (buffer) {
-        is ShortArray -> buffer[offset / Short.SIZE_BYTES]
-        is UShortArray -> buffer[offset / Short.SIZE_BYTES].toShort()
-        else -> error("Cannot read short from ${buffer::class}")
+    override fun getShort(offset: Int): Short {
+        require(offset >= 0 && offset + Short.SIZE_BYTES <= size) { "Offset out of bounds: $offset" }
+        return pointer.reinterpret<ShortVar>()[offset / Short.SIZE_BYTES]
     }
 
-    override fun getInt(offset: Int): Int = when (buffer) {
-        is IntArray -> buffer[offset / Int.SIZE_BYTES]
-        is UIntArray -> buffer[offset / Int.SIZE_BYTES].toInt()
-        else -> error("Cannot read int from ${buffer::class}")
+    override fun getInt(offset: Int): Int {
+        require(offset >= 0 && offset + Int.SIZE_BYTES <= size) { "Offset out of bounds: $offset" }
+        return pointer.reinterpret<IntVar>()[offset / Int.SIZE_BYTES]
     }
 
-    override fun getLong(offset: Int): Long = when (buffer) {
-        is LongArray -> buffer[offset / Long.SIZE_BYTES]
-        is ULongArray -> buffer[offset / Long.SIZE_BYTES].toLong()
-        else -> error("Cannot read long from ${buffer::class}")
+    override fun getLong(offset: Int): Long {
+        require(offset >= 0 && offset + Long.SIZE_BYTES <= size) { "Offset out of bounds: $offset" }
+        return pointer.reinterpret<LongVar>()[offset / Long.SIZE_BYTES]
     }
 
-    override fun getFloat(offset: Int): Float = when (buffer) {
-        is FloatArray -> buffer[offset / Float.SIZE_BYTES]
-        else -> error("Cannot read float from ${buffer::class}")
+    override fun getFloat(offset: Int): Float {
+        require(offset >= 0 && offset + Float.SIZE_BYTES <= size) { "Offset out of bounds: $offset" }
+        return pointer.reinterpret<FloatVar>()[offset / Float.SIZE_BYTES]
     }
 
-    override fun getDouble(offset: Int): Double = when (buffer) {
-        is DoubleArray -> buffer[offset / Double.SIZE_BYTES]
-        else -> error("Cannot read double from ${buffer::class}")
+    override fun getDouble(offset: Int): Double {
+        require(offset >= 0 && offset + Double.SIZE_BYTES <= size) { "Offset out of bounds: $offset" }
+        return pointer.reinterpret<DoubleVar>()[offset / Double.SIZE_BYTES]
     }
 
-    override fun getUByte(offset: Int): UByte = when (buffer) {
-        is UByteArray -> buffer[offset]
-        is ByteArray -> buffer[offset].toUByte()
-        else -> error("Cannot read unsigned byte from ${buffer::class}")
+    override fun getUByte(offset: Int): UByte {
+        return getByte(offset).toUByte()
     }
 
-    override fun getUShort(offset: Int): UShort = when (buffer) {
-        is UShortArray -> buffer[offset / Short.SIZE_BYTES]
-        is ShortArray -> buffer[offset / Short.SIZE_BYTES].toUShort()
-        else -> error("Cannot read unsigned short from ${buffer::class}")
+    override fun getUShort(offset: Int): UShort {
+        return getShort(offset).toUShort()
     }
 
-    override fun getUInt(offset: Int): UInt = when (buffer) {
-        is UIntArray -> buffer[offset / Int.SIZE_BYTES]
-        is IntArray -> buffer[offset / Int.SIZE_BYTES].toUInt()
-        else -> error("Cannot read unsigned int from ${buffer::class}")
+    override fun getUInt(offset: Int): UInt {
+        return getInt(offset).toUInt()
     }
 
-    override fun getULong(offset: Int): ULong = when (buffer) {
-        is ULongArray -> buffer[offset / Long.SIZE_BYTES]
-        is LongArray -> buffer[offset / Long.SIZE_BYTES].toULong()
-        else -> error("Cannot read unsigned long from ${buffer::class}")
+    override fun getULong(offset: Int): ULong {
+        return getLong(offset).toULong()
     }
 
     // Indexed write methods
 
     override fun setByte(offset: Int, value: Byte) {
-        when (buffer) {
-            is ByteArray -> buffer[offset] = value
-            is UByteArray -> buffer[offset] = value.toUByte()
-            else -> error("Cannot write byte to ${buffer::class}")
-        }
+        require(offset >= 0 && offset < size) { "Offset out of bounds: $offset" }
+        bytePtr[offset] = value
     }
 
     override fun setShort(offset: Int, value: Short) {
-        when (buffer) {
-            is ShortArray -> buffer[offset / Short.SIZE_BYTES] = value
-            is UShortArray -> buffer[offset / Short.SIZE_BYTES] = value.toUShort()
-            else -> error("Cannot write short to ${buffer::class}")
-        }
+        require(offset >= 0 && offset + Short.SIZE_BYTES <= size) { "Offset out of bounds: $offset" }
+        pointer.reinterpret<ShortVar>()[offset / Short.SIZE_BYTES] = value
     }
 
     override fun setInt(offset: Int, value: Int) {
-        when (buffer) {
-            is IntArray -> buffer[offset / Int.SIZE_BYTES] = value
-            is UIntArray -> buffer[offset / Int.SIZE_BYTES] = value.toUInt()
-            else -> error("Cannot write int to ${buffer::class}")
-        }
+        require(offset >= 0 && offset + Int.SIZE_BYTES <= size) { "Offset out of bounds: $offset" }
+        pointer.reinterpret<IntVar>()[offset / Int.SIZE_BYTES] = value
     }
 
     override fun setLong(offset: Int, value: Long) {
-        when (buffer) {
-            is LongArray -> buffer[offset / Long.SIZE_BYTES] = value
-            is ULongArray -> buffer[offset / Long.SIZE_BYTES] = value.toULong()
-            else -> error("Cannot write long to ${buffer::class}")
-        }
+        require(offset >= 0 && offset + Long.SIZE_BYTES <= size) { "Offset out of bounds: $offset" }
+        pointer.reinterpret<LongVar>()[offset / Long.SIZE_BYTES] = value
     }
 
     override fun setFloat(offset: Int, value: Float) {
-        when (buffer) {
-            is FloatArray -> buffer[offset / Float.SIZE_BYTES] = value
-            else -> error("Cannot write float to ${buffer::class}")
-        }
+        require(offset >= 0 && offset + Float.SIZE_BYTES <= size) { "Offset out of bounds: $offset" }
+        pointer.reinterpret<FloatVar>()[offset / Float.SIZE_BYTES] = value
     }
 
     override fun setDouble(offset: Int, value: Double) {
-        when (buffer) {
-            is DoubleArray -> buffer[offset / Double.SIZE_BYTES] = value
-            else -> error("Cannot write double to ${buffer::class}")
-        }
+        require(offset >= 0 && offset + Double.SIZE_BYTES <= size) { "Offset out of bounds: $offset" }
+        pointer.reinterpret<DoubleVar>()[offset / Double.SIZE_BYTES] = value
     }
 
     override fun setUByte(offset: Int, value: UByte) {
-        when (buffer) {
-            is UByteArray -> buffer[offset] = value
-            is ByteArray -> buffer[offset] = value.toByte()
-            else -> error("Cannot write unsigned byte to ${buffer::class}")
-        }
+        setByte(offset, value.toByte())
     }
 
     override fun setUShort(offset: Int, value: UShort) {
-        when (buffer) {
-            is UShortArray -> buffer[offset / Short.SIZE_BYTES] = value
-            is ShortArray -> buffer[offset / Short.SIZE_BYTES] = value.toShort()
-            else -> error("Cannot write unsigned short to ${buffer::class}")
-        }
+        setShort(offset, value.toShort())
     }
 
     override fun setUInt(offset: Int, value: UInt) {
-        when (buffer) {
-            is UIntArray -> buffer[offset / Int.SIZE_BYTES] = value
-            is IntArray -> buffer[offset / Int.SIZE_BYTES] = value.toInt()
-            else -> error("Cannot write unsigned int to ${buffer::class}")
-        }
+        setInt(offset, value.toInt())
     }
 
     override fun setULong(offset: Int, value: ULong) {
-        when (buffer) {
-            is ULongArray -> buffer[offset / Long.SIZE_BYTES] = value
-            is LongArray -> buffer[offset / Long.SIZE_BYTES] = value.toLong()
-            else -> error("Cannot write unsigned long to ${buffer::class}")
+        setLong(offset, value.toLong())
+    }
+
+    /**
+     * Returns the raw C pointer for interop with native APIs.
+     * Use with caution as this provides direct access to unmanaged memory.
+     */
+    fun getRawPointer(): COpaquePointer = pointer
+
+    /**
+     * Copies data from a ByteArray into this buffer at the specified offset.
+     * @param source The source byte array
+     * @param offset The offset in this buffer where to start writing
+     */
+    fun copyFrom(source: ByteArray, offset: Int = 0) {
+        require(offset >= 0 && offset + source.size <= size) { "Copy would exceed buffer bounds" }
+        for (i in source.indices) {
+            bytePtr[offset + i] = source[i]
+        }
+    }
+
+    /**
+     * Copies data from this buffer into a ByteArray at the specified offset.
+     * @param destination The destination byte array
+     * @param offset The offset in this buffer where to start reading
+     * @param length The number of bytes to copy
+     */
+    fun copyTo(destination: ByteArray, offset: Int = 0, length: Int = destination.size) {
+        require(offset >= 0 && offset + length <= size) { "Copy would exceed buffer bounds" }
+        require(length <= destination.size) { "Destination array too small" }
+        for (i in 0 until length) {
+            destination[i] = bytePtr[offset + i]
+        }
+    }
+
+    /**
+     * Releases the native memory if this buffer owns it.
+     * After calling this method, the buffer should not be used anymore.
+     */
+    fun free() {
+        if (ownsMemory) {
+            nativeHeap.free(bytePtr)
+        }
+    }
+
+    companion object {
+        /**
+         * Creates an OpaquePointerArrayBuffer from a ByteArray by copying the data.
+         * @param array The source byte array
+         * @return A new buffer containing a copy of the array data
+         */
+        fun fromByteArray(array: ByteArray): OpaquePointerArrayBuffer {
+            val buffer = OpaquePointerArrayBuffer(array.size.toLong())
+            buffer.copyFrom(array)
+            return buffer
+        }
+
+        /**
+         * Creates an OpaquePointerArrayBuffer from a ShortArray by copying the data.
+         * @param array The source array
+         * @return A new buffer containing a copy of the array data
+         */
+        fun fromShortArray(array: ShortArray): OpaquePointerArrayBuffer {
+            val buffer = OpaquePointerArrayBuffer((array.size * Short.SIZE_BYTES).toLong())
+            val ptr = buffer.pointer.reinterpret<ShortVar>()
+            for (i in array.indices) {
+                ptr[i] = array[i]
+            }
+            return buffer
+        }
+
+        /**
+         * Creates an OpaquePointerArrayBuffer from an IntArray by copying the data.
+         * @param array The source array
+         * @return A new buffer containing a copy of the array data
+         */
+        fun fromIntArray(array: IntArray): OpaquePointerArrayBuffer {
+            val buffer = OpaquePointerArrayBuffer((array.size * Int.SIZE_BYTES).toLong())
+            val ptr = buffer.pointer.reinterpret<IntVar>()
+            for (i in array.indices) {
+                ptr[i] = array[i]
+            }
+            return buffer
+        }
+
+        /**
+         * Creates an OpaquePointerArrayBuffer from a LongArray by copying the data.
+         * @param array The source array
+         * @return A new buffer containing a copy of the array data
+         */
+        fun fromLongArray(array: LongArray): OpaquePointerArrayBuffer {
+            val buffer = OpaquePointerArrayBuffer((array.size * Long.SIZE_BYTES).toLong())
+            val ptr = buffer.pointer.reinterpret<LongVar>()
+            for (i in array.indices) {
+                ptr[i] = array[i]
+            }
+            return buffer
+        }
+
+        /**
+         * Creates an OpaquePointerArrayBuffer from a FloatArray by copying the data.
+         * @param array The source array
+         * @return A new buffer containing a copy of the array data
+         */
+        fun fromFloatArray(array: FloatArray): OpaquePointerArrayBuffer {
+            val buffer = OpaquePointerArrayBuffer((array.size * Float.SIZE_BYTES).toLong())
+            val ptr = buffer.pointer.reinterpret<FloatVar>()
+            for (i in array.indices) {
+                ptr[i] = array[i]
+            }
+            return buffer
+        }
+
+        /**
+         * Creates an OpaquePointerArrayBuffer from a DoubleArray by copying the data.
+         * @param array The source array
+         * @return A new buffer containing a copy of the array data
+         */
+        fun fromDoubleArray(array: DoubleArray): OpaquePointerArrayBuffer {
+            val buffer = OpaquePointerArrayBuffer((array.size * Double.SIZE_BYTES).toLong())
+            val ptr = buffer.pointer.reinterpret<DoubleVar>()
+            for (i in array.indices) {
+                ptr[i] = array[i]
+            }
+            return buffer
+        }
+
+        /**
+         * Creates an OpaquePointerArrayBuffer from a UByteArray by copying the data.
+         * @param array The source array
+         * @return A new buffer containing a copy of the array data
+         */
+        fun fromUByteArray(array: UByteArray): OpaquePointerArrayBuffer {
+            return fromByteArray(array.asByteArray())
+        }
+
+        /**
+         * Creates an OpaquePointerArrayBuffer from a UShortArray by copying the data.
+         * @param array The source array
+         * @return A new buffer containing a copy of the array data
+         */
+        fun fromUShortArray(array: UShortArray): OpaquePointerArrayBuffer {
+            return fromShortArray(array.asShortArray())
+        }
+
+        /**
+         * Creates an OpaquePointerArrayBuffer from a UIntArray by copying the data.
+         * @param array The source array
+         * @return A new buffer containing a copy of the array data
+         */
+        fun fromUIntArray(array: UIntArray): OpaquePointerArrayBuffer {
+            return fromIntArray(array.asIntArray())
+        }
+
+        /**
+         * Creates an OpaquePointerArrayBuffer from a ULongArray by copying the data.
+         * @param array The source array
+         * @return A new buffer containing a copy of the array data
+         */
+        fun fromULongArray(array: ULongArray): OpaquePointerArrayBuffer {
+            return fromLongArray(array.asLongArray())
         }
     }
 }
