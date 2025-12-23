@@ -1,6 +1,16 @@
+@file:OptIn(ExperimentalForeignApi::class)
+
 package io.ygdrasil.webgpu
 
+import kotlinx.cinterop.COpaque
+import kotlinx.cinterop.COpaquePointer
 import kotlinx.cinterop.ExperimentalForeignApi
+import kotlinx.cinterop.addressOf
+import kotlinx.cinterop.reinterpret
+import kotlinx.cinterop.usePinned
+import kotlinx.cinterop.CPointer
+import kotlinx.cinterop.ByteVar
+import kotlinx.cinterop.set
 
 /**
  * Represents a native array buffer backed by a primitive array, providing platform-specific
@@ -19,19 +29,7 @@ import kotlinx.cinterop.ExperimentalForeignApi
 @OptIn(ExperimentalForeignApi::class)
 value class NativeArrayBuffer internal constructor(val buffer: Any): ArrayBuffer {
     override val size: Long
-        get() = when (buffer) {
-            is ByteArray -> buffer.size.toLong()
-            is ShortArray -> (buffer.size * Short.SIZE_BYTES).toLong()
-            is IntArray -> (buffer.size * Int.SIZE_BYTES).toLong()
-            is LongArray -> (buffer.size * Long.SIZE_BYTES).toLong()
-            is FloatArray -> (buffer.size * Float.SIZE_BYTES).toLong()
-            is DoubleArray -> (buffer.size * Double.SIZE_BYTES).toLong()
-            is UByteArray -> buffer.size.toLong()
-            is UShortArray -> (buffer.size * Short.SIZE_BYTES).toLong()
-            is UIntArray -> (buffer.size * Int.SIZE_BYTES).toLong()
-            is ULongArray -> (buffer.size * Long.SIZE_BYTES).toLong()
-            else -> error("Unsupported buffer type: ${buffer::class}")
-        }
+        get() = buffer.getSizeInBytes()
 
     // Read methods - convert entire buffer to typed arrays
 
@@ -156,18 +154,15 @@ value class NativeArrayBuffer internal constructor(val buffer: Any): ArrayBuffer
     // Indexed write methods
 
     override fun setByte(offset: Int, value: Byte) {
-        when (buffer) {
-            is ByteArray -> buffer[offset] = value
-            is UByteArray -> buffer[offset] = value.toUByte()
-            else -> error("Cannot write byte to ${buffer::class}")
+        buffer.useOpaquePinned { buffer ->
+            val ptr = buffer.reinterpret<ByteVar>()
+            ptr[offset] = value
         }
     }
 
     override fun setShort(offset: Int, value: Short) {
-        when (buffer) {
-            is ShortArray -> buffer[offset / Short.SIZE_BYTES] = value
-            is UShortArray -> buffer[offset / Short.SIZE_BYTES] = value.toUShort()
-            else -> error("Cannot write short to ${buffer::class}")
+        buffer.useOpaquePinned { buffer ->
+
         }
     }
 
@@ -232,4 +227,33 @@ value class NativeArrayBuffer internal constructor(val buffer: Any): ArrayBuffer
             else -> error("Cannot write unsigned long to ${buffer::class}")
         }
     }
+}
+
+private fun Any.getSizeInBytes(): Long = when (this) {
+    is ByteArray -> size.toLong()
+    is ShortArray -> (size * Short.SIZE_BYTES).toLong()
+    is IntArray -> (size * Int.SIZE_BYTES).toLong()
+    is LongArray -> (size * Long.SIZE_BYTES).toLong()
+    is FloatArray -> (size * Float.SIZE_BYTES).toLong()
+    is DoubleArray -> (size * Double.SIZE_BYTES).toLong()
+    is UByteArray -> size.toLong()
+    is UShortArray -> (size * Short.SIZE_BYTES).toLong()
+    is UIntArray -> (size * Int.SIZE_BYTES).toLong()
+    is ULongArray -> (size * Long.SIZE_BYTES).toLong()
+    else -> error("Unsupported buffer type: ${this::class}")
+}
+
+
+private inline fun <R> Any.useOpaquePinned(block: (COpaquePointer) -> R): R = when (this) {
+    is ByteArray -> this.usePinned { block(it.addressOf(0).reinterpret<COpaque>()) }
+    is ShortArray -> this.usePinned { block(it.addressOf(0).reinterpret<COpaque>()) }
+    is IntArray -> this.usePinned { block(it.addressOf(0).reinterpret<COpaque>()) }
+    is LongArray -> this.usePinned { block(it.addressOf(0).reinterpret<COpaque>()) }
+    is FloatArray -> this.usePinned { block(it.addressOf(0).reinterpret<COpaque>()) }
+    is DoubleArray -> this.usePinned { block(it.addressOf(0).reinterpret<COpaque>()) }
+    is UByteArray -> this.usePinned { block(it.addressOf(0).reinterpret<COpaque>()) }
+    is UShortArray -> this.usePinned { block(it.addressOf(0).reinterpret<COpaque>()) }
+    is UIntArray -> this.usePinned { block(it.addressOf(0).reinterpret<COpaque>()) }
+    is ULongArray -> this.usePinned { block(it.addressOf(0).reinterpret<COpaque>()) }
+    else -> error("Unsupported buffer type: ${this::class}")
 }
