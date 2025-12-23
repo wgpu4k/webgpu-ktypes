@@ -1,9 +1,6 @@
 package io.ygdrasil.webgpu
 
-import kotlinx.cinterop.COpaque
-import kotlinx.cinterop.COpaquePointer
 import kotlinx.cinterop.ExperimentalForeignApi
-import kotlinx.cinterop.usePinned
 
 /**
  * Represents a platform-specific abstraction over raw binary data stored in an ArrayBuffer.
