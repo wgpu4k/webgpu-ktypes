@@ -17,6 +17,217 @@ import java.nio.ByteBuffer
  * on JVM or `org.khronos.webgl.ArrayBuffer` on JavaScript or Wasm.
  */
 actual sealed interface ArrayBuffer {
+    /**
+     * The size of the buffer in bytes.
+     */
+    actual val size: Long
+
+    // Read methods - convert entire buffer to typed arrays
+
+    /**
+     * Converts the buffer to a ByteArray.
+     * @return a ByteArray containing the buffer's data
+     */
+    actual fun toByteArray(): ByteArray
+
+    /**
+     * Converts the buffer to a ShortArray.
+     * @return a ShortArray containing the buffer's data (size must be multiple of 2)
+     */
+    actual fun toShortArray(): ShortArray
+
+    /**
+     * Converts the buffer to an IntArray.
+     * @return an IntArray containing the buffer's data (size must be multiple of 4)
+     */
+    actual fun toIntArray(): IntArray
+
+    /**
+     * Converts the buffer to a LongArray.
+     * @return a LongArray containing the buffer's data (size must be multiple of 8)
+     */
+    actual fun toLongArray(): LongArray
+
+    /**
+     * Converts the buffer to a FloatArray.
+     * @return a FloatArray containing the buffer's data (size must be multiple of 4)
+     */
+    actual fun toFloatArray(): FloatArray
+
+    /**
+     * Converts the buffer to a DoubleArray.
+     * @return a DoubleArray containing the buffer's data (size must be multiple of 8)
+     */
+    actual fun toDoubleArray(): DoubleArray
+
+    /**
+     * Converts the buffer to a UByteArray.
+     * @return a UByteArray containing the buffer's data
+     */
+    actual fun toUByteArray(): UByteArray
+
+    /**
+     * Converts the buffer to a UShortArray.
+     * @return a UShortArray containing the buffer's data (size must be multiple of 2)
+     */
+    actual fun toUShortArray(): UShortArray
+
+    /**
+     * Converts the buffer to a UIntArray.
+     * @return a UIntArray containing the buffer's data (size must be multiple of 4)
+     */
+    actual fun toUIntArray(): UIntArray
+
+    /**
+     * Converts the buffer to a ULongArray.
+     * @return a ULongArray containing the buffer's data (size must be multiple of 8)
+     */
+    actual fun toULongArray(): ULongArray
+
+    // Indexed read methods
+
+    /**
+     * Reads a byte at the specified offset.
+     * @param offset the byte offset
+     * @return the byte value
+     */
+    actual fun getByte(offset: Int): Byte
+
+    /**
+     * Reads a short at the specified offset.
+     * @param offset the byte offset (must be aligned to 2 bytes)
+     * @return the short value
+     */
+    actual fun getShort(offset: Int): Short
+
+    /**
+     * Reads an int at the specified offset.
+     * @param offset the byte offset (must be aligned to 4 bytes)
+     * @return the int value
+     */
+    actual fun getInt(offset: Int): Int
+
+    /**
+     * Reads a long at the specified offset.
+     * @param offset the byte offset (must be aligned to 8 bytes)
+     * @return the long value
+     */
+    actual fun getLong(offset: Int): Long
+
+    /**
+     * Reads a float at the specified offset.
+     * @param offset the byte offset (must be aligned to 4 bytes)
+     * @return the float value
+     */
+    actual fun getFloat(offset: Int): Float
+
+    /**
+     * Reads a double at the specified offset.
+     * @param offset the byte offset (must be aligned to 8 bytes)
+     * @return the double value
+     */
+    actual fun getDouble(offset: Int): Double
+
+    /**
+     * Reads an unsigned byte at the specified offset.
+     * @param offset the byte offset
+     * @return the unsigned byte value
+     */
+    actual fun getUByte(offset: Int): UByte
+
+    /**
+     * Reads an unsigned short at the specified offset.
+     * @param offset the byte offset (must be aligned to 2 bytes)
+     * @return the unsigned short value
+     */
+    actual fun getUShort(offset: Int): UShort
+
+    /**
+     * Reads an unsigned int at the specified offset.
+     * @param offset the byte offset (must be aligned to 4 bytes)
+     * @return the unsigned int value
+     */
+    actual fun getUInt(offset: Int): UInt
+
+    /**
+     * Reads an unsigned long at the specified offset.
+     * @param offset the byte offset (must be aligned to 8 bytes)
+     * @return the unsigned long value
+     */
+    actual fun getULong(offset: Int): ULong
+
+    // Indexed write methods
+
+    /**
+     * Writes a byte at the specified offset.
+     * @param offset the byte offset
+     * @param value the byte value to write
+     */
+    actual fun setByte(offset: Int, value: Byte)
+
+    /**
+     * Writes a short at the specified offset.
+     * @param offset the byte offset (must be aligned to 2 bytes)
+     * @param value the short value to write
+     */
+    actual fun setShort(offset: Int, value: Short)
+
+    /**
+     * Writes an int at the specified offset.
+     * @param offset the byte offset (must be aligned to 4 bytes)
+     * @param value the int value to write
+     */
+    actual fun setInt(offset: Int, value: Int)
+
+    /**
+     * Writes a long at the specified offset.
+     * @param offset the byte offset (must be aligned to 8 bytes)
+     * @param value the long value to write
+     */
+    actual fun setLong(offset: Int, value: Long)
+
+    /**
+     * Writes a float at the specified offset.
+     * @param offset the byte offset (must be aligned to 4 bytes)
+     * @param value the float value to write
+     */
+    actual fun setFloat(offset: Int, value: Float)
+
+    /**
+     * Writes a double at the specified offset.
+     * @param offset the byte offset (must be aligned to 8 bytes)
+     * @param value the double value to write
+     */
+    actual fun setDouble(offset: Int, value: Double)
+
+    /**
+     * Writes an unsigned byte at the specified offset.
+     * @param offset the byte offset
+     * @param value the unsigned byte value to write
+     */
+    actual fun setUByte(offset: Int, value: UByte)
+
+    /**
+     * Writes an unsigned short at the specified offset.
+     * @param offset the byte offset (must be aligned to 2 bytes)
+     * @param value the unsigned short value to write
+     */
+    actual fun setUShort(offset: Int, value: UShort)
+
+    /**
+     * Writes an unsigned int at the specified offset.
+     * @param offset the byte offset (must be aligned to 4 bytes)
+     * @param value the unsigned int value to write
+     */
+    actual fun setUInt(offset: Int, value: UInt)
+
+    /**
+     * Writes an unsigned long at the specified offset.
+     * @param offset the byte offset (must be aligned to 8 bytes)
+     * @param value the unsigned long value to write
+     */
+    actual fun setULong(offset: Int, value: ULong)
+
     actual companion object {
         /**
          * Creates an ArrayBuffer from a MemorySegment.
@@ -139,4 +350,93 @@ actual sealed interface ArrayBuffer {
  * @param buffer The underlying `MemorySegment` instance that serves as the basis for this array buffer.
  */
 @JvmInline
-value class JvmArrayBuffer internal constructor(val buffer: MemorySegment): ArrayBuffer
+value class JvmArrayBuffer internal constructor(val buffer: MemorySegment): ArrayBuffer {
+    override val size: Long
+        get() = buffer.byteSize()
+
+    // Read methods - convert entire buffer to typed arrays
+
+    override fun toByteArray(): ByteArray = buffer.toArray(java.lang.foreign.ValueLayout.JAVA_BYTE)
+
+    override fun toShortArray(): ShortArray = buffer.toArray(java.lang.foreign.ValueLayout.JAVA_SHORT)
+
+    override fun toIntArray(): IntArray = buffer.toArray(java.lang.foreign.ValueLayout.JAVA_INT)
+
+    override fun toLongArray(): LongArray = buffer.toArray(java.lang.foreign.ValueLayout.JAVA_LONG)
+
+    override fun toFloatArray(): FloatArray = buffer.toArray(java.lang.foreign.ValueLayout.JAVA_FLOAT)
+
+    override fun toDoubleArray(): DoubleArray = buffer.toArray(java.lang.foreign.ValueLayout.JAVA_DOUBLE)
+
+    override fun toUByteArray(): UByteArray = buffer.toArray(java.lang.foreign.ValueLayout.JAVA_BYTE).asUByteArray()
+
+    override fun toUShortArray(): UShortArray = buffer.toArray(java.lang.foreign.ValueLayout.JAVA_SHORT).asUShortArray()
+
+    override fun toUIntArray(): UIntArray = buffer.toArray(java.lang.foreign.ValueLayout.JAVA_INT).asUIntArray()
+
+    override fun toULongArray(): ULongArray = buffer.toArray(java.lang.foreign.ValueLayout.JAVA_LONG).asULongArray()
+
+    // Indexed read methods
+
+    override fun getByte(offset: Int): Byte = buffer.get(java.lang.foreign.ValueLayout.JAVA_BYTE, offset.toLong())
+
+    override fun getShort(offset: Int): Short = buffer.get(java.lang.foreign.ValueLayout.JAVA_SHORT, offset.toLong())
+
+    override fun getInt(offset: Int): Int = buffer.get(java.lang.foreign.ValueLayout.JAVA_INT, offset.toLong())
+
+    override fun getLong(offset: Int): Long = buffer.get(java.lang.foreign.ValueLayout.JAVA_LONG, offset.toLong())
+
+    override fun getFloat(offset: Int): Float = buffer.get(java.lang.foreign.ValueLayout.JAVA_FLOAT, offset.toLong())
+
+    override fun getDouble(offset: Int): Double = buffer.get(java.lang.foreign.ValueLayout.JAVA_DOUBLE, offset.toLong())
+
+    override fun getUByte(offset: Int): UByte = getByte(offset).toUByte()
+
+    override fun getUShort(offset: Int): UShort = getShort(offset).toUShort()
+
+    override fun getUInt(offset: Int): UInt = getInt(offset).toUInt()
+
+    override fun getULong(offset: Int): ULong = getLong(offset).toULong()
+
+    // Indexed write methods
+
+    override fun setByte(offset: Int, value: Byte) {
+        buffer.set(java.lang.foreign.ValueLayout.JAVA_BYTE, offset.toLong(), value)
+    }
+
+    override fun setShort(offset: Int, value: Short) {
+        buffer.set(java.lang.foreign.ValueLayout.JAVA_SHORT, offset.toLong(), value)
+    }
+
+    override fun setInt(offset: Int, value: Int) {
+        buffer.set(java.lang.foreign.ValueLayout.JAVA_INT, offset.toLong(), value)
+    }
+
+    override fun setLong(offset: Int, value: Long) {
+        buffer.set(java.lang.foreign.ValueLayout.JAVA_LONG, offset.toLong(), value)
+    }
+
+    override fun setFloat(offset: Int, value: Float) {
+        buffer.set(java.lang.foreign.ValueLayout.JAVA_FLOAT, offset.toLong(), value)
+    }
+
+    override fun setDouble(offset: Int, value: Double) {
+        buffer.set(java.lang.foreign.ValueLayout.JAVA_DOUBLE, offset.toLong(), value)
+    }
+
+    override fun setUByte(offset: Int, value: UByte) {
+        setByte(offset, value.toByte())
+    }
+
+    override fun setUShort(offset: Int, value: UShort) {
+        setShort(offset, value.toShort())
+    }
+
+    override fun setUInt(offset: Int, value: UInt) {
+        setInt(offset, value.toInt())
+    }
+
+    override fun setULong(offset: Int, value: ULong) {
+        setLong(offset, value.toLong())
+    }
+}
