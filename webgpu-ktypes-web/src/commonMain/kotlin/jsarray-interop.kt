@@ -11,11 +11,7 @@ import kotlin.js.length
 import kotlin.js.set
 import kotlin.js.unsafeCast
 
-fun <A: JsAny, B> JsArray<A>.map(converter: (A) -> B): List<B> = sequence<B> {
-    (0 until length).forEach { index ->
-        yield(converter(this@map.get(index)!!))
-    }
-}.toList()
+expect fun <A: JsAny, B> JsArray<A>.map(converter: (A) -> B): List<B>
 
 fun <A: JsAny> jsArray(vararg values: A): JsArray<A> = js("Array.from(values)")
 

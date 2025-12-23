@@ -22,9 +22,9 @@ class JsArrayInteropTest {
     fun jsArray_vararg_creation_and_indexing() {
         val arr: JsArray<JsNumber> = jsArray(1.asJsNumber(), 2.asJsNumber(), 3.asJsNumber())
         assertEquals(3, arr.length, "JsArray length should match number of elements")
-        assertEquals(1L, arr[0]!!.toLong())
-        assertEquals(2L, arr[1]!!.toLong())
-        assertEquals(3L, arr[2]!!.toLong())
+        assertEquals(1L, arr.bridge_get(0).toLong())
+        assertEquals(2L, arr.bridge_get(1).toLong())
+        assertEquals(3L, arr.bridge_get(2).toLong())
     }
 
     @Test
@@ -39,16 +39,16 @@ class JsArrayInteropTest {
         val src = listOf(7, 8, 9, Int.MAX_VALUE, Int.MIN_VALUE)
         val jsArr = src.mapJsArray { it.asJsNumber() }
         assertEquals(src.size, jsArr.length)
-        assertEquals(7L, jsArr[0]!!.toLong())
-        assertEquals(7, jsArr[0]!!.toInt())
-        assertEquals(8L, jsArr[1]!!.toLong())
-        assertEquals(8, jsArr[1]!!.toInt())
-        assertEquals(9L, jsArr[2]!!.toLong())
-        assertEquals(9, jsArr[2]!!.toInt())
-        assertEquals(Int.MAX_VALUE.toLong(), jsArr[3]!!.toLong())
-        assertEquals(Int.MAX_VALUE, jsArr[3]!!.toInt())
-        assertEquals(Int.MIN_VALUE.toLong(), jsArr[4]!!.toLong())
-        assertEquals(Int.MIN_VALUE, jsArr[4]!!.toInt())
+        assertEquals(7L, jsArr.bridge_get(0).toLong())
+        assertEquals(7, jsArr.bridge_get(0).toInt())
+        assertEquals(8L, jsArr.bridge_get(1).toLong())
+        assertEquals(8, jsArr.bridge_get(1).toInt())
+        assertEquals(9L, jsArr.bridge_get(2).toLong())
+        assertEquals(9, jsArr.bridge_get(2).toInt())
+        assertEquals(Int.MAX_VALUE.toLong(), jsArr.bridge_get(3).toLong())
+        assertEquals(Int.MAX_VALUE, jsArr.bridge_get(3).toInt())
+        assertEquals(Int.MIN_VALUE.toLong(), jsArr.bridge_get(4).toLong())
+        assertEquals(Int.MIN_VALUE, jsArr.bridge_get(4).toInt())
     }
 
     @Test
@@ -61,6 +61,9 @@ class JsArrayInteropTest {
     }
 
 }
+
+// js and wasmjs footprint mismatch
+expect fun<A: JsAny> JsArray<A>.bridge_get(index: Int): A
 
 external interface TestJs : JsAny {
     var x: JsNumber

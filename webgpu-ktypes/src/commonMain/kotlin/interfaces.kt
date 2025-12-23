@@ -2257,7 +2257,7 @@ interface GPUShaderModuleCompilationHint {
 	 * Type: GPUPipelineLayout or GPUAutoLayoutMode.
 	 * 
 	 */
-	val layout: GPUPipelineLayout??
+	val layout: GPUPipelineLayout?
 }
 
 /**
