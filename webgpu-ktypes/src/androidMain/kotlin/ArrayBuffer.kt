@@ -23,7 +23,7 @@ import java.nio.ByteBuffer
  * ```
  */
 actual sealed interface ArrayBuffer {
-    companion object {
+    actual companion object {
         fun from(buffer: ByteBuffer): ArrayBuffer = AndroidArrayBuffer(buffer)
     }
 }

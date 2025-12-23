@@ -1,3 +1,5 @@
+@file:OptIn(ExperimentalUnsignedTypes::class)
+
 package io.ygdrasil.webgpu
 
 
@@ -11,6 +13,15 @@ package io.ygdrasil.webgpu
  */
 expect sealed interface ArrayBuffer {
     companion object {
-
+        fun from(array: ByteArray): ArrayBuffer
+        fun from(array: ShortArray): ArrayBuffer
+        fun from(array: IntArray): ArrayBuffer
+        fun from(array: LongArray): ArrayBuffer
+        fun from(array: FloatArray): ArrayBuffer
+        fun from(array: DoubleArray): ArrayBuffer
+        fun from(array: UByteArray): ArrayBuffer
+        fun from(array: UShortArray): ArrayBuffer
+        fun from(array: UIntArray): ArrayBuffer
+        fun from(array: ULongArray): ArrayBuffer
     }
 }

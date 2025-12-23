@@ -15,7 +15,7 @@ import java.nio.ByteBuffer
  * on JVM or `org.khronos.webgl.ArrayBuffer` on JavaScript or Wasm.
  */
 actual sealed interface ArrayBuffer {
-    companion object {
+    actual companion object {
         fun from(segment: MemorySegment): ArrayBuffer = JvmArrayBuffer(segment)
 
         fun from(buffer: ByteBuffer): ArrayBuffer = JvmArrayBuffer(MemorySegment.ofBuffer(buffer))
