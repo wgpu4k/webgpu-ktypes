@@ -140,97 +140,129 @@ internal actual inline fun js.buffer.ArrayBuffer.readUIntArray(): UIntArray {
 // Indexed read methods
 @Suppress("NOTHING_TO_INLINE")
 internal actual inline fun js.buffer.ArrayBuffer.readByte(offset: Int): Byte {
-    val view = Int8Array<js.buffer.ArrayBuffer>(this)
-    return view[offset].toInt().toByte()
+    val view = Int8Array<js.buffer.ArrayBuffer>(
+        this, offset, 1
+    )
+    return view[0].toInt().toByte()
 }
 
 @Suppress("NOTHING_TO_INLINE")
 internal actual inline fun js.buffer.ArrayBuffer.readShort(offset: Int): Short {
-    val view = Int16Array<js.buffer.ArrayBuffer>(this)
-    return view[offset / Short.SIZE_BYTES].toInt().toShort()
+    val view = Int16Array<js.buffer.ArrayBuffer>(
+        this, offset, 1
+    )
+    return view[0].toInt().toShort()
 }
 
 @Suppress("NOTHING_TO_INLINE")
 internal actual inline fun js.buffer.ArrayBuffer.readInt(offset: Int): Int {
-    val view = Int32Array<js.buffer.ArrayBuffer>(this)
-    return view[offset / Int.SIZE_BYTES].toInt()
+    val view = Int32Array<js.buffer.ArrayBuffer>(
+        this, offset, 1
+    )
+    return view[0].toInt()
 }
 
 @Suppress("NOTHING_TO_INLINE")
 internal actual inline fun js.buffer.ArrayBuffer.readFloat(offset: Int): Float {
-    val view = Float32Array<js.buffer.ArrayBuffer>(this)
-    return view[offset / Float.SIZE_BYTES].toDouble().toFloat()
+    val view = Float32Array<js.buffer.ArrayBuffer>(
+        this, offset, 1
+    )
+    return view[0].toDouble().toFloat()
 }
 
 @Suppress("NOTHING_TO_INLINE")
 internal actual inline fun js.buffer.ArrayBuffer.readDouble(offset: Int): Double {
-    val view = Float64Array<js.buffer.ArrayBuffer>(this)
-    return view[offset / Double.SIZE_BYTES].toDouble()
+    val view = Float64Array<js.buffer.ArrayBuffer>(
+        this, offset, 1
+    )
+    return view[0].toDouble()
 }
 
 @Suppress("NOTHING_TO_INLINE")
 internal actual inline fun js.buffer.ArrayBuffer.readUByte(offset: Int): UByte {
-    val view = Uint8Array<js.buffer.ArrayBuffer>(this)
-    return view[offset].toInt().toUByte()
+    val view = Uint8Array<js.buffer.ArrayBuffer>(
+        this, offset, 1
+    )
+    return view[0].toInt().toUByte()
 }
 
 @Suppress("NOTHING_TO_INLINE")
 internal actual inline fun js.buffer.ArrayBuffer.readUShort(offset: Int): UShort {
-    val view = Uint16Array<js.buffer.ArrayBuffer>(this)
-    return view[offset / Short.SIZE_BYTES].toInt().toUShort()
+    val view = Uint16Array<js.buffer.ArrayBuffer>(
+        this, offset, 1
+    )
+    return view[0].toInt().toUShort()
 }
 
 @Suppress("NOTHING_TO_INLINE")
 internal actual inline fun js.buffer.ArrayBuffer.readUInt(offset: Int): UInt {
-    val view = Uint32Array<js.buffer.ArrayBuffer>(this)
-    return view[offset / Int.SIZE_BYTES].toInt().toUInt()
+    val view = Uint32Array<js.buffer.ArrayBuffer>(
+        this, offset, 1
+    )
+    return view[0].toInt().toUInt()
 }
 
 // Indexed write methods
 @Suppress("NOTHING_TO_INLINE")
 internal actual inline fun js.buffer.ArrayBuffer.writeByte(offset: Int, value: Byte) {
-    val view = Int8Array<js.buffer.ArrayBuffer>(this)
-    view[offset] = value.toJsByte()
+    val view = Int8Array<js.buffer.ArrayBuffer>(
+        this, offset, 1
+    )
+    view[0] = value.toJsByte()
 }
 
 @Suppress("NOTHING_TO_INLINE")
 internal actual inline fun js.buffer.ArrayBuffer.writeShort(offset: Int, value: Short) {
-    val view = Int16Array<js.buffer.ArrayBuffer>(this)
-    view[offset / Short.SIZE_BYTES] = value.toJsShort()
+    val view = Int16Array<js.buffer.ArrayBuffer>(
+        this, offset, 1
+    )
+    view[0] = value.toJsShort()
 }
 
 @Suppress("NOTHING_TO_INLINE")
 internal actual inline fun js.buffer.ArrayBuffer.writeInt(offset: Int, value: Int) {
-    val view = Int32Array<js.buffer.ArrayBuffer>(this)
-    view[offset / Int.SIZE_BYTES] = value.toJsInt()
+    val view = Int32Array<js.buffer.ArrayBuffer>(
+        this, offset, 1
+    )
+    view[0] = value.toJsInt()
 }
 
 @Suppress("NOTHING_TO_INLINE")
 internal actual inline fun js.buffer.ArrayBuffer.writeFloat(offset: Int, value: Float) {
-    val view = Float32Array<js.buffer.ArrayBuffer>(this)
-    view[offset / Float.SIZE_BYTES] = value.toJsFloat()
+    val view = Float32Array<js.buffer.ArrayBuffer>(
+        this, offset, 1
+    )
+    view[0] = value.toJsFloat()
 }
 
 @Suppress("NOTHING_TO_INLINE")
 internal actual inline fun js.buffer.ArrayBuffer.writeDouble(offset: Int, value: Double) {
-    val view = Float64Array<js.buffer.ArrayBuffer>(this)
-    view[offset / Double.SIZE_BYTES] = value.toJsNumber()
+    val view = Float64Array<js.buffer.ArrayBuffer>(
+        this, offset, 1
+    )
+    view[0] = value.toJsNumber()
 }
 
 @Suppress("NOTHING_TO_INLINE")
 internal actual inline fun js.buffer.ArrayBuffer.writeUByte(offset: Int, value: UByte) {
-    val view = Uint8Array<js.buffer.ArrayBuffer>(this)
-    view[offset] = value.toJsUByte()
+    val view = Uint8Array<js.buffer.ArrayBuffer>(
+        this, offset, 1
+    )
+    view[0] = value.toJsUByte()
 }
 
 @Suppress("NOTHING_TO_INLINE")
 internal actual inline fun js.buffer.ArrayBuffer.writeUShort(offset: Int, value: UShort) {
-    val view = Uint16Array<js.buffer.ArrayBuffer>(this)
-    view[offset / Short.SIZE_BYTES] = value.toShort().toJsShort()
+    val view = Uint16Array<js.buffer.ArrayBuffer>(
+        this, offset, 1
+    )
+    view[0] = value.toShort().toJsShort()
 }
 
 @Suppress("NOTHING_TO_INLINE")
 internal actual inline fun js.buffer.ArrayBuffer.writeUInt(offset: Int, value: UInt) {
-    val view = Uint32Array<js.buffer.ArrayBuffer>(this)
-    view[offset / Int.SIZE_BYTES] = value.toInt().toJsInt()
+    val view = Uint32Array<js.buffer.ArrayBuffer>(
+        this, offset, 1
+    )
+    view[0] = value.toInt().toJsInt()
 }
