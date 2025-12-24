@@ -38,12 +38,6 @@ expect sealed interface ArrayBuffer {
     fun toIntArray(): IntArray
 
     /**
-     * Converts the buffer to a LongArray.
-     * @return a LongArray containing the buffer's data (size must be multiple of 8)
-     */
-    fun toLongArray(): LongArray
-
-    /**
      * Converts the buffer to a FloatArray.
      * @return a FloatArray containing the buffer's data (size must be multiple of 4)
      */
@@ -73,12 +67,6 @@ expect sealed interface ArrayBuffer {
      */
     fun toUIntArray(): UIntArray
 
-    /**
-     * Converts the buffer to a ULongArray.
-     * @return a ULongArray containing the buffer's data (size must be multiple of 8)
-     */
-    fun toULongArray(): ULongArray
-
     // Indexed read methods
 
     /**
@@ -101,13 +89,6 @@ expect sealed interface ArrayBuffer {
      * @return the int value
      */
     fun getInt(offset: Int): Int
-
-    /**
-     * Reads a long at the specified offset.
-     * @param offset the byte offset (must be aligned to 8 bytes)
-     * @return the long value
-     */
-    fun getLong(offset: Int): Long
 
     /**
      * Reads a float at the specified offset.
@@ -144,13 +125,6 @@ expect sealed interface ArrayBuffer {
      */
     fun getUInt(offset: Int): UInt
 
-    /**
-     * Reads an unsigned long at the specified offset.
-     * @param offset the byte offset (must be aligned to 8 bytes)
-     * @return the unsigned long value
-     */
-    fun getULong(offset: Int): ULong
-
     // Indexed write methods
 
     /**
@@ -173,13 +147,6 @@ expect sealed interface ArrayBuffer {
      * @param value the int value to write
      */
     fun setInt(offset: Int, value: Int)
-
-    /**
-     * Writes a long at the specified offset.
-     * @param offset the byte offset (must be aligned to 8 bytes)
-     * @param value the long value to write
-     */
-    fun setLong(offset: Int, value: Long)
 
     /**
      * Writes a float at the specified offset.
@@ -216,13 +183,6 @@ expect sealed interface ArrayBuffer {
      */
     fun setUInt(offset: Int, value: UInt)
 
-    /**
-     * Writes an unsigned long at the specified offset.
-     * @param offset the byte offset (must be aligned to 8 bytes)
-     * @param value the unsigned long value to write
-     */
-    fun setULong(offset: Int, value: ULong)
-
     companion object {
         /**
          * Creates an ArrayBuffer from a ByteArray.
@@ -244,13 +204,6 @@ expect sealed interface ArrayBuffer {
          * @return an ArrayBuffer containing the data from the int array
          */
         fun from(array: IntArray): ArrayBuffer
-
-        /**
-         * Creates an ArrayBuffer from a LongArray.
-         * @param array the long array to convert
-         * @return an ArrayBuffer containing the data from the long array
-         */
-        fun from(array: LongArray): ArrayBuffer
 
         /**
          * Creates an ArrayBuffer from a FloatArray.
@@ -287,11 +240,5 @@ expect sealed interface ArrayBuffer {
          */
         fun from(array: UIntArray): ArrayBuffer
 
-        /**
-         * Creates an ArrayBuffer from a ULongArray.
-         * @param array the unsigned long array to convert
-         * @return an ArrayBuffer containing the data from the unsigned long array
-         */
-        fun from(array: ULongArray): ArrayBuffer
     }
 }
