@@ -2,14 +2,19 @@
 
 package io.ygdrasil.webgpu
 
-import js.core.BigInt
 import js.core.JsPrimitives.toJsByte
 import js.core.JsPrimitives.toJsFloat
 import js.core.JsPrimitives.toJsInt
 import js.core.JsPrimitives.toJsShort
 import js.core.JsPrimitives.toJsUByte
-import js.typedarrays.*
-import kotlin.js.set
+import js.typedarrays.Float32Array
+import js.typedarrays.Float64Array
+import js.typedarrays.Int16Array
+import js.typedarrays.Int32Array
+import js.typedarrays.Int8Array
+import js.typedarrays.Uint16Array
+import js.typedarrays.Uint32Array
+import js.typedarrays.Uint8Array
 
 @Suppress("NOTHING_TO_INLINE")
 internal actual inline fun ByteArray.toArrayBuffer(): ArrayBuffer {
