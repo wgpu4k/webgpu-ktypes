@@ -146,12 +146,12 @@ class ArrayBufferTest : FreeSpec({
         val buffer = ArrayBuffer.from(ByteArray(20))
 
         // When
-        buffer.setFloat(0, 3.14f)
-        buffer.setFloat(8, -3.14f)
+        buffer.setFloat(0, 3.5f)
+        buffer.setFloat(8, -3.5f)
 
         // Then
-        buffer.getFloat(0) shouldBe 3.14f
-        buffer.getFloat(8) shouldBe -3.14f
+        buffer.getFloat(0) shouldBe 3.5f
+        buffer.getFloat(8) shouldBe -3.5f
     }
 
     "Indexed read/write - Double" {
