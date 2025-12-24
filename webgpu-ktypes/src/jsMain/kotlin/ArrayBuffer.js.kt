@@ -130,8 +130,8 @@ internal actual inline fun js.buffer.ArrayBuffer.readUShort(offset: Int): UShort
 
 @Suppress("NOTHING_TO_INLINE")
 internal actual inline fun js.buffer.ArrayBuffer.readUInt(offset: Int): UInt {
-    val view = Uint32Array<js.buffer.ArrayBuffer>(this)
-    return view[offset / Int.SIZE_BYTES].unsafeCast<Int>().toUInt()
+    val view = Int32Array<js.buffer.ArrayBuffer>(this)
+    return view[offset / Int.SIZE_BYTES].toUInt()
 }
 
 
