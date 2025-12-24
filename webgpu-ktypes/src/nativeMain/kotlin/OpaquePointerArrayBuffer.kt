@@ -37,7 +37,7 @@ import kotlin.experimental.ExperimentalNativeApi
  * @param ownsMemory Whether this buffer owns the memory and should free it on cleanup
  */
 @OptIn(ExperimentalForeignApi::class, ExperimentalNativeApi::class)
-class OpaquePointerArrayBuffer internal constructor(
+class OpaquePointerArrayBuffer private constructor(
     private val pointer: COpaquePointer,
     override val size: ULong,
     private val ownsMemory: Boolean = true
@@ -47,7 +47,7 @@ class OpaquePointerArrayBuffer internal constructor(
      * Creates a new buffer by allocating native memory of the specified size.
      * @param sizeInBytes The size of the buffer in bytes
      */
-    constructor(sizeInBytes: ULong) : this(
+    internal constructor(sizeInBytes: ULong) : this(
         pointer = nativeHeap.allocArray<ByteVar>(sizeInBytes.toInt()).reinterpret(),
         size = sizeInBytes,
         ownsMemory = true
@@ -58,7 +58,7 @@ class OpaquePointerArrayBuffer internal constructor(
      * @param pointer The opaque C pointer
      * @param sizeInBytes The size of the buffer in bytes
      */
-    constructor(pointer: COpaquePointer, sizeInBytes: ULong) : this(
+    internal constructor(pointer: COpaquePointer, sizeInBytes: ULong) : this(
         pointer = pointer,
         size = sizeInBytes,
         ownsMemory = false
@@ -198,23 +198,6 @@ class OpaquePointerArrayBuffer internal constructor(
     }
 
     /**
-     * Returns the raw C pointer for interop with native APIs.
-     * Use with caution as this provides direct access to unmanaged memory.
-     */
-    fun getRawPointer(): COpaquePointer = pointer
-
-    /**
-     * Copies data from a ByteArray into this buffer at the specified offset.
-     * @param source The source byte array
-     * @param offset The offset in this buffer where to start writing
-     */
-    fun copyFrom(source: ByteArray, offset: Int = 0) {
-        for (i in source.indices) {
-            bytePtr[offset + i] = source[i]
-        }
-    }
-
-    /**
      * Releases the native memory if this buffer owns it.
      * After calling this method, the buffer should not be used anymore.
      */
@@ -224,100 +207,4 @@ class OpaquePointerArrayBuffer internal constructor(
         }
     }
 
-    companion object {
-        /**
-         * Creates an OpaquePointerArrayBuffer from a ByteArray by copying the data.
-         * @param array The source byte array
-         * @return A new buffer containing a copy of the array data
-         */
-        fun fromByteArray(array: ByteArray): OpaquePointerArrayBuffer {
-            val buffer = OpaquePointerArrayBuffer(array.size.toULong())
-            buffer.copyFrom(array)
-            return buffer
-        }
-
-        /**
-         * Creates an OpaquePointerArrayBuffer from a ShortArray by copying the data.
-         * @param array The source array
-         * @return A new buffer containing a copy of the array data
-         */
-        fun fromShortArray(array: ShortArray): OpaquePointerArrayBuffer {
-            val buffer = OpaquePointerArrayBuffer((array.size * Short.SIZE_BYTES).toULong())
-            val ptr = buffer.pointer.reinterpret<ShortVar>()
-            for (i in array.indices) {
-                ptr[i] = array[i]
-            }
-            return buffer
-        }
-
-        /**
-         * Creates an OpaquePointerArrayBuffer from an IntArray by copying the data.
-         * @param array The source array
-         * @return A new buffer containing a copy of the array data
-         */
-        fun fromIntArray(array: IntArray): OpaquePointerArrayBuffer {
-            val buffer = OpaquePointerArrayBuffer((array.size * Int.SIZE_BYTES).toULong())
-            val ptr = buffer.pointer.reinterpret<IntVar>()
-            for (i in array.indices) {
-                ptr[i] = array[i]
-            }
-            return buffer
-        }
-
-        /**
-         * Creates an OpaquePointerArrayBuffer from a FloatArray by copying the data.
-         * @param array The source array
-         * @return A new buffer containing a copy of the array data
-         */
-        fun fromFloatArray(array: FloatArray): OpaquePointerArrayBuffer {
-            val buffer = OpaquePointerArrayBuffer((array.size * Float.SIZE_BYTES).toULong())
-            val ptr = buffer.pointer.reinterpret<FloatVar>()
-            for (i in array.indices) {
-                ptr[i] = array[i]
-            }
-            return buffer
-        }
-
-        /**
-         * Creates an OpaquePointerArrayBuffer from a DoubleArray by copying the data.
-         * @param array The source array
-         * @return A new buffer containing a copy of the array data
-         */
-        fun fromDoubleArray(array: DoubleArray): OpaquePointerArrayBuffer {
-            val buffer = OpaquePointerArrayBuffer((array.size * Double.SIZE_BYTES).toULong())
-            val ptr = buffer.pointer.reinterpret<DoubleVar>()
-            for (i in array.indices) {
-                ptr[i] = array[i]
-            }
-            return buffer
-        }
-
-        /**
-         * Creates an OpaquePointerArrayBuffer from a UByteArray by copying the data.
-         * @param array The source array
-         * @return A new buffer containing a copy of the array data
-         */
-        fun fromUByteArray(array: UByteArray): OpaquePointerArrayBuffer {
-            return fromByteArray(array.asByteArray())
-        }
-
-        /**
-         * Creates an OpaquePointerArrayBuffer from a UShortArray by copying the data.
-         * @param array The source array
-         * @return A new buffer containing a copy of the array data
-         */
-        fun fromUShortArray(array: UShortArray): OpaquePointerArrayBuffer {
-            return fromShortArray(array.asShortArray())
-        }
-
-        /**
-         * Creates an OpaquePointerArrayBuffer from a UIntArray by copying the data.
-         * @param array The source array
-         * @return A new buffer containing a copy of the array data
-         */
-        fun fromUIntArray(array: UIntArray): OpaquePointerArrayBuffer {
-            return fromIntArray(array.asIntArray())
-        }
-
-    }
 }

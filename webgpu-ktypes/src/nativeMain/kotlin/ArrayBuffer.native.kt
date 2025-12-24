@@ -1,4 +1,9 @@
+@file:OptIn(ExperimentalForeignApi::class)
+
 package io.ygdrasil.webgpu
+
+import kotlinx.cinterop.COpaquePointer
+import kotlinx.cinterop.ExperimentalForeignApi
 
 /**
  * Represents a platform-specific abstraction over raw binary data stored in an ArrayBuffer.
@@ -189,6 +194,11 @@ actual sealed interface ArrayBuffer {
     actual fun setUInt(offset: Int, value: UInt)
 
     actual companion object {
+
+        fun of(pointer: COpaquePointer, size: ULong) : OpaquePointerArrayBuffer {
+            return OpaquePointerArrayBuffer(pointer, size)
+        }
+
         /**
          * Creates an ArrayBuffer from a ByteArray.
          * @param array the byte array to convert
