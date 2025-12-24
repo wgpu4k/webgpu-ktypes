@@ -8,12 +8,16 @@ import kotlinx.cinterop.ExperimentalForeignApi
 import kotlinx.cinterop.FloatVar
 import kotlinx.cinterop.IntVar
 import kotlinx.cinterop.ShortVar
+import kotlinx.cinterop.UnsafeNumber
+import kotlinx.cinterop.addressOf
 import kotlinx.cinterop.allocArray
 import kotlinx.cinterop.free
 import kotlinx.cinterop.get
 import kotlinx.cinterop.nativeHeap
 import kotlinx.cinterop.reinterpret
 import kotlinx.cinterop.set
+import kotlinx.cinterop.usePinned
+import platform.posix.memcpy
 import kotlin.experimental.ExperimentalNativeApi
 
 /**
@@ -67,8 +71,8 @@ class OpaquePointerArrayBuffer internal constructor(
 
     override fun toByteArray(): ByteArray {
         val array = ByteArray(size.toInt())
-        for (i in 0 until size.toInt()) {
-            array[i] = bytePtr[i]
+        array.usePinned { pinned ->
+            memcpy(pinned.addressOf(0), bytePtr, size.toULong())
         }
         return array
     }

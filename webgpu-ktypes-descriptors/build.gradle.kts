@@ -25,7 +25,6 @@ kotlin {
     iosX64()
     iosArm64()
     iosSimulatorArm64()
-    watchosArm32()
     watchosArm64()
     watchosSimulatorArm64()
     watchosX64()
@@ -34,9 +33,7 @@ kotlin {
     linuxArm64()
     linuxX64()
     mingwX64()
-    androidNativeArm32()
     androidNativeArm64()
-    androidNativeX86()
     androidNativeX64()
 
     androidLibrary {
