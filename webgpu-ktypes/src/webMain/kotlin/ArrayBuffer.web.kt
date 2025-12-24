@@ -40,12 +40,6 @@ actual sealed interface ArrayBuffer {
     actual fun toIntArray(): IntArray
 
     /**
-     * Converts the buffer to a LongArray.
-     * @return a LongArray containing the buffer's data (size must be multiple of 8)
-     */
-    actual fun toLongArray(): LongArray
-
-    /**
      * Converts the buffer to a FloatArray.
      * @return a FloatArray containing the buffer's data (size must be multiple of 4)
      */
@@ -75,12 +69,6 @@ actual sealed interface ArrayBuffer {
      */
     actual fun toUIntArray(): UIntArray
 
-    /**
-     * Converts the buffer to a ULongArray.
-     * @return a ULongArray containing the buffer's data (size must be multiple of 8)
-     */
-    actual fun toULongArray(): ULongArray
-
     // Indexed read methods
 
     /**
@@ -103,13 +91,6 @@ actual sealed interface ArrayBuffer {
      * @return the int value
      */
     actual fun getInt(offset: Int): Int
-
-    /**
-     * Reads a long at the specified offset.
-     * @param offset the byte offset (must be aligned to 8 bytes)
-     * @return the long value
-     */
-    actual fun getLong(offset: Int): Long
 
     /**
      * Reads a float at the specified offset.
@@ -146,13 +127,6 @@ actual sealed interface ArrayBuffer {
      */
     actual fun getUInt(offset: Int): UInt
 
-    /**
-     * Reads an unsigned long at the specified offset.
-     * @param offset the byte offset (must be aligned to 8 bytes)
-     * @return the unsigned long value
-     */
-    actual fun getULong(offset: Int): ULong
-
     // Indexed write methods
 
     /**
@@ -175,13 +149,6 @@ actual sealed interface ArrayBuffer {
      * @param value the int value to write
      */
     actual fun setInt(offset: Int, value: Int)
-
-    /**
-     * Writes a long at the specified offset.
-     * @param offset the byte offset (must be aligned to 8 bytes)
-     * @param value the long value to write
-     */
-    actual fun setLong(offset: Int, value: Long)
 
     /**
      * Writes a float at the specified offset.
@@ -218,13 +185,6 @@ actual sealed interface ArrayBuffer {
      */
     actual fun setUInt(offset: Int, value: UInt)
 
-    /**
-     * Writes an unsigned long at the specified offset.
-     * @param offset the byte offset (must be aligned to 8 bytes)
-     * @param value the unsigned long value to write
-     */
-    actual fun setULong(offset: Int, value: ULong)
-
     actual companion object {
         /**
          * Creates an ArrayBuffer from a JavaScript ArrayBuffer.
@@ -256,14 +216,6 @@ actual sealed interface ArrayBuffer {
          * @return an ArrayBuffer containing the data from the int array
          */
         actual fun from(array: IntArray): ArrayBuffer
-            = array.toArrayBuffer()
-
-        /**
-         * Creates an ArrayBuffer from a LongArray.
-         * @param array the long array to convert
-         * @return an ArrayBuffer containing the data from the long array
-         */
-        actual fun from(array: LongArray): ArrayBuffer
             = array.toArrayBuffer()
 
         /**
@@ -305,61 +257,45 @@ actual sealed interface ArrayBuffer {
          */
         actual fun from(array: UIntArray): ArrayBuffer
             = array.toArrayBuffer()
-
-        /**
-         * Creates an ArrayBuffer from a ULongArray.
-         * @param array the unsigned long array to convert
-         * @return an ArrayBuffer containing the data from the unsigned long array
-         */
-        actual fun from(array: ULongArray): ArrayBuffer
-            = array.toArrayBuffer()
     }
 }
 
 internal expect inline fun ByteArray.toArrayBuffer(): ArrayBuffer
 internal expect inline fun ShortArray.toArrayBuffer(): ArrayBuffer
 internal expect inline fun IntArray.toArrayBuffer(): ArrayBuffer
-internal expect inline fun LongArray.toArrayBuffer(): ArrayBuffer
 internal expect inline fun FloatArray.toArrayBuffer(): ArrayBuffer
 internal expect inline fun DoubleArray.toArrayBuffer(): ArrayBuffer
 internal expect inline fun UByteArray.toArrayBuffer(): ArrayBuffer
 internal expect inline fun UShortArray.toArrayBuffer(): ArrayBuffer
 internal expect inline fun UIntArray.toArrayBuffer(): ArrayBuffer
-internal expect inline fun ULongArray.toArrayBuffer(): ArrayBuffer
 
 // Platform-specific extension methods
 internal expect fun js.buffer.ArrayBuffer.readByteArray(): ByteArray
 internal expect fun js.buffer.ArrayBuffer.readShortArray(): ShortArray
 internal expect fun js.buffer.ArrayBuffer.readIntArray(): IntArray
-internal expect fun js.buffer.ArrayBuffer.readLongArray(): LongArray
 internal expect fun js.buffer.ArrayBuffer.readFloatArray(): FloatArray
 internal expect fun js.buffer.ArrayBuffer.readDoubleArray(): DoubleArray
 internal expect fun js.buffer.ArrayBuffer.readUByteArray(): UByteArray
 internal expect fun js.buffer.ArrayBuffer.readUShortArray(): UShortArray
 internal expect fun js.buffer.ArrayBuffer.readUIntArray(): UIntArray
-internal expect fun js.buffer.ArrayBuffer.readULongArray(): ULongArray
 
 internal expect fun js.buffer.ArrayBuffer.readByte(offset: Int): Byte
 internal expect fun js.buffer.ArrayBuffer.readShort(offset: Int): Short
 internal expect fun js.buffer.ArrayBuffer.readInt(offset: Int): Int
-internal expect fun js.buffer.ArrayBuffer.readLong(offset: Int): Long
 internal expect fun js.buffer.ArrayBuffer.readFloat(offset: Int): Float
 internal expect fun js.buffer.ArrayBuffer.readDouble(offset: Int): Double
 internal expect fun js.buffer.ArrayBuffer.readUByte(offset: Int): UByte
 internal expect fun js.buffer.ArrayBuffer.readUShort(offset: Int): UShort
 internal expect fun js.buffer.ArrayBuffer.readUInt(offset: Int): UInt
-internal expect fun js.buffer.ArrayBuffer.readULong(offset: Int): ULong
 
 internal expect fun js.buffer.ArrayBuffer.writeByte(offset: Int, value: Byte)
 internal expect fun js.buffer.ArrayBuffer.writeShort(offset: Int, value: Short)
 internal expect fun js.buffer.ArrayBuffer.writeInt(offset: Int, value: Int)
-internal expect fun js.buffer.ArrayBuffer.writeLong(offset: Int, value: Long)
 internal expect fun js.buffer.ArrayBuffer.writeFloat(offset: Int, value: Float)
 internal expect fun js.buffer.ArrayBuffer.writeDouble(offset: Int, value: Double)
 internal expect fun js.buffer.ArrayBuffer.writeUByte(offset: Int, value: UByte)
 internal expect fun js.buffer.ArrayBuffer.writeUShort(offset: Int, value: UShort)
 internal expect fun js.buffer.ArrayBuffer.writeUInt(offset: Int, value: UInt)
-internal expect fun js.buffer.ArrayBuffer.writeULong(offset: Int, value: ULong)
 
 /**
  * A Kotlin/JS value class that serves as a wrapper for the JavaScript `ArrayBuffer`.
@@ -379,36 +315,30 @@ value class WebArrayBuffer internal constructor(val buffer: js.buffer.ArrayBuffe
     override fun toByteArray(): ByteArray = buffer.readByteArray()
     override fun toShortArray(): ShortArray = buffer.readShortArray()
     override fun toIntArray(): IntArray = buffer.readIntArray()
-    override fun toLongArray(): LongArray = buffer.readLongArray()
     override fun toFloatArray(): FloatArray = buffer.readFloatArray()
     override fun toDoubleArray(): DoubleArray = buffer.readDoubleArray()
     override fun toUByteArray(): UByteArray = buffer.readUByteArray()
     override fun toUShortArray(): UShortArray = buffer.readUShortArray()
     override fun toUIntArray(): UIntArray = buffer.readUIntArray()
-    override fun toULongArray(): ULongArray = buffer.readULongArray()
 
     // Indexed read methods
     override fun getByte(offset: Int): Byte = buffer.readByte(offset)
     override fun getShort(offset: Int): Short = buffer.readShort(offset)
     override fun getInt(offset: Int): Int = buffer.readInt(offset)
-    override fun getLong(offset: Int): Long = buffer.readLong(offset)
     override fun getFloat(offset: Int): Float = buffer.readFloat(offset)
     override fun getDouble(offset: Int): Double = buffer.readDouble(offset)
     override fun getUByte(offset: Int): UByte = buffer.readUByte(offset)
     override fun getUShort(offset: Int): UShort = buffer.readUShort(offset)
     override fun getUInt(offset: Int): UInt = buffer.readUInt(offset)
-    override fun getULong(offset: Int): ULong = buffer.readULong(offset)
 
     // Indexed write methods
     override fun setByte(offset: Int, value: Byte) = buffer.writeByte(offset, value)
     override fun setShort(offset: Int, value: Short) = buffer.writeShort(offset, value)
     override fun setInt(offset: Int, value: Int) = buffer.writeInt(offset, value)
-    override fun setLong(offset: Int, value: Long) = buffer.writeLong(offset, value)
     override fun setFloat(offset: Int, value: Float) = buffer.writeFloat(offset, value)
     override fun setDouble(offset: Int, value: Double) = buffer.writeDouble(offset, value)
     override fun setUByte(offset: Int, value: UByte) = buffer.writeUByte(offset, value)
     override fun setUShort(offset: Int, value: UShort) = buffer.writeUShort(offset, value)
     override fun setUInt(offset: Int, value: UInt) = buffer.writeUInt(offset, value)
-    override fun setULong(offset: Int, value: ULong) = buffer.writeULong(offset, value)
 }
 

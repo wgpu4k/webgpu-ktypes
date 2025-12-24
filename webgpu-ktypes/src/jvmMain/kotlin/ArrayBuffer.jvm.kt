@@ -42,11 +42,6 @@ actual sealed interface ArrayBuffer {
      */
     actual fun toIntArray(): IntArray
 
-    /**
-     * Converts the buffer to a LongArray.
-     * @return a LongArray containing the buffer's data (size must be multiple of 8)
-     */
-    actual fun toLongArray(): LongArray
 
     /**
      * Converts the buffer to a FloatArray.
@@ -78,11 +73,6 @@ actual sealed interface ArrayBuffer {
      */
     actual fun toUIntArray(): UIntArray
 
-    /**
-     * Converts the buffer to a ULongArray.
-     * @return a ULongArray containing the buffer's data (size must be multiple of 8)
-     */
-    actual fun toULongArray(): ULongArray
 
     // Indexed read methods
 
@@ -107,12 +97,6 @@ actual sealed interface ArrayBuffer {
      */
     actual fun getInt(offset: Int): Int
 
-    /**
-     * Reads a long at the specified offset.
-     * @param offset the byte offset (must be aligned to 8 bytes)
-     * @return the long value
-     */
-    actual fun getLong(offset: Int): Long
 
     /**
      * Reads a float at the specified offset.
@@ -149,12 +133,6 @@ actual sealed interface ArrayBuffer {
      */
     actual fun getUInt(offset: Int): UInt
 
-    /**
-     * Reads an unsigned long at the specified offset.
-     * @param offset the byte offset (must be aligned to 8 bytes)
-     * @return the unsigned long value
-     */
-    actual fun getULong(offset: Int): ULong
 
     // Indexed write methods
 
@@ -179,12 +157,6 @@ actual sealed interface ArrayBuffer {
      */
     actual fun setInt(offset: Int, value: Int)
 
-    /**
-     * Writes a long at the specified offset.
-     * @param offset the byte offset (must be aligned to 8 bytes)
-     * @param value the long value to write
-     */
-    actual fun setLong(offset: Int, value: Long)
 
     /**
      * Writes a float at the specified offset.
@@ -221,12 +193,6 @@ actual sealed interface ArrayBuffer {
      */
     actual fun setUInt(offset: Int, value: UInt)
 
-    /**
-     * Writes an unsigned long at the specified offset.
-     * @param offset the byte offset (must be aligned to 8 bytes)
-     * @param value the unsigned long value to write
-     */
-    actual fun setULong(offset: Int, value: ULong)
 
     actual companion object {
         /**
@@ -270,14 +236,6 @@ actual sealed interface ArrayBuffer {
             return JvmArrayBuffer(MemorySegment.ofArray(array))
         }
 
-        /**
-         * Creates an ArrayBuffer from a LongArray.
-         * @param array the long array to convert
-         * @return an ArrayBuffer containing the data from the long array
-         */
-        actual fun from(array: LongArray): ArrayBuffer {
-            return JvmArrayBuffer(MemorySegment.ofArray(array))
-        }
 
         /**
          * Creates an ArrayBuffer from a FloatArray.
@@ -324,14 +282,6 @@ actual sealed interface ArrayBuffer {
             return JvmArrayBuffer(MemorySegment.ofArray(array.asIntArray()))
         }
 
-        /**
-         * Creates an ArrayBuffer from a ULongArray.
-         * @param array the unsigned long array to convert
-         * @return an ArrayBuffer containing the data from the unsigned long array
-         */
-        actual fun from(array: ULongArray): ArrayBuffer {
-            return JvmArrayBuffer(MemorySegment.ofArray(array.asLongArray()))
-        }
     }
 }
 
@@ -362,7 +312,6 @@ value class JvmArrayBuffer internal constructor(val buffer: MemorySegment): Arra
 
     override fun toIntArray(): IntArray = buffer.toArray(java.lang.foreign.ValueLayout.JAVA_INT)
 
-    override fun toLongArray(): LongArray = buffer.toArray(java.lang.foreign.ValueLayout.JAVA_LONG)
 
     override fun toFloatArray(): FloatArray = buffer.toArray(java.lang.foreign.ValueLayout.JAVA_FLOAT)
 
@@ -374,7 +323,6 @@ value class JvmArrayBuffer internal constructor(val buffer: MemorySegment): Arra
 
     override fun toUIntArray(): UIntArray = buffer.toArray(java.lang.foreign.ValueLayout.JAVA_INT).asUIntArray()
 
-    override fun toULongArray(): ULongArray = buffer.toArray(java.lang.foreign.ValueLayout.JAVA_LONG).asULongArray()
 
     // Indexed read methods
 
@@ -384,7 +332,6 @@ value class JvmArrayBuffer internal constructor(val buffer: MemorySegment): Arra
 
     override fun getInt(offset: Int): Int = buffer.get(java.lang.foreign.ValueLayout.JAVA_INT_UNALIGNED, offset.toLong())
 
-    override fun getLong(offset: Int): Long = buffer.get(java.lang.foreign.ValueLayout.JAVA_LONG_UNALIGNED, offset.toLong())
 
     override fun getFloat(offset: Int): Float = buffer.get(java.lang.foreign.ValueLayout.JAVA_FLOAT_UNALIGNED, offset.toLong())
 
@@ -396,7 +343,6 @@ value class JvmArrayBuffer internal constructor(val buffer: MemorySegment): Arra
 
     override fun getUInt(offset: Int): UInt = getInt(offset).toUInt()
 
-    override fun getULong(offset: Int): ULong = getLong(offset).toULong()
 
     // Indexed write methods
 
@@ -412,9 +358,6 @@ value class JvmArrayBuffer internal constructor(val buffer: MemorySegment): Arra
         buffer.set(java.lang.foreign.ValueLayout.JAVA_INT_UNALIGNED, offset.toLong(), value)
     }
 
-    override fun setLong(offset: Int, value: Long) {
-        buffer.set(java.lang.foreign.ValueLayout.JAVA_LONG_UNALIGNED, offset.toLong(), value)
-    }
 
     override fun setFloat(offset: Int, value: Float) {
         buffer.set(java.lang.foreign.ValueLayout.JAVA_FLOAT_UNALIGNED, offset.toLong(), value)
@@ -436,7 +379,4 @@ value class JvmArrayBuffer internal constructor(val buffer: MemorySegment): Arra
         setInt(offset, value.toInt())
     }
 
-    override fun setULong(offset: Int, value: ULong) {
-        setLong(offset, value.toLong())
-    }
 }

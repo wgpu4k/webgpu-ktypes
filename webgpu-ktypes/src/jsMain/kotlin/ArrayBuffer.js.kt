@@ -16,9 +16,6 @@ internal actual inline fun ShortArray.toArrayBuffer(): ArrayBuffer
 internal actual inline fun IntArray.toArrayBuffer(): ArrayBuffer
     = ArrayBuffer.from(unsafeCast<Int32Array<js.buffer.ArrayBuffer>>().buffer)
 
-@Suppress("NOTHING_TO_INLINE")
-internal actual inline fun LongArray.toArrayBuffer(): ArrayBuffer
-    = ArrayBuffer.from(unsafeCast<BigInt64Array<js.buffer.ArrayBuffer>>().buffer)
 
 @Suppress("NOTHING_TO_INLINE")
 internal actual inline fun FloatArray.toArrayBuffer(): ArrayBuffer
@@ -40,9 +37,6 @@ internal actual inline fun UShortArray.toArrayBuffer(): ArrayBuffer
 internal actual inline fun UIntArray.toArrayBuffer(): ArrayBuffer
     = ArrayBuffer.from(unsafeCast<Uint32Array<js.buffer.ArrayBuffer>>().buffer)
 
-@Suppress("NOTHING_TO_INLINE")
-internal actual inline fun ULongArray.toArrayBuffer(): ArrayBuffer
-    = ArrayBuffer.from(unsafeCast<BigUint64Array<js.buffer.ArrayBuffer>>().buffer)
 
 // Read methods - convert ArrayBuffer to typed arrays
 @Suppress("NOTHING_TO_INLINE")
@@ -63,11 +57,6 @@ internal actual inline fun js.buffer.ArrayBuffer.readIntArray(): IntArray {
     return IntArray(view.length) { view[it].unsafeCast<Int>() }
 }
 
-@Suppress("NOTHING_TO_INLINE")
-internal actual inline fun js.buffer.ArrayBuffer.readLongArray(): LongArray {
-    val view = BigInt64Array<js.buffer.ArrayBuffer>(this)
-    return LongArray(view.length) { view[it].unsafeCast<Long>() }
-}
 
 @Suppress("NOTHING_TO_INLINE")
 internal actual inline fun js.buffer.ArrayBuffer.readFloatArray(): FloatArray {
@@ -99,11 +88,6 @@ internal actual inline fun js.buffer.ArrayBuffer.readUIntArray(): UIntArray {
     return UIntArray(view.length) { view[it].unsafeCast<Int>().toUInt() }
 }
 
-@Suppress("NOTHING_TO_INLINE")
-internal actual inline fun js.buffer.ArrayBuffer.readULongArray(): ULongArray {
-    val view = BigUint64Array<js.buffer.ArrayBuffer>(this)
-    return ULongArray(view.length) { view[it].unsafeCast<Long>().toULong() }
-}
 
 // Indexed read methods
 @Suppress("NOTHING_TO_INLINE")
@@ -124,11 +108,6 @@ internal actual inline fun js.buffer.ArrayBuffer.readInt(offset: Int): Int {
     return view[offset / Int.SIZE_BYTES].unsafeCast<Int>()
 }
 
-@Suppress("NOTHING_TO_INLINE")
-internal actual inline fun js.buffer.ArrayBuffer.readLong(offset: Int): Long {
-    val view = BigInt64Array<js.buffer.ArrayBuffer>(this)
-    return view[offset / Long.SIZE_BYTES].unsafeCast<Long>()
-}
 
 @Suppress("NOTHING_TO_INLINE")
 internal actual inline fun js.buffer.ArrayBuffer.readFloat(offset: Int): Float {
@@ -160,11 +139,6 @@ internal actual inline fun js.buffer.ArrayBuffer.readUInt(offset: Int): UInt {
     return view[offset / Int.SIZE_BYTES].unsafeCast<Int>().toUInt()
 }
 
-@Suppress("NOTHING_TO_INLINE")
-internal actual inline fun js.buffer.ArrayBuffer.readULong(offset: Int): ULong {
-    val view = BigUint64Array<js.buffer.ArrayBuffer>(this)
-    return view[offset / Long.SIZE_BYTES].unsafeCast<Long>().toULong()
-}
 
 // Indexed write methods
 @Suppress("NOTHING_TO_INLINE")
@@ -185,11 +159,6 @@ internal actual inline fun js.buffer.ArrayBuffer.writeInt(offset: Int, value: In
     view[offset / Int.SIZE_BYTES] = value
 }
 
-@Suppress("NOTHING_TO_INLINE")
-internal actual inline fun js.buffer.ArrayBuffer.writeLong(offset: Int, value: Long) {
-    val view = BigInt64Array<js.buffer.ArrayBuffer>(this)
-    view[offset / Long.SIZE_BYTES] = js.core.BigInt(value)
-}
 
 @Suppress("NOTHING_TO_INLINE")
 internal actual inline fun js.buffer.ArrayBuffer.writeFloat(offset: Int, value: Float) {
@@ -221,8 +190,3 @@ internal actual inline fun js.buffer.ArrayBuffer.writeUInt(offset: Int, value: U
     view[offset / Int.SIZE_BYTES] = value.toInt()
 }
 
-@Suppress("NOTHING_TO_INLINE")
-internal actual inline fun js.buffer.ArrayBuffer.writeULong(offset: Int, value: ULong) {
-    val view = BigUint64Array<js.buffer.ArrayBuffer>(this)
-    view[offset / Long.SIZE_BYTES] = js.core.BigInt(value.toLong())
-}

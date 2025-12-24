@@ -48,12 +48,6 @@ actual sealed interface ArrayBuffer {
     actual fun toIntArray(): IntArray
 
     /**
-     * Converts the buffer to a LongArray.
-     * @return a LongArray containing the buffer's data (size must be multiple of 8)
-     */
-    actual fun toLongArray(): LongArray
-
-    /**
      * Converts the buffer to a FloatArray.
      * @return a FloatArray containing the buffer's data (size must be multiple of 4)
      */
@@ -83,12 +77,6 @@ actual sealed interface ArrayBuffer {
      */
     actual fun toUIntArray(): UIntArray
 
-    /**
-     * Converts the buffer to a ULongArray.
-     * @return a ULongArray containing the buffer's data (size must be multiple of 8)
-     */
-    actual fun toULongArray(): ULongArray
-
     // Indexed read methods
 
     /**
@@ -111,13 +99,6 @@ actual sealed interface ArrayBuffer {
      * @return the int value
      */
     actual fun getInt(offset: Int): Int
-
-    /**
-     * Reads a long at the specified offset.
-     * @param offset the byte offset (must be aligned to 8 bytes)
-     * @return the long value
-     */
-    actual fun getLong(offset: Int): Long
 
     /**
      * Reads a float at the specified offset.
@@ -154,13 +135,6 @@ actual sealed interface ArrayBuffer {
      */
     actual fun getUInt(offset: Int): UInt
 
-    /**
-     * Reads an unsigned long at the specified offset.
-     * @param offset the byte offset (must be aligned to 8 bytes)
-     * @return the unsigned long value
-     */
-    actual fun getULong(offset: Int): ULong
-
     // Indexed write methods
 
     /**
@@ -183,13 +157,6 @@ actual sealed interface ArrayBuffer {
      * @param value the int value to write
      */
     actual fun setInt(offset: Int, value: Int)
-
-    /**
-     * Writes a long at the specified offset.
-     * @param offset the byte offset (must be aligned to 8 bytes)
-     * @param value the long value to write
-     */
-    actual fun setLong(offset: Int, value: Long)
 
     /**
      * Writes a float at the specified offset.
@@ -225,13 +192,6 @@ actual sealed interface ArrayBuffer {
      * @param value the unsigned int value to write
      */
     actual fun setUInt(offset: Int, value: UInt)
-
-    /**
-     * Writes an unsigned long at the specified offset.
-     * @param offset the byte offset (must be aligned to 8 bytes)
-     * @param value the unsigned long value to write
-     */
-    actual fun setULong(offset: Int, value: ULong)
 
     actual companion object {
 
@@ -274,18 +234,6 @@ actual sealed interface ArrayBuffer {
         actual fun from(array: IntArray): ArrayBuffer {
             val buffer = ByteBuffer.allocateDirect(array.size * Int.SIZE_BYTES)
             buffer.asIntBuffer().put(array)
-            buffer.rewind()
-            return AndroidArrayBuffer(buffer)
-        }
-
-        /**
-         * Creates an ArrayBuffer from a LongArray.
-         * @param array the long array to convert
-         * @return an ArrayBuffer containing the data from the long array
-         */
-        actual fun from(array: LongArray): ArrayBuffer {
-            val buffer = ByteBuffer.allocateDirect(array.size * Long.SIZE_BYTES)
-            buffer.asLongBuffer().put(array)
             buffer.rewind()
             return AndroidArrayBuffer(buffer)
         }
@@ -350,17 +298,6 @@ actual sealed interface ArrayBuffer {
             return AndroidArrayBuffer(buffer)
         }
 
-        /**
-         * Creates an ArrayBuffer from a ULongArray.
-         * @param array the unsigned long array to convert
-         * @return an ArrayBuffer containing the data from the unsigned long array
-         */
-        actual fun from(array: ULongArray): ArrayBuffer {
-            val buffer = ByteBuffer.allocateDirect(array.size * Long.SIZE_BYTES)
-            buffer.asLongBuffer().put(array.asLongArray())
-            buffer.rewind()
-            return AndroidArrayBuffer(buffer)
-        }
     }
 }
 
@@ -407,12 +344,6 @@ value class AndroidArrayBuffer internal constructor(val buffer: ByteBuffer): Arr
         return array
     }
 
-    override fun toLongArray(): LongArray {
-        val array = LongArray(buffer.capacity() / Long.SIZE_BYTES)
-        buffer.duplicate().asLongBuffer().get(array)
-        return array
-    }
-
     override fun toFloatArray(): FloatArray {
         val array = FloatArray(buffer.capacity() / Float.SIZE_BYTES)
         buffer.duplicate().asFloatBuffer().get(array)
@@ -431,8 +362,6 @@ value class AndroidArrayBuffer internal constructor(val buffer: ByteBuffer): Arr
 
     override fun toUIntArray(): UIntArray = toIntArray().asUIntArray()
 
-    override fun toULongArray(): ULongArray = toLongArray().asULongArray()
-
     // Indexed read methods
 
     override fun getByte(offset: Int): Byte = buffer.get(offset)
@@ -440,8 +369,6 @@ value class AndroidArrayBuffer internal constructor(val buffer: ByteBuffer): Arr
     override fun getShort(offset: Int): Short = buffer.getShort(offset)
 
     override fun getInt(offset: Int): Int = buffer.getInt(offset)
-
-    override fun getLong(offset: Int): Long = buffer.getLong(offset)
 
     override fun getFloat(offset: Int): Float = buffer.getFloat(offset)
 
@@ -452,8 +379,6 @@ value class AndroidArrayBuffer internal constructor(val buffer: ByteBuffer): Arr
     override fun getUShort(offset: Int): UShort = getShort(offset).toUShort()
 
     override fun getUInt(offset: Int): UInt = getInt(offset).toUInt()
-
-    override fun getULong(offset: Int): ULong = getLong(offset).toULong()
 
     // Indexed write methods
 
@@ -467,10 +392,6 @@ value class AndroidArrayBuffer internal constructor(val buffer: ByteBuffer): Arr
 
     override fun setInt(offset: Int, value: Int) {
         buffer.putInt(offset, value)
-    }
-
-    override fun setLong(offset: Int, value: Long) {
-        buffer.putLong(offset, value)
     }
 
     override fun setFloat(offset: Int, value: Float) {
@@ -493,8 +414,5 @@ value class AndroidArrayBuffer internal constructor(val buffer: ByteBuffer): Arr
         setInt(offset, value.toInt())
     }
 
-    override fun setULong(offset: Int, value: ULong) {
-        setLong(offset, value.toLong())
-    }
 }
 

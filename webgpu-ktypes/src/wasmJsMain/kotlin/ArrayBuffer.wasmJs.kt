@@ -39,15 +39,6 @@ internal actual inline fun IntArray.toArrayBuffer(): ArrayBuffer {
 }
 
 @Suppress("NOTHING_TO_INLINE")
-internal actual inline fun LongArray.toArrayBuffer(): ArrayBuffer {
-    val array = JsArray<BigInt>()
-    forEachIndexed { index, value ->
-        array[index] = BigInt(value)
-    }
-    return ArrayBuffer.from(BigInt64Array<js.buffer.ArrayBuffer>(array).buffer)
-}
-
-@Suppress("NOTHING_TO_INLINE")
 internal actual inline fun FloatArray.toArrayBuffer(): ArrayBuffer {
     val array = JsArray<JsNumber>()
     forEachIndexed { index, value ->
@@ -92,15 +83,6 @@ internal actual inline fun UIntArray.toArrayBuffer(): ArrayBuffer {
     return ArrayBuffer.from(Uint32Array<js.buffer.ArrayBuffer>(array).buffer)
 }
 
-@Suppress("NOTHING_TO_INLINE")
-internal actual inline fun ULongArray.toArrayBuffer(): ArrayBuffer {
-    val array = JsArray<BigInt>()
-    forEachIndexed { index, value ->
-        array[index] = BigInt(value.toLong())
-    }
-    return ArrayBuffer.from(BigInt64Array<js.buffer.ArrayBuffer>(array).buffer)
-}
-
 // Read methods - convert ArrayBuffer to typed arrays
 @Suppress("NOTHING_TO_INLINE")
 internal actual inline fun js.buffer.ArrayBuffer.readByteArray(): ByteArray {
@@ -118,12 +100,6 @@ internal actual inline fun js.buffer.ArrayBuffer.readShortArray(): ShortArray {
 internal actual inline fun js.buffer.ArrayBuffer.readIntArray(): IntArray {
     val view = Int32Array<js.buffer.ArrayBuffer>(this)
     return IntArray(view.length) { view[it].toInt() }
-}
-
-@Suppress("NOTHING_TO_INLINE")
-internal actual inline fun js.buffer.ArrayBuffer.readLongArray(): LongArray {
-    // TODO: BigInt conversion not fully supported in Wasm yet
-    error("Long array conversion not yet supported in WasmJs")
 }
 
 @Suppress("NOTHING_TO_INLINE")
@@ -156,12 +132,6 @@ internal actual inline fun js.buffer.ArrayBuffer.readUIntArray(): UIntArray {
     return UIntArray(view.length) { view[it].toInt().toUInt() }
 }
 
-@Suppress("NOTHING_TO_INLINE")
-internal actual inline fun js.buffer.ArrayBuffer.readULongArray(): ULongArray {
-    // TODO: BigInt conversion not fully supported in Wasm yet
-    error("ULong array conversion not yet supported in WasmJs")
-}
-
 // Indexed read methods
 @Suppress("NOTHING_TO_INLINE")
 internal actual inline fun js.buffer.ArrayBuffer.readByte(offset: Int): Byte {
@@ -179,12 +149,6 @@ internal actual inline fun js.buffer.ArrayBuffer.readShort(offset: Int): Short {
 internal actual inline fun js.buffer.ArrayBuffer.readInt(offset: Int): Int {
     val view = Int32Array<js.buffer.ArrayBuffer>(this)
     return view[offset / Int.SIZE_BYTES].toInt()
-}
-
-@Suppress("NOTHING_TO_INLINE")
-internal actual inline fun js.buffer.ArrayBuffer.readLong(offset: Int): Long {
-    // TODO: BigInt conversion not fully supported in Wasm yet
-    error("Long read not yet supported in WasmJs")
 }
 
 @Suppress("NOTHING_TO_INLINE")
@@ -217,12 +181,6 @@ internal actual inline fun js.buffer.ArrayBuffer.readUInt(offset: Int): UInt {
     return view[offset / Int.SIZE_BYTES].toInt().toUInt()
 }
 
-@Suppress("NOTHING_TO_INLINE")
-internal actual inline fun js.buffer.ArrayBuffer.readULong(offset: Int): ULong {
-    // TODO: BigInt conversion not fully supported in Wasm yet
-    error("ULong read not yet supported in WasmJs")
-}
-
 // Indexed write methods
 @Suppress("NOTHING_TO_INLINE")
 internal actual inline fun js.buffer.ArrayBuffer.writeByte(offset: Int, value: Byte) {
@@ -240,12 +198,6 @@ internal actual inline fun js.buffer.ArrayBuffer.writeShort(offset: Int, value: 
 internal actual inline fun js.buffer.ArrayBuffer.writeInt(offset: Int, value: Int) {
     val view = Int32Array<js.buffer.ArrayBuffer>(this)
     view[offset / Int.SIZE_BYTES] = value.toJsInt()
-}
-
-@Suppress("NOTHING_TO_INLINE")
-internal actual inline fun js.buffer.ArrayBuffer.writeLong(offset: Int, value: Long) {
-    val view = BigInt64Array<js.buffer.ArrayBuffer>(this)
-    view[offset / Long.SIZE_BYTES] = BigInt(value)
 }
 
 @Suppress("NOTHING_TO_INLINE")
@@ -276,10 +228,4 @@ internal actual inline fun js.buffer.ArrayBuffer.writeUShort(offset: Int, value:
 internal actual inline fun js.buffer.ArrayBuffer.writeUInt(offset: Int, value: UInt) {
     val view = Uint32Array<js.buffer.ArrayBuffer>(this)
     view[offset / Int.SIZE_BYTES] = value.toInt().toJsInt()
-}
-
-@Suppress("NOTHING_TO_INLINE")
-internal actual inline fun js.buffer.ArrayBuffer.writeULong(offset: Int, value: ULong) {
-    val view = BigUint64Array<js.buffer.ArrayBuffer>(this)
-    view[offset / Long.SIZE_BYTES] = BigInt(value.toLong())
 }

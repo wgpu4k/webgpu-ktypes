@@ -42,18 +42,6 @@ class ArrayBufferTest : FreeSpec({
         output shouldBe input
     }
 
-    "LongArray round-trip" {
-        // Given
-        val input = longArrayOf(100000L, 200000L, 300000L, -100000L, -200000L, -300000L)
-
-        // When
-        val buffer = ArrayBuffer.from(input)
-        val output = buffer.toLongArray()
-
-        // Then
-        output shouldBe input
-    }
-
     "FloatArray round-trip" {
         // Given
         val input = floatArrayOf(1.5f, 2.5f, 3.5f, -1.5f, -2.5f, -3.5f)
@@ -114,18 +102,6 @@ class ArrayBufferTest : FreeSpec({
         output shouldBe input
     }
 
-    "ULongArray round-trip" {
-        // Given
-        val input = ulongArrayOf(100000u, 200000u, 300000u, 18446744073709551615u, 18446744073709551614u, 18446744073709551613u)
-
-        // When
-        val buffer = ArrayBuffer.from(input)
-        val output = buffer.toULongArray()
-
-        // Then
-        output shouldBe input
-    }
-
     "Indexed read/write - Byte" {
         // Given
         val buffer = ArrayBuffer.from(ByteArray(10))
@@ -163,19 +139,6 @@ class ArrayBufferTest : FreeSpec({
         // Then
         buffer.getInt(0) shouldBe 100000
         buffer.getInt(8) shouldBe -100000
-    }
-
-    "Indexed read/write - Long" {
-        // Given
-        val buffer = ArrayBuffer.from(ByteArray(32))
-
-        // When
-        buffer.setLong(0, 10000000000L)
-        buffer.setLong(16, -10000000000L)
-
-        // Then
-        buffer.getLong(0) shouldBe 10000000000L
-        buffer.getLong(16) shouldBe -10000000000L
     }
 
     "Indexed read/write - Float" {
@@ -243,16 +206,4 @@ class ArrayBufferTest : FreeSpec({
         buffer.getUInt(8) shouldBe 2147483648u
     }
 
-    "Indexed read/write - ULong" {
-        // Given
-        val buffer = ArrayBuffer.from(ByteArray(32))
-
-        // When
-        buffer.setULong(0, 18446744073709551615u)
-        buffer.setULong(16, 9223372036854775808u)
-
-        // Then
-        buffer.getULong(0) shouldBe 18446744073709551615u
-        buffer.getULong(16) shouldBe 9223372036854775808u
-    }
 })

@@ -46,12 +46,6 @@ actual sealed interface ArrayBuffer {
     actual fun toIntArray(): IntArray
 
     /**
-     * Converts the buffer to a LongArray.
-     * @return a LongArray containing the buffer's data (size must be multiple of 8)
-     */
-    actual fun toLongArray(): LongArray
-
-    /**
      * Converts the buffer to a FloatArray.
      * @return a FloatArray containing the buffer's data (size must be multiple of 4)
      */
@@ -81,12 +75,6 @@ actual sealed interface ArrayBuffer {
      */
     actual fun toUIntArray(): UIntArray
 
-    /**
-     * Converts the buffer to a ULongArray.
-     * @return a ULongArray containing the buffer's data (size must be multiple of 8)
-     */
-    actual fun toULongArray(): ULongArray
-
     // Indexed read methods
 
     /**
@@ -109,13 +97,6 @@ actual sealed interface ArrayBuffer {
      * @return the int value
      */
     actual fun getInt(offset: Int): Int
-
-    /**
-     * Reads a long at the specified offset.
-     * @param offset the byte offset (must be aligned to 8 bytes)
-     * @return the long value
-     */
-    actual fun getLong(offset: Int): Long
 
     /**
      * Reads a float at the specified offset.
@@ -152,13 +133,6 @@ actual sealed interface ArrayBuffer {
      */
     actual fun getUInt(offset: Int): UInt
 
-    /**
-     * Reads an unsigned long at the specified offset.
-     * @param offset the byte offset (must be aligned to 8 bytes)
-     * @return the unsigned long value
-     */
-    actual fun getULong(offset: Int): ULong
-
     // Indexed write methods
 
     /**
@@ -181,13 +155,6 @@ actual sealed interface ArrayBuffer {
      * @param value the int value to write
      */
     actual fun setInt(offset: Int, value: Int)
-
-    /**
-     * Writes a long at the specified offset.
-     * @param offset the byte offset (must be aligned to 8 bytes)
-     * @param value the long value to write
-     */
-    actual fun setLong(offset: Int, value: Long)
 
     /**
      * Writes a float at the specified offset.
@@ -224,13 +191,6 @@ actual sealed interface ArrayBuffer {
      */
     actual fun setUInt(offset: Int, value: UInt)
 
-    /**
-     * Writes an unsigned long at the specified offset.
-     * @param offset the byte offset (must be aligned to 8 bytes)
-     * @param value the unsigned long value to write
-     */
-    actual fun setULong(offset: Int, value: ULong)
-
     actual companion object {
         /**
          * Creates an ArrayBuffer from a ByteArray.
@@ -255,15 +215,6 @@ actual sealed interface ArrayBuffer {
          * @return an ArrayBuffer containing the data from the int array
          */
         actual fun from(array: IntArray): ArrayBuffer {
-            return NativeArrayBuffer(array)
-        }
-
-        /**
-         * Creates an ArrayBuffer from a LongArray.
-         * @param array the long array to convert
-         * @return an ArrayBuffer containing the data from the long array
-         */
-        actual fun from(array: LongArray): ArrayBuffer {
             return NativeArrayBuffer(array)
         }
 
@@ -309,15 +260,6 @@ actual sealed interface ArrayBuffer {
          * @return an ArrayBuffer containing the data from the unsigned int array
          */
         actual fun from(array: UIntArray): ArrayBuffer {
-            return NativeArrayBuffer(array)
-        }
-
-        /**
-         * Creates an ArrayBuffer from a ULongArray.
-         * @param array the unsigned long array to convert
-         * @return an ArrayBuffer containing the data from the unsigned long array
-         */
-        actual fun from(array: ULongArray): ArrayBuffer {
             return NativeArrayBuffer(array)
         }
     }
@@ -401,16 +343,6 @@ class OpaquePointerArrayBuffer internal constructor(
         return array
     }
 
-    override fun toLongArray(): LongArray {
-        require(size % Long.SIZE_BYTES == 0L) { "Buffer size must be multiple of ${Long.SIZE_BYTES}" }
-        val array = LongArray((size / Long.SIZE_BYTES).toInt())
-        val longPtr = pointer.reinterpret<LongVar>()
-        for (i in array.indices) {
-            array[i] = longPtr[i]
-        }
-        return array
-    }
-
     override fun toFloatArray(): FloatArray {
         require(size % Float.SIZE_BYTES == 0L) { "Buffer size must be multiple of ${Float.SIZE_BYTES}" }
         val array = FloatArray((size / Float.SIZE_BYTES).toInt())
@@ -443,10 +375,6 @@ class OpaquePointerArrayBuffer internal constructor(
         return toIntArray().asUIntArray()
     }
 
-    override fun toULongArray(): ULongArray {
-        return toLongArray().asULongArray()
-    }
-
     // Indexed read methods
 
     override fun getByte(offset: Int): Byte {
@@ -462,11 +390,6 @@ class OpaquePointerArrayBuffer internal constructor(
     override fun getInt(offset: Int): Int {
         require(offset >= 0 && offset + Int.SIZE_BYTES <= size) { "Offset out of bounds: $offset" }
         return pointer.reinterpret<IntVar>()[offset / Int.SIZE_BYTES]
-    }
-
-    override fun getLong(offset: Int): Long {
-        require(offset >= 0 && offset + Long.SIZE_BYTES <= size) { "Offset out of bounds: $offset" }
-        return pointer.reinterpret<LongVar>()[offset / Long.SIZE_BYTES]
     }
 
     override fun getFloat(offset: Int): Float {
@@ -491,10 +414,6 @@ class OpaquePointerArrayBuffer internal constructor(
         return getInt(offset).toUInt()
     }
 
-    override fun getULong(offset: Int): ULong {
-        return getLong(offset).toULong()
-    }
-
     // Indexed write methods
 
     override fun setByte(offset: Int, value: Byte) {
@@ -510,11 +429,6 @@ class OpaquePointerArrayBuffer internal constructor(
     override fun setInt(offset: Int, value: Int) {
         require(offset >= 0 && offset + Int.SIZE_BYTES <= size) { "Offset out of bounds: $offset" }
         pointer.reinterpret<IntVar>()[offset / Int.SIZE_BYTES] = value
-    }
-
-    override fun setLong(offset: Int, value: Long) {
-        require(offset >= 0 && offset + Long.SIZE_BYTES <= size) { "Offset out of bounds: $offset" }
-        pointer.reinterpret<LongVar>()[offset / Long.SIZE_BYTES] = value
     }
 
     override fun setFloat(offset: Int, value: Float) {
@@ -537,10 +451,6 @@ class OpaquePointerArrayBuffer internal constructor(
 
     override fun setUInt(offset: Int, value: UInt) {
         setInt(offset, value.toInt())
-    }
-
-    override fun setULong(offset: Int, value: ULong) {
-        setLong(offset, value.toLong())
     }
 
     /**
@@ -626,20 +536,6 @@ class OpaquePointerArrayBuffer internal constructor(
         }
 
         /**
-         * Creates an OpaquePointerArrayBuffer from a LongArray by copying the data.
-         * @param array The source array
-         * @return A new buffer containing a copy of the array data
-         */
-        fun fromLongArray(array: LongArray): OpaquePointerArrayBuffer {
-            val buffer = OpaquePointerArrayBuffer((array.size * Long.SIZE_BYTES).toLong())
-            val ptr = buffer.pointer.reinterpret<LongVar>()
-            for (i in array.indices) {
-                ptr[i] = array[i]
-            }
-            return buffer
-        }
-
-        /**
          * Creates an OpaquePointerArrayBuffer from a FloatArray by copying the data.
          * @param array The source array
          * @return A new buffer containing a copy of the array data
@@ -694,14 +590,6 @@ class OpaquePointerArrayBuffer internal constructor(
             return fromIntArray(array.asIntArray())
         }
 
-        /**
-         * Creates an OpaquePointerArrayBuffer from a ULongArray by copying the data.
-         * @param array The source array
-         * @return A new buffer containing a copy of the array data
-         */
-        fun fromULongArray(array: ULongArray): OpaquePointerArrayBuffer {
-            return fromLongArray(array.asLongArray())
-        }
     }
 }
 

@@ -2,28 +2,24 @@
 
 package io.ygdrasil.webgpu
 
-import kotlinx.cinterop.COpaque
-import kotlinx.cinterop.COpaquePointer
-import kotlinx.cinterop.ExperimentalForeignApi
-import kotlinx.cinterop.addressOf
-import kotlinx.cinterop.reinterpret
-import kotlinx.cinterop.usePinned
-import kotlinx.cinterop.CPointer
 import kotlinx.cinterop.ByteVar
+import kotlinx.cinterop.COpaquePointer
 import kotlinx.cinterop.CPointed
+import kotlinx.cinterop.DoubleVar
+import kotlinx.cinterop.ExperimentalForeignApi
+import kotlinx.cinterop.FloatVar
+import kotlinx.cinterop.IntVar
 import kotlinx.cinterop.NativePtr
 import kotlinx.cinterop.ShortVar
-import kotlinx.cinterop.IntVar
-import kotlinx.cinterop.LongVar
-import kotlinx.cinterop.FloatVar
-import kotlinx.cinterop.DoubleVar
 import kotlinx.cinterop.UByteVar
-import kotlinx.cinterop.UShortVar
 import kotlinx.cinterop.UIntVar
-import kotlinx.cinterop.ULongVar
+import kotlinx.cinterop.UShortVar
+import kotlinx.cinterop.addressOf
 import kotlinx.cinterop.get
 import kotlinx.cinterop.interpretCPointer
+import kotlinx.cinterop.reinterpret
 import kotlinx.cinterop.set
+import kotlinx.cinterop.usePinned
 
 /**
  * Represents a native array buffer backed by a primitive array, providing platform-specific
@@ -64,11 +60,6 @@ value class NativeArrayBuffer internal constructor(val buffer: Any): ArrayBuffer
         else -> error("Cannot convert ${buffer::class} to IntArray")
     }
 
-    override fun toLongArray(): LongArray = when (buffer) {
-        is LongArray -> buffer
-        is ULongArray -> buffer.asLongArray()
-        else -> error("Cannot convert ${buffer::class} to LongArray")
-    }
 
     override fun toFloatArray(): FloatArray = when (buffer) {
         is FloatArray -> buffer
@@ -98,11 +89,6 @@ value class NativeArrayBuffer internal constructor(val buffer: Any): ArrayBuffer
         else -> error("Cannot convert ${buffer::class} to UIntArray")
     }
 
-    override fun toULongArray(): ULongArray = when (buffer) {
-        is ULongArray -> buffer
-        is LongArray -> buffer.asULongArray()
-        else -> error("Cannot convert ${buffer::class} to ULongArray")
-    }
 
     // Indexed read methods
 
@@ -127,12 +113,6 @@ value class NativeArrayBuffer internal constructor(val buffer: Any): ArrayBuffer
         }
     }
 
-    override fun getLong(offset: Int): Long {
-        buffer.useOpaquePinned(offset) { buffer ->
-            val ptr = buffer.reinterpret<LongVar>()
-            return ptr[0]
-        }
-    }
 
     override fun getFloat(offset: Int): Float {
         buffer.useOpaquePinned(offset) { buffer ->
@@ -169,12 +149,6 @@ value class NativeArrayBuffer internal constructor(val buffer: Any): ArrayBuffer
         }
     }
 
-    override fun getULong(offset: Int): ULong {
-        buffer.useOpaquePinned(offset) { buffer ->
-            val ptr = buffer.reinterpret<ULongVar>()
-            return ptr[0]
-        }
-    }
 
     // Indexed write methods
 
@@ -199,12 +173,6 @@ value class NativeArrayBuffer internal constructor(val buffer: Any): ArrayBuffer
         }
     }
 
-    override fun setLong(offset: Int, value: Long) {
-        buffer.useOpaquePinned(offset) { buffer ->
-            val ptr = buffer.reinterpret<LongVar>()
-            ptr[0] = value
-        }
-    }
 
     override fun setFloat(offset: Int, value: Float) {
         buffer.useOpaquePinned(offset) { buffer ->
@@ -241,25 +209,17 @@ value class NativeArrayBuffer internal constructor(val buffer: Any): ArrayBuffer
         }
     }
 
-    override fun setULong(offset: Int, value: ULong) {
-        buffer.useOpaquePinned(offset) { buffer ->
-            val ptr = buffer.reinterpret<ULongVar>()
-            ptr[0] = value
-        }
-    }
 }
 
 private fun Any.getSizeInBytes(): Long = when (this) {
     is ByteArray -> size.toLong()
     is ShortArray -> (size * Short.SIZE_BYTES).toLong()
     is IntArray -> (size * Int.SIZE_BYTES).toLong()
-    is LongArray -> (size * Long.SIZE_BYTES).toLong()
     is FloatArray -> (size * Float.SIZE_BYTES).toLong()
     is DoubleArray -> (size * Double.SIZE_BYTES).toLong()
     is UByteArray -> size.toLong()
     is UShortArray -> (size * Short.SIZE_BYTES).toLong()
     is UIntArray -> (size * Int.SIZE_BYTES).toLong()
-    is ULongArray -> (size * Long.SIZE_BYTES).toLong()
     else -> error("Unsupported buffer type: ${this::class}")
 }
 
@@ -268,13 +228,11 @@ private inline fun <R> Any.useOpaquePinned(offset: Int, block: (COpaquePointer) 
     is ByteArray -> this.usePinned { block(it.addressOf(0).rawValue.withOffset(offset)) }
     is ShortArray -> this.usePinned { block(it.addressOf(0).rawValue.withOffset(offset)) }
     is IntArray -> this.usePinned { block(it.addressOf(0).rawValue.withOffset(offset)) }
-    is LongArray -> this.usePinned { block(it.addressOf(0).rawValue.withOffset(offset)) }
     is FloatArray -> this.usePinned { block(it.addressOf(0).rawValue.withOffset(offset)) }
     is DoubleArray -> this.usePinned { block(it.addressOf(0).rawValue.withOffset(offset)) }
     is UByteArray -> this.usePinned { block(it.addressOf(0).rawValue.withOffset(offset)) }
     is UShortArray -> this.usePinned { block(it.addressOf(0).rawValue.withOffset(offset)) }
     is UIntArray -> this.usePinned { block(it.addressOf(0).rawValue.withOffset(offset)) }
-    is ULongArray -> this.usePinned { block(it.addressOf(0).rawValue.withOffset(offset)) }
     else -> error("Unsupported buffer type: ${this::class}")
 }
 
