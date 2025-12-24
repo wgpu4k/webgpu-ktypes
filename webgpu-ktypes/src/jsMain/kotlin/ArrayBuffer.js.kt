@@ -27,16 +27,15 @@ internal actual inline fun DoubleArray.toArrayBuffer(): ArrayBuffer
 
 @Suppress("NOTHING_TO_INLINE")
 internal actual inline fun UByteArray.toArrayBuffer(): ArrayBuffer
-    = ArrayBuffer.from(unsafeCast<Uint8Array<js.buffer.ArrayBuffer>>().buffer)
+    = asByteArray().toArrayBuffer()
 
 @Suppress("NOTHING_TO_INLINE")
 internal actual inline fun UShortArray.toArrayBuffer(): ArrayBuffer
-    = ArrayBuffer.from(unsafeCast<Uint16Array<js.buffer.ArrayBuffer>>().buffer)
+    = asShortArray().toArrayBuffer()
 
 @Suppress("NOTHING_TO_INLINE")
 internal actual inline fun UIntArray.toArrayBuffer(): ArrayBuffer
-    = ArrayBuffer.from(unsafeCast<Uint32Array<js.buffer.ArrayBuffer>>().buffer)
-
+    = asIntArray().toArrayBuffer()
 
 // Read methods - convert ArrayBuffer to typed arrays
 @Suppress("NOTHING_TO_INLINE")
@@ -72,22 +71,18 @@ internal actual inline fun js.buffer.ArrayBuffer.readDoubleArray(): DoubleArray 
 
 @Suppress("NOTHING_TO_INLINE")
 internal actual inline fun js.buffer.ArrayBuffer.readUByteArray(): UByteArray {
-    val view = Uint8Array<js.buffer.ArrayBuffer>(this)
-    return UByteArray(view.length) { view[it].unsafeCast<Int>().toUByte() }
+    return readByteArray().asUByteArray()
 }
 
 @Suppress("NOTHING_TO_INLINE")
 internal actual inline fun js.buffer.ArrayBuffer.readUShortArray(): UShortArray {
-    val view = Uint16Array<js.buffer.ArrayBuffer>(this)
-    return UShortArray(view.length) { view[it].unsafeCast<Int>().toUShort() }
+    return readShortArray().asUShortArray()
 }
 
 @Suppress("NOTHING_TO_INLINE")
 internal actual inline fun js.buffer.ArrayBuffer.readUIntArray(): UIntArray {
-    val view = Uint32Array<js.buffer.ArrayBuffer>(this)
-    return UIntArray(view.length) { view[it].unsafeCast<Int>().toUInt() }
+    return readIntArray().asUIntArray()
 }
-
 
 // Indexed read methods
 @Suppress("NOTHING_TO_INLINE")
