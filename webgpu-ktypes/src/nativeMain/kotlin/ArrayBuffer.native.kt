@@ -20,7 +20,7 @@ actual sealed interface ArrayBuffer {
     /**
      * The size of the buffer in bytes.
      */
-    actual val size: Long
+    actual val size: ULong
 
     // Read methods - convert entire buffer to typed arrays
 

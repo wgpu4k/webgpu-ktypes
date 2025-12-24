@@ -37,7 +37,7 @@ import kotlinx.cinterop.usePinned
  */
 @OptIn(ExperimentalForeignApi::class)
 value class NativeArrayBuffer internal constructor(val buffer: Any): ArrayBuffer {
-    override val size: Long
+    override val size: ULong
         get() = buffer.getSizeInBytes()
 
     // Read methods - convert entire buffer to typed arrays
@@ -211,17 +211,17 @@ value class NativeArrayBuffer internal constructor(val buffer: Any): ArrayBuffer
 
 }
 
-private fun Any.getSizeInBytes(): Long = when (this) {
-    is ByteArray -> size.toLong()
-    is ShortArray -> (size * Short.SIZE_BYTES).toLong()
-    is IntArray -> (size * Int.SIZE_BYTES).toLong()
-    is FloatArray -> (size * Float.SIZE_BYTES).toLong()
-    is DoubleArray -> (size * Double.SIZE_BYTES).toLong()
-    is UByteArray -> size.toLong()
-    is UShortArray -> (size * Short.SIZE_BYTES).toLong()
-    is UIntArray -> (size * Int.SIZE_BYTES).toLong()
+private fun Any.getSizeInBytes(): ULong = when (this) {
+    is ByteArray -> size
+    is ShortArray -> size * Short.SIZE_BYTES
+    is IntArray -> size * Int.SIZE_BYTES
+    is FloatArray -> size * Float.SIZE_BYTES
+    is DoubleArray -> size * Double.SIZE_BYTES
+    is UByteArray -> size
+    is UShortArray -> size * Short.SIZE_BYTES
+    is UIntArray -> size * Int.SIZE_BYTES
     else -> error("Unsupported buffer type: ${this::class}")
-}
+}.toULong()
 
 
 private inline fun <R> Any.useOpaquePinned(offset: Int, block: (COpaquePointer) -> R): R = when (this) {

@@ -17,7 +17,7 @@ actual sealed interface ArrayBuffer {
     /**
      * The size of the buffer in bytes.
      */
-    actual val size: Long
+    actual val size: ULong
 
     // Read methods - convert entire buffer to typed arrays
 
@@ -308,8 +308,8 @@ internal expect fun js.buffer.ArrayBuffer.writeUInt(offset: Int, value: UInt)
  * @property buffer The underlying `js.buffer.ArrayBuffer` instance being wrapped.
  */
 value class WebArrayBuffer internal constructor(val buffer: js.buffer.ArrayBuffer): ArrayBuffer {
-    override val size: Long
-        get() = buffer.byteLength.toLong()
+    override val size: ULong
+        get() = buffer.byteLength.toULong()
 
     // Read methods - convert entire buffer to typed arrays
     override fun toByteArray(): ByteArray = buffer.readByteArray()

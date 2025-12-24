@@ -20,7 +20,7 @@ actual sealed interface ArrayBuffer {
     /**
      * The size of the buffer in bytes.
      */
-    actual val size: Long
+    actual val size: ULong
 
     // Read methods - convert entire buffer to typed arrays
 
@@ -301,8 +301,8 @@ actual sealed interface ArrayBuffer {
  */
 @JvmInline
 value class JvmArrayBuffer internal constructor(val buffer: MemorySegment): ArrayBuffer {
-    override val size: Long
-        get() = buffer.byteSize()
+    override val size: ULong
+        get() = buffer.byteSize().toULong()
 
     // Read methods - convert entire buffer to typed arrays
 

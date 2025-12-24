@@ -15,7 +15,7 @@ expect sealed interface ArrayBuffer {
     /**
      * The size of the buffer in bytes.
      */
-    val size: Long
+    val size: ULong
 
     // Read methods - convert entire buffer to typed arrays
 

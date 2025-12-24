@@ -39,7 +39,7 @@ import kotlin.experimental.ExperimentalNativeApi
 @OptIn(ExperimentalForeignApi::class, ExperimentalNativeApi::class)
 class OpaquePointerArrayBuffer internal constructor(
     private val pointer: COpaquePointer,
-    override val size: Long,
+    override val size: ULong,
     private val ownsMemory: Boolean = true
 ) : ArrayBuffer {
 
@@ -47,7 +47,7 @@ class OpaquePointerArrayBuffer internal constructor(
      * Creates a new buffer by allocating native memory of the specified size.
      * @param sizeInBytes The size of the buffer in bytes
      */
-    constructor(sizeInBytes: Long) : this(
+    constructor(sizeInBytes: ULong) : this(
         pointer = nativeHeap.allocArray<ByteVar>(sizeInBytes.toInt()).reinterpret(),
         size = sizeInBytes,
         ownsMemory = true
@@ -58,7 +58,7 @@ class OpaquePointerArrayBuffer internal constructor(
      * @param pointer The opaque C pointer
      * @param sizeInBytes The size of the buffer in bytes
      */
-    constructor(pointer: COpaquePointer, sizeInBytes: Long) : this(
+    constructor(pointer: COpaquePointer, sizeInBytes: ULong) : this(
         pointer = pointer,
         size = sizeInBytes,
         ownsMemory = false
@@ -72,14 +72,14 @@ class OpaquePointerArrayBuffer internal constructor(
     override fun toByteArray(): ByteArray {
         val array = ByteArray(size.toInt())
         array.usePinned { pinned ->
-            memcpy(pinned.addressOf(0), bytePtr, size.toULong())
+            memcpy(pinned.addressOf(0), bytePtr, size)
         }
         return array
     }
 
     override fun toShortArray(): ShortArray {
-        require(size % Short.SIZE_BYTES == 0L) { "Buffer size must be multiple of ${Short.SIZE_BYTES}" }
-        val array = ShortArray((size / Short.SIZE_BYTES).toInt())
+        require(size % Short.SIZE_BYTES.toUInt() == 0uL) { "Buffer size must be multiple of ${Short.SIZE_BYTES}" }
+        val array = ShortArray((size / Short.SIZE_BYTES.toUInt()).toInt())
         val shortPtr = pointer.reinterpret<ShortVar>()
         for (i in array.indices) {
             array[i] = shortPtr[i]
@@ -88,8 +88,8 @@ class OpaquePointerArrayBuffer internal constructor(
     }
 
     override fun toIntArray(): IntArray {
-        require(size % Int.SIZE_BYTES == 0L) { "Buffer size must be multiple of ${Int.SIZE_BYTES}" }
-        val array = IntArray((size / Int.SIZE_BYTES).toInt())
+        require(size % Int.SIZE_BYTES.toUInt() == 0uL) { "Buffer size must be multiple of ${Int.SIZE_BYTES}" }
+        val array = IntArray((size / Int.SIZE_BYTES.toUInt()).toInt())
         val intPtr = pointer.reinterpret<IntVar>()
         for (i in array.indices) {
             array[i] = intPtr[i]
@@ -98,8 +98,8 @@ class OpaquePointerArrayBuffer internal constructor(
     }
 
     override fun toFloatArray(): FloatArray {
-        require(size % Float.SIZE_BYTES == 0L) { "Buffer size must be multiple of ${Float.SIZE_BYTES}" }
-        val array = FloatArray((size / Float.SIZE_BYTES).toInt())
+        require(size % Float.SIZE_BYTES.toUInt() == 0uL) { "Buffer size must be multiple of ${Float.SIZE_BYTES}" }
+        val array = FloatArray((size / Float.SIZE_BYTES.toUInt()).toInt())
         val floatPtr = pointer.reinterpret<FloatVar>()
         for (i in array.indices) {
             array[i] = floatPtr[i]
@@ -108,8 +108,8 @@ class OpaquePointerArrayBuffer internal constructor(
     }
 
     override fun toDoubleArray(): DoubleArray {
-        require(size % Double.SIZE_BYTES == 0L) { "Buffer size must be multiple of ${Double.SIZE_BYTES}" }
-        val array = DoubleArray((size / Double.SIZE_BYTES).toInt())
+        require(size % Double.SIZE_BYTES.toUInt() == 0uL) { "Buffer size must be multiple of ${Double.SIZE_BYTES}" }
+        val array = DoubleArray((size / Double.SIZE_BYTES.toUInt()).toInt())
         val doublePtr = pointer.reinterpret<DoubleVar>()
         for (i in array.indices) {
             array[i] = doublePtr[i]
@@ -132,27 +132,22 @@ class OpaquePointerArrayBuffer internal constructor(
     // Indexed read methods
 
     override fun getByte(offset: Int): Byte {
-        require(offset >= 0 && offset < size) { "Offset out of bounds: $offset" }
         return bytePtr[offset]
     }
 
     override fun getShort(offset: Int): Short {
-        require(offset >= 0 && offset + Short.SIZE_BYTES <= size) { "Offset out of bounds: $offset" }
         return pointer.reinterpret<ShortVar>()[offset / Short.SIZE_BYTES]
     }
 
     override fun getInt(offset: Int): Int {
-        require(offset >= 0 && offset + Int.SIZE_BYTES <= size) { "Offset out of bounds: $offset" }
         return pointer.reinterpret<IntVar>()[offset / Int.SIZE_BYTES]
     }
 
     override fun getFloat(offset: Int): Float {
-        require(offset >= 0 && offset + Float.SIZE_BYTES <= size) { "Offset out of bounds: $offset" }
         return pointer.reinterpret<FloatVar>()[offset / Float.SIZE_BYTES]
     }
 
     override fun getDouble(offset: Int): Double {
-        require(offset >= 0 && offset + Double.SIZE_BYTES <= size) { "Offset out of bounds: $offset" }
         return pointer.reinterpret<DoubleVar>()[offset / Double.SIZE_BYTES]
     }
 
@@ -171,27 +166,22 @@ class OpaquePointerArrayBuffer internal constructor(
     // Indexed write methods
 
     override fun setByte(offset: Int, value: Byte) {
-        require(offset >= 0 && offset < size) { "Offset out of bounds: $offset" }
         bytePtr[offset] = value
     }
 
     override fun setShort(offset: Int, value: Short) {
-        require(offset >= 0 && offset + Short.SIZE_BYTES <= size) { "Offset out of bounds: $offset" }
         pointer.reinterpret<ShortVar>()[offset / Short.SIZE_BYTES] = value
     }
 
     override fun setInt(offset: Int, value: Int) {
-        require(offset >= 0 && offset + Int.SIZE_BYTES <= size) { "Offset out of bounds: $offset" }
         pointer.reinterpret<IntVar>()[offset / Int.SIZE_BYTES] = value
     }
 
     override fun setFloat(offset: Int, value: Float) {
-        require(offset >= 0 && offset + Float.SIZE_BYTES <= size) { "Offset out of bounds: $offset" }
         pointer.reinterpret<FloatVar>()[offset / Float.SIZE_BYTES] = value
     }
 
     override fun setDouble(offset: Int, value: Double) {
-        require(offset >= 0 && offset + Double.SIZE_BYTES <= size) { "Offset out of bounds: $offset" }
         pointer.reinterpret<DoubleVar>()[offset / Double.SIZE_BYTES] = value
     }
 
@@ -219,23 +209,8 @@ class OpaquePointerArrayBuffer internal constructor(
      * @param offset The offset in this buffer where to start writing
      */
     fun copyFrom(source: ByteArray, offset: Int = 0) {
-        require(offset >= 0 && offset + source.size <= size) { "Copy would exceed buffer bounds" }
         for (i in source.indices) {
             bytePtr[offset + i] = source[i]
-        }
-    }
-
-    /**
-     * Copies data from this buffer into a ByteArray at the specified offset.
-     * @param destination The destination byte array
-     * @param offset The offset in this buffer where to start reading
-     * @param length The number of bytes to copy
-     */
-    fun copyTo(destination: ByteArray, offset: Int = 0, length: Int = destination.size) {
-        require(offset >= 0 && offset + length <= size) { "Copy would exceed buffer bounds" }
-        require(length <= destination.size) { "Destination array too small" }
-        for (i in 0 until length) {
-            destination[i] = bytePtr[offset + i]
         }
     }
 
@@ -256,7 +231,7 @@ class OpaquePointerArrayBuffer internal constructor(
          * @return A new buffer containing a copy of the array data
          */
         fun fromByteArray(array: ByteArray): OpaquePointerArrayBuffer {
-            val buffer = OpaquePointerArrayBuffer(array.size.toLong())
+            val buffer = OpaquePointerArrayBuffer(array.size.toULong())
             buffer.copyFrom(array)
             return buffer
         }
@@ -267,7 +242,7 @@ class OpaquePointerArrayBuffer internal constructor(
          * @return A new buffer containing a copy of the array data
          */
         fun fromShortArray(array: ShortArray): OpaquePointerArrayBuffer {
-            val buffer = OpaquePointerArrayBuffer((array.size * Short.SIZE_BYTES).toLong())
+            val buffer = OpaquePointerArrayBuffer((array.size * Short.SIZE_BYTES).toULong())
             val ptr = buffer.pointer.reinterpret<ShortVar>()
             for (i in array.indices) {
                 ptr[i] = array[i]
@@ -281,7 +256,7 @@ class OpaquePointerArrayBuffer internal constructor(
          * @return A new buffer containing a copy of the array data
          */
         fun fromIntArray(array: IntArray): OpaquePointerArrayBuffer {
-            val buffer = OpaquePointerArrayBuffer((array.size * Int.SIZE_BYTES).toLong())
+            val buffer = OpaquePointerArrayBuffer((array.size * Int.SIZE_BYTES).toULong())
             val ptr = buffer.pointer.reinterpret<IntVar>()
             for (i in array.indices) {
                 ptr[i] = array[i]
@@ -295,7 +270,7 @@ class OpaquePointerArrayBuffer internal constructor(
          * @return A new buffer containing a copy of the array data
          */
         fun fromFloatArray(array: FloatArray): OpaquePointerArrayBuffer {
-            val buffer = OpaquePointerArrayBuffer((array.size * Float.SIZE_BYTES).toLong())
+            val buffer = OpaquePointerArrayBuffer((array.size * Float.SIZE_BYTES).toULong())
             val ptr = buffer.pointer.reinterpret<FloatVar>()
             for (i in array.indices) {
                 ptr[i] = array[i]
@@ -309,7 +284,7 @@ class OpaquePointerArrayBuffer internal constructor(
          * @return A new buffer containing a copy of the array data
          */
         fun fromDoubleArray(array: DoubleArray): OpaquePointerArrayBuffer {
-            val buffer = OpaquePointerArrayBuffer((array.size * Double.SIZE_BYTES).toLong())
+            val buffer = OpaquePointerArrayBuffer((array.size * Double.SIZE_BYTES).toULong())
             val ptr = buffer.pointer.reinterpret<DoubleVar>()
             for (i in array.indices) {
                 ptr[i] = array[i]
