@@ -17,8 +17,9 @@ import kotlinx.cinterop.nativeHeap
 import kotlinx.cinterop.reinterpret
 import kotlinx.cinterop.set
 import kotlinx.cinterop.usePinned
-import platform.posix.memcpy
 import kotlin.experimental.ExperimentalNativeApi
+import kotlin.native.ref.createCleaner
+import platform.posix.memcpy
 
 /**
  * Represents a native array buffer backed by an opaque C pointer, providing direct access
@@ -43,10 +44,12 @@ class OpaquePointerArrayBuffer private constructor(
     private val ownsMemory: Boolean = true
 ) : ArrayBuffer {
 
-    /**
-     * Creates a new buffer by allocating native memory of the specified size.
-     * @param sizeInBytes The size of the buffer in bytes
-     */
+    private val cleaner = if (ownsMemory) {
+        createCleaner(pointer.reinterpret<ByteVar>()) { ptr ->
+            nativeHeap.free(ptr)
+        }
+    } else null
+
     internal constructor(sizeInBytes: ULong) : this(
         pointer = nativeHeap.allocArray<ByteVar>(sizeInBytes.toInt()).reinterpret(),
         size = sizeInBytes,
@@ -195,16 +198,6 @@ class OpaquePointerArrayBuffer private constructor(
 
     override fun setUInt(offset: Int, value: UInt) {
         setInt(offset, value.toInt())
-    }
-
-    /**
-     * Releases the native memory if this buffer owns it.
-     * After calling this method, the buffer should not be used anymore.
-     */
-    fun free() {
-        if (ownsMemory) {
-            nativeHeap.free(bytePtr)
-        }
     }
 
 }
