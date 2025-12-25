@@ -195,7 +195,14 @@ actual sealed interface ArrayBuffer {
 
     actual companion object {
 
-        fun of(pointer: COpaquePointer, size: ULong) : OpaquePointerArrayBuffer {
+        /**
+         * Wraps a native pointer and its size into an OpaquePointerArrayBuffer.
+         *
+         * @param pointer the native pointer to wrap
+         * @param size the size of the buffer in bytes
+         * @return an instance of OpaquePointerArrayBuffer wrapping the provided pointer and size
+         */
+        fun wrap(pointer: COpaquePointer, size: ULong) : OpaquePointerArrayBuffer {
             return OpaquePointerArrayBuffer(pointer, size)
         }
 

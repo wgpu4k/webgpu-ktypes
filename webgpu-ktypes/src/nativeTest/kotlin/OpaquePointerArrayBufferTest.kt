@@ -21,7 +21,7 @@ class OpaquePointerArrayBufferTest : FreeSpec({
         }
 
         // When - create a buffer using of() that wraps the memory
-        val wrappedBuffer = ArrayBuffer.of(ptr.reinterpret(), size.toULong())
+        val wrappedBuffer = ArrayBuffer.wrap(ptr.reinterpret(), size.toULong())
 
         // Then - the wrapped buffer should have the same data
         wrappedBuffer.toByteArray() shouldBe sourceArray
@@ -40,7 +40,7 @@ class OpaquePointerArrayBufferTest : FreeSpec({
         }
 
         // When - create a wrapped buffer and modify it
-        val wrappedBuffer = ArrayBuffer.of(ptr.reinterpret(), size.toULong())
+        val wrappedBuffer = ArrayBuffer.wrap(ptr.reinterpret(), size.toULong())
         wrappedBuffer.setByte(0, 99)
         wrappedBuffer.setByte(2, 88)
 
@@ -62,7 +62,7 @@ class OpaquePointerArrayBufferTest : FreeSpec({
         }
 
         // When - wrap it using of()
-        val wrappedBuffer = ArrayBuffer.of(
+        val wrappedBuffer = ArrayBuffer.wrap(
             ptr.reinterpret(),
             (size * Int.SIZE_BYTES).toULong()
         )
@@ -84,7 +84,7 @@ class OpaquePointerArrayBufferTest : FreeSpec({
         }
 
         // When - wrap it using of()
-        val wrappedBuffer = ArrayBuffer.of(
+        val wrappedBuffer = ArrayBuffer.wrap(
             ptr.reinterpret(),
             (size * Float.SIZE_BYTES).toULong()
         )
@@ -106,7 +106,7 @@ class OpaquePointerArrayBufferTest : FreeSpec({
         }
 
         // When - wrap it using of()
-        val wrappedBuffer = ArrayBuffer.of(
+        val wrappedBuffer = ArrayBuffer.wrap(
             ptr.reinterpret(),
             (size * Double.SIZE_BYTES).toULong()
         )
@@ -127,7 +127,7 @@ class OpaquePointerArrayBufferTest : FreeSpec({
         }
 
         // When - wrap only the first 5 bytes
-        val partialBuffer = ArrayBuffer.of(ptr.reinterpret(), 5u)
+        val partialBuffer = ArrayBuffer.wrap(ptr.reinterpret(), 5u)
 
         // Then - should only contain the first 5 bytes
         partialBuffer.size shouldBe 5u
@@ -143,7 +143,7 @@ class OpaquePointerArrayBufferTest : FreeSpec({
         val ptr = nativeHeap.allocArray<ByteVar>(bufferSize)
 
         // When - wrap it and write various data types
-        val wrappedBuffer = ArrayBuffer.of(ptr.reinterpret(), bufferSize.toULong())
+        val wrappedBuffer = ArrayBuffer.wrap(ptr.reinterpret(), bufferSize.toULong())
 
         wrappedBuffer.setByte(0, 42)
         wrappedBuffer.setShort(4, 1000)
