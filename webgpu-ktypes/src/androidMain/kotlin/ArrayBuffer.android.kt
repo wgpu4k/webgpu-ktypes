@@ -25,7 +25,7 @@ actual sealed interface ArrayBuffer {
     /**
      * The size of the buffer in bytes.
      */
-    actual val size: Long
+    actual val size: ULong
 
     // Read methods - convert entire buffer to typed arrays
 
@@ -321,8 +321,8 @@ value class AndroidArrayBuffer internal constructor(val buffer: ByteBuffer): Arr
         if (buffer.isDirect.not()) error("ByteBuffer must be direct")
     }
 
-    override val size: Long
-        get() = buffer.capacity().toLong()
+    override val size: ULong
+        get() = buffer.capacity().toULong()
 
     // Read methods - convert entire buffer to typed arrays
 
