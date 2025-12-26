@@ -67,97 +67,97 @@ value class AndroidArrayBuffer internal constructor(val buffer: ByteBuffer): Arr
 
     // Indexed read methods
 
-    override fun getByte(offset: Int): Byte = buffer.get(offset)
+    override fun getByte(offset: ULong): Byte = buffer.get(offset.toInt())
 
-    override fun getShort(offset: Int): Short = buffer.getShort(offset)
+    override fun getShort(offset: ULong): Short = buffer.getShort(offset.toInt())
 
-    override fun getInt(offset: Int): Int = buffer.getInt(offset)
+    override fun getInt(offset: ULong): Int = buffer.getInt(offset.toInt())
 
-    override fun getFloat(offset: Int): Float = buffer.getFloat(offset)
+    override fun getFloat(offset: ULong): Float = buffer.getFloat(offset.toInt())
 
-    override fun getDouble(offset: Int): Double = buffer.getDouble(offset)
+    override fun getDouble(offset: ULong): Double = buffer.getDouble(offset.toInt())
 
-    override fun getUByte(offset: Int): UByte = getByte(offset).toUByte()
+    override fun getUByte(offset: ULong): UByte = getByte(offset).toUByte()
 
-    override fun getUShort(offset: Int): UShort = getShort(offset).toUShort()
+    override fun getUShort(offset: ULong): UShort = getShort(offset).toUShort()
 
-    override fun getUInt(offset: Int): UInt = getInt(offset).toUInt()
+    override fun getUInt(offset: ULong): UInt = getInt(offset).toUInt()
 
     // Indexed write methods
 
-    override fun setByte(offset: Int, value: Byte) {
-        buffer.put(offset, value)
+    override fun setByte(offset: ULong, value: Byte) {
+        buffer.put(offset.toInt(), value)
     }
 
-    override fun setShort(offset: Int, value: Short) {
-        buffer.putShort(offset, value)
+    override fun setShort(offset: ULong, value: Short) {
+        buffer.putShort(offset.toInt(), value)
     }
 
-    override fun setInt(offset: Int, value: Int) {
-        buffer.putInt(offset, value)
+    override fun setInt(offset: ULong, value: Int) {
+        buffer.putInt(offset.toInt(), value)
     }
 
-    override fun setFloat(offset: Int, value: Float) {
-        buffer.putFloat(offset, value)
+    override fun setFloat(offset: ULong, value: Float) {
+        buffer.putFloat(offset.toInt(), value)
     }
 
-    override fun setDouble(offset: Int, value: Double) {
-        buffer.putDouble(offset, value)
+    override fun setDouble(offset: ULong, value: Double) {
+        buffer.putDouble(offset.toInt(), value)
     }
 
-    override fun setUByte(offset: Int, value: UByte) {
+    override fun setUByte(offset: ULong, value: UByte) {
         setByte(offset, value.toByte())
     }
 
-    override fun setUShort(offset: Int, value: UShort) {
+    override fun setUShort(offset: ULong, value: UShort) {
         setShort(offset, value.toShort())
     }
 
-    override fun setUInt(offset: Int, value: UInt) {
+    override fun setUInt(offset: ULong, value: UInt) {
         setInt(offset, value.toInt())
     }
 
     // Array write methods
 
-    override fun setBytes(offset: Int, array: ByteArray) {
+    override fun setBytes(offset: ULong, array: ByteArray) {
         val duplicate = buffer.duplicate()
-        duplicate.position(offset)
+        duplicate.position(offset.toInt())
         duplicate.put(array)
     }
 
-    override fun setShorts(offset: Int, array: ShortArray) {
+    override fun setShorts(offset: ULong, array: ShortArray) {
         val duplicate = buffer.duplicate()
-        duplicate.position(offset)
+        duplicate.position(offset.toInt())
         duplicate.asShortBuffer().put(array)
     }
 
-    override fun setInts(offset: Int, array: IntArray) {
+    override fun setInts(offset: ULong, array: IntArray) {
         val duplicate = buffer.duplicate()
-        duplicate.position(offset)
+        duplicate.position(offset.toInt())
         duplicate.asIntBuffer().put(array)
     }
 
-    override fun setFloats(offset: Int, array: FloatArray) {
+    override fun setFloats(offset: ULong, array: FloatArray) {
         val duplicate = buffer.duplicate()
-        duplicate.position(offset)
+        duplicate.position(offset.toInt())
         duplicate.asFloatBuffer().put(array)
     }
 
-    override fun setDoubles(offset: Int, array: DoubleArray) {
+    override fun setDoubles(offset: ULong, array: DoubleArray) {
         val duplicate = buffer.duplicate()
-        duplicate.position(offset)
+        duplicate.position(offset.toInt())
         duplicate.asDoubleBuffer().put(array)
     }
 
-    override fun setUBytes(offset: Int, array: UByteArray) {
+    override fun setUBytes(offset: ULong, array: UByteArray) {
         setBytes(offset, array.asByteArray())
     }
 
-    override fun setUShorts(offset: Int, array: UShortArray) {
+    override fun setUShorts(offset: ULong, array: UShortArray) {
         setShorts(offset, array.asShortArray())
     }
 
-    override fun setUInts(offset: Int, array: UIntArray) {
+    override fun setUInts(offset: ULong, array: UIntArray) {
         setInts(offset, array.asIntArray())
     }
 

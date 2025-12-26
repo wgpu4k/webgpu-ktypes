@@ -84,56 +84,56 @@ actual sealed interface ArrayBuffer {
      * @param offset the byte offset
      * @return the byte value
      */
-    actual fun getByte(offset: Int): Byte
+    actual fun getByte(offset: ULong): Byte
 
     /**
      * Reads a short at the specified offset.
      * @param offset the byte offset (must be aligned to 2 bytes)
      * @return the short value
      */
-    actual fun getShort(offset: Int): Short
+    actual fun getShort(offset: ULong): Short
 
     /**
      * Reads an int at the specified offset.
      * @param offset the byte offset (must be aligned to 4 bytes)
      * @return the int value
      */
-    actual fun getInt(offset: Int): Int
+    actual fun getInt(offset: ULong): Int
 
     /**
      * Reads a float at the specified offset.
      * @param offset the byte offset (must be aligned to 4 bytes)
      * @return the float value
      */
-    actual fun getFloat(offset: Int): Float
+    actual fun getFloat(offset: ULong): Float
 
     /**
      * Reads a double at the specified offset.
      * @param offset the byte offset (must be aligned to 8 bytes)
      * @return the double value
      */
-    actual fun getDouble(offset: Int): Double
+    actual fun getDouble(offset: ULong): Double
 
     /**
      * Reads an unsigned byte at the specified offset.
      * @param offset the byte offset
      * @return the unsigned byte value
      */
-    actual fun getUByte(offset: Int): UByte
+    actual fun getUByte(offset: ULong): UByte
 
     /**
      * Reads an unsigned short at the specified offset.
      * @param offset the byte offset (must be aligned to 2 bytes)
      * @return the unsigned short value
      */
-    actual fun getUShort(offset: Int): UShort
+    actual fun getUShort(offset: ULong): UShort
 
     /**
      * Reads an unsigned int at the specified offset.
      * @param offset the byte offset (must be aligned to 4 bytes)
      * @return the unsigned int value
      */
-    actual fun getUInt(offset: Int): UInt
+    actual fun getUInt(offset: ULong): UInt
 
     // Indexed write methods
 
@@ -142,56 +142,56 @@ actual sealed interface ArrayBuffer {
      * @param offset the byte offset
      * @param value the byte value to write
      */
-    actual fun setByte(offset: Int, value: Byte)
+    actual fun setByte(offset: ULong, value: Byte)
 
     /**
      * Writes a short at the specified offset.
      * @param offset the byte offset (must be aligned to 2 bytes)
      * @param value the short value to write
      */
-    actual fun setShort(offset: Int, value: Short)
+    actual fun setShort(offset: ULong, value: Short)
 
     /**
      * Writes an int at the specified offset.
      * @param offset the byte offset (must be aligned to 4 bytes)
      * @param value the int value to write
      */
-    actual fun setInt(offset: Int, value: Int)
+    actual fun setInt(offset: ULong, value: Int)
 
     /**
      * Writes a float at the specified offset.
      * @param offset the byte offset (must be aligned to 4 bytes)
      * @param value the float value to write
      */
-    actual fun setFloat(offset: Int, value: Float)
+    actual fun setFloat(offset: ULong, value: Float)
 
     /**
      * Writes a double at the specified offset.
      * @param offset the byte offset (must be aligned to 8 bytes)
      * @param value the double value to write
      */
-    actual fun setDouble(offset: Int, value: Double)
+    actual fun setDouble(offset: ULong, value: Double)
 
     /**
      * Writes an unsigned byte at the specified offset.
      * @param offset the byte offset
      * @param value the unsigned byte value to write
      */
-    actual fun setUByte(offset: Int, value: UByte)
+    actual fun setUByte(offset: ULong, value: UByte)
 
     /**
      * Writes an unsigned short at the specified offset.
      * @param offset the byte offset (must be aligned to 2 bytes)
      * @param value the unsigned short value to write
      */
-    actual fun setUShort(offset: Int, value: UShort)
+    actual fun setUShort(offset: ULong, value: UShort)
 
     /**
      * Writes an unsigned int at the specified offset.
      * @param offset the byte offset (must be aligned to 4 bytes)
      * @param value the unsigned int value to write
      */
-    actual fun setUInt(offset: Int, value: UInt)
+    actual fun setUInt(offset: ULong, value: UInt)
 
     // Array write methods
 
@@ -200,56 +200,56 @@ actual sealed interface ArrayBuffer {
      * @param offset the byte offset where to start writing
      * @param array the byte array to write
      */
-    actual fun setBytes(offset: Int, array: ByteArray)
+    actual fun setBytes(offset: ULong, array: ByteArray)
 
     /**
      * Writes a ShortArray into the buffer at the specified offset.
      * @param offset the byte offset where to start writing (must be aligned to 2 bytes)
      * @param array the short array to write
      */
-    actual fun setShorts(offset: Int, array: ShortArray)
+    actual fun setShorts(offset: ULong, array: ShortArray)
 
     /**
      * Writes an IntArray into the buffer at the specified offset.
      * @param offset the byte offset where to start writing (must be aligned to 4 bytes)
      * @param array the int array to write
      */
-    actual fun setInts(offset: Int, array: IntArray)
+    actual fun setInts(offset: ULong, array: IntArray)
 
     /**
      * Writes a FloatArray into the buffer at the specified offset.
      * @param offset the byte offset where to start writing (must be aligned to 4 bytes)
      * @param array the float array to write
      */
-    actual fun setFloats(offset: Int, array: FloatArray)
+    actual fun setFloats(offset: ULong, array: FloatArray)
 
     /**
      * Writes a DoubleArray into the buffer at the specified offset.
      * @param offset the byte offset where to start writing (must be aligned to 8 bytes)
      * @param array the double array to write
      */
-    actual fun setDoubles(offset: Int, array: DoubleArray)
+    actual fun setDoubles(offset: ULong, array: DoubleArray)
 
     /**
      * Writes a UByteArray into the buffer at the specified offset.
      * @param offset the byte offset where to start writing
      * @param array the unsigned byte array to write
      */
-    actual fun setUBytes(offset: Int, array: UByteArray)
+    actual fun setUBytes(offset: ULong, array: UByteArray)
 
     /**
      * Writes a UShortArray into the buffer at the specified offset.
      * @param offset the byte offset where to start writing (must be aligned to 2 bytes)
      * @param array the unsigned short array to write
      */
-    actual fun setUShorts(offset: Int, array: UShortArray)
+    actual fun setUShorts(offset: ULong, array: UShortArray)
 
     /**
      * Writes a UIntArray into the buffer at the specified offset.
      * @param offset the byte offset where to start writing (must be aligned to 4 bytes)
      * @param array the unsigned int array to write
      */
-    actual fun setUInts(offset: Int, array: UIntArray)
+    actual fun setUInts(offset: ULong, array: UIntArray)
 
     actual companion object {
 
@@ -282,7 +282,7 @@ actual sealed interface ArrayBuffer {
          */
         actual fun from(array: ByteArray): ArrayBuffer {
             val buffer = OpaquePointerArrayBuffer(array.size.toULong())
-            buffer.setBytes(0, array)
+            buffer.setBytes(0u, array)
             return buffer
         }
 
@@ -293,7 +293,7 @@ actual sealed interface ArrayBuffer {
          */
         actual fun from(array: ShortArray): ArrayBuffer {
             val buffer = OpaquePointerArrayBuffer((array.size * Short.SIZE_BYTES).toULong())
-            buffer.setShorts(0, array)
+            buffer.setShorts(0u, array)
             return buffer
         }
 
@@ -304,7 +304,7 @@ actual sealed interface ArrayBuffer {
          */
         actual fun from(array: IntArray): ArrayBuffer {
             val buffer = OpaquePointerArrayBuffer((array.size * Int.SIZE_BYTES).toULong())
-            buffer.setInts(0, array)
+            buffer.setInts(0u, array)
             return buffer
         }
 
@@ -315,7 +315,7 @@ actual sealed interface ArrayBuffer {
          */
         actual fun from(array: FloatArray): ArrayBuffer {
             val buffer = OpaquePointerArrayBuffer((array.size * Float.SIZE_BYTES).toULong())
-            buffer.setFloats(0, array)
+            buffer.setFloats(0u, array)
             return buffer
         }
 
@@ -326,7 +326,7 @@ actual sealed interface ArrayBuffer {
          */
         actual fun from(array: DoubleArray): ArrayBuffer {
             val buffer = OpaquePointerArrayBuffer((array.size * Double.SIZE_BYTES).toULong())
-            buffer.setDoubles(0, array)
+            buffer.setDoubles(0u, array)
             return buffer
         }
 
@@ -337,7 +337,7 @@ actual sealed interface ArrayBuffer {
          */
         actual fun from(array: UByteArray): ArrayBuffer {
             val buffer = OpaquePointerArrayBuffer(array.size.toULong())
-            buffer.setUBytes(0, array)
+            buffer.setUBytes(0u, array)
             return buffer
         }
 
@@ -348,7 +348,7 @@ actual sealed interface ArrayBuffer {
          */
         actual fun from(array: UShortArray): ArrayBuffer {
             val buffer = OpaquePointerArrayBuffer((array.size * Short.SIZE_BYTES).toULong())
-            buffer.setUShorts(0, array)
+            buffer.setUShorts(0u, array)
             return buffer
         }
 
@@ -359,7 +359,7 @@ actual sealed interface ArrayBuffer {
          */
         actual fun from(array: UIntArray): ArrayBuffer {
             val buffer = OpaquePointerArrayBuffer((array.size * Int.SIZE_BYTES).toULong())
-            buffer.setUInts(0, array)
+            buffer.setUInts(0u, array)
             return buffer
         }
     }

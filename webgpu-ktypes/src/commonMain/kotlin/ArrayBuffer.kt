@@ -74,56 +74,56 @@ expect sealed interface ArrayBuffer {
      * @param offset the byte offset
      * @return the byte value
      */
-    fun getByte(offset: Int): Byte
+    fun getByte(offset: ULong): Byte
 
     /**
      * Reads a short at the specified offset.
      * @param offset the byte offset (must be aligned to 2 bytes)
      * @return the short value
      */
-    fun getShort(offset: Int): Short
+    fun getShort(offset: ULong): Short
 
     /**
      * Reads an int at the specified offset.
      * @param offset the byte offset (must be aligned to 4 bytes)
      * @return the int value
      */
-    fun getInt(offset: Int): Int
+    fun getInt(offset: ULong): Int
 
     /**
      * Reads a float at the specified offset.
      * @param offset the byte offset (must be aligned to 4 bytes)
      * @return the float value
      */
-    fun getFloat(offset: Int): Float
+    fun getFloat(offset: ULong): Float
 
     /**
      * Reads a double at the specified offset.
      * @param offset the byte offset (must be aligned to 8 bytes)
      * @return the double value
      */
-    fun getDouble(offset: Int): Double
+    fun getDouble(offset: ULong): Double
 
     /**
      * Reads an unsigned byte at the specified offset.
      * @param offset the byte offset
      * @return the unsigned byte value
      */
-    fun getUByte(offset: Int): UByte
+    fun getUByte(offset: ULong): UByte
 
     /**
      * Reads an unsigned short at the specified offset.
      * @param offset the byte offset (must be aligned to 2 bytes)
      * @return the unsigned short value
      */
-    fun getUShort(offset: Int): UShort
+    fun getUShort(offset: ULong): UShort
 
     /**
      * Reads an unsigned int at the specified offset.
      * @param offset the byte offset (must be aligned to 4 bytes)
      * @return the unsigned int value
      */
-    fun getUInt(offset: Int): UInt
+    fun getUInt(offset: ULong): UInt
 
     // Indexed write methods
 
@@ -132,56 +132,56 @@ expect sealed interface ArrayBuffer {
      * @param offset the byte offset
      * @param value the byte value to write
      */
-    fun setByte(offset: Int, value: Byte)
+    fun setByte(offset: ULong, value: Byte)
 
     /**
      * Writes a short at the specified offset.
      * @param offset the byte offset (must be aligned to 2 bytes)
      * @param value the short value to write
      */
-    fun setShort(offset: Int, value: Short)
+    fun setShort(offset: ULong, value: Short)
 
     /**
      * Writes an int at the specified offset.
      * @param offset the byte offset (must be aligned to 4 bytes)
      * @param value the int value to write
      */
-    fun setInt(offset: Int, value: Int)
+    fun setInt(offset: ULong, value: Int)
 
     /**
      * Writes a float at the specified offset.
      * @param offset the byte offset (must be aligned to 4 bytes)
      * @param value the float value to write
      */
-    fun setFloat(offset: Int, value: Float)
+    fun setFloat(offset: ULong, value: Float)
 
     /**
      * Writes a double at the specified offset.
      * @param offset the byte offset (must be aligned to 8 bytes)
      * @param value the double value to write
      */
-    fun setDouble(offset: Int, value: Double)
+    fun setDouble(offset: ULong, value: Double)
 
     /**
      * Writes an unsigned byte at the specified offset.
      * @param offset the byte offset
      * @param value the unsigned byte value to write
      */
-    fun setUByte(offset: Int, value: UByte)
+    fun setUByte(offset: ULong, value: UByte)
 
     /**
      * Writes an unsigned short at the specified offset.
      * @param offset the byte offset (must be aligned to 2 bytes)
      * @param value the unsigned short value to write
      */
-    fun setUShort(offset: Int, value: UShort)
+    fun setUShort(offset: ULong, value: UShort)
 
     /**
      * Writes an unsigned int at the specified offset.
      * @param offset the byte offset (must be aligned to 4 bytes)
      * @param value the unsigned int value to write
      */
-    fun setUInt(offset: Int, value: UInt)
+    fun setUInt(offset: ULong, value: UInt)
 
     // Array write methods
 
@@ -190,56 +190,56 @@ expect sealed interface ArrayBuffer {
      * @param offset the byte offset where to start writing
      * @param array the byte array to write
      */
-    fun setBytes(offset: Int, array: ByteArray)
+    fun setBytes(offset: ULong, array: ByteArray)
 
     /**
      * Writes a ShortArray into the buffer at the specified offset.
      * @param offset the byte offset where to start writing (must be aligned to 2 bytes)
      * @param array the short array to write
      */
-    fun setShorts(offset: Int, array: ShortArray)
+    fun setShorts(offset: ULong, array: ShortArray)
 
     /**
      * Writes an IntArray into the buffer at the specified offset.
      * @param offset the byte offset where to start writing (must be aligned to 4 bytes)
      * @param array the int array to write
      */
-    fun setInts(offset: Int, array: IntArray)
+    fun setInts(offset: ULong, array: IntArray)
 
     /**
      * Writes a FloatArray into the buffer at the specified offset.
      * @param offset the byte offset where to start writing (must be aligned to 4 bytes)
      * @param array the float array to write
      */
-    fun setFloats(offset: Int, array: FloatArray)
+    fun setFloats(offset: ULong, array: FloatArray)
 
     /**
      * Writes a DoubleArray into the buffer at the specified offset.
      * @param offset the byte offset where to start writing (must be aligned to 8 bytes)
      * @param array the double array to write
      */
-    fun setDoubles(offset: Int, array: DoubleArray)
+    fun setDoubles(offset: ULong, array: DoubleArray)
 
     /**
      * Writes a UByteArray into the buffer at the specified offset.
      * @param offset the byte offset where to start writing
      * @param array the unsigned byte array to write
      */
-    fun setUBytes(offset: Int, array: UByteArray)
+    fun setUBytes(offset: ULong, array: UByteArray)
 
     /**
      * Writes a UShortArray into the buffer at the specified offset.
      * @param offset the byte offset where to start writing (must be aligned to 2 bytes)
      * @param array the unsigned short array to write
      */
-    fun setUShorts(offset: Int, array: UShortArray)
+    fun setUShorts(offset: ULong, array: UShortArray)
 
     /**
      * Writes a UIntArray into the buffer at the specified offset.
      * @param offset the byte offset where to start writing (must be aligned to 4 bytes)
      * @param array the unsigned int array to write
      */
-    fun setUInts(offset: Int, array: UIntArray)
+    fun setUInts(offset: ULong, array: UIntArray)
 
     companion object {
         /**

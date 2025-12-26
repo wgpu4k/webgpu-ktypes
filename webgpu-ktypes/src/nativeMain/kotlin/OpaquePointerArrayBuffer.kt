@@ -141,76 +141,76 @@ class OpaquePointerArrayBuffer private constructor(
 
     // Indexed read methods
 
-    override fun getByte(offset: Int): Byte {
-        return bytePtr[offset]
+    override fun getByte(offset: ULong): Byte {
+        return bytePtr[offset.toInt()]
     }
 
-    override fun getShort(offset: Int): Short {
-        return pointer.reinterpret<ShortVar>()[offset / Short.SIZE_BYTES]
+    override fun getShort(offset: ULong): Short {
+        return pointer.reinterpret<ShortVar>()[(offset / Short.SIZE_BYTES.toUInt()).toInt()]
     }
 
-    override fun getInt(offset: Int): Int {
-        return pointer.reinterpret<IntVar>()[offset / Int.SIZE_BYTES]
+    override fun getInt(offset: ULong): Int {
+        return pointer.reinterpret<IntVar>()[(offset / Int.SIZE_BYTES.toUInt()).toInt()]
     }
 
-    override fun getFloat(offset: Int): Float {
-        return pointer.reinterpret<FloatVar>()[offset / Float.SIZE_BYTES]
+    override fun getFloat(offset: ULong): Float {
+        return pointer.reinterpret<FloatVar>()[(offset / Float.SIZE_BYTES.toUInt()).toInt()]
     }
 
-    override fun getDouble(offset: Int): Double {
-        return pointer.reinterpret<DoubleVar>()[offset / Double.SIZE_BYTES]
+    override fun getDouble(offset: ULong): Double {
+        return pointer.reinterpret<DoubleVar>()[(offset / Double.SIZE_BYTES.toUInt()).toInt()]
     }
 
-    override fun getUByte(offset: Int): UByte {
+    override fun getUByte(offset: ULong): UByte {
         return getByte(offset).toUByte()
     }
 
-    override fun getUShort(offset: Int): UShort {
+    override fun getUShort(offset: ULong): UShort {
         return getShort(offset).toUShort()
     }
 
-    override fun getUInt(offset: Int): UInt {
+    override fun getUInt(offset: ULong): UInt {
         return getInt(offset).toUInt()
     }
 
     // Indexed write methods
 
-    override fun setByte(offset: Int, value: Byte) {
-        bytePtr[offset] = value
+    override fun setByte(offset: ULong, value: Byte) {
+        bytePtr[offset.toInt()] = value
     }
 
-    override fun setShort(offset: Int, value: Short) {
-        pointer.reinterpret<ShortVar>()[offset / Short.SIZE_BYTES] = value
+    override fun setShort(offset: ULong, value: Short) {
+        pointer.reinterpret<ShortVar>()[(offset / Short.SIZE_BYTES.toUInt()).toInt()] = value
     }
 
-    override fun setInt(offset: Int, value: Int) {
-        pointer.reinterpret<IntVar>()[offset / Int.SIZE_BYTES] = value
+    override fun setInt(offset: ULong, value: Int) {
+        pointer.reinterpret<IntVar>()[(offset / Int.SIZE_BYTES.toUInt()).toInt()] = value
     }
 
-    override fun setFloat(offset: Int, value: Float) {
-        pointer.reinterpret<FloatVar>()[offset / Float.SIZE_BYTES] = value
+    override fun setFloat(offset: ULong, value: Float) {
+        pointer.reinterpret<FloatVar>()[(offset / Float.SIZE_BYTES.toUInt()).toInt()] = value
     }
 
-    override fun setDouble(offset: Int, value: Double) {
-        pointer.reinterpret<DoubleVar>()[offset / Double.SIZE_BYTES] = value
+    override fun setDouble(offset: ULong, value: Double) {
+        pointer.reinterpret<DoubleVar>()[(offset / Double.SIZE_BYTES.toUInt()).toInt()] = value
     }
 
-    override fun setUByte(offset: Int, value: UByte) {
+    override fun setUByte(offset: ULong, value: UByte) {
         setByte(offset, value.toByte())
     }
 
-    override fun setUShort(offset: Int, value: UShort) {
+    override fun setUShort(offset: ULong, value: UShort) {
         setShort(offset, value.toShort())
     }
 
-    override fun setUInt(offset: Int, value: UInt) {
+    override fun setUInt(offset: ULong, value: UInt) {
         setInt(offset, value.toInt())
     }
 
     // Array write methods
 
     @OptIn(UnsafeNumber::class)
-    override fun setBytes(offset: Int, array: ByteArray) {
+    override fun setBytes(offset: ULong, array: ByteArray) {
         array.usePinned { pinned ->
             val destPtr = interpretCPointer<ByteVar>(bytePtr.rawValue + offset.toLong())
             memcpy(destPtr, pinned.addressOf(0), array.size.convert())
@@ -218,7 +218,7 @@ class OpaquePointerArrayBuffer private constructor(
     }
 
     @OptIn(UnsafeNumber::class)
-    override fun setShorts(offset: Int, array: ShortArray) {
+    override fun setShorts(offset: ULong, array: ShortArray) {
         array.usePinned { pinned ->
             val destPtr = interpretCPointer<ByteVar>(bytePtr.rawValue + offset.toLong())
             memcpy(destPtr, pinned.addressOf(0), (array.size * Short.SIZE_BYTES).convert())
@@ -226,7 +226,7 @@ class OpaquePointerArrayBuffer private constructor(
     }
 
     @OptIn(UnsafeNumber::class)
-    override fun setInts(offset: Int, array: IntArray) {
+    override fun setInts(offset: ULong, array: IntArray) {
         array.usePinned { pinned ->
             val destPtr = interpretCPointer<ByteVar>(bytePtr.rawValue + offset.toLong())
             memcpy(destPtr, pinned.addressOf(0), (array.size * Int.SIZE_BYTES).convert())
@@ -234,7 +234,7 @@ class OpaquePointerArrayBuffer private constructor(
     }
 
     @OptIn(UnsafeNumber::class)
-    override fun setFloats(offset: Int, array: FloatArray) {
+    override fun setFloats(offset: ULong, array: FloatArray) {
         array.usePinned { pinned ->
             val destPtr = interpretCPointer<ByteVar>(bytePtr.rawValue + offset.toLong())
             memcpy(destPtr, pinned.addressOf(0), (array.size * Float.SIZE_BYTES).convert())
@@ -242,22 +242,22 @@ class OpaquePointerArrayBuffer private constructor(
     }
 
     @OptIn(UnsafeNumber::class)
-    override fun setDoubles(offset: Int, array: DoubleArray) {
+    override fun setDoubles(offset: ULong, array: DoubleArray) {
         array.usePinned { pinned ->
             val destPtr = interpretCPointer<ByteVar>(bytePtr.rawValue + offset.toLong())
             memcpy(destPtr, pinned.addressOf(0), (array.size * Double.SIZE_BYTES).convert())
         }
     }
 
-    override fun setUBytes(offset: Int, array: UByteArray) {
+    override fun setUBytes(offset: ULong, array: UByteArray) {
         setBytes(offset, array.asByteArray())
     }
 
-    override fun setUShorts(offset: Int, array: UShortArray) {
+    override fun setUShorts(offset: ULong, array: UShortArray) {
         setShorts(offset, array.asShortArray())
     }
 
-    override fun setUInts(offset: Int, array: UIntArray) {
+    override fun setUInts(offset: ULong, array: UIntArray) {
         setInts(offset, array.asIntArray())
     }
 

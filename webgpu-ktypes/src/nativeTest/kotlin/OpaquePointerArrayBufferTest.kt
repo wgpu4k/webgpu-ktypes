@@ -41,12 +41,12 @@ class OpaquePointerArrayBufferTest : FreeSpec({
 
         // When - create a wrapped buffer and modify it
         val wrappedBuffer = ArrayBuffer.wrap(ptr.reinterpret(), size.toULong())
-        wrappedBuffer.setByte(0, 99)
-        wrappedBuffer.setByte(2, 88)
+        wrappedBuffer.setByte(0u, 99)
+        wrappedBuffer.setByte(2u, 88)
 
         // Then - modifications should be visible in the wrapped buffer
-        wrappedBuffer.getByte(0) shouldBe 99
-        wrappedBuffer.getByte(2) shouldBe 88
+        wrappedBuffer.getByte(0u) shouldBe 99
+        wrappedBuffer.getByte(2u) shouldBe 88
 
         // Cleanup
         nativeHeap.free(ptr)
@@ -145,24 +145,24 @@ class OpaquePointerArrayBufferTest : FreeSpec({
         // When - wrap it and write various data types
         val wrappedBuffer = ArrayBuffer.wrap(ptr.reinterpret(), bufferSize.toULong())
 
-        wrappedBuffer.setByte(0, 42)
-        wrappedBuffer.setShort(4, 1000)
-        wrappedBuffer.setInt(8, 100000)
-        wrappedBuffer.setFloat(12, 3.14f)
-        wrappedBuffer.setDouble(16, 2.71828)
-        wrappedBuffer.setUByte(24, 255u)
-        wrappedBuffer.setUShort(28, 65535u)
-        wrappedBuffer.setUInt(32, 4294967295u)
+        wrappedBuffer.setByte(0u, 42)
+        wrappedBuffer.setShort(4u, 1000)
+        wrappedBuffer.setInt(8u, 100000)
+        wrappedBuffer.setFloat(12u, 3.14f)
+        wrappedBuffer.setDouble(16u, 2.71828)
+        wrappedBuffer.setUByte(24u, 255u)
+        wrappedBuffer.setUShort(28u, 65535u)
+        wrappedBuffer.setUInt(32u, 4294967295u)
 
         // Then - should be able to read all values back
-        wrappedBuffer.getByte(0) shouldBe 42
-        wrappedBuffer.getShort(4) shouldBe 1000
-        wrappedBuffer.getInt(8) shouldBe 100000
-        wrappedBuffer.getFloat(12) shouldBe 3.14f
-        wrappedBuffer.getDouble(16) shouldBe 2.71828
-        wrappedBuffer.getUByte(24) shouldBe 255u
-        wrappedBuffer.getUShort(28) shouldBe 65535u
-        wrappedBuffer.getUInt(32) shouldBe 4294967295u
+        wrappedBuffer.getByte(0u) shouldBe 42
+        wrappedBuffer.getShort(4u) shouldBe 1000
+        wrappedBuffer.getInt(8u) shouldBe 100000
+        wrappedBuffer.getFloat(12u) shouldBe 3.14f
+        wrappedBuffer.getDouble(16u) shouldBe 2.71828
+        wrappedBuffer.getUByte(24u) shouldBe 255u
+        wrappedBuffer.getUShort(28u) shouldBe 65535u
+        wrappedBuffer.getUInt(32u) shouldBe 4294967295u
 
         // Cleanup
         nativeHeap.free(ptr)
@@ -182,33 +182,33 @@ class OpaquePointerArrayBufferTest : FreeSpec({
         val buffer = ArrayBuffer.allocate(32u)
 
         // When - write various values
-        buffer.setByte(0, 42)
-        buffer.setShort(4, 1000)
-        buffer.setInt(8, 100000)
-        buffer.setFloat(12, 3.14f)
-        buffer.setDouble(16, 2.71828)
-        buffer.setUByte(24, 255u)
-        buffer.setUShort(26, 65535u)
-        buffer.setUInt(28, 4294967295u)
+        buffer.setByte(0u, 42)
+        buffer.setShort(4u, 1000)
+        buffer.setInt(8u, 100000)
+        buffer.setFloat(12u, 3.14f)
+        buffer.setDouble(16u, 2.71828)
+        buffer.setUByte(24u, 255u)
+        buffer.setUShort(26u, 65535u)
+        buffer.setUInt(28u, 4294967295u)
 
         // Then - should be able to read all values back
-        buffer.getByte(0) shouldBe 42
-        buffer.getShort(4) shouldBe 1000
-        buffer.getInt(8) shouldBe 100000
-        buffer.getFloat(12) shouldBe 3.14f
-        buffer.getDouble(16) shouldBe 2.71828
-        buffer.getUByte(24) shouldBe 255u
-        buffer.getUShort(26) shouldBe 65535u
-        buffer.getUInt(28) shouldBe 4294967295u
+        buffer.getByte(0u) shouldBe 42
+        buffer.getShort(4u) shouldBe 1000
+        buffer.getInt(8u) shouldBe 100000
+        buffer.getFloat(12u) shouldBe 3.14f
+        buffer.getDouble(16u) shouldBe 2.71828
+        buffer.getUByte(24u) shouldBe 255u
+        buffer.getUShort(26u) shouldBe 65535u
+        buffer.getUInt(28u) shouldBe 4294967295u
     }
 
     "ArrayBuffer.allocate() - convert to typed arrays" {
         // Given - allocate a buffer and fill it with data
         val buffer = ArrayBuffer.allocate(16u)
-        buffer.setInt(0, 100)
-        buffer.setInt(4, 200)
-        buffer.setInt(8, 300)
-        buffer.setInt(12, 400)
+        buffer.setInt(0u, 100)
+        buffer.setInt(4u, 200)
+        buffer.setInt(8u, 300)
+        buffer.setInt(12u, 400)
 
         // When - convert to int array
         val intArray = buffer.toIntArray()
@@ -221,8 +221,8 @@ class OpaquePointerArrayBufferTest : FreeSpec({
         // When - allocate multiple buffers (they should be automatically freed by GC)
         repeat(100) {
             val buffer = ArrayBuffer.allocate(1024u)
-            buffer.setByte(0, it.toByte())
-            buffer.getByte(0) shouldBe it.toByte()
+            buffer.setByte(0u, it.toByte())
+            buffer.getByte(0u) shouldBe it.toByte()
         }
         // Then - no memory leaks should occur (this is verified by not crashing)
     }

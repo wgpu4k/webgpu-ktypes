@@ -24,11 +24,11 @@ class JvmArrayBufferTest: FreeSpec({
                 val segment = arena.allocate(10L)
                 val buffer = ArrayBuffer.wrap(segment)
 
-                buffer.setByte(0, 42)
-                buffer.setByte(5, -10)
+                buffer.setByte(0u, 42)
+                buffer.setByte(5u, -10)
 
-                buffer.getByte(0) shouldBe 42
-                buffer.getByte(5) shouldBe -10
+                buffer.getByte(0u) shouldBe 42
+                buffer.getByte(5u) shouldBe -10
             }
         }
 
@@ -37,11 +37,11 @@ class JvmArrayBufferTest: FreeSpec({
                 val segment = arena.allocate(10L)
                 val buffer = ArrayBuffer.wrap(segment)
 
-                buffer.setShort(0, 1000)
-                buffer.setShort(4, -2000)
+                buffer.setShort(0u, 1000)
+                buffer.setShort(4u, -2000)
 
-                buffer.getShort(0) shouldBe 1000
-                buffer.getShort(4) shouldBe -2000
+                buffer.getShort(0u) shouldBe 1000
+                buffer.getShort(4u) shouldBe -2000
             }
         }
 
@@ -50,11 +50,11 @@ class JvmArrayBufferTest: FreeSpec({
                 val segment = arena.allocate(16L)
                 val buffer = ArrayBuffer.wrap(segment)
 
-                buffer.setInt(0, 123456)
-                buffer.setInt(8, -987654)
+                buffer.setInt(0u, 123456)
+                buffer.setInt(8u, -987654)
 
-                buffer.getInt(0) shouldBe 123456
-                buffer.getInt(8) shouldBe -987654
+                buffer.getInt(0u) shouldBe 123456
+                buffer.getInt(8u) shouldBe -987654
             }
         }
 
@@ -63,11 +63,11 @@ class JvmArrayBufferTest: FreeSpec({
                 val segment = arena.allocate(16L)
                 val buffer = ArrayBuffer.wrap(segment)
 
-                buffer.setFloat(0, 3.14f)
-                buffer.setFloat(8, -2.71f)
+                buffer.setFloat(0u, 3.14f)
+                buffer.setFloat(8u, -2.71f)
 
-                buffer.getFloat(0) shouldBe 3.14f
-                buffer.getFloat(8) shouldBe -2.71f
+                buffer.getFloat(0u) shouldBe 3.14f
+                buffer.getFloat(8u) shouldBe -2.71f
             }
         }
 
@@ -76,11 +76,11 @@ class JvmArrayBufferTest: FreeSpec({
                 val segment = arena.allocate(32L)
                 val buffer = ArrayBuffer.wrap(segment)
 
-                buffer.setDouble(0, 3.141592)
-                buffer.setDouble(16, -2.718281)
+                buffer.setDouble(0u, 3.141592)
+                buffer.setDouble(16u, -2.718281)
 
-                buffer.getDouble(0) shouldBe 3.141592
-                buffer.getDouble(16) shouldBe -2.718281
+                buffer.getDouble(0u) shouldBe 3.141592
+                buffer.getDouble(16u) shouldBe -2.718281
             }
         }
 
@@ -89,11 +89,11 @@ class JvmArrayBufferTest: FreeSpec({
                 val segment = arena.allocate(10L)
                 val buffer = ArrayBuffer.wrap(segment)
 
-                buffer.setUByte(0, 200u)
-                buffer.setUByte(5, 255u)
+                buffer.setUByte(0u, 200u)
+                buffer.setUByte(5u, 255u)
 
-                buffer.getUByte(0) shouldBe 200u
-                buffer.getUByte(5) shouldBe 255u
+                buffer.getUByte(0u) shouldBe 200u
+                buffer.getUByte(5u) shouldBe 255u
             }
         }
 
@@ -102,11 +102,11 @@ class JvmArrayBufferTest: FreeSpec({
                 val segment = arena.allocate(10L)
                 val buffer = ArrayBuffer.wrap(segment)
 
-                buffer.setUShort(0, 50000u)
-                buffer.setUShort(4, 65535u)
+                buffer.setUShort(0u, 50000u)
+                buffer.setUShort(4u, 65535u)
 
-                buffer.getUShort(0) shouldBe 50000u
-                buffer.getUShort(4) shouldBe 65535u
+                buffer.getUShort(0u) shouldBe 50000u
+                buffer.getUShort(4u) shouldBe 65535u
             }
         }
 
@@ -115,11 +115,11 @@ class JvmArrayBufferTest: FreeSpec({
                 val segment = arena.allocate(16L)
                 val buffer = ArrayBuffer.wrap(segment)
 
-                buffer.setUInt(0, 3000000000u)
-                buffer.setUInt(8, 4294967295u)
+                buffer.setUInt(0u, 3000000000u)
+                buffer.setUInt(8u, 4294967295u)
 
-                buffer.getUInt(0) shouldBe 3000000000u
-                buffer.getUInt(8) shouldBe 4294967295u
+                buffer.getUInt(0u) shouldBe 3000000000u
+                buffer.getUInt(8u) shouldBe 4294967295u
             }
         }
 
@@ -160,9 +160,9 @@ class JvmArrayBufferTest: FreeSpec({
             val buffer = ArrayBuffer.wrap(segment)
 
             buffer.size shouldBe 5u
-            buffer.getByte(0) shouldBe 10
-            buffer.getByte(2) shouldBe 30
-            buffer.getByte(4) shouldBe 50
+            buffer.getByte(0u) shouldBe 10
+            buffer.getByte(2u) shouldBe 30
+            buffer.getByte(4u) shouldBe 50
         }
 
         "should reflect changes in wrapped segment" {
@@ -172,10 +172,10 @@ class JvmArrayBufferTest: FreeSpec({
 
                 val buffer = ArrayBuffer.wrap(segment)
 
-                buffer.getInt(0) shouldBe 999
+                buffer.getInt(0u) shouldBe 999
 
                 // Modify via buffer
-                buffer.setInt(0, 111)
+                buffer.setInt(0u, 111)
 
                 // Verify change is reflected in segment
                 segment.get(ValueLayout.JAVA_INT_UNALIGNED, 0L) shouldBe 111

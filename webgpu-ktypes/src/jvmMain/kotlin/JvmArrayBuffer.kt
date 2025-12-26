@@ -45,90 +45,90 @@ value class JvmArrayBuffer internal constructor(val buffer: MemorySegment): Arra
 
     // Indexed read methods
 
-    override fun getByte(offset: Int): Byte = buffer.get(ValueLayout.JAVA_BYTE, offset.toLong())
+    override fun getByte(offset: ULong): Byte = buffer.get(ValueLayout.JAVA_BYTE, offset.toLong())
 
-    override fun getShort(offset: Int): Short = buffer.get(ValueLayout.JAVA_SHORT_UNALIGNED, offset.toLong())
+    override fun getShort(offset: ULong): Short = buffer.get(ValueLayout.JAVA_SHORT_UNALIGNED, offset.toLong())
 
-    override fun getInt(offset: Int): Int = buffer.get(ValueLayout.JAVA_INT_UNALIGNED, offset.toLong())
+    override fun getInt(offset: ULong): Int = buffer.get(ValueLayout.JAVA_INT_UNALIGNED, offset.toLong())
 
 
-    override fun getFloat(offset: Int): Float = buffer.get(ValueLayout.JAVA_FLOAT_UNALIGNED, offset.toLong())
+    override fun getFloat(offset: ULong): Float = buffer.get(ValueLayout.JAVA_FLOAT_UNALIGNED, offset.toLong())
 
-    override fun getDouble(offset: Int): Double = buffer.get(ValueLayout.JAVA_DOUBLE_UNALIGNED, offset.toLong())
+    override fun getDouble(offset: ULong): Double = buffer.get(ValueLayout.JAVA_DOUBLE_UNALIGNED, offset.toLong())
 
-    override fun getUByte(offset: Int): UByte = getByte(offset).toUByte()
+    override fun getUByte(offset: ULong): UByte = getByte(offset).toUByte()
 
-    override fun getUShort(offset: Int): UShort = getShort(offset).toUShort()
+    override fun getUShort(offset: ULong): UShort = getShort(offset).toUShort()
 
-    override fun getUInt(offset: Int): UInt = getInt(offset).toUInt()
+    override fun getUInt(offset: ULong): UInt = getInt(offset).toUInt()
 
 
     // Indexed write methods
 
-    override fun setByte(offset: Int, value: Byte) {
+    override fun setByte(offset: ULong, value: Byte) {
         buffer.set(ValueLayout.JAVA_BYTE, offset.toLong(), value)
     }
 
-    override fun setShort(offset: Int, value: Short) {
+    override fun setShort(offset: ULong, value: Short) {
         buffer.set(ValueLayout.JAVA_SHORT_UNALIGNED, offset.toLong(), value)
     }
 
-    override fun setInt(offset: Int, value: Int) {
+    override fun setInt(offset: ULong, value: Int) {
         buffer.set(ValueLayout.JAVA_INT_UNALIGNED, offset.toLong(), value)
     }
 
 
-    override fun setFloat(offset: Int, value: Float) {
+    override fun setFloat(offset: ULong, value: Float) {
         buffer.set(ValueLayout.JAVA_FLOAT_UNALIGNED, offset.toLong(), value)
     }
 
-    override fun setDouble(offset: Int, value: Double) {
+    override fun setDouble(offset: ULong, value: Double) {
         buffer.set(ValueLayout.JAVA_DOUBLE_UNALIGNED, offset.toLong(), value)
     }
 
-    override fun setUByte(offset: Int, value: UByte) {
+    override fun setUByte(offset: ULong, value: UByte) {
         setByte(offset, value.toByte())
     }
 
-    override fun setUShort(offset: Int, value: UShort) {
+    override fun setUShort(offset: ULong, value: UShort) {
         setShort(offset, value.toShort())
     }
 
-    override fun setUInt(offset: Int, value: UInt) {
+    override fun setUInt(offset: ULong, value: UInt) {
         setInt(offset, value.toInt())
     }
 
     // Array write methods
 
-    override fun setBytes(offset: Int, array: ByteArray) {
+    override fun setBytes(offset: ULong, array: ByteArray) {
         MemorySegment.copy(array, 0, buffer, ValueLayout.JAVA_BYTE, offset.toLong(), array.size)
     }
 
-    override fun setShorts(offset: Int, array: ShortArray) {
+    override fun setShorts(offset: ULong, array: ShortArray) {
         MemorySegment.copy(array, 0, buffer, ValueLayout.JAVA_SHORT_UNALIGNED, offset.toLong(), array.size)
     }
 
-    override fun setInts(offset: Int, array: IntArray) {
+    override fun setInts(offset: ULong, array: IntArray) {
         MemorySegment.copy(array, 0, buffer, ValueLayout.JAVA_INT_UNALIGNED, offset.toLong(), array.size)
     }
 
-    override fun setFloats(offset: Int, array: FloatArray) {
+    override fun setFloats(offset: ULong, array: FloatArray) {
         MemorySegment.copy(array, 0, buffer, ValueLayout.JAVA_FLOAT_UNALIGNED, offset.toLong(), array.size)
     }
 
-    override fun setDoubles(offset: Int, array: DoubleArray) {
+    override fun setDoubles(offset: ULong, array: DoubleArray) {
         MemorySegment.copy(array, 0, buffer, ValueLayout.JAVA_DOUBLE_UNALIGNED, offset.toLong(), array.size)
     }
 
-    override fun setUBytes(offset: Int, array: UByteArray) {
+    override fun setUBytes(offset: ULong, array: UByteArray) {
         setBytes(offset, array.asByteArray())
     }
 
-    override fun setUShorts(offset: Int, array: UShortArray) {
+    override fun setUShorts(offset: ULong, array: UShortArray) {
         setShorts(offset, array.asShortArray())
     }
 
-    override fun setUInts(offset: Int, array: UIntArray) {
+    override fun setUInts(offset: ULong, array: UIntArray) {
         setInts(offset, array.asIntArray())
     }
 
