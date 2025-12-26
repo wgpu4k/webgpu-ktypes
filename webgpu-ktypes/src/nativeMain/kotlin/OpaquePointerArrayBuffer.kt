@@ -82,42 +82,42 @@ class OpaquePointerArrayBuffer private constructor(
         return array
     }
 
+    @OptIn(UnsafeNumber::class)
     override fun toShortArray(): ShortArray {
         require(size % Short.SIZE_BYTES.toUInt() == 0uL) { "Buffer size must be multiple of ${Short.SIZE_BYTES}" }
         val array = ShortArray((size / Short.SIZE_BYTES.toUInt()).toInt())
-        val shortPtr = pointer.reinterpret<ShortVar>()
-        for (i in array.indices) {
-            array[i] = shortPtr[i]
+        array.usePinned { pinned ->
+            memcpy(pinned.addressOf(0), bytePtr, size.convert())
         }
         return array
     }
 
+    @OptIn(UnsafeNumber::class)
     override fun toIntArray(): IntArray {
         require(size % Int.SIZE_BYTES.toUInt() == 0uL) { "Buffer size must be multiple of ${Int.SIZE_BYTES}" }
         val array = IntArray((size / Int.SIZE_BYTES.toUInt()).toInt())
-        val intPtr = pointer.reinterpret<IntVar>()
-        for (i in array.indices) {
-            array[i] = intPtr[i]
+        array.usePinned { pinned ->
+            memcpy(pinned.addressOf(0), bytePtr, size.convert())
         }
         return array
     }
 
+    @OptIn(UnsafeNumber::class)
     override fun toFloatArray(): FloatArray {
         require(size % Float.SIZE_BYTES.toUInt() == 0uL) { "Buffer size must be multiple of ${Float.SIZE_BYTES}" }
         val array = FloatArray((size / Float.SIZE_BYTES.toUInt()).toInt())
-        val floatPtr = pointer.reinterpret<FloatVar>()
-        for (i in array.indices) {
-            array[i] = floatPtr[i]
+        array.usePinned { pinned ->
+            memcpy(pinned.addressOf(0), bytePtr, size.convert())
         }
         return array
     }
 
+    @OptIn(UnsafeNumber::class)
     override fun toDoubleArray(): DoubleArray {
         require(size % Double.SIZE_BYTES.toUInt() == 0uL) { "Buffer size must be multiple of ${Double.SIZE_BYTES}" }
         val array = DoubleArray((size / Double.SIZE_BYTES.toUInt()).toInt())
-        val doublePtr = pointer.reinterpret<DoubleVar>()
-        for (i in array.indices) {
-            array[i] = doublePtr[i]
+        array.usePinned { pinned ->
+            memcpy(pinned.addressOf(0), bytePtr, size.convert())
         }
         return array
     }
