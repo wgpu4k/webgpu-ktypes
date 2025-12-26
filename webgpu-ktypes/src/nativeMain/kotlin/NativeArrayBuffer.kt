@@ -209,6 +209,104 @@ value class NativeArrayBuffer internal constructor(val buffer: Any): ArrayBuffer
         }
     }
 
+    // Array write methods
+
+    override fun setBytes(offset: Int, array: ByteArray) {
+        array.usePinned { src ->
+            useOpaquePinned(offset) { dest ->
+                val srcPtr = src.addressOf(0).reinterpret<ByteVar>()
+                val destPtr = dest.reinterpret<ByteVar>()
+                for (i in array.indices) {
+                    destPtr[i] = srcPtr[i]
+                }
+            }
+        }
+    }
+
+    override fun setShorts(offset: Int, array: ShortArray) {
+        array.usePinned { src ->
+            useOpaquePinned(offset) { dest ->
+                val srcPtr = src.addressOf(0).reinterpret<ShortVar>()
+                val destPtr = dest.reinterpret<ShortVar>()
+                for (i in array.indices) {
+                    destPtr[i] = srcPtr[i]
+                }
+            }
+        }
+    }
+
+    override fun setInts(offset: Int, array: IntArray) {
+        array.usePinned { src ->
+            useOpaquePinned(offset) { dest ->
+                val srcPtr = src.addressOf(0).reinterpret<IntVar>()
+                val destPtr = dest.reinterpret<IntVar>()
+                for (i in array.indices) {
+                    destPtr[i] = srcPtr[i]
+                }
+            }
+        }
+    }
+
+    override fun setFloats(offset: Int, array: FloatArray) {
+        array.usePinned { src ->
+            useOpaquePinned(offset) { dest ->
+                val srcPtr = src.addressOf(0).reinterpret<FloatVar>()
+                val destPtr = dest.reinterpret<FloatVar>()
+                for (i in array.indices) {
+                    destPtr[i] = srcPtr[i]
+                }
+            }
+        }
+    }
+
+    override fun setDoubles(offset: Int, array: DoubleArray) {
+        array.usePinned { src ->
+            useOpaquePinned(offset) { dest ->
+                val srcPtr = src.addressOf(0).reinterpret<DoubleVar>()
+                val destPtr = dest.reinterpret<DoubleVar>()
+                for (i in array.indices) {
+                    destPtr[i] = srcPtr[i]
+                }
+            }
+        }
+    }
+
+    override fun setUBytes(offset: Int, array: UByteArray) {
+        array.usePinned { src ->
+            useOpaquePinned(offset) { dest ->
+                val srcPtr = src.addressOf(0).reinterpret<UByteVar>()
+                val destPtr = dest.reinterpret<UByteVar>()
+                for (i in array.indices) {
+                    destPtr[i] = srcPtr[i]
+                }
+            }
+        }
+    }
+
+    override fun setUShorts(offset: Int, array: UShortArray) {
+        array.usePinned { src ->
+            useOpaquePinned(offset) { dest ->
+                val srcPtr = src.addressOf(0).reinterpret<UShortVar>()
+                val destPtr = dest.reinterpret<UShortVar>()
+                for (i in array.indices) {
+                    destPtr[i] = srcPtr[i]
+                }
+            }
+        }
+    }
+
+    override fun setUInts(offset: Int, array: UIntArray) {
+        array.usePinned { src ->
+            useOpaquePinned(offset) { dest ->
+                val srcPtr = src.addressOf(0).reinterpret<UIntVar>()
+                val destPtr = dest.reinterpret<UIntVar>()
+                for (i in array.indices) {
+                    destPtr[i] = srcPtr[i]
+                }
+            }
+        }
+    }
+
     inline fun <R> useOpaquePinned(offset: Int, block: (COpaquePointer) -> R): R = buffer.useOpaquePinned(offset, block)
 }
 

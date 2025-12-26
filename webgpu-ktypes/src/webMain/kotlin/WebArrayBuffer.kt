@@ -45,4 +45,14 @@ value class WebArrayBuffer internal constructor(val buffer: js.buffer.ArrayBuffe
     override fun setUByte(offset: Int, value: UByte) = buffer.writeUByte(offset, value)
     override fun setUShort(offset: Int, value: UShort) = buffer.writeUShort(offset, value)
     override fun setUInt(offset: Int, value: UInt) = buffer.writeUInt(offset, value)
+
+    // Array write methods
+    override fun setBytes(offset: Int, array: ByteArray) = buffer.writeByteArray(offset, array)
+    override fun setShorts(offset: Int, array: ShortArray) = buffer.writeShortArray(offset, array)
+    override fun setInts(offset: Int, array: IntArray) = buffer.writeIntArray(offset, array)
+    override fun setFloats(offset: Int, array: FloatArray) = buffer.writeFloatArray(offset, array)
+    override fun setDoubles(offset: Int, array: DoubleArray) = buffer.writeDoubleArray(offset, array)
+    override fun setUBytes(offset: Int, array: UByteArray) = buffer.writeUByteArray(offset, array)
+    override fun setUShorts(offset: Int, array: UShortArray) = buffer.writeUShortArray(offset, array)
+    override fun setUInts(offset: Int, array: UIntArray) = buffer.writeUIntArray(offset, array)
 }

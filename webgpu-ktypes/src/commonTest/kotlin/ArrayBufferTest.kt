@@ -260,4 +260,159 @@ class ArrayBufferTest : FreeSpec({
         buffer.getUInt(8) shouldBe 2147483648u
     }
 
+    "Array write - ByteArray" {
+        // Given
+        val buffer = ArrayBuffer.allocate(20u)
+        val data = byteArrayOf(1, 2, 3, 4, 5)
+
+        // When
+        buffer.setBytes(0, data)
+        buffer.setBytes(10, byteArrayOf(-1, -2, -3))
+
+        // Then
+        buffer.getByte(0) shouldBe 1
+        buffer.getByte(4) shouldBe 5
+        buffer.getByte(10) shouldBe -1
+        buffer.getByte(12) shouldBe -3
+    }
+
+    "Array write - ShortArray" {
+        // Given
+        val buffer = ArrayBuffer.allocate(40u)
+        val data = shortArrayOf(100, 200, 300)
+
+        // When
+        buffer.setShorts(0, data)
+        buffer.setShorts(20, shortArrayOf(-100, -200))
+
+        // Then
+        buffer.getShort(0) shouldBe 100
+        buffer.getShort(4) shouldBe 300
+        buffer.getShort(20) shouldBe -100
+        buffer.getShort(22) shouldBe -200
+    }
+
+    "Array write - IntArray" {
+        // Given
+        val buffer = ArrayBuffer.allocate(40u)
+        val data = intArrayOf(1000, 2000, 3000)
+
+        // When
+        buffer.setInts(0, data)
+        buffer.setInts(20, intArrayOf(-1000, -2000))
+
+        // Then
+        buffer.getInt(0) shouldBe 1000
+        buffer.getInt(8) shouldBe 3000
+        buffer.getInt(20) shouldBe -1000
+        buffer.getInt(24) shouldBe -2000
+    }
+
+    "Array write - FloatArray" {
+        // Given
+        val buffer = ArrayBuffer.allocate(40u)
+        val data = floatArrayOf(1.5f, 2.5f, 3.5f)
+
+        // When
+        buffer.setFloats(0, data)
+        buffer.setFloats(20, floatArrayOf(-1.5f, -2.5f))
+
+        // Then
+        buffer.getFloat(0) shouldBe 1.5f
+        buffer.getFloat(8) shouldBe 3.5f
+        buffer.getFloat(20) shouldBe -1.5f
+        buffer.getFloat(24) shouldBe -2.5f
+    }
+
+    "Array write - DoubleArray" {
+        // Given
+        val buffer = ArrayBuffer.allocate(64u)
+        val data = doubleArrayOf(1.5, 2.5, 3.5)
+
+        // When
+        buffer.setDoubles(0, data)
+        buffer.setDoubles(32, doubleArrayOf(-1.5, -2.5))
+
+        // Then
+        buffer.getDouble(0) shouldBe 1.5
+        buffer.getDouble(16) shouldBe 3.5
+        buffer.getDouble(32) shouldBe -1.5
+        buffer.getDouble(40) shouldBe -2.5
+    }
+
+    "Array write - UByteArray" {
+        // Given
+        val buffer = ArrayBuffer.allocate(20u)
+        val data = ubyteArrayOf(1u, 2u, 3u, 4u, 5u)
+
+        // When
+        buffer.setUBytes(0, data)
+        buffer.setUBytes(10, ubyteArrayOf(255u, 254u, 253u))
+
+        // Then
+        buffer.getUByte(0) shouldBe 1u
+        buffer.getUByte(4) shouldBe 5u
+        buffer.getUByte(10) shouldBe 255u
+        buffer.getUByte(12) shouldBe 253u
+    }
+
+    "Array write - UShortArray" {
+        // Given
+        val buffer = ArrayBuffer.allocate(40u)
+        val data = ushortArrayOf(100u, 200u, 300u)
+
+        // When
+        buffer.setUShorts(0, data)
+        buffer.setUShorts(20, ushortArrayOf(65535u, 65534u))
+
+        // Then
+        buffer.getUShort(0) shouldBe 100u
+        buffer.getUShort(4) shouldBe 300u
+        buffer.getUShort(20) shouldBe 65535u
+        buffer.getUShort(22) shouldBe 65534u
+    }
+
+    "Array write - UIntArray" {
+        // Given
+        val buffer = ArrayBuffer.allocate(40u)
+        val data = uintArrayOf(1000u, 2000u, 3000u)
+
+        // When
+        buffer.setUInts(0, data)
+        buffer.setUInts(20, uintArrayOf(4294967295u, 4294967294u))
+
+        // Then
+        buffer.getUInt(0) shouldBe 1000u
+        buffer.getUInt(8) shouldBe 3000u
+        buffer.getUInt(20) shouldBe 4294967295u
+        buffer.getUInt(24) shouldBe 4294967294u
+    }
+
+    "Array write - complete buffer overwrite" {
+        // Given
+        val buffer = ArrayBuffer.allocate(16u)
+        val data = byteArrayOf(1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16)
+
+        // When
+        buffer.setBytes(0, data)
+
+        // Then
+        buffer.toByteArray() shouldBe data
+    }
+
+    "Array write - partial buffer with verification" {
+        // Given
+        val buffer = ArrayBuffer.allocate(20u)
+        val intData = intArrayOf(100, 200)
+
+        // When
+        buffer.setInts(4, intData)
+
+        // Then
+        buffer.getByte(0) shouldBe 0 // Should remain zero
+        buffer.getInt(4) shouldBe 100
+        buffer.getInt(8) shouldBe 200
+        buffer.getByte(12) shouldBe 0 // Should remain zero
+    }
+
 })

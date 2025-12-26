@@ -117,4 +117,48 @@ value class AndroidArrayBuffer internal constructor(val buffer: ByteBuffer): Arr
         setInt(offset, value.toInt())
     }
 
+    // Array write methods
+
+    override fun setBytes(offset: Int, array: ByteArray) {
+        val duplicate = buffer.duplicate()
+        duplicate.position(offset)
+        duplicate.put(array)
+    }
+
+    override fun setShorts(offset: Int, array: ShortArray) {
+        val duplicate = buffer.duplicate()
+        duplicate.position(offset)
+        duplicate.asShortBuffer().put(array)
+    }
+
+    override fun setInts(offset: Int, array: IntArray) {
+        val duplicate = buffer.duplicate()
+        duplicate.position(offset)
+        duplicate.asIntBuffer().put(array)
+    }
+
+    override fun setFloats(offset: Int, array: FloatArray) {
+        val duplicate = buffer.duplicate()
+        duplicate.position(offset)
+        duplicate.asFloatBuffer().put(array)
+    }
+
+    override fun setDoubles(offset: Int, array: DoubleArray) {
+        val duplicate = buffer.duplicate()
+        duplicate.position(offset)
+        duplicate.asDoubleBuffer().put(array)
+    }
+
+    override fun setUBytes(offset: Int, array: UByteArray) {
+        setBytes(offset, array.asByteArray())
+    }
+
+    override fun setUShorts(offset: Int, array: UShortArray) {
+        setShorts(offset, array.asShortArray())
+    }
+
+    override fun setUInts(offset: Int, array: UIntArray) {
+        setInts(offset, array.asIntArray())
+    }
+
 }

@@ -98,4 +98,38 @@ value class JvmArrayBuffer internal constructor(val buffer: MemorySegment): Arra
         setInt(offset, value.toInt())
     }
 
+    // Array write methods
+
+    override fun setBytes(offset: Int, array: ByteArray) {
+        MemorySegment.copy(array, 0, buffer, ValueLayout.JAVA_BYTE, offset.toLong(), array.size)
+    }
+
+    override fun setShorts(offset: Int, array: ShortArray) {
+        MemorySegment.copy(array, 0, buffer, ValueLayout.JAVA_SHORT_UNALIGNED, offset.toLong(), array.size)
+    }
+
+    override fun setInts(offset: Int, array: IntArray) {
+        MemorySegment.copy(array, 0, buffer, ValueLayout.JAVA_INT_UNALIGNED, offset.toLong(), array.size)
+    }
+
+    override fun setFloats(offset: Int, array: FloatArray) {
+        MemorySegment.copy(array, 0, buffer, ValueLayout.JAVA_FLOAT_UNALIGNED, offset.toLong(), array.size)
+    }
+
+    override fun setDoubles(offset: Int, array: DoubleArray) {
+        MemorySegment.copy(array, 0, buffer, ValueLayout.JAVA_DOUBLE_UNALIGNED, offset.toLong(), array.size)
+    }
+
+    override fun setUBytes(offset: Int, array: UByteArray) {
+        setBytes(offset, array.asByteArray())
+    }
+
+    override fun setUShorts(offset: Int, array: UShortArray) {
+        setShorts(offset, array.asShortArray())
+    }
+
+    override fun setUInts(offset: Int, array: UIntArray) {
+        setInts(offset, array.asIntArray())
+    }
+
 }

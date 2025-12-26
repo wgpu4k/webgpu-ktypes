@@ -266,3 +266,68 @@ internal actual inline fun js.buffer.ArrayBuffer.writeUInt(offset: Int, value: U
     )
     view[0] = value.toInt().toJsInt()
 }
+
+// Array write methods
+@Suppress("NOTHING_TO_INLINE")
+internal actual inline fun js.buffer.ArrayBuffer.writeByteArray(offset: Int, array: ByteArray) {
+    val view = Int8Array<js.buffer.ArrayBuffer>(this, offset, array.size)
+    array.forEachIndexed { index, value ->
+        view[index] = value.toJsByte()
+    }
+}
+
+@Suppress("NOTHING_TO_INLINE")
+internal actual inline fun js.buffer.ArrayBuffer.writeShortArray(offset: Int, array: ShortArray) {
+    val view = Int16Array<js.buffer.ArrayBuffer>(this, offset, array.size)
+    array.forEachIndexed { index, value ->
+        view[index] = value.toJsShort()
+    }
+}
+
+@Suppress("NOTHING_TO_INLINE")
+internal actual inline fun js.buffer.ArrayBuffer.writeIntArray(offset: Int, array: IntArray) {
+    val view = Int32Array<js.buffer.ArrayBuffer>(this, offset, array.size)
+    array.forEachIndexed { index, value ->
+        view[index] = value.toJsInt()
+    }
+}
+
+@Suppress("NOTHING_TO_INLINE")
+internal actual inline fun js.buffer.ArrayBuffer.writeFloatArray(offset: Int, array: FloatArray) {
+    val view = Float32Array<js.buffer.ArrayBuffer>(this, offset, array.size)
+    array.forEachIndexed { index, value ->
+        view[index] = value.toJsFloat()
+    }
+}
+
+@Suppress("NOTHING_TO_INLINE")
+internal actual inline fun js.buffer.ArrayBuffer.writeDoubleArray(offset: Int, array: DoubleArray) {
+    val view = Float64Array<js.buffer.ArrayBuffer>(this, offset, array.size)
+    array.forEachIndexed { index, value ->
+        view[index] = value.toJsNumber()
+    }
+}
+
+@Suppress("NOTHING_TO_INLINE")
+internal actual inline fun js.buffer.ArrayBuffer.writeUByteArray(offset: Int, array: UByteArray) {
+    val view = Uint8Array<js.buffer.ArrayBuffer>(this, offset, array.size)
+    array.forEachIndexed { index, value ->
+        view[index] = value.toJsUByte()
+    }
+}
+
+@Suppress("NOTHING_TO_INLINE")
+internal actual inline fun js.buffer.ArrayBuffer.writeUShortArray(offset: Int, array: UShortArray) {
+    val view = Uint16Array<js.buffer.ArrayBuffer>(this, offset, array.size)
+    array.forEachIndexed { index, value ->
+        view[index] = value.toShort().toJsShort()
+    }
+}
+
+@Suppress("NOTHING_TO_INLINE")
+internal actual inline fun js.buffer.ArrayBuffer.writeUIntArray(offset: Int, array: UIntArray) {
+    val view = Uint32Array<js.buffer.ArrayBuffer>(this, offset, array.size)
+    array.forEachIndexed { index, value ->
+        view[index] = value.toInt().toJsInt()
+    }
+}

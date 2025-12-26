@@ -185,6 +185,64 @@ actual sealed interface ArrayBuffer {
      */
     actual fun setUInt(offset: Int, value: UInt)
 
+    // Array write methods
+
+    /**
+     * Writes a ByteArray into the buffer at the specified offset.
+     * @param offset the byte offset where to start writing
+     * @param array the byte array to write
+     */
+    actual fun setBytes(offset: Int, array: ByteArray)
+
+    /**
+     * Writes a ShortArray into the buffer at the specified offset.
+     * @param offset the byte offset where to start writing (must be aligned to 2 bytes)
+     * @param array the short array to write
+     */
+    actual fun setShorts(offset: Int, array: ShortArray)
+
+    /**
+     * Writes an IntArray into the buffer at the specified offset.
+     * @param offset the byte offset where to start writing (must be aligned to 4 bytes)
+     * @param array the int array to write
+     */
+    actual fun setInts(offset: Int, array: IntArray)
+
+    /**
+     * Writes a FloatArray into the buffer at the specified offset.
+     * @param offset the byte offset where to start writing (must be aligned to 4 bytes)
+     * @param array the float array to write
+     */
+    actual fun setFloats(offset: Int, array: FloatArray)
+
+    /**
+     * Writes a DoubleArray into the buffer at the specified offset.
+     * @param offset the byte offset where to start writing (must be aligned to 8 bytes)
+     * @param array the double array to write
+     */
+    actual fun setDoubles(offset: Int, array: DoubleArray)
+
+    /**
+     * Writes a UByteArray into the buffer at the specified offset.
+     * @param offset the byte offset where to start writing
+     * @param array the unsigned byte array to write
+     */
+    actual fun setUBytes(offset: Int, array: UByteArray)
+
+    /**
+     * Writes a UShortArray into the buffer at the specified offset.
+     * @param offset the byte offset where to start writing (must be aligned to 2 bytes)
+     * @param array the unsigned short array to write
+     */
+    actual fun setUShorts(offset: Int, array: UShortArray)
+
+    /**
+     * Writes a UIntArray into the buffer at the specified offset.
+     * @param offset the byte offset where to start writing (must be aligned to 4 bytes)
+     * @param array the unsigned int array to write
+     */
+    actual fun setUInts(offset: Int, array: UIntArray)
+
     actual companion object {
         /**
          * Allocates a new ArrayBuffer with the specified size in bytes.
@@ -307,4 +365,13 @@ internal expect fun js.buffer.ArrayBuffer.writeDouble(offset: Int, value: Double
 internal expect fun js.buffer.ArrayBuffer.writeUByte(offset: Int, value: UByte)
 internal expect fun js.buffer.ArrayBuffer.writeUShort(offset: Int, value: UShort)
 internal expect fun js.buffer.ArrayBuffer.writeUInt(offset: Int, value: UInt)
+
+internal expect fun js.buffer.ArrayBuffer.writeByteArray(offset: Int, array: ByteArray)
+internal expect fun js.buffer.ArrayBuffer.writeShortArray(offset: Int, array: ShortArray)
+internal expect fun js.buffer.ArrayBuffer.writeIntArray(offset: Int, array: IntArray)
+internal expect fun js.buffer.ArrayBuffer.writeFloatArray(offset: Int, array: FloatArray)
+internal expect fun js.buffer.ArrayBuffer.writeDoubleArray(offset: Int, array: DoubleArray)
+internal expect fun js.buffer.ArrayBuffer.writeUByteArray(offset: Int, array: UByteArray)
+internal expect fun js.buffer.ArrayBuffer.writeUShortArray(offset: Int, array: UShortArray)
+internal expect fun js.buffer.ArrayBuffer.writeUIntArray(offset: Int, array: UIntArray)
 

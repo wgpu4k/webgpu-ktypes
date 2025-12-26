@@ -14,6 +14,7 @@ import kotlinx.cinterop.allocArray
 import kotlinx.cinterop.convert
 import kotlinx.cinterop.free
 import kotlinx.cinterop.get
+import kotlinx.cinterop.interpretCPointer
 import kotlinx.cinterop.nativeHeap
 import kotlinx.cinterop.reinterpret
 import kotlinx.cinterop.set
@@ -204,6 +205,60 @@ class OpaquePointerArrayBuffer private constructor(
 
     override fun setUInt(offset: Int, value: UInt) {
         setInt(offset, value.toInt())
+    }
+
+    // Array write methods
+
+    @OptIn(UnsafeNumber::class)
+    override fun setBytes(offset: Int, array: ByteArray) {
+        array.usePinned { pinned ->
+            val destPtr = interpretCPointer<ByteVar>(bytePtr.rawValue + offset.toLong())
+            memcpy(destPtr, pinned.addressOf(0), array.size.convert())
+        }
+    }
+
+    @OptIn(UnsafeNumber::class)
+    override fun setShorts(offset: Int, array: ShortArray) {
+        array.usePinned { pinned ->
+            val destPtr = interpretCPointer<ByteVar>(bytePtr.rawValue + offset.toLong())
+            memcpy(destPtr, pinned.addressOf(0), (array.size * Short.SIZE_BYTES).convert())
+        }
+    }
+
+    @OptIn(UnsafeNumber::class)
+    override fun setInts(offset: Int, array: IntArray) {
+        array.usePinned { pinned ->
+            val destPtr = interpretCPointer<ByteVar>(bytePtr.rawValue + offset.toLong())
+            memcpy(destPtr, pinned.addressOf(0), (array.size * Int.SIZE_BYTES).convert())
+        }
+    }
+
+    @OptIn(UnsafeNumber::class)
+    override fun setFloats(offset: Int, array: FloatArray) {
+        array.usePinned { pinned ->
+            val destPtr = interpretCPointer<ByteVar>(bytePtr.rawValue + offset.toLong())
+            memcpy(destPtr, pinned.addressOf(0), (array.size * Float.SIZE_BYTES).convert())
+        }
+    }
+
+    @OptIn(UnsafeNumber::class)
+    override fun setDoubles(offset: Int, array: DoubleArray) {
+        array.usePinned { pinned ->
+            val destPtr = interpretCPointer<ByteVar>(bytePtr.rawValue + offset.toLong())
+            memcpy(destPtr, pinned.addressOf(0), (array.size * Double.SIZE_BYTES).convert())
+        }
+    }
+
+    override fun setUBytes(offset: Int, array: UByteArray) {
+        setBytes(offset, array.asByteArray())
+    }
+
+    override fun setUShorts(offset: Int, array: UShortArray) {
+        setShorts(offset, array.asShortArray())
+    }
+
+    override fun setUInts(offset: Int, array: UIntArray) {
+        setInts(offset, array.asIntArray())
     }
 
 }
