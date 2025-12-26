@@ -280,8 +280,11 @@ actual sealed interface ArrayBuffer {
          * @param array the byte array to convert
          * @return an ArrayBuffer containing the data from the byte array
          */
-        actual fun from(array: ByteArray): ArrayBuffer
-                = NativeArrayBuffer(array)
+        actual fun from(array: ByteArray): ArrayBuffer {
+            val buffer = OpaquePointerArrayBuffer(array.size.toULong())
+            buffer.setBytes(0, array)
+            return buffer
+        }
 
         /**
          * Creates an ArrayBuffer from a ShortArray.
@@ -289,7 +292,9 @@ actual sealed interface ArrayBuffer {
          * @return an ArrayBuffer containing the data from the short array
          */
         actual fun from(array: ShortArray): ArrayBuffer {
-            return NativeArrayBuffer(array)
+            val buffer = OpaquePointerArrayBuffer((array.size * Short.SIZE_BYTES).toULong())
+            buffer.setShorts(0, array)
+            return buffer
         }
 
         /**
@@ -298,7 +303,9 @@ actual sealed interface ArrayBuffer {
          * @return an ArrayBuffer containing the data from the int array
          */
         actual fun from(array: IntArray): ArrayBuffer {
-            return NativeArrayBuffer(array)
+            val buffer = OpaquePointerArrayBuffer((array.size * Int.SIZE_BYTES).toULong())
+            buffer.setInts(0, array)
+            return buffer
         }
 
         /**
@@ -307,7 +314,9 @@ actual sealed interface ArrayBuffer {
          * @return an ArrayBuffer containing the data from the float array
          */
         actual fun from(array: FloatArray): ArrayBuffer {
-            return NativeArrayBuffer(array)
+            val buffer = OpaquePointerArrayBuffer((array.size * Float.SIZE_BYTES).toULong())
+            buffer.setFloats(0, array)
+            return buffer
         }
 
         /**
@@ -316,7 +325,9 @@ actual sealed interface ArrayBuffer {
          * @return an ArrayBuffer containing the data from the double array
          */
         actual fun from(array: DoubleArray): ArrayBuffer {
-            return NativeArrayBuffer(array)
+            val buffer = OpaquePointerArrayBuffer((array.size * Double.SIZE_BYTES).toULong())
+            buffer.setDoubles(0, array)
+            return buffer
         }
 
         /**
@@ -325,7 +336,9 @@ actual sealed interface ArrayBuffer {
          * @return an ArrayBuffer containing the data from the unsigned byte array
          */
         actual fun from(array: UByteArray): ArrayBuffer {
-            return NativeArrayBuffer(array)
+            val buffer = OpaquePointerArrayBuffer(array.size.toULong())
+            buffer.setUBytes(0, array)
+            return buffer
         }
 
         /**
@@ -334,7 +347,9 @@ actual sealed interface ArrayBuffer {
          * @return an ArrayBuffer containing the data from the unsigned short array
          */
         actual fun from(array: UShortArray): ArrayBuffer {
-            return NativeArrayBuffer(array)
+            val buffer = OpaquePointerArrayBuffer((array.size * Short.SIZE_BYTES).toULong())
+            buffer.setUShorts(0, array)
+            return buffer
         }
 
         /**
@@ -343,7 +358,9 @@ actual sealed interface ArrayBuffer {
          * @return an ArrayBuffer containing the data from the unsigned int array
          */
         actual fun from(array: UIntArray): ArrayBuffer {
-            return NativeArrayBuffer(array)
+            val buffer = OpaquePointerArrayBuffer((array.size * Int.SIZE_BYTES).toULong())
+            buffer.setUInts(0, array)
+            return buffer
         }
     }
 }
