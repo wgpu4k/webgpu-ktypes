@@ -185,6 +185,15 @@ expect sealed interface ArrayBuffer {
 
     companion object {
         /**
+         * Allocates a new ArrayBuffer with the specified size in bytes.
+         * The buffer is zero-initialized and memory is managed automatically.
+         *
+         * @param sizeInBytes the size of the buffer in bytes
+         * @return a new ArrayBuffer with the specified size
+         */
+        fun allocate(sizeInBytes: ULong): ArrayBuffer
+
+        /**
          * Creates an ArrayBuffer from a ByteArray.
          * @param array the byte array to convert
          * @return an ArrayBuffer containing the data from the byte array

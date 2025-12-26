@@ -196,6 +196,18 @@ actual sealed interface ArrayBuffer {
     actual companion object {
 
         /**
+         * Allocates a new ArrayBuffer with the specified size in bytes.
+         * The buffer is zero-initialized and memory is managed automatically.
+         *
+         * @param sizeInBytes the size of the buffer in bytes
+         * @return a new ArrayBuffer with the specified size
+         */
+        actual fun allocate(sizeInBytes: ULong): ArrayBuffer {
+            val buffer = ByteBuffer.allocateDirect(sizeInBytes.toInt())
+            return AndroidArrayBuffer(buffer)
+        }
+
+        /**
          * Creates an ArrayBuffer from a ByteBuffer.
          * @param buffer the byte buffer to wrap (must be a direct buffer)
          * @return an ArrayBuffer backed by the byte buffer

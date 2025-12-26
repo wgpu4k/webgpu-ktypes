@@ -196,6 +196,17 @@ actual sealed interface ArrayBuffer {
     actual companion object {
 
         /**
+         * Allocates a new ArrayBuffer with the specified size in bytes.
+         * The buffer is zero-initialized and memory is managed automatically.
+         *
+         * @param sizeInBytes the size of the buffer in bytes
+         * @return a new ArrayBuffer with the specified size
+         */
+        actual fun allocate(sizeInBytes: ULong): ArrayBuffer {
+            return OpaquePointerArrayBuffer(sizeInBytes)
+        }
+
+        /**
          * Wraps a native pointer and its size into an OpaquePointerArrayBuffer.
          *
          * @param pointer the native pointer to wrap

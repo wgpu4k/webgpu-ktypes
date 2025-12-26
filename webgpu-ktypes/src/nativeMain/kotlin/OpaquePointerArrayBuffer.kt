@@ -11,6 +11,7 @@ import kotlinx.cinterop.ShortVar
 import kotlinx.cinterop.UnsafeNumber
 import kotlinx.cinterop.addressOf
 import kotlinx.cinterop.allocArray
+import kotlinx.cinterop.convert
 import kotlinx.cinterop.free
 import kotlinx.cinterop.get
 import kotlinx.cinterop.nativeHeap
@@ -72,10 +73,11 @@ class OpaquePointerArrayBuffer private constructor(
 
     // Read methods - convert entire buffer to typed arrays
 
+    @OptIn(UnsafeNumber::class)
     override fun toByteArray(): ByteArray {
         val array = ByteArray(size.toInt())
         array.usePinned { pinned ->
-            memcpy(pinned.addressOf(0), bytePtr, size)
+            memcpy(pinned.addressOf(0), bytePtr, size.convert())
         }
         return array
     }

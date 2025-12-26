@@ -196,6 +196,17 @@ actual sealed interface ArrayBuffer {
 
     actual companion object {
         /**
+         * Allocates a new ArrayBuffer with the specified size in bytes.
+         * The buffer is zero-initialized and memory is managed automatically.
+         *
+         * @param sizeInBytes the size of the buffer in bytes
+         * @return a new ArrayBuffer with the specified size
+         */
+        actual fun allocate(sizeInBytes: ULong): ArrayBuffer {
+            return JvmArrayBuffer(MemorySegment.ofArray(ByteArray(sizeInBytes.toInt())))
+        }
+
+        /**
          * Creates an ArrayBuffer from a MemorySegment.
          * @param segment the memory segment to wrap
          * @return an ArrayBuffer backed by the memory segment

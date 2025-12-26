@@ -187,6 +187,17 @@ actual sealed interface ArrayBuffer {
 
     actual companion object {
         /**
+         * Allocates a new ArrayBuffer with the specified size in bytes.
+         * The buffer is zero-initialized and memory is managed automatically.
+         *
+         * @param sizeInBytes the size of the buffer in bytes
+         * @return a new ArrayBuffer with the specified size
+         */
+        actual fun allocate(sizeInBytes: ULong): ArrayBuffer {
+            return WebArrayBuffer(js.buffer.ArrayBuffer(sizeInBytes.toInt()))
+        }
+
+        /**
          * Creates an ArrayBuffer from a JavaScript ArrayBuffer.
          * @param buffer the JavaScript array buffer to wrap
          * @return an ArrayBuffer backed by the JavaScript array buffer

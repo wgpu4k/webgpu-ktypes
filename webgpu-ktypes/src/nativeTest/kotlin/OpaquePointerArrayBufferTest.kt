@@ -167,4 +167,63 @@ class OpaquePointerArrayBufferTest : FreeSpec({
         // Cleanup
         nativeHeap.free(ptr)
     }
+
+    "ArrayBuffer.allocate() - create zero-initialized buffer" {
+        // When - allocate a new buffer
+        val buffer = ArrayBuffer.allocate(10u)
+
+        // Then - buffer should have correct size and be zero-initialized
+        buffer.size shouldBe 10u
+        buffer.toByteArray() shouldBe ByteArray(10) { 0 }
+    }
+
+    "ArrayBuffer.allocate() - write and read values" {
+        // Given - allocate a new buffer
+        val buffer = ArrayBuffer.allocate(32u)
+
+        // When - write various values
+        buffer.setByte(0, 42)
+        buffer.setShort(4, 1000)
+        buffer.setInt(8, 100000)
+        buffer.setFloat(12, 3.14f)
+        buffer.setDouble(16, 2.71828)
+        buffer.setUByte(24, 255u)
+        buffer.setUShort(26, 65535u)
+        buffer.setUInt(28, 4294967295u)
+
+        // Then - should be able to read all values back
+        buffer.getByte(0) shouldBe 42
+        buffer.getShort(4) shouldBe 1000
+        buffer.getInt(8) shouldBe 100000
+        buffer.getFloat(12) shouldBe 3.14f
+        buffer.getDouble(16) shouldBe 2.71828
+        buffer.getUByte(24) shouldBe 255u
+        buffer.getUShort(26) shouldBe 65535u
+        buffer.getUInt(28) shouldBe 4294967295u
+    }
+
+    "ArrayBuffer.allocate() - convert to typed arrays" {
+        // Given - allocate a buffer and fill it with data
+        val buffer = ArrayBuffer.allocate(16u)
+        buffer.setInt(0, 100)
+        buffer.setInt(4, 200)
+        buffer.setInt(8, 300)
+        buffer.setInt(12, 400)
+
+        // When - convert to int array
+        val intArray = buffer.toIntArray()
+
+        // Then - should contain the correct values
+        intArray shouldBe intArrayOf(100, 200, 300, 400)
+    }
+
+    "ArrayBuffer.allocate() - memory is automatically managed" {
+        // When - allocate multiple buffers (they should be automatically freed by GC)
+        repeat(100) {
+            val buffer = ArrayBuffer.allocate(1024u)
+            buffer.setByte(0, it.toByte())
+            buffer.getByte(0) shouldBe it.toByte()
+        }
+        // Then - no memory leaks should occur (this is verified by not crashing)
+    }
 })
