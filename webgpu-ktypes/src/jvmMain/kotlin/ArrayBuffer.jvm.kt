@@ -2,8 +2,8 @@
 
 package io.ygdrasil.webgpu
 
+import java.lang.foreign.Arena
 import java.lang.foreign.MemorySegment
-import java.nio.ByteBuffer
 
 /**
  * Represents a platform-specific abstraction for handling raw binary data buffers.
@@ -261,7 +261,7 @@ actual sealed interface ArrayBuffer {
          * @return a new ArrayBuffer with the specified size
          */
         actual fun allocate(sizeInBytes: ULong): ArrayBuffer {
-            return JvmArrayBuffer(MemorySegment.ofArray(ByteArray(sizeInBytes.toInt())))
+            return JvmArrayBuffer(Arena.ofAuto().allocate(sizeInBytes.toLong()))
         }
 
         /**
@@ -272,19 +272,13 @@ actual sealed interface ArrayBuffer {
         fun wrap(segment: MemorySegment): ArrayBuffer = JvmArrayBuffer(segment)
 
         /**
-         * Creates an ArrayBuffer from a ByteBuffer.
-         * @param buffer the byte buffer to convert
-         * @return an ArrayBuffer backed by the byte buffer's memory segment
-         */
-        fun from(buffer: ByteBuffer): ArrayBuffer = JvmArrayBuffer(MemorySegment.ofBuffer(buffer))
-
-        /**
          * Creates an ArrayBuffer from a ByteArray.
          * @param array the byte array to convert
          * @return an ArrayBuffer containing the data from the byte array
          */
         actual fun of(array: ByteArray): ArrayBuffer {
-            return JvmArrayBuffer(MemorySegment.ofArray(array.copyOf()))
+            return allocate((array.size * Byte.SIZE_BYTES).toULong())
+                .also { it.setBytes(0u, array) }
         }
 
         /**
@@ -293,7 +287,8 @@ actual sealed interface ArrayBuffer {
          * @return an ArrayBuffer containing the data from the short array
          */
         actual fun of(array: ShortArray): ArrayBuffer {
-            return JvmArrayBuffer(MemorySegment.ofArray(array.copyOf()))
+            return allocate((array.size * Short.SIZE_BYTES).toULong())
+                .also { it.setShorts(0u, array) }
         }
 
         /**
@@ -302,7 +297,8 @@ actual sealed interface ArrayBuffer {
          * @return an ArrayBuffer containing the data from the int array
          */
         actual fun of(array: IntArray): ArrayBuffer {
-            return JvmArrayBuffer(MemorySegment.ofArray(array.copyOf()))
+            return allocate((array.size * Int.SIZE_BYTES).toULong())
+                .also { it.setInts(0u, array) }
         }
 
 
@@ -312,7 +308,8 @@ actual sealed interface ArrayBuffer {
          * @return an ArrayBuffer containing the data from the float array
          */
         actual fun of(array: FloatArray): ArrayBuffer {
-            return JvmArrayBuffer(MemorySegment.ofArray(array.copyOf()))
+            return allocate((array.size * Float.SIZE_BYTES).toULong())
+                .also { it.setFloats(0u, array) }
         }
 
         /**
@@ -321,7 +318,8 @@ actual sealed interface ArrayBuffer {
          * @return an ArrayBuffer containing the data from the double array
          */
         actual fun of(array: DoubleArray): ArrayBuffer {
-            return JvmArrayBuffer(MemorySegment.ofArray(array.copyOf()))
+            return allocate((array.size * Double.SIZE_BYTES).toULong())
+                .also { it.setDoubles(0u, array) }
         }
 
         /**
@@ -330,7 +328,8 @@ actual sealed interface ArrayBuffer {
          * @return an ArrayBuffer containing the data from the unsigned byte array
          */
         actual fun of(array: UByteArray): ArrayBuffer {
-            return JvmArrayBuffer(MemorySegment.ofArray(array.asByteArray().copyOf()))
+            return allocate((array.size * UByte.SIZE_BYTES).toULong())
+                .also { it.setUBytes(0u, array) }
         }
 
         /**
@@ -339,7 +338,8 @@ actual sealed interface ArrayBuffer {
          * @return an ArrayBuffer containing the data from the unsigned short array
          */
         actual fun of(array: UShortArray): ArrayBuffer {
-            return JvmArrayBuffer(MemorySegment.ofArray(array.asShortArray().copyOf()))
+            return allocate((array.size * UShort.SIZE_BYTES).toULong())
+                .also { it.setUShorts(0u, array) }
         }
 
         /**
@@ -348,7 +348,8 @@ actual sealed interface ArrayBuffer {
          * @return an ArrayBuffer containing the data from the unsigned int array
          */
         actual fun of(array: UIntArray): ArrayBuffer {
-            return JvmArrayBuffer(MemorySegment.ofArray(array.asIntArray().copyOf()))
+            return allocate((array.size * UInt.SIZE_BYTES).toULong())
+                .also { it.setUInts(0u, array) }
         }
 
     }
