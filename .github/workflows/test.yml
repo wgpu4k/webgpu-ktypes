@@ -34,7 +34,7 @@ jobs:
       - name: Build
         run: |
           ./gradlew check
-      - name: Summarize tests results
-        uses: jeantessier/test-summary-action@v1
-        if: ${{ runner.os == 'Linux' }}
+#      - name: Summarize tests results
+#        uses: jeantessier/test-summary-action@v1
+#        if: ${{ runner.os == 'Linux' }}
 
