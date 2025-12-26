@@ -6,12 +6,12 @@ import io.ygdrasil.webgpu.ArrayBuffer
 import kotlinx.cinterop.*
 
 /**
- * Tests for ArrayBuffer.of() method which is native-specific.
+ * Tests for ArrayBuffer.wrap() method which is native-specific.
  * This method allows wrapping an existing native pointer without copying data.
  */
 class OpaquePointerArrayBufferTest : FreeSpec({
 
-    "ArrayBuffer.of() - create buffer from existing memory pointer" {
+    "ArrayBuffer.wrap() - create buffer from existing memory pointer" {
         // Given - allocate native memory and fill it with data
         val size = 5
         val ptr = nativeHeap.allocArray<ByteVar>(size)
@@ -30,7 +30,7 @@ class OpaquePointerArrayBufferTest : FreeSpec({
         nativeHeap.free(ptr)
     }
 
-    "ArrayBuffer.of() - modifications in wrapped buffer are visible" {
+    "ArrayBuffer.wrap() - modifications in wrapped buffer are visible" {
         // Given - allocate native memory
         val size = 5
         val ptr = nativeHeap.allocArray<ByteVar>(size)
@@ -52,7 +52,7 @@ class OpaquePointerArrayBufferTest : FreeSpec({
         nativeHeap.free(ptr)
     }
 
-    "ArrayBuffer.of() - wrapping IntArray memory" {
+    "ArrayBuffer.wrap() - wrapping IntArray memory" {
         // Given - allocate int array memory
         val size = 4
         val ptr = nativeHeap.allocArray<IntVar>(size)
@@ -74,7 +74,7 @@ class OpaquePointerArrayBufferTest : FreeSpec({
         nativeHeap.free(ptr)
     }
 
-    "ArrayBuffer.of() - wrapping FloatArray memory" {
+    "ArrayBuffer.wrap() - wrapping FloatArray memory" {
         // Given - allocate float array memory
         val size = 4
         val ptr = nativeHeap.allocArray<FloatVar>(size)
@@ -96,7 +96,7 @@ class OpaquePointerArrayBufferTest : FreeSpec({
         nativeHeap.free(ptr)
     }
 
-    "ArrayBuffer.of() - wrapping DoubleArray memory" {
+    "ArrayBuffer.wrap() - wrapping DoubleArray memory" {
         // Given - allocate double array memory
         val size = 4
         val ptr = nativeHeap.allocArray<DoubleVar>(size)
@@ -118,7 +118,7 @@ class OpaquePointerArrayBufferTest : FreeSpec({
         nativeHeap.free(ptr)
     }
 
-    "ArrayBuffer.of() - partial buffer wrapping" {
+    "ArrayBuffer.wrap() - partial buffer wrapping" {
         // Given - allocate 10 bytes
         val size = 10
         val ptr = nativeHeap.allocArray<ByteVar>(size)
@@ -137,7 +137,7 @@ class OpaquePointerArrayBufferTest : FreeSpec({
         nativeHeap.free(ptr)
     }
 
-    "ArrayBuffer.of() - read and write all data types" {
+    "ArrayBuffer.wrap() - read and write all data types" {
         // Given - allocate native memory large enough for all types
         val bufferSize = 64
         val ptr = nativeHeap.allocArray<ByteVar>(bufferSize)
