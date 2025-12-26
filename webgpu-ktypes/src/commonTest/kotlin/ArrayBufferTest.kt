@@ -6,6 +6,60 @@ import io.ygdrasil.webgpu.ArrayBuffer
 
 
 class ArrayBufferTest : FreeSpec({
+    "allocate creates zero-initialized buffer" {
+        // When
+        val buffer = ArrayBuffer.allocate(16u)
+
+        // Then
+        buffer.size shouldBe 16u
+        val bytes = buffer.toByteArray()
+        bytes.all { it == 0.toByte() } shouldBe true
+    }
+
+    "allocate with different sizes" {
+        // Given
+        val sizes = listOf(1uL, 8uL, 64uL, 256uL, 1024uL)
+
+        sizes.forEach { size ->
+            // When
+            val buffer = ArrayBuffer.allocate(size)
+
+            // Then
+            buffer.size shouldBe size
+            buffer.toByteArray().size shouldBe size.toInt()
+        }
+    }
+
+    "allocate buffer can be written to" {
+        // Given
+        val buffer = ArrayBuffer.allocate(16u)
+
+        // When
+        buffer.setByte(0, 42)
+        buffer.setInt(4, 12345)
+        buffer.setFloat(8, 3.50f)
+
+        // Then
+        buffer.getByte(0) shouldBe 42
+        buffer.getInt(4) shouldBe 12345
+        buffer.getFloat(8) shouldBe 3.50f
+    }
+
+    "allocate buffer supports all typed array conversions" {
+        // Given
+        val buffer = ArrayBuffer.allocate(32u)
+
+        // When - write some data
+        buffer.setInt(0, 100)
+        buffer.setInt(4, 200)
+
+        // Then - can convert to different typed arrays
+        buffer.toByteArray().size shouldBe 32
+        buffer.toIntArray().size shouldBe 8
+        buffer.toFloatArray().size shouldBe 8
+        buffer.toDoubleArray().size shouldBe 4
+    }
+
     "ByteArray round-trip" {
         // Given
         val input = byteArrayOf(1, 2, 3, 4, 5, -1, -2, -3)
