@@ -256,56 +256,56 @@ expect sealed interface ArrayBuffer {
          * @param array the byte array to convert
          * @return an ArrayBuffer containing the data from the byte array
          */
-        fun from(array: ByteArray): ArrayBuffer
+        fun of(array: ByteArray): ArrayBuffer
 
         /**
          * Creates an ArrayBuffer from a ShortArray.
          * @param array the short array to convert
          * @return an ArrayBuffer containing the data from the short array
          */
-        fun from(array: ShortArray): ArrayBuffer
+        fun of(array: ShortArray): ArrayBuffer
 
         /**
          * Creates an ArrayBuffer from an IntArray.
          * @param array the int array to convert
          * @return an ArrayBuffer containing the data from the int array
          */
-        fun from(array: IntArray): ArrayBuffer
+        fun of(array: IntArray): ArrayBuffer
 
         /**
          * Creates an ArrayBuffer from a FloatArray.
          * @param array the float array to convert
          * @return an ArrayBuffer containing the data from the float array
          */
-        fun from(array: FloatArray): ArrayBuffer
+        fun of(array: FloatArray): ArrayBuffer
 
         /**
          * Creates an ArrayBuffer from a DoubleArray.
          * @param array the double array to convert
          * @return an ArrayBuffer containing the data from the double array
          */
-        fun from(array: DoubleArray): ArrayBuffer
+        fun of(array: DoubleArray): ArrayBuffer
 
         /**
          * Creates an ArrayBuffer from a UByteArray.
          * @param array the unsigned byte array to convert
          * @return an ArrayBuffer containing the data from the unsigned byte array
          */
-        fun from(array: UByteArray): ArrayBuffer
+        fun of(array: UByteArray): ArrayBuffer
 
         /**
          * Creates an ArrayBuffer from a UShortArray.
          * @param array the unsigned short array to convert
          * @return an ArrayBuffer containing the data from the unsigned short array
          */
-        fun from(array: UShortArray): ArrayBuffer
+        fun of(array: UShortArray): ArrayBuffer
 
         /**
          * Creates an ArrayBuffer from a UIntArray.
          * @param array the unsigned int array to convert
          * @return an ArrayBuffer containing the data from the unsigned int array
          */
-        fun from(array: UIntArray): ArrayBuffer
+        fun of(array: UIntArray): ArrayBuffer
 
     }
 }

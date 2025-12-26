@@ -268,7 +268,7 @@ actual sealed interface ArrayBuffer {
          * @param array the byte array to convert
          * @return an ArrayBuffer containing the data from the byte array
          */
-        actual fun from(array: ByteArray): ArrayBuffer
+        actual fun of(array: ByteArray): ArrayBuffer
             = array.toArrayBuffer()
 
         /**
@@ -276,7 +276,7 @@ actual sealed interface ArrayBuffer {
          * @param array the short array to convert
          * @return an ArrayBuffer containing the data from the short array
          */
-        actual fun from(array: ShortArray): ArrayBuffer
+        actual fun of(array: ShortArray): ArrayBuffer
             = array.toArrayBuffer()
 
         /**
@@ -284,7 +284,7 @@ actual sealed interface ArrayBuffer {
          * @param array the int array to convert
          * @return an ArrayBuffer containing the data from the int array
          */
-        actual fun from(array: IntArray): ArrayBuffer
+        actual fun of(array: IntArray): ArrayBuffer
             = array.toArrayBuffer()
 
         /**
@@ -292,7 +292,7 @@ actual sealed interface ArrayBuffer {
          * @param array the float array to convert
          * @return an ArrayBuffer containing the data from the float array
          */
-        actual fun from(array: FloatArray): ArrayBuffer
+        actual fun of(array: FloatArray): ArrayBuffer
             = array.toArrayBuffer()
 
         /**
@@ -300,7 +300,7 @@ actual sealed interface ArrayBuffer {
          * @param array the double array to convert
          * @return an ArrayBuffer containing the data from the double array
          */
-        actual fun from(array: DoubleArray): ArrayBuffer
+        actual fun of(array: DoubleArray): ArrayBuffer
             = array.toArrayBuffer()
 
         /**
@@ -308,7 +308,7 @@ actual sealed interface ArrayBuffer {
          * @param array the unsigned byte array to convert
          * @return an ArrayBuffer containing the data from the unsigned byte array
          */
-        actual fun from(array: UByteArray): ArrayBuffer
+        actual fun of(array: UByteArray): ArrayBuffer
             = array.toArrayBuffer()
 
         /**
@@ -316,7 +316,7 @@ actual sealed interface ArrayBuffer {
          * @param array the unsigned short array to convert
          * @return an ArrayBuffer containing the data from the unsigned short array
          */
-        actual fun from(array: UShortArray): ArrayBuffer
+        actual fun of(array: UShortArray): ArrayBuffer
             = array.toArrayBuffer()
 
         /**
@@ -324,7 +324,7 @@ actual sealed interface ArrayBuffer {
          * @param array the unsigned int array to convert
          * @return an ArrayBuffer containing the data from the unsigned int array
          */
-        actual fun from(array: UIntArray): ArrayBuffer
+        actual fun of(array: UIntArray): ArrayBuffer
             = array.toArrayBuffer()
     }
 }
