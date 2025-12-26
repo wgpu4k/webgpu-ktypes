@@ -22,7 +22,7 @@ internal actual inline fun ByteArray.toArrayBuffer(): ArrayBuffer {
     forEachIndexed { index, value ->
         array[index] = value.toJsByte()
     }
-    return ArrayBuffer.from(Int8Array<js.buffer.ArrayBuffer>(array).buffer)
+    return ArrayBuffer.wrap(Int8Array<js.buffer.ArrayBuffer>(array).buffer)
 }
 
 @Suppress("NOTHING_TO_INLINE")
@@ -31,7 +31,7 @@ internal actual inline fun ShortArray.toArrayBuffer(): ArrayBuffer {
     forEachIndexed { index, value ->
         array[index] = value.toJsShort()
     }
-    return ArrayBuffer.from(Int16Array<js.buffer.ArrayBuffer>(array).buffer)
+    return ArrayBuffer.wrap(Int16Array<js.buffer.ArrayBuffer>(array).buffer)
 }
 
 @Suppress("NOTHING_TO_INLINE")
@@ -40,7 +40,7 @@ internal actual inline fun IntArray.toArrayBuffer(): ArrayBuffer {
     forEachIndexed { index, value ->
         array[index] = value.toJsNumber()
     }
-    return ArrayBuffer.from(Int32Array<js.buffer.ArrayBuffer>(array).buffer)
+    return ArrayBuffer.wrap(Int32Array<js.buffer.ArrayBuffer>(array).buffer)
 }
 
 @Suppress("NOTHING_TO_INLINE")
@@ -49,7 +49,7 @@ internal actual inline fun FloatArray.toArrayBuffer(): ArrayBuffer {
     forEachIndexed { index, value ->
         array[index] = value.toJsFloat()
     }
-    return ArrayBuffer.from(Float32Array<js.buffer.ArrayBuffer>(array).buffer)
+    return ArrayBuffer.wrap(Float32Array<js.buffer.ArrayBuffer>(array).buffer)
 }
 
 @Suppress("NOTHING_TO_INLINE")
@@ -58,7 +58,7 @@ internal actual inline fun DoubleArray.toArrayBuffer(): ArrayBuffer {
     forEachIndexed { index, value ->
         array[index] = value.toJsNumber()
     }
-    return ArrayBuffer.from(Float64Array<js.buffer.ArrayBuffer>(array).buffer)
+    return ArrayBuffer.wrap(Float64Array<js.buffer.ArrayBuffer>(array).buffer)
 }
 
 @Suppress("NOTHING_TO_INLINE")
@@ -67,7 +67,7 @@ internal actual inline fun UByteArray.toArrayBuffer(): ArrayBuffer {
     forEachIndexed { index, value ->
         array[index] = value.toJsUByte()
     }
-    return ArrayBuffer.from(Uint8Array<js.buffer.ArrayBuffer>(array).buffer)
+    return ArrayBuffer.wrap(Uint8Array<js.buffer.ArrayBuffer>(array).buffer)
 }
 
 @Suppress("NOTHING_TO_INLINE")
@@ -76,7 +76,7 @@ internal actual inline fun UShortArray.toArrayBuffer(): ArrayBuffer {
     forEachIndexed { index, value ->
         array[index] = value.toShort().toJsShort()
     }
-    return ArrayBuffer.from(Uint16Array<js.buffer.ArrayBuffer>(array).buffer)
+    return ArrayBuffer.wrap(Uint16Array<js.buffer.ArrayBuffer>(array).buffer)
 }
 
 @Suppress("NOTHING_TO_INLINE")
@@ -85,7 +85,7 @@ internal actual inline fun UIntArray.toArrayBuffer(): ArrayBuffer {
     forEachIndexed { index, value ->
         array[index] = value.toInt().toJsInt()
     }
-    return ArrayBuffer.from(Uint32Array<js.buffer.ArrayBuffer>(array).buffer)
+    return ArrayBuffer.wrap(Uint32Array<js.buffer.ArrayBuffer>(array).buffer)
 }
 
 // Read methods - convert ArrayBuffer to typed arrays

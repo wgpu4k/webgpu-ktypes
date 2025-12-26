@@ -6,24 +6,24 @@ import js.typedarrays.*
 
 @Suppress("NOTHING_TO_INLINE")
 internal actual inline fun ByteArray.toArrayBuffer(): ArrayBuffer
-    = ArrayBuffer.from(unsafeCast<Int8Array<js.buffer.ArrayBuffer>>().buffer)
+    = ArrayBuffer.wrap(unsafeCast<Int8Array<js.buffer.ArrayBuffer>>().buffer)
 
 @Suppress("NOTHING_TO_INLINE")
 internal actual inline fun ShortArray.toArrayBuffer(): ArrayBuffer
-    = ArrayBuffer.from(unsafeCast<Int16Array<js.buffer.ArrayBuffer>>().buffer)
+    = ArrayBuffer.wrap(unsafeCast<Int16Array<js.buffer.ArrayBuffer>>().buffer)
 
 @Suppress("NOTHING_TO_INLINE")
 internal actual inline fun IntArray.toArrayBuffer(): ArrayBuffer
-    = ArrayBuffer.from(unsafeCast<Int32Array<js.buffer.ArrayBuffer>>().buffer)
+    = ArrayBuffer.wrap(unsafeCast<Int32Array<js.buffer.ArrayBuffer>>().buffer)
 
 
 @Suppress("NOTHING_TO_INLINE")
 internal actual inline fun FloatArray.toArrayBuffer(): ArrayBuffer
-    = ArrayBuffer.from(unsafeCast<Float32Array<js.buffer.ArrayBuffer>>().buffer)
+    = ArrayBuffer.wrap(unsafeCast<Float32Array<js.buffer.ArrayBuffer>>().buffer)
 
 @Suppress("NOTHING_TO_INLINE")
 internal actual inline fun DoubleArray.toArrayBuffer(): ArrayBuffer
-    = ArrayBuffer.from(unsafeCast<Float64Array<js.buffer.ArrayBuffer>>().buffer)
+    = ArrayBuffer.wrap(unsafeCast<Float64Array<js.buffer.ArrayBuffer>>().buffer)
 
 @Suppress("NOTHING_TO_INLINE")
 internal actual inline fun UByteArray.toArrayBuffer(): ArrayBuffer
