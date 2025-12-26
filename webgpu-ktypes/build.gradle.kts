@@ -113,6 +113,10 @@ tasks.withType<Test>().configureEach {
     filter {
         failOnNoDiscoveredTests = false
     }
+    reports {
+        junitXml.required.set(true)
+        html.required.set(true)
+    }
 }
 
 tasks.named<Test>("jvmTest") {
