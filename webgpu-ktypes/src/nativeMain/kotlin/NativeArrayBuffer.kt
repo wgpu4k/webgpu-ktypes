@@ -93,21 +93,21 @@ value class NativeArrayBuffer internal constructor(val buffer: Any): ArrayBuffer
     // Indexed read methods
 
     override fun getByte(offset: Int): Byte {
-        buffer.useOpaquePinned(offset) { buffer ->
+        useOpaquePinned(offset) { buffer ->
             val ptr = buffer.reinterpret<ByteVar>()
             return ptr[0]
         }
     }
 
     override fun getShort(offset: Int): Short {
-        buffer.useOpaquePinned(offset) { buffer ->
+        useOpaquePinned(offset) { buffer ->
             val ptr = buffer.reinterpret<ShortVar>()
             return ptr[0]
         }
     }
 
     override fun getInt(offset: Int): Int {
-        buffer.useOpaquePinned(offset) { buffer ->
+        useOpaquePinned(offset) { buffer ->
             val ptr = buffer.reinterpret<IntVar>()
             return ptr[0]
         }
@@ -115,35 +115,35 @@ value class NativeArrayBuffer internal constructor(val buffer: Any): ArrayBuffer
 
 
     override fun getFloat(offset: Int): Float {
-        buffer.useOpaquePinned(offset) { buffer ->
+        useOpaquePinned(offset) { buffer ->
             val ptr = buffer.reinterpret<FloatVar>()
             return ptr[0]
         }
     }
 
     override fun getDouble(offset: Int): Double {
-        buffer.useOpaquePinned(offset) { buffer ->
+        useOpaquePinned(offset) { buffer ->
             val ptr = buffer.reinterpret<DoubleVar>()
             return ptr[0]
         }
     }
 
     override fun getUByte(offset: Int): UByte {
-        buffer.useOpaquePinned(offset) { buffer ->
+        useOpaquePinned(offset) { buffer ->
             val ptr = buffer.reinterpret<UByteVar>()
             return ptr[0]
         }
     }
 
     override fun getUShort(offset: Int): UShort {
-        buffer.useOpaquePinned(offset) { buffer ->
+        useOpaquePinned(offset) { buffer ->
             val ptr = buffer.reinterpret<UShortVar>()
             return ptr[0]
         }
     }
 
     override fun getUInt(offset: Int): UInt {
-        buffer.useOpaquePinned(offset) { buffer ->
+        useOpaquePinned(offset) { buffer ->
             val ptr = buffer.reinterpret<UIntVar>()
             return ptr[0]
         }
@@ -153,21 +153,21 @@ value class NativeArrayBuffer internal constructor(val buffer: Any): ArrayBuffer
     // Indexed write methods
 
     override fun setByte(offset: Int, value: Byte) {
-        buffer.useOpaquePinned(offset) { buffer ->
+        useOpaquePinned(offset) { buffer ->
             val ptr = buffer.reinterpret<ByteVar>()
             ptr[0] = value
         }
     }
 
     override fun setShort(offset: Int, value: Short) {
-        buffer.useOpaquePinned(offset) { buffer ->
+        useOpaquePinned(offset) { buffer ->
             val ptr = (buffer).reinterpret<ShortVar>()
             ptr[0] = value
         }
     }
 
     override fun setInt(offset: Int, value: Int) {
-        buffer.useOpaquePinned(offset) { buffer ->
+        useOpaquePinned(offset) { buffer ->
             val ptr = buffer.reinterpret<IntVar>()
             ptr[0] = value
         }
@@ -175,40 +175,41 @@ value class NativeArrayBuffer internal constructor(val buffer: Any): ArrayBuffer
 
 
     override fun setFloat(offset: Int, value: Float) {
-        buffer.useOpaquePinned(offset) { buffer ->
+        useOpaquePinned(offset) { buffer ->
             val ptr = buffer.reinterpret<FloatVar>()
             ptr[0] = value
         }
     }
 
     override fun setDouble(offset: Int, value: Double) {
-        buffer.useOpaquePinned(offset) { buffer ->
+        useOpaquePinned(offset) { buffer ->
             val ptr = buffer.reinterpret<DoubleVar>()
             ptr[0] = value
         }
     }
 
     override fun setUByte(offset: Int, value: UByte) {
-        buffer.useOpaquePinned(offset) { buffer ->
+        useOpaquePinned(offset) { buffer ->
             val ptr = buffer.reinterpret<UByteVar>()
             ptr[0] = value
         }
     }
 
     override fun setUShort(offset: Int, value: UShort) {
-        buffer.useOpaquePinned(offset) { buffer ->
+        useOpaquePinned(offset) { buffer ->
             val ptr = buffer.reinterpret<UShortVar>()
             ptr[0] = value
         }
     }
 
     override fun setUInt(offset: Int, value: UInt) {
-        buffer.useOpaquePinned(offset) { buffer ->
+        useOpaquePinned(offset) { buffer ->
             val ptr = buffer.reinterpret<UIntVar>()
             ptr[0] = value
         }
     }
 
+    inline fun <R> useOpaquePinned(offset: Int, block: (COpaquePointer) -> R): R = buffer.useOpaquePinned(offset, block)
 }
 
 private fun Any.getSizeInBytes(): ULong = when (this) {
@@ -223,8 +224,8 @@ private fun Any.getSizeInBytes(): ULong = when (this) {
     else -> error("Unsupported buffer type: ${this::class}")
 }.toULong()
 
-
-private inline fun <R> Any.useOpaquePinned(offset: Int, block: (COpaquePointer) -> R): R = when (this) {
+@PublishedApi
+internal inline fun <R> Any.useOpaquePinned(offset: Int, block: (COpaquePointer) -> R): R = when (this) {
     is ByteArray -> this.usePinned { block(it.addressOf(0).rawValue.withOffset(offset)) }
     is ShortArray -> this.usePinned { block(it.addressOf(0).rawValue.withOffset(offset)) }
     is IntArray -> this.usePinned { block(it.addressOf(0).rawValue.withOffset(offset)) }
@@ -236,4 +237,5 @@ private inline fun <R> Any.useOpaquePinned(offset: Int, block: (COpaquePointer) 
     else -> error("Unsupported buffer type: ${this::class}")
 }
 
-fun NativePtr.withOffset(offset: Int) = interpretCPointer<CPointed>(this + offset.toLong())!!
+@PublishedApi
+internal fun NativePtr.withOffset(offset: Int) = interpretCPointer<CPointed>(this + offset.toLong())!!

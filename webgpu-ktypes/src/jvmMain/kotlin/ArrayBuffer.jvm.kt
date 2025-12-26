@@ -211,7 +211,7 @@ actual sealed interface ArrayBuffer {
          * @param segment the memory segment to wrap
          * @return an ArrayBuffer backed by the memory segment
          */
-        fun from(segment: MemorySegment): ArrayBuffer = JvmArrayBuffer(segment)
+        fun wrap(segment: MemorySegment): ArrayBuffer = JvmArrayBuffer(segment)
 
         /**
          * Creates an ArrayBuffer from a ByteBuffer.
@@ -294,100 +294,4 @@ actual sealed interface ArrayBuffer {
         }
 
     }
-}
-
-
-/**
- * A JVM-specific implementation of the `ArrayBuffer` interface.
- *
- * `JvmArrayBuffer` provides a lightweight wrapper around the `MemorySegment` class, allowing
- * JVM platforms to manage, access, and manipulate raw binary data in a way that conforms
- * to the `ArrayBuffer` abstraction.
- *
- * This class leverages the `@JvmInline` annotation, making it a value class. This ensures
- * minimal runtime overhead and allows the `MemorySegment` instance to be used with improved
- * performance due to inlining and reduced object allocations.
- *
- * @param buffer The underlying `MemorySegment` instance that serves as the basis for this array buffer.
- */
-@JvmInline
-value class JvmArrayBuffer internal constructor(val buffer: MemorySegment): ArrayBuffer {
-    override val size: ULong
-        get() = buffer.byteSize().toULong()
-
-    // Read methods - convert entire buffer to typed arrays
-
-    override fun toByteArray(): ByteArray = buffer.toArray(java.lang.foreign.ValueLayout.JAVA_BYTE)
-
-    override fun toShortArray(): ShortArray = buffer.toArray(java.lang.foreign.ValueLayout.JAVA_SHORT_UNALIGNED)
-
-    override fun toIntArray(): IntArray = buffer.toArray(java.lang.foreign.ValueLayout.JAVA_INT_UNALIGNED)
-
-
-    override fun toFloatArray(): FloatArray = buffer.toArray(java.lang.foreign.ValueLayout.JAVA_FLOAT_UNALIGNED)
-
-    override fun toDoubleArray(): DoubleArray = buffer.toArray(java.lang.foreign.ValueLayout.JAVA_DOUBLE_UNALIGNED)
-
-    override fun toUByteArray(): UByteArray = buffer.toArray(java.lang.foreign.ValueLayout.JAVA_BYTE).asUByteArray()
-
-    override fun toUShortArray(): UShortArray = buffer.toArray(java.lang.foreign.ValueLayout.JAVA_SHORT_UNALIGNED).asUShortArray()
-
-    override fun toUIntArray(): UIntArray = buffer.toArray(java.lang.foreign.ValueLayout.JAVA_INT_UNALIGNED).asUIntArray()
-
-
-    // Indexed read methods
-
-    override fun getByte(offset: Int): Byte = buffer.get(java.lang.foreign.ValueLayout.JAVA_BYTE, offset.toLong())
-
-    override fun getShort(offset: Int): Short = buffer.get(java.lang.foreign.ValueLayout.JAVA_SHORT_UNALIGNED, offset.toLong())
-
-    override fun getInt(offset: Int): Int = buffer.get(java.lang.foreign.ValueLayout.JAVA_INT_UNALIGNED, offset.toLong())
-
-
-    override fun getFloat(offset: Int): Float = buffer.get(java.lang.foreign.ValueLayout.JAVA_FLOAT_UNALIGNED, offset.toLong())
-
-    override fun getDouble(offset: Int): Double = buffer.get(java.lang.foreign.ValueLayout.JAVA_DOUBLE_UNALIGNED, offset.toLong())
-
-    override fun getUByte(offset: Int): UByte = getByte(offset).toUByte()
-
-    override fun getUShort(offset: Int): UShort = getShort(offset).toUShort()
-
-    override fun getUInt(offset: Int): UInt = getInt(offset).toUInt()
-
-
-    // Indexed write methods
-
-    override fun setByte(offset: Int, value: Byte) {
-        buffer.set(java.lang.foreign.ValueLayout.JAVA_BYTE, offset.toLong(), value)
-    }
-
-    override fun setShort(offset: Int, value: Short) {
-        buffer.set(java.lang.foreign.ValueLayout.JAVA_SHORT_UNALIGNED, offset.toLong(), value)
-    }
-
-    override fun setInt(offset: Int, value: Int) {
-        buffer.set(java.lang.foreign.ValueLayout.JAVA_INT_UNALIGNED, offset.toLong(), value)
-    }
-
-
-    override fun setFloat(offset: Int, value: Float) {
-        buffer.set(java.lang.foreign.ValueLayout.JAVA_FLOAT_UNALIGNED, offset.toLong(), value)
-    }
-
-    override fun setDouble(offset: Int, value: Double) {
-        buffer.set(java.lang.foreign.ValueLayout.JAVA_DOUBLE_UNALIGNED, offset.toLong(), value)
-    }
-
-    override fun setUByte(offset: Int, value: UByte) {
-        setByte(offset, value.toByte())
-    }
-
-    override fun setUShort(offset: Int, value: UShort) {
-        setShort(offset, value.toShort())
-    }
-
-    override fun setUInt(offset: Int, value: UInt) {
-        setInt(offset, value.toInt())
-    }
-
 }
