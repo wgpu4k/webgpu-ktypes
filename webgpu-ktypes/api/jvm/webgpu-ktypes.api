@@ -1,22 +1,30 @@
 public abstract interface class io/ygdrasil/webgpu/ArrayBuffer {
 	public static final field Companion Lio/ygdrasil/webgpu/ArrayBuffer$Companion;
-	public abstract fun getByte (I)B
-	public abstract fun getDouble (I)D
-	public abstract fun getFloat (I)F
-	public abstract fun getInt (I)I
-	public abstract fun getShort (I)S
+	public abstract fun getByte-VKZWuLQ (J)B
+	public abstract fun getDouble-VKZWuLQ (J)D
+	public abstract fun getFloat-VKZWuLQ (J)F
+	public abstract fun getInt-VKZWuLQ (J)I
+	public abstract fun getShort-VKZWuLQ (J)S
 	public abstract fun getSize-s-VKNKU ()J
-	public abstract fun getUByte-Wa3L5BU (I)B
-	public abstract fun getUInt-OGnWXxg (I)I
-	public abstract fun getUShort-BwKQO78 (I)S
-	public abstract fun setByte (IB)V
-	public abstract fun setDouble (ID)V
-	public abstract fun setFloat (IF)V
-	public abstract fun setInt (II)V
-	public abstract fun setShort (IS)V
-	public abstract fun setUByte-EK-6454 (IB)V
-	public abstract fun setUInt-Qn1smSk (II)V
-	public abstract fun setUShort-i8woANY (IS)V
+	public abstract fun getUByte-NsiRcpg (J)B
+	public abstract fun getUInt--4l20Xc (J)I
+	public abstract fun getUShort-ZO3KGMw (J)S
+	public abstract fun setByte-4PLdz1A (JB)V
+	public abstract fun setBytes-4PLdz1A (J[B)V
+	public abstract fun setDouble-4PLdz1A (JD)V
+	public abstract fun setDoubles-4PLdz1A (J[D)V
+	public abstract fun setFloat-4PLdz1A (JF)V
+	public abstract fun setFloats-4PLdz1A (J[F)V
+	public abstract fun setInt-4PLdz1A (JI)V
+	public abstract fun setInts-4PLdz1A (J[I)V
+	public abstract fun setShort-4PLdz1A (JS)V
+	public abstract fun setShorts-4PLdz1A (J[S)V
+	public abstract fun setUByte-RFc766c (JB)V
+	public abstract fun setUBytes-DD8cEzA (J[B)V
+	public abstract fun setUInt-8GdB7C8 (JI)V
+	public abstract fun setUInts-TtKN_Aw (J[I)V
+	public abstract fun setUShort-E2t620U (JS)V
+	public abstract fun setUShorts-hATpKzI (J[S)V
 	public abstract fun toByteArray ()[B
 	public abstract fun toDoubleArray ()[D
 	public abstract fun toFloatArray ()[F
@@ -29,16 +37,15 @@ public abstract interface class io/ygdrasil/webgpu/ArrayBuffer {
 
 public final class io/ygdrasil/webgpu/ArrayBuffer$Companion {
 	public final fun allocate-VKZWuLQ (J)Lio/ygdrasil/webgpu/ArrayBuffer;
-	public final fun from (Ljava/lang/foreign/MemorySegment;)Lio/ygdrasil/webgpu/ArrayBuffer;
-	public final fun from (Ljava/nio/ByteBuffer;)Lio/ygdrasil/webgpu/ArrayBuffer;
-	public final fun from ([B)Lio/ygdrasil/webgpu/ArrayBuffer;
-	public final fun from ([D)Lio/ygdrasil/webgpu/ArrayBuffer;
-	public final fun from ([F)Lio/ygdrasil/webgpu/ArrayBuffer;
-	public final fun from ([I)Lio/ygdrasil/webgpu/ArrayBuffer;
-	public final fun from ([S)Lio/ygdrasil/webgpu/ArrayBuffer;
-	public final fun from--ajY-9A ([I)Lio/ygdrasil/webgpu/ArrayBuffer;
-	public final fun from-GBYM_sE ([B)Lio/ygdrasil/webgpu/ArrayBuffer;
-	public final fun from-rL5Bavg ([S)Lio/ygdrasil/webgpu/ArrayBuffer;
+	public final fun of ([B)Lio/ygdrasil/webgpu/ArrayBuffer;
+	public final fun of ([D)Lio/ygdrasil/webgpu/ArrayBuffer;
+	public final fun of ([F)Lio/ygdrasil/webgpu/ArrayBuffer;
+	public final fun of ([I)Lio/ygdrasil/webgpu/ArrayBuffer;
+	public final fun of ([S)Lio/ygdrasil/webgpu/ArrayBuffer;
+	public final fun of--ajY-9A ([I)Lio/ygdrasil/webgpu/ArrayBuffer;
+	public final fun of-GBYM_sE ([B)Lio/ygdrasil/webgpu/ArrayBuffer;
+	public final fun of-rL5Bavg ([S)Lio/ygdrasil/webgpu/ArrayBuffer;
+	public final fun wrap (Ljava/lang/foreign/MemorySegment;)Lio/ygdrasil/webgpu/ArrayBuffer;
 }
 
 public abstract interface class io/ygdrasil/webgpu/FlagEnumeration {
@@ -1447,42 +1454,58 @@ public final class io/ygdrasil/webgpu/JvmArrayBuffer : io/ygdrasil/webgpu/ArrayB
 	public static fun equals-impl (Ljava/lang/foreign/MemorySegment;Ljava/lang/Object;)Z
 	public static final fun equals-impl0 (Ljava/lang/foreign/MemorySegment;Ljava/lang/foreign/MemorySegment;)Z
 	public final fun getBuffer ()Ljava/lang/foreign/MemorySegment;
-	public fun getByte (I)B
-	public static fun getByte-impl (Ljava/lang/foreign/MemorySegment;I)B
-	public fun getDouble (I)D
-	public static fun getDouble-impl (Ljava/lang/foreign/MemorySegment;I)D
-	public fun getFloat (I)F
-	public static fun getFloat-impl (Ljava/lang/foreign/MemorySegment;I)F
-	public fun getInt (I)I
-	public static fun getInt-impl (Ljava/lang/foreign/MemorySegment;I)I
-	public fun getShort (I)S
-	public static fun getShort-impl (Ljava/lang/foreign/MemorySegment;I)S
+	public fun getByte-VKZWuLQ (J)B
+	public static fun getByte-VKZWuLQ (Ljava/lang/foreign/MemorySegment;J)B
+	public fun getDouble-VKZWuLQ (J)D
+	public static fun getDouble-VKZWuLQ (Ljava/lang/foreign/MemorySegment;J)D
+	public fun getFloat-VKZWuLQ (J)F
+	public static fun getFloat-VKZWuLQ (Ljava/lang/foreign/MemorySegment;J)F
+	public fun getInt-VKZWuLQ (J)I
+	public static fun getInt-VKZWuLQ (Ljava/lang/foreign/MemorySegment;J)I
+	public fun getShort-VKZWuLQ (J)S
+	public static fun getShort-VKZWuLQ (Ljava/lang/foreign/MemorySegment;J)S
 	public fun getSize-s-VKNKU ()J
 	public static fun getSize-s-VKNKU (Ljava/lang/foreign/MemorySegment;)J
-	public fun getUByte-Wa3L5BU (I)B
-	public static fun getUByte-Wa3L5BU (Ljava/lang/foreign/MemorySegment;I)B
-	public fun getUInt-OGnWXxg (I)I
-	public static fun getUInt-OGnWXxg (Ljava/lang/foreign/MemorySegment;I)I
-	public fun getUShort-BwKQO78 (I)S
-	public static fun getUShort-BwKQO78 (Ljava/lang/foreign/MemorySegment;I)S
+	public fun getUByte-NsiRcpg (J)B
+	public static fun getUByte-NsiRcpg (Ljava/lang/foreign/MemorySegment;J)B
+	public fun getUInt--4l20Xc (J)I
+	public static fun getUInt--4l20Xc (Ljava/lang/foreign/MemorySegment;J)I
+	public fun getUShort-ZO3KGMw (J)S
+	public static fun getUShort-ZO3KGMw (Ljava/lang/foreign/MemorySegment;J)S
 	public fun hashCode ()I
 	public static fun hashCode-impl (Ljava/lang/foreign/MemorySegment;)I
-	public fun setByte (IB)V
-	public static fun setByte-impl (Ljava/lang/foreign/MemorySegment;IB)V
-	public fun setDouble (ID)V
-	public static fun setDouble-impl (Ljava/lang/foreign/MemorySegment;ID)V
-	public fun setFloat (IF)V
-	public static fun setFloat-impl (Ljava/lang/foreign/MemorySegment;IF)V
-	public fun setInt (II)V
-	public static fun setInt-impl (Ljava/lang/foreign/MemorySegment;II)V
-	public fun setShort (IS)V
-	public static fun setShort-impl (Ljava/lang/foreign/MemorySegment;IS)V
-	public fun setUByte-EK-6454 (IB)V
-	public static fun setUByte-EK-6454 (Ljava/lang/foreign/MemorySegment;IB)V
-	public fun setUInt-Qn1smSk (II)V
-	public static fun setUInt-Qn1smSk (Ljava/lang/foreign/MemorySegment;II)V
-	public fun setUShort-i8woANY (IS)V
-	public static fun setUShort-i8woANY (Ljava/lang/foreign/MemorySegment;IS)V
+	public fun setByte-4PLdz1A (JB)V
+	public static fun setByte-4PLdz1A (Ljava/lang/foreign/MemorySegment;JB)V
+	public fun setBytes-4PLdz1A (J[B)V
+	public static fun setBytes-4PLdz1A (Ljava/lang/foreign/MemorySegment;J[B)V
+	public fun setDouble-4PLdz1A (JD)V
+	public static fun setDouble-4PLdz1A (Ljava/lang/foreign/MemorySegment;JD)V
+	public fun setDoubles-4PLdz1A (J[D)V
+	public static fun setDoubles-4PLdz1A (Ljava/lang/foreign/MemorySegment;J[D)V
+	public fun setFloat-4PLdz1A (JF)V
+	public static fun setFloat-4PLdz1A (Ljava/lang/foreign/MemorySegment;JF)V
+	public fun setFloats-4PLdz1A (J[F)V
+	public static fun setFloats-4PLdz1A (Ljava/lang/foreign/MemorySegment;J[F)V
+	public fun setInt-4PLdz1A (JI)V
+	public static fun setInt-4PLdz1A (Ljava/lang/foreign/MemorySegment;JI)V
+	public fun setInts-4PLdz1A (J[I)V
+	public static fun setInts-4PLdz1A (Ljava/lang/foreign/MemorySegment;J[I)V
+	public fun setShort-4PLdz1A (JS)V
+	public static fun setShort-4PLdz1A (Ljava/lang/foreign/MemorySegment;JS)V
+	public fun setShorts-4PLdz1A (J[S)V
+	public static fun setShorts-4PLdz1A (Ljava/lang/foreign/MemorySegment;J[S)V
+	public fun setUByte-RFc766c (JB)V
+	public static fun setUByte-RFc766c (Ljava/lang/foreign/MemorySegment;JB)V
+	public fun setUBytes-DD8cEzA (J[B)V
+	public static fun setUBytes-DD8cEzA (Ljava/lang/foreign/MemorySegment;J[B)V
+	public fun setUInt-8GdB7C8 (JI)V
+	public static fun setUInt-8GdB7C8 (Ljava/lang/foreign/MemorySegment;JI)V
+	public fun setUInts-TtKN_Aw (J[I)V
+	public static fun setUInts-TtKN_Aw (Ljava/lang/foreign/MemorySegment;J[I)V
+	public fun setUShort-E2t620U (JS)V
+	public static fun setUShort-E2t620U (Ljava/lang/foreign/MemorySegment;JS)V
+	public fun setUShorts-hATpKzI (J[S)V
+	public static fun setUShorts-hATpKzI (Ljava/lang/foreign/MemorySegment;J[S)V
 	public fun toByteArray ()[B
 	public static fun toByteArray-impl (Ljava/lang/foreign/MemorySegment;)[B
 	public fun toDoubleArray ()[D
