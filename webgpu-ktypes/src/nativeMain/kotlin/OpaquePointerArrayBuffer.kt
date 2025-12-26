@@ -40,11 +40,15 @@ import platform.posix.memcpy
  */
 @OptIn(ExperimentalForeignApi::class, ExperimentalNativeApi::class)
 class OpaquePointerArrayBuffer private constructor(
-    private val pointer: COpaquePointer,
+    val pointer: COpaquePointer,
     override val size: ULong,
     private val ownsMemory: Boolean = true
 ) : ArrayBuffer {
 
+    /**
+     * Cleans up the native memory when the buffer is no longer needed.
+     */
+    @Suppress("UNUSED_PARAMETER")
     private val cleaner = if (ownsMemory) {
         createCleaner(pointer.reinterpret<ByteVar>()) { ptr ->
             nativeHeap.free(ptr)
