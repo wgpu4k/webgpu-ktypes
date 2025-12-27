@@ -34,7 +34,11 @@ jobs:
       - name: Build
         run: |
           ./gradlew check
-#      - name: Summarize tests results
-#        uses: jeantessier/test-summary-action@v1
-#        if: ${{ runner.os == 'Linux' }}
+      - name: Publish Test Results
+        uses: EnricoMi/publish-unit-test-result-action@v2
+        if: always() && runner.os == 'Linux'
+        with:
+          files: |
+            **/build/test-results/**/TEST-*.xml
+          check_name: Test Results
 

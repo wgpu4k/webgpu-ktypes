@@ -13,6 +13,11 @@ plugins {
 }
 
 kotlin {
+    @OptIn(org.jetbrains.kotlin.gradle.dsl.abi.ExperimentalAbiValidation::class)
+    abiValidation {
+        enabled = true
+    }
+
     js {
         browser()
         nodejs()
@@ -107,6 +112,10 @@ java {
 tasks.withType<Test>().configureEach {
     filter {
         failOnNoDiscoveredTests = false
+    }
+    reports {
+        junitXml.required.set(true)
+        html.required.set(true)
     }
 }
 
