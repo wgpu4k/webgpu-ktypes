@@ -1,17 +1,23 @@
 @file:OptIn(ExperimentalKotlinGradlePluginApi::class)
 
+import com.android.build.api.dsl.androidLibrary
 import org.jetbrains.kotlin.gradle.ExperimentalKotlinGradlePluginApi
 import org.jetbrains.kotlin.gradle.dsl.JvmTarget
-import org.jetbrains.kotlin.gradle.plugin.KotlinHierarchyTemplate
-import org.jetbrains.kotlin.gradle.plugin.KotlinSourceSetTree
 
 plugins {
     publish
     kotlin("multiplatform")
-    id("com.android.library")
+    alias(libs.plugins.android.library)
+    alias(libs.plugins.kotest)
+    alias(libs.plugins.ksp)
 }
 
 kotlin {
+    @OptIn(org.jetbrains.kotlin.gradle.dsl.abi.ExperimentalAbiValidation::class)
+    abiValidation {
+        enabled = true
+    }
+
     js {
         browser()
         nodejs()
@@ -19,14 +25,13 @@ kotlin {
 
     jvm {
         compilerOptions {
-            jvmTarget = JvmTarget.JVM_21
+            jvmTarget = JvmTarget.JVM_25
         }
     }
 
     iosX64()
     iosArm64()
     iosSimulatorArm64()
-    watchosArm32()
     watchosArm64()
     watchosSimulatorArm64()
     watchosX64()
@@ -35,17 +40,17 @@ kotlin {
     linuxArm64()
     linuxX64()
     mingwX64()
-    androidNativeArm32()
     androidNativeArm64()
-    androidNativeX86()
     androidNativeX64()
 
-    androidTarget {
+    androidLibrary {
         compilerOptions {
-            jvmTarget = JvmTarget.JVM_21
+            jvmTarget = JvmTarget.JVM_17
         }
 
-        publishLibraryVariants("release", "debug")
+        namespace = "io.ygdrasil.webgpu.ktypes"
+        compileSdk = 36
+        minSdk = 28
     }
 
 
@@ -53,6 +58,9 @@ kotlin {
     wasmJs {
         browser()
         nodejs()
+        compilerOptions {
+            freeCompilerArgs.add("-opt-in=kotlin.js.ExperimentalWasmJsInterop")
+        }
     }
 
     applyDefaultHierarchyTemplate()
@@ -78,21 +86,48 @@ kotlin {
         nativeMain.get().dependsOn(commonNativeMain)
         jvmMain.get().dependsOn(commonNativeMain)
         androidMain.get().dependsOn(commonNativeMain)
+
+        commonTest {
+            dependencies {
+                implementation(libs.bundles.kotest)
+            }
+        }
+
+        jvmTest {
+            dependencies {
+                implementation(libs.kotest.runner.junit5)
+                implementation(libs.kotlin.reflect)
+            }
+        }
     }
-}
-
-android {
-    namespace = "io.ygdrasil.webgpu.ktypes"
-    compileSdk = 35
-
-    defaultConfig {
-        minSdk = 28
-    }
-
 }
 
 java {
     toolchain {
-        languageVersion.set(JavaLanguageVersion.of(21))
+        languageVersion.set(JavaLanguageVersion.of(25))
+    }
+}
+
+
+tasks.withType<Test>().configureEach {
+    filter {
+        failOnNoDiscoveredTests = false
+    }
+    reports {
+        junitXml.required.set(true)
+        html.required.set(true)
+    }
+}
+
+tasks.named<Test>("jvmTest") {
+    useJUnitPlatform()
+    testLogging {
+        showExceptions = true
+        showStandardStreams = true
+        events = setOf(
+            org.gradle.api.tasks.testing.logging.TestLogEvent.FAILED,
+            org.gradle.api.tasks.testing.logging.TestLogEvent.PASSED
+        )
+        exceptionFormat = org.gradle.api.tasks.testing.logging.TestExceptionFormat.FULL
     }
 }

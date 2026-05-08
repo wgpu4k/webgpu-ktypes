@@ -1,7 +1,7 @@
 package generator.domain
 
+import com.squareup.kotlinpoet.TypeSpec
 import de.fabmax.webidl.model.IdlModel
-import kotlin.collections.plusAssign
 
 class MapperContext(
     val idlModel: IdlModel,
@@ -9,11 +9,11 @@ class MapperContext(
 ) {
 
     val interfaces = mutableListOf<Interface>()
-    val typeAliases = mutableListOf<TypeAlias>()
+    var typeAliases = emptyList<TypeAlias>()
     var commonEnumerations = emptyList<Enumeration>()
     var commonWebEnumerations = emptyList<Enumeration>()
     var commonNativeEnumerations = emptyList<Enumeration>()
-    var bitflagEnumerations = emptyList<Enumeration>()
+    var bitflagEnumerations = emptyList<TypeSpec>()
     val descriptors = mutableListOf<DescriptorClass>()
     val webInterfaces = mutableListOf<Interface>()
     val webTypeAlias = mutableListOf<TypeAlias>()
@@ -56,49 +56,70 @@ class MapperContext(
             .map { it.name }
         interfaces.toList()
             .forEach {
-            if ( it.name in setLikes) {
-                interfaces -= it
+                if (it.name in setLikes) {
+                    interfaces -= it
+                }
             }
-        }
 
         typeAliases += TypeAlias("GPUSupportedFeatures", "Set<GPUFeatureName>")
-        typeAliases.filter { it.name.endsWith("Flags") }
-            .forEach { it.type = "Set<${it.name.removeSuffix("Flags")}>" }
-
-        interfaces.first { it.name == "GPUBuffer" }.apply {
-            attributes.find { it.name == "usage" }!!.apply {
-                type = "GPUBufferUsageFlags"
-            }
-        }
-        interfaces.first { it.name == "GPUTexture" }.apply {
-            attributes.find { it.name == "usage" }!!.apply {
-                type = "GPUTextureUsageFlags"
-            }
-        }
-
-        bitflagEnumerations.first { it.name == "GPUColorWriteMask" }.apply {
-            name = "GPUColorWrite"
-        }
-
-        descriptors.first { it.name == "GPUColorTargetState" }.apply {
-            parameter.first { it.name == "writeMask" }.apply { defaultValue = "setOf(GPUColorWrite.All)"}
-        }
-        descriptors.first { it.name == "GPUTextureViewDescriptor" }.apply {
-            parameter.first { it.name == "usage" }.apply { defaultValue = "emptySet()"}
-        }
 
         interfaces.first { it.name == "GPUBindingCommandsMixin" }.apply {
             methods.first { it.name == "setBindGroup" }.apply {
                 // remove dynamicOffsetsStart and dynamicOffsetsLength
                 parameters = parameters.filter { it.name in listOf("index", "bindGroup", "dynamicOffsetsData") }
-                parameters.first { it.name == "dynamicOffsetsData"}.defaultValue = "emptyList()"
+                parameters.first { it.name == "dynamicOffsetsData" }.defaultValue = "emptyList()"
+            }
+        }
+
+        replaceBitFlagsReferences()
+    }
+
+    private fun replaceBitFlagsReferences() {
+        typeAliases = typeAliases.filter { !it.name.endsWith("Flags") }
+
+        interfaces.first { it.name == "GPUBuffer" }.apply {
+            attributes.find { it.name == "usage" }!!.apply {
+                type = "Set<GPUBufferUsage>"
+            }
+        }
+        interfaces.first { it.name == "GPUTexture" }.apply {
+            attributes.find { it.name == "usage" }!!.apply {
+                type = "Set<GPUTextureUsage>"
+            }
+        }
+
+        interfaces.first { it.name == "GPUBuffer" }.apply {
+            methods.first { it.name == "mapAsync" }.apply {
+                parameters.first { it.name == "mode" }.apply {
+                    type = "GPUMapMode"
+                }
+            }
+        }
+
+        replaceDescriptorFieldType("GPUBufferDescriptor", "usage", "GPUBufferUsage")
+        replaceDescriptorFieldType("GPUBindGroupLayoutEntry", "visibility", "GPUShaderStage")
+        replaceDescriptorFieldType("GPUTextureDescriptor", "usage", "GPUTextureUsage")
+        replaceDescriptorFieldType("GPUColorTargetState", "writeMask", "GPUColorWrite", "GPUColorWrite.All")
+        replaceDescriptorFieldType("GPUTextureViewDescriptor", "usage", "GPUTextureUsage", "GPUTextureUsage.None")
+    }
+
+    private fun replaceDescriptorFieldType(className: String, fieldName: String, newType: String, newDefaultValue: String? = null) {
+        interfaces.first { it.name == className }.apply {
+            attributes.first { it.name == fieldName }.apply {
+                type = newType
+            }
+        }
+        descriptors.first { it.name == className }.apply {
+            parameter.first { it.name == fieldName }.apply {
+                defaultValue = newDefaultValue
+                type = newType
             }
         }
     }
 
     private fun changeGPUErrorAsSealed() {
         interfaces.find { it.name == "GPUError" }!!.apply {
-           sealed = true
+            sealed = true
         }
     }
 
@@ -107,15 +128,21 @@ class MapperContext(
             attributes = attributes.filter { it.name !in listOf("lost", "onuncapturederror") }
         }
         descriptors.find { it.name == "GPUDeviceDescriptor" }!!.apply {
-            parameter += DescriptorClass.Parameter("onUncapturedError", "GPUUncapturedErrorCallback?", defaultValue = "null")
+            parameter += DescriptorClass.Parameter(
+                "onUncapturedError",
+                "GPUUncapturedErrorCallback?",
+                defaultValue = "null"
+            )
         }
         interfaces.find { it.name == "GPUDeviceDescriptor" }!!.apply {
             attributes += Interface.Attribute("onUncapturedError", "GPUUncapturedErrorCallback?", true)
         }
         interfaces += Interface("GPUUncapturedErrorCallback", functional = true).apply {
-            methods += Interface.Method("onUncapturedError", "Unit", listOf(
-                Interface.Method.Parameter("error", "GPUError")
-            ))
+            methods += Interface.Method(
+                "onUncapturedError", "Unit", listOf(
+                    Interface.Method.Parameter("error", "GPUError")
+                )
+            )
         }
     }
 
@@ -128,7 +155,7 @@ class MapperContext(
             .fixNameStartingWithNumeric()
             .lowercase()
         return commonEnumerations.find { it.name == typeName }
-            ?.let { enum -> enum.values.find { it.name.lowercase() == fixedValue }?.name}
+            ?.let { enum -> enum.values.find { it.name.lowercase() == fixedValue }?.name }
             ?: error("enumeration not found with type $typeName and value $fixedValue")
     }
 
@@ -165,6 +192,16 @@ internal fun String.fixNameStartingWithNumeric(): String {
 }
 
 private val interfaceToAddAutocloseableTrait = listOf(
-    "GPUAdapter", "GPUBindGroup", "GPUBindGroupLayout", "GPUCommandBuffer", "GPUComputePipeline", "GPUPipelineLayout",
-    "GPURenderPipeline", "GPUSampler", "GPUShaderModule", "GPUTextureView", "GPURenderBundleEncoder", "GPUCommandEncoder"
+    "GPUAdapter",
+    "GPUBindGroup",
+    "GPUBindGroupLayout",
+    "GPUCommandBuffer",
+    "GPUComputePipeline",
+    "GPUPipelineLayout",
+    "GPURenderPipeline",
+    "GPUSampler",
+    "GPUShaderModule",
+    "GPUTextureView",
+    "GPURenderBundleEncoder",
+    "GPUCommandEncoder"
 )

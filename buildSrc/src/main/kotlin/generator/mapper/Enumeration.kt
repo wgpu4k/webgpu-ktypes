@@ -1,9 +1,15 @@
 package generator.mapper
 
+import com.squareup.kotlinpoet.ARRAY
+import com.squareup.kotlinpoet.ClassName
+import com.squareup.kotlinpoet.FunSpec
+import com.squareup.kotlinpoet.KModifier
+import com.squareup.kotlinpoet.ParameterizedTypeName.Companion.parameterizedBy
+import com.squareup.kotlinpoet.PropertySpec
+import com.squareup.kotlinpoet.TypeSpec
 import generator.domain.Enumeration
 import generator.domain.MapperContext
 import generator.domain.fixNameStartingWithNumeric
-import kotlin.collections.forEach
 
 fun MapperContext.loadEnums() {
     loadBitFlagEnums()
@@ -12,23 +18,61 @@ fun MapperContext.loadEnums() {
 
 private fun MapperContext.loadBitFlagEnums() {
     yamlModel.bitflags.forEach { bitflag ->
-        val name = bitflag.name.convertToKotlinClassName()
-        bitflagEnumerations += Enumeration(
-            "GPU$name",
-            bitflag.entries
-                .mapIndexed { index, entry ->
-                    // Calculate first if that a combination
-                    val value =
-                        entry.value_combination?.sumOf { subPart -> indexToFlagValue(bitflag.entries.indexOfFirst { it.name == subPart }) }
-                            ?: indexToFlagValue(index)
+        val name = bitflag.name.convertToKotlinClassName().let { if (it.endsWith("Mask")) it.substringBeforeLast("Mask") else it  }
 
-                    val name = entry.name.convertToKotlinClassName()
-                    Enumeration.Value("$name(${value}uL)")
-                },
-            parameters = listOf("override val value: ULong"),
-            extends = listOf("FlagEnumeration"),
-
+        val className = ClassName("io.ygdrasil.webgpu", "GPU$name")
+        bitflagEnumerations += TypeSpec.classBuilder(className)
+            .addAnnotation(JvmInline::class)
+            .addModifiers(KModifier.VALUE)
+            .primaryConstructor(
+                FunSpec.constructorBuilder()
+                    .addParameter("value", ULong::class)
+                    .addModifiers(KModifier.PRIVATE)
+                    .build()
             )
+            .addProperty(
+                PropertySpec.builder("value", ULong::class)
+                    .initializer("value")
+                    .build()
+            )
+            .addType(
+                TypeSpec.companionObjectBuilder()
+                    .addProperties(
+                        bitflag.entries.mapIndexed { index, entry ->
+                            val value =
+                                entry.value_combination?.sumOf { subPart -> indexToFlagValue(bitflag.entries.indexOfFirst { it.name == subPart }) }
+                                    ?: indexToFlagValue(index)
+
+                            PropertySpec.builder(entry.name.convertToKotlinClassName(), className)
+                                .initializer("${className.simpleName}(${value}uL)")
+                                .build()
+                        }
+                    )
+                    .addProperty(
+                        PropertySpec.builder("entries", ClassName("kotlin.collections", "Set").parameterizedBy(className))
+                            .initializer("setOf(${bitflag.entries.joinToString { it.name.convertToKotlinClassName() }})")
+                            .build()
+                    )
+                    .build()
+            )
+            .addFunction(
+                FunSpec.builder("or")
+                    .addModifiers(KModifier.INFIX)
+                    .addParameter("other", className)
+                    .returns(className)
+                    .addCode("return ${className.simpleName}(value or other.value)")
+                    .build()
+            )
+            .addFunction(
+                FunSpec.builder("of")
+                    .addModifiers(KModifier.INFIX)
+                    .addParameter("values", ARRAY.parameterizedBy(className))
+                    .returns(className)
+                    .addCode("return values.fold(${className.simpleName}.None) { acc, enumeration -> acc or enumeration }")
+                    .build()
+            )
+            .build()
+
     }
 }
 

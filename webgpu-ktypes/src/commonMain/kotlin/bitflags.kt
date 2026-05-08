@@ -2,47 +2,127 @@
 // This file has been generated DO NO EDIT
 package io.ygdrasil.webgpu
 
-enum class GPUBufferUsage(override val value: ULong): FlagEnumeration {
-	None(0uL),
-	MapRead(1uL),
-	MapWrite(2uL),
-	CopySrc(4uL),
-	CopyDst(8uL),
-	Index(16uL),
-	Vertex(32uL),
-	Uniform(64uL),
-	Storage(128uL),
-	Indirect(256uL),
-	QueryResolve(512uL);
+@kotlin.jvm.JvmInline
+public value class GPUBufferUsage private constructor(
+  public val `value`: kotlin.ULong,
+) {
+  public infix fun or(other: io.ygdrasil.webgpu.GPUBufferUsage): io.ygdrasil.webgpu.GPUBufferUsage = GPUBufferUsage(value or other.value)
+
+  public infix fun of(values: kotlin.Array<io.ygdrasil.webgpu.GPUBufferUsage>): io.ygdrasil.webgpu.GPUBufferUsage = values.fold(GPUBufferUsage.None) { acc, enumeration -> acc or enumeration }
+
+  public companion object {
+    public val None: io.ygdrasil.webgpu.GPUBufferUsage = GPUBufferUsage(0uL)
+
+    public val MapRead: io.ygdrasil.webgpu.GPUBufferUsage = GPUBufferUsage(1uL)
+
+    public val MapWrite: io.ygdrasil.webgpu.GPUBufferUsage = GPUBufferUsage(2uL)
+
+    public val CopySrc: io.ygdrasil.webgpu.GPUBufferUsage = GPUBufferUsage(4uL)
+
+    public val CopyDst: io.ygdrasil.webgpu.GPUBufferUsage = GPUBufferUsage(8uL)
+
+    public val Index: io.ygdrasil.webgpu.GPUBufferUsage = GPUBufferUsage(16uL)
+
+    public val Vertex: io.ygdrasil.webgpu.GPUBufferUsage = GPUBufferUsage(32uL)
+
+    public val Uniform: io.ygdrasil.webgpu.GPUBufferUsage = GPUBufferUsage(64uL)
+
+    public val Storage: io.ygdrasil.webgpu.GPUBufferUsage = GPUBufferUsage(128uL)
+
+    public val Indirect: io.ygdrasil.webgpu.GPUBufferUsage = GPUBufferUsage(256uL)
+
+    public val QueryResolve: io.ygdrasil.webgpu.GPUBufferUsage = GPUBufferUsage(512uL)
+
+    public val entries: kotlin.collections.Set<io.ygdrasil.webgpu.GPUBufferUsage> = setOf(None, MapRead, MapWrite, CopySrc, CopyDst, Index, Vertex, Uniform, Storage, Indirect, QueryResolve)
+  }
 }
 
-enum class GPUColorWrite(override val value: ULong): FlagEnumeration {
-	None(0uL),
-	Red(1uL),
-	Green(2uL),
-	Blue(4uL),
-	Alpha(8uL),
-	All(15uL);
+@kotlin.jvm.JvmInline
+public value class GPUColorWrite private constructor(
+  public val `value`: kotlin.ULong,
+) {
+  public infix fun or(other: io.ygdrasil.webgpu.GPUColorWrite): io.ygdrasil.webgpu.GPUColorWrite = GPUColorWrite(value or other.value)
+
+  public infix fun of(values: kotlin.Array<io.ygdrasil.webgpu.GPUColorWrite>): io.ygdrasil.webgpu.GPUColorWrite = values.fold(GPUColorWrite.None) { acc, enumeration -> acc or enumeration }
+
+  public companion object {
+    public val None: io.ygdrasil.webgpu.GPUColorWrite = GPUColorWrite(0uL)
+
+    public val Red: io.ygdrasil.webgpu.GPUColorWrite = GPUColorWrite(1uL)
+
+    public val Green: io.ygdrasil.webgpu.GPUColorWrite = GPUColorWrite(2uL)
+
+    public val Blue: io.ygdrasil.webgpu.GPUColorWrite = GPUColorWrite(4uL)
+
+    public val Alpha: io.ygdrasil.webgpu.GPUColorWrite = GPUColorWrite(8uL)
+
+    public val All: io.ygdrasil.webgpu.GPUColorWrite = GPUColorWrite(15uL)
+
+    public val entries: kotlin.collections.Set<io.ygdrasil.webgpu.GPUColorWrite> = setOf(None, Red, Green, Blue, Alpha, All)
+  }
 }
 
-enum class GPUMapMode(override val value: ULong): FlagEnumeration {
-	None(0uL),
-	Read(1uL),
-	Write(2uL);
+@kotlin.jvm.JvmInline
+public value class GPUMapMode private constructor(
+  public val `value`: kotlin.ULong,
+) {
+  public infix fun or(other: io.ygdrasil.webgpu.GPUMapMode): io.ygdrasil.webgpu.GPUMapMode = GPUMapMode(value or other.value)
+
+  public infix fun of(values: kotlin.Array<io.ygdrasil.webgpu.GPUMapMode>): io.ygdrasil.webgpu.GPUMapMode = values.fold(GPUMapMode.None) { acc, enumeration -> acc or enumeration }
+
+  public companion object {
+    public val None: io.ygdrasil.webgpu.GPUMapMode = GPUMapMode(0uL)
+
+    public val Read: io.ygdrasil.webgpu.GPUMapMode = GPUMapMode(1uL)
+
+    public val Write: io.ygdrasil.webgpu.GPUMapMode = GPUMapMode(2uL)
+
+    public val entries: kotlin.collections.Set<io.ygdrasil.webgpu.GPUMapMode> = setOf(None, Read, Write)
+  }
 }
 
-enum class GPUShaderStage(override val value: ULong): FlagEnumeration {
-	None(0uL),
-	Vertex(1uL),
-	Fragment(2uL),
-	Compute(4uL);
+@kotlin.jvm.JvmInline
+public value class GPUShaderStage private constructor(
+  public val `value`: kotlin.ULong,
+) {
+  public infix fun or(other: io.ygdrasil.webgpu.GPUShaderStage): io.ygdrasil.webgpu.GPUShaderStage = GPUShaderStage(value or other.value)
+
+  public infix fun of(values: kotlin.Array<io.ygdrasil.webgpu.GPUShaderStage>): io.ygdrasil.webgpu.GPUShaderStage = values.fold(GPUShaderStage.None) { acc, enumeration -> acc or enumeration }
+
+  public companion object {
+    public val None: io.ygdrasil.webgpu.GPUShaderStage = GPUShaderStage(0uL)
+
+    public val Vertex: io.ygdrasil.webgpu.GPUShaderStage = GPUShaderStage(1uL)
+
+    public val Fragment: io.ygdrasil.webgpu.GPUShaderStage = GPUShaderStage(2uL)
+
+    public val Compute: io.ygdrasil.webgpu.GPUShaderStage = GPUShaderStage(4uL)
+
+    public val entries: kotlin.collections.Set<io.ygdrasil.webgpu.GPUShaderStage> = setOf(None, Vertex, Fragment, Compute)
+  }
 }
 
-enum class GPUTextureUsage(override val value: ULong): FlagEnumeration {
-	None(0uL),
-	CopySrc(1uL),
-	CopyDst(2uL),
-	TextureBinding(4uL),
-	StorageBinding(8uL),
-	RenderAttachment(16uL);
+@kotlin.jvm.JvmInline
+public value class GPUTextureUsage private constructor(
+  public val `value`: kotlin.ULong,
+) {
+  public infix fun or(other: io.ygdrasil.webgpu.GPUTextureUsage): io.ygdrasil.webgpu.GPUTextureUsage = GPUTextureUsage(value or other.value)
+
+  public infix fun of(values: kotlin.Array<io.ygdrasil.webgpu.GPUTextureUsage>): io.ygdrasil.webgpu.GPUTextureUsage = values.fold(GPUTextureUsage.None) { acc, enumeration -> acc or enumeration }
+
+  public companion object {
+    public val None: io.ygdrasil.webgpu.GPUTextureUsage = GPUTextureUsage(0uL)
+
+    public val CopySrc: io.ygdrasil.webgpu.GPUTextureUsage = GPUTextureUsage(1uL)
+
+    public val CopyDst: io.ygdrasil.webgpu.GPUTextureUsage = GPUTextureUsage(2uL)
+
+    public val TextureBinding: io.ygdrasil.webgpu.GPUTextureUsage = GPUTextureUsage(4uL)
+
+    public val StorageBinding: io.ygdrasil.webgpu.GPUTextureUsage = GPUTextureUsage(8uL)
+
+    public val RenderAttachment: io.ygdrasil.webgpu.GPUTextureUsage = GPUTextureUsage(16uL)
+
+    public val entries: kotlin.collections.Set<io.ygdrasil.webgpu.GPUTextureUsage> = setOf(None, CopySrc, CopyDst, TextureBinding, StorageBinding, RenderAttachment)
+  }
 }

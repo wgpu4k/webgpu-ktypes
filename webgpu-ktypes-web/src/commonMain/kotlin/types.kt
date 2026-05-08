@@ -110,9 +110,9 @@ external interface WGPUBuffer : JsAny, WGPUObjectBase {
 	fun mapAsync(mode: JsNumber  /* GPUMapModeFlags */): Promise<JsAny> /* Promise */
 	fun mapAsync(mode: JsNumber  /* GPUMapModeFlags */, offset: JsNumber  /* GPUSize64 */): Promise<JsAny> /* Promise */
 	fun mapAsync(mode: JsNumber  /* GPUMapModeFlags */, offset: JsNumber  /* GPUSize64 */, size: JsNumber  /* GPUSize64 */): Promise<JsAny> /* Promise */
-	fun getMappedRange(): ArrayBuffer
-	fun getMappedRange(offset: JsNumber  /* GPUSize64 */): ArrayBuffer
-	fun getMappedRange(offset: JsNumber  /* GPUSize64 */, size: JsNumber  /* GPUSize64 */): ArrayBuffer
+	fun getMappedRange(): js.buffer.ArrayBuffer
+	fun getMappedRange(offset: JsNumber  /* GPUSize64 */): js.buffer.ArrayBuffer
+	fun getMappedRange(offset: JsNumber  /* GPUSize64 */, size: JsNumber  /* GPUSize64 */): js.buffer.ArrayBuffer
 	fun unmap()
 	fun destroy()
 }
@@ -247,10 +247,10 @@ external interface WGPURenderBundleEncoder : JsAny, WGPUObjectBase, WGPUCommands
 external interface WGPUQueue : JsAny, WGPUObjectBase {
 	fun submit(commandBuffers: JsArray<JsAny> /* sequence<GPUCommandBuffer> */)
 	fun onSubmittedWorkDone(): Promise<JsAny> /* Promise */
-	fun writeBuffer(buffer: WGPUBuffer  /* GPUBuffer */, bufferOffset: JsNumber  /* GPUSize64 */, data: ArrayBuffer /* AllowSharedBufferSource */)
-	fun writeBuffer(buffer: WGPUBuffer  /* GPUBuffer */, bufferOffset: JsNumber  /* GPUSize64 */, data: ArrayBuffer /* AllowSharedBufferSource */, dataOffset: JsNumber  /* GPUSize64 */)
-	fun writeBuffer(buffer: WGPUBuffer  /* GPUBuffer */, bufferOffset: JsNumber  /* GPUSize64 */, data: ArrayBuffer /* AllowSharedBufferSource */, dataOffset: JsNumber  /* GPUSize64 */, size: JsNumber  /* GPUSize64 */)
-	fun writeTexture(destination: WGPUTexelCopyTextureInfo  /* GPUTexelCopyTextureInfo */, data: ArrayBuffer /* AllowSharedBufferSource */, dataLayout: WGPUTexelCopyBufferLayout  /* GPUTexelCopyBufferLayout */, size: WGPUExtent3D  /* GPUExtent3D */)
+	fun writeBuffer(buffer: WGPUBuffer  /* GPUBuffer */, bufferOffset: JsNumber  /* GPUSize64 */, data: js.buffer.ArrayBuffer /* AllowSharedBufferSource */)
+	fun writeBuffer(buffer: WGPUBuffer  /* GPUBuffer */, bufferOffset: JsNumber  /* GPUSize64 */, data: js.buffer.ArrayBuffer /* AllowSharedBufferSource */, dataOffset: JsNumber  /* GPUSize64 */)
+	fun writeBuffer(buffer: WGPUBuffer  /* GPUBuffer */, bufferOffset: JsNumber  /* GPUSize64 */, data: js.buffer.ArrayBuffer /* AllowSharedBufferSource */, dataOffset: JsNumber  /* GPUSize64 */, size: JsNumber  /* GPUSize64 */)
+	fun writeTexture(destination: WGPUTexelCopyTextureInfo  /* GPUTexelCopyTextureInfo */, data: js.buffer.ArrayBuffer /* AllowSharedBufferSource */, dataLayout: WGPUTexelCopyBufferLayout  /* GPUTexelCopyBufferLayout */, size: WGPUExtent3D  /* GPUExtent3D */)
 	fun copyExternalImageToTexture(source: WGPUCopyExternalImageSourceInfo  /* GPUCopyExternalImageSourceInfo */, destination: WGPUCopyExternalImageDestInfo  /* GPUCopyExternalImageDestInfo */, copySize: WGPUExtent3D  /* GPUExtent3D */)
 }
 

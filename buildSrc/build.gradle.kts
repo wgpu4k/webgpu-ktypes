@@ -27,6 +27,7 @@ dependencies {
 
 	implementation(libs.kotlinx.serialization.json)
 	implementation(libs.jsoup)
+    implementation(libs.kotlinpoet)
 
 	implementation(libs.coroutines)
 

@@ -256,7 +256,7 @@ data class BufferDescriptor(
 	 * Specifies the allowed usages for the buffer. This is a bitmask of [GPUBufferUsageFlags](https://www.w3.org/TR/webgpu/#typedefdef-gpubufferusageflags) that indicates how the buffer will be used.
 	 * 
 	 */
-	override val usage: GPUBufferUsageFlags,
+	override val usage: GPUBufferUsage,
 	/**
 	 * Indicates whether the buffer should be created in an already mapped state. If `true`, the buffer can be immediately accessed using [getMappedRange()](https://www.w3.org/TR/webgpu/#dom-gpubuffer-getmappedrange). This is useful for setting the buffer's initial data.
 	 * 
@@ -286,7 +286,7 @@ data class TextureDescriptor(
 	 * Specifies the usage flags for the texture. This is a required property.
 	 * 
 	 */
-	override val usage: GPUTextureUsageFlags,
+	override val usage: GPUTextureUsage,
 	/**
 	 * Specifies the number of mipmap levels in the texture. The default value is 1.
 	 * 
@@ -337,7 +337,7 @@ data class TextureViewDescriptor(
 	 * See also: [WebGPU Specification - GPUTextureUsageFlags](https://www.w3.org/TR/webgpu/#typedefdef-gputextureusageflags).
 	 * 
 	 */
-	override val usage: GPUTextureUsageFlags = emptySet(),
+	override val usage: GPUTextureUsage = GPUTextureUsage.None,
 	/**
 	 * `aspect` specifies which aspects of the texture are accessible to the texture view. This property determines whether the view can access color, depth, stencil, or all aspects of the texture.
 	 * 
@@ -495,7 +495,7 @@ data class BindGroupLayoutEntry(
 	 * A bitset of the members of [GPUShaderStage](https://www.w3.org/TR/webgpu/#namespacedef-gpushaderstage). Each set bit indicates that a `GPUBindGroupLayoutEntry`'s resource will be accessible from the associated shader stage.
 	 * 
 	 */
-	override val visibility: GPUShaderStageFlags,
+	override val visibility: GPUShaderStage,
 	/**
 	 * When provided, indicates that the binding resource type for this `GPUBindGroupLayoutEntry` is [GPUBufferBinding](https://www.w3.org/TR/webgpu/#dictdef-gpubufferbinding).
 	 * 
@@ -1017,7 +1017,7 @@ data class ColorTargetState(
 	 * For more details, refer to the [W3C WebGPU specification](https://www.w3.org/TR/webgpu/#dom-gpucolortargetstate-writemask).
 	 * 
 	 */
-	override val writeMask: GPUColorWriteFlags = setOf(GPUColorWrite.All)
+	override val writeMask: GPUColorWrite = GPUColorWrite.All
 ): GPUColorTargetState
 
 /**

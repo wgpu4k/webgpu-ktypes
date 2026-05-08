@@ -53,8 +53,8 @@ internal fun IdlType.toWebKotlinType(): String = when (this) {
         "float",
         "double" -> "JsNumber /* $this */"
         "boolean" -> "Boolean"
-        "AllowSharedBufferSource" -> "ArrayBuffer /* $this */"
-        "ArrayBuffer" -> "ArrayBuffer"
+        "AllowSharedBufferSource" -> "js.buffer.ArrayBuffer /* $this */"
+        "ArrayBuffer" -> "js.buffer.ArrayBuffer"
         "undefined" -> "Unit"
         "DOMString", "USVString" -> "String /* $this */"
         "sequence", "FrozenArray" -> "JsArray<JsAny> /* $this<${this.parameterTypes?.get(0)}> */"
