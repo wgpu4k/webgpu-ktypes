@@ -7,7 +7,7 @@ wgpu4k-native = "v25.0.2"
 kaml = "0.104.0"
 kotlin = "2.3.21"
 agp = "8.12.3"
-coroutines = "1.10.2"
+coroutines = "1.11.0"
 kotlinpoet = "2.3.0"
 
 # Tests
