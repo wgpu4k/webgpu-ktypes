@@ -30,6 +30,14 @@ kotlin {
     }
 
     sourceSets {
+        commonMain {
+            dependencies {
+                implementation(projects.wgsl.core)
+                implementation(projects.wgsl.parser)
+                implementation(projects.wgsl.generator)
+                implementation(libs.clikt)
+            }
+        }
 
         commonTest {
             dependencies {
@@ -40,7 +48,7 @@ kotlin {
         jvmTest {
             dependencies {
                 implementation(libs.kotest.runner.junit5)
-                implementation(libs.kotlin.reflect)
+                implementation(libs.logback.classic)
             }
         }
     }
@@ -67,7 +75,7 @@ tasks.named<Test>("jvmTest") {
     useJUnitPlatform()
     testLogging {
         showExceptions = true
-        showStandardStreams = true
+        showStandardStreams = false
         events = setOf(
             org.gradle.api.tasks.testing.logging.TestLogEvent.FAILED,
             org.gradle.api.tasks.testing.logging.TestLogEvent.PASSED

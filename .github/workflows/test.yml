@@ -27,6 +27,11 @@ jobs:
           cache: 'gradle'
       - name: Setup Gradle
         uses: gradle/actions/setup-gradle@v6
+      - name: Install Native Validators (Ubuntu)
+        if: matrix.os == 'ubuntu-latest'
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y glslang-tools spirv-tools
       - name: Cache Gradle packages
         uses: actions/cache@v4
         with:

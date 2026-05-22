@@ -1,0 +1,562 @@
+{
+  "repository_type": "monorepo",
+  "repository_name": "webgpu-ktypes",
+  "repository_description": "WebGPU Kotlin Toolkit - Type-safe Kotlin bindings for WebGPU API with multiplatform support",
+  "organization": "ygdrasil-oss",
+  "total_parts": 5,
+  "primary_technology": {
+    "language": "Kotlin",
+    "build_system": "Gradle",
+    "build_system_version": "9.5.0",
+    "build_dsl": "Kotlin (KTS)",
+    "java_toolchain": "Java 25",
+    "android_jvm_target": "Java 17"
+  },
+  "architecture_pattern": "Modular Multiplatform Library with hierarchical dependencies",
+  "architecture_description": "wgsl/core -> wgsl/parser -> webgpu-ktypes -> webgpu-ktypes-descriptors, webgpu-ktypes-web, webgpu-ktypes-specifications",
+  "platform_targets": [
+    "JVM",
+    "JS",
+    "Node.js",
+    "WasmJs",
+    "Android",
+    "iOS",
+    "macOS",
+    "Linux",
+    "Windows",
+    "watchOS",
+    "tvOS"
+  ],
+  "total_platform_targets": 19,
+  "parts": [
+    {
+      "part_id": "webgpu-ktypes",
+      "display_name": "webgpu-ktypes",
+      "description": "Core WebGPU bindings and type definitions - foundation for the entire toolkit",
+      "project_type": "library",
+      "root_path": "/Volumes/Cache/webgpu-ktypes/webgpu-ktypes",
+      "relative_path": "webgpu-ktypes",
+      "role": "core",
+      "dependencies": [],
+      "platforms": [
+        "JVM",
+        "JS",
+        "Node.js",
+        "WasmJs",
+        "Android",
+        "iOS",
+        "macOS",
+        "Linux",
+        "Windows",
+        "watchOS",
+        "tvOS"
+      ],
+      "technology_stack": {
+        "language": "Kotlin Multiplatform",
+        "build_tool": "Gradle KTS",
+        "test_framework": "Kotest",
+        "platform_technologies": {
+          "JVM": ["Java 21+ FFM API"],
+          "JS": ["Kotlin/JS Typed Arrays"],
+          "WasmJs": ["Kotlin/Wasm"],
+          "Native": ["Kotlin/Native C Interop"],
+          "Android": ["Java NIO ByteBuffer"]
+        }
+      },
+      "lines_of_code": {
+        "total": 13200,
+        "generated": 7599,
+        "hand_written": 5601,
+        "generated_percentage": 57.5
+      },
+      "test_coverage": {
+        "arraybuffer_coverage": "100%",
+        "test_cases": 27,
+        "test_files": 3
+      },
+      "source_sets": [
+        "commonMain",
+        "jvmMain",
+        "jsMain",
+        "wasmJsMain",
+        "nativeMain",
+        "androidMain",
+        "commonTest",
+        "jvmTest",
+        "nativeTest",
+        "commonNativeMain"
+      ],
+      "key_components": [
+        "ArrayBuffer (sealed interface)",
+        "WebGPU Interfaces (1650+ lines, generated)",
+        "WebGPU Enumerations (1000+ lines, generated)",
+        "Bit Flags (128 lines, generated)",
+        "Type Aliases (19 lines, generated)",
+        "Platform-specific implementations for all 19 targets"
+      ],
+      "build_configuration": {
+        "file": "build.gradle.kts",
+        "plugins": [
+          "kotlin-multiplatform",
+          "kotlinx-serialization",
+          "kotlin-parcelize"
+        ]
+      },
+      "artifact_coordinates": {
+        "group_id": "io.ygdrasil",
+        "artifact_id": "webgpu-ktypes",
+        "current_version": "0.0.9-SNAPSHOT"
+      },
+      "documentation": [
+        "docs/architecture-webgpu-ktypes.md",
+        "docs/source-tree-webgpu-ktypes-*.md",
+        "docs/component-inventory-webgpu-ktypes.md"
+      ]
+    },
+    {
+      "part_id": "webgpu-ktypes-descriptors",
+      "display_name": "webgpu-ktypes-descriptors",
+      "description": "Descriptor type definitions for WebGPU operations - extends core types with descriptor-specific functionality",
+      "project_type": "library",
+      "root_path": "/Volumes/Cache/webgpu-ktypes/webgpu-ktypes-descriptors",
+      "relative_path": "webgpu-ktypes-descriptors",
+      "role": "descriptor-types",
+      "dependencies": [
+        {
+          "part_id": "webgpu-ktypes",
+          "type": "implementation",
+          "description": "Uses core WebGPU types and ArrayBuffer abstraction"
+        }
+      ],
+      "platforms": [
+        "JVM",
+        "JS",
+        "Node.js",
+        "WasmJs",
+        "Android",
+        "iOS",
+        "macOS",
+        "Linux",
+        "Windows",
+        "watchOS",
+        "tvOS"
+      ],
+      "technology_stack": {
+        "language": "Kotlin Multiplatform",
+        "build_tool": "Gradle KTS",
+        "test_framework": "Kotest",
+        "dependencies": ["webgpu-ktypes"]
+      },
+      "lines_of_code": {
+        "total": 500,
+        "generated": 0,
+        "hand_written": 500
+      },
+      "source_sets": [
+        "commonMain"
+      ],
+      "key_components": [
+        "Descriptor types (descriptor.kt)",
+        "Deprecated type aliases (deprecated.types.kt)"
+      ],
+      "build_configuration": {
+        "file": "build.gradle.kts",
+        "plugins": [
+          "kotlin-multiplatform"
+        ]
+      },
+      "artifact_coordinates": {
+        "group_id": "io.ygdrasil",
+        "artifact_id": "webgpu-ktypes-descriptors",
+        "current_version": "0.0.9-SNAPSHOT"
+      },
+      "documentation": [
+        "docs/architecture-webgpu-ktypes-descriptors.md"
+      ]
+    },
+    {
+      "part_id": "webgpu-ktypes-specifications",
+      "display_name": "webgpu-ktypes-specifications",
+      "description": "Specification-related types and documentation - contains WebGPU specification references",
+      "project_type": "library",
+      "root_path": "/Volumes/Cache/webgpu-ktypes/webgpu-ktypes-specifications",
+      "relative_path": "webgpu-ktypes-specifications",
+      "role": "specifications",
+      "dependencies": [
+        {
+          "part_id": "webgpu-ktypes",
+          "type": "implementation",
+          "description": "Uses core WebGPU types"
+        }
+      ],
+      "platforms": [
+        "JVM",
+        "JS",
+        "Node.js",
+        "WasmJs",
+        "Android",
+        "iOS",
+        "macOS",
+        "Linux",
+        "Windows",
+        "watchOS",
+        "tvOS"
+      ],
+      "technology_stack": {
+        "language": "Kotlin Multiplatform",
+        "build_tool": "Gradle KTS",
+        "test_framework": "Kotest"
+      },
+      "lines_of_code": {
+        "total": 200,
+        "generated": 0,
+        "hand_written": 200
+      },
+      "source_sets": [
+        "commonMain",
+        "jvmMain"
+      ],
+      "key_components": [
+        "WebGPU specification documentation (webgpu.md resource)"
+      ],
+      "resources": [
+        "src/jvmMain/resources/webgpu.md"
+      ],
+      "build_configuration": {
+        "file": "build.gradle.kts",
+        "plugins": [
+          "kotlin-multiplatform"
+        ]
+      },
+      "artifact_coordinates": {
+        "group_id": "io.ygdrasil",
+        "artifact_id": "webgpu-ktypes-specifications",
+        "current_version": "0.0.9-SNAPSHOT"
+      },
+      "documentation": [
+        "docs/architecture-webgpu-ktypes-specifications.md"
+      ]
+    },
+    {
+      "part_id": "webgpu-ktypes-web",
+      "display_name": "webgpu-ktypes-web",
+      "description": "Web/JS-specific type extensions and interop utilities - provides browser-specific functionality",
+      "project_type": "library",
+      "root_path": "/Volumes/Cache/webgpu-ktypes/webgpu-ktypes-web",
+      "relative_path": "webgpu-ktypes-web",
+      "role": "web-interop",
+      "dependencies": [
+        {
+          "part_id": "webgpu-ktypes",
+          "type": "implementation",
+          "description": "Uses core WebGPU types and ArrayBuffer abstraction"
+        }
+      ],
+      "platforms": [
+        "JS",
+        "WasmJs"
+      ],
+      "platform_specialization": "JS/WasmJs only - not available for other platforms",
+      "technology_stack": {
+        "language": "Kotlin Multiplatform",
+        "build_tool": "Gradle KTS",
+        "test_framework": "Kotest",
+        "interop": ["Kotlin/JS", "Kotlin/Wasm"]
+      },
+      "lines_of_code": {
+        "total": 1500,
+        "generated": 0,
+        "hand_written": 1500
+      },
+      "source_sets": [
+        "commonMain",
+        "commonTest",
+        "jsMain",
+        "jsTest",
+        "wasmJsMain"
+      ],
+      "key_components": [
+        "Interop utilities (interop.kt)",
+        "JS array interoperability (jsarray-interop.kt)",
+        "JS number conversions (jsnumber-interops.kt)",
+        "Web-specific types (types.kt)",
+        "Platform-specific implementations for JS and WasmJs"
+      ],
+      "build_configuration": {
+        "file": "build.gradle.kts",
+        "plugins": [
+          "kotlin-multiplatform"
+        ]
+      },
+      "artifact_coordinates": {
+        "group_id": "io.ygdrasil",
+        "artifact_id": "webgpu-ktypes-web",
+        "current_version": "0.0.9-SNAPSHOT"
+      },
+      "documentation": [
+        "docs/architecture-webgpu-ktypes-web.md"
+      ]
+    },
+    {
+      "part_id": "wgsl",
+      "display_name": "wgsl",
+      "description": "WebGPU Shading Language (WGSL) processor - independent module for parsing and processing WGSL shaders",
+      "project_type": "library",
+      "root_path": "/Volumes/Cache/webgpu-ktypes/wgsl",
+      "relative_path": "wgsl",
+      "role": "shader-processor",
+      "dependencies": [],
+      "platforms": [
+        "JVM",
+        "JS",
+        "Node.js",
+        "WasmJs",
+        "Android",
+        "iOS",
+        "macOS",
+        "Linux",
+        "Windows",
+        "watchOS",
+        "tvOS"
+      ],
+      "architecture": "Modular with submodules",
+      "submodules": [
+        {
+          "name": "core",
+          "path": "wgsl/core",
+          "description": "Core WGSL processing logic",
+          "dependencies": [],
+          "platforms": "All 19"
+        },
+        {
+          "name": "parser",
+          "path": "wgsl/parser",
+          "description": "WGSL language parser",
+          "dependencies": ["core"],
+          "platforms": "All 19",
+          "documentation": ["wgsl/parser/README.md"]
+        },
+        {
+          "name": "generator",
+          "path": "wgsl/generator",
+          "description": "Code generation utilities",
+          "dependencies": ["core"],
+          "platforms": "All 19"
+        },
+        {
+          "name": "cli",
+          "path": "wgsl/cli",
+          "description": "Command-line interface for WGSL processing",
+          "dependencies": ["parser", "generator"],
+          "platforms": "All 19"
+        },
+        {
+          "name": "tests",
+          "path": "wgsl/tests",
+          "description": "WGSL-specific tests",
+          "dependencies": ["core", "parser", "generator"],
+          "platforms": "All 19",
+          "documentation": ["wgsl/tests/README.md"]
+        }
+      ],
+      "technology_stack": {
+        "language": "Kotlin Multiplatform",
+        "build_tool": "Gradle KTS",
+        "test_framework": "Kotest",
+        "parsing": "Custom parser implementation"
+      },
+      "lines_of_code": {
+        "total": 5000,
+        "generated": 0,
+        "hand_written": 5000
+      },
+      "source_sets": [
+        "commonMain",
+        "jvmMain",
+        "jsMain",
+        "nativeMain",
+        "commonTest"
+      ],
+      "key_components": [
+        "WGSL AST (Abstract Syntax Tree)",
+        "Lexer and parser",
+        "Semantic analyzer",
+        "Code generator",
+        "CLI tool"
+      ],
+      "build_configuration": {
+        "file": "build.gradle.kts",
+        "submodule_config": "settings.gradle.kts",
+        "plugins": [
+          "kotlin-multiplatform"
+        ]
+      },
+      "artifact_coordinates": {
+        "group_id": "io.ygdrasil",
+        "prefix": "wgsl-",
+        "current_version": "0.0.9-SNAPSHOT",
+        "submodule_artifacts": [
+          "wgsl-core",
+          "wgsl-parser",
+          "wgsl-generator",
+          "wgsl-cli",
+          "wgsl-tests"
+        ]
+      },
+      "documentation": [
+        "docs/architecture-wgsl.md",
+        "wgsl/parser/README.md",
+        "wgsl/tests/README.md"
+      ]
+    }
+  ],
+  "integration_points": [
+    {
+      "type": "dependency",
+      "from": "webgpu-ktypes-descriptors",
+      "to": "webgpu-ktypes",
+      "description": "Uses core WebGPU types and ArrayBuffer abstraction",
+      "pattern": "implementation(project(\":webgpu-ktypes\"))"
+    },
+    {
+      "type": "dependency",
+      "from": "webgpu-ktypes-web",
+      "to": "webgpu-ktypes",
+      "description": "Uses core WebGPU types and ArrayBuffer abstraction",
+      "pattern": "implementation(project(\":webgpu-ktypes\"))"
+    },
+    {
+      "type": "dependency",
+      "from": "webgpu-ktypes-specifications",
+      "to": "webgpu-ktypes",
+      "description": "Uses core WebGPU types",
+      "pattern": "implementation(project(\":webgpu-ktypes\"))"
+    },
+    {
+      "type": "internal",
+      "from": "wgsl/parser",
+      "to": "wgsl/core",
+      "description": "Parser depends on core WGSL processing logic",
+      "pattern": "implementation(project(\":wgsl:core\"))"
+    },
+    {
+      "type": "internal",
+      "from": "wgsl/generator",
+      "to": "wgsl/core",
+      "description": "Generator depends on core WGSL processing logic",
+      "pattern": "implementation(project(\":wgsl:core\"))"
+    },
+    {
+      "type": "internal",
+      "from": "wgsl/cli",
+      "to": ["wgsl/parser", "wgsl/generator"],
+      "description": "CLI depends on parser and generator",
+      "pattern": "implementation(project(\":wgsl:parser\")), implementation(project(\":wgsl:generator\"))"
+    },
+    {
+      "type": "internal",
+      "from": "wgsl/tests",
+      "to": ["wgsl/core", "wgsl/parser", "wgsl/generator"],
+      "description": "Tests depend on core, parser, and generator",
+      "pattern": "implementation(project(\":wgsl:core\")), implementation(project(\":wgsl:parser\")), implementation(project(\":wgsl:generator\"))"
+    }
+  ],
+  "build_integration": {
+    "build_system": "Gradle",
+    "build_file": "build.gradle.kts",
+    "settings_file": "settings.gradle.kts",
+    "version_management": {
+      "method": "environment_variable",
+      "variable": "VERSION",
+      "default": "0.0.9-SNAPSHOT"
+    },
+    "publish_configurations": {
+      "repositories": [
+        {
+          "name": "MavenCentral",
+          "url": "https://oss.sonatype.org/service/local/staging/deploy/maven2/",
+          "type": "staging"
+        }
+      ],
+      "signing": {
+        "enabled": true,
+        "method": "GPG"
+      },
+      "artifact_types": ["JAR", "AAR", "Kotlin Multiplatform Library"]
+    }
+  },
+  "ci_cd": {
+    "provider": "GitHub Actions",
+    "workflows": [
+      {
+        "name": "test.yml",
+        "trigger": ["push", "pull_request"],
+        "branches": ["master", "release/**", "feature/**", "fix/**"],
+        "purpose": "Run tests on all platforms",
+        "matrix": ["macOS", "Ubuntu", "Windows"]
+      },
+      {
+        "name": "publish.yml",
+        "trigger": ["release"],
+        "purpose": "Build and publish artifacts to Maven Central"
+      },
+      {
+        "name": "snapshot.yml",
+        "trigger": ["push to master"],
+        "purpose": "Publish snapshot builds"
+      },
+      {
+        "name": "codeql.yml",
+        "trigger": ["push", "pull_request"],
+        "purpose": "Security code analysis"
+      },
+      {
+        "name": "qodana_code_quality.yml",
+        "trigger": ["push", "pull_request"],
+        "purpose": "Code quality analysis"
+      }
+    ]
+  },
+  "testing": {
+    "framework": "Kotest",
+    "style": "FunSpec (BDD)",
+    "assertions": "Matcher-based",
+    "coverage": {
+      "webgpu-ktypes": "100% for ArrayBuffer",
+      "test_files": 10+
+    },
+    "platform_coverage": ["JVM", "JS", "Native", "Android", "WasmJs"]
+  },
+  "documentation": {
+    "language": "English",
+    "format": "Markdown",
+    "location": "/Volumes/Cache/webgpu-ktypes/docs/",
+    "generated_files": [
+      "project-scan-report.json",
+      "source-tree-analysis.md",
+      "source-tree-webgpu-ktypes-*.md",
+      "development-guide.md",
+      "deployment-guide.md",
+      "integration-architecture.md",
+      "architecture-webgpu-ktypes.md",
+      "architecture-webgpu-ktypes-descriptors.md",
+      "architecture-webgpu-ktypes-specifications.md",
+      "architecture-webgpu-ktypes-web.md",
+      "architecture-wgsl.md",
+      "project-overview.md",
+      "component-inventory-webgpu-ktypes.md",
+      "contribution-guide.md",
+      "project-parts.json"
+    ],
+    "total_files": 25,
+    "total_lines": 20000+
+  },
+  "metadata": {
+    "workflow": "BMAD document-project",
+    "step": 9,
+    "generated_date": "2026-05-19T20:47:00Z",
+    "scan_level": "exhaustive",
+    "mode": "initial_scan",
+    "version": "1.0"
+  }
+}

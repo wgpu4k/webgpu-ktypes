@@ -226,112 +226,38 @@ abstract class GoldenTestBase(val backendName: String) : FunSpec({
 
 ### Tests Concrets
 
-#### Test de Parsing IR
-
-```kotlin
-// src/test/kotlin/dev/gfxrs/naga/test/golden/IrGoldenTests.kt
-
-package io.ygdrasil.wgsl.test.golden
-
-import io.ygdrasil.wgsl.test.GoldenTestBase
-import io.ygdrasil.wgsl.test.GoldenTestBase.BackendType.IR
-import org.junit.jupiter.api.DisplayName
-import org.junit.jupiter.params.ParameterizedTest
-import org.junit.jupiter.params.provider.ValueSource
-
-class IrGoldenTests : GoldenTestBase() {
-    
-    @ParameterizedTest
-    @ValueSource(strings = [
-        "const-exprs",
-        "conv-bvec",
-        "entry-point-args",
-        "global-variable",
-        "local-variable",
-        "matrix",
-        "pointers",
-        "structs",
-        "type-inference"
-    ])
-    @DisplayName("IR Golden Test: {0}")
-    fun `test IR generation`(name: String) {
-        val source = loadWgsl(name)
-        val module = parseToIr(source).getOrThrow()
-        val actual = serializeIr(module)
-        
-        assertOrUpdateGolden(name, IR, actual)
-    }
-}
-```
+Toutes les classes de test de backend héritent de `GoldenTestBase` :
 
 #### Test de Génération MSL
-
 ```kotlin
-// src/test/kotlin/dev/gfxrs/naga/test/golden/MslGoldenTests.kt
+// wgsl/tests/src/jvmTest/kotlin/io/ygdrasil/wgsl/tests/MslGoldenTest.kt
+package io.ygdrasil.wgsl.tests
 
-package io.ygdrasil.wgsl.test.golden
+class MslGoldenTest : GoldenTestBase("msl")
+```
 
-import io.ygdrasil.wgsl.test.GoldenTestBase
-import io.ygdrasil.wgsl.test.GoldenTestBase.BackendType.MSL
-import org.junit.jupiter.api.DisplayName
-import org.junit.jupiter.params.ParameterizedTest
-import org.junit.jupiter.params.provider.ValueSource
+#### Test de Génération HLSL
+```kotlin
+// wgsl/tests/src/jvmTest/kotlin/io/ygdrasil/wgsl/tests/HlslGoldenTest.kt
+package io.ygdrasil.wgsl.tests
 
-class MslGoldenTests : GoldenTestBase() {
-    
-    @ParameterizedTest
-    @ValueSource(strings = [
-        "const-exprs",
-        "entry-point-args",
-        "global-variable",
-        "local-variable",
-        "matrix",
-        "structs"
-    ])
-    @DisplayName("MSL Golden Test: {0}")
-    fun `test MSL generation`(name: String) {
-        val source = loadWgsl(name)
-        val module = parseToIr(source).getOrThrow()
-        val actual = generateMsl(module)
-        
-        assertOrUpdateGolden(name, MSL, actual)
-    }
-}
+class HlslGoldenTest : GoldenTestBase("hlsl")
+```
+
+#### Test de Génération GLSL
+```kotlin
+// wgsl/tests/src/jvmTest/kotlin/io/ygdrasil/wgsl/tests/GlslGoldenTest.kt
+package io.ygdrasil.wgsl.tests
+
+class GlslGoldenTest : GoldenTestBase("glsl")
 ```
 
 #### Test Round-Trip WGSL
-
 ```kotlin
-// src/test/kotlin/dev/gfxrs/naga/test/golden/WgslRoundTripTests.kt
+// wgsl/tests/src/jvmTest/kotlin/io/ygdrasil/wgsl/tests/WgslGoldenTest.kt
+package io.ygdrasil.wgsl.tests
 
-package io.ygdrasil.wgsl.test.golden
-
-import io.ygdrasil.wgsl.test.GoldenTestBase
-import io.ygdrasil.wgsl.test.GoldenTestBase.BackendType.WGSL
-import org.junit.jupiter.api.DisplayName
-import org.junit.jupiter.params.ParameterizedTest
-import org.junit.jupiter.params.provider.ValueSource
-
-class WgslRoundTripTests : GoldenTestBase() {
-    
-    @ParameterizedTest
-    @ValueSource(strings = [
-        "const-exprs",
-        "entry-point-args",
-        "global-variable",
-        "local-variable",
-        "matrix",
-        "structs"
-    ])
-    @DisplayName("WGSL Round-Trip Test: {0}")
-    fun `test WGSL round-trip`(name: String) {
-        val source = loadWgsl(name)
-        val module = parseToIr(source).getOrThrow()
-        val actual = generateWgsl(module)
-        
-        assertOrUpdateGolden(name, WGSL, actual)
-    }
-}
+class WgslGoldenTest : GoldenTestBase("wgsl")
 ```
 
 ---

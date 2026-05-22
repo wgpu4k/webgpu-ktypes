@@ -165,11 +165,17 @@ enum class ShaderStage {
  */
 @Serializable
 sealed class EarlyDepthTest {
+    @Serializable
     object Default : EarlyDepthTest()
+    @Serializable
     object ForceDepthGreater : EarlyDepthTest()
+    @Serializable
     object ForceDepthGreaterEqual : EarlyDepthTest()
+    @Serializable
     object ForceDepthLess : EarlyDepthTest()
+    @Serializable
     object ForceDepthLessEqual : EarlyDepthTest()
+    @Serializable
     data class ForceDepthUnchanged(val value: Handle<Expression>) : EarlyDepthTest()
 }
 
@@ -178,8 +184,11 @@ sealed class EarlyDepthTest {
  */
 @Serializable
 sealed class BindingAttribute {
+    @Serializable
     data class Builtin(val builtin: BuiltinValue) : BindingAttribute()
+    @Serializable
     data class Location(val location: Int) : BindingAttribute()
+    @Serializable
     data class Interpolate(val sampling: Sampling, val type: InterpolationType) : BindingAttribute()
 }
 
@@ -208,9 +217,13 @@ enum class InterpolationType {
  */
 @Serializable
 sealed class DiagnosticFilterNode {
+    @Serializable
     data class All(val children: List<Handle<DiagnosticFilterNode>>) : DiagnosticFilterNode()
+    @Serializable
     data class Any(val children: List<Handle<DiagnosticFilterNode>>) : DiagnosticFilterNode()
+    @Serializable
     data class Operand(val expression: Handle<Expression>) : DiagnosticFilterNode()
+    @Serializable
     data class Severity(val severity: DiagnosticSeverity, val children: List<Handle<DiagnosticFilterNode>>) :
         DiagnosticFilterNode()
 }

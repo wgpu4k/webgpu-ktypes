@@ -41,3 +41,4 @@ kotlin-ide/
 .npmrc
 *.hprof
 /.junie/
+/*.txt

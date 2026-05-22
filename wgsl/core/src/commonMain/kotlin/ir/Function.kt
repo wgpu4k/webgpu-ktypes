@@ -73,12 +73,7 @@ data class FunctionParameter(
     /**
      * The binding for this parameter (if it's a shader I/O parameter).
      */
-    val binding: Binding? = null,
-
-    /**
-     * Whether this parameter is builtin.
-     */
-    val builtin: BuiltinValue? = null,
+    val binding: BindingAttribute? = null,
 ) {
     override fun toString(): String = name
 }
@@ -138,83 +133,97 @@ sealed class Statement {
     /**
      * Empty statement (no-op).
      */
+    @Serializable
     object Nop : Statement()
 
     /**
      * Block of statements.
      */
-    data class Block(val block: Handle<Block>) : Statement()
+    @Serializable
+    data class Block(val block: Handle<io.ygdrasil.wgsl.ir.Block>) : Statement()
 
     /**
      * Variable declaration statement.
      */
+    @Serializable
     data class Declare(val variable: Handle<LocalVariable>) : Statement()
 
     /**
      * Initialize a variable with an expression.
      */
+    @Serializable
     data class Init(val variable: Handle<LocalVariable>) : Statement()
 
     /**
      * Assign a value to a pointer.
      */
+    @Serializable
     data class Assign(val pointer: Handle<Expression>, val value: Handle<Expression>) : Statement()
 
     /**
      * Emit a range of expressions.
      */
+    @Serializable
     data class Emit(val range: Range<Expression>) : Statement()
 
     /**
      * If statement.
      */
+    @Serializable
     data class If(
         val condition: Handle<Expression>,
-        val accept: Handle<Block>,
-        val reject: Handle<Block>? = null
+        val accept: Handle<io.ygdrasil.wgsl.ir.Block>,
+        val reject: Handle<io.ygdrasil.wgsl.ir.Block>? = null
     ) : Statement()
 
     /**
      * Switch statement.
      */
+    @Serializable
     data class Switch(
         val selector: Handle<Expression>,
-        val body: Handle<Block>,
-        val default: Handle<Block>? = null,
+        val body: Handle<io.ygdrasil.wgsl.ir.Block>,
+        val default: Handle<io.ygdrasil.wgsl.ir.Block>? = null,
         val cases: List<Case>
     ) : Statement()
 
     /**
      * Loop statement.
      */
+    @Serializable
     data class Loop(
-        val body: Handle<Block>,
-        val continuing: Handle<Block>? = null
+        val body: Handle<io.ygdrasil.wgsl.ir.Block>,
+        val continuing: Handle<io.ygdrasil.wgsl.ir.Block>? = null
     ) : Statement()
 
     /**
      * Break statement.
      */
+    @Serializable
     object Break : Statement()
 
     /**
      * Continue statement.
      */
+    @Serializable
     object Continue : Statement()
 
     /**
      * Return statement.
      */
+    @Serializable
     data class Return(val value: Handle<Expression>? = null) : Statement()
 
     /**
      * Discard statement.
      */
+    @Serializable
     object Discard : Statement()
 
     /**
      * Kill statement.
      */
+    @Serializable
     object Kill : Statement()
 }
 
@@ -231,7 +240,7 @@ data class Case(
     /**
      * The body of the case.
      */
-    val body: Handle<Block>,
+    val body: Handle<io.ygdrasil.wgsl.ir.Block>,
 )
 
 /**
@@ -239,7 +248,9 @@ data class Case(
  */
 @Serializable
 sealed class CaseSelector : Equatable {
+    @Serializable
     class Value(val value: ScalarValue) : CaseSelector()
+    @Serializable
     class Default : CaseSelector()
 
     override fun isEquivalentTo(other: Any): Boolean {

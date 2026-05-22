@@ -1,0 +1,27 @@
+public final class io/ygdrasil/wgsl/cli/ConvertCommand : com/github/ajalt/clikt/core/CliktCommand {
+	public fun <init> ()V
+	public final fun getFormat ()Lio/ygdrasil/wgsl/cli/OutputFormat;
+	public final fun getInput ()Ljava/io/File;
+	public final fun getOutput ()Ljava/io/File;
+	public fun run ()V
+}
+
+public final class io/ygdrasil/wgsl/cli/MainKt {
+	public static final fun main ([Ljava/lang/String;)V
+}
+
+public final class io/ygdrasil/wgsl/cli/OutputFormat : java/lang/Enum {
+	public static final field glsl Lio/ygdrasil/wgsl/cli/OutputFormat;
+	public static final field hlsl Lio/ygdrasil/wgsl/cli/OutputFormat;
+	public static final field msl Lio/ygdrasil/wgsl/cli/OutputFormat;
+	public static final field wgsl Lio/ygdrasil/wgsl/cli/OutputFormat;
+	public static fun getEntries ()Lkotlin/enums/EnumEntries;
+	public static fun valueOf (Ljava/lang/String;)Lio/ygdrasil/wgsl/cli/OutputFormat;
+	public static fun values ()[Lio/ygdrasil/wgsl/cli/OutputFormat;
+}
+
+public final class io/ygdrasil/wgsl/cli/WgslKTypes : com/github/ajalt/clikt/core/CliktCommand {
+	public fun <init> ()V
+	public fun run ()V
+}
+

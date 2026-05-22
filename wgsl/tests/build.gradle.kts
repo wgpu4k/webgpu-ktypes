@@ -29,10 +29,8 @@ kotlin {
         commonMain {
             dependencies {
                 implementation(project(":wgsl:core"))
-                implementation(project(":wgsl:wgsl"))
-                implementation(project(":wgsl:msl"))
-                implementation(project(":wgsl:hlsl"))
-                implementation(project(":wgsl:glsl"))
+                implementation(project(":wgsl:parser"))
+                implementation(project(":wgsl:generator"))
             }
         }
 
@@ -46,6 +44,8 @@ kotlin {
         jvmTest {
             dependencies {
                 implementation(libs.kotest.runner.junit5)
+                implementation(libs.kotlin.logging)
+                implementation(libs.logback.classic)
             }
         }
     }
@@ -53,13 +53,37 @@ kotlin {
 
 tasks.named<Test>("jvmTest") {
     useJUnitPlatform()
+    val goldenUpdate = System.getenv("GOLDEN_UPDATE")?.toBoolean() ?: false
+    val showFullExceptions = System.getenv("GOLDEN_DEBUG")?.toBoolean() ?: false
     testLogging {
-        showExceptions = true
-        showStandardStreams = true
+        showExceptions = showFullExceptions
+        showStandardStreams = false
         events = setOf(
             org.gradle.api.tasks.testing.logging.TestLogEvent.FAILED,
             org.gradle.api.tasks.testing.logging.TestLogEvent.PASSED
         )
-        exceptionFormat = org.gradle.api.tasks.testing.logging.TestExceptionFormat.FULL
+        exceptionFormat = if (goldenUpdate || showFullExceptions) {
+            org.gradle.api.tasks.testing.logging.TestExceptionFormat.FULL
+        } else {
+            org.gradle.api.tasks.testing.logging.TestExceptionFormat.SHORT
+        }
     }
+    
+    // Configure logback for tests
+    systemProperty("logback.configurationFile", layout.projectDirectory.dir("src/jvmTest/resources").file("logback-test.xml").asFile.path)
+}
+
+// Task to run the golden debug tool
+val goldenDebug by tasks.creating(JavaExec::class) {
+    group = "debug"
+    description = "Run golden test debugger on a single file"
+    
+    classpath = sourceSets["jvmTest"].runtimeClasspath
+    mainClass = "io.ygdrasil.wgsl.tests.GoldenDebugKt"
+    
+    // Pass arguments to the main function
+    args = project.properties.getOrDefault("args", "").toString().split("\\s+".toRegex())
+    
+    // Ensure the JVM arguments include the classpath
+    jvmArgs = listOf("-Dfile.encoding=UTF-8", "-Dlogback.configurationFile=${layout.projectDirectory.dir("src/jvmTest/resources")}/logback-test.xml")
 }

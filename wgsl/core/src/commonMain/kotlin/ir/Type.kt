@@ -40,33 +40,43 @@ data class Type(
 sealed class TypeInner : Equatable {
 
     // Scalar types
+    @Serializable
     data class Scalar(val kind: ScalarKind, val width: Int) : TypeInner()
 
     // Vector types
+    @Serializable
     data class Vector(val size: VectorSize, val scalar: Handle<Type>) : TypeInner()
 
     // Matrix types
+    @Serializable
     data class Matrix(val columns: VectorSize, val rows: VectorSize, val scalar: Handle<Type>) : TypeInner()
 
     // Array types
+    @Serializable
     data class Array(val element: Handle<Type>, val size: ArraySize) : TypeInner()
 
     // Struct types
+    @Serializable
     data class Struct(val members: List<StructMember>) : TypeInner()
 
     // Pointer types
-    data class Pointer(val base: Handle<Type>, val addressSpace: AddressSpace) : TypeInner()
+    @Serializable
+    data class Pointer(val base: Handle<Type>, val addressSpace: AddressSpace, val accessMode: AccessMode? = null) : TypeInner()
 
     // Value pointer types (WGSL extension)
+    @Serializable
     data class ValuePointer(val base: Handle<Type>) : TypeInner()
 
     // Opaque types (for external types like textures, samplers)
+    @Serializable
     data class Opaque(val name: String) : TypeInner()
 
     // Error type (for type errors)
+    @Serializable
     object Error : TypeInner()
 
     // Abstract types
+    @Serializable
     data class Abstract(val scalar: ScalarKind) : TypeInner()
 
     override fun isEquivalentTo(other: Any): Boolean {
@@ -94,7 +104,7 @@ sealed class TypeInner : Equatable {
 data class StructMember(
     val name: String,
     val type: Handle<Type>,
-    val binding: Handle<GlobalVariable>? = null,
+    val binding: BindingAttribute? = null,
     val offset: Int = 0,
 )
 
@@ -103,7 +113,9 @@ data class StructMember(
  */
 @Serializable
 sealed class ArraySize : Equatable {
+    @Serializable
     class Constant(val value: Int) : ArraySize()
+    @Serializable
     class Dynamic(val expression: Handle<Expression>) : ArraySize()
 
     override fun isEquivalentTo(other: Any): Boolean {

@@ -515,57 +515,69 @@ class ConstantEvaluator(
 
     private fun evaluateAccessExpression(kind: ExpressionKind.Access, context: EvaluationContext): ConstValue {
         val base = evaluateExpression(kind.expr, context)
+        val indexVal = evaluateExpression(kind.index, context)
+        
+        if (indexVal !is ConstValue.Scalar || (indexVal.value !is ScalarValue.I32 && indexVal.value !is ScalarValue.U32)) {
+            return ConstValue.NotConst
+        }
+        
+        val index = when (val v = indexVal.value) {
+            is ScalarValue.I32 -> v.value
+            is ScalarValue.U32 -> v.value.toInt()
+        }
+        
         return when (base) {
             is ConstValue.Vector -> {
-                if (kind.index >= 0 && kind.index < base.components.size) {
-                    ConstValue.Scalar(base.components[kind.index], base.type)
+                if (index >= 0 && index < base.components.size) {
+                    ConstValue.Scalar(base.components[index], base.type)
                 } else {
                     throw EvaluationError("Vector index out of bounds")
                 }
             }
             is ConstValue.Matrix -> {
-                 if (kind.index >= 0 && kind.index < base.columns.size) {
-                    ConstValue.Vector(base.columns[kind.index], base.type)
+                 if (index >= 0 && index < base.columns.size) {
+                    ConstValue.Vector(base.columns[index], base.type)
                 } else {
                     throw EvaluationError("Matrix index out of bounds")
                 }
             }
             is ConstValue.Array -> {
-                if (kind.index >= 0 && kind.index < base.elements.size) {
-                    base.elements[kind.index]
+                if (index >= 0 && index < base.elements.size) {
+                    base.elements[index]
                 } else {
                     throw EvaluationError("Array index out of bounds")
                 }
             }
-            else -> ConstValue.NotConst
+            is ConstValue.Scalar, is ConstValue.Struct, is ConstValue.NotConst -> ConstValue.NotConst
         }
     }
 
     private fun evaluateAccessIndexExpression(kind: ExpressionKind.AccessIndex, context: EvaluationContext): ConstValue {
         val base = evaluateExpression(kind.expr, context)
+        val index = kind.index.toInt()
         return when (base) {
             is ConstValue.Vector -> {
-                if (kind.index >= 0 && kind.index < base.components.size) {
-                    ConstValue.Scalar(base.components[kind.index], base.type)
+                if (index >= 0 && index < base.components.size) {
+                    ConstValue.Scalar(base.components[index], base.type)
                 } else {
                     throw EvaluationError("Vector index out of bounds")
                 }
             }
             is ConstValue.Matrix -> {
-                 if (kind.index >= 0 && kind.index < base.columns.size) {
-                    ConstValue.Vector(base.columns[kind.index], base.type)
+                 if (index >= 0 && index < base.columns.size) {
+                    ConstValue.Vector(base.columns[index], base.type)
                 } else {
                     throw EvaluationError("Matrix index out of bounds")
                 }
             }
             is ConstValue.Array -> {
-                if (kind.index >= 0 && kind.index < base.elements.size) {
-                    base.elements[kind.index]
+                if (index >= 0 && index < base.elements.size) {
+                    base.elements[index]
                 } else {
                     throw EvaluationError("Array index out of bounds")
                 }
             }
-            else -> ConstValue.NotConst
+            is ConstValue.Scalar, is ConstValue.Struct, is ConstValue.NotConst -> ConstValue.NotConst
         }
     }
 

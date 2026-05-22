@@ -1,11 +1,14 @@
 package io.ygdrasil.wgsl.back
 
+import io.github.oshai.kotlinlogging.KotlinLogging
 import io.ygdrasil.wgsl.arena.Handle
 import io.ygdrasil.wgsl.ir.*
 import io.ygdrasil.wgsl.ir.Function
 import io.ygdrasil.wgsl.proc.Layouter
 import io.ygdrasil.wgsl.proc.Namer
 import io.ygdrasil.wgsl.valid.ModuleInfo
+
+private val logger = KotlinLogging.logger {}
 
 /**
  * Classe de base pour tous les writers de backend.
@@ -77,9 +80,9 @@ abstract class WriterBase<T : BackendOptions>(
     }
 
     protected open fun writeFunctions() {
-        println("[DEBUG_LOG] Writing ${module.functions.size} functions")
+        logger.debug { "Writing ${module.functions.size} functions" }
         module.functions.forEachWithHandle { handle, func ->
-            println("[DEBUG_LOG] Writing function ${func.name}")
+            logger.debug { "Writing function ${func.name}" }
             writeFunction(func, handle)
         }
     }
@@ -91,13 +94,6 @@ abstract class WriterBase<T : BackendOptions>(
         writeFunctionSignature(func, name)
         writeLine(" {")
         indent {
-            func.localVariables.forEachWithHandle { vHandle, variable ->
-                val varName = getLocalVariableName(vHandle)
-                val typeName = getTypeName(variable.type)
-                val init = variable.init?.let { " = ${writeExpression(it)}" } ?: ""
-                writeLine("$typeName $varName$init;")
-            }
-            writeLine()
             writeBlock(func.body)
         }
         writeLine("}")
@@ -126,7 +122,7 @@ abstract class WriterBase<T : BackendOptions>(
             is Statement.Nop -> {}
             is Statement.Block -> {
                 writeLine("{")
-                indent { writeBlock(stmt.block as Handle<io.ygdrasil.wgsl.ir.Block>) }
+                indent { writeBlock(stmt.block) }
                 writeLine("}")
             }
             is Statement.Declare -> {
@@ -154,10 +150,10 @@ abstract class WriterBase<T : BackendOptions>(
             is Statement.If -> {
                 val cond = writeExpression(stmt.condition)
                 writeLine("if ($cond) {")
-                indent { writeBlock(stmt.accept as Handle<io.ygdrasil.wgsl.ir.Block>) }
+                indent { writeBlock(stmt.accept) }
                 if (stmt.reject != null) {
                     writeLine("} else {")
-                    indent { writeBlock(stmt.reject as Handle<io.ygdrasil.wgsl.ir.Block>) }
+                    indent { writeBlock(stmt.reject) }
                 }
                 writeLine("}")
             }
@@ -183,11 +179,11 @@ abstract class WriterBase<T : BackendOptions>(
             is Statement.Loop -> {
                 writeLine("while (true) {")
                 indent {
-                    writeBlock(stmt.body as Handle<io.ygdrasil.wgsl.ir.Block>)
+                    writeBlock(stmt.body)
                     if (stmt.continuing != null) {
                         // Continuing block is tricky in C-like languages
                         // For now we just write it at the end
-                        writeBlock(stmt.continuing as Handle<io.ygdrasil.wgsl.ir.Block>)
+                        writeBlock(stmt.continuing)
                     }
                 }
                 writeLine("}")
@@ -243,17 +239,18 @@ abstract class WriterBase<T : BackendOptions>(
             }
             is ExpressionKind.AccessIndex -> {
                 val e = writeExpression(kind.expr)
-                "$e[${kind.index}]"
-            }
-            is ExpressionKind.Access -> {
-                val e = writeExpression(kind.expr)
                 val type = getExpressionType(kind.expr)
                 if (type.inner is TypeInner.Struct) {
-                    val member = type.inner.members[kind.index]
+                    val member = type.inner.members[kind.index.toInt()]
                     "$e.${member.name}"
                 } else {
                     "$e[${kind.index}]"
                 }
+            }
+            is ExpressionKind.Access -> {
+                val e = writeExpression(kind.expr)
+                val i = writeExpression(kind.index)
+                "$e[$i]"
             }
             is ExpressionKind.Swizzle -> {
                 val e = writeExpression(kind.vector)
@@ -373,17 +370,17 @@ abstract class WriterBase<T : BackendOptions>(
             is ExpressionKind.LocalVar -> currentFunction!!.localVariables[kind.handle].type.let { module.types[it] }
             is ExpressionKind.GlobalVar -> module.globalVariables[kind.handle].type.let { module.types[it] }
             is ExpressionKind.FunctionArgument -> currentFunction!!.parameters[kind.index].type.let { module.types[it] }
-            is ExpressionKind.Access -> {
+            is ExpressionKind.AccessIndex -> {
                 val baseType = getExpressionType(kind.expr)
                 when (val inner = baseType.inner) {
-                    is TypeInner.Struct -> module.types[inner.members[kind.index].type]
+                    is TypeInner.Struct -> module.types[inner.members[kind.index.toInt()].type]
                     is TypeInner.Vector -> module.types[inner.scalar]
-                    is TypeInner.Matrix -> module.types[inner.scalar] // Should be vector, but let's stay simple
+                    is TypeInner.Matrix -> module.types[inner.scalar] // Should be vector
                     is TypeInner.Array -> module.types[inner.element]
                     else -> Type(TypeInner.Error)
                 }
             }
-            is ExpressionKind.AccessIndex -> {
+            is ExpressionKind.Access -> {
                 val baseType = getExpressionType(kind.expr)
                 when (val inner = baseType.inner) {
                     is TypeInner.Vector -> module.types[inner.scalar]

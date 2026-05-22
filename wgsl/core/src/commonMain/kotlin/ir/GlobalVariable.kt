@@ -17,6 +17,11 @@ data class GlobalVariable(
      * The storage class of the variable.
      */
     val storageClass: StorageClass,
+    
+    /**
+     * The access mode of the variable.
+     */
+    val accessMode: AccessMode? = null,
 
     /**
      * The type of the variable.

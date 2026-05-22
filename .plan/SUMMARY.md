@@ -121,12 +121,12 @@
 - [x] **Tests** : Tous les tests de backends utilisent **Kotest FunSpec**
 
 ### 🚧 **Phase 5 : Validation (2-3 semaines)**
-- [/] Configurer les golden files
-- [ ] Intégrer spirv-val pour SPIR-V
-- [ ] Intégrer glslangValidator pour GLSL
-- [ ] Intégrer Metal compiler pour MSL
-- [ ] Intégrer DXC/FXC pour HLSL
-- [ ] **Livrable** : Pipeline de validation complet
+- [x] Configurer l'infrastructure des golden files (Classes de base et backends)
+- [x] Étendre la suite de tests golden (simple.wgsl, complex.wgsl, arithmetic.wgsl opérationnels)
+- [x] Intégrer l'infrastructure des validateurs natifs (GlslValidator, MetalValidator, SpirvValidator, HlslValidator implémentés)
+- [x] Améliorer la validation GLSL avec support des stages
+- [ ] Pipeline de validation complet (Attente de backends complets)
+- [ ] Automatisation CI
 
 ### 🟢 **Phase 6 : Tests (2 semaines)**
 - [x] Implémenter tests unitaires (Phase 1 : ArenaTest, DiagnosticTest, SpanTest - 3 tests)

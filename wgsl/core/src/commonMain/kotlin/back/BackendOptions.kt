@@ -7,7 +7,7 @@ import io.ygdrasil.wgsl.valid.ValidationFlags
 /**
  * Options communes à tous les backends.
  */
-sealed class BackendOptions {
+abstract class BackendOptions {
     /**
      * Flags de validation à appliquer avant la génération.
      */
@@ -127,6 +127,21 @@ data class WgslOptions(
     // Options spécifiques WGSL
     val debug: Boolean = false,
     val prettyPrint: Boolean = true
+) : BackendOptions()
+
+/**
+ * Options spécifiques à l'IR.
+ */
+data class IrOptions(
+    override val validationFlags: ValidationFlags = ValidationFlags.ALL,
+    override val capabilities: Capabilities = Capabilities.ALL,
+    override val shaderStages: ShaderStages = ShaderStages.ALL,
+    override val indent: String = "    ",
+    override val newline: String = "\n",
+    override val version: String? = null,
+    override val languageName: String = "IR",
+    override val fileExtension: String = ".json",
+    override val bindingMap: BindingMap = BindingMap()
 ) : BackendOptions()
 
 /**

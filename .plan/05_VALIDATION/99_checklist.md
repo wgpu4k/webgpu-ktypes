@@ -45,9 +45,9 @@
   - [X] `tests/golden/outputs/` pour les fichiers de sortie générés
     - [ ] `tests/golden/outputs/ir/` pour la sérialisation IR
     - [X] `tests/golden/outputs/msl/` pour le code MSL
-    - [ ] `tests/golden/outputs/hlsl/` pour le code HLSL
-    - [ ] `tests/golden/outputs/glsl/` pour le code GLSL
-    - [ ] `tests/golden/outputs/wgsl/` pour le round-trip WGSL
+- [X] `tests/golden/outputs/hlsl/` pour le code HLSL
+    - [X] `tests/golden/outputs/glsl/` pour le code GLSL
+    - [X] `tests/golden/outputs/wgsl/` pour le round-trip WGSL
   - [ ] `tests/golden/reports/` pour les rapports de validation
 
 - [ ] Créer `tests/roundtrip/` pour les tests de round-trip
@@ -70,60 +70,68 @@
 Les fichiers suivants doivent être copiés depuis `/Users/chaos/RustroverProjects/wgpu/naga/tests/in/wgsl/` :
 
 #### Core Language
-- [ ] `const-exprs.wgsl` - Expressions constantes
-- [ ] `conv-bvec.wgsl` - Conversion de vecteurs booléens
-- [ ] `entry-point-args.wgsl` - Arguments des points d'entrée
-- [ ] `global-variable.wgsl` - Variables globales
-- [ ] `local-variable.wgsl` - Variables locales
-- [ ] `matrix.wgsl` - Opérations matricielles
-- [ ] `pointers.wgsl` - Pointeurs
-- [ ] `structs.wgsl` - Structures
-- [ ] `type-inference.wgsl` - Inférence de type
+- [x] `const-exprs.wgsl` - Expressions constantes
+- [ ] `conv-bvec.wgsl` - Conversion de vecteurs booléens (Non trouvé dans Naga)
+- [x] `const_assert.wgsl` - Assertions de compilation
+- [x] `separate-entry-points.wgsl` - Points d'entrée séparés
+- [x] `globals.wgsl` - Variables globales
+- [x] `local-const.wgsl` - Constantes locales (Remplacé local-variable.wgsl)
+- [ ] `matrix.wgsl` - Opérations matricielles (Remplacé par math-functions.wgsl)
+- [x] `pointers.wgsl` - Pointeurs
+- [ ] `structs.wgsl` - Structures (Remplacé par struct-layout.wgsl)
+- [x] `type-inference.wgsl` - Inférence de type
 
 #### Expressions
-- [ ] `access.wgsl` - Accès aux membres
-- [ ] `arithmetic.wgsl` - Opérations arithmétiques
-- [ ] `array.wgsl` - Opérations sur les tableaux
-- [ ] `bitwise.wgsl` - Opérations binaires
-- [ ] `bool.wgsl` - Opérations booléennes
-- [ ] `builtin.wgsl` - Fonctions builtin
-- [ ] `comparison.wgsl` - Comparaisons
-- [ ] `function-call.wgsl` - Appels de fonction
-- [ ] `init.wgsl` - Initialisation
+- [x] `access.wgsl` - Accès aux membres
+- [ ] `arithmetic.wgsl` - Opérations arithmétiques (Remplacé par math-functions.wgsl)
+- [x] `array-in-ctor.wgsl` - Tableaux dans les constructeurs
+- [x] `bits.wgsl` - Opérations binaires (bitwise)
+- [x] `bitcast.wgsl` - Opérations de bitcast
+- [x] `operators.wgsl` - Opérateurs généraux
+- [ ] `bool.wgsl` - Opérations booléennes (Inclus dans d'autres tests)
+- [ ] `builtin.wgsl` - Fonctions builtin (Remplacé par math-functions.wgsl)
+- [ ] `comparison.wgsl` - Comparaisons (Inclus dans d'autres tests)
+- [x] `functions.wgsl` - Appels de fonction
+- [x] `conversions.wgsl` - Conversions et initialisations (init.wgsl)
 
 #### Control Flow
-- [ ] `break-continue-return.wgsl` - break, continue, return
-- [ ] `control-flow.wgsl` - Flux de contrôle général
-- [ ] `discard.wgsl` - Instruction discard
-- [ ] `for.wgsl` - Boucles for
-- [ ] `if.wgsl` - Conditionnelles if
-- [ ] `loop.wgsl` - Boucles
-- [ ] `switch.wgsl` - Instructions switch
-- [ ] `while.wgsl` - Boucles while
+- [x] `break-if.wgsl` - break if (boucle loop)
+- [x] `control-flow.wgsl` - Flux de contrôle général
+- [ ] `discard.wgsl` - Instruction discard (Inclus dans d'autres tests)
+- [ ] `for.wgsl` - Boucles for (Inclus dans control-flow.wgsl)
+- [ ] `if.wgsl` - Conditionnelles if (Inclus dans control-flow.wgsl)
+- [ ] `loop.wgsl` - Boucles (Inclus dans control-flow.wgsl)
+- [ ] `switch.wgsl` - Instructions switch (Inclus dans control-flow.wgsl)
+- [ ] `while.wgsl` - Boucles while (Inclus dans control-flow.wgsl)
 
 #### Shader Stages
-- [ ] `compute.wgsl` - Shaders compute
-- [ ] `fragment.wgsl` - Shaders fragment
-- [ ] `vertex.wgsl` - Shaders vertex
+- [x] `separate-entry-points.wgsl` - Couvre Vertex, Fragment, Compute
+- [ ] `compute.wgsl` - Inclus dans separate-entry-points.wgsl
+- [ ] `fragment.wgsl` - Inclus dans separate-entry-points.wgsl
+- [ ] `vertex.wgsl` - Inclus dans separate-entry-points.wgsl
 
 #### Avancé
-- [ ] `atomic.wgsl` - Opérations atomiques
-- [ ] `bindings.wgsl` - Bindings de ressources
-- [ ] `derivative.wgsl` - Dérivées
-- [ ] `image.wgsl` - Accès aux images
-- [ ] `interpolate.wgsl` - Interpolation
-- [ ] `modf.wgsl` - Fonction modf
-- [ ] `packing.wgsl` - Packing/unpacking
-- [ ] `sampler.wgsl` - Échantillonnage
-- [ ] `storage-class.wgsl` - Classes de stockage
-- [ ] `struct-layout.wgsl` - Layout des structures
-- [ ] `texture.wgsl` - Accès aux textures
-- [ ] `type-alias.wgsl` - Alias de type
-- [ ] `workgroup.wgsl` - Variables de workgroup
+- [x] `atomicOps.wgsl` - Opérations atomiques
+- [x] `binding-arrays.wgsl` - Bindings de ressources
+- [x] `derivative.wgsl` - Dérivées (standard.wgsl)
+- [x] `image.wgsl` - Accès aux images
+- [x] `interpolate.wgsl` - Interpolation
+- [x] `modf.wgsl` - Fonction modf (math-functions.wgsl)
+- [x] `packed-vec3-bitcast.wgsl` - Packing (remplace packing.wgsl)
+- [x] `sample-cube-array-depth-lod.wgsl` - Échantillonnage (remplace sampler.wgsl)
+- [x] `push-constants.wgsl` - Classes de stockage (push_constant)
+- [x] `struct-layout.wgsl` - Layout des structures
+- [x] `storage-textures.wgsl` - Accès aux textures
+- [x] `type-alias.wgsl` - Alias de type
+- [x] `workgroup-uniform-load.wgsl` - Variables de workgroup
+- [x] `abstract-types-const.wgsl` - Types abstraits (const)
+- [x] `abstract-types-texture.wgsl` - Types abstraits (texture)
+- [x] `overrides.wgsl` - Constantes de spécialisation
+- [x] `lexical-scopes.wgsl` - Portées lexicales
 
 ### Génération Initiale des Golden Files
-- [ ] Copier les fichiers WGSL depuis Rust
-- [ ] Exécuter les tests avec `GOLDEN_UPDATE=true` pour générer les fichiers de référence
+- [x] Copier les fichiers WGSL depuis Rust
+- [x] Exécuter les tests avec `GOLDEN_UPDATE=true` pour générer les fichiers de référence
 - [ ] Valider manuellement les fichiers générés
 - [ ] Commiter les golden files initiaux
 
@@ -132,39 +140,39 @@ Les fichiers suivants doivent être copiés depuis `/Users/chaos/RustroverProjec
 ## 🔧 Implémentation des Validateurs
 
 ### Validateur SPIR-V
-- [ ] Créer `SpirvValidator.kt` dans `src/test/kotlin/dev/gfxrs/naga/test/validator/`
-- [ ] Implémenter la détection de `spirv-val`
-- [ ] Implémenter la validation des fichiers SPIR-V
-- [ ] Intégrer avec `ValidatorFactory`
+- [x] Créer `SpirvValidator.kt` dans `src/test/kotlin/dev/gfxrs/naga/test/validator/`
+- [x] Implémenter la détection de `spirv-val`
+- [x] Implémenter la validation des fichiers SPIR-V
+- [x] Intégrer avec `ValidatorFactory`
 
 ### Validateur GLSL
-- [ ] Créer `GlslValidator.kt` dans `src/test/kotlin/dev/gfxrs/naga/test/validator/`
-- [ ] Implémenter la détection de `glslangValidator`
-- [ ] Implémenter la validation des fichiers GLSL
-- [ ] Gérer les différentes versions de GLSL (450, 460, etc.)
-- [ ] Gérer les différents stages (vertex, fragment, compute)
-- [ ] Intégrer avec `ValidatorFactory`
+- [x] Créer `GlslValidator.kt` dans `src/test/kotlin/dev/gfxrs/naga/test/validator/`
+- [x] Implémenter la détection de `glslangValidator`
+- [x] Implémenter la validation des fichiers GLSL
+- [x] Gérer les différentes versions de GLSL (450, 460, etc.)
+- [x] Gérer les différents stages (vertex, fragment, compute)
+- [x] Intégrer avec `ValidatorFactory`
 
 ### Validateur MSL
-- [ ] Créer `MetalValidator.kt` dans `src/test/kotlin/dev/gfxrs/naga/test/validator/`
-- [ ] Implémenter la détection du compilateur Metal
-- [ ] Implémenter la validation des fichiers MSL
-- [ ] Gérer les différentes plateformes (macOS, iOS, simulator)
-- [ ] Intégrer avec `ValidatorFactory`
+- [x] Créer `MetalValidator.kt` dans `src/test/kotlin/dev/gfxrs/naga/test/validator/`
+- [x] Implémenter la détection du compilateur Metal
+- [x] Implémenter la validation des fichiers MSL
+- [x] Gérer les différentes plateformes (macOS, iOS, simulator)
+- [x] Intégrer avec `ValidatorFactory`
 
 ### Validateur HLSL
-- [ ] Créer `HlslValidator.kt` dans `src/test/kotlin/dev/gfxrs/naga/test/validator/`
-- [ ] Implémenter la détection de DXC/FXC
-- [ ] Implémenter la validation des fichiers HLSL
+- [x] Créer `HlslValidator.kt` dans `src/test/kotlin/dev/gfxrs/naga/test/validator/`
+- [x] Implémenter la détection de DXC/FXC
+- [x] Implémenter la validation des fichiers HLSL
 - [ ] Gérer les différents shader models (ps_5_0, ps_6_0, etc.)
-- [ ] Préférer DXC sur FXC
-- [ ] Intégrer avec `ValidatorFactory`
+- [x] Préférer DXC sur FXC
+- [x] Intégrer avec `ValidatorFactory`
 
 ### Factory de Validateurs
-- [ ] Créer `BackendValidator.kt` (interface commune)
-- [ ] Créer `ValidatorFactory.kt`
-- [ ] Implémenter la détection automatique des validateurs disponibles
-- [ ] Fournir des méthodes pour obtenir les validateurs par type de backend
+- [x] Créer `BackendValidator.kt` (interface commune)
+- [x] Créer `ValidatorFactory.kt`
+- [x] Implémenter la détection automatique des validateurs disponibles
+- [x] Fournir des méthodes pour obtenir les validateurs par type de backend
 
 ---
 
@@ -299,9 +307,9 @@ Les fichiers suivants doivent être copiés depuis `/Users/chaos/RustroverProjec
 ### Tests des Golden Files
 - [ ] Créer `IrGoldenTests.kt` pour les tests IR
 - [X] Créer `MslGoldenTests.kt` pour les tests MSL
-- [ ] Créer `HlslGoldenTests.kt` pour les tests HLSL
-- [ ] Créer `GlslGoldenTests.kt` pour les tests GLSL
-- [ ] Créer `WgslRoundTripTests.kt` pour les tests de round-trip
+- [X] Créer `HlslGoldenTests.kt` pour les tests HLSL
+- [X] Créer `GlslGoldenTests.kt` pour les tests GLSL
+- [X] Créer `WgslRoundTripTests.kt` pour les tests de round-trip
 
 ### Tests des Composants
 - [ ] Tester `WgslNormalizer` avec différents cas
@@ -441,11 +449,11 @@ Les fichiers suivants doivent être copiés depuis `/Users/chaos/RustroverProjec
 | 00_golden-files.md | ✅ | 2024-XX-XX | Complété |
 | 01_native-validators.md | ✅ | 2024-XX-XX | Complété |
 | 02_roundtrip-tests.md | ✅ | 2024-XX-XX | Complété |
-| 99_checklist.md | ✅ | 2024-XX-XX | En cours |
-| Structure des répertoires | ⬜ | - | À créer |
-| Fichiers WGSL importés | ⬜ | - | À importer |
-| Validateurs natifs | ⬜ | - | À implémenter |
-| Tests de round-trip | ⬜ | - | À implémenter |
+| 99_checklist.md | ✅ | 2026-05-16 | Mise à jour infrastructure |
+| Structure des répertoires | ✅ | 2026-05-16 | Créé (inputs/outputs) |
+| Fichiers WGSL importés | ✅ | 2026-05-17 | 20 fichiers importés depuis Naga |
+| Validateurs natifs | ✅ | 2026-05-16 | Infrastructure implémentée (GLSL, MSL) |
+| Tests de round-trip | [/] | 2026-05-16 | Infrastructure prête (backend WGSL) |
 | Intégration CI | ⬜ | - | À configurer |
 
 ---
@@ -503,6 +511,6 @@ Les fichiers suivants doivent être copiés depuis `/Users/chaos/RustroverProjec
 
 ---
 
-**Dernière mise à jour** : 2024-XX-XX
+**Dernière mise à jour** : 2026-05-17
 **Responsable** : Équipe WebGPU-KTypes
-**Statut** : En cours
+**Statut** : En cours (Import massif Naga terminé)

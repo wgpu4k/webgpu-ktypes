@@ -225,7 +225,6 @@ class Typifier {
             is TypeInner.Vector -> TypeResolution.ByHandle(inner.scalar)
             is TypeInner.Matrix -> TypeResolution.ByValue(TypeInner.Vector(inner.rows, inner.scalar))
             is TypeInner.Array -> TypeResolution.ByHandle(inner.element)
-            is TypeInner.Struct -> TypeResolution.ByHandle(inner.members[kind.index].type)
             else -> TypeResolution.ByValue(TypeInner.Error)
         }
     }
@@ -236,7 +235,7 @@ class Typifier {
             is TypeInner.Vector -> TypeResolution.ByHandle(inner.scalar)
             is TypeInner.Matrix -> TypeResolution.ByValue(TypeInner.Vector(inner.rows, inner.scalar))
             is TypeInner.Array -> TypeResolution.ByHandle(inner.element)
-            is TypeInner.Struct -> TypeResolution.ByHandle(inner.members[kind.index].type)
+            is TypeInner.Struct -> TypeResolution.ByHandle(inner.members[kind.index.toInt()].type)
             else -> TypeResolution.ByValue(TypeInner.Error)
         }
     }

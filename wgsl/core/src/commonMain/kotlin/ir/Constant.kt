@@ -34,31 +34,37 @@ sealed class ConstantInner {
     /**
      * A scalar constant value.
      */
+    @Serializable
     data class Scalar(val value: ScalarValue) : ConstantInner()
 
     /**
      * A vector constant value.
      */
+    @Serializable
     data class Vector(val components: List<ScalarValue>) : ConstantInner()
 
     /**
      * A matrix constant value.
      */
+    @Serializable
     data class Matrix(val columns: List<List<ScalarValue>>) : ConstantInner()
 
     /**
      * A zero value of the given type.
      */
+    @Serializable
     data class Zero(val type: Handle<Type>) : ConstantInner()
 
     /**
      * A composite of other constants.
      */
+    @Serializable
     data class Composite(val type: Handle<Type>, val components: List<Handle<Constant>>) : ConstantInner()
 
     /**
      * A constant expression that needs to be evaluated.
      */
+    @Serializable
     data class Expression(val expr: Handle<io.ygdrasil.wgsl.ir.Expression>) : ConstantInner()
 
     override fun toString(): String = when (this) {
