@@ -20,7 +20,7 @@ class PredeclaredEnumsTest : FunSpec({
             mode.category shouldBe "AddressMode"
             mode.value shouldBe "clamp_to_edge"
             mode.span shouldBe span
-            mode shouldBeInstanceOf<AddressMode>()
+            mode.shouldBeInstanceOf<AddressMode>()
         }
         
         test("Repeat has correct properties") {
@@ -183,16 +183,16 @@ class PredeclaredEnumsTest : FunSpec({
             val span = Span(0u, 12u)
             val enumerant = getPredeclaredEnumerant("AddressMode", "clamp_to_edge", span)
             
-            enumerant shouldBeInstanceOf<ClampToEdge>()
-            enumerant?.value shouldBe "clamp_to_edge"
+            enumerant.shouldBeInstanceOf<ClampToEdge>()
+            enumerant.value shouldBe "clamp_to_edge"
         }
         
         test("getPredeclaredEnumerant returns correct FilterMode") {
             val span = Span(0u, 7u)
             val enumerant = getPredeclaredEnumerant("FilterMode", "nearest", span)
             
-            enumerant shouldBeInstanceOf<Nearest>()
-            enumerant?.value shouldBe "nearest"
+            enumerant.shouldBeInstanceOf<Nearest>()
+            enumerant.value shouldBe "nearest"
         }
         
         test("getPredeclaredEnumerant returns null for unknown category") {
@@ -210,7 +210,7 @@ class PredeclaredEnumsTest : FunSpec({
         }
         
         test("allPredeclaredEnumerantCategories contains all categories") {
-            allPredeclaredEnumerantCategories shouldHaveSize 6
+            allPredeclaredEnumerantCategories shouldHaveSize 12
             allPredeclaredEnumerantCategories shouldContain "AddressMode"
             allPredeclaredEnumerantCategories shouldContain "FilterMode"
             allPredeclaredEnumerantCategories shouldContain "MipmapFilterMode"

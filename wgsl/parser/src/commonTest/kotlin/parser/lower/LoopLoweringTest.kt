@@ -18,7 +18,10 @@ class LoopLoweringTest : FunSpec({
         
         val mainFunc = module.functions.toList().first { it.name == "main" }
         val bodyBlock = mainFunc.blocks[mainFunc.body]
-        bodyBlock.statements.any { it is Statement.Loop } shouldBe true
+        val hasLoop = bodyBlock.statements.any { stmt ->
+            stmt is Statement.Loop || (stmt is Statement.Block && mainFunc.blocks[stmt.block].statements.any { it is Statement.Loop })
+        }
+        hasLoop shouldBe true
     }
     
     test("while_loop_should_generate_ir_loop") {

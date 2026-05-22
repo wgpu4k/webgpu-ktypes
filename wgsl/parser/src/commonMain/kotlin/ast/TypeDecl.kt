@@ -220,7 +220,17 @@ data class RayQueryType(
  */
 data class AbstractIntType(
     override val span: Span,
-) : TypeDecl()
+) : TypeDecl() {
+    override fun equals(other: Any?): Boolean {
+        if (this === other) return true
+        if (other !is AbstractIntType) return false
+        return true
+    }
+
+    override fun hashCode(): Int {
+        return this::class.hashCode()
+    }
+}
 
 /**
  * Abstract float type.
@@ -230,7 +240,17 @@ data class AbstractIntType(
  */
 data class AbstractFloatType(
     override val span: Span,
-) : TypeDecl()
+) : TypeDecl() {
+    override fun equals(other: Any?): Boolean {
+        if (this === other) return true
+        if (other !is AbstractFloatType) return false
+        return true
+    }
+
+    override fun hashCode(): Int {
+        return this::class.hashCode()
+    }
+}
 
 /**
  * An enum type reference.

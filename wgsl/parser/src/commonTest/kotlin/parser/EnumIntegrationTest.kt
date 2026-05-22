@@ -52,10 +52,8 @@ class EnumIntegrationTest : FunSpec({
             unit.declarations shouldHaveSize 2
             
             // The variable declaration with enum member access
-            val varDecl = unit.declarations[1] as VariableDeclStatement
-            varDecl.initializer shouldBeInstanceOf<EnumMemberExpr>()
-            
-            val enumMemberExpr = varDecl.initializer as EnumMemberExpr
+            val varDecl = unit.declarations[1] as VariableDecl
+            val enumMemberExpr = varDecl.initializer.shouldBeInstanceOf<EnumMemberExpr>()
             enumMemberExpr.enumDecl.name shouldBe "MyEnum"
             enumMemberExpr.memberName shouldBe "A"
             enumMemberExpr.getEnumTypeName() shouldBe "MyEnum"
@@ -70,10 +68,8 @@ class EnumIntegrationTest : FunSpec({
             
             parser.errors.isEmpty() shouldBe true
             
-            val varDecl = unit.declarations[0] as VariableDeclStatement
-            varDecl.initializer shouldBeInstanceOf<PredeclaredEnumerantExpr>()
-            
-            val enumExpr = varDecl.initializer as PredeclaredEnumerantExpr
+            val varDecl = unit.declarations[0] as VariableDecl
+            val enumExpr = varDecl.initializer.shouldBeInstanceOf<PredeclaredEnumerantExpr>()
             enumExpr.category shouldBe "AddressMode"
             enumExpr.enumerant.value shouldBe "clamp_to_edge"
         }
@@ -98,20 +94,23 @@ class EnumIntegrationTest : FunSpec({
             unit.declarations shouldHaveSize 3
             
             // Enum declaration
-            unit.declarations[0] shouldBeInstanceOf<EnumDecl>()
+            unit.declarations[0].shouldBeInstanceOf<EnumDecl>()
             
             // User-defined enum access (EnumMemberExpr after resolution)
-            val userVar = unit.declarations[1] as VariableDeclStatement
-            userVar.initializer shouldBeInstanceOf<EnumMemberExpr>()
+            val userVar = unit.declarations[1] as VariableDecl
+            userVar.initializer.shouldBeInstanceOf<EnumMemberExpr>()
             
             // Predeclared enumerant access (PredeclaredEnumerantExpr)
-            val predefinedVar = unit.declarations[2] as VariableDeclStatement
-            predefinedVar.initializer shouldBeInstanceOf<PredeclaredEnumerantExpr>()
+            val predefinedVar = unit.declarations[2] as VariableDecl
+            predefinedVar.initializer.shouldBeInstanceOf<PredeclaredEnumerantExpr>()
         }
         
         test("consistent dot notation syntax for accessing values") {
             // Both use the same dot notation syntax
-            val source1 = "let a = MyEnum.Value;"
+            val source1 = """
+                enum MyEnum { Value }
+                let a = MyEnum.Value;
+            """.trimIndent()
             val source2 = "let b = AddressMode.clamp_to_edge;"
             
             val parser1 = Parser(Lexer(source1))
@@ -125,8 +124,8 @@ class EnumIntegrationTest : FunSpec({
             parser2.errors.isEmpty() shouldBe true
             
             // First creates EnumMemberExpr (resolved from MemberAccessExpr), second creates PredeclaredEnumerantExpr
-            (unit1.declarations[0] as VariableDeclStatement).initializer shouldBeInstanceOf<EnumMemberExpr>()
-            (unit2.declarations[0] as VariableDeclStatement).initializer shouldBeInstanceOf<PredeclaredEnumerantExpr>()
+            (unit1.declarations[1] as VariableDecl).initializer.shouldBeInstanceOf<EnumMemberExpr>()
+            (unit2.declarations[0] as VariableDecl).initializer.shouldBeInstanceOf<PredeclaredEnumerantExpr>()
         }
     }
     
@@ -146,7 +145,7 @@ class EnumIntegrationTest : FunSpec({
             
             val structDecl = unit.declarations[1] as StructDecl
             structDecl.members shouldHaveSize 1
-            structDecl.members[0].type shouldBeInstanceOf<NamedType>()
+            structDecl.members[0].type.shouldBeInstanceOf<NamedType>()
             (structDecl.members[0].type as NamedType).name shouldBe "MyEnum"
         }
     }
@@ -168,7 +167,9 @@ class EnumIntegrationTest : FunSpec({
             val source = """
                 enum MyEnum { A, B }
                 fn process(e: MyEnum) { }
-                process(MyEnum.A);
+                fn main() {
+                    process(MyEnum.A);
+                }
             """.trimIndent()
             
             val parser = Parser(Lexer(source))

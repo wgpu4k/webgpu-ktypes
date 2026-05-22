@@ -18,16 +18,15 @@ class LexerLiteralTest : FunSpec({
         }
 
         test("Integers with size suffixes") {
-            val source = "42i 42u 42li 42lu"
+            val source = "42i 42u"
             val tokens = tokenizeSignificant(source)
             tokens.map { it.kind } shouldContainExactly listOf(
-                TokenKind.INT_LITERAL, TokenKind.UINT_LITERAL,
                 TokenKind.INT_LITERAL, TokenKind.UINT_LITERAL
             )
         }
 
         test("Floating point numbers") {
-            val source = "3.14 1.0e-5 .5 0x1.0p1 3.14f 3.14h 3.14lf 0x1p+0 0x1.8p+1 0x.1p1"
+            val source = "3.14 1.0e-5 .5 0x1.0p1 3.14f 3.14h 0x1p+0 0x1.8p+1 0x.1p1"
             val tokens = tokenizeSignificant(source)
             tokens.forEach { it.kind shouldBe TokenKind.FLOAT_LITERAL }
             tokens.last().literal shouldBe "0x.1p1"

@@ -443,4 +443,21 @@ val TokenKind.isRightAssociative: Boolean
 val TokenKind.isBuiltinValue: Boolean
     get() = this in listOf(
         TokenKind.POSITION,
+        TokenKind.VERTEX_INDEX,
+        TokenKind.INSTANCE_INDEX,
+        TokenKind.FRONT_FACING,
+        TokenKind.PRIMITIVE_INDEX,
+        TokenKind.SAMPLE_INDEX,
+        TokenKind.SAMPLE_MASK,
+        TokenKind.VIEWPORT_INDEX,
+        TokenKind.POINTSIZE,
+        TokenKind.CLIP_DISTANCES,
+        TokenKind.CULL_DISTANCES,
+        TokenKind.DEVICE_INDEX,
+        TokenKind.VIEW_INDEX,
+        TokenKind.WORKGROUP_ID,
+        TokenKind.NUM_WORKGROUPS,
+        TokenKind.GLOBAL_INVOCATION_ID,
+        TokenKind.LOCAL_INVOCATION_ID,
+        TokenKind.LOCAL_INVOCATION_INDEX,
     )

@@ -24,10 +24,10 @@ class AbstractTypeLoweringTest : FunSpec({
             val module = lowerer.lower(unit)
             
             // Should have at least one type (the abstract int)
-            module.types.count shouldBe 1
+            module.types.size shouldBe 1
             
-            val type = module.types.get(0)
-            type.inner shouldBeInstanceOf<TypeInner.Abstract>()
+            val type = module.types.toList()[0]
+            type.inner.shouldBeInstanceOf<TypeInner.Abstract>()
             val abstractInner = type.inner as TypeInner.Abstract
             abstractInner.scalar shouldBe ScalarKind.AbstractInt
         }
@@ -41,9 +41,9 @@ class AbstractTypeLoweringTest : FunSpec({
             val module = lowerer.lower(unit)
             
             // Should have the abstract int type for the parameter
-            module.types.count shouldBe 1
-            val type = module.types.get(0)
-            type.inner shouldBeInstanceOf<TypeInner.Abstract>()
+            module.types.size shouldBe 1
+            val type = module.types.toList()[0]
+            type.inner.shouldBeInstanceOf<TypeInner.Abstract>()
             val abstractInner = type.inner as TypeInner.Abstract
             abstractInner.scalar shouldBe ScalarKind.AbstractInt
         }
@@ -59,10 +59,10 @@ class AbstractTypeLoweringTest : FunSpec({
             val module = lowerer.lower(unit)
             
             // Should have at least one type (the abstract float)
-            module.types.count shouldBe 1
+            module.types.size shouldBe 1
             
-            val type = module.types.get(0)
-            type.inner shouldBeInstanceOf<TypeInner.Abstract>()
+            val type = module.types.toList()[0]
+            type.inner.shouldBeInstanceOf<TypeInner.Abstract>()
             val abstractInner = type.inner as TypeInner.Abstract
             abstractInner.scalar shouldBe ScalarKind.AbstractFloat
         }
@@ -76,9 +76,9 @@ class AbstractTypeLoweringTest : FunSpec({
             val module = lowerer.lower(unit)
             
             // Should have the abstract float type
-            module.types.count shouldBe 1
-            val type = module.types.get(0)
-            type.inner shouldBeInstanceOf<TypeInner.Abstract>()
+            module.types.size shouldBe 1
+            val type = module.types.toList()[0]
+            type.inner.shouldBeInstanceOf<TypeInner.Abstract>()
             val abstractInner = type.inner as TypeInner.Abstract
             abstractInner.scalar shouldBe ScalarKind.AbstractFloat
         }
@@ -98,9 +98,9 @@ class AbstractTypeLoweringTest : FunSpec({
             val module = lowerer.lower(unit)
             
             // Should have both abstract types
-            module.types.count shouldBe 2
+            module.types.size shouldBe 2
             
-            val types = module.types.map { it.inner }
+            val types = module.types.toList().map { it.inner }
             val abstractTypes = types.filterIsInstance<TypeInner.Abstract>()
             abstractTypes.size shouldBe 2
             

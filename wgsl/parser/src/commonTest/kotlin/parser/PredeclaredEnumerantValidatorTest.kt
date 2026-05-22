@@ -227,7 +227,7 @@ class PredeclaredEnumerantValidatorTest : FunSpec({
             val source = """
                 fn sample(mode: AddressMode = AddressMode.invalid) {
                 }
-            "".trimIndent()
+            """.trimIndent()
             val parser = Parser(Lexer(source))
             val unit = parser.parse()
             

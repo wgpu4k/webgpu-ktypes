@@ -81,6 +81,8 @@ import io.ygdrasil.wgsl.ast.VariableDeclStatement
 import io.ygdrasil.wgsl.ast.VectorType
 import io.ygdrasil.wgsl.ast.VertexOutput
 import io.ygdrasil.wgsl.ast.WhileStatement
+import io.ygdrasil.wgsl.ast.ExpressionTransformer
+import io.ygdrasil.wgsl.ast.tryResolveToEnumExpr
 import io.ygdrasil.wgsl.ir.Span
 import io.ygdrasil.wgsl.lexer.Lexer
 import io.ygdrasil.wgsl.lexer.Token
@@ -368,6 +370,7 @@ class Parser(
         val members = mutableListOf<StructMember>()
         while (currentKind() != TokenKind.RIGHT_BRACE && !isAtEnd()) {
             if (expect(TokenKind.SEMICOLON)) continue
+            if (expect(TokenKind.COMMA)) continue
             members.add(parseStructMember())
         }
         expectOrError(TokenKind.RIGHT_BRACE, "Expected '}'")
@@ -395,9 +398,9 @@ class Parser(
         }
 
         // Parse name
-        var name = if (currentKind() == TokenKind.IDENTIFIER) {
+        var name = if (currentKind() == TokenKind.IDENTIFIER || currentKind().isBuiltinValue) {
             val nameToken = advance()
-            nameToken.literal ?: ""
+            nameToken.literal ?: nameToken.kind.toString().lowercase()
         } else {
             // T023 fix: If name is missing, try to get it from @builtin attribute
             val builtinAttr = attributes.find { it.name == "builtin" }
@@ -422,7 +425,9 @@ class Parser(
             null
         }
 
-        expectOrError(TokenKind.SEMICOLON, "Expected ';'")
+        if (!expectAny(TokenKind.SEMICOLON, TokenKind.COMMA) && currentKind() != TokenKind.RIGHT_BRACE) {
+            error("Expected ';' or ',' after struct member")
+        }
 
         val end = previousToken?.span?.end ?: currentToken.span.end
         return StructMember(
@@ -1830,13 +1835,19 @@ class Parser(
                     // For now, simple heuristic: if there's a '(' later, it's a call with template args
                     advance()
                     val templateArgs = mutableListOf<TypeDecl>()
-                    while (currentKind() != TokenKind.RIGHT_ANGLE && !isAtEnd()) {
-                        val startToken = currentToken
-                        templateArgs.add(parseTypeDecl())
-                        if (currentKind() == TokenKind.COMMA) {
-                            advance()
+                    val oldInsideTemplate = isInsideTemplate
+                    isInsideTemplate = true
+                    try {
+                        while (currentKind() != TokenKind.RIGHT_ANGLE && !isAtEnd()) {
+                            val startToken = currentToken
+                            templateArgs.add(parseTypeDecl())
+                            if (currentKind() == TokenKind.COMMA) {
+                                advance()
+                            }
+                            if (startToken == currentToken) advance()
                         }
-                        if (startToken == currentToken) advance()
+                    } finally {
+                        isInsideTemplate = oldInsideTemplate
                     }
                     expectOrError(TokenKind.RIGHT_ANGLE, "Expected '>'")
 

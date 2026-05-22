@@ -28,7 +28,7 @@ class PredeclaredEnumerantAllTests : FunSpec({
     
     context("Predeclared enumerant registry") {
         test("all categories are defined") {
-            allPredeclaredEnumerantCategories shouldHaveSize 6
+            allPredeclaredEnumerantCategories shouldHaveSize 12
             allPredeclaredEnumerantCategories shouldContain "AddressMode"
             allPredeclaredEnumerantCategories shouldContain "FilterMode"
             allPredeclaredEnumerantCategories shouldContain "MipmapFilterMode"
@@ -148,12 +148,10 @@ class PredeclaredEnumerantAllTests : FunSpec({
             
             parser.errors.isEmpty() shouldBe true
             
-            val decl = unit.declarations[0] as VariableDeclStatement
-            decl.initializer shouldBeInstanceOf<PredeclaredEnumerantExpr>()
-            
-            val enumExpr = decl.initializer as PredeclaredEnumerantExpr
+            val decl = unit.declarations[0] as VariableDecl
+            val enumExpr = decl.initializer.shouldBeInstanceOf<PredeclaredEnumerantExpr>()
             enumExpr.category shouldBe "AddressMode"
-            enumExpr.enumerant shouldBeInstanceOf<ClampToEdge>()
+            enumExpr.enumerant.shouldBeInstanceOf<ClampToEdge>()
         }
         
         test("FilterMode.nearest") {
@@ -163,10 +161,10 @@ class PredeclaredEnumerantAllTests : FunSpec({
             
             parser.errors.isEmpty() shouldBe true
             
-            val decl = unit.declarations[0] as VariableDeclStatement
-            val enumExpr = decl.initializer as PredeclaredEnumerantExpr
+            val decl = unit.declarations[0] as VariableDecl
+            val enumExpr = decl.initializer.shouldBeInstanceOf<PredeclaredEnumerantExpr>()
             enumExpr.category shouldBe "FilterMode"
-            enumExpr.enumerant shouldBeInstanceOf<Nearest>()
+            enumExpr.enumerant.shouldBeInstanceOf<Nearest>()
         }
         
         test("all AddressMode values parse correctly") {
@@ -178,8 +176,8 @@ class PredeclaredEnumerantAllTests : FunSpec({
                 
                 parser.errors.isEmpty() shouldBe true
                 
-                val decl = unit.declarations[0] as VariableDeclStatement
-                decl.initializer shouldBeInstanceOf<PredeclaredEnumerantExpr>()
+                val decl = unit.declarations[0] as VariableDecl
+                decl.initializer.shouldBeInstanceOf<PredeclaredEnumerantExpr>()
             }
         }
     }
@@ -242,7 +240,7 @@ class PredeclaredEnumerantAllTests : FunSpec({
             unit.declarations shouldHaveSize 3
             
             for (decl in unit.declarations) {
-                (decl as VariableDeclStatement).initializer shouldBeInstanceOf<PredeclaredEnumerantExpr>()
+                (decl as VariableDecl).initializer.shouldBeInstanceOf<PredeclaredEnumerantExpr>()
             }
         }
         
@@ -274,8 +272,8 @@ class PredeclaredEnumerantAllTests : FunSpec({
             // Should parse without errors (falls back to MemberAccessExpr)
             parser.errors.isEmpty() shouldBe true
             
-            val decl = unit.declarations[0] as VariableDeclStatement
-            decl.initializer shouldBeInstanceOf<MemberAccessExpr>()
+            val decl = unit.declarations[0] as VariableDecl
+            decl.initializer.shouldBeInstanceOf<MemberAccessExpr>()
         }
         
         test("mixed valid and invalid enumerants") {

@@ -3,6 +3,7 @@ package io.ygdrasil.wgsl.parser
 import io.kotest.core.spec.style.FunSpec
 import io.kotest.matchers.collections.shouldHaveSize
 import io.kotest.matchers.shouldBe
+import io.kotest.matchers.types.shouldBeInstanceOf
 import io.ygdrasil.wgsl.ast.*
 import io.ygdrasil.wgsl.lexer.Lexer
 
@@ -154,7 +155,7 @@ class PredeclaredEnumerantValidationTest : FunSpec({
         test("all InterpolationType values are valid") {
             val values = listOf("perspective", "linear", "flat")
             for (value in values) {
-                val source = "let type = InterpolationType.$value;"
+                val source = "let x = InterpolationType.$value;"
                 val parser = Parser(Lexer(source))
                 val unit = parser.parse()
                 
@@ -177,7 +178,7 @@ class PredeclaredEnumerantValidationTest : FunSpec({
             val values = listOf("position", "vertex_index", "instance_index", "front_facing", 
                 "primitive_index", "sample_index", "sample_mask", "viewport_index")
             for (value in values) {
-                val source = "let builtin = BuiltinValue.$value;"
+                val source = "let x = BuiltinValue.$value;"
                 val parser = Parser(Lexer(source))
                 val unit = parser.parse()
                 
@@ -219,7 +220,7 @@ class PredeclaredEnumerantValidationTest : FunSpec({
         }
         
         test("InterpolationType.invalid_value generates error") {
-            val source = "let type = InterpolationType.invalid_value;"
+            val source = "let x = InterpolationType.invalid_value;"
             val parser = Parser(Lexer(source))
             val unit = parser.parse()
             
@@ -297,7 +298,7 @@ class PredeclaredEnumerantValidationTest : FunSpec({
         }
         
         test("BuiltinValue.invalid_value generates error") {
-            val source = "let builtin = BuiltinValue.invalid_value;"
+            val source = "let x = BuiltinValue.invalid_value;"
             val parser = Parser(Lexer(source))
             val unit = parser.parse()
             
@@ -326,8 +327,8 @@ class PredeclaredEnumerantValidationTest : FunSpec({
             // Should parse without errors (falls back to MemberAccessExpr)
             parser.errors.isEmpty() shouldBe true
             
-            val decl = unit.declarations[0] as VariableDeclStatement
-            decl.initializer as? MemberAccessExpr shouldBe decl.initializer
+            val decl = unit.declarations[0] as VariableDecl
+            decl.initializer.shouldBeInstanceOf<MemberAccessExpr>()
         }
     }
     
@@ -394,8 +395,8 @@ class PredeclaredEnumerantValidationTest : FunSpec({
             parser.errors shouldHaveSize 1
             
             // The valid one should still be parsed correctly
-            val validDecl = unit.declarations[0] as VariableDeclStatement
-            validDecl.initializer as? PredeclaredEnumerantExpr shouldBe validDecl.initializer
+            val validDecl = unit.declarations[0] as VariableDecl
+            validDecl.initializer.shouldBeInstanceOf<PredeclaredEnumerantExpr>()
         }
     }
 })

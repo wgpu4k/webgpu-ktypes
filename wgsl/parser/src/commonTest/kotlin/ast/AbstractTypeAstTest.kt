@@ -22,7 +22,7 @@ class AbstractTypeAstTest : FunSpec({
             val span = Span(0u, 12u)
             val abstractInt = AbstractIntType(span)
             
-            abstractInt shouldBeInstanceOf<TypeDecl>()
+            abstractInt.shouldBeInstanceOf<TypeDecl>()
             abstractInt.span shouldBe span
         }
         
@@ -31,11 +31,11 @@ class AbstractTypeAstTest : FunSpec({
             val abstractInt = AbstractIntType(span)
             val concreteInt = ScalarType(ScalarKind.I32, span)
             
-            abstractInt shouldBeInstanceOf<AbstractIntType>()
-            abstractInt shouldBeInstanceOf<TypeDecl>()
+            abstractInt.shouldBeInstanceOf<AbstractIntType>()
+            abstractInt.shouldBeInstanceOf<TypeDecl>()
             
-            concreteInt shouldBeInstanceOf<ScalarType>()
-            concreteInt shouldBeInstanceOf<TypeDecl>()
+            concreteInt.shouldBeInstanceOf<ScalarType>()
+            concreteInt.shouldBeInstanceOf<TypeDecl>()
             
             // They should be different types
             abstractInt::class shouldBe AbstractIntType::class
@@ -56,7 +56,7 @@ class AbstractTypeAstTest : FunSpec({
             
             // Should be usable anywhere a TypeDecl is expected
             val typeDecl: TypeDecl = abstractInt
-            typeDecl shouldBeInstanceOf<AbstractIntType>()
+            typeDecl.shouldBeInstanceOf<AbstractIntType>()
         }
     }
     
@@ -65,7 +65,7 @@ class AbstractTypeAstTest : FunSpec({
             val span = Span(0u, 14u)
             val abstractFloat = AbstractFloatType(span)
             
-            abstractFloat shouldBeInstanceOf<TypeDecl>()
+            abstractFloat.shouldBeInstanceOf<TypeDecl>()
             abstractFloat.span shouldBe span
         }
         
@@ -74,11 +74,11 @@ class AbstractTypeAstTest : FunSpec({
             val abstractFloat = AbstractFloatType(span)
             val concreteFloat = ScalarType(ScalarKind.F32, span)
             
-            abstractFloat shouldBeInstanceOf<AbstractFloatType>()
-            abstractFloat shouldBeInstanceOf<TypeDecl>()
+            abstractFloat.shouldBeInstanceOf<AbstractFloatType>()
+            abstractFloat.shouldBeInstanceOf<TypeDecl>()
             
-            concreteFloat shouldBeInstanceOf<ScalarType>()
-            concreteFloat shouldBeInstanceOf<TypeDecl>()
+            concreteFloat.shouldBeInstanceOf<ScalarType>()
+            concreteFloat.shouldBeInstanceOf<TypeDecl>()
             
             // They should be different types
             abstractFloat::class shouldBe AbstractFloatType::class
@@ -99,7 +99,7 @@ class AbstractTypeAstTest : FunSpec({
             
             // Should be usable anywhere a TypeDecl is expected
             val typeDecl: TypeDecl = abstractFloat
-            typeDecl shouldBeInstanceOf<AbstractFloatType>()
+            typeDecl.shouldBeInstanceOf<AbstractFloatType>()
         }
     }
     
@@ -114,10 +114,10 @@ class AbstractTypeAstTest : FunSpec({
             )
             
             types shouldHaveSize 4
-            types[0] shouldBeInstanceOf<AbstractIntType>()
-            types[1] shouldBeInstanceOf<AbstractFloatType>()
-            types[2] shouldBeInstanceOf<ScalarType>()
-            types[3] shouldBeInstanceOf<ScalarType>()
+            types[0].shouldBeInstanceOf<AbstractIntType>()
+            types[1].shouldBeInstanceOf<AbstractFloatType>()
+            types[2].shouldBeInstanceOf<ScalarType>()
+            types[3].shouldBeInstanceOf<ScalarType>()
         }
     }
     
@@ -143,8 +143,8 @@ class AbstractTypeAstTest : FunSpec({
             val abstractInt = AbstractIntType(span)
             val abstractFloat = AbstractFloatType(span)
             
-            abstractInt shouldBeInstanceOf<AbstractIntType>()
-            abstractFloat shouldBeInstanceOf<AbstractFloatType>()
+            abstractInt.shouldBeInstanceOf<AbstractIntType>()
+            abstractFloat.shouldBeInstanceOf<AbstractFloatType>()
             
             // Different types should not be equal
             (abstractInt == abstractFloat) shouldBe false

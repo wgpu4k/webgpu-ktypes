@@ -6,10 +6,12 @@ import io.kotest.matchers.shouldBe
 import io.kotest.matchers.shouldNotBe
 import io.kotest.matchers.types.shouldBeInstanceOf
 import io.ygdrasil.wgsl.ast.*
-import io.ygdrasil.wgsl.ir.ScalarKind
+import io.ygdrasil.wgsl.ir.ScalarKind as IrScalarKind
 import io.ygdrasil.wgsl.ir.TypeInner
+import io.ygdrasil.wgsl.ir.Span
 import io.ygdrasil.wgsl.lexer.Lexer
 import io.ygdrasil.wgsl.lexer.TokenKind
+import io.ygdrasil.wgsl.lexer.isKeyword
 import io.ygdrasil.wgsl.parser.Lowerer
 import io.ygdrasil.wgsl.parser.TypeResolver
 
@@ -212,7 +214,7 @@ class AbstractTypeAllTests : FunSpec({
             unit.declarations shouldHaveSize 1
             
             val decl = unit.declarations[0] as VariableDecl
-            decl.type shouldBeInstanceOf<AbstractIntType>()
+            decl.type.shouldBeInstanceOf<AbstractIntType>()
         }
         
         test("parse abstract float variable") {
@@ -224,7 +226,7 @@ class AbstractTypeAllTests : FunSpec({
             unit.declarations shouldHaveSize 1
             
             val decl = unit.declarations[0] as VariableDecl
-            decl.type shouldBeInstanceOf<AbstractFloatType>()
+            decl.type.shouldBeInstanceOf<AbstractFloatType>()
         }
         
         test("parse abstract int with initializer") {
@@ -234,7 +236,7 @@ class AbstractTypeAllTests : FunSpec({
             
             parser.errors.isEmpty() shouldBe true
             val decl = unit.declarations[0] as VariableDecl
-            decl.type shouldBeInstanceOf<AbstractIntType>()
+            decl.type.shouldBeInstanceOf<AbstractIntType>()
             decl.initializer shouldNotBe null
         }
         
@@ -245,7 +247,7 @@ class AbstractTypeAllTests : FunSpec({
             
             parser.errors.isEmpty() shouldBe true
             val decl = unit.declarations[0] as VariableDecl
-            decl.type shouldBeInstanceOf<AbstractFloatType>()
+            decl.type.shouldBeInstanceOf<AbstractFloatType>()
             decl.initializer shouldNotBe null
         }
         
@@ -257,7 +259,7 @@ class AbstractTypeAllTests : FunSpec({
             parser.errors.isEmpty() shouldBe true
             val func = unit.declarations[0] as FunctionDecl
             func.parameters shouldHaveSize 1
-            func.parameters[0].type shouldBeInstanceOf<AbstractIntType>()
+            func.parameters[0].type.shouldBeInstanceOf<AbstractIntType>()
         }
         
         test("parse abstract float function parameter") {
@@ -268,7 +270,7 @@ class AbstractTypeAllTests : FunSpec({
             parser.errors.isEmpty() shouldBe true
             val func = unit.declarations[0] as FunctionDecl
             func.parameters shouldHaveSize 1
-            func.parameters[0].type shouldBeInstanceOf<AbstractFloatType>()
+            func.parameters[0].type.shouldBeInstanceOf<AbstractFloatType>()
         }
         
         test("parse abstract int return type") {
@@ -278,7 +280,7 @@ class AbstractTypeAllTests : FunSpec({
             
             parser.errors.isEmpty() shouldBe true
             val func = unit.declarations[0] as FunctionDecl
-            func.returnType shouldBeInstanceOf<AbstractIntType>()
+            func.returnType.shouldBeInstanceOf<AbstractIntType>()
         }
         
         test("parse abstract float return type") {
@@ -288,7 +290,7 @@ class AbstractTypeAllTests : FunSpec({
             
             parser.errors.isEmpty() shouldBe true
             val func = unit.declarations[0] as FunctionDecl
-            func.returnType shouldBeInstanceOf<AbstractFloatType>()
+            func.returnType.shouldBeInstanceOf<AbstractFloatType>()
         }
         
         test("parse abstract types in struct") {
@@ -305,8 +307,8 @@ class AbstractTypeAllTests : FunSpec({
             parser.errors.isEmpty() shouldBe true
             val struct = unit.declarations[0] as StructDecl
             struct.members shouldHaveSize 2
-            struct.members[0].type shouldBeInstanceOf<AbstractIntType>()
-            struct.members[1].type shouldBeInstanceOf<AbstractFloatType>()
+            struct.members[0].type.shouldBeInstanceOf<AbstractIntType>()
+            struct.members[1].type.shouldBeInstanceOf<AbstractFloatType>()
         }
         
         test("parse type alias with abstract int") {
@@ -316,7 +318,7 @@ class AbstractTypeAllTests : FunSpec({
             
             parser.errors.isEmpty() shouldBe true
             val typeAlias = unit.declarations[0] as TypeAliasDecl
-            typeAlias.type shouldBeInstanceOf<AbstractIntType>()
+            typeAlias.type.shouldBeInstanceOf<AbstractIntType>()
         }
         
         test("parse type alias with abstract float") {
@@ -326,7 +328,7 @@ class AbstractTypeAllTests : FunSpec({
             
             parser.errors.isEmpty() shouldBe true
             val typeAlias = unit.declarations[0] as TypeAliasDecl
-            typeAlias.type shouldBeInstanceOf<AbstractFloatType>()
+            typeAlias.type.shouldBeInstanceOf<AbstractFloatType>()
         }
     }
     
@@ -369,7 +371,7 @@ class AbstractTypeAllTests : FunSpec({
             val span = Span(0u, 12u)
             val type = AbstractIntType(span)
 
-            type shouldBeInstanceOf<TypeDecl>()
+            type.shouldBeInstanceOf<TypeDecl>()
             type.span shouldBe span
         }
 
@@ -377,7 +379,7 @@ class AbstractTypeAllTests : FunSpec({
             val span = Span(0u, 14u)
             val type = AbstractFloatType(span)
 
-            type shouldBeInstanceOf<TypeDecl>()
+            type.shouldBeInstanceOf<TypeDecl>()
             type.span shouldBe span
         }
 
@@ -386,11 +388,11 @@ class AbstractTypeAllTests : FunSpec({
             val abstractInt = AbstractIntType(span)
             val concreteInt = ScalarType(ScalarKind.I32, span)
 
-            abstractInt shouldBeInstanceOf<AbstractIntType>()
-            abstractInt shouldBeInstanceOf<TypeDecl>()
+            abstractInt.shouldBeInstanceOf<AbstractIntType>()
+            abstractInt.shouldBeInstanceOf<TypeDecl>()
 
-            concreteInt shouldBeInstanceOf<ScalarType>()
-            concreteInt shouldBeInstanceOf<TypeDecl>()
+            concreteInt.shouldBeInstanceOf<ScalarType>()
+            concreteInt.shouldBeInstanceOf<TypeDecl>()
 
             // They should be different types
             abstractInt::class shouldBe AbstractIntType::class
@@ -402,11 +404,11 @@ class AbstractTypeAllTests : FunSpec({
             val abstractFloat = AbstractFloatType(span)
             val concreteFloat = ScalarType(ScalarKind.F32, span)
 
-            abstractFloat shouldBeInstanceOf<AbstractFloatType>()
-            abstractFloat shouldBeInstanceOf<TypeDecl>()
+            abstractFloat.shouldBeInstanceOf<AbstractFloatType>()
+            abstractFloat.shouldBeInstanceOf<TypeDecl>()
 
-            concreteFloat shouldBeInstanceOf<ScalarType>()
-            concreteFloat shouldBeInstanceOf<TypeDecl>()
+            concreteFloat.shouldBeInstanceOf<ScalarType>()
+            concreteFloat.shouldBeInstanceOf<TypeDecl>()
 
             // They should be different types
             abstractFloat::class shouldBe AbstractFloatType::class
@@ -446,10 +448,10 @@ class AbstractTypeAllTests : FunSpec({
             )
 
             types shouldHaveSize 4
-            types[0] shouldBeInstanceOf<AbstractIntType>()
-            types[1] shouldBeInstanceOf<AbstractFloatType>()
-            types[2] shouldBeInstanceOf<ScalarType>()
-            types[3] shouldBeInstanceOf<ScalarType>()
+            types[0].shouldBeInstanceOf<AbstractIntType>()
+            types[1].shouldBeInstanceOf<AbstractFloatType>()
+            types[2].shouldBeInstanceOf<ScalarType>()
+            types[3].shouldBeInstanceOf<ScalarType>()
         }
 
         test("AbstractIntType can be used as a TypeDecl") {
@@ -458,7 +460,7 @@ class AbstractTypeAllTests : FunSpec({
 
             // Should be usable anywhere a TypeDecl is expected
             val typeDecl: TypeDecl = abstractInt
-            typeDecl shouldBeInstanceOf<AbstractIntType>()
+            typeDecl.shouldBeInstanceOf<AbstractIntType>()
         }
 
         test("AbstractFloatType can be used as a TypeDecl") {
@@ -467,7 +469,7 @@ class AbstractTypeAllTests : FunSpec({
 
             // Should be usable anywhere a TypeDecl is expected
             val typeDecl: TypeDecl = abstractFloat
-            typeDecl shouldBeInstanceOf<AbstractFloatType>()
+            typeDecl.shouldBeInstanceOf<AbstractFloatType>()
         }
     }
 
@@ -484,11 +486,11 @@ class AbstractTypeAllTests : FunSpec({
             val lowerer = Lowerer()
             val module = lowerer.lower(unit)
             
-            module.types.count shouldBe 1
-            val type = module.types.get(0)
-            type.inner shouldBeInstanceOf<TypeInner.Abstract>()
+            module.types.size shouldBe 1
+            val type = module.types.toList()[0]
+            type.inner.shouldBeInstanceOf<TypeInner.Abstract>()
             val abstractInner = type.inner as TypeInner.Abstract
-            abstractInner.scalar shouldBe ScalarKind.AbstractInt
+            abstractInner.scalar shouldBe IrScalarKind.AbstractInt
         }
         
         test("lower AbstractFloatType to IR Abstract") {
@@ -499,11 +501,11 @@ class AbstractTypeAllTests : FunSpec({
             val lowerer = Lowerer()
             val module = lowerer.lower(unit)
             
-            module.types.count shouldBe 1
-            val type = module.types.get(0)
-            type.inner shouldBeInstanceOf<TypeInner.Abstract>()
+            module.types.size shouldBe 1
+            val type = module.types.toList()[0]
+            type.inner.shouldBeInstanceOf<TypeInner.Abstract>()
             val abstractInner = type.inner as TypeInner.Abstract
-            abstractInner.scalar shouldBe ScalarKind.AbstractFloat
+            abstractInner.scalar shouldBe IrScalarKind.AbstractFloat
         }
         
         test("lower abstract types in function signature") {
@@ -515,11 +517,11 @@ class AbstractTypeAllTests : FunSpec({
             val module = lowerer.lower(unit)
             
             // Should have both abstract int (parameter) and abstract float (return)
-            val abstractTypes = module.types.map { it.inner }.filterIsInstance<TypeInner.Abstract>()
+            val abstractTypes = module.types.toList().map { it.inner }.filterIsInstance<TypeInner.Abstract>()
             abstractTypes.size shouldBe 2
             
             val scalarKinds = abstractTypes.map { it.scalar }
-            scalarKinds shouldBe listOf(ScalarKind.AbstractInt, ScalarKind.AbstractFloat)
+            scalarKinds shouldBe listOf(IrScalarKind.AbstractInt, IrScalarKind.AbstractFloat)
         }
         
         test("lower abstract types in struct") {
@@ -536,7 +538,7 @@ class AbstractTypeAllTests : FunSpec({
             val lowerer = Lowerer()
             val module = lowerer.lower(unit)
             
-            val abstractTypes = module.types.map { it.inner }.filterIsInstance<TypeInner.Abstract>()
+            val abstractTypes = module.types.toList().map { it.inner }.filterIsInstance<TypeInner.Abstract>()
             abstractTypes.size shouldBe 2
         }
     }
@@ -573,7 +575,7 @@ class AbstractTypeAllTests : FunSpec({
             val module = lowerer.lower(unit)
             
             // Should have at least 2 abstract types (int and float)
-            val abstractTypes = module.types.map { it.inner }.filterIsInstance<TypeInner.Abstract>()
+            val abstractTypes = module.types.toList().map { it.inner }.filterIsInstance<TypeInner.Abstract>()
             abstractTypes.size shouldBe 2
         }
 
@@ -593,16 +595,16 @@ class AbstractTypeAllTests : FunSpec({
 
             // Verify types
             val declA = unit.declarations[0] as VariableDecl
-            declA.type shouldBeInstanceOf<ScalarType>()
+            declA.type.shouldBeInstanceOf<ScalarType>()
 
             val declB = unit.declarations[1] as VariableDecl
-            declB.type shouldBeInstanceOf<AbstractIntType>()
+            declB.type.shouldBeInstanceOf<AbstractIntType>()
 
             val declC = unit.declarations[2] as VariableDecl
-            declC.type shouldBeInstanceOf<ScalarType>()
+            declC.type.shouldBeInstanceOf<ScalarType>()
 
             val declD = unit.declarations[3] as VariableDecl
-            declD.type shouldBeInstanceOf<AbstractFloatType>()
+            declD.type.shouldBeInstanceOf<AbstractFloatType>()
         }
 
         test("parse abstract types with type aliases") {
@@ -622,10 +624,10 @@ class AbstractTypeAllTests : FunSpec({
 
             // First two are type aliases
             val typeAlias1 = unit.declarations[0] as TypeAliasDecl
-            typeAlias1.type shouldBeInstanceOf<AbstractIntType>()
-
+            typeAlias1.type.shouldBeInstanceOf<AbstractIntType>()
+ 
             val typeAlias2 = unit.declarations[1] as TypeAliasDecl
-            typeAlias2.type shouldBeInstanceOf<AbstractFloatType>()
+            typeAlias2.type.shouldBeInstanceOf<AbstractFloatType>()
         }
     }
 })

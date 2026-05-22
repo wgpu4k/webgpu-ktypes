@@ -4,6 +4,7 @@ import io.ygdrasil.wgsl.ast.AbstractFloatType
 import io.ygdrasil.wgsl.ast.AbstractIntType
 import io.ygdrasil.wgsl.ast.ArrayType
 import io.ygdrasil.wgsl.ast.PredeclaredEnumerantExpr
+import io.ygdrasil.wgsl.ast.EnumMemberExpr
 import io.ygdrasil.wgsl.ast.AssignmentStatement
 import io.ygdrasil.wgsl.ast.AtomicType
 import io.ygdrasil.wgsl.ast.Attribute
@@ -554,6 +555,20 @@ class TypeResolver(
             }
 
             is PredeclaredEnumerantExpr -> expr
+            is EnumMemberExpr -> {
+                val memberExists = expr.enumDecl.members.any { it.name == expr.memberName }
+                if (!memberExists) {
+                    unresolved.add(
+                        UnresolvedReferenceError(
+                            name = expr.memberName,
+                            kind = UnresolvedReferenceError.ReferenceKind.VALUE,
+                            span = expr.span,
+                            message = "Unknown enum member: ${expr.memberName} in enum ${expr.enumDecl.name}"
+                        )
+                    )
+                }
+                expr
+            }
         }
     }
 
@@ -1027,6 +1042,19 @@ class TypeResolver(
             }
 
             is PredeclaredEnumerantExpr -> {}
+            is EnumMemberExpr -> {
+                val memberExists = expr.enumDecl.members.any { it.name == expr.memberName }
+                if (!memberExists) {
+                    errors.add(
+                        UnresolvedReferenceError(
+                            name = expr.memberName,
+                            kind = UnresolvedReferenceError.ReferenceKind.VALUE,
+                            span = expr.span,
+                            message = "Unknown enum member: ${expr.memberName} in enum ${expr.enumDecl.name}"
+                        )
+                    )
+                }
+            }
         }
     }
 

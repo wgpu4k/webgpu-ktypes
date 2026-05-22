@@ -25,26 +25,38 @@ sealed interface EnumValue {
 }
 
 /**
+ * Concrete implementation of the EnumValue interface.
+ */
+data class EnumValueImpl(
+    override val name: String,
+    override val value: String?,
+    override val span: Span,
+    private val qualifiedName: String = name
+) : EnumValue {
+    override fun getQualifiedName(): String = qualifiedName
+}
+
+/**
  * Extension to make existing EnumMember compatible with EnumValue interface.
  * This allows EnumMember to be treated as an EnumValue without modifying its original definition.
  */
-fun EnumMember.toEnumValue(): EnumValue = object : EnumValue {
-    override val name: String = this@toEnumValue.name
-    override val value: String? = this@toEnumValue.value?.toString()
-    override val span: Span = this@toEnumValue.span
-    override fun getQualifiedName(): String = name
-}
+fun EnumMember.toEnumValue(): EnumValue = EnumValueImpl(
+    name = name,
+    value = value?.toString(),
+    span = span,
+    qualifiedName = name
+)
 
 /**
  * Extension to make existing PredeclaredEnumerant compatible with EnumValue interface.
  * This allows PredeclaredEnumerant to be treated as an EnumValue without modifying its original definition.
  */
-fun PredeclaredEnumerant.toEnumValue(): EnumValue = object : EnumValue {
-    override val name: String = this@toEnumValue.value
-    override val value: String? = this@toEnumValue.value
-    override val span: Span = this@toEnumValue.span
-    override fun getQualifiedName(): String = "${this@toEnumValue.category}.${this@toEnumValue.value}"
-}
+fun PredeclaredEnumerant.toEnumValue(): EnumValue = EnumValueImpl(
+    name = value,
+    value = value,
+    span = span,
+    qualifiedName = "$category.$value"
+)
 
 /**
  * Base class for all expressions that reference enum values.
@@ -105,7 +117,7 @@ data class EnumMemberExpr(
 fun MemberAccessExpr.tryResolveToEnumExpr(translationUnit: TranslationUnit): Expression {
     // Check if the object is an identifier referencing a user-defined enum
     if (objectExpr is IdentExpr) {
-        val enumName = objectExpr.identifier
+        val enumName = objectExpr.name
         
         // Check if there's a user-defined enum with this name
         val enumDecl = translationUnit.declarations
@@ -140,12 +152,12 @@ abstract class ExpressionTransformer {
     
     private fun transformDeclaration(decl: GlobalDecl): GlobalDecl {
         return when (decl) {
-            is VariableDeclStatement -> {
+            is VariableDecl -> {
                 val initializer = decl.initializer?.let { transform(it) }
                 decl.copy(initializer = initializer)
             }
             is FunctionDecl -> {
-                val body = decl.body?.let { transformStatement(it) }
+                val body = decl.body?.let { transformStatement(it) as BlockStatement }
                 decl.copy(body = body)
             }
             is StructDecl -> {
@@ -155,23 +167,33 @@ abstract class ExpressionTransformer {
                 }
                 decl.copy(members = members)
             }
-            is EnumDecl -> decl
-            is TypeDecl -> decl
+            is EnumDecl -> {
+                val members = decl.members.map { member ->
+                    val value = member.value?.let { transform(it) }
+                    member.copy(value = value)
+                }
+                decl.copy(members = members)
+            }
             is TypeAliasDecl -> decl
-            is OverrideDecl -> decl
-            is ConstAssertDecl -> decl
+            is OverrideDecl -> {
+                val initializer = decl.initializer?.let { transform(it) }
+                decl.copy(initializer = initializer)
+            }
+            is ConstAssertDecl -> {
+                val expression = transform(decl.expression)
+                decl.copy(expression = expression)
+            }
             is DiagnosticDirective -> decl
             is EnableDirective -> decl
             is RequiresDirective -> decl
-            else -> decl
         }
     }
     
     private fun transformStatement(stmt: Statement): Statement {
         return when (stmt) {
             is ExpressionStatement -> {
-                val expr = transform(stmt.expression)
-                stmt.copy(expression = expr)
+                val expr = transform(stmt.expr)
+                stmt.copy(expr = expr)
             }
             is VariableDeclStatement -> {
                 val initializer = stmt.initializer?.let { transform(it) }
@@ -183,13 +205,13 @@ abstract class ExpressionTransformer {
             }
             is IfStatement -> {
                 val condition = transform(stmt.condition)
-                val thenBody = stmt.thenBody?.let { transformStatement(it) }
-                val elseBody = stmt.elseBody?.let { transformStatement(it) }
-                stmt.copy(condition = condition, thenBody = thenBody, elseBody = elseBody)
+                val thenBranch = transformStatement(stmt.thenBranch)
+                val elseBranch = stmt.elseBranch?.let { transformStatement(it) }
+                stmt.copy(condition = condition, thenBranch = thenBranch, elseBranch = elseBranch)
             }
             is ReturnStatement -> {
-                val expression = stmt.expression?.let { transform(it) }
-                stmt.copy(expression = expression)
+                val value = stmt.value?.let { transform(it) }
+                stmt.copy(value = value)
             }
             is AssignmentStatement -> {
                 val lhs = transform(stmt.lhs)
@@ -199,14 +221,25 @@ abstract class ExpressionTransformer {
             is ForStatement -> {
                 val init = stmt.init?.let { transformStatement(it) }
                 val condition = stmt.condition?.let { transform(it) }
-                val update = stmt.update?.let { transformStatement(it) }
-                val body = stmt.body?.let { transformStatement(it) }
+                val update = stmt.update?.let { transform(it) }
+                val body = transformStatement(stmt.body) as BlockStatement
                 stmt.copy(init = init, condition = condition, update = update, body = body)
             }
             is WhileStatement -> {
                 val condition = transform(stmt.condition)
-                val body = stmt.body?.let { transformStatement(it) }
-                stmt.copy(condition = condition, body = body)
+                val body = transformStatement(stmt.body) as BlockStatement
+                val continuing = stmt.continuing?.let { transformStatement(it) as BlockStatement }
+                stmt.copy(condition = condition, body = body, continuing = continuing)
+            }
+            is LoopStatement -> {
+                val body = transformStatement(stmt.body) as BlockStatement
+                val continuing = stmt.continuing?.let { transformStatement(it) as BlockStatement }
+                stmt.copy(body = body, continuing = continuing)
+            }
+            is SwitchStatement -> {
+                val expression = transform(stmt.expression)
+                val body = transformSwitchBody(stmt.body)
+                stmt.copy(expression = expression, body = body)
             }
             is DiscardStatement -> stmt
             is BreakStatement -> stmt
@@ -216,14 +249,36 @@ abstract class ExpressionTransformer {
                 stmt.copy(condition = condition)
             }
             is EmptyStatement -> stmt
-            is ConstAssertStatement -> stmt
-            is PhonyAssignmentStatement -> stmt
-            is IncDecStatement -> {
+            is ConstAssertStatement -> {
                 val expression = transform(stmt.expression)
                 stmt.copy(expression = expression)
             }
-            else -> stmt
+            is PhonyAssignmentStatement -> {
+                val expression = transform(stmt.expression)
+                stmt.copy(expression = expression)
+            }
+            is IncDecStatement -> {
+                val expr = transform(stmt.expr)
+                stmt.copy(expr = expr)
+            }
         }
+    }
+
+    private fun transformSwitchBody(body: SwitchBody): SwitchBody {
+        val cases = body.cases.map { case ->
+            when (case) {
+                is Case -> {
+                    val selectors = case.selectors.map { transform(it) }
+                    val caseBody = transformStatement(case.body) as BlockStatement
+                    case.copy(selectors = selectors, body = caseBody)
+                }
+                is DefaultCase -> {
+                    val caseBody = transformStatement(case.body) as BlockStatement
+                    case.copy(body = caseBody)
+                }
+            }
+        }
+        return body.copy(cases = cases)
     }
     
     /**
@@ -239,18 +294,18 @@ abstract class ExpressionTransformer {
                 expr.copy(left = left, right = right)
             }
             is UnaryExpr -> {
-                val expression = transform(expr.expression)
-                expr.copy(expression = expression)
+                val operand = transform(expr.operand)
+                expr.copy(operand = operand)
             }
             is CallExpr -> {
-                val arguments = expr.arguments.map { transform(it) }
+                val args = expr.args.map { transform(it) }
                 val callee = transform(expr.callee)
-                expr.copy(callee = callee, arguments = arguments)
+                expr.copy(callee = callee, args = args)
             }
             is IndexExpr -> {
-                val expression = transform(expr.expression)
+                val objectExpr = transform(expr.objectExpr)
                 val index = transform(expr.index)
-                expr.copy(expression = expression, index = index)
+                expr.copy(objectExpr = objectExpr, index = index)
             }
             is TernaryExpr -> {
                 val condition = transform(expr.condition)
@@ -259,16 +314,16 @@ abstract class ExpressionTransformer {
                 expr.copy(condition = condition, trueExpr = trueExpr, falseExpr = falseExpr)
             }
             is BitcastExpr -> {
-                val expression = transform(expr.expression)
-                expr.copy(expression = expression)
+                val expression = transform(expr.expr)
+                expr.copy(expr = expression)
             }
             is TypeCastExpr -> {
-                val expression = transform(expr.expression)
-                expr.copy(expression = expression)
+                val expression = transform(expr.expr)
+                expr.copy(expr = expression)
             }
             is SwizzleExpr -> {
-                val expression = transform(expr.expression)
-                expr.copy(expression = expression)
+                val expression = transform(expr.objectExpr)
+                expr.copy(objectExpr = expression)
             }
             is IdentExpr -> expr
             is IntLiteral -> expr
@@ -277,7 +332,6 @@ abstract class ExpressionTransformer {
             is StringLiteral -> expr
             is PredeclaredEnumerantExpr -> expr
             is EnumMemberExpr -> expr
-            else -> expr
         }
     }
     

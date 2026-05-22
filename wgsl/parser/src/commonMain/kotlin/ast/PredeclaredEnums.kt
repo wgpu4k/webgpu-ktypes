@@ -207,6 +207,142 @@ data class ViewportIndex(override val span: Span) : BuiltinValueEnum(span) {
 }
 
 // =============================================================================
+// Wrapping Mode Enumerants
+// =============================================================================
+
+sealed class WrappingMode(override val span: Span) : PredeclaredEnumerant() {
+    override val category: String = "WrappingMode"
+}
+
+data class WrappingClampToEdge(override val span: Span) : WrappingMode(span) {
+    override val value: String = "clamp_to_edge"
+}
+
+data class WrappingRepeat(override val span: Span) : WrappingMode(span) {
+    override val value: String = "repeat"
+}
+
+data class WrappingMirrorRepeat(override val span: Span) : WrappingMode(span) {
+    override val value: String = "mirror_repeat"
+}
+
+// =============================================================================
+// Comparison Function Enumerants
+// =============================================================================
+
+sealed class ComparisonFunction(override val span: Span) : PredeclaredEnumerant() {
+    override val category: String = "ComparisonFunction"
+}
+
+data class Never(override val span: Span) : ComparisonFunction(span) {
+    override val value: String = "never"
+}
+
+data class Less(override val span: Span) : ComparisonFunction(span) {
+    override val value: String = "less"
+}
+
+data class Equal(override val span: Span) : ComparisonFunction(span) {
+    override val value: String = "equal"
+}
+
+data class LessEqual(override val span: Span) : ComparisonFunction(span) {
+    override val value: String = "less_equal"
+}
+
+data class Greater(override val span: Span) : ComparisonFunction(span) {
+    override val value: String = "greater"
+}
+
+data class NotEqual(override val span: Span) : ComparisonFunction(span) {
+    override val value: String = "not_equal"
+}
+
+data class GreaterEqual(override val span: Span) : ComparisonFunction(span) {
+    override val value: String = "greater_equal"
+}
+
+data class Always(override val span: Span) : ComparisonFunction(span) {
+    override val value: String = "always"
+}
+
+// =============================================================================
+// Sampler Address Mode Enumerants
+// =============================================================================
+
+sealed class SamplerAddressMode(override val span: Span) : PredeclaredEnumerant() {
+    override val category: String = "SamplerAddressMode"
+}
+
+data class SamplerClampToEdge(override val span: Span) : SamplerAddressMode(span) {
+    override val value: String = "clamp_to_edge"
+}
+
+data class SamplerRepeat(override val span: Span) : SamplerAddressMode(span) {
+    override val value: String = "repeat"
+}
+
+data class SamplerMirrorRepeat(override val span: Span) : SamplerAddressMode(span) {
+    override val value: String = "mirror_repeat"
+}
+
+data class ClampToBorder(override val span: Span) : SamplerAddressMode(span) {
+    override val value: String = "clamp_to_border"
+}
+
+// =============================================================================
+// Sampler Filter Mode Enumerants
+// =============================================================================
+
+sealed class SamplerFilterMode(override val span: Span) : PredeclaredEnumerant() {
+    override val category: String = "SamplerFilterMode"
+}
+
+data class SamplerNearest(override val span: Span) : SamplerFilterMode(span) {
+    override val value: String = "nearest"
+}
+
+data class SamplerLinear(override val span: Span) : SamplerFilterMode(span) {
+    override val value: String = "linear"
+}
+
+// =============================================================================
+// Sampler Mipmap Filter Mode Enumerants
+// =============================================================================
+
+sealed class SamplerMipmapFilterMode(override val span: Span) : PredeclaredEnumerant() {
+    override val category: String = "SamplerMipmapFilterMode"
+}
+
+data class SamplerMipmapNearest(override val span: Span) : SamplerMipmapFilterMode(span) {
+    override val value: String = "nearest"
+}
+
+data class SamplerMipmapLinear(override val span: Span) : SamplerMipmapFilterMode(span) {
+    override val value: String = "linear"
+}
+
+// =============================================================================
+// Sampler Border Color Enumerants
+// =============================================================================
+
+sealed class SamplerBorderColor(override val span: Span) : PredeclaredEnumerant() {
+    override val category: String = "SamplerBorderColor"
+}
+
+data class TransparentBlack(override val span: Span) : SamplerBorderColor(span) {
+    override val value: String = "transparent_black"
+}
+
+data class OpaqueBlack(override val span: Span) : SamplerBorderColor(span) {
+    override val value: String = "opaque_black"
+}
+
+data class OpaqueWhite(override val span: Span) : SamplerBorderColor(span) {
+    override val value: String = "opaque_white"
+}
+
+// =============================================================================
 // Helper functions
 // =============================================================================
 
@@ -226,6 +362,12 @@ fun getPredeclaredEnumerant(category: String, value: String, span: Span): Predec
             "mirror_repeat" -> MirrorRepeat(span)
             else -> null
         }
+        "WrappingMode" -> when (value) {
+            "clamp_to_edge" -> WrappingClampToEdge(span)
+            "repeat" -> WrappingRepeat(span)
+            "mirror_repeat" -> WrappingMirrorRepeat(span)
+            else -> null
+        }
         "FilterMode" -> when (value) {
             "nearest" -> Nearest(span)
             "linear" -> Linear(span)
@@ -234,6 +376,40 @@ fun getPredeclaredEnumerant(category: String, value: String, span: Span): Predec
         "MipmapFilterMode" -> when (value) {
             "nearest" -> MipmapNearest(span)
             "linear" -> MipmapLinear(span)
+            else -> null
+        }
+        "ComparisonFunction" -> when (value) {
+            "never" -> Never(span)
+            "less" -> Less(span)
+            "equal" -> Equal(span)
+            "less_equal" -> LessEqual(span)
+            "greater" -> Greater(span)
+            "not_equal" -> NotEqual(span)
+            "greater_equal" -> GreaterEqual(span)
+            "always" -> Always(span)
+            else -> null
+        }
+        "SamplerAddressMode" -> when (value) {
+            "clamp_to_edge" -> SamplerClampToEdge(span)
+            "repeat" -> SamplerRepeat(span)
+            "mirror_repeat" -> SamplerMirrorRepeat(span)
+            "clamp_to_border" -> ClampToBorder(span)
+            else -> null
+        }
+        "SamplerFilterMode" -> when (value) {
+            "nearest" -> SamplerNearest(span)
+            "linear" -> SamplerLinear(span)
+            else -> null
+        }
+        "SamplerMipmapFilterMode" -> when (value) {
+            "nearest" -> SamplerMipmapNearest(span)
+            "linear" -> SamplerMipmapLinear(span)
+            else -> null
+        }
+        "SamplerBorderColor" -> when (value) {
+            "transparent_black" -> TransparentBlack(span)
+            "opaque_black" -> OpaqueBlack(span)
+            "opaque_white" -> OpaqueWhite(span)
             else -> null
         }
         "InterpolationType" -> when (value) {
@@ -268,8 +444,14 @@ fun getPredeclaredEnumerant(category: String, value: String, span: Span): Predec
  */
 val allPredeclaredEnumerantCategories: List<String> = listOf(
     "AddressMode",
+    "WrappingMode",
     "FilterMode",
     "MipmapFilterMode",
+    "ComparisonFunction",
+    "SamplerAddressMode",
+    "SamplerFilterMode",
+    "SamplerMipmapFilterMode",
+    "SamplerBorderColor",
     "InterpolationType",
     "InterpolationSampling",
     "BuiltinValue"
@@ -280,8 +462,14 @@ val allPredeclaredEnumerantCategories: List<String> = listOf(
  */
 fun getPredeclaredEnumerantValues(category: String): List<String> = when (category) {
     "AddressMode" -> listOf("clamp_to_edge", "repeat", "mirror_repeat")
+    "WrappingMode" -> listOf("clamp_to_edge", "repeat", "mirror_repeat")
     "FilterMode" -> listOf("nearest", "linear")
     "MipmapFilterMode" -> listOf("nearest", "linear")
+    "ComparisonFunction" -> listOf("never", "less", "equal", "less_equal", "greater", "not_equal", "greater_equal", "always")
+    "SamplerAddressMode" -> listOf("clamp_to_edge", "repeat", "mirror_repeat", "clamp_to_border")
+    "SamplerFilterMode" -> listOf("nearest", "linear")
+    "SamplerMipmapFilterMode" -> listOf("nearest", "linear")
+    "SamplerBorderColor" -> listOf("transparent_black", "opaque_black", "opaque_white")
     "InterpolationType" -> listOf("perspective", "linear", "flat")
     "InterpolationSampling" -> listOf("center", "centroid", "sample")
     "BuiltinValue" -> listOf(

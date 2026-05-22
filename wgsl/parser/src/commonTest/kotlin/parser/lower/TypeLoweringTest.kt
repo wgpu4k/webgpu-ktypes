@@ -87,9 +87,9 @@ class TypeLoweringTest : FunSpec({
         structType shouldNotBe null
         
         val irStruct = structType!!.inner as TypeInner.Struct
-        // Known bug: struct has 3 members due to extra empty member from parsing
-        // Verify that x and y members exist (ignoring the empty one)
-        irStruct.members.size shouldBe 3
+        // Verified: struct has exactly 2 members after the parsing fix
+        // Verify that x and y members exist
+        irStruct.members.size shouldBe 2
         
         // Find members by name
         val xMember = irStruct.members.find { it.name == "x" }

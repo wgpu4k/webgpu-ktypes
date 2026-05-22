@@ -23,10 +23,11 @@ class LexerEnumTest : FunSpec({
         
         test("enum keyword in context") {
             val tokens = Lexer("enum MyEnum {}").tokenizeSignificant()
-            tokens shouldContain TokenKind.ENUM
-            tokens shouldContain TokenKind.IDENTIFIER
-            tokens shouldContain TokenKind.LEFT_BRACE
-            tokens shouldContain TokenKind.RIGHT_BRACE
+            val kinds = tokens.map { it.kind }
+            kinds shouldContain TokenKind.ENUM
+            kinds shouldContain TokenKind.IDENTIFIER
+            kinds shouldContain TokenKind.LEFT_BRACE
+            kinds shouldContain TokenKind.RIGHT_BRACE
         }
     }
     
@@ -35,7 +36,7 @@ class LexerEnumTest : FunSpec({
             val source = "enum Color { RED, GREEN, BLUE }"
             val tokens = Lexer(source).tokenizeSignificant()
             
-            tokens shouldHaveSize 7
+            tokens shouldHaveSize 9
             tokens[0].kind shouldBe TokenKind.ENUM
             tokens[1].kind shouldBe TokenKind.IDENTIFIER
             tokens[1].literal shouldBe "Color"
@@ -45,43 +46,49 @@ class LexerEnumTest : FunSpec({
             tokens[4].kind shouldBe TokenKind.COMMA
             tokens[5].kind shouldBe TokenKind.IDENTIFIER
             tokens[5].literal shouldBe "GREEN"
-            tokens[6].kind shouldBe TokenKind.IDENTIFIER
-            tokens[6].literal shouldBe "BLUE"
+            tokens[6].kind shouldBe TokenKind.COMMA
+            tokens[7].kind shouldBe TokenKind.IDENTIFIER
+            tokens[7].literal shouldBe "BLUE"
+            tokens[8].kind shouldBe TokenKind.RIGHT_BRACE
         }
         
         test("lex enum with explicit values") {
             val source = "enum Status { ACTIVE = 1, INACTIVE = 0 }"
             val tokens = Lexer(source).tokenizeSignificant()
+            val kinds = tokens.map { it.kind }
             
-            tokens shouldContain TokenKind.ENUM
-            tokens shouldContain TokenKind.IDENTIFIER
-            tokens shouldContain TokenKind.ASSIGN
-            tokens shouldContain TokenKind.INT_LITERAL
+            kinds shouldContain TokenKind.ENUM
+            kinds shouldContain TokenKind.IDENTIFIER
+            kinds shouldContain TokenKind.ASSIGN
+            kinds shouldContain TokenKind.INT_LITERAL
         }
         
         test("lex enum with attributes") {
             val source = "@packed enum MyEnum { A, B }"
             val tokens = Lexer(source).tokenizeSignificant()
+            val kinds = tokens.map { it.kind }
             
-            tokens shouldContain TokenKind.AT
-            tokens shouldContain TokenKind.IDENTIFIER
-            tokens shouldContain TokenKind.ENUM
+            kinds shouldContain TokenKind.AT
+            kinds shouldContain TokenKind.IDENTIFIER
+            kinds shouldContain TokenKind.ENUM
         }
         
         test("lex enum with member attributes") {
             val source = "enum MyEnum { @attr1 A, @attr2 B }"
             val tokens = Lexer(source).tokenizeSignificant()
+            val kinds = tokens.map { it.kind }
             
-            tokens shouldContain TokenKind.ENUM
-            tokens shouldContain TokenKind.AT
-            tokens shouldContain TokenKind.IDENTIFIER
+            kinds shouldContain TokenKind.ENUM
+            kinds shouldContain TokenKind.AT
+            kinds shouldContain TokenKind.IDENTIFIER
         }
         
         test("lex enum with trailing comma") {
             val source = "enum Color { RED, GREEN, BLUE, }"
             val tokens = Lexer(source).tokenizeSignificant()
+            val kinds = tokens.map { it.kind }
             
-            tokens shouldContain TokenKind.COMMA
+            kinds shouldContain TokenKind.COMMA
         }
         
         test("lex empty enum") {
@@ -100,22 +107,25 @@ class LexerEnumTest : FunSpec({
         test("lex enum member with uppercase name") {
             val source = "enum Test { UPPERCASE }"
             val tokens = Lexer(source).tokenizeSignificant()
+            val kinds = tokens.map { it.kind }
             
-            tokens shouldContain TokenKind.IDENTIFIER
+            kinds shouldContain TokenKind.IDENTIFIER
         }
         
         test("lex enum member with snake_case name") {
             val source = "enum Test { snake_case }"
             val tokens = Lexer(source).tokenizeSignificant()
+            val kinds = tokens.map { it.kind }
             
-            tokens shouldContain TokenKind.IDENTIFIER
+            kinds shouldContain TokenKind.IDENTIFIER
         }
         
         test("lex enum member with mixed case name") {
             val source = "enum Test { MixedCase }"
             val tokens = Lexer(source).tokenizeSignificant()
+            val kinds = tokens.map { it.kind }
             
-            tokens shouldContain TokenKind.IDENTIFIER
+            kinds shouldContain TokenKind.IDENTIFIER
         }
     }
     
@@ -123,22 +133,25 @@ class LexerEnumTest : FunSpec({
         test("lex enum with integer values") {
             val source = "enum Test { A = 42, B = -5 }"
             val tokens = Lexer(source).tokenizeSignificant()
+            val kinds = tokens.map { it.kind }
             
-            tokens shouldContain TokenKind.INT_LITERAL
+            kinds shouldContain TokenKind.INT_LITERAL
         }
         
         test("lex enum with hex values") {
             val source = "enum Test { A = 0xFF, B = 0x0 }"
             val tokens = Lexer(source).tokenizeSignificant()
+            val kinds = tokens.map { it.kind }
             
-            tokens shouldContain TokenKind.INT_LITERAL
+            kinds shouldContain TokenKind.INT_LITERAL
         }
         
         test("lex enum with float values") {
             val source = "enum Test { A = 3.14 }"
             val tokens = Lexer(source).tokenizeSignificant()
+            val kinds = tokens.map { it.kind }
             
-            tokens shouldContain TokenKind.FLOAT_LITERAL
+            kinds shouldContain TokenKind.FLOAT_LITERAL
         }
     }
     

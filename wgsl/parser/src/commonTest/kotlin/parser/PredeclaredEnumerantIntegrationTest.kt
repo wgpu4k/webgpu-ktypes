@@ -1,6 +1,7 @@
 package io.ygdrasil.wgsl.parser
 
 import io.kotest.core.spec.style.FunSpec
+import io.kotest.matchers.collections.shouldHaveSize
 import io.kotest.matchers.shouldBe
 import io.kotest.matchers.types.shouldBeInstanceOf
 import io.ygdrasil.wgsl.ast.*
@@ -26,7 +27,7 @@ class PredeclaredEnumerantIntegrationTest : FunSpec({
             val unit = parser.parse()
             
             parser.errors.isEmpty() shouldBe true
-            unit.declarations shouldBeInstanceOf<List<GlobalDecl>>()
+            unit.declarations.shouldBeInstanceOf<List<GlobalDecl>>()
         }
         
         test("similar syntax works for both") {
@@ -58,7 +59,7 @@ class PredeclaredEnumerantIntegrationTest : FunSpec({
             parser.errors.isEmpty() shouldBe true
             
             val structDecl = unit.declarations[0] as StructDecl
-            structDecl.members shouldBeInstanceOf<List<StructMember>>()
+            structDecl.members.shouldBeInstanceOf<List<StructMember>>()
             structDecl.members shouldHaveSize 2
         }
         
@@ -69,10 +70,12 @@ class PredeclaredEnumerantIntegrationTest : FunSpec({
                     filterMode: FilterMode,
                 }
                 
-                let sampler = TextureSampler(
-                    AddressMode.clamp_to_edge,
-                    FilterMode.linear
-                );
+                fn main() {
+                    let s = TextureSampler(
+                        AddressMode.clamp_to_edge,
+                        FilterMode.linear
+                    );
+                }
             """.trimIndent()
             
             val parser = Parser(Lexer(source))
@@ -145,7 +148,9 @@ class PredeclaredEnumerantIntegrationTest : FunSpec({
         test("function call with enumerant argument") {
             val source = """
                 fn process(mode: AddressMode) { }
-                process(AddressMode.repeat);
+                fn main() {
+                    process(AddressMode.repeat);
+                }
             """.trimIndent()
             
             val parser = Parser(Lexer(source))
@@ -236,9 +241,11 @@ class PredeclaredEnumerantIntegrationTest : FunSpec({
         
         test("enumerant in if condition") {
             val source = """
-                let mode = AddressMode.repeat;
-                if (mode == AddressMode.repeat) {
-                    let x = 1;
+                fn main() {
+                    let mode = AddressMode.repeat;
+                    if (mode == AddressMode.repeat) {
+                        let x = 1;
+                    }
                 }
             """.trimIndent()
             
@@ -264,11 +271,13 @@ class PredeclaredEnumerantIntegrationTest : FunSpec({
     context("predeclared enumerants in arrays") {
         test("array of AddressMode") {
             val source = """
-                let modes: array<AddressMode, 3> = array<AddressMode, 3>(
-                    AddressMode.clamp_to_edge,
-                    AddressMode.repeat,
-                    AddressMode.mirror_repeat
-                );
+                fn main() {
+                    let modes: array<AddressMode, 3> = array<AddressMode, 3>(
+                        AddressMode.clamp_to_edge,
+                        AddressMode.repeat,
+                        AddressMode.mirror_repeat
+                    );
+                }
             """.trimIndent()
             
             val parser = Parser(Lexer(source))
@@ -281,11 +290,13 @@ class PredeclaredEnumerantIntegrationTest : FunSpec({
     context("predeclared enumerants in switch statements") {
         test("switch on AddressMode") {
             val source = """
-                let mode: AddressMode = AddressMode.clamp_to_edge;
-                switch (mode) {
-                    case AddressMode.clamp_to_edge: { let x = 1; }
-                    case AddressMode.repeat: { let x = 2; }
-                    case AddressMode.mirror_repeat: { let x = 3; }
+                fn main() {
+                    let mode: AddressMode = AddressMode.clamp_to_edge;
+                    switch (mode) {
+                        case AddressMode.clamp_to_edge: { let x = 1; }
+                        case AddressMode.repeat: { let x = 2; }
+                        case AddressMode.mirror_repeat: { let x = 3; }
+                    }
                 }
             """.trimIndent()
             
@@ -305,20 +316,20 @@ class PredeclaredEnumerantIntegrationTest : FunSpec({
                     mipmapMode: MipmapFilterMode,
                 }
                 
-                [[group(0), binding(0)]]
+                @group(0) @binding(0)
                 var texture: texture_2d<f32>;
                 
-                [[group(0), binding(1)]]
-                var sampler: sampler;
+                @group(0) @binding(1)
+                var my_sampler: sampler;
                 
                 struct Uniforms {
                     params: TextureParams,
                 }
                 
-                [[group(0), binding(2)]]
+                @group(0) @binding(2)
                 var<uniform> uniforms: Uniforms;
                 
-                [[stage(fragment)]]
+                @fragment
                 fn main() {
                     let params = uniforms.params;
                     let mode = params.addressMode;
@@ -329,6 +340,9 @@ class PredeclaredEnumerantIntegrationTest : FunSpec({
             val parser = Parser(Lexer(source))
             val unit = parser.parse()
             
+            if (parser.errors.isNotEmpty()) {
+                println("PARSER ERRORS (complex shader test): " + parser.errors.joinToString("\n") { it.message })
+            }
             parser.errors.isEmpty() shouldBe true
         }
     }
@@ -336,18 +350,20 @@ class PredeclaredEnumerantIntegrationTest : FunSpec({
     context("all categories can be used together") {
         test("use all predeclared enumerant categories in one module") {
             val source = """
-                let addr1 = AddressMode.clamp_to_edge;
-                let addr2 = WrappingMode.repeat;
-                let filter1 = FilterMode.nearest;
-                let filter2 = MipmapFilterMode.linear;
-                let cmp = ComparisonFunction.always;
-                let samplerAddr = SamplerAddressMode.clamp_to_border;
-                let samplerFilter = SamplerFilterMode.nearest;
-                let samplerMipmap = SamplerMipmapFilterMode.linear;
-                let samplerColor = SamplerBorderColor.transparent_black;
-                let interpType = InterpolationType.perspective;
-                let interpSample = InterpolationSampling.center;
-                let builtin = BuiltinValue.position;
+                fn main() {
+                    let addr1 = AddressMode.clamp_to_edge;
+                    let addr2 = WrappingMode.repeat;
+                    let filter1 = FilterMode.nearest;
+                    let filter2 = MipmapFilterMode.linear;
+                    let cmp = ComparisonFunction.always;
+                    let samplerAddr = SamplerAddressMode.clamp_to_border;
+                    let samplerFilter = SamplerFilterMode.nearest;
+                    let samplerMipmap = SamplerMipmapFilterMode.linear;
+                    let samplerColor = SamplerBorderColor.transparent_black;
+                    let interpType = InterpolationType.perspective;
+                    let interpSample = InterpolationSampling.center;
+                    let builtinVal = BuiltinValue.position;
+                }
             """.trimIndent()
             
             val parser = Parser(Lexer(source))
@@ -365,8 +381,8 @@ class PredeclaredEnumerantIntegrationTest : FunSpec({
             
             parser.errors.isEmpty() shouldBe true
             
-            val decl = unit.declarations[0] as VariableDeclStatement
-            val enumExpr = decl.initializer as PredeclaredEnumerantExpr
+            val decl = unit.declarations[0] as VariableDecl
+            val enumExpr = decl.initializer.shouldBeInstanceOf<PredeclaredEnumerantExpr>()
             
             enumExpr.category shouldBe "AddressMode"
             enumExpr.enumerant.category shouldBe "AddressMode"
@@ -379,11 +395,11 @@ class PredeclaredEnumerantIntegrationTest : FunSpec({
             val parser1 = Parser(Lexer(source1))
             val unit1 = parser1.parse()
             
-            val decl1 = unit1.declarations[0] as VariableDeclStatement
-            val enumExpr1 = decl1.initializer as PredeclaredEnumerantExpr
+            val decl1 = unit1.declarations[0] as VariableDecl
+            val enumExpr1 = decl1.initializer.shouldBeInstanceOf<PredeclaredEnumerantExpr>()
             
-            // PredeclaredEnumerantExpr devrait étendre EnumValueExpr
-            (enumExpr1 is EnumValueExpr) shouldBe true
+            // PredeclaredEnumerantExpr should extend EnumValueExpr
+            enumExpr1.shouldBeInstanceOf<EnumValueExpr>()
             enumExpr1.getQualifiedName() shouldBe "AddressMode.clamp_to_edge"
         }
     }
@@ -400,8 +416,8 @@ class PredeclaredEnumerantIntegrationTest : FunSpec({
             
             parser.errors.isEmpty() shouldBe true
             
-            val decl = unit.declarations[1] as VariableDeclStatement
-            decl.initializer shouldBeInstanceOf<EnumMemberExpr>()
+            val decl = unit.declarations[1] as VariableDecl
+            decl.initializer.shouldBeInstanceOf<EnumMemberExpr>()
         }
         
         test("predeclared enumerant creates PredeclaredEnumerantExpr") {
@@ -411,8 +427,8 @@ class PredeclaredEnumerantIntegrationTest : FunSpec({
             
             parser.errors.isEmpty() shouldBe true
             
-            val decl = unit.declarations[0] as VariableDeclStatement
-            decl.initializer shouldBeInstanceOf<PredeclaredEnumerantExpr>()
+            val decl = unit.declarations[0] as VariableDecl
+            decl.initializer.shouldBeInstanceOf<PredeclaredEnumerantExpr>()
         }
         
         test("both EnumMemberExpr and PredeclaredEnumerantExpr extend EnumValueExpr") {
@@ -425,10 +441,10 @@ class PredeclaredEnumerantIntegrationTest : FunSpec({
             
             val source2 = "let mode = AddressMode.clamp_to_edge;"
             val parser2 = Parser(Lexer(source2))
-            val val unit2 = parser2.parse()
+            val unit2 = parser2.parse()
             
-            val decl1 = unit1.declarations[1] as VariableDeclStatement
-            val decl2 = unit2.declarations[0] as VariableDeclStatement
+            val decl1 = unit1.declarations[1] as VariableDecl
+            val decl2 = unit2.declarations[0] as VariableDecl
             
             (decl1.initializer is EnumValueExpr) shouldBe true
             (decl2.initializer is EnumValueExpr) shouldBe true

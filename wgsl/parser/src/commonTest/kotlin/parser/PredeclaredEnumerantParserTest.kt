@@ -21,12 +21,10 @@ class PredeclaredEnumerantParserTest : FunSpec({
             parser.errors.isEmpty() shouldBe true
             unit.declarations shouldHaveSize 1
             
-            val decl = unit.declarations[0] as VariableDeclStatement
-            decl.initializer shouldBeInstanceOf<PredeclaredEnumerantExpr>()
-            
-            val enumExpr = decl.initializer as PredeclaredEnumerantExpr
+            val decl = unit.declarations[0] as VariableDecl
+            val enumExpr = decl.initializer.shouldBeInstanceOf<PredeclaredEnumerantExpr>()
             enumExpr.category shouldBe "AddressMode"
-            enumExpr.enumerant shouldBeInstanceOf<ClampToEdge>()
+            enumExpr.enumerant.shouldBeInstanceOf<ClampToEdge>()
             enumExpr.enumerant.value shouldBe "clamp_to_edge"
         }
         
@@ -37,10 +35,10 @@ class PredeclaredEnumerantParserTest : FunSpec({
             
             parser.errors.isEmpty() shouldBe true
             
-            val decl = unit.declarations[0] as VariableDeclStatement
-            val enumExpr = decl.initializer as PredeclaredEnumerantExpr
+            val decl = unit.declarations[0] as VariableDecl
+            val enumExpr = decl.initializer.shouldBeInstanceOf<PredeclaredEnumerantExpr>()
             enumExpr.category shouldBe "AddressMode"
-            enumExpr.enumerant shouldBeInstanceOf<Repeat>()
+            enumExpr.enumerant.shouldBeInstanceOf<Repeat>()
         }
         
         test("parse AddressMode.mirror_repeat") {
@@ -50,10 +48,10 @@ class PredeclaredEnumerantParserTest : FunSpec({
             
             parser.errors.isEmpty() shouldBe true
             
-            val decl = unit.declarations[0] as VariableDeclStatement
-            val enumExpr = decl.initializer as PredeclaredEnumerantExpr
+            val decl = unit.declarations[0] as VariableDecl
+            val enumExpr = decl.initializer.shouldBeInstanceOf<PredeclaredEnumerantExpr>()
             enumExpr.category shouldBe "AddressMode"
-            enumExpr.enumerant shouldBeInstanceOf<MirrorRepeat>()
+            enumExpr.enumerant.shouldBeInstanceOf<MirrorRepeat>()
         }
     }
     
@@ -65,10 +63,10 @@ class PredeclaredEnumerantParserTest : FunSpec({
             
             parser.errors.isEmpty() shouldBe true
             
-            val decl = unit.declarations[0] as VariableDeclStatement
-            val enumExpr = decl.initializer as PredeclaredEnumerantExpr
+            val decl = unit.declarations[0] as VariableDecl
+            val enumExpr = decl.initializer.shouldBeInstanceOf<PredeclaredEnumerantExpr>()
             enumExpr.category shouldBe "FilterMode"
-            enumExpr.enumerant shouldBeInstanceOf<Nearest>()
+            enumExpr.enumerant.shouldBeInstanceOf<Nearest>()
         }
         
         test("parse FilterMode.linear") {
@@ -78,10 +76,10 @@ class PredeclaredEnumerantParserTest : FunSpec({
             
             parser.errors.isEmpty() shouldBe true
             
-            val decl = unit.declarations[0] as VariableDeclStatement
-            val enumExpr = decl.initializer as PredeclaredEnumerantExpr
+            val decl = unit.declarations[0] as VariableDecl
+            val enumExpr = decl.initializer.shouldBeInstanceOf<PredeclaredEnumerantExpr>()
             enumExpr.category shouldBe "FilterMode"
-            enumExpr.enumerant shouldBeInstanceOf<Linear>()
+            enumExpr.enumerant.shouldBeInstanceOf<Linear>()
         }
     }
     
@@ -93,10 +91,10 @@ class PredeclaredEnumerantParserTest : FunSpec({
             
             parser.errors.isEmpty() shouldBe true
             
-            val decl = unit.declarations[0] as VariableDeclStatement
-            val enumExpr = decl.initializer as PredeclaredEnumerantExpr
+            val decl = unit.declarations[0] as VariableDecl
+            val enumExpr = decl.initializer.shouldBeInstanceOf<PredeclaredEnumerantExpr>()
             enumExpr.category shouldBe "MipmapFilterMode"
-            enumExpr.enumerant shouldBeInstanceOf<MipmapNearest>()
+            enumExpr.enumerant.shouldBeInstanceOf<MipmapNearest>()
         }
         
         test("parse MipmapFilterMode.linear") {
@@ -106,51 +104,51 @@ class PredeclaredEnumerantParserTest : FunSpec({
             
             parser.errors.isEmpty() shouldBe true
             
-            val decl = unit.declarations[0] as VariableDeclStatement
-            val enumExpr = decl.initializer as PredeclaredEnumerantExpr
+            val decl = unit.declarations[0] as VariableDecl
+            val enumExpr = decl.initializer.shouldBeInstanceOf<PredeclaredEnumerantExpr>()
             enumExpr.category shouldBe "MipmapFilterMode"
-            enumExpr.enumerant shouldBeInstanceOf<MipmapLinear>()
+            enumExpr.enumerant.shouldBeInstanceOf<MipmapLinear>()
         }
     }
     
     context("InterpolationType enumerants") {
         test("parse InterpolationType.perspective") {
-            val source = "let type = InterpolationType.perspective;"
+            val source = "let x = InterpolationType.perspective;"
             val parser = Parser(Lexer(source))
             val unit = parser.parse()
             
             parser.errors.isEmpty() shouldBe true
             
-            val decl = unit.declarations[0] as VariableDeclStatement
-            val enumExpr = decl.initializer as PredeclaredEnumerantExpr
+            val decl = unit.declarations[0] as VariableDecl
+            val enumExpr = decl.initializer.shouldBeInstanceOf<PredeclaredEnumerantExpr>()
             enumExpr.category shouldBe "InterpolationType"
-            enumExpr.enumerant shouldBeInstanceOf<Perspective>()
+            enumExpr.enumerant.shouldBeInstanceOf<Perspective>()
         }
         
         test("parse InterpolationType.linear") {
-            val source = "let type = InterpolationType.linear;"
+            val source = "let x = InterpolationType.linear;"
             val parser = Parser(Lexer(source))
             val unit = parser.parse()
             
             parser.errors.isEmpty() shouldBe true
             
-            val decl = unit.declarations[0] as VariableDeclStatement
-            val enumExpr = decl.initializer as PredeclaredEnumerantExpr
+            val decl = unit.declarations[0] as VariableDecl
+            val enumExpr = decl.initializer.shouldBeInstanceOf<PredeclaredEnumerantExpr>()
             enumExpr.category shouldBe "InterpolationType"
-            enumExpr.enumerant shouldBeInstanceOf<LinearInterpolation>()
+            enumExpr.enumerant.shouldBeInstanceOf<LinearInterpolation>()
         }
         
         test("parse InterpolationType.flat") {
-            val source = "let type = InterpolationType.flat;"
+            val source = "let x = InterpolationType.flat;"
             val parser = Parser(Lexer(source))
             val unit = parser.parse()
             
             parser.errors.isEmpty() shouldBe true
             
-            val decl = unit.declarations[0] as VariableDeclStatement
-            val enumExpr = decl.initializer as PredeclaredEnumerantExpr
+            val decl = unit.declarations[0] as VariableDecl
+            val enumExpr = decl.initializer.shouldBeInstanceOf<PredeclaredEnumerantExpr>()
             enumExpr.category shouldBe "InterpolationType"
-            enumExpr.enumerant shouldBeInstanceOf<Flat>()
+            enumExpr.enumerant.shouldBeInstanceOf<Flat>()
         }
     }
     
@@ -162,10 +160,10 @@ class PredeclaredEnumerantParserTest : FunSpec({
             
             parser.errors.isEmpty() shouldBe true
             
-            val decl = unit.declarations[0] as VariableDeclStatement
-            val enumExpr = decl.initializer as PredeclaredEnumerantExpr
+            val decl = unit.declarations[0] as VariableDecl
+            val enumExpr = decl.initializer.shouldBeInstanceOf<PredeclaredEnumerantExpr>()
             enumExpr.category shouldBe "InterpolationSampling"
-            enumExpr.enumerant shouldBeInstanceOf<Center>()
+            enumExpr.enumerant.shouldBeInstanceOf<Center>()
         }
         
         test("parse InterpolationSampling.centroid") {
@@ -175,10 +173,10 @@ class PredeclaredEnumerantParserTest : FunSpec({
             
             parser.errors.isEmpty() shouldBe true
             
-            val decl = unit.declarations[0] as VariableDeclStatement
-            val enumExpr = decl.initializer as PredeclaredEnumerantExpr
+            val decl = unit.declarations[0] as VariableDecl
+            val enumExpr = decl.initializer.shouldBeInstanceOf<PredeclaredEnumerantExpr>()
             enumExpr.category shouldBe "InterpolationSampling"
-            enumExpr.enumerant shouldBeInstanceOf<Centroid>()
+            enumExpr.enumerant.shouldBeInstanceOf<Centroid>()
         }
         
         test("parse InterpolationSampling.sample") {
@@ -188,10 +186,10 @@ class PredeclaredEnumerantParserTest : FunSpec({
             
             parser.errors.isEmpty() shouldBe true
             
-            val decl = unit.declarations[0] as VariableDeclStatement
-            val enumExpr = decl.initializer as PredeclaredEnumerantExpr
+            val decl = unit.declarations[0] as VariableDecl
+            val enumExpr = decl.initializer.shouldBeInstanceOf<PredeclaredEnumerantExpr>()
             enumExpr.category shouldBe "InterpolationSampling"
-            enumExpr.enumerant shouldBeInstanceOf<Sample>()
+            enumExpr.enumerant.shouldBeInstanceOf<Sample>()
         }
     }
     
@@ -213,15 +211,15 @@ class PredeclaredEnumerantParserTest : FunSpec({
             // Should create a MemberAccessExpr instead of PredeclaredEnumerantExpr
             // because the category is not recognized
             unit.declarations shouldHaveSize 1
-            val decl = unit.declarations[0] as VariableDeclStatement
+            val decl = unit.declarations[0] as VariableDecl
             // This should still parse as MemberAccessExpr (fallback)
-            decl.initializer shouldBeInstanceOf<MemberAccessExpr>()
+            decl.initializer.shouldBeInstanceOf<MemberAccessExpr>()
         }
     }
     
     context("Usage in function parameters") {
         test("parse predeclared enumerant as function parameter") {
-            val source = "fn sample(mode: AddressMode.clamp_to_edge) { }"
+            val source = "fn sample(mode: AddressMode) { }"
             val parser = Parser(Lexer(source))
             val unit = parser.parse()
             
@@ -229,9 +227,7 @@ class PredeclaredEnumerantParserTest : FunSpec({
             
             val func = unit.declarations[0] as FunctionDecl
             func.parameters shouldHaveSize 1
-            // The parameter type should be a PredeclaredEnumerantExpr
-            // Actually, this is a type annotation, not an expression
-            // So we need to check how type annotations work
+            func.parameters[0].type.shouldBeInstanceOf<NamedType>().name shouldBe "AddressMode"
         }
     }
     
@@ -251,7 +247,7 @@ class PredeclaredEnumerantParserTest : FunSpec({
             unit.declarations shouldHaveSize 4
             
             for (decl in unit.declarations) {
-                (decl as VariableDeclStatement).initializer shouldBeInstanceOf<PredeclaredEnumerantExpr>()
+                (decl as VariableDecl).initializer.shouldBeInstanceOf<PredeclaredEnumerantExpr>()
             }
         }
     }

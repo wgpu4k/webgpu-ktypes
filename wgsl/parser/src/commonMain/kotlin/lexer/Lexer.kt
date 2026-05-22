@@ -455,9 +455,6 @@ class Lexer(
         val nextChar = peekChar()?.lowercaseChar()
         if (nextChar == 'f' || nextChar == 'h') {
             consume()
-        } else if (nextChar == 'l' && peekChar(1)?.lowercaseChar() == 'f') {
-            consume()
-            consume()
         }
 
         val text = source.substring(startIndex, index)

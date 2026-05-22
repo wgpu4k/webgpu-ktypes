@@ -8,6 +8,7 @@ import io.kotest.matchers.shouldBe
 import io.kotest.matchers.types.shouldBeInstanceOf
 import io.ygdrasil.wgsl.ast.EnumDecl
 import io.ygdrasil.wgsl.ast.EnumMember
+import io.ygdrasil.wgsl.ast.EnumMemberExpr
 import io.ygdrasil.wgsl.ast.EnumType
 import io.ygdrasil.wgsl.ast.Expression
 import io.ygdrasil.wgsl.ast.FunctionDecl
@@ -100,8 +101,7 @@ class TypeResolverEnumTest : FunSpec({
         val varDecl = result.resolvedUnit.declarations[1].shouldBeInstanceOf<VariableDecl>()
         varDecl.name shouldBe "myColor"
         varDecl.type.shouldNotBeNull()
-        varDecl.type.shouldBeInstanceOf<NamedType>()
-        (varDecl.type as NamedType).name shouldBe "Color"
+        varDecl.type.shouldBeInstanceOf<EnumType>().name shouldBe "Color"
     }
 
     test("resolve enum type reference in function parameter") {
@@ -125,8 +125,7 @@ class TypeResolverEnumTest : FunSpec({
         
         val param = funcDecl.parameters[0]
         param.name shouldBe "d"
-        param.type.shouldBeInstanceOf<NamedType>()
-        (param.type as NamedType).name shouldBe "Direction"
+        param.type.shouldBeInstanceOf<EnumType>().name shouldBe "Direction"
     }
 
     test("resolve enum member access") {
@@ -146,10 +145,8 @@ class TypeResolverEnumTest : FunSpec({
         val varDecl = result.resolvedUnit.declarations[1].shouldBeInstanceOf<VariableDecl>()
         varDecl.name shouldBe "c"
         varDecl.initializer.shouldNotBeNull()
-        varDecl.initializer.shouldBeInstanceOf<MemberAccessExpr>()
-        
-        val memberAccess = varDecl.initializer as MemberAccessExpr
-        memberAccess.member shouldBe "RED"
+        val enumMemberExpr = varDecl.initializer.shouldBeInstanceOf<EnumMemberExpr>()
+        enumMemberExpr.memberName shouldBe "RED"
     }
 
     // ========== Error Cases ==========
@@ -182,7 +179,7 @@ class TypeResolverEnumTest : FunSpec({
         val result = resolver.resolve(parseResult)
         
         result.isSuccess shouldBe false
-        result.unresolvedReferences shouldHaveSize 1
+        result.unresolvedReferences shouldHaveSize 2
         result.unresolvedReferences[0].name shouldBe "UnknownEnum"
     }
 
@@ -292,7 +289,7 @@ class TypeResolverEnumTest : FunSpec({
         
         // Validate the resolved unit
         val errors = resolver.validateResolution(result.resolvedUnit)
-        errors shouldBeEmpty ()
+        errors.shouldBeEmpty()
     }
 
     test("validate enum with invalid member access") {
@@ -331,11 +328,7 @@ class TypeResolverEnumTest : FunSpec({
         val paramType = funcDecl.parameters[0].type
         
         // When a NamedType references an enum, it should be resolved to EnumType
-        // But in the current implementation, NamedType is kept and validated
-        // The actual type checking happens in validation
-        // For now, we just verify the NamedType references the enum correctly
-        paramType.shouldBeInstanceOf<NamedType>()
-        (paramType as NamedType).name shouldBe "MyEnum"
+        paramType.shouldBeInstanceOf<EnumType>().name shouldBe "MyEnum"
     }
 
     // ========== Edge Cases ==========
@@ -352,7 +345,7 @@ class TypeResolverEnumTest : FunSpec({
         
         val enumDecl = result.resolvedUnit.declarations[0].shouldBeInstanceOf<EnumDecl>()
         enumDecl.name shouldBe "Empty"
-        enumDecl.members shouldBeEmpty ()
+        enumDecl.members.shouldBeEmpty()
     }
 
     test("enum with trailing comma") {
