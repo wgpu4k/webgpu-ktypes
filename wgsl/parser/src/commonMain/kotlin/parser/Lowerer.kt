@@ -517,6 +517,62 @@ class Lowerer {
                 IrStatement.Nop
             }
             is DiagnosticStatement -> IrStatement.Nop
+            is DiscardStatement -> IrStatement.Discard
+            is SwitchStatement -> {
+                val selector = lowerExpression(astStmt.expression)
+                
+                var defaultBlock: Handle<io.ygdrasil.wgsl.ir.Block>? = null
+                val irCases = mutableListOf<io.ygdrasil.wgsl.ir.Case>()
+                
+                for (case in astStmt.body.cases) {
+                    when (case) {
+                        is DefaultCase -> {
+                            defaultBlock = lowerBlock(case.body)
+                            irCases.add(io.ygdrasil.wgsl.ir.Case(io.ygdrasil.wgsl.ir.CaseSelector.Default(), defaultBlock))
+                        }
+                        is Case -> {
+                            val bodyHandle = lowerBlock(case.body)
+                            
+                            if (case.isDefault) {
+                                defaultBlock = bodyHandle
+                            }
+                            
+                            for (selectorExpr in case.selectors) {
+                                val irSelector = when (selectorExpr) {
+                                    is IntLiteral -> {
+                                        val scalar = if (selectorExpr.suffix == "u") {
+                                            IrScalarValue.U32(selectorExpr.value)
+                                        } else {
+                                            IrScalarValue.I32(selectorExpr.value.toInt())
+                                        }
+                                        io.ygdrasil.wgsl.ir.CaseSelector.Value(scalar)
+                                    }
+                                    is BoolLiteral -> {
+                                        io.ygdrasil.wgsl.ir.CaseSelector.Value(IrScalarValue.Bool(selectorExpr.value))
+                                    }
+                                    is IdentExpr -> {
+                                        if (selectorExpr.name == "default") {
+                                            io.ygdrasil.wgsl.ir.CaseSelector.Default()
+                                        } else {
+                                            throw LoweringError("Unsupported case selector identifier: '${selectorExpr.name}'")
+                                        }
+                                    }
+                                    else -> throw LoweringError("Unsupported case selector expression type: ${selectorExpr::class.simpleName}")
+                                }
+                                
+                                irCases.add(io.ygdrasil.wgsl.ir.Case(irSelector, bodyHandle))
+                            }
+                            
+                            if (case.selectors.isEmpty() && case.isDefault) {
+                                irCases.add(io.ygdrasil.wgsl.ir.Case(io.ygdrasil.wgsl.ir.CaseSelector.Default(), bodyHandle))
+                            }
+                        }
+                    }
+                }
+                
+                val switchBodyBlock = currentBlocks!!.append(io.ygdrasil.wgsl.ir.Block(emptyList()))
+                IrStatement.Switch(selector, switchBodyBlock, defaultBlock, irCases)
+            }
             is IncDecStatement -> {
                 val pointer = lowerExpression(astStmt.expr)
                 

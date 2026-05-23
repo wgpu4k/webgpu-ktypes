@@ -180,4 +180,68 @@ class StatementLoweringTest : FunSpec({
         binding.group shouldBe 2
         binding.index shouldBe 5
     }
+
+    test("T021: should lower discard statement") {
+        val module = lowerWgsl("""
+            @fragment
+            fn main() {
+                discard;
+            }
+        """)
+        
+        val mainFunc = module.functions.toList().first { func -> func.name == "main" }
+        val bodyBlock = mainFunc.blocks[mainFunc.body]
+        bodyBlock.statements shouldHaveSize 1
+        bodyBlock.statements[0] shouldBe io.ygdrasil.wgsl.ir.Statement.Discard
+    }
+
+    test("T022: should lower switch statement with multiple selectors and default") {
+        val module = lowerWgsl("""
+            fn main() {
+                var material: i32 = 2;
+                var result: i32 = 0;
+                switch (material) {
+                    case 1: { result = 10; }
+                    case 2, 3: { result = 20; }
+                    default: { result = 0; }
+                }
+            }
+        """)
+        
+        val mainFunc = module.functions.toList().first { func -> func.name == "main" }
+        val bodyBlock = mainFunc.blocks[mainFunc.body]
+        bodyBlock.statements shouldHaveSize 3
+        
+        bodyBlock.statements[2] should beInstanceOf<io.ygdrasil.wgsl.ir.Statement.Switch>()
+        val switchStmt = bodyBlock.statements[2] as io.ygdrasil.wgsl.ir.Statement.Switch
+        
+        // Assert cases
+        switchStmt.cases shouldHaveSize 4 // case 1, case 2, case 3, and default (Naga maps multiple selectors and default as separate cases)
+        
+        // 1st case: value 1
+        val case1 = switchStmt.cases[0]
+        case1.selector should beInstanceOf<io.ygdrasil.wgsl.ir.CaseSelector.Value>()
+        val val1 = case1.selector as io.ygdrasil.wgsl.ir.CaseSelector.Value
+        val1.value should beInstanceOf<io.ygdrasil.wgsl.ir.ScalarValue.I32>()
+        (val1.value as io.ygdrasil.wgsl.ir.ScalarValue.I32).value shouldBe 1
+        
+        // 2nd case: value 2
+        val case2 = switchStmt.cases[1]
+        case2.selector should beInstanceOf<io.ygdrasil.wgsl.ir.CaseSelector.Value>()
+        val val2 = case2.selector as io.ygdrasil.wgsl.ir.CaseSelector.Value
+        (val2.value as io.ygdrasil.wgsl.ir.ScalarValue.I32).value shouldBe 2
+        
+        // 3rd case: value 3
+        val case3 = switchStmt.cases[2]
+        case3.selector should beInstanceOf<io.ygdrasil.wgsl.ir.CaseSelector.Value>()
+        val val3 = case3.selector as io.ygdrasil.wgsl.ir.CaseSelector.Value
+        (val3.value as io.ygdrasil.wgsl.ir.ScalarValue.I32).value shouldBe 3
+        
+        // 4th case: default
+        val case4 = switchStmt.cases[3]
+        case4.selector should beInstanceOf<io.ygdrasil.wgsl.ir.CaseSelector.Default>()
+        
+        // Default case handle must not be null
+        switchStmt.default shouldNotBe null
+    }
 })
