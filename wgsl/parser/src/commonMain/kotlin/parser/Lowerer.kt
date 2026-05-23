@@ -505,7 +505,45 @@ class Lowerer {
                 IrStatement.Nop
             }
             is DiagnosticStatement -> IrStatement.Nop
-            else -> IrStatement.Nop
+            is IncDecStatement -> {
+                val pointer = lowerExpression(astStmt.expr)
+                
+                // 1. Resolve type of pointer
+                val objExprKind = currentExpressions!![pointer].kind
+                val objTypeHandle = when (objExprKind) {
+                    is IrExpressionKind.LocalVar -> currentLocalVars!![objExprKind.handle].type
+                    is IrExpressionKind.GlobalVar -> module.globalVariables[objExprKind.handle].type
+                    is IrExpressionKind.FunctionArgument -> {
+                        val func = currentFunction?.let { module.functions[it] }
+                            ?: throw LoweringError("Function context missing for IncDecStatement argument")
+                        func.parameters[objExprKind.index].type
+                    }
+                    else -> null
+                }
+                
+                // 2. Choose correct 1 literal based on variable type
+                val scalarValue = when (val inner = objTypeHandle?.let { module.types[it].inner }) {
+                    is IrTypeInner.Scalar -> when (inner.kind) {
+                        IrScalarKind.Uint -> IrScalarValue.U32(1L)
+                        IrScalarKind.F32 -> IrScalarValue.F32(1.0f)
+                        else -> IrScalarValue.I32(1)
+                    }
+                    else -> IrScalarValue.I32(1)
+                }
+                
+                val oneExpr = currentExpressions!!.append(
+                    IrExpression(IrExpressionKind.Literal(IrLiteralValue.Scalar(scalarValue)))
+                )
+                
+                // 3. Create Assign statement with Binary addition/subtraction
+                val op = if (astStmt.isIncrement) IrBinaryOperator.Add else IrBinaryOperator.Subtract
+                val binaryExpr = currentExpressions!!.append(
+                    IrExpression(IrExpressionKind.Binary(op, pointer, oneExpr))
+                )
+                
+                IrStatement.Assign(pointer, binaryExpr)
+            }
+            else -> throw LoweringError("Unsupported statement type: ${astStmt::class.simpleName}")
         }
     }
 
