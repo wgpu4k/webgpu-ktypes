@@ -123,6 +123,29 @@ abstract class GoldenTestBase(val backendName: String) : FunSpec({
                         } catch (e: AssertionError) {
                             handleGoldenError(fileName, backendName, "comparison", e)
                         }
+
+                        // Proposition 3 : Validation par Round-Trip Sémantique d'Isomorphisme d'IR
+                        try {
+                            val unitRoundtrip = io.ygdrasil.wgsl.parser.parseWgsl(output)
+                            val resolverRoundtrip = io.ygdrasil.wgsl.parser.TypeResolver()
+                            val resolutionResultRoundtrip = resolverRoundtrip.resolve(unitRoundtrip)
+                            if (!resolutionResultRoundtrip.isSuccess) {
+                                throw GoldenTestException(
+                                    fileName, backendName, "roundtrip-type-resolution",
+                                    "Unresolved references in roundtrip AST: ${resolutionResultRoundtrip.unresolvedReferences}"
+                                )
+                            }
+                            val lowererRoundtrip = io.ygdrasil.wgsl.parser.Lowerer()
+                            val moduleRoundtrip = lowererRoundtrip.lower(resolutionResultRoundtrip.resolvedUnit)
+
+                            val irWriter = io.ygdrasil.wgsl.back.IrWriter()
+                            val jsonOriginal = irWriter.write(module, io.ygdrasil.wgsl.valid.ModuleInfo())
+                            val jsonRoundtrip = irWriter.write(moduleRoundtrip, io.ygdrasil.wgsl.valid.ModuleInfo())
+
+                            jsonRoundtrip shouldBe jsonOriginal
+                        } catch (e: Exception) {
+                            handleGoldenError(fileName, backendName, "roundtrip-semantic-isomorphism", e)
+                        }
                     } else {
                         try {
                             output shouldBe expected

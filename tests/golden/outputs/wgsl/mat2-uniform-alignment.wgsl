@@ -4,12 +4,9 @@ struct Struct_3 {
     b: mat2x2<f32>,
 }
 @group(0) @binding(0)
-var<uniform> global_0: Struct_3;
-
-fn main() {
-    Struct_3 local_0 = global_0;
-}
+var<uniform> u: Struct_3;
 
 @compute
 fn main() {
+    var v: Struct_3 = u;
 }

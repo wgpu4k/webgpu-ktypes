@@ -93,23 +93,20 @@ class WgslWriter(
         val func = module.functions[ep.function]
         val returnType = func.returnType?.let { " -> ${getTypeName(it)}" } ?: ""
         
+        currentFunction = func
+        
         write("fn ${ep.name}(")
         
         val args = mutableListOf<String>()
-        
-        ep.bindings.forEach { attr ->
-            when (attr) {
-                is BindingAttribute.Builtin -> {
-                    val typeName = getWgslBuiltinType(attr.builtin)
-                    val name = attr.builtin.name.lowercase()
-                    args.add("@builtin(${getWgslBuiltinName(attr.builtin)}) $name: $typeName")
-                }
-                is BindingAttribute.Location -> {
-                    val typeName = "vec4<f32>" 
-                    val name = "loc_${attr.location}"
-                    args.add("@location(${attr.location}) $name: $typeName")
-                }
-                else -> {}
+        func.parameters.forEach { param ->
+            val typeName = getTypeName(param.type)
+            val binding = param.binding
+            if (binding is BindingAttribute.Builtin) {
+                args.add("@builtin(${getWgslBuiltinName(binding.builtin)}) ${param.name}: $typeName")
+            } else if (binding is BindingAttribute.Location) {
+                args.add("@location(${binding.location}) ${param.name}: $typeName")
+            } else {
+                args.add("${param.name}: $typeName")
             }
         }
 
@@ -119,6 +116,24 @@ class WgslWriter(
             writeBlock(func.body)
         }
         writeLine("}")
+        
+        currentFunction = null
+    }
+
+    override fun writeFunction(func: Function, handle: Handle<Function>) {
+        val isEntryPoint = module.entryPoints.any { it.function == handle }
+        if (isEntryPoint) return // written via writeEntryPoint
+        super.writeFunction(func, handle)
+    }
+
+    override fun getGlobalVariableName(handle: Handle<GlobalVariable>): String {
+        val variable = module.globalVariables[handle]
+        return variable.name.ifEmpty { "global_${handle.index}" }
+    }
+
+    override fun getLocalVariableName(handle: Handle<LocalVariable>): String {
+        val variable = currentFunction?.localVariables?.get(handle)
+        return variable?.name?.ifEmpty { null } ?: "local_${handle.index}"
     }
 
     override fun writeExpression(handle: Handle<Expression>): String {
@@ -216,8 +231,46 @@ class WgslWriter(
                 }
                 "ptr<$space, $baseName$mode>"
             }
+            is TypeInner.ValuePointer -> {
+                val baseName = getTypeName(inner.base)
+                "ptr<function, $baseName>"
+            }
+            is TypeInner.Array -> {
+                val elementTypeName = getTypeName(inner.element)
+                val sizeStr = when (val size = inner.size) {
+                    is ArraySize.Constant -> size.value.toString()
+                    is ArraySize.Dynamic -> ""
+                }
+                if (sizeStr.isNotEmpty()) "array<$elementTypeName, $sizeStr>" else "array<$elementTypeName>"
+            }
+            is TypeInner.Abstract -> {
+                when (inner.scalar) {
+                    ScalarKind.AbstractInt -> "abstract-int"
+                    ScalarKind.AbstractFloat -> "abstract-float"
+                    else -> "/* unknown abstract */"
+                }
+            }
             is TypeInner.Opaque -> inner.name
             else -> "/* unknown type */"
+        }
+    }
+
+    override fun writeStatement(stmt: Statement) {
+        when (stmt) {
+            is Statement.Declare -> {
+                val variable = currentFunction!!.localVariables[stmt.variable]
+                val name = getLocalVariableName(stmt.variable)
+                val typeName = getTypeName(variable.type)
+                writeLine("var $name: $typeName;")
+            }
+            is Statement.Init -> {
+                val variable = currentFunction!!.localVariables[stmt.variable]
+                val name = getLocalVariableName(stmt.variable)
+                val typeName = getTypeName(variable.type)
+                val init = variable.init?.let { writeExpression(it) } ?: "/* error: no init */"
+                writeLine("var $name: $typeName = $init;")
+            }
+            else -> super.writeStatement(stmt)
         }
     }
 
