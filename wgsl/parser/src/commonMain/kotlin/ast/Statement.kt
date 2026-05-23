@@ -123,7 +123,7 @@ data class ForStatement(
     /** The condition (checked before each iteration). */
     val condition: Expression?,
     /** The update expression (executed after each iteration). */
-    val update: Expression?,
+    val update: Statement?,
     /** The body of the loop. */
     val body: BlockStatement,
     override val span: Span,
@@ -233,5 +233,16 @@ data class ExpressionStatement(
 data class ConstAssertStatement(
     /** The expression to assert. */
     val expression: Expression,
+    override val span: Span,
+) : Statement()
+
+/**
+ * A diagnostic statement.
+ */
+data class DiagnosticStatement(
+    /** The severity level. */
+    val severity: String,
+    /** The diagnostic rule. */
+    val rule: String,
     override val span: Span,
 ) : Statement()

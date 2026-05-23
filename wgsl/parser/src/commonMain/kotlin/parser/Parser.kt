@@ -25,6 +25,7 @@ import io.ygdrasil.wgsl.ast.ConstantType
 import io.ygdrasil.wgsl.ast.ContinueStatement
 import io.ygdrasil.wgsl.ast.DefaultCase
 import io.ygdrasil.wgsl.ast.DiagnosticDirective
+import io.ygdrasil.wgsl.ast.DiagnosticStatement
 import io.ygdrasil.wgsl.ast.DiscardStatement
 import io.ygdrasil.wgsl.ast.EmptyStatement
 import io.ygdrasil.wgsl.ast.EnableDirective
@@ -632,7 +633,7 @@ class Parser(
 
         val end = previousToken?.span?.end ?: currentToken.span.end
         return TypeAliasDecl(
-            attributes = emptyList(), // TODO: parse attributes
+            attributes = attributes,
             name = name,
             templateParams = templateParams,
             type = type,
@@ -1833,6 +1834,19 @@ class Parser(
                     // This could be a comparison, but in postfix position it's likely template args
                     // e.g. vec4<f32>(...)
                     // For now, simple heuristic: if there's a '(' later, it's a call with template args
+                    val isTemplate = if (left is IdentExpr) {
+                        val name = left.name
+                        name == "vec" || name == "vec2" || name == "vec3" || name == "vec4" ||
+                        name == "mat" || name.startsWith("mat") ||
+                        name == "array" || name == "atomic" || name == "ptr" ||
+                        name.startsWith("texture_")
+                    } else {
+                        false
+                    }
+
+                    if (!isTemplate) {
+                        break
+                    }
                     advance()
                     val templateArgs = mutableListOf<TypeDecl>()
                     val oldInsideTemplate = isInsideTemplate
@@ -1926,25 +1940,6 @@ class Parser(
                     left = IndexExpr(left, index, Span(start, end))
                 }
 
-                TokenKind.INCREMENT -> {
-                    advance()
-                    // Postfix increment
-                    val start = left.span.start
-                    val end = currentToken.span.end
-                    // For now, return the left expression
-                    // TODO: proper increment expression
-                    left = left
-                }
-
-                TokenKind.DECREMENT -> {
-                    advance()
-                    // Postfix decrement
-                    val start = left.span.start
-                    val end = currentToken.span.end
-                    // For now, return the left expression
-                    // TODO: proper decrement expression
-                    left = left
-                }
 
                 else -> break
             }
@@ -2090,7 +2085,7 @@ class Parser(
             TokenKind.FOR -> parseForStatement()
             TokenKind.DIAGNOSTIC -> {
                 val directive = parseDiagnosticDirective()
-                ExpressionStatement(IdentExpr("diagnostic", directive.span), directive.span) // TODO: Better AST representation for local diagnostics
+                DiagnosticStatement(directive.severity, directive.rule, directive.span)
             }
             TokenKind.BREAK -> {
                 advance()
@@ -2391,7 +2386,29 @@ class Parser(
 
         // Parse update
         val update = if (currentKind() != TokenKind.RIGHT_PAREN && currentKind() != TokenKind.LEFT_BRACE) {
-            parseExpression()
+            val expr = parseExpression()
+            when (currentKind()) {
+                TokenKind.ASSIGN, TokenKind.PLUS_ASSIGN, TokenKind.MINUS_ASSIGN,
+                TokenKind.STAR_ASSIGN, TokenKind.SLASH_ASSIGN, TokenKind.PERCENT_ASSIGN,
+                TokenKind.AND_ASSIGN, TokenKind.OR_ASSIGN, TokenKind.XOR_ASSIGN,
+                TokenKind.LEFT_SHIFT_ASSIGN, TokenKind.RIGHT_SHIFT_ASSIGN -> {
+                    val op = currentKind()
+                    advance()
+                    val rhs = parseExpression()
+                    AssignmentStatement(expr, rhs, mapAssignmentOp(op), Span(expr.span.start, previousToken?.span?.end ?: expr.span.end))
+                }
+                TokenKind.INCREMENT -> {
+                    advance()
+                    IncDecStatement(expr, true, Span(expr.span.start, previousToken?.span?.end ?: expr.span.end))
+                }
+                TokenKind.DECREMENT -> {
+                    advance()
+                    IncDecStatement(expr, false, Span(expr.span.start, previousToken?.span?.end ?: expr.span.end))
+                }
+                else -> {
+                    ExpressionStatement(expr, Span(expr.span.start, expr.span.end))
+                }
+            }
         } else {
             null
         }

@@ -22,6 +22,7 @@ import io.ygdrasil.wgsl.ast.ConstantType
 import io.ygdrasil.wgsl.ast.ContinueStatement
 import io.ygdrasil.wgsl.ast.DefaultCase
 import io.ygdrasil.wgsl.ast.DiagnosticDirective
+import io.ygdrasil.wgsl.ast.DiagnosticStatement
 import io.ygdrasil.wgsl.ast.DiscardStatement
 import io.ygdrasil.wgsl.ast.EmptyStatement
 import io.ygdrasil.wgsl.ast.EnableDirective
@@ -733,7 +734,7 @@ class TypeResolver(
             is ForStatement -> {
                 val resolvedInit = stmt.init?.let { resolveStatement(it, unresolved) }
                 val resolvedCondition = stmt.condition?.let { resolveExpression(it, unresolved) }
-                val resolvedUpdate = stmt.update?.let { resolveExpression(it, unresolved) }
+                val resolvedUpdate = stmt.update?.let { resolveStatement(it, unresolved) }
                 val resolvedBody = resolveBlockStatement(stmt.body, unresolved)
                 stmt.copy(
                     init = resolvedInit,
@@ -788,6 +789,8 @@ class TypeResolver(
                 val resolvedExpr = resolveExpression(stmt.expression, unresolved)
                 ConstAssertStatement(resolvedExpr, stmt.span)
             }
+
+            is DiagnosticStatement -> stmt
 
             is EmptyStatement -> stmt
         }
@@ -966,6 +969,47 @@ class TypeResolver(
                 for (arg in type.args) {
                     validateTypeDecl(arg, errors)
                 }
+
+                // Basic validation for built-in template types
+                val argCount = type.args.size
+                when {
+                    type.name.startsWith("vec") || type.name.startsWith("mat") || type.name == "atomic" -> {
+                        if (argCount != 1) {
+                            errors.add(
+                                UnresolvedReferenceError(
+                                    name = type.name,
+                                    kind = UnresolvedReferenceError.ReferenceKind.TYPE,
+                                    span = type.span,
+                                    message = "Template type '${type.name}' expects exactly 1 argument, got $argCount"
+                                )
+                            )
+                        }
+                    }
+                    type.name == "array" -> {
+                        if (argCount !in 1..2) {
+                            errors.add(
+                                UnresolvedReferenceError(
+                                    name = type.name,
+                                    kind = UnresolvedReferenceError.ReferenceKind.TYPE,
+                                    span = type.span,
+                                    message = "Template type 'array' expects 1 or 2 arguments, got $argCount"
+                                )
+                            )
+                        }
+                    }
+                    type.name == "ptr" -> {
+                        if (argCount !in 2..3) {
+                            errors.add(
+                                UnresolvedReferenceError(
+                                    name = type.name,
+                                    kind = UnresolvedReferenceError.ReferenceKind.TYPE,
+                                    span = type.span,
+                                    message = "Template type 'ptr' expects 2 or 3 arguments, got $argCount"
+                                )
+                            )
+                        }
+                    }
+                }
             }
 
             is AtomicType -> validateTypeDecl(type.elementType, errors)
@@ -1125,7 +1169,7 @@ class TypeResolver(
             is ForStatement -> {
                 stmt.init?.let { validateStatement(it, errors) }
                 stmt.condition?.let { validateExpression(it, errors) }
-                stmt.update?.let { validateExpression(it, errors) }
+                stmt.update?.let { validateStatement(it, errors) }
                 validateBlockStatement(stmt.body, errors)
             }
 
@@ -1149,6 +1193,7 @@ class TypeResolver(
             is ExpressionStatement -> validateExpression(stmt.expr, errors)
             is ConstAssertStatement -> validateExpression(stmt.expression, errors)
             is EmptyStatement -> {}
+            is DiagnosticStatement -> {}
         }
     }
 

@@ -400,9 +400,33 @@ class Lexer(
         consumeDigits { it in '0'..'9' }
 
         // Check for float parts
-        val hasDot = peekChar() == '.'
+        val hasDot = if (peekChar() == '.') {
+            val next = peekChar(1)
+            if (next == null || (next !in 'a'..'z' && next !in 'A'..'Z' && next != '_')) {
+                true
+            } else if (next == 'e' || next == 'E') {
+                val nextNext = peekChar(2)
+                if (nextNext != null && nextNext in '0'..'9') {
+                    true
+                } else if ((nextNext == '+' || nextNext == '-') && peekChar(3)?.let { it in '0'..'9' } == true) {
+                    true
+                } else {
+                    false
+                }
+            } else if (next == 'f' || next == 'F' || next == 'h' || next == 'H') {
+                val nextNext = peekChar(2)
+                if (nextNext == null || (nextNext !in 'a'..'z' && nextNext !in 'A'..'Z' && nextNext !in '0'..'9' && nextNext != '_')) {
+                    true
+                } else {
+                    false
+                }
+            } else {
+                false
+            }
+        } else {
+            false
+        }
         val hasExp = peekChar()?.let { it in "eE" } ?: false
-        val hasSuffix = peekChar()?.let { it in "fFuU" } ?: false
 
         if (hasDot || hasExp) {
             return lexFloatLiteral(start, startIndex)

@@ -460,11 +460,8 @@ class Lowerer {
                 bodyStatements.add(IrStatement.Block(bodyBlock))
                 
                 // Add update if present
-                // Note: ForStatement.update is Expression? in AST
-                // For now, we skip the update to avoid issues with assignment expressions
-                // TODO: Properly handle update expressions
                 astStmt.update?.let { update ->
-                    // Skip for now - will be handled in a future iteration
+                    bodyStatements.add(lowerStatement(update))
                 }
                 
                 // Create the body block for the loop
@@ -507,6 +504,7 @@ class Lowerer {
                 lowerExpression(astStmt.expr)
                 IrStatement.Nop
             }
+            is DiagnosticStatement -> IrStatement.Nop
             else -> IrStatement.Nop
         }
     }
@@ -552,12 +550,32 @@ class Lowerer {
                 // Heuristic: if callee is IdentExpr and matches a function name, it's a call
                 // If it matches a type name, it's a TypeConstructor
                 val calleeName = (astExpr.callee as? IdentExpr)?.name
+                val isBuiltinType = calleeName == "f32" || calleeName == "i32" || calleeName == "u32" || calleeName == "bool" || calleeName?.startsWith("vec") == true || calleeName?.startsWith("mat") == true || calleeName?.startsWith("array") == true
+                val isStructType = calleeName != null && structNameMap.containsKey(calleeName)
+                
                 if (calleeName != null && functionMap.containsKey(calleeName)) {
                     IrExpressionKind.Call(functionMap[calleeName]!!, astExpr.args.map { lowerExpression(it) })
-                } else {
-                    // Assume type constructor for now
-                    val type = lowerType(NamedType(calleeName ?: "unknown", astExpr.span))
+                } else if (isBuiltinType || isStructType) {
+                    val type = lowerType(NamedType(calleeName, astExpr.span))
                     IrExpressionKind.TypeConstructor(type, astExpr.args.map { lowerExpression(it) })
+                } else {
+                    // It's a builtin function or unresolved function, emit Call instead of TypeConstructor
+                    val funcName = calleeName ?: "unknown_func"
+                    val stubExpressions = Arena<IrExpression>()
+                    val stubBlocks = Arena<IrBlock>()
+                    val stubLocalVars = Arena<IrLocalVariable>()
+                    val dummyFunc = module.functions.append(
+                        IrFunction(
+                            name = funcName,
+                            parameters = emptyList(),
+                            returnType = null,
+                            expressions = stubExpressions,
+                            localVariables = stubLocalVars,
+                            blocks = stubBlocks,
+                            body = stubBlocks.append(IrBlock(emptyList()))
+                        )
+                    )
+                    IrExpressionKind.Call(dummyFunc, astExpr.args.map { lowerExpression(it) })
                 }
             }
             is MemberAccessExpr -> {
@@ -635,7 +653,7 @@ class Lowerer {
                     )
                 }
             }
-            else -> IrExpressionKind.Literal(IrLiteralValue.Scalar(IrScalarValue.I32(0)))
+            else -> throw LoweringError("Unsupported expression type: ${astExpr::class.simpleName}")
         }
         return currentExpressions!!.append(IrExpression(kind))
     }

@@ -259,7 +259,7 @@ class ModuleIndexer {
                     dependencies.addAll(findDependenciesInExpression(stmt.condition, allNames))
                 }
                 if (stmt.update != null) {
-                    dependencies.addAll(findDependenciesInExpression(stmt.update, allNames))
+                    dependencies.addAll(findDependenciesInStatement(stmt.update, allNames))
                 }
                 dependencies.addAll(findDependenciesInBlock(stmt.body, allNames))
             }

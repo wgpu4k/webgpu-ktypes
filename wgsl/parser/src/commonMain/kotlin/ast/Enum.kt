@@ -221,7 +221,7 @@ abstract class ExpressionTransformer {
             is ForStatement -> {
                 val init = stmt.init?.let { transformStatement(it) }
                 val condition = stmt.condition?.let { transform(it) }
-                val update = stmt.update?.let { transform(it) }
+                val update = stmt.update?.let { transformStatement(it) }
                 val body = transformStatement(stmt.body) as BlockStatement
                 stmt.copy(init = init, condition = condition, update = update, body = body)
             }
@@ -261,6 +261,7 @@ abstract class ExpressionTransformer {
                 val expr = transform(stmt.expr)
                 stmt.copy(expr = expr)
             }
+            is DiagnosticStatement -> stmt
         }
     }
 
