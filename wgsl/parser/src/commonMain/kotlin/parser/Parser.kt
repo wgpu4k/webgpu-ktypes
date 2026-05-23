@@ -104,8 +104,22 @@ class Parser(
     /** The lexer providing tokens. */
     private val lexer: Lexer,
 ) {
+    private fun nextNonCommentToken(): Token {
+        var token = lexer.next() ?: Token.eof(Span.UNDEFINED)
+        while (token.kind == TokenKind.SINGLE_LINE_COMMENT ||
+               token.kind == TokenKind.MULTI_LINE_COMMENT ||
+               token.kind == TokenKind.DOC_COMMENT) {
+            token = lexer.next() ?: Token.eof(Span.UNDEFINED)
+        }
+        return token
+    }
+
     /** The current token. */
-    private var currentToken: Token = lexer.next() ?: Token.eof(Span.UNDEFINED)
+    private var currentToken: Token = Token.eof(Span.UNDEFINED)
+
+    init {
+        currentToken = nextNonCommentToken()
+    }
 
     /** The previous token (for error recovery). */
     private var previousToken: Token? = null
@@ -130,7 +144,7 @@ class Parser(
      */
     private fun advance(): Token {
         previousToken = currentToken
-        currentToken = lexer.next() ?: Token.eof(Span.UNDEFINED)
+        currentToken = nextNonCommentToken()
         return previousToken!!
     }
 
@@ -291,9 +305,9 @@ class Parser(
         expectOrError(TokenKind.FN, "Expected 'fn'")
 
         // Parse name
-        val name = if (currentKind() == TokenKind.IDENTIFIER) {
+        val name = if (currentKind() == TokenKind.IDENTIFIER || currentKind().isBuiltinValue) {
             val nameToken = advance()
-            nameToken.literal ?: ""
+            nameToken.literal ?: nameToken.kind.toString().lowercase()
         } else {
             error("Expected function name")
             ""
@@ -553,9 +567,9 @@ class Parser(
         }
 
         // Parse name
-        val name = if (currentKind() == TokenKind.IDENTIFIER) {
+        val name = if (currentKind() == TokenKind.IDENTIFIER || currentKind().isBuiltinValue) {
             val nameToken = advance()
-            nameToken.literal ?: ""
+            nameToken.literal ?: nameToken.kind.toString().lowercase()
         } else {
             error("Expected variable name")
             ""
@@ -901,9 +915,9 @@ class Parser(
         }
 
         // Parse name
-        val name = if (currentKind() == TokenKind.IDENTIFIER) {
+        val name = if (currentKind() == TokenKind.IDENTIFIER || currentKind().isBuiltinValue) {
             val nameToken = advance()
-            nameToken.literal ?: ""
+            nameToken.literal ?: nameToken.kind.toString().lowercase()
         } else {
             error("Expected parameter name")
             ""
@@ -2442,9 +2456,9 @@ class Parser(
         advance()
 
         // Parse name
-        val name = if (currentKind() == TokenKind.IDENTIFIER) {
+        val name = if (currentKind() == TokenKind.IDENTIFIER || currentKind().isBuiltinValue) {
             val nameToken = advance()
-            nameToken.literal ?: ""
+            nameToken.literal ?: nameToken.kind.toString().lowercase()
         } else {
             error("Expected variable name")
             ""

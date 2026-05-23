@@ -115,6 +115,12 @@ class GlslWriter(
         return super.writeExpression(handle)
     }
 
+    override fun getFunctionName(handle: Handle<Function>): String {
+        val name = module.functions[handle].name
+        val isEntryPoint = module.entryPoints.any { it.function == handle }
+        return if (isEntryPoint) "wgsl_$name" else name
+    }
+
     override fun writeEntryPoint(ep: EntryPoint, index: Int) {
         writeLine()
         val func = module.functions[ep.function]
@@ -164,7 +170,7 @@ class GlslWriter(
             // Mapping inputs to parameters and calling the function
             val args = func.parameters.map { it.name }
             
-            val call = "${func.name}(${args.joinToString()})"
+            val call = "${getFunctionName(ep.function)}(${args.joinToString()})"
             if (returnType != null) {
                 if (ep.stage == ShaderStage.Vertex) {
                     val type = module.types[returnType]

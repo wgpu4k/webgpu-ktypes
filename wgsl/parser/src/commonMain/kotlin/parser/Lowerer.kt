@@ -80,10 +80,12 @@ class Lowerer {
             }
         }
 
-        // 2. Lower global variables
+        // 2. Lower global variables and overrides
         for (decl in unit.declarations) {
-            if (decl is VariableDecl) {
-                lowerGlobalVariable(decl)
+            when (decl) {
+                is VariableDecl -> lowerGlobalVariable(decl)
+                is OverrideDecl -> lowerOverride(decl)
+                else -> {}
             }
         }
 
@@ -171,6 +173,60 @@ class Lowerer {
                 }
                 is AbstractIntType -> IrTypeInner.Abstract(IrScalarKind.AbstractInt)
                 is AbstractFloatType -> IrTypeInner.Abstract(IrScalarKind.AbstractFloat)
+                is TemplateType -> {
+                    val name = typeDecl.name
+                    when (name) {
+                        "array" -> {
+                            val elemType = typeDecl.args.getOrNull(0)?.let { lowerType(it) }
+                                ?: module.types.append(IrType(IrTypeInner.Scalar(IrScalarKind.F32, 4)))
+                            val arraySize = typeDecl.args.getOrNull(1)?.let { arg ->
+                                when (arg) {
+                                    is ConstantType -> {
+                                        val expr = arg.expression
+                                        if (expr is IntLiteral) {
+                                            IrArraySize.Constant(expr.value.toInt())
+                                        } else {
+                                            IrArraySize.Dynamic(Handle(0))
+                                        }
+                                    }
+                                    is NamedType -> {
+                                        val valInt = arg.name.toIntOrNull()
+                                        if (valInt != null) {
+                                            IrArraySize.Constant(valInt)
+                                        } else {
+                                            IrArraySize.Dynamic(Handle(0))
+                                        }
+                                    }
+                                    else -> IrArraySize.Dynamic(Handle(0))
+                                }
+                            } ?: IrArraySize.Dynamic(Handle(0))
+                            IrTypeInner.Array(elemType, arraySize)
+                        }
+                        "vec2", "vec3", "vec4" -> {
+                            val size = name.substring(3).toInt()
+                            val elemType = typeDecl.args.getOrNull(0)?.let { lowerType(it) }
+                                ?: module.types.append(IrType(IrTypeInner.Scalar(IrScalarKind.F32, 4)))
+                            IrTypeInner.Vector(lowerVectorSize(size), elemType)
+                        }
+                        "mat2x2", "mat2x3", "mat2x4", "mat3x2", "mat3x3", "mat3x4", "mat4x2", "mat4x3", "mat4x4" -> {
+                            val cols = name.substring(3, 4).toInt()
+                            val rows = name.substring(5, 6).toInt()
+                            val elemType = typeDecl.args.getOrNull(0)?.let { lowerType(it) }
+                                ?: module.types.append(IrType(IrTypeInner.Scalar(IrScalarKind.F32, 4)))
+                            IrTypeInner.Matrix(lowerVectorSize(cols), lowerVectorSize(rows), elemType)
+                        }
+                        "atomic" -> {
+                            val elemType = typeDecl.args.getOrNull(0)?.let { lowerType(it) }
+                                ?: module.types.append(IrType(IrTypeInner.Scalar(IrScalarKind.F32, 4)))
+                            module.types[elemType].inner
+                        }
+                        else -> IrTypeInner.Scalar(IrScalarKind.F32, 4)
+                    }
+                }
+                is AtomicType -> {
+                    val elemType = lowerType(typeDecl.elementType)
+                    module.types[elemType].inner
+                }
                 else -> IrTypeInner.Scalar(IrScalarKind.F32, 4)
             }
             module.types.append(IrType(inner))
@@ -299,6 +355,35 @@ class Lowerer {
         globalVarMap[decl.name] = module.globalVariables.append(variable)
     }
 
+    private fun lowerOverride(decl: OverrideDecl) {
+        val type = decl.type?.let { lowerType(it) } ?: return
+        val storageClass = IrStorageClass.Private
+        val accessMode = IrAccessMode.Read
+
+        val initHandle = decl.initializer?.let { initializerExpr ->
+            val savedExpressions = currentExpressions
+            try {
+                currentExpressions = module.globalExpressions
+                val result = lowerExpression(initializerExpr)
+                currentExpressions = savedExpressions
+                result
+            } catch (e: Exception) {
+                currentExpressions = savedExpressions
+                throw e
+            }
+        }
+
+        val variable = IrGlobalVariable(
+            name = decl.name,
+            storageClass = storageClass,
+            accessMode = accessMode,
+            binding = null,
+            type = type,
+            `init` = initHandle
+        )
+        globalVarMap[decl.name] = module.globalVariables.append(variable)
+    }
+
     private fun lowerStorageClassText(text: String?): IrStorageClass = when (text) {
         "storage" -> IrStorageClass.Storage
         "uniform" -> IrStorageClass.Uniform
@@ -416,11 +501,14 @@ class Lowerer {
                 IrStatement.Nop
             }
             is VariableDeclStatement -> {
-                val type = astStmt.type?.let { lowerType(it) } ?: lowerInferredType(astStmt.initializer)
+                val initHandle = astStmt.initializer?.let { lowerExpression(it) }
+                val type = astStmt.type?.let { lowerType(it) }
+                    ?: initHandle?.let { resolveExpressionType(it) }
+                    ?: lowerInferredType(astStmt.initializer)
                 val localVar = IrLocalVariable(
                     name = astStmt.name,
                     type = type,
-                    init = astStmt.initializer?.let { lowerExpression(it) }
+                    init = initHandle
                 )
                 val handle = currentLocalVars!!.append(localVar)
                 localVariablesMap[astStmt.name] = handle
@@ -514,6 +602,11 @@ class Lowerer {
             is ExpressionStatement -> {
                 // Evaluate expression for side effects, discard result
                 lowerExpression(astStmt.expr)
+                IrStatement.Nop
+            }
+            is PhonyAssignmentStatement -> {
+                // Evaluate expression for side effects, discard result
+                lowerExpression(astStmt.expression)
                 IrStatement.Nop
             }
             is DiagnosticStatement -> IrStatement.Nop
@@ -662,7 +755,12 @@ class Lowerer {
                 if (calleeName != null && functionMap.containsKey(calleeName)) {
                     IrExpressionKind.Call(functionMap[calleeName]!!, astExpr.args.map { lowerExpression(it) })
                 } else if (isBuiltinType || isStructType) {
-                    val type = lowerType(NamedType(calleeName, astExpr.span))
+                    val typeDecl = if (astExpr.templateArgs != null) {
+                        TemplateType(calleeName, astExpr.templateArgs, astExpr.span)
+                    } else {
+                        NamedType(calleeName, astExpr.span)
+                    }
+                    val type = lowerType(typeDecl)
                     IrExpressionKind.TypeConstructor(type, astExpr.args.map { lowerExpression(it) })
                 } else {
                     // It's a builtin function or unresolved function, emit Call instead of TypeConstructor
@@ -688,62 +786,68 @@ class Lowerer {
                 val objExpr = lowerExpression(astExpr.objectExpr)
                 val memberName = astExpr.member
                 
-                // Résoudre le type de l'objet
-                val objExprKind = currentExpressions!![objExpr].kind
-                val objTypeHandle = when (objExprKind) {
-                    is IrExpressionKind.LocalVar -> {
-                        currentLocalVars!![objExprKind.handle].type
+                // Résoudre le type de l'objet de manière récursive
+                val objTypeHandle = resolveExpressionType(objExpr)
+                val objType = module.types[objTypeHandle]
+                var inner = objType.inner
+                var currentTypeHandle = objTypeHandle
+                while (inner is IrTypeInner.Pointer || inner is IrTypeInner.ValuePointer) {
+                    val base = when (inner) {
+                        is IrTypeInner.Pointer -> inner.base
+                        is IrTypeInner.ValuePointer -> inner.base
                     }
-                    is IrExpressionKind.GlobalVar -> {
-                        module.globalVariables[objExprKind.handle].type
-                    }
-                    is IrExpressionKind.FunctionArgument -> {
-                        // Résoudre via currentFunction et l'index du paramètre
-                        val func = currentFunction?.let { module.functions[it] }
-                            ?: throw LoweringError("Member access on function argument without current function context")
-                        val paramIndex = objExprKind.index
-                        if (paramIndex >= 0 && paramIndex < func.parameters.size) {
-                            func.parameters[paramIndex].type
-                        } else {
-                            throw LoweringError("Invalid function argument index: $paramIndex")
-                        }
-                    }
-                    is IrExpressionKind.TypeConstructor -> {
-                        // Pour TypeConstructor(S(1, 2)), le type est directement disponible
-                        objExprKind.type
-                    }
-                    else -> throw LoweringError("Cannot resolve member access on ${objExprKind::class.simpleName}")
+                    currentTypeHandle = base
+                    inner = module.types[base].inner
                 }
                 
-                val objType = module.types[objTypeHandle]
-                val structName = structHandleToNameMap[objTypeHandle]
-                    ?: throw LoweringError("Cannot access member on non-struct type or type not found in struct map")
-                
-                // Récupérer l'index du membre
-                val memberIndex = structMemberIndexMap[structName]?.get(memberName)
-                    ?: run {
-                        // DEBUG: Afficher le contenu de structMemberIndexMap
-                        println("DEBUG: Member '$memberName' not found in struct '$structName'")
-                        println("  Available structs: ${structMemberIndexMap.keys}")
-                        println("  Members of '$structName': ${structMemberIndexMap[structName]?.keys}")
-                        if (structName == "VertexOutput") {
-                            println("  Searching for VertexOutput in structNameMap...")
-                            structNameMap.forEach { (name, handle) ->
-                                if (name == "VertexOutput") {
-                                    val type = module.types[handle]
-                                    println("  Found VertexOutput: handle=$handle, type=$type")
-                                    val structInner = type.inner as? IrTypeInner.Struct
-                                    if (structInner != null) {
-                                        println("  Members: ${structInner.members.map { it.name }}")
+                if (inner is IrTypeInner.Vector) {
+                    // Vector swizzling/component access
+                    val pattern = memberName.map { char ->
+                        when (char) {
+                            'x', 'r' -> 0
+                            'y', 'g' -> 1
+                            'z', 'b' -> 2
+                            'w', 'a' -> 3
+                            else -> throw LoweringError("Invalid vector component: '$char'")
+                        }
+                    }
+                    
+                    if (pattern.size == 1) {
+                        IrExpressionKind.AccessIndex(objExpr, pattern[0].toUInt())
+                    } else {
+                        val size = IrVectorSize.fromInt(pattern.size)
+                        IrExpressionKind.Swizzle(size, objExpr, pattern)
+                    }
+                } else {
+                    val structName = structHandleToNameMap[currentTypeHandle]
+                        ?: throw LoweringError("Cannot access member on non-struct type or type not found in struct map")
+                    
+                    // Récupérer l'index du membre
+                    val memberIndex = structMemberIndexMap[structName]?.get(memberName)
+                        ?: run {
+                            // DEBUG: Afficher le contenu de structMemberIndexMap
+                            println("DEBUG: Member '$memberName' not found in struct '$structName'")
+                            println("  Available structs: ${structMemberIndexMap.keys}")
+                            println("  Members of '$structName': ${structMemberIndexMap[structName]?.keys}")
+                            if (structName == "VertexOutput") {
+                                println("  Searching for VertexOutput in structNameMap...")
+                                structNameMap.forEach { (name, handle) ->
+                                    if (name == "VertexOutput") {
+                                        val type = module.types[handle]
+                                        println("  Found VertexOutput: handle=$handle, type=$type")
+                                        val structInner = type.inner as? IrTypeInner.Struct
+                                        if (structInner != null) {
+                                            println("  Members: ${structInner.members.map { it.name }}")
+                                        }
                                     }
                                 }
+                                println("  VertexOutput search complete")
                             }
-                            println("  VertexOutput search complete")
+                            throw LoweringError("Member '$memberName' not found in struct '$structName'")
                         }
-                        throw LoweringError("Member '$memberName' not found in struct '$structName'")
-                    }
-                
-                IrExpressionKind.AccessIndex(objExpr, memberIndex)
+                    
+                    IrExpressionKind.AccessIndex(objExpr, memberIndex)
+                }
             }
             is IndexExpr -> {
                 val index = astExpr.index
@@ -797,5 +901,169 @@ class Lowerer {
     private fun lowerInferredType(initializer: Expression?): Handle<IrType> {
         // Very simplified inference
         return module.types.append(IrType(IrTypeInner.Scalar(IrScalarKind.F32, 4)))
+    }
+
+    private fun resolveExpressionType(expr: Handle<IrExpression>): Handle<IrType> {
+        val kind = currentExpressions!![expr].kind
+        return when (kind) {
+            is IrExpressionKind.LocalVar -> {
+                currentLocalVars!![kind.handle].type
+            }
+            is IrExpressionKind.GlobalVar -> {
+                module.globalVariables[kind.handle].type
+            }
+            is IrExpressionKind.FunctionArgument -> {
+                val func = currentFunction?.let { module.functions[it] }
+                    ?: throw LoweringError("Function argument without current function context")
+                val paramIndex = kind.index
+                if (paramIndex >= 0 && paramIndex < func.parameters.size) {
+                    func.parameters[paramIndex].type
+                } else {
+                    throw LoweringError("Invalid function argument index: $paramIndex")
+                }
+            }
+            is IrExpressionKind.TypeConstructor -> {
+                kind.type
+            }
+            is IrExpressionKind.Access -> {
+                val baseTypeHandle = resolveExpressionType(kind.expr)
+                val baseType = module.types[baseTypeHandle]
+                var inner = baseType.inner
+                while (inner is IrTypeInner.Pointer || inner is IrTypeInner.ValuePointer) {
+                    inner = module.types[when (inner) {
+                        is IrTypeInner.Pointer -> inner.base
+                        is IrTypeInner.ValuePointer -> inner.base
+                    }].inner
+                }
+                
+                val elemTypeHandle = when (inner) {
+                    is IrTypeInner.Array -> inner.element
+                    is IrTypeInner.Vector -> inner.scalar
+                    is IrTypeInner.Matrix -> {
+                        val vectorInner = IrTypeInner.Vector(inner.rows, inner.scalar)
+                        module.types.append(IrType(vectorInner))
+                    }
+                    else -> throw LoweringError("Cannot index into non-aggregate type: ${inner::class.simpleName}")
+                }
+                
+                val originalInner = baseType.inner
+                if (originalInner is IrTypeInner.Pointer) {
+                    val ptrInner = IrTypeInner.Pointer(elemTypeHandle, originalInner.addressSpace, originalInner.accessMode)
+                    module.types.append(IrType(ptrInner))
+                } else if (originalInner is IrTypeInner.ValuePointer) {
+                    val ptrInner = IrTypeInner.ValuePointer(elemTypeHandle)
+                    module.types.append(IrType(ptrInner))
+                } else {
+                    elemTypeHandle
+                }
+            }
+            is IrExpressionKind.AccessIndex -> {
+                val baseTypeHandle = resolveExpressionType(kind.expr)
+                val baseType = module.types[baseTypeHandle]
+                var inner = baseType.inner
+                while (inner is IrTypeInner.Pointer || inner is IrTypeInner.ValuePointer) {
+                    inner = module.types[when (inner) {
+                        is IrTypeInner.Pointer -> inner.base
+                        is IrTypeInner.ValuePointer -> inner.base
+                    }].inner
+                }
+                
+                val elemTypeHandle = when (inner) {
+                    is IrTypeInner.Array -> inner.element
+                    is IrTypeInner.Vector -> inner.scalar
+                    is IrTypeInner.Matrix -> {
+                        val vectorInner = IrTypeInner.Vector(inner.rows, inner.scalar)
+                        module.types.append(IrType(vectorInner))
+                    }
+                    is IrTypeInner.Struct -> {
+                        inner.members[kind.index.toInt()].type
+                    }
+                    else -> throw LoweringError("Cannot index into non-aggregate type: ${inner::class.simpleName}")
+                }
+                
+                val originalInner = baseType.inner
+                if (originalInner is IrTypeInner.Pointer) {
+                    val ptrInner = IrTypeInner.Pointer(elemTypeHandle, originalInner.addressSpace, originalInner.accessMode)
+                    module.types.append(IrType(ptrInner))
+                } else if (originalInner is IrTypeInner.ValuePointer) {
+                    val ptrInner = IrTypeInner.ValuePointer(elemTypeHandle)
+                    module.types.append(IrType(ptrInner))
+                } else {
+                    elemTypeHandle
+                }
+            }
+            is IrExpressionKind.Swizzle -> {
+                val baseTypeHandle = resolveExpressionType(kind.vector)
+                val baseType = module.types[baseTypeHandle]
+                var inner = baseType.inner
+                while (inner is IrTypeInner.Pointer || inner is IrTypeInner.ValuePointer) {
+                    inner = module.types[when (inner) {
+                        is IrTypeInner.Pointer -> inner.base
+                        is IrTypeInner.ValuePointer -> inner.base
+                    }].inner
+                }
+                val scalarHandle = when (inner) {
+                    is IrTypeInner.Vector -> inner.scalar
+                    else -> throw LoweringError("Swizzle on non-vector type: ${inner::class.simpleName}")
+                }
+                val vectorInner = IrTypeInner.Vector(kind.size, scalarHandle)
+                module.types.append(IrType(vectorInner))
+            }
+            is IrExpressionKind.Load -> {
+                val baseTypeHandle = resolveExpressionType(kind.pointer)
+                val baseType = module.types[baseTypeHandle]
+                when (val inner = baseType.inner) {
+                    is IrTypeInner.Pointer -> inner.base
+                    is IrTypeInner.ValuePointer -> inner.base
+                    else -> throw LoweringError("Load on non-pointer type: ${inner::class.simpleName}")
+                }
+            }
+            is IrExpressionKind.ValuePointer -> {
+                val baseTypeHandle = resolveExpressionType(kind.base)
+                val ptrInner = IrTypeInner.ValuePointer(baseTypeHandle)
+                module.types.append(IrType(ptrInner))
+            }
+            is IrExpressionKind.Literal -> {
+                when (val value = kind.value) {
+                    is IrLiteralValue.Scalar -> {
+                        val (scalarKind, width) = when (value.value) {
+                            is IrScalarValue.Bool -> IrScalarKind.Bool to 1
+                            is IrScalarValue.I8 -> IrScalarKind.Sint to 1
+                            is IrScalarValue.U8 -> IrScalarKind.Uint to 1
+                            is IrScalarValue.I16 -> IrScalarKind.Sint to 2
+                            is IrScalarValue.U16 -> IrScalarKind.Uint to 2
+                            is IrScalarValue.I32 -> IrScalarKind.Sint to 4
+                            is IrScalarValue.U32 -> IrScalarKind.Uint to 4
+                            is IrScalarValue.I64 -> IrScalarKind.Sint to 8
+                            is IrScalarValue.U64 -> IrScalarKind.Uint to 8
+                            is IrScalarValue.F16 -> IrScalarKind.F16 to 2
+                            is IrScalarValue.F32 -> IrScalarKind.F32 to 4
+                            is IrScalarValue.F64 -> IrScalarKind.F64 to 8
+                            is IrScalarValue.AbstractInt -> IrScalarKind.AbstractInt to 8
+                            is IrScalarValue.AbstractFloat -> IrScalarKind.AbstractFloat to 8
+                        }
+                        val scalarInner = IrTypeInner.Scalar(scalarKind, width)
+                        module.types.append(IrType(scalarInner))
+                    }
+                    else -> throw LoweringError("Unsupported literal value type: ${value::class.simpleName}")
+                }
+            }
+            is IrExpressionKind.Call -> {
+                module.functions[kind.function].returnType
+                    ?: if (kind.arguments.isNotEmpty()) {
+                        resolveExpressionType(kind.arguments[0])
+                    } else {
+                        throw LoweringError("Function ${module.functions[kind.function].name} has no return type")
+                    }
+            }
+            is IrExpressionKind.BuiltinCall -> {
+                if (kind.arguments.isNotEmpty()) {
+                    resolveExpressionType(kind.arguments[0])
+                } else {
+                    throw LoweringError("Builtin call to ${kind.function} has no arguments to infer type from")
+                }
+            }
+            else -> throw LoweringError("Cannot resolve member access object type for expression kind: ${kind::class.simpleName}")
+        }
     }
 }

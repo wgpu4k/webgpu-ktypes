@@ -50,7 +50,13 @@ abstract class GoldenTestBase(val backendName: String) : FunSpec({
     context("$backendName Golden Tests") {
         val inputFiles = Files.list(inputDir)
             .filter { it.toString().endsWith(".wgsl") }
-            .filter { goldenFilter == null || it.fileName.toString().contains(goldenFilter) }
+            .filter {
+                if (goldenFilter == "starter") {
+                    Files.size(it) < 200
+                } else {
+                    goldenFilter == null || (if (goldenFilter.endsWith(".wgsl")) it.fileName.toString() == goldenFilter else it.fileName.toString().contains(goldenFilter))
+                }
+            }
             .toList()
 
         inputFiles.forEach { inputFile ->

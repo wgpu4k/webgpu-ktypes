@@ -1,0 +1,41 @@
+{
+    "types": {
+        "data": [
+            {
+                "inner": {
+                    "__type": "io.ygdrasil.wgsl.ir.TypeInner.Scalar",
+                    "kind": "F32",
+                    "width": 4
+                }
+            }
+        ],
+        "indexMap": [
+            {
+                "inner": {
+                    "__type": "io.ygdrasil.wgsl.ir.TypeInner.Scalar",
+                    "kind": "F32",
+                    "width": 4
+                }
+            },
+            0
+        ]
+    },
+    "constants": {},
+    "globalExpressions": {},
+    "globalVariables": {
+        "data": [
+            {
+                "name": "point_shadow_textures",
+                "storageClass": "Private",
+                "type": 0
+            },
+            {
+                "name": "point_shadow_textures_sampler",
+                "storageClass": "Private",
+                "type": 0
+            }
+        ]
+    },
+    "functions": {},
+    "diagnosticFilters": {}
+}

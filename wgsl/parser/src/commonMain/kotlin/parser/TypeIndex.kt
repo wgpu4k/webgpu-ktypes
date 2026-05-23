@@ -140,11 +140,47 @@ class TypeIndex {
 
     private fun isBuiltinValueKeyword(name: String): Boolean {
         return name in setOf(
+            // Builtin values
             "position", "vertex_index", "instance_index", "front_facing",
             "primitive_index", "sample_index", "sample_mask", "viewport_index",
             "pointsize", "clip_distances", "cull_distances", "device_index",
             "view_index", "workgroup_id", "num_workgroups", "global_invocation_id",
-            "local_invocation_id", "local_invocation_index"
+            "local_invocation_id", "local_invocation_index", "subgroup_size",
+            "subgroup_invocation_id", "frag_depth",
+
+            // Attributes and options
+            "less_equal", "greater_equal", "any", "unchanged", "force",
+            "per_vertex", "error_type",
+
+            // Suffixes/built-ins
+            "vec2f", "vec3f", "vec4f", "vec2i", "vec3i", "vec4i",
+            "vec2u", "vec3u", "vec4u", "vec2h", "vec3h", "vec4h",
+            "mat2x2f", "mat2x3f", "mat2x4f", "mat3x2f", "mat3x3f", "mat3x4f",
+            "mat4x2f", "mat4x3f", "mat4x4f",
+            "mat2x2h", "mat2x3h", "mat2x4h", "mat3x2h", "mat3x3h", "mat3x4h",
+            "mat4x2h", "mat4x3h", "mat4x4h",
+
+            // Built-in functions
+            "abs", "acos", "acosh", "all", "any", "arrayLength", "asin", "asinh", "atan", "atanh", "atan2",
+            "ceil", "clamp", "cos", "cosh", "cross", "degrees", "determinant", "distance", "dot",
+            "exp", "exp2", "faceForward", "floor", "fma", "fract", "frexp",
+            "inverseSqrt", "ldexp", "length", "log", "log2", "max", "min", "mix", "modf",
+            "normalize", "pow", "quantizeToF16", "radians", "reflect", "refract", "round",
+            "saturate", "sign", "sin", "sinh", "smoothstep", "sqrt", "step", "tan", "tanh", "transpose", "trunc",
+            "dpdx", "dpdxCoarse", "dpdxFine", "dpdy", "dpdyCoarse", "dpdyFine", "fwidth", "fwidthCoarse", "fwidthFine",
+            "textureDimensions", "textureGather", "textureGatherCompare", "textureLoad", "textureSample",
+            "textureSampleBias", "textureSampleCompare", "textureSampleCompareLevel", "textureSampleGrad",
+            "textureSampleLevel", "textureSampleBaseClampToEdge", "textureStore",
+            "atomicLoad", "atomicStore", "atomicAdd", "atomicSub", "atomicMax", "atomicMin",
+            "atomicAnd", "atomicOr", "atomicXor", "atomicExchange", "atomicCompareExchangeWeak",
+            "workgroupBarrier", "storageBarrier", "subgroupBarrier",
+            "pack4xI8", "pack4xU8", "unpack4xI8", "unpack4xU8",
+            "pack2x16float", "unpack2x16float", "pack2x16snorm", "unpack2x16snorm",
+            "pack2x16unorm", "unpack2x16unorm", "pack4x8snorm", "unpack4x8snorm",
+            "pack4x8unorm", "unpack4x8unorm",
+
+            // Array constructors/aliases
+            "array"
         )
     }
 
@@ -236,7 +272,8 @@ class TypeIndex {
      * Check if a name is a builtin vector type (vec2, vec3, vec4).
      */
     fun isBuiltinVectorType(name: String): Boolean {
-        return name.startsWith("vec") && (name.endsWith("2") || name.endsWith("3") || name.endsWith("4"))
+        return (name.startsWith("vec") && (name.endsWith("2") || name.endsWith("3") || name.endsWith("4"))) ||
+               name.matches(Regex("vec[234][fiuh]"))
     }
 
     /**
@@ -251,6 +288,22 @@ class TypeIndex {
      * Returns (size, elementTypeName) or null if not a vector type.
      */
     fun parseBuiltinVectorType(name: String): Pair<Int, String>? {
+        // Shorthand match vecN[fiuh]
+        val shorthandRegex = Regex("vec([234])([fiuh])")
+        val shorthandMatch = shorthandRegex.matchEntire(name)
+        if (shorthandMatch != null) {
+            val size = shorthandMatch.groupValues[1].toInt()
+            val suffix = shorthandMatch.groupValues[2]
+            val elementType = when (suffix) {
+                "f" -> "f32"
+                "i" -> "i32"
+                "u" -> "u32"
+                "h" -> "f16"
+                else -> "f32"
+            }
+            return Pair(size, elementType)
+        }
+
         val vectorRegex = Regex("vec(\\d+)<(.+)>")
         val match = vectorRegex.matchEntire(name)
         if (match != null) {
@@ -268,6 +321,21 @@ class TypeIndex {
      * Returns (columns, rows, elementTypeName) or null if not a matrix type.
      */
     fun parseBuiltinMatrixType(name: String): Triple<Int, Int, String>? {
+        // Shorthand match matNxM[fh]
+        val shorthandRegex = Regex("mat([234])x([234])([fh])")
+        val shorthandMatch = shorthandRegex.matchEntire(name)
+        if (shorthandMatch != null) {
+            val cols = shorthandMatch.groupValues[1].toInt()
+            val rows = shorthandMatch.groupValues[2].toInt()
+            val suffix = shorthandMatch.groupValues[3]
+            val elementType = when (suffix) {
+                "f" -> "f32"
+                "h" -> "f16"
+                else -> "f32"
+            }
+            return Triple(cols, rows, elementType)
+        }
+
         val matrixRegex = Regex("mat(\\d+)x(\\d+)<(.+)>")
         val match = matrixRegex.matchEntire(name)
         if (match != null) {
