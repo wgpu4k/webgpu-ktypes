@@ -7,6 +7,7 @@ import io.kotest.matchers.shouldBe
 import io.kotest.matchers.types.beInstanceOf
 import io.ygdrasil.wgsl.ir.Statement
 import io.ygdrasil.wgsl.parser.TestUtils.lowerWgsl
+import io.kotest.matchers.shouldNotBe
 
 class StatementLoweringTest : FunSpec({
     test("T013: should lower return statement") {
@@ -160,5 +161,23 @@ class StatementLoweringTest : FunSpec({
         
         val valExpr = mainFunc.expressions[assign.value]
         valExpr.kind should beInstanceOf<io.ygdrasil.wgsl.ir.ExpressionKind.Binary>()
+    }
+
+    test("T020: should lower global variable resource bindings (@group and @binding)") {
+        val module = lowerWgsl("""
+            struct Grid {
+                id: u32,
+            }
+            @group(2) @binding(5) var<uniform> grid: Grid;
+        """)
+        
+        module.globalVariables.size shouldBe 1
+        val globalVar = module.globalVariables.toList()[0]
+        globalVar.name shouldBe "grid"
+        
+        globalVar.binding shouldNotBe null
+        val binding = globalVar.binding!!
+        binding.group shouldBe 2
+        binding.index shouldBe 5
     }
 })

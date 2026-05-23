@@ -276,11 +276,23 @@ class Lowerer {
             }
         }
 
+        val group = decl.attributes.find { it.name == "group" }?.let {
+            (it.args.firstOrNull() as? IntLiteral)?.value?.toInt()
+        }
+        val bindingIndex = decl.attributes.find { it.name == "binding" }?.let {
+            (it.args.firstOrNull() as? IntLiteral)?.value?.toInt()
+        }
+        val binding = if (group != null && bindingIndex != null) {
+            io.ygdrasil.wgsl.ir.Binding(group, bindingIndex)
+        } else {
+            null
+        }
+
         val variable = IrGlobalVariable(
             name = decl.name,
             storageClass = storageClass,
             accessMode = accessMode,
-            binding = null,
+            binding = binding,
             type = type,
             `init` = initHandle
         )
