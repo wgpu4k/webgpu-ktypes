@@ -142,7 +142,23 @@ class Lowerer {
                 }
                 is VectorType -> IrTypeInner.Vector(lowerVectorSize(typeDecl.size), lowerType(typeDecl.elementType))
                 is MatrixType -> IrTypeInner.Matrix(lowerVectorSize(typeDecl.columns), lowerVectorSize(typeDecl.rows), lowerType(typeDecl.elementType))
-                is ArrayType -> IrTypeInner.Array(lowerType(typeDecl.elementType), IrArraySize.Dynamic(Handle<IrExpression>(0)))
+                is ArrayType -> {
+                    val arraySize = typeDecl.length?.let { len ->
+                        when (len) {
+                            is IntLiteral -> IrArraySize.Constant(len.value.toInt())
+                            is IdentExpr -> {
+                                val valInt = len.name.toIntOrNull()
+                                if (valInt != null) {
+                                    IrArraySize.Constant(valInt)
+                                } else {
+                                    IrArraySize.Dynamic(Handle(0))
+                                }
+                            }
+                            else -> IrArraySize.Dynamic(Handle(0))
+                        }
+                    } ?: IrArraySize.Dynamic(Handle(0))
+                    IrTypeInner.Array(lowerType(typeDecl.elementType), arraySize)
+                }
                 is StructType -> {
                     // Fallback: create empty struct (shouldn't happen if all structs are processed first)
                     IrTypeInner.Struct(emptyList())
