@@ -21,8 +21,15 @@ class LexerBasicTest : FunSpec({
         }
 
         test("Whitespace only") {
-            val tokens = tokenizeSignificant("   \t\n\r  ")
+            val tokens = tokenizeSignificant("   \t\n\r\u000C  ")
             tokens shouldHaveSize 0
+        }
+
+        test("Form feed as blankspace is skipped") {
+            val tokens = tokenizeSignificant("foo\u000Cbar")
+            tokens shouldHaveSize 2
+            tokens[0].literal shouldBe "foo"
+            tokens[1].literal shouldBe "bar"
         }
 
         test("Single identifier") {
@@ -44,6 +51,26 @@ class LexerBasicTest : FunSpec({
             tokens shouldHaveSize 1
             tokens[0].kind shouldBe TokenKind.IDENTIFIER
             tokens[0].literal shouldBe "foo123"
+        }
+
+        test("Non-ASCII characters are recognized as UNKNOWN, not part of identifier") {
+            val tokens = tokenize("fooébar")
+            // Expect: identifier "foo", unknown "é", identifier "bar", EOF
+            val filtered = tokens.filter { !it.isEof }
+            filtered shouldHaveSize 3
+            filtered[0].kind shouldBe TokenKind.IDENTIFIER
+            filtered[0].literal shouldBe "foo"
+            filtered[1].kind shouldBe TokenKind.UNKNOWN
+            filtered[2].kind shouldBe TokenKind.IDENTIFIER
+            filtered[2].literal shouldBe "bar"
+        }
+
+        test("Unicode Chinese characters are recognized as UNKNOWN") {
+            val tokens = tokenize("变量")
+            val filtered = tokens.filter { !it.isEof }
+            filtered shouldHaveSize 2
+            filtered[0].kind shouldBe TokenKind.UNKNOWN
+            filtered[1].kind shouldBe TokenKind.UNKNOWN
         }
     }
 

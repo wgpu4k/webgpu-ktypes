@@ -190,9 +190,13 @@ class LexerNumericEdgeCaseTest : FunSpec({
             tokens2[0].literal shouldBe "0x1.8p-2h"
         }
 
-        test("consecutive underscores 1__000 should be UNKNOWN") {
-            val tokens = tokenize("1__000")
-            tokens.filter { !it.isEof }[0].kind shouldBe TokenKind.UNKNOWN
+        test("consecutive underscores 1__000 is tokenized as integer followed by identifier") {
+            val tokens = tokenizeSignificant("1__000")
+            tokens.map { it.kind } shouldContainExactly listOf(
+                TokenKind.INT_LITERAL, TokenKind.IDENTIFIER
+            )
+            tokens[0].literal shouldBe "1"
+            tokens[1].literal shouldBe "__000"
         }
     }
 })

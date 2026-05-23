@@ -90,5 +90,17 @@ class LexerCommentEdgeCaseTest : FunSpec({
             all[0].kind shouldBe TokenKind.DOC_COMMENT
             all[1].kind shouldBe TokenKind.IDENTIFIER
         }
+
+        test("single-line comment ending abruptly at EOF without newline is SINGLE_LINE_COMMENT") {
+            val tokens = tokenize("// comment at eof")
+            tokens.filter { !it.isEof } shouldHaveSize 1
+            tokens[0].kind shouldBe TokenKind.SINGLE_LINE_COMMENT
+        }
+
+        test("block comment ending abruptly at EOF is MULTI_LINE_COMMENT") {
+            val tokens = tokenize("/* block comment at eof */")
+            tokens.filter { !it.isEof } shouldHaveSize 1
+            tokens[0].kind shouldBe TokenKind.MULTI_LINE_COMMENT
+        }
     }
 })

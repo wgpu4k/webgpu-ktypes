@@ -244,7 +244,7 @@ class Lexer(
     private fun skipWhitespace() {
         while (!isAtEnd) {
             when (peekChar()!!) {
-                ' ', '\t', '\r', '\n' -> consume()
+                ' ', '\t', '\r', '\n', '\u000C' -> consume()
                 else -> break
             }
         }
@@ -337,6 +337,13 @@ class Lexer(
             return lexHexLiteral(start, startIndex)
         }
 
+        // Reject decimal integer starting with 0 followed by other digits (e.g. 052)
+        val isMalformedOctal = firstChar == '0' && peekChar(1)?.let { it in '0'..'9' } ?: false
+        if (isMalformedOctal) {
+            consumeDigits { it in '0'..'9' }
+            return Token.simple(TokenKind.UNKNOWN, spanFrom(start))
+        }
+
         // Decimal literal
         return lexDecimalLiteral(start, startIndex)
     }
@@ -349,26 +356,60 @@ class Lexer(
         consume()
         consume()
 
-        // Consume hex digits
-        consumeDigits { it in '0'..'9' || it in 'a'..'f' || it in 'A'..'F' }
+        val hexDigitsStart = index
+        // Consume hex digits only if it does not start with a digit separator '_'
+        if (peekChar() != '_') {
+            consumeDigits { it in '0'..'9' || it in 'a'..'f' || it in 'A'..'F' }
+        }
+        val hexDigitsCount = index - hexDigitsStart
 
         var isFloat = false
+        var hasFractionDigits = false
 
         // Optional fractional part
         if (peekChar() == '.') {
             isFloat = true
             consume()
-            consumeDigits { it in '0'..'9' || it in 'a'..'f' || it in 'A'..'F' }
+            val fracStart = index
+            if (peekChar() != '_') {
+                consumeDigits { it in '0'..'9' || it in 'a'..'f' || it in 'A'..'F' }
+            }
+            hasFractionDigits = (index - fracStart) > 0
         }
 
         // Optional exponent part
+        var hasExponent = false
+        var hasExponentDigits = false
         if (peekChar()?.let { it in "pP" } == true) {
             isFloat = true
+            hasExponent = true
             consume()
             if (peekChar()?.let { it in "+-" } == true) {
                 consume()
             }
-            consumeDigits { it in '0'..'9' }
+            val expDigitsStart = index
+            if (peekChar() != '_') {
+                consumeDigits { it in '0'..'9' }
+            }
+            hasExponentDigits = (index - expDigitsStart) > 0
+        }
+
+        // Check validity
+        val hasMantisse = hexDigitsCount > 0 || hasFractionDigits
+        val isFloatValid = !isFloat || (hasExponent && hasExponentDigits)
+
+        if (!hasMantisse || !isFloatValid) {
+            // Suffixes check to consume completely
+            if (isFloat) {
+                if (peekChar()?.let { it in "fFhH" } == true) {
+                    consume()
+                }
+            } else {
+                if (peekChar()?.let { it in "iIuU" } == true) {
+                    consume()
+                }
+            }
+            return Token.simple(TokenKind.UNKNOWN, spanFrom(start))
         }
 
         // Suffixes (standard WGSL only: f, F, h, H for floats; i, I, u, U for integers)
@@ -463,16 +504,34 @@ class Lexer(
         // Consume fractional part
         if (peekChar() == '.') {
             consume()
-            consumeDigits { it in '0'..'9' }
+            if (peekChar() != '_') {
+                consumeDigits { it in '0'..'9' }
+            }
         }
 
         // Consume exponent part
+        var hasExponent = false
+        var hasExponentDigits = false
         if (peekChar()?.let { it in "eE" } == true) {
+            hasExponent = true
             consume()
             if (peekChar()?.let { it in "+-" } == true) {
                 consume()
             }
-            consumeDigits { it in '0'..'9' }
+            val expDigitsStart = index
+            if (peekChar() != '_') {
+                consumeDigits { it in '0'..'9' }
+            }
+            hasExponentDigits = (index - expDigitsStart) > 0
+        }
+
+        if (hasExponent && !hasExponentDigits) {
+            // Suffixes check to consume completely
+            val nextChar = peekChar()?.lowercaseChar()
+            if (nextChar == 'f' || nextChar == 'h') {
+                consume()
+            }
+            return Token.simple(TokenKind.UNKNOWN, spanFrom(start))
         }
 
         // Check for float suffixes
@@ -493,6 +552,7 @@ class Lexer(
         consume()
 
         val content = StringBuilder()
+        var isValid = true
 
         // Consume until closing quote or end
         while (!isAtEnd) {
@@ -500,12 +560,15 @@ class Lexer(
             when (char) {
                 '"' -> {
                     consume()
-                    return Token.stringLiteral(content.toString(), spanFrom(start))
+                    return Token.stringLiteral(if (isValid) content.toString() else "", spanFrom(start))
                 }
 
                 '\\' -> {
                     consume() // consume \
-                    if (isAtEnd) break
+                    if (isAtEnd) {
+                        isValid = false
+                        break
+                    }
                     val escapeChar = consume()!!
                     when (escapeChar) {
                         'n' -> content.append('\n')
@@ -524,6 +587,8 @@ class Lexer(
                             }
                             if (hex.length == 2) {
                                 content.append(hex.toString().toInt(16).toChar())
+                            } else {
+                                isValid = false
                             }
                         }
                         'u' -> {
@@ -538,25 +603,35 @@ class Lexer(
                                         break
                                     }
                                 }
-                                if (peekChar() == '}') consume() // }
-                                if (hex.isNotEmpty()) {
-                                    try {
-                                        val codePoint = hex.toString().toInt(16)
-                                        content.append(
-                                            if (codePoint <= 0xFFFF) {
-                                                codePoint.toChar().toString()
-                                            } else if (codePoint <= 0x10FFFF) {
-                                                val high = 0xD800 + ((codePoint - 0x10000) ushr 10)
-                                                val low = 0xDC00 + ((codePoint - 0x10000) and 0x3FF)
-                                                charArrayOf(high.toChar(), low.toChar()).concatToString()
+                                if (peekChar() == '}') {
+                                    consume() // }
+                                    if (hex.isNotEmpty()) {
+                                        try {
+                                            val codePoint = hex.toString().toInt(16)
+                                            if (codePoint <= 0x10FFFF) {
+                                                content.append(
+                                                    if (codePoint <= 0xFFFF) {
+                                                        codePoint.toChar().toString()
+                                                    } else {
+                                                        val high = 0xD800 + ((codePoint - 0x10000) ushr 10)
+                                                        val low = 0xDC00 + ((codePoint - 0x10000) and 0x3FF)
+                                                        charArrayOf(high.toChar(), low.toChar()).concatToString()
+                                                    }
+                                                )
                                             } else {
-                                                ""
+                                                isValid = false
                                             }
-                                        )
-                                    } catch (e: Exception) {
-                                        // Ignore invalid code point
+                                        } catch (e: Exception) {
+                                            isValid = false
+                                        }
+                                    } else {
+                                        isValid = false
                                     }
+                                } else {
+                                    isValid = false
                                 }
+                            } else {
+                                isValid = false
                             }
                         }
                         else -> content.append(escapeChar)
@@ -572,7 +647,7 @@ class Lexer(
             }
         }
 
-        return Token.stringLiteral(content.toString(), spanFrom(start))
+        return Token.stringLiteral(if (isValid) content.toString() else "", spanFrom(start))
     }
 
     private fun Char.isHexDigit(): Boolean = this in '0'..'9' || this in 'a'..'f' || this in 'A'..'F'

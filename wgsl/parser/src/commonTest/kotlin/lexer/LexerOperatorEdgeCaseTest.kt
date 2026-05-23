@@ -141,4 +141,42 @@ class LexerOperatorEdgeCaseTest : FunSpec({
             tokens[0].kind shouldBe TokenKind.DECREMENT
         }
     }
+
+    context("Developer expression compaction (no whitespace between operators)") {
+        test("compact expression a+b is tokenized as ID, PLUS, ID") {
+            val tokens = tokenizeSignificant("a+b")
+            tokens.map { it.kind } shouldContainExactly listOf(
+                TokenKind.IDENTIFIER, TokenKind.PLUS, TokenKind.IDENTIFIER
+            )
+            tokens[0].literal shouldBe "a"
+            tokens[2].literal shouldBe "b"
+        }
+
+        test("compact expression a++b is tokenized as ID, INCREMENT, ID") {
+            val tokens = tokenizeSignificant("a++b")
+            tokens.map { it.kind } shouldContainExactly listOf(
+                TokenKind.IDENTIFIER, TokenKind.INCREMENT, TokenKind.IDENTIFIER
+            )
+            tokens[0].literal shouldBe "a"
+            tokens[2].literal shouldBe "b"
+        }
+
+        test("compact expression a+++b uses maximal munch to produce ID, INCREMENT, PLUS, ID") {
+            val tokens = tokenizeSignificant("a+++b")
+            tokens.map { it.kind } shouldContainExactly listOf(
+                TokenKind.IDENTIFIER, TokenKind.INCREMENT, TokenKind.PLUS, TokenKind.IDENTIFIER
+            )
+            tokens[0].literal shouldBe "a"
+            tokens[3].literal shouldBe "b"
+        }
+
+        test("compact assignment with negative sign x=-1 is ID, ASSIGN, MINUS, INT") {
+            val tokens = tokenizeSignificant("x=-1")
+            tokens.map { it.kind } shouldContainExactly listOf(
+                TokenKind.IDENTIFIER, TokenKind.ASSIGN, TokenKind.MINUS, TokenKind.INT_LITERAL
+            )
+            tokens[0].literal shouldBe "x"
+            tokens[3].literal shouldBe "1"
+        }
+    }
 })

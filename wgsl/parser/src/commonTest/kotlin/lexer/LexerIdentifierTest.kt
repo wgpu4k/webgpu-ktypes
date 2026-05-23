@@ -42,6 +42,20 @@ class LexerIdentifierTest : FunSpec({
             tokens[0].kind    shouldBe TokenKind.IDENTIFIER
             tokens[0].literal shouldBe "MyStruct"
         }
+
+        test("identifier starting with underscore followed by digits is an identifier") {
+            val tokens = tokenizeSignificant("_42")
+            tokens shouldHaveSize 1
+            tokens[0].kind shouldBe TokenKind.IDENTIFIER
+            tokens[0].literal shouldBe "_42"
+        }
+
+        test("identifier starting with double underscore followed by digits is an identifier") {
+            val tokens = tokenizeSignificant("__1")
+            tokens shouldHaveSize 1
+            tokens[0].kind shouldBe TokenKind.IDENTIFIER
+            tokens[0].literal shouldBe "__1"
+        }
     }
 
     context("Isolated underscore is the UNDERSCORE token, not an identifier") {
@@ -87,6 +101,34 @@ class LexerIdentifierTest : FunSpec({
             tokens shouldHaveSize 1
             tokens[0].kind    shouldBe TokenKind.IDENTIFIER
             tokens[0].literal shouldBe "letX"
+        }
+
+        test("fn_name is an identifier, not a fn keyword") {
+            val tokens = tokenizeSignificant("fn_name")
+            tokens shouldHaveSize 1
+            tokens[0].kind shouldBe TokenKind.IDENTIFIER
+            tokens[0].literal shouldBe "fn_name"
+        }
+
+        test("constance is an identifier, not a const keyword") {
+            val tokens = tokenizeSignificant("constance")
+            tokens shouldHaveSize 1
+            tokens[0].kind shouldBe TokenKind.IDENTIFIER
+            tokens[0].literal shouldBe "constance"
+        }
+
+        test("variable is an identifier, not a var keyword") {
+            val tokens = tokenizeSignificant("variable")
+            tokens shouldHaveSize 1
+            tokens[0].kind shouldBe TokenKind.IDENTIFIER
+            tokens[0].literal shouldBe "variable"
+        }
+
+        test("struct_type is an identifier, not a struct keyword") {
+            val tokens = tokenizeSignificant("struct_type")
+            tokens shouldHaveSize 1
+            tokens[0].kind shouldBe TokenKind.IDENTIFIER
+            tokens[0].literal shouldBe "struct_type"
         }
     }
 })
