@@ -1,0 +1,54 @@
+#include <metal_stdlib>
+using namespace metal;
+int global_0 = 1;
+uint global_1 = 1u;
+float global_2 = 1.0f;
+float global_3 = 1.0f;
+int4 global_4 = int4();
+float4 global_5 = float4(1);
+float2x2 global_6 = float2x2(float2(), float2());
+float2x2 global_7 = float2x2(float2(1.0f, 1), float2(1, 1));
+
+[[kernel]]
+void main() {
+    int local_0 = global_0;
+    float local_1 = global_2;
+    float2x2 local_2 = global_7;
+    int local_3 = 1;
+    uint local_4 = 1u;
+    float local_5 = 1.0f;
+    float local_6 = 1.0f;
+    int4 local_7 = int4();
+    float4 local_8 = float4(1);
+    float2x2 local_9 = float2x2(float2(), float2());
+    float2x2 local_10 = float2x2(float2(1.0f, 1), float2(1, 1));
+    int local_11 = local_3;
+    uint local_12 = local_4;
+    float local_13 = local_5;
+    float local_14 = local_6;
+    int4 local_15 = local_7;
+    float4 local_16 = local_8;
+    float2x2 local_17 = local_9;
+    float2x2 local_18 = local_10;
+    int local_19 = 1;
+    uint local_20 = 1u;
+    float local_21 = 1.0f;
+    float local_22 = 1.0f;
+    int4 local_23 = int4();
+    float4 local_24 = float4(1);
+    float2x2 local_25 = float2x2(float2(), float2());
+    float2x2 local_26 = float2x2(float2(1.0f, 1), float2(1, 1));
+    int local_27 = local_19;
+    uint local_28 = local_20;
+    float local_29 = local_21;
+    float local_30 = local_22;
+    int4 local_31 = local_23;
+    int local_32 = 1;
+    uint local_33 = 1u;
+    float local_34 = 1.0f;
+    float local_35 = 1.0f;
+    int4 local_36 = int4();
+    float4 local_37 = float4(1);
+    float2x2 local_38 = float2x2(float2(), float2());
+    float2x2 local_39 = float2x2(float2(1.0f, 1), float2(1, 1));
+}
