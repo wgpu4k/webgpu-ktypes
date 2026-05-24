@@ -44,6 +44,13 @@
                     "__type": "io.ygdrasil.wgsl.ir.TypeInner.Opaque",
                     "name": "sampler"
                 }
+            },
+            {
+                "inner": {
+                    "__type": "io.ygdrasil.wgsl.ir.TypeInner.Vector",
+                    "size": "Quad",
+                    "scalar": 2
+                }
             }
         ],
         "indexMap": [
@@ -96,7 +103,15 @@
                     "name": "sampler"
                 }
             },
-            5
+            5,
+            {
+                "inner": {
+                    "__type": "io.ygdrasil.wgsl.ir.TypeInner.Vector",
+                    "size": "Quad",
+                    "scalar": 2
+                }
+            },
+            6
         ]
     },
     "constants": {},
@@ -221,7 +236,7 @@
                         },
                         {
                             "name": "s",
-                            "type": 4,
+                            "type": 6,
                             "init": 8
                         }
                     ]
@@ -342,7 +357,7 @@
                         "type": 3
                     }
                 ],
-                "returnType": 4,
+                "returnType": 6,
                 "localVariables": {},
                 "expressions": {},
                 "blocks": {

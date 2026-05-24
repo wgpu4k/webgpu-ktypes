@@ -16,5 +16,5 @@ main_Output main() {
     return stage_out;
 }
 
-Texture2D<float> textureSampleCompareLevel(Texture2D<float> arg_0, sampler_comparison arg_1, float3 arg_2, int arg_3, float arg_4) {
+float textureSampleCompareLevel(Texture2D<float> arg_0, sampler_comparison arg_1, float3 arg_2, int arg_3, float arg_4) {
 }

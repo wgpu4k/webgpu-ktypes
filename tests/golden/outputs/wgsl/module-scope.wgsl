@@ -19,10 +19,10 @@ fn call() {
     statement();
     var x: Struct_1 = returns();
     var vf: f32 = f32(Value);
-    var s: texture_2d<f32> = textureSample(Texture, Sampler, vec2<f32>(vf));
+    var s: vec4<f32> = textureSample(Texture, Sampler, vec2<f32>(vf));
 }
 
-fn textureSample(arg_0: texture_2d<f32>, arg_1: sampler, arg_2: vec2<f32>) -> texture_2d<f32> {
+fn textureSample(arg_0: texture_2d<f32>, arg_1: sampler, arg_2: vec2<f32>) -> vec4<f32> {
 }
 
 @fragment

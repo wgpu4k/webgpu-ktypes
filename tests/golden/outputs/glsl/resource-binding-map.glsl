@@ -13,24 +13,24 @@ vec4 wgsl_entry_point_one(vec4 pos) {
     return textureSample(global_0, global_2, pos.xy);
 }
 
-texture2D textureSample(texture2D arg_0, sampler arg_1, vec2 arg_2) {
+vec4 textureSample(texture2D arg_0, sampler arg_1, vec2 arg_2) {
 }
 
 vec4 wgsl_entry_point_two() {
     return textureSample(global_0, global_2, global_4);
 }
 
-texture2D textureSample(texture2D arg_0, sampler arg_1, vec2 arg_2) {
+vec4 textureSample(texture2D arg_0, sampler arg_1, vec2 arg_2) {
 }
 
 vec4 wgsl_entry_point_three() {
     return (textureSample(global_0, global_2, (global_5 + global_4)) + textureSample(global_1, global_3, global_4));
 }
 
-texture2D textureSample(texture2D arg_0, sampler arg_1, vec2 arg_2) {
+vec4 textureSample(texture2D arg_0, sampler arg_1, vec2 arg_2) {
 }
 
-texture2D textureSample(texture2D arg_0, sampler arg_1, vec2 arg_2) {
+vec4 textureSample(texture2D arg_0, sampler arg_1, vec2 arg_2) {
 }
 
 layout(location = 0) out vec4 outColor;

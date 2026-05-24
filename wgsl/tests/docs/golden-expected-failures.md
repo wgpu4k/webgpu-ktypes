@@ -116,7 +116,7 @@ Each listed case is still executed. The test fails if the case starts passing un
 | `glsl` | `primitive-index-mesh.wgsl` | `native-validation` | Baseline debt from issue 16 golden stabilization. | `#16` |
 | `glsl` | `primitive-index.wgsl` | `native-validation` | Baseline debt from issue 16 golden stabilization. | `#16` |
 | `glsl` | `push-constants.wgsl` | `native-validation` | Baseline debt from issue 16 golden stabilization. | `#16` |
-| `glsl` | `quad.wgsl` | `lowering` | Baseline debt from issue 16 golden stabilization. | `#16` |
+| `glsl` | `quad.wgsl` | `native-validation` | Golden output is reviewed after texture sampling lowering fix, but GLSL native validation still rejects the current multi-entry-point output due overlapping locations. | `#16` |
 | `glsl` | `ray-query-no-init-tracking.wgsl` | `type-resolution` | Baseline debt from issue 16 golden stabilization. | `#16` |
 | `glsl` | `ray-query.wgsl` | `type-resolution` | Baseline debt from issue 16 golden stabilization. | `#16` |
 | `glsl` | `ray-tracing-pipeline.wgsl` | `native-validation` | Generated output now matches the golden; native validation still rejects the backend output after Emit preservation. | `#16` |
@@ -174,7 +174,6 @@ Each listed case is still executed. The test fails if the case starts passing un
 | `hlsl` | `mesh-shader-lines.wgsl` | `type-resolution` | Baseline debt from issue 16 golden stabilization. | `#16` |
 | `hlsl` | `mesh-shader-points.wgsl` | `type-resolution` | Baseline debt from issue 16 golden stabilization. | `#16` |
 | `hlsl` | `mesh-shader.wgsl` | `type-resolution` | Baseline debt from issue 16 golden stabilization. | `#16` |
-| `hlsl` | `quad.wgsl` | `lowering` | Baseline debt from issue 16 golden stabilization. | `#16` |
 | `hlsl` | `ray-query-no-init-tracking.wgsl` | `type-resolution` | Baseline debt from issue 16 golden stabilization. | `#16` |
 | `hlsl` | `ray-query.wgsl` | `type-resolution` | Baseline debt from issue 16 golden stabilization. | `#16` |
 | `ir` | `abstract-types-texture.wgsl` | `type-resolution` | Baseline debt from issue 16 golden stabilization. | `#16` |
@@ -208,7 +207,6 @@ Each listed case is still executed. The test fails if the case starts passing un
 | `ir` | `mesh-shader-lines.wgsl` | `type-resolution` | Baseline debt from issue 16 golden stabilization. | `#16` |
 | `ir` | `mesh-shader-points.wgsl` | `type-resolution` | Baseline debt from issue 16 golden stabilization. | `#16` |
 | `ir` | `mesh-shader.wgsl` | `type-resolution` | Baseline debt from issue 16 golden stabilization. | `#16` |
-| `ir` | `quad.wgsl` | `lowering` | Baseline debt from issue 16 golden stabilization. | `#16` |
 | `ir` | `ray-query-no-init-tracking.wgsl` | `type-resolution` | Baseline debt from issue 16 golden stabilization. | `#16` |
 | `ir` | `ray-query.wgsl` | `type-resolution` | Baseline debt from issue 16 golden stabilization. | `#16` |
 | `msl` | `abstract-types-texture.wgsl` | `type-resolution` | Baseline debt from issue 16 golden stabilization. | `#16` |
@@ -242,7 +240,6 @@ Each listed case is still executed. The test fails if the case starts passing un
 | `msl` | `mesh-shader-lines.wgsl` | `type-resolution` | Baseline debt from issue 16 golden stabilization. | `#16` |
 | `msl` | `mesh-shader-points.wgsl` | `type-resolution` | Baseline debt from issue 16 golden stabilization. | `#16` |
 | `msl` | `mesh-shader.wgsl` | `type-resolution` | Baseline debt from issue 16 golden stabilization. | `#16` |
-| `msl` | `quad.wgsl` | `lowering` | Baseline debt from issue 16 golden stabilization. | `#16` |
 | `msl` | `ray-query-no-init-tracking.wgsl` | `type-resolution` | Baseline debt from issue 16 golden stabilization. | `#16` |
 | `msl` | `ray-query.wgsl` | `type-resolution` | Baseline debt from issue 16 golden stabilization. | `#16` |
 | `roundtrip` | `6438-conflicting-idents.wgsl` | `roundtrip-semantic-isomorphism` | Baseline debt from issue 16 golden stabilization. | `#16` |
@@ -311,7 +308,7 @@ Each listed case is still executed. The test fails if the case starts passing un
 | `roundtrip` | `pointer-function-arg.wgsl` | `roundtrip-semantic-isomorphism` | Baseline debt from issue 16 golden stabilization. | `#16` |
 | `roundtrip` | `pointers.wgsl` | `roundtrip-semantic-isomorphism` | Baseline debt from issue 16 golden stabilization. | `#16` |
 | `roundtrip` | `push-constants.wgsl` | `roundtrip-semantic-isomorphism` | Baseline debt from issue 16 golden stabilization. | `#16` |
-| `roundtrip` | `quad.wgsl` | `lowering` | Baseline debt from issue 16 golden stabilization. | `#16` |
+| `roundtrip` | `quad.wgsl` | `roundtrip-semantic-isomorphism` | Golden output is reviewed after texture sampling lowering fix, but roundtrip comparison still differs on return location binding placement. | `#16` |
 | `roundtrip` | `ray-query-no-init-tracking.wgsl` | `type-resolution` | Baseline debt from issue 16 golden stabilization. | `#16` |
 | `roundtrip` | `ray-query.wgsl` | `type-resolution` | Baseline debt from issue 16 golden stabilization. | `#16` |
 | `roundtrip` | `ray-tracing-pipeline.wgsl` | `roundtrip-semantic-isomorphism` | Baseline debt from issue 16 golden stabilization. | `#16` |
@@ -388,7 +385,7 @@ Each listed case is still executed. The test fails if the case starts passing un
 | `wgsl` | `pointer-function-arg.wgsl` | `roundtrip-semantic-isomorphism` | Baseline debt from issue 16 golden stabilization. | `#16` |
 | `wgsl` | `pointers.wgsl` | `roundtrip-semantic-isomorphism` | Baseline debt from issue 16 golden stabilization. | `#16` |
 | `wgsl` | `push-constants.wgsl` | `roundtrip-semantic-isomorphism` | Baseline debt from issue 16 golden stabilization. | `#16` |
-| `wgsl` | `quad.wgsl` | `lowering` | Baseline debt from issue 16 golden stabilization. | `#16` |
+| `wgsl` | `quad.wgsl` | `roundtrip-semantic-isomorphism` | Golden output is reviewed after texture sampling lowering fix, but WGSL comparison still differs on return location binding placement. | `#16` |
 | `wgsl` | `ray-query-no-init-tracking.wgsl` | `type-resolution` | Baseline debt from issue 16 golden stabilization. | `#16` |
 | `wgsl` | `ray-query.wgsl` | `type-resolution` | Baseline debt from issue 16 golden stabilization. | `#16` |
 | `wgsl` | `ray-tracing-pipeline.wgsl` | `roundtrip-semantic-isomorphism` | Baseline debt from issue 16 golden stabilization. | `#16` |

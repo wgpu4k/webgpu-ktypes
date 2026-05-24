@@ -17,5 +17,5 @@ main_Output main(main_Input stage_in) {
     return stage_out;
 }
 
-Texture2D<float4> textureSample(Texture2D<float4> arg_0, SamplerState arg_1, float2 arg_2) {
+float4 textureSample(Texture2D<float4> arg_0, SamplerState arg_1, float2 arg_2) {
 }

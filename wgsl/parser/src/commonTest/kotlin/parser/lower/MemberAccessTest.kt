@@ -29,4 +29,28 @@ class MemberAccessTest : FunSpec({
             index shouldBe 1u
         }
     }
+
+    test("texture_sample_result_allows_alpha_component_access") {
+        val module = lowerWgsl("""
+            @group(0) @binding(0) var tex : texture_2d<f32>;
+            @group(0) @binding(1) var smp : sampler;
+
+            @fragment
+            fn main(@location(0) uv : vec2<f32>) -> @location(0) vec4<f32> {
+                let color = textureSample(tex, smp, uv);
+                let alpha = color.a;
+                return color * alpha;
+            }
+        """)
+
+        val mainFunc = module.functions.toList().first { it.name == "main" }
+        val color = mainFunc.localVariables.toList().first { it.name == "color" }
+        val colorType = module.types[color.type].inner as TypeInner.Vector
+        colorType.size shouldBe VectorSize.Quad
+        module.types[colorType.scalar].inner shouldBe TypeInner.Scalar(ScalarKind.F32, 4)
+
+        val alpha = mainFunc.localVariables.toList().first { it.name == "alpha" }
+        val alphaInit = mainFunc.expressions[alpha.init!!].kind as ExpressionKind.AccessIndex
+        alphaInit.index shouldBe 3u
+    }
 })

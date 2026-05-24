@@ -115,7 +115,7 @@
                     "data": [
                         {
                             "name": "a",
-                            "type": 0,
+                            "type": 3,
                             "init": 4
                         },
                         {
@@ -391,7 +391,7 @@
                         "type": 4
                     }
                 ],
-                "returnType": 0,
+                "returnType": 3,
                 "localVariables": {},
                 "expressions": {},
                 "blocks": {

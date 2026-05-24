@@ -4,7 +4,7 @@ var<private> u_texture: texture_2d<f32>;
 @group(0) @binding(1)
 var<private> u_sampler: sampler;
 
-fn textureSample(arg_0: texture_2d<f32>, arg_1: sampler, arg_2: vec2<f32>) -> texture_2d<f32> {
+fn textureSample(arg_0: texture_2d<f32>, arg_1: sampler, arg_2: vec2<f32>) -> vec4<f32> {
 }
 
 @fragment

@@ -18,7 +18,7 @@ vec4 wgsl_fs_main(Struct_3 in) {
     return textureSample(global_0, global_1, in.uv);
 }
 
-textureCube textureSample(textureCube arg_0, sampler arg_1, vec3 arg_2) {
+vec4 textureSample(textureCube arg_0, sampler arg_1, vec3 arg_2) {
 }
 
 Struct_3 wgsl_vs_main(uint vertex_index) {

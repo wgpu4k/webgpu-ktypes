@@ -4,12 +4,12 @@ var<private> point_shadow_textures: texture_depth_cube_array;
 @group(0) @binding(5)
 var<private> point_shadow_textures_sampler: sampler_comparison;
 
-fn textureSampleCompare(arg_0: texture_depth_cube_array, arg_1: sampler_comparison, arg_2: vec3<f32>, arg_3: i32, arg_4: f32) -> texture_depth_cube_array {
+fn textureSampleCompare(arg_0: texture_depth_cube_array, arg_1: sampler_comparison, arg_2: vec3<f32>, arg_3: i32, arg_4: f32) -> f32 {
 }
 
 @fragment
 fn fragment() -> vec4<f32> {
     var frag_ls: vec3<f32> = vec4<f32>(1.0f, 1.0f, 2.0f, 1.0f).xyz;
-    var a: texture_depth_cube_array = textureSampleCompare(point_shadow_textures, point_shadow_textures_sampler, frag_ls, i32(1), 1.0f);
+    var a: f32 = textureSampleCompare(point_shadow_textures, point_shadow_textures_sampler, frag_ls, i32(1), 1.0f);
     return vec4<f32>(a, 1.0f, 1.0f, 1.0f);
 }

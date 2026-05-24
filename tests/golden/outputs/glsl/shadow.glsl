@@ -39,7 +39,7 @@ float fetch_shadow(uint light_id, vec4 homogeneous_coords) {
     return textureSampleCompareLevel(global_0, global_1, light_local, int(light_id), (homogeneous_coords[2] * proj_correction));
 }
 
-texture2D textureSampleCompareLevel(texture2D arg_0, sampler_comparison arg_1, vec2 arg_2, int arg_3, float arg_4) {
+float textureSampleCompareLevel(texture2D arg_0, sampler_comparison arg_1, vec2 arg_2, int arg_3, float arg_4) {
 }
 
 Struct_8 wgsl_vs_main(ivec4 position, ivec4 normal) {

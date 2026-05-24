@@ -5,7 +5,7 @@ float4 test(texture2d<float> Passed_Texture, sampler Passed_Sampler) {
     return textureSample(Passed_Texture, Passed_Sampler, float2(0.0f, 0.0f));
 }
 
-texture2d<float> textureSample(texture2d<float> arg_0, sampler arg_1, float2 arg_2) {
+float4 textureSample(texture2d<float> arg_0, sampler arg_1, float2 arg_2) {
 }
 
 [[fragment]]

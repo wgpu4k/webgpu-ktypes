@@ -1,0 +1,584 @@
+{
+    "types": {
+        "data": [
+            {
+                "inner": {
+                    "__type": "io.ygdrasil.wgsl.ir.TypeInner.Scalar",
+                    "kind": "F32",
+                    "width": 4
+                }
+            },
+            {
+                "inner": {
+                    "__type": "io.ygdrasil.wgsl.ir.TypeInner.Vector",
+                    "size": "Bi",
+                    "scalar": 0
+                }
+            },
+            {
+                "inner": {
+                    "__type": "io.ygdrasil.wgsl.ir.TypeInner.Vector",
+                    "size": "Quad",
+                    "scalar": 0
+                }
+            },
+            {
+                "inner": {
+                    "__type": "io.ygdrasil.wgsl.ir.TypeInner.Struct",
+                    "members": [
+                        {
+                            "name": "uv",
+                            "type": 1,
+                            "binding": {
+                                "__type": "io.ygdrasil.wgsl.ir.BindingAttribute.Location",
+                                "location": 0
+                            }
+                        },
+                        {
+                            "name": "position",
+                            "type": 2,
+                            "binding": {
+                                "__type": "io.ygdrasil.wgsl.ir.BindingAttribute.Builtin",
+                                "builtin": "Position"
+                            }
+                        }
+                    ]
+                }
+            },
+            {
+                "inner": {
+                    "__type": "io.ygdrasil.wgsl.ir.TypeInner.Opaque",
+                    "name": "texture_2d<f32>"
+                }
+            },
+            {
+                "inner": {
+                    "__type": "io.ygdrasil.wgsl.ir.TypeInner.Opaque",
+                    "name": "sampler"
+                }
+            }
+        ],
+        "indexMap": [
+            {
+                "inner": {
+                    "__type": "io.ygdrasil.wgsl.ir.TypeInner.Scalar",
+                    "kind": "F32",
+                    "width": 4
+                }
+            },
+            0,
+            {
+                "inner": {
+                    "__type": "io.ygdrasil.wgsl.ir.TypeInner.Vector",
+                    "size": "Bi",
+                    "scalar": 0
+                }
+            },
+            1,
+            {
+                "inner": {
+                    "__type": "io.ygdrasil.wgsl.ir.TypeInner.Vector",
+                    "size": "Quad",
+                    "scalar": 0
+                }
+            },
+            2,
+            {
+                "inner": {
+                    "__type": "io.ygdrasil.wgsl.ir.TypeInner.Struct",
+                    "members": [
+                        {
+                            "name": "uv",
+                            "type": 1,
+                            "binding": {
+                                "__type": "io.ygdrasil.wgsl.ir.BindingAttribute.Location",
+                                "location": 0
+                            }
+                        },
+                        {
+                            "name": "position",
+                            "type": 2,
+                            "binding": {
+                                "__type": "io.ygdrasil.wgsl.ir.BindingAttribute.Builtin",
+                                "builtin": "Position"
+                            }
+                        }
+                    ]
+                }
+            },
+            3,
+            {
+                "inner": {
+                    "__type": "io.ygdrasil.wgsl.ir.TypeInner.Opaque",
+                    "name": "texture_2d<f32>"
+                }
+            },
+            4,
+            {
+                "inner": {
+                    "__type": "io.ygdrasil.wgsl.ir.TypeInner.Opaque",
+                    "name": "sampler"
+                }
+            },
+            5
+        ]
+    },
+    "constants": {},
+    "globalExpressions": {
+        "data": [
+            {
+                "kind": {
+                    "__type": "io.ygdrasil.wgsl.ir.ExpressionKind.Literal",
+                    "value": {
+                        "__type": "io.ygdrasil.wgsl.ir.LiteralValue.Scalar",
+                        "value": {
+                            "__type": "io.ygdrasil.wgsl.ir.ScalarValue.F32",
+                            "value": 1.2
+                        }
+                    }
+                }
+            }
+        ]
+    },
+    "globalVariables": {
+        "data": [
+            {
+                "name": "c_scale",
+                "storageClass": "Private",
+                "type": 0,
+                "init": 0
+            },
+            {
+                "name": "u_texture",
+                "storageClass": "Private",
+                "type": 4,
+                "binding": {
+                    "group": 0,
+                    "index": 0
+                }
+            },
+            {
+                "name": "u_sampler",
+                "storageClass": "Private",
+                "type": 5,
+                "binding": {
+                    "group": 0,
+                    "index": 1
+                }
+            }
+        ]
+    },
+    "functions": {
+        "data": [
+            {
+                "name": "fs_extra",
+                "parameters": [],
+                "returnType": 2,
+                "localVariables": {},
+                "expressions": {
+                    "data": [
+                        {
+                            "kind": {
+                                "__type": "io.ygdrasil.wgsl.ir.ExpressionKind.Literal",
+                                "value": {
+                                    "__type": "io.ygdrasil.wgsl.ir.LiteralValue.Scalar",
+                                    "value": {
+                                        "__type": "io.ygdrasil.wgsl.ir.ScalarValue.F32",
+                                        "value": 0.0
+                                    }
+                                }
+                            }
+                        },
+                        {
+                            "kind": {
+                                "__type": "io.ygdrasil.wgsl.ir.ExpressionKind.Literal",
+                                "value": {
+                                    "__type": "io.ygdrasil.wgsl.ir.LiteralValue.Scalar",
+                                    "value": {
+                                        "__type": "io.ygdrasil.wgsl.ir.ScalarValue.F32",
+                                        "value": 0.5
+                                    }
+                                }
+                            }
+                        },
+                        {
+                            "kind": {
+                                "__type": "io.ygdrasil.wgsl.ir.ExpressionKind.Literal",
+                                "value": {
+                                    "__type": "io.ygdrasil.wgsl.ir.LiteralValue.Scalar",
+                                    "value": {
+                                        "__type": "io.ygdrasil.wgsl.ir.ScalarValue.F32",
+                                        "value": 0.0
+                                    }
+                                }
+                            }
+                        },
+                        {
+                            "kind": {
+                                "__type": "io.ygdrasil.wgsl.ir.ExpressionKind.Literal",
+                                "value": {
+                                    "__type": "io.ygdrasil.wgsl.ir.LiteralValue.Scalar",
+                                    "value": {
+                                        "__type": "io.ygdrasil.wgsl.ir.ScalarValue.F32",
+                                        "value": 0.5
+                                    }
+                                }
+                            }
+                        },
+                        {
+                            "kind": {
+                                "__type": "io.ygdrasil.wgsl.ir.ExpressionKind.TypeConstructor",
+                                "type": 2,
+                                "arguments": [
+                                    0,
+                                    1,
+                                    2,
+                                    3
+                                ]
+                            }
+                        }
+                    ]
+                },
+                "blocks": {
+                    "data": [
+                        {
+                            "statements": []
+                        },
+                        {
+                            "statements": [
+                                {
+                                    "__type": "io.ygdrasil.wgsl.ir.Statement.Return",
+                                    "value": 4
+                                }
+                            ]
+                        }
+                    ]
+                },
+                "body": 1
+            },
+            {
+                "name": "vert_main",
+                "parameters": [
+                    {
+                        "name": "pos",
+                        "type": 1,
+                        "binding": {
+                            "__type": "io.ygdrasil.wgsl.ir.BindingAttribute.Location",
+                            "location": 0
+                        }
+                    },
+                    {
+                        "name": "uv",
+                        "type": 1,
+                        "binding": {
+                            "__type": "io.ygdrasil.wgsl.ir.BindingAttribute.Location",
+                            "location": 1
+                        }
+                    }
+                ],
+                "returnType": 3,
+                "localVariables": {},
+                "expressions": {
+                    "data": [
+                        {
+                            "kind": {
+                                "__type": "io.ygdrasil.wgsl.ir.ExpressionKind.FunctionArgument",
+                                "index": 1
+                            }
+                        },
+                        {
+                            "kind": {
+                                "__type": "io.ygdrasil.wgsl.ir.ExpressionKind.GlobalVar",
+                                "handle": 0
+                            }
+                        },
+                        {
+                            "kind": {
+                                "__type": "io.ygdrasil.wgsl.ir.ExpressionKind.FunctionArgument",
+                                "index": 0
+                            }
+                        },
+                        {
+                            "kind": {
+                                "__type": "io.ygdrasil.wgsl.ir.ExpressionKind.Binary",
+                                "operator": "Multiply",
+                                "left": 1,
+                                "right": 2
+                            }
+                        },
+                        {
+                            "kind": {
+                                "__type": "io.ygdrasil.wgsl.ir.ExpressionKind.Literal",
+                                "value": {
+                                    "__type": "io.ygdrasil.wgsl.ir.LiteralValue.Scalar",
+                                    "value": {
+                                        "__type": "io.ygdrasil.wgsl.ir.ScalarValue.F32",
+                                        "value": 0.0
+                                    }
+                                }
+                            }
+                        },
+                        {
+                            "kind": {
+                                "__type": "io.ygdrasil.wgsl.ir.ExpressionKind.Literal",
+                                "value": {
+                                    "__type": "io.ygdrasil.wgsl.ir.LiteralValue.Scalar",
+                                    "value": {
+                                        "__type": "io.ygdrasil.wgsl.ir.ScalarValue.F32",
+                                        "value": 1.0
+                                    }
+                                }
+                            }
+                        },
+                        {
+                            "kind": {
+                                "__type": "io.ygdrasil.wgsl.ir.ExpressionKind.TypeConstructor",
+                                "type": 2,
+                                "arguments": [
+                                    3,
+                                    4,
+                                    5
+                                ]
+                            }
+                        },
+                        {
+                            "kind": {
+                                "__type": "io.ygdrasil.wgsl.ir.ExpressionKind.TypeConstructor",
+                                "type": 3,
+                                "arguments": [
+                                    0,
+                                    6
+                                ]
+                            }
+                        }
+                    ]
+                },
+                "blocks": {
+                    "data": [
+                        {
+                            "statements": []
+                        },
+                        {
+                            "statements": [
+                                {
+                                    "__type": "io.ygdrasil.wgsl.ir.Statement.Return",
+                                    "value": 7
+                                }
+                            ]
+                        }
+                    ]
+                },
+                "body": 1
+            },
+            {
+                "name": "frag_main",
+                "parameters": [
+                    {
+                        "name": "uv",
+                        "type": 1,
+                        "binding": {
+                            "__type": "io.ygdrasil.wgsl.ir.BindingAttribute.Location",
+                            "location": 0
+                        }
+                    }
+                ],
+                "returnType": 2,
+                "localVariables": {
+                    "data": [
+                        {
+                            "name": "color",
+                            "type": 2,
+                            "init": 3
+                        },
+                        {
+                            "name": "premultiplied",
+                            "type": 2,
+                            "init": 11
+                        }
+                    ]
+                },
+                "expressions": {
+                    "data": [
+                        {
+                            "kind": {
+                                "__type": "io.ygdrasil.wgsl.ir.ExpressionKind.GlobalVar",
+                                "handle": 1
+                            }
+                        },
+                        {
+                            "kind": {
+                                "__type": "io.ygdrasil.wgsl.ir.ExpressionKind.GlobalVar",
+                                "handle": 2
+                            }
+                        },
+                        {
+                            "kind": {
+                                "__type": "io.ygdrasil.wgsl.ir.ExpressionKind.FunctionArgument",
+                                "index": 0
+                            }
+                        },
+                        {
+                            "kind": {
+                                "__type": "io.ygdrasil.wgsl.ir.ExpressionKind.Call",
+                                "function": 3,
+                                "arguments": [
+                                    0,
+                                    1,
+                                    2
+                                ]
+                            }
+                        },
+                        {
+                            "kind": {
+                                "__type": "io.ygdrasil.wgsl.ir.ExpressionKind.LocalVar",
+                                "handle": 0
+                            }
+                        },
+                        {
+                            "kind": {
+                                "__type": "io.ygdrasil.wgsl.ir.ExpressionKind.AccessIndex",
+                                "expr": 4,
+                                "index": 3
+                            }
+                        },
+                        {
+                            "kind": {
+                                "__type": "io.ygdrasil.wgsl.ir.ExpressionKind.Literal",
+                                "value": {
+                                    "__type": "io.ygdrasil.wgsl.ir.LiteralValue.Scalar",
+                                    "value": {
+                                        "__type": "io.ygdrasil.wgsl.ir.ScalarValue.F32",
+                                        "value": 0.0
+                                    }
+                                }
+                            }
+                        },
+                        {
+                            "kind": {
+                                "__type": "io.ygdrasil.wgsl.ir.ExpressionKind.Binary",
+                                "operator": "Equal",
+                                "left": 5,
+                                "right": 6
+                            }
+                        },
+                        {
+                            "kind": {
+                                "__type": "io.ygdrasil.wgsl.ir.ExpressionKind.LocalVar",
+                                "handle": 0
+                            }
+                        },
+                        {
+                            "kind": {
+                                "__type": "io.ygdrasil.wgsl.ir.ExpressionKind.AccessIndex",
+                                "expr": 8,
+                                "index": 3
+                            }
+                        },
+                        {
+                            "kind": {
+                                "__type": "io.ygdrasil.wgsl.ir.ExpressionKind.LocalVar",
+                                "handle": 0
+                            }
+                        },
+                        {
+                            "kind": {
+                                "__type": "io.ygdrasil.wgsl.ir.ExpressionKind.Binary",
+                                "operator": "Multiply",
+                                "left": 9,
+                                "right": 10
+                            }
+                        },
+                        {
+                            "kind": {
+                                "__type": "io.ygdrasil.wgsl.ir.ExpressionKind.LocalVar",
+                                "handle": 1
+                            }
+                        }
+                    ]
+                },
+                "blocks": {
+                    "data": [
+                        {
+                            "statements": []
+                        },
+                        {
+                            "statements": [
+                                {
+                                    "__type": "io.ygdrasil.wgsl.ir.Statement.Discard"
+                                }
+                            ]
+                        },
+                        {
+                            "statements": [
+                                {
+                                    "__type": "io.ygdrasil.wgsl.ir.Statement.Init",
+                                    "variable": 0
+                                },
+                                {
+                                    "__type": "io.ygdrasil.wgsl.ir.Statement.If",
+                                    "condition": 7,
+                                    "accept": 1
+                                },
+                                {
+                                    "__type": "io.ygdrasil.wgsl.ir.Statement.Init",
+                                    "variable": 1
+                                },
+                                {
+                                    "__type": "io.ygdrasil.wgsl.ir.Statement.Return",
+                                    "value": 12
+                                }
+                            ]
+                        }
+                    ]
+                },
+                "body": 2
+            },
+            {
+                "name": "textureSample",
+                "parameters": [
+                    {
+                        "name": "arg_0",
+                        "type": 4
+                    },
+                    {
+                        "name": "arg_1",
+                        "type": 5
+                    },
+                    {
+                        "name": "arg_2",
+                        "type": 1
+                    }
+                ],
+                "returnType": 2,
+                "localVariables": {},
+                "expressions": {},
+                "blocks": {
+                    "data": [
+                        {
+                            "statements": []
+                        }
+                    ]
+                },
+                "body": 0
+            }
+        ]
+    },
+    "entryPoints": [
+        {
+            "name": "fs_extra",
+            "function": 0,
+            "stage": "Fragment"
+        },
+        {
+            "name": "vert_main",
+            "function": 1,
+            "stage": "Vertex"
+        },
+        {
+            "name": "frag_main",
+            "function": 2,
+            "stage": "Fragment"
+        }
+    ],
+    "diagnosticFilters": {}
+}
