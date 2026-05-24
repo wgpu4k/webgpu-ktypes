@@ -53,4 +53,39 @@ class MemberAccessTest : FunSpec({
         val alphaInit = mainFunc.expressions[alpha.init!!].kind as ExpressionKind.AccessIndex
         alphaInit.index shouldBe 3u
     }
+
+    test("atomic_compare_exchange_result_exposes_old_value_and_exchanged_members") {
+        val module = lowerWgsl("""
+            @group(0) @binding(0)
+            var<storage, read_write> values: array<atomic<u32>, 1>;
+
+            @compute @workgroup_size(1)
+            fn main() {
+                let result = atomicCompareExchangeWeak(&values[0], 1u, 2u);
+                let old = result.old_value;
+                let exchanged = result.exchanged;
+            }
+        """)
+
+        val mainFunc = module.functions.toList().first { it.name == "main" }
+        val result = mainFunc.localVariables.toList().first { it.name == "result" }
+        val resultType = module.types[result.type].inner as TypeInner.Struct
+        resultType.members.map { it.name } shouldBe listOf("old_value", "exchanged")
+
+        val loaded = mainFunc.localVariables.toList().first { it.name == "old" }
+        module.types[loaded.type].inner shouldBe TypeInner.Scalar(ScalarKind.Uint, 4)
+
+        val oldValueType = module.types[resultType.members[0].type].inner
+        oldValueType shouldBe TypeInner.Scalar(ScalarKind.Uint, 4)
+
+        val exchangedType = module.types[resultType.members[1].type].inner
+        exchangedType shouldBe TypeInner.Scalar(ScalarKind.Bool, 1)
+
+        val oldInit = mainFunc.expressions[loaded.init!!].kind as ExpressionKind.AccessIndex
+        oldInit.index shouldBe 0u
+
+        val exchanged = mainFunc.localVariables.toList().first { it.name == "exchanged" }
+        val exchangedInit = mainFunc.expressions[exchanged.init!!].kind as ExpressionKind.AccessIndex
+        exchangedInit.index shouldBe 1u
+    }
 })

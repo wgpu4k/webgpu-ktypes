@@ -5,6 +5,14 @@ struct Struct_3 {
     uint atomic_scalar;
     int atomic_arr[2];
 };
+struct Struct_10 {
+    uint old_value;
+    bool exchanged;
+};
+struct Struct_11 {
+    int old_value;
+    bool exchanged;
+};
 uint global_0 : register(u0);
 int global_1[2] : register(u1);
 uint global_2;
@@ -102,14 +110,14 @@ void cs_main() {
     atomicExchange(&global_3[1], 1);
     atomicExchange(&global_5.atomic_scalar, 1u);
     atomicExchange(&global_5.atomic_arr[1], 1);
-    void local_8 = atomicCompareExchangeWeak(&global_0, 1u, 2u);
-    void local_9 = atomicCompareExchangeWeak(&global_1[1], 1, 2);
-    void local_10 = atomicCompareExchangeWeak(&global_4.atomic_scalar, 1u, 2u);
-    void local_11 = atomicCompareExchangeWeak(&global_4.atomic_arr[1], 1, 2);
-    void local_12 = atomicCompareExchangeWeak(&global_2, 1u, 2u);
-    void local_13 = atomicCompareExchangeWeak(&global_3[1], 1, 2);
-    void local_14 = atomicCompareExchangeWeak(&global_5.atomic_scalar, 1u, 2u);
-    void local_15 = atomicCompareExchangeWeak(&global_5.atomic_arr[1], 1, 2);
+    Struct_10 local_8 = atomicCompareExchangeWeak(&global_0, 1u, 2u);
+    Struct_11 local_9 = atomicCompareExchangeWeak(&global_1[1], 1, 2);
+    Struct_10 local_10 = atomicCompareExchangeWeak(&global_4.atomic_scalar, 1u, 2u);
+    Struct_11 local_11 = atomicCompareExchangeWeak(&global_4.atomic_arr[1], 1, 2);
+    Struct_10 local_12 = atomicCompareExchangeWeak(&global_2, 1u, 2u);
+    Struct_11 local_13 = atomicCompareExchangeWeak(&global_3[1], 1, 2);
+    Struct_10 local_14 = atomicCompareExchangeWeak(&global_5.atomic_scalar, 1u, 2u);
+    Struct_11 local_15 = atomicCompareExchangeWeak(&global_5.atomic_arr[1], 1, 2);
 }
 
 void atomicStore(void arg_0, uint arg_1) {
@@ -376,26 +384,26 @@ void atomicExchange(void arg_0, uint arg_1) {
 void atomicExchange(void arg_0, int arg_1) {
 }
 
-void atomicCompareExchangeWeak(void arg_0, uint arg_1, uint arg_2) {
+Struct_10 atomicCompareExchangeWeak(void arg_0, uint arg_1, uint arg_2) {
 }
 
-void atomicCompareExchangeWeak(void arg_0, int arg_1, int arg_2) {
+Struct_11 atomicCompareExchangeWeak(void arg_0, int arg_1, int arg_2) {
 }
 
-void atomicCompareExchangeWeak(void arg_0, uint arg_1, uint arg_2) {
+Struct_10 atomicCompareExchangeWeak(void arg_0, uint arg_1, uint arg_2) {
 }
 
-void atomicCompareExchangeWeak(void arg_0, int arg_1, int arg_2) {
+Struct_11 atomicCompareExchangeWeak(void arg_0, int arg_1, int arg_2) {
 }
 
-void atomicCompareExchangeWeak(void arg_0, uint arg_1, uint arg_2) {
+Struct_10 atomicCompareExchangeWeak(void arg_0, uint arg_1, uint arg_2) {
 }
 
-void atomicCompareExchangeWeak(void arg_0, int arg_1, int arg_2) {
+Struct_11 atomicCompareExchangeWeak(void arg_0, int arg_1, int arg_2) {
 }
 
-void atomicCompareExchangeWeak(void arg_0, uint arg_1, uint arg_2) {
+Struct_10 atomicCompareExchangeWeak(void arg_0, uint arg_1, uint arg_2) {
 }
 
-void atomicCompareExchangeWeak(void arg_0, int arg_1, int arg_2) {
+Struct_11 atomicCompareExchangeWeak(void arg_0, int arg_1, int arg_2) {
 }

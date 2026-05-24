@@ -3,6 +3,14 @@ struct Struct_3 {
     atomic_scalar: u32,
     atomic_arr: array<i32, 2>,
 }
+struct Struct_10 {
+    old_value: u32,
+    exchanged: bool,
+}
+struct Struct_11 {
+    old_value: i32,
+    exchanged: bool,
+}
 @group(0) @binding(0)
 var<storage, read_write> storage_atomic_scalar: u32;
 @group(0) @binding(1)
@@ -277,28 +285,28 @@ fn atomicExchange(arg_0: ptr<function, u32>, arg_1: u32) -> ptr<function, u32> {
 fn atomicExchange(arg_0: ptr<function, i32>, arg_1: i32) -> ptr<function, i32> {
 }
 
-fn atomicCompareExchangeWeak(arg_0: ptr<function, u32>, arg_1: u32, arg_2: u32) -> ptr<function, u32> {
+fn atomicCompareExchangeWeak(arg_0: ptr<function, u32>, arg_1: u32, arg_2: u32) -> Struct_10 {
 }
 
-fn atomicCompareExchangeWeak(arg_0: ptr<function, i32>, arg_1: i32, arg_2: i32) -> ptr<function, i32> {
+fn atomicCompareExchangeWeak(arg_0: ptr<function, i32>, arg_1: i32, arg_2: i32) -> Struct_11 {
 }
 
-fn atomicCompareExchangeWeak(arg_0: ptr<function, u32>, arg_1: u32, arg_2: u32) -> ptr<function, u32> {
+fn atomicCompareExchangeWeak(arg_0: ptr<function, u32>, arg_1: u32, arg_2: u32) -> Struct_10 {
 }
 
-fn atomicCompareExchangeWeak(arg_0: ptr<function, i32>, arg_1: i32, arg_2: i32) -> ptr<function, i32> {
+fn atomicCompareExchangeWeak(arg_0: ptr<function, i32>, arg_1: i32, arg_2: i32) -> Struct_11 {
 }
 
-fn atomicCompareExchangeWeak(arg_0: ptr<function, u32>, arg_1: u32, arg_2: u32) -> ptr<function, u32> {
+fn atomicCompareExchangeWeak(arg_0: ptr<function, u32>, arg_1: u32, arg_2: u32) -> Struct_10 {
 }
 
-fn atomicCompareExchangeWeak(arg_0: ptr<function, i32>, arg_1: i32, arg_2: i32) -> ptr<function, i32> {
+fn atomicCompareExchangeWeak(arg_0: ptr<function, i32>, arg_1: i32, arg_2: i32) -> Struct_11 {
 }
 
-fn atomicCompareExchangeWeak(arg_0: ptr<function, u32>, arg_1: u32, arg_2: u32) -> ptr<function, u32> {
+fn atomicCompareExchangeWeak(arg_0: ptr<function, u32>, arg_1: u32, arg_2: u32) -> Struct_10 {
 }
 
-fn atomicCompareExchangeWeak(arg_0: ptr<function, i32>, arg_1: i32, arg_2: i32) -> ptr<function, i32> {
+fn atomicCompareExchangeWeak(arg_0: ptr<function, i32>, arg_1: i32, arg_2: i32) -> Struct_11 {
 }
 
 @compute
@@ -391,12 +399,12 @@ fn cs_main(id: vec3<u32>) {
     atomicExchange(&workgroup_atomic_arr[1], 1);
     atomicExchange(&workgroup_struct.atomic_scalar, 1u);
     atomicExchange(&workgroup_struct.atomic_arr[1], 1);
-    var cas_res_0: ptr<function, u32> = atomicCompareExchangeWeak(&storage_atomic_scalar, 1u, 2u);
-    var cas_res_1: ptr<function, i32> = atomicCompareExchangeWeak(&storage_atomic_arr[1], 1, 2);
-    var cas_res_2: ptr<function, u32> = atomicCompareExchangeWeak(&storage_struct.atomic_scalar, 1u, 2u);
-    var cas_res_3: ptr<function, i32> = atomicCompareExchangeWeak(&storage_struct.atomic_arr[1], 1, 2);
-    var cas_res_4: ptr<function, u32> = atomicCompareExchangeWeak(&workgroup_atomic_scalar, 1u, 2u);
-    var cas_res_5: ptr<function, i32> = atomicCompareExchangeWeak(&workgroup_atomic_arr[1], 1, 2);
-    var cas_res_6: ptr<function, u32> = atomicCompareExchangeWeak(&workgroup_struct.atomic_scalar, 1u, 2u);
-    var cas_res_7: ptr<function, i32> = atomicCompareExchangeWeak(&workgroup_struct.atomic_arr[1], 1, 2);
+    var cas_res_0: Struct_10 = atomicCompareExchangeWeak(&storage_atomic_scalar, 1u, 2u);
+    var cas_res_1: Struct_11 = atomicCompareExchangeWeak(&storage_atomic_arr[1], 1, 2);
+    var cas_res_2: Struct_10 = atomicCompareExchangeWeak(&storage_struct.atomic_scalar, 1u, 2u);
+    var cas_res_3: Struct_11 = atomicCompareExchangeWeak(&storage_struct.atomic_arr[1], 1, 2);
+    var cas_res_4: Struct_10 = atomicCompareExchangeWeak(&workgroup_atomic_scalar, 1u, 2u);
+    var cas_res_5: Struct_11 = atomicCompareExchangeWeak(&workgroup_atomic_arr[1], 1, 2);
+    var cas_res_6: Struct_10 = atomicCompareExchangeWeak(&workgroup_struct.atomic_scalar, 1u, 2u);
+    var cas_res_7: Struct_11 = atomicCompareExchangeWeak(&workgroup_struct.atomic_arr[1], 1, 2);
 }
