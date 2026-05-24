@@ -6,7 +6,7 @@ float4 entry_point_one(float4 pos [[position]], texture2d<float> global_0 [[text
     return textureSample(global_0, global_2, pos.xy);
 }
 
-texture2d<float> textureSample(texture2d<float> arg_0, sampler arg_1, float2 arg_2) {
+float4 textureSample(texture2d<float> arg_0, sampler arg_1, float2 arg_2) {
 }
 
 [[fragment]]
@@ -14,7 +14,7 @@ float4 entry_point_two(texture2d<float> global_0 [[texture(0)]], texture2d<float
     return textureSample(global_0, global_2, global_4);
 }
 
-texture2d<float> textureSample(texture2d<float> arg_0, sampler arg_1, float2 arg_2) {
+float4 textureSample(texture2d<float> arg_0, sampler arg_1, float2 arg_2) {
 }
 
 [[fragment]]
@@ -22,8 +22,8 @@ float4 entry_point_three(texture2d<float> global_0 [[texture(0)]], texture2d<flo
     return (textureSample(global_0, global_2, (global_5 + global_4)) + textureSample(global_1, global_3, global_4));
 }
 
-texture2d<float> textureSample(texture2d<float> arg_0, sampler arg_1, float2 arg_2) {
+float4 textureSample(texture2d<float> arg_0, sampler arg_1, float2 arg_2) {
 }
 
-texture2d<float> textureSample(texture2d<float> arg_0, sampler arg_1, float2 arg_2) {
+float4 textureSample(texture2d<float> arg_0, sampler arg_1, float2 arg_2) {
 }

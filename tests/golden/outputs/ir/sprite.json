@@ -182,7 +182,7 @@
                         "type": 3
                     }
                 ],
-                "returnType": 0,
+                "returnType": 4,
                 "localVariables": {},
                 "expressions": {},
                 "blocks": {

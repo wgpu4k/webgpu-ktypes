@@ -31,7 +31,7 @@ float fetch_shadow(uint light_id, float4 homogeneous_coords) {
     return textureSampleCompareLevel(global_0, global_1, local_2, int(light_id), (homogeneous_coords[2] * local_1));
 }
 
-depth2d<float> textureSampleCompareLevel(depth2d<float> arg_0, sampler_comparison arg_1, float2 arg_2, int arg_3, float arg_4) {
+float textureSampleCompareLevel(depth2d<float> arg_0, sampler_comparison arg_1, float2 arg_2, int arg_3, float arg_4) {
 }
 
 struct vs_main_Input {

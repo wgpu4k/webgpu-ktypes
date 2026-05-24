@@ -21,7 +21,7 @@ entry_point_one_Output entry_point_one(entry_point_one_Input stage_in) {
     return stage_out;
 }
 
-Texture2D<float4> textureSample(Texture2D<float4> arg_0, SamplerState arg_1, float2 arg_2) {
+float4 textureSample(Texture2D<float4> arg_0, SamplerState arg_1, float2 arg_2) {
 }
 
 struct entry_point_two_Output {
@@ -33,7 +33,7 @@ entry_point_two_Output entry_point_two() {
     return stage_out;
 }
 
-Texture2D<float4> textureSample(Texture2D<float4> arg_0, SamplerState arg_1, float2 arg_2) {
+float4 textureSample(Texture2D<float4> arg_0, SamplerState arg_1, float2 arg_2) {
 }
 
 struct entry_point_three_Output {
@@ -45,8 +45,8 @@ entry_point_three_Output entry_point_three() {
     return stage_out;
 }
 
-Texture2D<float4> textureSample(Texture2D<float4> arg_0, SamplerState arg_1, float2 arg_2) {
+float4 textureSample(Texture2D<float4> arg_0, SamplerState arg_1, float2 arg_2) {
 }
 
-Texture2D<float4> textureSample(Texture2D<float4> arg_0, SamplerState arg_1, float2 arg_2) {
+float4 textureSample(Texture2D<float4> arg_0, SamplerState arg_1, float2 arg_2) {
 }

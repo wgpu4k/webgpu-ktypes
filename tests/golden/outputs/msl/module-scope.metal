@@ -16,10 +16,10 @@ void call() {
     statement();
     Struct_1 local_0 = returns();
     float local_1 = float(global_0);
-    texture2d<float> local_2 = textureSample(global_1, global_2, float2(local_1));
+    float4 local_2 = textureSample(global_1, global_2, float2(local_1));
 }
 
-texture2d<float> textureSample(texture2d<float> arg_0, sampler arg_1, float2 arg_2) {
+float4 textureSample(texture2d<float> arg_0, sampler arg_1, float2 arg_2) {
 }
 
 [[fragment]]

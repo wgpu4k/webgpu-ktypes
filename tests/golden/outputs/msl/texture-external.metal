@@ -2,14 +2,14 @@
 using namespace metal;
 
 float4 test(texture2d<float> t) {
-    texture2d<float> local_0 = textureSampleBaseClampToEdge(t, global_1, float2(0.0f));
+    float4 local_0 = textureSampleBaseClampToEdge(t, global_1, float2(0.0f));
     texture2d<float> local_1 = textureLoad(t, float2(0));
     texture2d<float> local_2 = textureLoad(t, float2(0u));
     texture2d<float> local_3 = textureDimensions(t);
     return (((local_0 + local_1) + local_2) + float2(local_3).xyxy);
 }
 
-texture2d<float> textureSampleBaseClampToEdge(texture2d<float> arg_0, sampler arg_1, float2 arg_2) {
+float4 textureSampleBaseClampToEdge(texture2d<float> arg_0, sampler arg_1, float2 arg_2) {
 }
 
 texture2d<float> textureLoad(texture2d<float> arg_0, float2 arg_1) {

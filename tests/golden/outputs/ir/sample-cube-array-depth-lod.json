@@ -270,7 +270,7 @@
                         "type": 2
                     }
                 ],
-                "returnType": 0,
+                "returnType": 2,
                 "localVariables": {},
                 "expressions": {},
                 "blocks": {

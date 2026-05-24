@@ -22,7 +22,7 @@ fs_main_Output fs_main() {
     return stage_out;
 }
 
-TextureCube<float4> textureSample(TextureCube<float4> arg_0, SamplerState arg_1, float3 arg_2) {
+float4 textureSample(TextureCube<float4> arg_0, SamplerState arg_1, float3 arg_2) {
 }
 
 struct vs_main_Output {

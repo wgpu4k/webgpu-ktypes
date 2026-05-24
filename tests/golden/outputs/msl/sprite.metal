@@ -10,5 +10,5 @@ float4 main(main_Input in [[stage_in]], texture2d<float> global_0 [[texture(0)]]
     return textureSample(global_0, global_1, uv);
 }
 
-texture2d<float> textureSample(texture2d<float> arg_0, sampler arg_1, float2 arg_2) {
+float4 textureSample(texture2d<float> arg_0, sampler arg_1, float2 arg_2) {
 }

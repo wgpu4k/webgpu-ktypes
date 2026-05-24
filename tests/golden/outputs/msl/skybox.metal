@@ -14,7 +14,7 @@ float4 fs_main(texturecube<float> global_0 [[texture(1)]], sampler global_1 [[sa
     return textureSample(global_0, global_1, in.uv);
 }
 
-texturecube<float> textureSample(texturecube<float> arg_0, sampler arg_1, float3 arg_2) {
+float4 textureSample(texturecube<float> arg_0, sampler arg_1, float3 arg_2) {
 }
 
 struct vs_main_Output {

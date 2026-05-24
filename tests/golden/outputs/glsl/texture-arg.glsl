@@ -9,7 +9,7 @@ vec4 test(texture2D Passed_Texture, sampler Passed_Sampler) {
     return textureSample(Passed_Texture, Passed_Sampler, vec2(0.0f, 0.0f));
 }
 
-texture2D textureSample(texture2D arg_0, sampler arg_1, vec2 arg_2) {
+vec4 textureSample(texture2D arg_0, sampler arg_1, vec2 arg_2) {
 }
 
 vec4 wgsl_main() {

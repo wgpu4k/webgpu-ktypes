@@ -5,14 +5,14 @@ var<private> tex: texture_external;
 var<private> samp: sampler;
 
 fn test(t: texture_external) -> vec4<f32> {
-    var a: texture_external = textureSampleBaseClampToEdge(t, samp, vec2<f32>(0.0f));
+    var a: vec4<f32> = textureSampleBaseClampToEdge(t, samp, vec2<f32>(0.0f));
     var b: texture_external = textureLoad(t, vec2<f32>(0));
     var c: texture_external = textureLoad(t, vec2<f32>(0u));
     var d: texture_external = textureDimensions(t);
     return (((a + b) + c) + vec2<f32>(d).xyxy);
 }
 
-fn textureSampleBaseClampToEdge(arg_0: texture_external, arg_1: sampler, arg_2: vec2<f32>) -> texture_external {
+fn textureSampleBaseClampToEdge(arg_0: texture_external, arg_1: sampler, arg_2: vec2<f32>) -> vec4<f32> {
 }
 
 fn textureLoad(arg_0: texture_external, arg_1: vec2<f32>) -> texture_external {

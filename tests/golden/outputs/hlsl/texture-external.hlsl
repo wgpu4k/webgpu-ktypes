@@ -5,14 +5,14 @@ texture_external global_0 : register(t0);
 SamplerState global_1 : register(t1);
 
 float4 test(texture_external t) {
-    texture_external local_0 = textureSampleBaseClampToEdge(t, global_1, float2(0.0f));
+    float4 local_0 = textureSampleBaseClampToEdge(t, global_1, float2(0.0f));
     texture_external local_1 = textureLoad(t, float2(0));
     texture_external local_2 = textureLoad(t, float2(0u));
     texture_external local_3 = textureDimensions(t);
     return (((local_0 + local_1) + local_2) + float2(local_3).xyxy);
 }
 
-texture_external textureSampleBaseClampToEdge(texture_external arg_0, SamplerState arg_1, float2 arg_2) {
+float4 textureSampleBaseClampToEdge(texture_external arg_0, SamplerState arg_1, float2 arg_2) {
 }
 
 texture_external textureLoad(texture_external arg_0, float2 arg_1) {

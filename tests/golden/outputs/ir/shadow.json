@@ -909,7 +909,7 @@
                         "type": 0
                     }
                 ],
-                "returnType": 10,
+                "returnType": 0,
                 "localVariables": {},
                 "expressions": {},
                 "blocks": {

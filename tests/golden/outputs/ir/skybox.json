@@ -336,7 +336,7 @@
                         "type": 2
                     }
                 ],
-                "returnType": 6,
+                "returnType": 1,
                 "localVariables": {},
                 "expressions": {},
                 "blocks": {

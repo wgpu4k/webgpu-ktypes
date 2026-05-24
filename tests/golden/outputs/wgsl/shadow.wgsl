@@ -42,7 +42,7 @@ fn fetch_shadow(light_id: u32, homogeneous_coords: vec4<f32>) -> f32 {
     return textureSampleCompareLevel(t_shadow, sampler_shadow, light_local, i32(light_id), (homogeneous_coords[2] * proj_correction));
 }
 
-fn textureSampleCompareLevel(arg_0: texture_depth_2d_array, arg_1: sampler_comparison, arg_2: vec2<f32>, arg_3: i32, arg_4: f32) -> texture_depth_2d_array {
+fn textureSampleCompareLevel(arg_0: texture_depth_2d_array, arg_1: sampler_comparison, arg_2: vec2<f32>, arg_3: i32, arg_4: f32) -> f32 {
 }
 
 fn normalize(arg_0: vec3<f32>) -> vec3<f32> {

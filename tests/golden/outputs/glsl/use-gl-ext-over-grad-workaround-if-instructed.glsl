@@ -12,7 +12,7 @@ float wgsl_main() {
     return textureSampleCompareLevel(global_0, global_1, pos, array_index, depth);
 }
 
-texture2D textureSampleCompareLevel(texture2D arg_0, sampler_comparison arg_1, vec2 arg_2, int arg_3, float arg_4) {
+float textureSampleCompareLevel(texture2D arg_0, sampler_comparison arg_1, vec2 arg_2, int arg_3, float arg_4) {
 }
 
 layout(location = 0) out float outColor;

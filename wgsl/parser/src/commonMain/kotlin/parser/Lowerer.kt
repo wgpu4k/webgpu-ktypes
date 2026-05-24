@@ -970,11 +970,7 @@ class Lowerer {
                     val stubBlocks = Arena<IrBlock>()
                     val stubLocalVars = Arena<IrLocalVariable>()
                     
-                    val returnType = if (loweredArgs.isNotEmpty()) {
-                        resolveExpressionType(loweredArgs[0])
-                    } else {
-                        null
-                    }
+                    val returnType = inferBuiltinLikeReturnType(funcName, loweredArgs)
                     
                     val dummyFunc = module.functions.append(
                         IrFunction(
@@ -1325,5 +1321,46 @@ class Lowerer {
             }
             else -> throw LoweringError("Cannot resolve member access object type for expression kind: ${kind::class.simpleName}")
         }
+    }
+
+    private fun inferBuiltinLikeReturnType(
+        functionName: String,
+        arguments: List<Handle<IrExpression>>
+    ): Handle<IrType>? {
+        return when (functionName) {
+            "textureSample",
+            "textureSampleBias",
+            "textureSampleGrad",
+            "textureSampleLevel",
+            "textureSampleBaseClampToEdge" -> arguments.firstOrNull()?.let { inferSampledTextureReturnType(it) }
+            "textureSampleCompare",
+            "textureSampleCompareLevel" -> scalarType("f32")
+            else -> arguments.firstOrNull()?.let { resolveExpressionType(it) }
+        }
+    }
+
+    private fun inferSampledTextureReturnType(textureExpression: Handle<IrExpression>): Handle<IrType> {
+        val textureType = module.types[resolveExpressionType(textureExpression)].inner
+        val elementTypeName = (textureType as? IrTypeInner.Opaque)
+            ?.name
+            ?.substringAfter("<", missingDelimiterValue = "f32")
+            ?.substringBefore(",")
+            ?.substringBefore(">")
+            ?.trim()
+            ?.takeIf { it.isNotEmpty() }
+            ?: "f32"
+        return module.types.append(IrType(IrTypeInner.Vector(IrVectorSize.Quad, scalarType(elementTypeName))))
+    }
+
+    private fun scalarType(typeName: String): Handle<IrType> {
+        val inner = when (typeName) {
+            "i32" -> IrTypeInner.Scalar(IrScalarKind.Sint, 4)
+            "u32" -> IrTypeInner.Scalar(IrScalarKind.Uint, 4)
+            "f16" -> IrTypeInner.Scalar(IrScalarKind.F16, 2)
+            "f32" -> IrTypeInner.Scalar(IrScalarKind.F32, 4)
+            "bool" -> IrTypeInner.Scalar(IrScalarKind.Bool, 1)
+            else -> IrTypeInner.Scalar(IrScalarKind.F32, 4)
+        }
+        return module.types.append(IrType(inner))
     }
 }
