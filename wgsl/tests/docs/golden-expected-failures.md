@@ -8,7 +8,7 @@ Each listed case is still executed. The test fails if the case starts passing un
 | `glsl` | `6438-conflicting-idents.wgsl` | `native-validation` | Baseline debt from issue 16 golden stabilization. | `#16` |
 | `glsl` | `6772-unpack-expr-accesses.wgsl` | `comparison` | Baseline debt from issue 16 golden stabilization. | `#16` |
 | `glsl` | `7048-multiple-dynamic-1.wgsl` | `comparison` | Baseline debt from issue 16 golden stabilization. | `#16` |
-| `glsl` | `7995-unicode-idents.wgsl` | `type-resolution` | Baseline debt from issue 16 golden stabilization. | `#16` |
+| `glsl` | `7995-unicode-idents.wgsl` | `comparison` | Unicode identifiers now parse and lower; generated output still differs from the golden. | `#16` |
 | `glsl` | `8820-multiple-local-invocation-index-id.wgsl` | `native-validation` | Baseline debt from issue 16 golden stabilization. | `#16` |
 | `glsl` | `9105-primitive-index-ordering.wgsl` | `native-validation` | Baseline debt from issue 16 golden stabilization. | `#16` |
 | `glsl` | `abstract-types-atomic.wgsl` | `comparison` | Baseline debt from issue 16 golden stabilization. | `#16` |
@@ -153,7 +153,7 @@ Each listed case is still executed. The test fails if the case starts passing un
 | `hlsl` | `7048-multiple-dynamic-1.wgsl` | `comparison` | Baseline debt from issue 16 golden stabilization. | `#16` |
 | `hlsl` | `7048-multiple-dynamic-2.wgsl` | `comparison` | Baseline debt from issue 16 golden stabilization. | `#16` |
 | `hlsl` | `7048-multiple-dynamic-3.wgsl` | `comparison` | Baseline debt from issue 16 golden stabilization. | `#16` |
-| `hlsl` | `7995-unicode-idents.wgsl` | `type-resolution` | Baseline debt from issue 16 golden stabilization. | `#16` |
+| `hlsl` | `7995-unicode-idents.wgsl` | `comparison` | Unicode identifiers now parse and lower; generated output still differs from the golden. | `#16` |
 | `hlsl` | `8820-multiple-local-invocation-index-id.wgsl` | `comparison` | Baseline debt from issue 16 golden stabilization. | `#16` |
 | `hlsl` | `9105-primitive-index-ordering.wgsl` | `comparison` | Baseline debt from issue 16 golden stabilization. | `#16` |
 | `hlsl` | `abstract-types-atomic.wgsl` | `comparison` | Baseline debt from issue 16 golden stabilization. | `#16` |
@@ -294,7 +294,7 @@ Each listed case is still executed. The test fails if the case starts passing un
 | `hlsl` | `workgroup-uniform-load.wgsl` | `comparison` | Baseline debt from issue 16 golden stabilization. | `#16` |
 | `hlsl` | `workgroup-var-init.wgsl` | `comparison` | Baseline debt from issue 16 golden stabilization. | `#16` |
 | `ir` | `6772-unpack-expr-accesses.wgsl` | `comparison` | Baseline debt from issue 16 golden stabilization. | `#16` |
-| `ir` | `7995-unicode-idents.wgsl` | `type-resolution` | Baseline debt from issue 16 golden stabilization. | `#16` |
+| `ir` | `7995-unicode-idents.wgsl` | `comparison` | Unicode identifiers now parse and lower; generated output still differs from the golden. | `#16` |
 | `ir` | `abstract-types-atomic.wgsl` | `comparison` | Baseline debt from issue 16 golden stabilization. | `#16` |
 | `ir` | `abstract-types-builtins.wgsl` | `comparison` | Baseline debt from issue 16 golden stabilization. | `#16` |
 | `ir` | `abstract-types-const.wgsl` | `comparison` | Baseline debt from issue 16 golden stabilization. | `#16` |
@@ -400,7 +400,7 @@ Each listed case is still executed. The test fails if the case starts passing un
 | `msl` | `7048-multiple-dynamic-1.wgsl` | `comparison` | Baseline debt from issue 16 golden stabilization. | `#16` |
 | `msl` | `7048-multiple-dynamic-2.wgsl` | `comparison` | Baseline debt from issue 16 golden stabilization. | `#16` |
 | `msl` | `7048-multiple-dynamic-3.wgsl` | `comparison` | Baseline debt from issue 16 golden stabilization. | `#16` |
-| `msl` | `7995-unicode-idents.wgsl` | `type-resolution` | Baseline debt from issue 16 golden stabilization. | `#16` |
+| `msl` | `7995-unicode-idents.wgsl` | `comparison` | Unicode identifiers now parse and lower; generated output still differs from the golden. | `#16` |
 | `msl` | `8820-multiple-local-invocation-index-id.wgsl` | `comparison` | Baseline debt from issue 16 golden stabilization. | `#16` |
 | `msl` | `9105-primitive-index-ordering.wgsl` | `comparison` | Baseline debt from issue 16 golden stabilization. | `#16` |
 | `msl` | `abstract-types-atomic.wgsl` | `comparison` | Baseline debt from issue 16 golden stabilization. | `#16` |
@@ -541,7 +541,6 @@ Each listed case is still executed. The test fails if the case starts passing un
 | `msl` | `workgroup-uniform-load.wgsl` | `comparison` | Baseline debt from issue 16 golden stabilization. | `#16` |
 | `msl` | `workgroup-var-init.wgsl` | `comparison` | Baseline debt from issue 16 golden stabilization. | `#16` |
 | `roundtrip` | `6438-conflicting-idents.wgsl` | `roundtrip-semantic-isomorphism` | Baseline debt from issue 16 golden stabilization. | `#16` |
-| `roundtrip` | `7995-unicode-idents.wgsl` | `type-resolution` | Baseline debt from issue 16 golden stabilization. | `#16` |
 | `roundtrip` | `abstract-types-atomic.wgsl` | `roundtrip-semantic-isomorphism` | Baseline debt from issue 16 golden stabilization. | `#16` |
 | `roundtrip` | `abstract-types-function-calls.wgsl` | `lowering` | Baseline debt from issue 16 golden stabilization. | `#16` |
 | `roundtrip` | `abstract-types-return.wgsl` | `lowering` | Baseline debt from issue 16 golden stabilization. | `#16` |
@@ -626,7 +625,6 @@ Each listed case is still executed. The test fails if the case starts passing un
 | `roundtrip` | `workgroup-uniform-load-atomic.wgsl` | `type-resolution` | Baseline debt from issue 16 golden stabilization. | `#16` |
 | `roundtrip` | `workgroup-uniform-load.wgsl` | `roundtrip-semantic-isomorphism` | Baseline debt from issue 16 golden stabilization. | `#16` |
 | `wgsl` | `6438-conflicting-idents.wgsl` | `roundtrip-semantic-isomorphism` | Baseline debt from issue 16 golden stabilization. | `#16` |
-| `wgsl` | `7995-unicode-idents.wgsl` | `type-resolution` | Baseline debt from issue 16 golden stabilization. | `#16` |
 | `wgsl` | `abstract-types-atomic.wgsl` | `roundtrip-semantic-isomorphism` | Baseline debt from issue 16 golden stabilization. | `#16` |
 | `wgsl` | `abstract-types-function-calls.wgsl` | `lowering` | Baseline debt from issue 16 golden stabilization. | `#16` |
 | `wgsl` | `abstract-types-return.wgsl` | `lowering` | Baseline debt from issue 16 golden stabilization. | `#16` |

@@ -180,13 +180,9 @@ class Lexer(
                     Token.simple(TokenKind.SLASH, spanFrom(start))
                 }
             }
-
-            // Identifiers and keywords
-            in 'a'..'z', in 'A'..'Z' -> lexIdentifierOrKeyword(start)
-
             // Special handling for underscore
             '_' -> {
-                if (peekChar(1)?.let { it in 'a'..'z' || it in 'A'..'Z' || it == '_' || it in '0'..'9' } == true) {
+                if (peekChar(1)?.isIdentifierContinue() == true) {
                     lexIdentifierOrKeyword(start)
                 } else {
                     consume()
@@ -229,8 +225,10 @@ class Lexer(
                 Token.simple(TokenKind.AT, spanFrom(start))
             }
 
-
-            else -> {
+            // Identifiers and keywords
+            else -> if (char.isIdentifierStart()) {
+                lexIdentifierOrKeyword(start)
+            } else {
                 // Unknown character - consume and return as error
                 consume()
                 Token.simple(TokenKind.UNKNOWN, spanFrom(start))
@@ -315,7 +313,7 @@ class Lexer(
         consume()
 
         // Consume the rest of the identifier
-        consumeWhile { it in 'a'..'z' || it in 'A'..'Z' || it == '_' || it in '0'..'9' }
+        consumeWhile { it.isIdentifierContinue() }
 
         val text = source.substring(startIndex, index)
         val kind = keywordFor(text) ?: TokenKind.IDENTIFIER
@@ -1051,3 +1049,12 @@ fun tokenize(source: String): List<Token> = Lexer(source).tokenize()
  * returning only significant tokens.
  */
 fun tokenizeSignificant(source: String): List<Token> = Lexer(source).tokenizeSignificant()
+
+private fun Char.isIdentifierStart(): Boolean {
+    // Kotlin common does not expose the WGSL XID_Start table; keep this as a Unicode letter subset.
+    return this == '_' || this in 'a'..'z' || this in 'A'..'Z' || isLetter()
+}
+
+private fun Char.isIdentifierContinue(): Boolean {
+    return isIdentifierStart() || this in '0'..'9' || isDigit()
+}

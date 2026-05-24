@@ -53,24 +53,27 @@ class LexerBasicTest : FunSpec({
             tokens[0].literal shouldBe "foo123"
         }
 
-        test("Non-ASCII characters are recognized as UNKNOWN, not part of identifier") {
+        test("Unicode letters are valid identifier characters") {
             val tokens = tokenize("fooébar")
-            // Expect: identifier "foo", unknown "é", identifier "bar", EOF
             val filtered = tokens.filter { !it.isEof }
-            filtered shouldHaveSize 3
+            filtered shouldHaveSize 1
             filtered[0].kind shouldBe TokenKind.IDENTIFIER
-            filtered[0].literal shouldBe "foo"
-            filtered[1].kind shouldBe TokenKind.UNKNOWN
-            filtered[2].kind shouldBe TokenKind.IDENTIFIER
-            filtered[2].literal shouldBe "bar"
+            filtered[0].literal shouldBe "fooébar"
         }
 
-        test("Unicode Chinese characters are recognized as UNKNOWN") {
+        test("Unicode identifiers can contain trailing digits") {
+            val tokens = tokenizeSignificant("θ2")
+            tokens shouldHaveSize 1
+            tokens[0].kind shouldBe TokenKind.IDENTIFIER
+            tokens[0].literal shouldBe "θ2"
+        }
+
+        test("Unicode Chinese characters are recognized as one identifier") {
             val tokens = tokenize("变量")
             val filtered = tokens.filter { !it.isEof }
-            filtered shouldHaveSize 2
-            filtered[0].kind shouldBe TokenKind.UNKNOWN
-            filtered[1].kind shouldBe TokenKind.UNKNOWN
+            filtered shouldHaveSize 1
+            filtered[0].kind shouldBe TokenKind.IDENTIFIER
+            filtered[0].literal shouldBe "变量"
         }
     }
 
@@ -123,4 +126,3 @@ class LexerBasicTest : FunSpec({
         }
     }
 })
-

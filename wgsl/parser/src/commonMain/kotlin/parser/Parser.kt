@@ -2052,7 +2052,7 @@ class Parser(
             TokenKind.SAMPLER, TokenKind.SAMPLER_COMPARISON, TokenKind.RAY_QUERY,
             TokenKind.TEXTURE_1D, TokenKind.TEXTURE_2D, TokenKind.TEXTURE_3D,
             TokenKind.TEXTURE_CUBE, TokenKind.TEXTURE_EXTERNAL,
-            TokenKind.BUILTIN, TokenKind.POSITION, TokenKind.VERTEX_INDEX, TokenKind.INSTANCE_INDEX,
+            TokenKind.BUILTIN, TokenKind.COMPUTE, TokenKind.POSITION, TokenKind.VERTEX_INDEX, TokenKind.INSTANCE_INDEX,
             TokenKind.FRONT_FACING, TokenKind.PRIMITIVE_INDEX, TokenKind.SAMPLE_INDEX,
             TokenKind.SAMPLE_MASK, TokenKind.VIEWPORT_INDEX, TokenKind.POINTSIZE,
             TokenKind.CLIP_DISTANCES, TokenKind.CULL_DISTANCES, TokenKind.DEVICE_INDEX,
