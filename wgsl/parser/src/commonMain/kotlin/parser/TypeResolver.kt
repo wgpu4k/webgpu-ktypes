@@ -721,8 +721,16 @@ class TypeResolver(
         unresolved: MutableList<UnresolvedReferenceError>
     ): BlockStatement {
         pushScope()
-        val resolvedStatements = block.statements.map { resolveStatement(it, unresolved) }
+        val resolvedBlock = resolveBlockStatementInCurrentScope(block, unresolved)
         popScope()
+        return resolvedBlock
+    }
+
+    private fun resolveBlockStatementInCurrentScope(
+        block: BlockStatement,
+        unresolved: MutableList<UnresolvedReferenceError>
+    ): BlockStatement {
+        val resolvedStatements = block.statements.map { resolveStatement(it, unresolved) }
         return block.copy(statements = resolvedStatements)
     }
 
@@ -750,8 +758,10 @@ class TypeResolver(
             }
 
             is LoopStatement -> {
-                val resolvedBody = resolveBlockStatement(stmt.body, unresolved)
-                val resolvedContinuing = stmt.continuing?.let { resolveBlockStatement(it, unresolved) }
+                pushScope()
+                val resolvedBody = resolveBlockStatementInCurrentScope(stmt.body, unresolved)
+                val resolvedContinuing = stmt.continuing?.let { resolveBlockStatementInCurrentScope(it, unresolved) }
+                popScope()
                 stmt.copy(body = resolvedBody, continuing = resolvedContinuing)
             }
 

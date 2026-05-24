@@ -643,6 +643,11 @@ class Lowerer {
                 val continuingBlock = astStmt.continuing?.let { lowerBlock(it) }
                 IrStatement.Loop(bodyBlock, continuingBlock)
             }
+            is BreakIfStatement -> {
+                val condition = lowerExpression(astStmt.condition)
+                val breakBlock = currentBlocks!!.append(IrBlock(listOf(IrStatement.Break)))
+                IrStatement.If(condition, breakBlock)
+            }
             is ConstAssertStatement -> {
                 // Const assertions are evaluated at compile time and produce no runtime code.
                 // We still lower the expression to ensure it's valid, but we don't emit any statement.
