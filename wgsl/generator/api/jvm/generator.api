@@ -1,0 +1,101 @@
+public final class io/ygdrasil/wgsl/generator/glsl/GlslModule {
+	public static final field INSTANCE Lio/ygdrasil/wgsl/generator/glsl/GlslModule;
+	public final fun writeString (Lio/ygdrasil/wgsl/ir/Module;Lio/ygdrasil/wgsl/valid/ModuleInfo;Lio/ygdrasil/wgsl/back/GlslOptions;)Ljava/lang/String;
+	public static synthetic fun writeString$default (Lio/ygdrasil/wgsl/generator/glsl/GlslModule;Lio/ygdrasil/wgsl/ir/Module;Lio/ygdrasil/wgsl/valid/ModuleInfo;Lio/ygdrasil/wgsl/back/GlslOptions;ILjava/lang/Object;)Ljava/lang/String;
+}
+
+public final class io/ygdrasil/wgsl/generator/glsl/GlslWriter : io/ygdrasil/wgsl/back/WriterBase, io/ygdrasil/wgsl/back/BackendWriter {
+	public fun <init> (Ljava/lang/StringBuilder;Lio/ygdrasil/wgsl/ir/Module;Lio/ygdrasil/wgsl/valid/ModuleInfo;Lio/ygdrasil/wgsl/back/GlslOptions;Lio/ygdrasil/wgsl/proc/Namer;Lio/ygdrasil/wgsl/proc/Layouter;)V
+	public fun canHandle (Lio/ygdrasil/wgsl/ir/Module;Lio/ygdrasil/wgsl/valid/ModuleInfo;)Z
+	public synthetic fun withOptions (Lio/ygdrasil/wgsl/back/BackendOptions;)Lio/ygdrasil/wgsl/back/BackendWriter;
+	public fun withOptions (Lio/ygdrasil/wgsl/back/GlslOptions;)Lio/ygdrasil/wgsl/back/BackendWriter;
+	public fun write (Lio/ygdrasil/wgsl/ir/Module;Lio/ygdrasil/wgsl/valid/ModuleInfo;)Ljava/lang/String;
+}
+
+public final class io/ygdrasil/wgsl/generator/glsl/GlslWriterFactory : io/ygdrasil/wgsl/back/BackendRegistry$BackendFactory {
+	public fun <init> ()V
+	public fun create ()Lio/ygdrasil/wgsl/back/BackendWriter;
+	public fun createWithOptions (Lio/ygdrasil/wgsl/back/BackendOptions;)Lio/ygdrasil/wgsl/back/BackendWriter;
+}
+
+public final class io/ygdrasil/wgsl/generator/glsl/GlslWriterFactoryKt {
+	public static final fun registerGlslBackend ()V
+}
+
+public final class io/ygdrasil/wgsl/generator/hlsl/HlslModule {
+	public static final field INSTANCE Lio/ygdrasil/wgsl/generator/hlsl/HlslModule;
+	public final fun writeString (Lio/ygdrasil/wgsl/ir/Module;Lio/ygdrasil/wgsl/valid/ModuleInfo;Lio/ygdrasil/wgsl/back/HlslOptions;)Ljava/lang/String;
+	public static synthetic fun writeString$default (Lio/ygdrasil/wgsl/generator/hlsl/HlslModule;Lio/ygdrasil/wgsl/ir/Module;Lio/ygdrasil/wgsl/valid/ModuleInfo;Lio/ygdrasil/wgsl/back/HlslOptions;ILjava/lang/Object;)Ljava/lang/String;
+}
+
+public final class io/ygdrasil/wgsl/generator/hlsl/HlslWriter : io/ygdrasil/wgsl/back/WriterBase, io/ygdrasil/wgsl/back/BackendWriter {
+	public fun <init> (Ljava/lang/StringBuilder;Lio/ygdrasil/wgsl/ir/Module;Lio/ygdrasil/wgsl/valid/ModuleInfo;Lio/ygdrasil/wgsl/back/HlslOptions;Lio/ygdrasil/wgsl/proc/Namer;Lio/ygdrasil/wgsl/proc/Layouter;)V
+	public fun canHandle (Lio/ygdrasil/wgsl/ir/Module;Lio/ygdrasil/wgsl/valid/ModuleInfo;)Z
+	public synthetic fun withOptions (Lio/ygdrasil/wgsl/back/BackendOptions;)Lio/ygdrasil/wgsl/back/BackendWriter;
+	public fun withOptions (Lio/ygdrasil/wgsl/back/HlslOptions;)Lio/ygdrasil/wgsl/back/BackendWriter;
+	public fun write (Lio/ygdrasil/wgsl/ir/Module;Lio/ygdrasil/wgsl/valid/ModuleInfo;)Ljava/lang/String;
+}
+
+public final class io/ygdrasil/wgsl/generator/hlsl/HlslWriterFactory : io/ygdrasil/wgsl/back/BackendRegistry$BackendFactory {
+	public fun <init> ()V
+	public fun create ()Lio/ygdrasil/wgsl/back/BackendWriter;
+	public fun createWithOptions (Lio/ygdrasil/wgsl/back/BackendOptions;)Lio/ygdrasil/wgsl/back/BackendWriter;
+}
+
+public final class io/ygdrasil/wgsl/generator/hlsl/HlslWriterFactoryKt {
+	public static final fun registerHlslBackend ()V
+}
+
+public final class io/ygdrasil/wgsl/generator/msl/Keywords {
+	public static final field INSTANCE Lio/ygdrasil/wgsl/generator/msl/Keywords;
+	public final fun getMSL_RESERVED ()Ljava/util/Set;
+}
+
+public final class io/ygdrasil/wgsl/generator/msl/MslModule {
+	public static final field INSTANCE Lio/ygdrasil/wgsl/generator/msl/MslModule;
+	public final fun writeString (Lio/ygdrasil/wgsl/ir/Module;Lio/ygdrasil/wgsl/valid/ModuleInfo;Lio/ygdrasil/wgsl/back/MslOptions;)Ljava/lang/String;
+	public static synthetic fun writeString$default (Lio/ygdrasil/wgsl/generator/msl/MslModule;Lio/ygdrasil/wgsl/ir/Module;Lio/ygdrasil/wgsl/valid/ModuleInfo;Lio/ygdrasil/wgsl/back/MslOptions;ILjava/lang/Object;)Ljava/lang/String;
+}
+
+public final class io/ygdrasil/wgsl/generator/msl/MslWriter : io/ygdrasil/wgsl/back/WriterBase, io/ygdrasil/wgsl/back/BackendWriter {
+	public fun <init> (Ljava/lang/StringBuilder;Lio/ygdrasil/wgsl/ir/Module;Lio/ygdrasil/wgsl/valid/ModuleInfo;Lio/ygdrasil/wgsl/back/MslOptions;Lio/ygdrasil/wgsl/proc/Namer;Lio/ygdrasil/wgsl/proc/Layouter;)V
+	public fun canHandle (Lio/ygdrasil/wgsl/ir/Module;Lio/ygdrasil/wgsl/valid/ModuleInfo;)Z
+	public synthetic fun withOptions (Lio/ygdrasil/wgsl/back/BackendOptions;)Lio/ygdrasil/wgsl/back/BackendWriter;
+	public fun withOptions (Lio/ygdrasil/wgsl/back/MslOptions;)Lio/ygdrasil/wgsl/back/BackendWriter;
+	public fun write (Lio/ygdrasil/wgsl/ir/Module;Lio/ygdrasil/wgsl/valid/ModuleInfo;)Ljava/lang/String;
+}
+
+public final class io/ygdrasil/wgsl/generator/msl/MslWriterFactory : io/ygdrasil/wgsl/back/BackendRegistry$BackendFactory {
+	public fun <init> ()V
+	public fun create ()Lio/ygdrasil/wgsl/back/BackendWriter;
+	public fun createWithOptions (Lio/ygdrasil/wgsl/back/BackendOptions;)Lio/ygdrasil/wgsl/back/BackendWriter;
+}
+
+public final class io/ygdrasil/wgsl/generator/msl/MslWriterFactoryKt {
+	public static final fun registerMslBackend ()V
+}
+
+public final class io/ygdrasil/wgsl/wgsl/WgslModule {
+	public static final field INSTANCE Lio/ygdrasil/wgsl/wgsl/WgslModule;
+	public final fun writeString (Lio/ygdrasil/wgsl/ir/Module;Lio/ygdrasil/wgsl/valid/ModuleInfo;Lio/ygdrasil/wgsl/back/WgslOptions;)Ljava/lang/String;
+	public static synthetic fun writeString$default (Lio/ygdrasil/wgsl/wgsl/WgslModule;Lio/ygdrasil/wgsl/ir/Module;Lio/ygdrasil/wgsl/valid/ModuleInfo;Lio/ygdrasil/wgsl/back/WgslOptions;ILjava/lang/Object;)Ljava/lang/String;
+}
+
+public final class io/ygdrasil/wgsl/wgsl/WgslWriter : io/ygdrasil/wgsl/back/WriterBase, io/ygdrasil/wgsl/back/BackendWriter {
+	public fun <init> (Ljava/lang/StringBuilder;Lio/ygdrasil/wgsl/ir/Module;Lio/ygdrasil/wgsl/valid/ModuleInfo;Lio/ygdrasil/wgsl/back/WgslOptions;Lio/ygdrasil/wgsl/proc/Namer;Lio/ygdrasil/wgsl/proc/Layouter;)V
+	public fun canHandle (Lio/ygdrasil/wgsl/ir/Module;Lio/ygdrasil/wgsl/valid/ModuleInfo;)Z
+	public synthetic fun withOptions (Lio/ygdrasil/wgsl/back/BackendOptions;)Lio/ygdrasil/wgsl/back/BackendWriter;
+	public fun withOptions (Lio/ygdrasil/wgsl/back/WgslOptions;)Lio/ygdrasil/wgsl/back/BackendWriter;
+	public fun write (Lio/ygdrasil/wgsl/ir/Module;Lio/ygdrasil/wgsl/valid/ModuleInfo;)Ljava/lang/String;
+}
+
+public final class io/ygdrasil/wgsl/wgsl/WgslWriterFactory : io/ygdrasil/wgsl/back/BackendRegistry$BackendFactory {
+	public fun <init> ()V
+	public fun create ()Lio/ygdrasil/wgsl/back/BackendWriter;
+	public fun createWithOptions (Lio/ygdrasil/wgsl/back/BackendOptions;)Lio/ygdrasil/wgsl/back/BackendWriter;
+}
+
+public final class io/ygdrasil/wgsl/wgsl/WgslWriterFactoryKt {
+	public static final fun registerWgslBackend ()V
+}
+

@@ -271,6 +271,7 @@ public final class io/ygdrasil/wgsl/back/BackendException : java/lang/Exception 
 }
 
 public abstract class io/ygdrasil/wgsl/back/BackendOptions {
+	public fun <init> ()V
 	public abstract fun getBindingMap ()Lio/ygdrasil/wgsl/back/BindingMap;
 	public abstract fun getCapabilities ()Lio/ygdrasil/wgsl/valid/Capabilities;
 	public abstract fun getFileExtension ()Ljava/lang/String;
@@ -421,6 +422,49 @@ public final class io/ygdrasil/wgsl/back/HlslOptions : io/ygdrasil/wgsl/back/Bac
 	public fun toString ()Ljava/lang/String;
 }
 
+public final class io/ygdrasil/wgsl/back/IrOptions : io/ygdrasil/wgsl/back/BackendOptions {
+	public fun <init> ()V
+	public fun <init> (Lio/ygdrasil/wgsl/valid/ValidationFlags;Lio/ygdrasil/wgsl/valid/Capabilities;Lio/ygdrasil/wgsl/valid/ShaderStages;Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;Lio/ygdrasil/wgsl/back/BindingMap;)V
+	public synthetic fun <init> (Lio/ygdrasil/wgsl/valid/ValidationFlags;Lio/ygdrasil/wgsl/valid/Capabilities;Lio/ygdrasil/wgsl/valid/ShaderStages;Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;Lio/ygdrasil/wgsl/back/BindingMap;ILkotlin/jvm/internal/DefaultConstructorMarker;)V
+	public final fun component1 ()Lio/ygdrasil/wgsl/valid/ValidationFlags;
+	public final fun component2 ()Lio/ygdrasil/wgsl/valid/Capabilities;
+	public final fun component3 ()Lio/ygdrasil/wgsl/valid/ShaderStages;
+	public final fun component4 ()Ljava/lang/String;
+	public final fun component5 ()Ljava/lang/String;
+	public final fun component6 ()Ljava/lang/String;
+	public final fun component7 ()Ljava/lang/String;
+	public final fun component8 ()Ljava/lang/String;
+	public final fun component9 ()Lio/ygdrasil/wgsl/back/BindingMap;
+	public final fun copy (Lio/ygdrasil/wgsl/valid/ValidationFlags;Lio/ygdrasil/wgsl/valid/Capabilities;Lio/ygdrasil/wgsl/valid/ShaderStages;Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;Lio/ygdrasil/wgsl/back/BindingMap;)Lio/ygdrasil/wgsl/back/IrOptions;
+	public static synthetic fun copy$default (Lio/ygdrasil/wgsl/back/IrOptions;Lio/ygdrasil/wgsl/valid/ValidationFlags;Lio/ygdrasil/wgsl/valid/Capabilities;Lio/ygdrasil/wgsl/valid/ShaderStages;Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;Lio/ygdrasil/wgsl/back/BindingMap;ILjava/lang/Object;)Lio/ygdrasil/wgsl/back/IrOptions;
+	public fun equals (Ljava/lang/Object;)Z
+	public fun getBindingMap ()Lio/ygdrasil/wgsl/back/BindingMap;
+	public fun getCapabilities ()Lio/ygdrasil/wgsl/valid/Capabilities;
+	public fun getFileExtension ()Ljava/lang/String;
+	public fun getIndent ()Ljava/lang/String;
+	public fun getLanguageName ()Ljava/lang/String;
+	public fun getNewline ()Ljava/lang/String;
+	public fun getShaderStages ()Lio/ygdrasil/wgsl/valid/ShaderStages;
+	public fun getValidationFlags ()Lio/ygdrasil/wgsl/valid/ValidationFlags;
+	public fun getVersion ()Ljava/lang/String;
+	public fun hashCode ()I
+	public fun toString ()Ljava/lang/String;
+}
+
+public final class io/ygdrasil/wgsl/back/IrWriter : io/ygdrasil/wgsl/back/BackendWriter {
+	public fun <init> ()V
+	public fun <init> (Lio/ygdrasil/wgsl/back/IrOptions;)V
+	public synthetic fun <init> (Lio/ygdrasil/wgsl/back/IrOptions;ILkotlin/jvm/internal/DefaultConstructorMarker;)V
+	public fun canHandle (Lio/ygdrasil/wgsl/ir/Module;Lio/ygdrasil/wgsl/valid/ModuleInfo;)Z
+	public synthetic fun withOptions (Lio/ygdrasil/wgsl/back/BackendOptions;)Lio/ygdrasil/wgsl/back/BackendWriter;
+	public fun withOptions (Lio/ygdrasil/wgsl/back/IrOptions;)Lio/ygdrasil/wgsl/back/BackendWriter;
+	public fun write (Lio/ygdrasil/wgsl/ir/Module;Lio/ygdrasil/wgsl/valid/ModuleInfo;)Ljava/lang/String;
+}
+
+public final class io/ygdrasil/wgsl/back/IrWriterKt {
+	public static final fun registerIrBackend ()V
+}
+
 public final class io/ygdrasil/wgsl/back/MslOptions : io/ygdrasil/wgsl/back/BackendOptions {
 	public fun <init> ()V
 	public fun <init> (Lio/ygdrasil/wgsl/valid/ValidationFlags;Lio/ygdrasil/wgsl/valid/Capabilities;Lio/ygdrasil/wgsl/valid/ShaderStages;Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;Lio/ygdrasil/wgsl/back/BindingMap;ZI)V
@@ -529,7 +573,7 @@ public abstract class io/ygdrasil/wgsl/back/WriterBase {
 	public fun write ()Ljava/lang/String;
 	protected final fun write (Ljava/lang/String;)V
 	protected fun writeAtomic (Ljava/lang/String;Lio/ygdrasil/wgsl/ir/AtomicFunction;Ljava/util/List;)Ljava/lang/String;
-	protected fun writeBitcast (Ljava/lang/String;Lio/ygdrasil/wgsl/ir/Type;)Ljava/lang/String;
+	protected fun writeBitcast (Ljava/lang/String;Lio/ygdrasil/wgsl/ir/Type;Lio/ygdrasil/wgsl/ir/Type;)Ljava/lang/String;
 	protected fun writeBlock-GlugwBY (I)V
 	protected fun writeConstantInner (Lio/ygdrasil/wgsl/ir/ConstantInner;)Ljava/lang/String;
 	protected fun writeConstants ()V
@@ -552,6 +596,20 @@ public abstract class io/ygdrasil/wgsl/back/WriterBase {
 	protected abstract fun writeStructType-gLNdcEg (ILio/ygdrasil/wgsl/ir/TypeInner$Struct;Ljava/lang/String;)V
 	protected fun writeTextureQuery (Ljava/lang/String;Lio/ygdrasil/wgsl/ir/TextureQueryKind;)Ljava/lang/String;
 	protected fun writeTypes ()V
+}
+
+public final class io/ygdrasil/wgsl/ir/AccessMode : java/lang/Enum {
+	public static final field Companion Lio/ygdrasil/wgsl/ir/AccessMode$Companion;
+	public static final field Read Lio/ygdrasil/wgsl/ir/AccessMode;
+	public static final field ReadWrite Lio/ygdrasil/wgsl/ir/AccessMode;
+	public static final field Write Lio/ygdrasil/wgsl/ir/AccessMode;
+	public static fun getEntries ()Lkotlin/enums/EnumEntries;
+	public static fun valueOf (Ljava/lang/String;)Lio/ygdrasil/wgsl/ir/AccessMode;
+	public static fun values ()[Lio/ygdrasil/wgsl/ir/AccessMode;
+}
+
+public final class io/ygdrasil/wgsl/ir/AccessMode$Companion {
+	public final fun serializer ()Lkotlinx/serialization/KSerializer;
 }
 
 public final class io/ygdrasil/wgsl/ir/AddressSpace : java/lang/Enum {
@@ -582,13 +640,45 @@ public final class io/ygdrasil/wgsl/ir/ArraySize$Companion {
 }
 
 public final class io/ygdrasil/wgsl/ir/ArraySize$Constant : io/ygdrasil/wgsl/ir/ArraySize {
+	public static final field Companion Lio/ygdrasil/wgsl/ir/ArraySize$Constant$Companion;
 	public fun <init> (I)V
 	public final fun getValue ()I
 }
 
+public final synthetic class io/ygdrasil/wgsl/ir/ArraySize$Constant$$serializer : kotlinx/serialization/internal/GeneratedSerializer {
+	public static final field INSTANCE Lio/ygdrasil/wgsl/ir/ArraySize$Constant$$serializer;
+	public final fun childSerializers ()[Lkotlinx/serialization/KSerializer;
+	public final fun deserialize (Lkotlinx/serialization/encoding/Decoder;)Lio/ygdrasil/wgsl/ir/ArraySize$Constant;
+	public synthetic fun deserialize (Lkotlinx/serialization/encoding/Decoder;)Ljava/lang/Object;
+	public final fun getDescriptor ()Lkotlinx/serialization/descriptors/SerialDescriptor;
+	public final fun serialize (Lkotlinx/serialization/encoding/Encoder;Lio/ygdrasil/wgsl/ir/ArraySize$Constant;)V
+	public synthetic fun serialize (Lkotlinx/serialization/encoding/Encoder;Ljava/lang/Object;)V
+	public fun typeParametersSerializers ()[Lkotlinx/serialization/KSerializer;
+}
+
+public final class io/ygdrasil/wgsl/ir/ArraySize$Constant$Companion {
+	public final fun serializer ()Lkotlinx/serialization/KSerializer;
+}
+
 public final class io/ygdrasil/wgsl/ir/ArraySize$Dynamic : io/ygdrasil/wgsl/ir/ArraySize {
+	public static final field Companion Lio/ygdrasil/wgsl/ir/ArraySize$Dynamic$Companion;
 	public synthetic fun <init> (ILkotlin/jvm/internal/DefaultConstructorMarker;)V
 	public final fun getExpression-Weu6vOY ()I
+}
+
+public final synthetic class io/ygdrasil/wgsl/ir/ArraySize$Dynamic$$serializer : kotlinx/serialization/internal/GeneratedSerializer {
+	public static final field INSTANCE Lio/ygdrasil/wgsl/ir/ArraySize$Dynamic$$serializer;
+	public final fun childSerializers ()[Lkotlinx/serialization/KSerializer;
+	public final fun deserialize (Lkotlinx/serialization/encoding/Decoder;)Lio/ygdrasil/wgsl/ir/ArraySize$Dynamic;
+	public synthetic fun deserialize (Lkotlinx/serialization/encoding/Decoder;)Ljava/lang/Object;
+	public final fun getDescriptor ()Lkotlinx/serialization/descriptors/SerialDescriptor;
+	public final fun serialize (Lkotlinx/serialization/encoding/Encoder;Lio/ygdrasil/wgsl/ir/ArraySize$Dynamic;)V
+	public synthetic fun serialize (Lkotlinx/serialization/encoding/Encoder;Ljava/lang/Object;)V
+	public fun typeParametersSerializers ()[Lkotlinx/serialization/KSerializer;
+}
+
+public final class io/ygdrasil/wgsl/ir/ArraySize$Dynamic$Companion {
+	public final fun serializer ()Lkotlinx/serialization/KSerializer;
 }
 
 public final class io/ygdrasil/wgsl/ir/AtomicFunction : java/lang/Enum {
@@ -683,6 +773,7 @@ public abstract class io/ygdrasil/wgsl/ir/BindingAttribute {
 }
 
 public final class io/ygdrasil/wgsl/ir/BindingAttribute$Builtin : io/ygdrasil/wgsl/ir/BindingAttribute {
+	public static final field Companion Lio/ygdrasil/wgsl/ir/BindingAttribute$Builtin$Companion;
 	public fun <init> (Lio/ygdrasil/wgsl/ir/BuiltinValue;)V
 	public final fun component1 ()Lio/ygdrasil/wgsl/ir/BuiltinValue;
 	public final fun copy (Lio/ygdrasil/wgsl/ir/BuiltinValue;)Lio/ygdrasil/wgsl/ir/BindingAttribute$Builtin;
@@ -693,11 +784,27 @@ public final class io/ygdrasil/wgsl/ir/BindingAttribute$Builtin : io/ygdrasil/wg
 	public fun toString ()Ljava/lang/String;
 }
 
+public final synthetic class io/ygdrasil/wgsl/ir/BindingAttribute$Builtin$$serializer : kotlinx/serialization/internal/GeneratedSerializer {
+	public static final field INSTANCE Lio/ygdrasil/wgsl/ir/BindingAttribute$Builtin$$serializer;
+	public final fun childSerializers ()[Lkotlinx/serialization/KSerializer;
+	public final fun deserialize (Lkotlinx/serialization/encoding/Decoder;)Lio/ygdrasil/wgsl/ir/BindingAttribute$Builtin;
+	public synthetic fun deserialize (Lkotlinx/serialization/encoding/Decoder;)Ljava/lang/Object;
+	public final fun getDescriptor ()Lkotlinx/serialization/descriptors/SerialDescriptor;
+	public final fun serialize (Lkotlinx/serialization/encoding/Encoder;Lio/ygdrasil/wgsl/ir/BindingAttribute$Builtin;)V
+	public synthetic fun serialize (Lkotlinx/serialization/encoding/Encoder;Ljava/lang/Object;)V
+	public fun typeParametersSerializers ()[Lkotlinx/serialization/KSerializer;
+}
+
+public final class io/ygdrasil/wgsl/ir/BindingAttribute$Builtin$Companion {
+	public final fun serializer ()Lkotlinx/serialization/KSerializer;
+}
+
 public final class io/ygdrasil/wgsl/ir/BindingAttribute$Companion {
 	public final fun serializer ()Lkotlinx/serialization/KSerializer;
 }
 
 public final class io/ygdrasil/wgsl/ir/BindingAttribute$Interpolate : io/ygdrasil/wgsl/ir/BindingAttribute {
+	public static final field Companion Lio/ygdrasil/wgsl/ir/BindingAttribute$Interpolate$Companion;
 	public fun <init> (Lio/ygdrasil/wgsl/ir/Sampling;Lio/ygdrasil/wgsl/ir/InterpolationType;)V
 	public final fun component1 ()Lio/ygdrasil/wgsl/ir/Sampling;
 	public final fun component2 ()Lio/ygdrasil/wgsl/ir/InterpolationType;
@@ -710,7 +817,23 @@ public final class io/ygdrasil/wgsl/ir/BindingAttribute$Interpolate : io/ygdrasi
 	public fun toString ()Ljava/lang/String;
 }
 
+public final synthetic class io/ygdrasil/wgsl/ir/BindingAttribute$Interpolate$$serializer : kotlinx/serialization/internal/GeneratedSerializer {
+	public static final field INSTANCE Lio/ygdrasil/wgsl/ir/BindingAttribute$Interpolate$$serializer;
+	public final fun childSerializers ()[Lkotlinx/serialization/KSerializer;
+	public final fun deserialize (Lkotlinx/serialization/encoding/Decoder;)Lio/ygdrasil/wgsl/ir/BindingAttribute$Interpolate;
+	public synthetic fun deserialize (Lkotlinx/serialization/encoding/Decoder;)Ljava/lang/Object;
+	public final fun getDescriptor ()Lkotlinx/serialization/descriptors/SerialDescriptor;
+	public final fun serialize (Lkotlinx/serialization/encoding/Encoder;Lio/ygdrasil/wgsl/ir/BindingAttribute$Interpolate;)V
+	public synthetic fun serialize (Lkotlinx/serialization/encoding/Encoder;Ljava/lang/Object;)V
+	public fun typeParametersSerializers ()[Lkotlinx/serialization/KSerializer;
+}
+
+public final class io/ygdrasil/wgsl/ir/BindingAttribute$Interpolate$Companion {
+	public final fun serializer ()Lkotlinx/serialization/KSerializer;
+}
+
 public final class io/ygdrasil/wgsl/ir/BindingAttribute$Location : io/ygdrasil/wgsl/ir/BindingAttribute {
+	public static final field Companion Lio/ygdrasil/wgsl/ir/BindingAttribute$Location$Companion;
 	public fun <init> (I)V
 	public final fun component1 ()I
 	public final fun copy (I)Lio/ygdrasil/wgsl/ir/BindingAttribute$Location;
@@ -719,6 +842,21 @@ public final class io/ygdrasil/wgsl/ir/BindingAttribute$Location : io/ygdrasil/w
 	public final fun getLocation ()I
 	public fun hashCode ()I
 	public fun toString ()Ljava/lang/String;
+}
+
+public final synthetic class io/ygdrasil/wgsl/ir/BindingAttribute$Location$$serializer : kotlinx/serialization/internal/GeneratedSerializer {
+	public static final field INSTANCE Lio/ygdrasil/wgsl/ir/BindingAttribute$Location$$serializer;
+	public final fun childSerializers ()[Lkotlinx/serialization/KSerializer;
+	public final fun deserialize (Lkotlinx/serialization/encoding/Decoder;)Lio/ygdrasil/wgsl/ir/BindingAttribute$Location;
+	public synthetic fun deserialize (Lkotlinx/serialization/encoding/Decoder;)Ljava/lang/Object;
+	public final fun getDescriptor ()Lkotlinx/serialization/descriptors/SerialDescriptor;
+	public final fun serialize (Lkotlinx/serialization/encoding/Encoder;Lio/ygdrasil/wgsl/ir/BindingAttribute$Location;)V
+	public synthetic fun serialize (Lkotlinx/serialization/encoding/Encoder;Ljava/lang/Object;)V
+	public fun typeParametersSerializers ()[Lkotlinx/serialization/KSerializer;
+}
+
+public final class io/ygdrasil/wgsl/ir/BindingAttribute$Location$Companion {
+	public final fun serializer ()Lkotlinx/serialization/KSerializer;
 }
 
 public final class io/ygdrasil/wgsl/ir/Block {
@@ -919,12 +1057,44 @@ public final class io/ygdrasil/wgsl/ir/CaseSelector$Companion {
 }
 
 public final class io/ygdrasil/wgsl/ir/CaseSelector$Default : io/ygdrasil/wgsl/ir/CaseSelector {
+	public static final field Companion Lio/ygdrasil/wgsl/ir/CaseSelector$Default$Companion;
 	public fun <init> ()V
 }
 
+public final synthetic class io/ygdrasil/wgsl/ir/CaseSelector$Default$$serializer : kotlinx/serialization/internal/GeneratedSerializer {
+	public static final field INSTANCE Lio/ygdrasil/wgsl/ir/CaseSelector$Default$$serializer;
+	public final fun childSerializers ()[Lkotlinx/serialization/KSerializer;
+	public final fun deserialize (Lkotlinx/serialization/encoding/Decoder;)Lio/ygdrasil/wgsl/ir/CaseSelector$Default;
+	public synthetic fun deserialize (Lkotlinx/serialization/encoding/Decoder;)Ljava/lang/Object;
+	public final fun getDescriptor ()Lkotlinx/serialization/descriptors/SerialDescriptor;
+	public final fun serialize (Lkotlinx/serialization/encoding/Encoder;Lio/ygdrasil/wgsl/ir/CaseSelector$Default;)V
+	public synthetic fun serialize (Lkotlinx/serialization/encoding/Encoder;Ljava/lang/Object;)V
+	public fun typeParametersSerializers ()[Lkotlinx/serialization/KSerializer;
+}
+
+public final class io/ygdrasil/wgsl/ir/CaseSelector$Default$Companion {
+	public final fun serializer ()Lkotlinx/serialization/KSerializer;
+}
+
 public final class io/ygdrasil/wgsl/ir/CaseSelector$Value : io/ygdrasil/wgsl/ir/CaseSelector {
+	public static final field Companion Lio/ygdrasil/wgsl/ir/CaseSelector$Value$Companion;
 	public fun <init> (Lio/ygdrasil/wgsl/ir/ScalarValue;)V
 	public final fun getValue ()Lio/ygdrasil/wgsl/ir/ScalarValue;
+}
+
+public final synthetic class io/ygdrasil/wgsl/ir/CaseSelector$Value$$serializer : kotlinx/serialization/internal/GeneratedSerializer {
+	public static final field INSTANCE Lio/ygdrasil/wgsl/ir/CaseSelector$Value$$serializer;
+	public final fun childSerializers ()[Lkotlinx/serialization/KSerializer;
+	public final fun deserialize (Lkotlinx/serialization/encoding/Decoder;)Lio/ygdrasil/wgsl/ir/CaseSelector$Value;
+	public synthetic fun deserialize (Lkotlinx/serialization/encoding/Decoder;)Ljava/lang/Object;
+	public final fun getDescriptor ()Lkotlinx/serialization/descriptors/SerialDescriptor;
+	public final fun serialize (Lkotlinx/serialization/encoding/Encoder;Lio/ygdrasil/wgsl/ir/CaseSelector$Value;)V
+	public synthetic fun serialize (Lkotlinx/serialization/encoding/Encoder;Ljava/lang/Object;)V
+	public fun typeParametersSerializers ()[Lkotlinx/serialization/KSerializer;
+}
+
+public final class io/ygdrasil/wgsl/ir/CaseSelector$Value$Companion {
+	public final fun serializer ()Lkotlinx/serialization/KSerializer;
 }
 
 public abstract class io/ygdrasil/wgsl/ir/ConstValue {
@@ -1142,6 +1312,7 @@ public final class io/ygdrasil/wgsl/ir/ConstantInner$Companion {
 }
 
 public final class io/ygdrasil/wgsl/ir/ConstantInner$Composite : io/ygdrasil/wgsl/ir/ConstantInner {
+	public static final field Companion Lio/ygdrasil/wgsl/ir/ConstantInner$Composite$Companion;
 	public synthetic fun <init> (ILjava/util/List;Lkotlin/jvm/internal/DefaultConstructorMarker;)V
 	public final fun component1-Weu6vOY ()I
 	public final fun component2 ()Ljava/util/List;
@@ -1154,7 +1325,23 @@ public final class io/ygdrasil/wgsl/ir/ConstantInner$Composite : io/ygdrasil/wgs
 	public fun toString ()Ljava/lang/String;
 }
 
+public final synthetic class io/ygdrasil/wgsl/ir/ConstantInner$Composite$$serializer : kotlinx/serialization/internal/GeneratedSerializer {
+	public static final field INSTANCE Lio/ygdrasil/wgsl/ir/ConstantInner$Composite$$serializer;
+	public final fun childSerializers ()[Lkotlinx/serialization/KSerializer;
+	public final fun deserialize (Lkotlinx/serialization/encoding/Decoder;)Lio/ygdrasil/wgsl/ir/ConstantInner$Composite;
+	public synthetic fun deserialize (Lkotlinx/serialization/encoding/Decoder;)Ljava/lang/Object;
+	public final fun getDescriptor ()Lkotlinx/serialization/descriptors/SerialDescriptor;
+	public final fun serialize (Lkotlinx/serialization/encoding/Encoder;Lio/ygdrasil/wgsl/ir/ConstantInner$Composite;)V
+	public synthetic fun serialize (Lkotlinx/serialization/encoding/Encoder;Ljava/lang/Object;)V
+	public fun typeParametersSerializers ()[Lkotlinx/serialization/KSerializer;
+}
+
+public final class io/ygdrasil/wgsl/ir/ConstantInner$Composite$Companion {
+	public final fun serializer ()Lkotlinx/serialization/KSerializer;
+}
+
 public final class io/ygdrasil/wgsl/ir/ConstantInner$Expression : io/ygdrasil/wgsl/ir/ConstantInner {
+	public static final field Companion Lio/ygdrasil/wgsl/ir/ConstantInner$Expression$Companion;
 	public synthetic fun <init> (ILkotlin/jvm/internal/DefaultConstructorMarker;)V
 	public final fun component1-Weu6vOY ()I
 	public final fun copy-GlugwBY (I)Lio/ygdrasil/wgsl/ir/ConstantInner$Expression;
@@ -1165,7 +1352,23 @@ public final class io/ygdrasil/wgsl/ir/ConstantInner$Expression : io/ygdrasil/wg
 	public fun toString ()Ljava/lang/String;
 }
 
+public final synthetic class io/ygdrasil/wgsl/ir/ConstantInner$Expression$$serializer : kotlinx/serialization/internal/GeneratedSerializer {
+	public static final field INSTANCE Lio/ygdrasil/wgsl/ir/ConstantInner$Expression$$serializer;
+	public final fun childSerializers ()[Lkotlinx/serialization/KSerializer;
+	public final fun deserialize (Lkotlinx/serialization/encoding/Decoder;)Lio/ygdrasil/wgsl/ir/ConstantInner$Expression;
+	public synthetic fun deserialize (Lkotlinx/serialization/encoding/Decoder;)Ljava/lang/Object;
+	public final fun getDescriptor ()Lkotlinx/serialization/descriptors/SerialDescriptor;
+	public final fun serialize (Lkotlinx/serialization/encoding/Encoder;Lio/ygdrasil/wgsl/ir/ConstantInner$Expression;)V
+	public synthetic fun serialize (Lkotlinx/serialization/encoding/Encoder;Ljava/lang/Object;)V
+	public fun typeParametersSerializers ()[Lkotlinx/serialization/KSerializer;
+}
+
+public final class io/ygdrasil/wgsl/ir/ConstantInner$Expression$Companion {
+	public final fun serializer ()Lkotlinx/serialization/KSerializer;
+}
+
 public final class io/ygdrasil/wgsl/ir/ConstantInner$Matrix : io/ygdrasil/wgsl/ir/ConstantInner {
+	public static final field Companion Lio/ygdrasil/wgsl/ir/ConstantInner$Matrix$Companion;
 	public fun <init> (Ljava/util/List;)V
 	public final fun component1 ()Ljava/util/List;
 	public final fun copy (Ljava/util/List;)Lio/ygdrasil/wgsl/ir/ConstantInner$Matrix;
@@ -1176,7 +1379,23 @@ public final class io/ygdrasil/wgsl/ir/ConstantInner$Matrix : io/ygdrasil/wgsl/i
 	public fun toString ()Ljava/lang/String;
 }
 
+public final synthetic class io/ygdrasil/wgsl/ir/ConstantInner$Matrix$$serializer : kotlinx/serialization/internal/GeneratedSerializer {
+	public static final field INSTANCE Lio/ygdrasil/wgsl/ir/ConstantInner$Matrix$$serializer;
+	public final fun childSerializers ()[Lkotlinx/serialization/KSerializer;
+	public final fun deserialize (Lkotlinx/serialization/encoding/Decoder;)Lio/ygdrasil/wgsl/ir/ConstantInner$Matrix;
+	public synthetic fun deserialize (Lkotlinx/serialization/encoding/Decoder;)Ljava/lang/Object;
+	public final fun getDescriptor ()Lkotlinx/serialization/descriptors/SerialDescriptor;
+	public final fun serialize (Lkotlinx/serialization/encoding/Encoder;Lio/ygdrasil/wgsl/ir/ConstantInner$Matrix;)V
+	public synthetic fun serialize (Lkotlinx/serialization/encoding/Encoder;Ljava/lang/Object;)V
+	public fun typeParametersSerializers ()[Lkotlinx/serialization/KSerializer;
+}
+
+public final class io/ygdrasil/wgsl/ir/ConstantInner$Matrix$Companion {
+	public final fun serializer ()Lkotlinx/serialization/KSerializer;
+}
+
 public final class io/ygdrasil/wgsl/ir/ConstantInner$Scalar : io/ygdrasil/wgsl/ir/ConstantInner {
+	public static final field Companion Lio/ygdrasil/wgsl/ir/ConstantInner$Scalar$Companion;
 	public fun <init> (Lio/ygdrasil/wgsl/ir/ScalarValue;)V
 	public final fun component1 ()Lio/ygdrasil/wgsl/ir/ScalarValue;
 	public final fun copy (Lio/ygdrasil/wgsl/ir/ScalarValue;)Lio/ygdrasil/wgsl/ir/ConstantInner$Scalar;
@@ -1187,7 +1406,23 @@ public final class io/ygdrasil/wgsl/ir/ConstantInner$Scalar : io/ygdrasil/wgsl/i
 	public fun toString ()Ljava/lang/String;
 }
 
+public final synthetic class io/ygdrasil/wgsl/ir/ConstantInner$Scalar$$serializer : kotlinx/serialization/internal/GeneratedSerializer {
+	public static final field INSTANCE Lio/ygdrasil/wgsl/ir/ConstantInner$Scalar$$serializer;
+	public final fun childSerializers ()[Lkotlinx/serialization/KSerializer;
+	public final fun deserialize (Lkotlinx/serialization/encoding/Decoder;)Lio/ygdrasil/wgsl/ir/ConstantInner$Scalar;
+	public synthetic fun deserialize (Lkotlinx/serialization/encoding/Decoder;)Ljava/lang/Object;
+	public final fun getDescriptor ()Lkotlinx/serialization/descriptors/SerialDescriptor;
+	public final fun serialize (Lkotlinx/serialization/encoding/Encoder;Lio/ygdrasil/wgsl/ir/ConstantInner$Scalar;)V
+	public synthetic fun serialize (Lkotlinx/serialization/encoding/Encoder;Ljava/lang/Object;)V
+	public fun typeParametersSerializers ()[Lkotlinx/serialization/KSerializer;
+}
+
+public final class io/ygdrasil/wgsl/ir/ConstantInner$Scalar$Companion {
+	public final fun serializer ()Lkotlinx/serialization/KSerializer;
+}
+
 public final class io/ygdrasil/wgsl/ir/ConstantInner$Vector : io/ygdrasil/wgsl/ir/ConstantInner {
+	public static final field Companion Lio/ygdrasil/wgsl/ir/ConstantInner$Vector$Companion;
 	public fun <init> (Ljava/util/List;)V
 	public final fun component1 ()Ljava/util/List;
 	public final fun copy (Ljava/util/List;)Lio/ygdrasil/wgsl/ir/ConstantInner$Vector;
@@ -1198,7 +1433,23 @@ public final class io/ygdrasil/wgsl/ir/ConstantInner$Vector : io/ygdrasil/wgsl/i
 	public fun toString ()Ljava/lang/String;
 }
 
+public final synthetic class io/ygdrasil/wgsl/ir/ConstantInner$Vector$$serializer : kotlinx/serialization/internal/GeneratedSerializer {
+	public static final field INSTANCE Lio/ygdrasil/wgsl/ir/ConstantInner$Vector$$serializer;
+	public final fun childSerializers ()[Lkotlinx/serialization/KSerializer;
+	public final fun deserialize (Lkotlinx/serialization/encoding/Decoder;)Lio/ygdrasil/wgsl/ir/ConstantInner$Vector;
+	public synthetic fun deserialize (Lkotlinx/serialization/encoding/Decoder;)Ljava/lang/Object;
+	public final fun getDescriptor ()Lkotlinx/serialization/descriptors/SerialDescriptor;
+	public final fun serialize (Lkotlinx/serialization/encoding/Encoder;Lio/ygdrasil/wgsl/ir/ConstantInner$Vector;)V
+	public synthetic fun serialize (Lkotlinx/serialization/encoding/Encoder;Ljava/lang/Object;)V
+	public fun typeParametersSerializers ()[Lkotlinx/serialization/KSerializer;
+}
+
+public final class io/ygdrasil/wgsl/ir/ConstantInner$Vector$Companion {
+	public final fun serializer ()Lkotlinx/serialization/KSerializer;
+}
+
 public final class io/ygdrasil/wgsl/ir/ConstantInner$Zero : io/ygdrasil/wgsl/ir/ConstantInner {
+	public static final field Companion Lio/ygdrasil/wgsl/ir/ConstantInner$Zero$Companion;
 	public synthetic fun <init> (ILkotlin/jvm/internal/DefaultConstructorMarker;)V
 	public final fun component1-Weu6vOY ()I
 	public final fun copy-GlugwBY (I)Lio/ygdrasil/wgsl/ir/ConstantInner$Zero;
@@ -1207,6 +1458,21 @@ public final class io/ygdrasil/wgsl/ir/ConstantInner$Zero : io/ygdrasil/wgsl/ir/
 	public final fun getType-Weu6vOY ()I
 	public fun hashCode ()I
 	public fun toString ()Ljava/lang/String;
+}
+
+public final synthetic class io/ygdrasil/wgsl/ir/ConstantInner$Zero$$serializer : kotlinx/serialization/internal/GeneratedSerializer {
+	public static final field INSTANCE Lio/ygdrasil/wgsl/ir/ConstantInner$Zero$$serializer;
+	public final fun childSerializers ()[Lkotlinx/serialization/KSerializer;
+	public final fun deserialize (Lkotlinx/serialization/encoding/Decoder;)Lio/ygdrasil/wgsl/ir/ConstantInner$Zero;
+	public synthetic fun deserialize (Lkotlinx/serialization/encoding/Decoder;)Ljava/lang/Object;
+	public final fun getDescriptor ()Lkotlinx/serialization/descriptors/SerialDescriptor;
+	public final fun serialize (Lkotlinx/serialization/encoding/Encoder;Lio/ygdrasil/wgsl/ir/ConstantInner$Zero;)V
+	public synthetic fun serialize (Lkotlinx/serialization/encoding/Encoder;Ljava/lang/Object;)V
+	public fun typeParametersSerializers ()[Lkotlinx/serialization/KSerializer;
+}
+
+public final class io/ygdrasil/wgsl/ir/ConstantInner$Zero$Companion {
+	public final fun serializer ()Lkotlinx/serialization/KSerializer;
 }
 
 public final class io/ygdrasil/wgsl/ir/Diagnostic {
@@ -1267,6 +1533,7 @@ public abstract class io/ygdrasil/wgsl/ir/DiagnosticFilterNode {
 }
 
 public final class io/ygdrasil/wgsl/ir/DiagnosticFilterNode$All : io/ygdrasil/wgsl/ir/DiagnosticFilterNode {
+	public static final field Companion Lio/ygdrasil/wgsl/ir/DiagnosticFilterNode$All$Companion;
 	public fun <init> (Ljava/util/List;)V
 	public final fun component1 ()Ljava/util/List;
 	public final fun copy (Ljava/util/List;)Lio/ygdrasil/wgsl/ir/DiagnosticFilterNode$All;
@@ -1277,7 +1544,23 @@ public final class io/ygdrasil/wgsl/ir/DiagnosticFilterNode$All : io/ygdrasil/wg
 	public fun toString ()Ljava/lang/String;
 }
 
+public final synthetic class io/ygdrasil/wgsl/ir/DiagnosticFilterNode$All$$serializer : kotlinx/serialization/internal/GeneratedSerializer {
+	public static final field INSTANCE Lio/ygdrasil/wgsl/ir/DiagnosticFilterNode$All$$serializer;
+	public final fun childSerializers ()[Lkotlinx/serialization/KSerializer;
+	public final fun deserialize (Lkotlinx/serialization/encoding/Decoder;)Lio/ygdrasil/wgsl/ir/DiagnosticFilterNode$All;
+	public synthetic fun deserialize (Lkotlinx/serialization/encoding/Decoder;)Ljava/lang/Object;
+	public final fun getDescriptor ()Lkotlinx/serialization/descriptors/SerialDescriptor;
+	public final fun serialize (Lkotlinx/serialization/encoding/Encoder;Lio/ygdrasil/wgsl/ir/DiagnosticFilterNode$All;)V
+	public synthetic fun serialize (Lkotlinx/serialization/encoding/Encoder;Ljava/lang/Object;)V
+	public fun typeParametersSerializers ()[Lkotlinx/serialization/KSerializer;
+}
+
+public final class io/ygdrasil/wgsl/ir/DiagnosticFilterNode$All$Companion {
+	public final fun serializer ()Lkotlinx/serialization/KSerializer;
+}
+
 public final class io/ygdrasil/wgsl/ir/DiagnosticFilterNode$Any : io/ygdrasil/wgsl/ir/DiagnosticFilterNode {
+	public static final field Companion Lio/ygdrasil/wgsl/ir/DiagnosticFilterNode$Any$Companion;
 	public fun <init> (Ljava/util/List;)V
 	public final fun component1 ()Ljava/util/List;
 	public final fun copy (Ljava/util/List;)Lio/ygdrasil/wgsl/ir/DiagnosticFilterNode$Any;
@@ -1288,11 +1571,27 @@ public final class io/ygdrasil/wgsl/ir/DiagnosticFilterNode$Any : io/ygdrasil/wg
 	public fun toString ()Ljava/lang/String;
 }
 
+public final synthetic class io/ygdrasil/wgsl/ir/DiagnosticFilterNode$Any$$serializer : kotlinx/serialization/internal/GeneratedSerializer {
+	public static final field INSTANCE Lio/ygdrasil/wgsl/ir/DiagnosticFilterNode$Any$$serializer;
+	public final fun childSerializers ()[Lkotlinx/serialization/KSerializer;
+	public final fun deserialize (Lkotlinx/serialization/encoding/Decoder;)Lio/ygdrasil/wgsl/ir/DiagnosticFilterNode$Any;
+	public synthetic fun deserialize (Lkotlinx/serialization/encoding/Decoder;)Ljava/lang/Object;
+	public final fun getDescriptor ()Lkotlinx/serialization/descriptors/SerialDescriptor;
+	public final fun serialize (Lkotlinx/serialization/encoding/Encoder;Lio/ygdrasil/wgsl/ir/DiagnosticFilterNode$Any;)V
+	public synthetic fun serialize (Lkotlinx/serialization/encoding/Encoder;Ljava/lang/Object;)V
+	public fun typeParametersSerializers ()[Lkotlinx/serialization/KSerializer;
+}
+
+public final class io/ygdrasil/wgsl/ir/DiagnosticFilterNode$Any$Companion {
+	public final fun serializer ()Lkotlinx/serialization/KSerializer;
+}
+
 public final class io/ygdrasil/wgsl/ir/DiagnosticFilterNode$Companion {
 	public final fun serializer ()Lkotlinx/serialization/KSerializer;
 }
 
 public final class io/ygdrasil/wgsl/ir/DiagnosticFilterNode$Operand : io/ygdrasil/wgsl/ir/DiagnosticFilterNode {
+	public static final field Companion Lio/ygdrasil/wgsl/ir/DiagnosticFilterNode$Operand$Companion;
 	public synthetic fun <init> (ILkotlin/jvm/internal/DefaultConstructorMarker;)V
 	public final fun component1-Weu6vOY ()I
 	public final fun copy-GlugwBY (I)Lio/ygdrasil/wgsl/ir/DiagnosticFilterNode$Operand;
@@ -1303,7 +1602,23 @@ public final class io/ygdrasil/wgsl/ir/DiagnosticFilterNode$Operand : io/ygdrasi
 	public fun toString ()Ljava/lang/String;
 }
 
+public final synthetic class io/ygdrasil/wgsl/ir/DiagnosticFilterNode$Operand$$serializer : kotlinx/serialization/internal/GeneratedSerializer {
+	public static final field INSTANCE Lio/ygdrasil/wgsl/ir/DiagnosticFilterNode$Operand$$serializer;
+	public final fun childSerializers ()[Lkotlinx/serialization/KSerializer;
+	public final fun deserialize (Lkotlinx/serialization/encoding/Decoder;)Lio/ygdrasil/wgsl/ir/DiagnosticFilterNode$Operand;
+	public synthetic fun deserialize (Lkotlinx/serialization/encoding/Decoder;)Ljava/lang/Object;
+	public final fun getDescriptor ()Lkotlinx/serialization/descriptors/SerialDescriptor;
+	public final fun serialize (Lkotlinx/serialization/encoding/Encoder;Lio/ygdrasil/wgsl/ir/DiagnosticFilterNode$Operand;)V
+	public synthetic fun serialize (Lkotlinx/serialization/encoding/Encoder;Ljava/lang/Object;)V
+	public fun typeParametersSerializers ()[Lkotlinx/serialization/KSerializer;
+}
+
+public final class io/ygdrasil/wgsl/ir/DiagnosticFilterNode$Operand$Companion {
+	public final fun serializer ()Lkotlinx/serialization/KSerializer;
+}
+
 public final class io/ygdrasil/wgsl/ir/DiagnosticFilterNode$Severity : io/ygdrasil/wgsl/ir/DiagnosticFilterNode {
+	public static final field Companion Lio/ygdrasil/wgsl/ir/DiagnosticFilterNode$Severity$Companion;
 	public fun <init> (Lio/ygdrasil/wgsl/ir/DiagnosticSeverity;Ljava/util/List;)V
 	public final fun component1 ()Lio/ygdrasil/wgsl/ir/DiagnosticSeverity;
 	public final fun component2 ()Ljava/util/List;
@@ -1314,6 +1629,21 @@ public final class io/ygdrasil/wgsl/ir/DiagnosticFilterNode$Severity : io/ygdras
 	public final fun getSeverity ()Lio/ygdrasil/wgsl/ir/DiagnosticSeverity;
 	public fun hashCode ()I
 	public fun toString ()Ljava/lang/String;
+}
+
+public final synthetic class io/ygdrasil/wgsl/ir/DiagnosticFilterNode$Severity$$serializer : kotlinx/serialization/internal/GeneratedSerializer {
+	public static final field INSTANCE Lio/ygdrasil/wgsl/ir/DiagnosticFilterNode$Severity$$serializer;
+	public final fun childSerializers ()[Lkotlinx/serialization/KSerializer;
+	public final fun deserialize (Lkotlinx/serialization/encoding/Decoder;)Lio/ygdrasil/wgsl/ir/DiagnosticFilterNode$Severity;
+	public synthetic fun deserialize (Lkotlinx/serialization/encoding/Decoder;)Ljava/lang/Object;
+	public final fun getDescriptor ()Lkotlinx/serialization/descriptors/SerialDescriptor;
+	public final fun serialize (Lkotlinx/serialization/encoding/Encoder;Lio/ygdrasil/wgsl/ir/DiagnosticFilterNode$Severity;)V
+	public synthetic fun serialize (Lkotlinx/serialization/encoding/Encoder;Ljava/lang/Object;)V
+	public fun typeParametersSerializers ()[Lkotlinx/serialization/KSerializer;
+}
+
+public final class io/ygdrasil/wgsl/ir/DiagnosticFilterNode$Severity$Companion {
+	public final fun serializer ()Lkotlinx/serialization/KSerializer;
 }
 
 public final class io/ygdrasil/wgsl/ir/DiagnosticKt {
@@ -1375,25 +1705,31 @@ public final class io/ygdrasil/wgsl/ir/EarlyDepthTest$Companion {
 
 public final class io/ygdrasil/wgsl/ir/EarlyDepthTest$Default : io/ygdrasil/wgsl/ir/EarlyDepthTest {
 	public static final field INSTANCE Lio/ygdrasil/wgsl/ir/EarlyDepthTest$Default;
+	public final fun serializer ()Lkotlinx/serialization/KSerializer;
 }
 
 public final class io/ygdrasil/wgsl/ir/EarlyDepthTest$ForceDepthGreater : io/ygdrasil/wgsl/ir/EarlyDepthTest {
 	public static final field INSTANCE Lio/ygdrasil/wgsl/ir/EarlyDepthTest$ForceDepthGreater;
+	public final fun serializer ()Lkotlinx/serialization/KSerializer;
 }
 
 public final class io/ygdrasil/wgsl/ir/EarlyDepthTest$ForceDepthGreaterEqual : io/ygdrasil/wgsl/ir/EarlyDepthTest {
 	public static final field INSTANCE Lio/ygdrasil/wgsl/ir/EarlyDepthTest$ForceDepthGreaterEqual;
+	public final fun serializer ()Lkotlinx/serialization/KSerializer;
 }
 
 public final class io/ygdrasil/wgsl/ir/EarlyDepthTest$ForceDepthLess : io/ygdrasil/wgsl/ir/EarlyDepthTest {
 	public static final field INSTANCE Lio/ygdrasil/wgsl/ir/EarlyDepthTest$ForceDepthLess;
+	public final fun serializer ()Lkotlinx/serialization/KSerializer;
 }
 
 public final class io/ygdrasil/wgsl/ir/EarlyDepthTest$ForceDepthLessEqual : io/ygdrasil/wgsl/ir/EarlyDepthTest {
 	public static final field INSTANCE Lio/ygdrasil/wgsl/ir/EarlyDepthTest$ForceDepthLessEqual;
+	public final fun serializer ()Lkotlinx/serialization/KSerializer;
 }
 
 public final class io/ygdrasil/wgsl/ir/EarlyDepthTest$ForceDepthUnchanged : io/ygdrasil/wgsl/ir/EarlyDepthTest {
+	public static final field Companion Lio/ygdrasil/wgsl/ir/EarlyDepthTest$ForceDepthUnchanged$Companion;
 	public synthetic fun <init> (ILkotlin/jvm/internal/DefaultConstructorMarker;)V
 	public final fun component1-Weu6vOY ()I
 	public final fun copy-GlugwBY (I)Lio/ygdrasil/wgsl/ir/EarlyDepthTest$ForceDepthUnchanged;
@@ -1402,6 +1738,21 @@ public final class io/ygdrasil/wgsl/ir/EarlyDepthTest$ForceDepthUnchanged : io/y
 	public final fun getValue-Weu6vOY ()I
 	public fun hashCode ()I
 	public fun toString ()Ljava/lang/String;
+}
+
+public final synthetic class io/ygdrasil/wgsl/ir/EarlyDepthTest$ForceDepthUnchanged$$serializer : kotlinx/serialization/internal/GeneratedSerializer {
+	public static final field INSTANCE Lio/ygdrasil/wgsl/ir/EarlyDepthTest$ForceDepthUnchanged$$serializer;
+	public final fun childSerializers ()[Lkotlinx/serialization/KSerializer;
+	public final fun deserialize (Lkotlinx/serialization/encoding/Decoder;)Lio/ygdrasil/wgsl/ir/EarlyDepthTest$ForceDepthUnchanged;
+	public synthetic fun deserialize (Lkotlinx/serialization/encoding/Decoder;)Ljava/lang/Object;
+	public final fun getDescriptor ()Lkotlinx/serialization/descriptors/SerialDescriptor;
+	public final fun serialize (Lkotlinx/serialization/encoding/Encoder;Lio/ygdrasil/wgsl/ir/EarlyDepthTest$ForceDepthUnchanged;)V
+	public synthetic fun serialize (Lkotlinx/serialization/encoding/Encoder;Ljava/lang/Object;)V
+	public fun typeParametersSerializers ()[Lkotlinx/serialization/KSerializer;
+}
+
+public final class io/ygdrasil/wgsl/ir/EarlyDepthTest$ForceDepthUnchanged$Companion {
+	public final fun serializer ()Lkotlinx/serialization/KSerializer;
 }
 
 public final class io/ygdrasil/wgsl/ir/EntryPoint {
@@ -1476,32 +1827,65 @@ public abstract class io/ygdrasil/wgsl/ir/ExpressionKind {
 }
 
 public final class io/ygdrasil/wgsl/ir/ExpressionKind$Access : io/ygdrasil/wgsl/ir/ExpressionKind {
+	public static final field Companion Lio/ygdrasil/wgsl/ir/ExpressionKind$Access$Companion;
 	public synthetic fun <init> (IILkotlin/jvm/internal/DefaultConstructorMarker;)V
 	public final fun component1-Weu6vOY ()I
-	public final fun component2 ()I
-	public final fun copy-Dv_J50E (II)Lio/ygdrasil/wgsl/ir/ExpressionKind$Access;
-	public static synthetic fun copy-Dv_J50E$default (Lio/ygdrasil/wgsl/ir/ExpressionKind$Access;IIILjava/lang/Object;)Lio/ygdrasil/wgsl/ir/ExpressionKind$Access;
+	public final fun component2-Weu6vOY ()I
+	public final fun copy-JWj_Tk4 (II)Lio/ygdrasil/wgsl/ir/ExpressionKind$Access;
+	public static synthetic fun copy-JWj_Tk4$default (Lio/ygdrasil/wgsl/ir/ExpressionKind$Access;IIILjava/lang/Object;)Lio/ygdrasil/wgsl/ir/ExpressionKind$Access;
 	public fun equals (Ljava/lang/Object;)Z
 	public final fun getExpr-Weu6vOY ()I
-	public final fun getIndex ()I
+	public final fun getIndex-Weu6vOY ()I
 	public fun hashCode ()I
 	public fun toString ()Ljava/lang/String;
+}
+
+public final synthetic class io/ygdrasil/wgsl/ir/ExpressionKind$Access$$serializer : kotlinx/serialization/internal/GeneratedSerializer {
+	public static final field INSTANCE Lio/ygdrasil/wgsl/ir/ExpressionKind$Access$$serializer;
+	public final fun childSerializers ()[Lkotlinx/serialization/KSerializer;
+	public final fun deserialize (Lkotlinx/serialization/encoding/Decoder;)Lio/ygdrasil/wgsl/ir/ExpressionKind$Access;
+	public synthetic fun deserialize (Lkotlinx/serialization/encoding/Decoder;)Ljava/lang/Object;
+	public final fun getDescriptor ()Lkotlinx/serialization/descriptors/SerialDescriptor;
+	public final fun serialize (Lkotlinx/serialization/encoding/Encoder;Lio/ygdrasil/wgsl/ir/ExpressionKind$Access;)V
+	public synthetic fun serialize (Lkotlinx/serialization/encoding/Encoder;Ljava/lang/Object;)V
+	public fun typeParametersSerializers ()[Lkotlinx/serialization/KSerializer;
+}
+
+public final class io/ygdrasil/wgsl/ir/ExpressionKind$Access$Companion {
+	public final fun serializer ()Lkotlinx/serialization/KSerializer;
 }
 
 public final class io/ygdrasil/wgsl/ir/ExpressionKind$AccessIndex : io/ygdrasil/wgsl/ir/ExpressionKind {
+	public static final field Companion Lio/ygdrasil/wgsl/ir/ExpressionKind$AccessIndex$Companion;
 	public synthetic fun <init> (IILkotlin/jvm/internal/DefaultConstructorMarker;)V
 	public final fun component1-Weu6vOY ()I
-	public final fun component2 ()I
-	public final fun copy-Dv_J50E (II)Lio/ygdrasil/wgsl/ir/ExpressionKind$AccessIndex;
-	public static synthetic fun copy-Dv_J50E$default (Lio/ygdrasil/wgsl/ir/ExpressionKind$AccessIndex;IIILjava/lang/Object;)Lio/ygdrasil/wgsl/ir/ExpressionKind$AccessIndex;
+	public final fun component2-pVg5ArA ()I
+	public final fun copy-f-NnoqI (II)Lio/ygdrasil/wgsl/ir/ExpressionKind$AccessIndex;
+	public static synthetic fun copy-f-NnoqI$default (Lio/ygdrasil/wgsl/ir/ExpressionKind$AccessIndex;IIILjava/lang/Object;)Lio/ygdrasil/wgsl/ir/ExpressionKind$AccessIndex;
 	public fun equals (Ljava/lang/Object;)Z
 	public final fun getExpr-Weu6vOY ()I
-	public final fun getIndex ()I
+	public final fun getIndex-pVg5ArA ()I
 	public fun hashCode ()I
 	public fun toString ()Ljava/lang/String;
 }
 
+public final synthetic class io/ygdrasil/wgsl/ir/ExpressionKind$AccessIndex$$serializer : kotlinx/serialization/internal/GeneratedSerializer {
+	public static final field INSTANCE Lio/ygdrasil/wgsl/ir/ExpressionKind$AccessIndex$$serializer;
+	public final fun childSerializers ()[Lkotlinx/serialization/KSerializer;
+	public final fun deserialize (Lkotlinx/serialization/encoding/Decoder;)Lio/ygdrasil/wgsl/ir/ExpressionKind$AccessIndex;
+	public synthetic fun deserialize (Lkotlinx/serialization/encoding/Decoder;)Ljava/lang/Object;
+	public final fun getDescriptor ()Lkotlinx/serialization/descriptors/SerialDescriptor;
+	public final fun serialize (Lkotlinx/serialization/encoding/Encoder;Lio/ygdrasil/wgsl/ir/ExpressionKind$AccessIndex;)V
+	public synthetic fun serialize (Lkotlinx/serialization/encoding/Encoder;Ljava/lang/Object;)V
+	public fun typeParametersSerializers ()[Lkotlinx/serialization/KSerializer;
+}
+
+public final class io/ygdrasil/wgsl/ir/ExpressionKind$AccessIndex$Companion {
+	public final fun serializer ()Lkotlinx/serialization/KSerializer;
+}
+
 public final class io/ygdrasil/wgsl/ir/ExpressionKind$ArrayLength : io/ygdrasil/wgsl/ir/ExpressionKind {
+	public static final field Companion Lio/ygdrasil/wgsl/ir/ExpressionKind$ArrayLength$Companion;
 	public synthetic fun <init> (ILkotlin/jvm/internal/DefaultConstructorMarker;)V
 	public final fun component1-Weu6vOY ()I
 	public final fun copy-GlugwBY (I)Lio/ygdrasil/wgsl/ir/ExpressionKind$ArrayLength;
@@ -1512,7 +1896,23 @@ public final class io/ygdrasil/wgsl/ir/ExpressionKind$ArrayLength : io/ygdrasil/
 	public fun toString ()Ljava/lang/String;
 }
 
+public final synthetic class io/ygdrasil/wgsl/ir/ExpressionKind$ArrayLength$$serializer : kotlinx/serialization/internal/GeneratedSerializer {
+	public static final field INSTANCE Lio/ygdrasil/wgsl/ir/ExpressionKind$ArrayLength$$serializer;
+	public final fun childSerializers ()[Lkotlinx/serialization/KSerializer;
+	public final fun deserialize (Lkotlinx/serialization/encoding/Decoder;)Lio/ygdrasil/wgsl/ir/ExpressionKind$ArrayLength;
+	public synthetic fun deserialize (Lkotlinx/serialization/encoding/Decoder;)Ljava/lang/Object;
+	public final fun getDescriptor ()Lkotlinx/serialization/descriptors/SerialDescriptor;
+	public final fun serialize (Lkotlinx/serialization/encoding/Encoder;Lio/ygdrasil/wgsl/ir/ExpressionKind$ArrayLength;)V
+	public synthetic fun serialize (Lkotlinx/serialization/encoding/Encoder;Ljava/lang/Object;)V
+	public fun typeParametersSerializers ()[Lkotlinx/serialization/KSerializer;
+}
+
+public final class io/ygdrasil/wgsl/ir/ExpressionKind$ArrayLength$Companion {
+	public final fun serializer ()Lkotlinx/serialization/KSerializer;
+}
+
 public final class io/ygdrasil/wgsl/ir/ExpressionKind$As : io/ygdrasil/wgsl/ir/ExpressionKind {
+	public static final field Companion Lio/ygdrasil/wgsl/ir/ExpressionKind$As$Companion;
 	public synthetic fun <init> (IILkotlin/jvm/internal/DefaultConstructorMarker;)V
 	public final fun component1-Weu6vOY ()I
 	public final fun component2-Weu6vOY ()I
@@ -1525,7 +1925,23 @@ public final class io/ygdrasil/wgsl/ir/ExpressionKind$As : io/ygdrasil/wgsl/ir/E
 	public fun toString ()Ljava/lang/String;
 }
 
+public final synthetic class io/ygdrasil/wgsl/ir/ExpressionKind$As$$serializer : kotlinx/serialization/internal/GeneratedSerializer {
+	public static final field INSTANCE Lio/ygdrasil/wgsl/ir/ExpressionKind$As$$serializer;
+	public final fun childSerializers ()[Lkotlinx/serialization/KSerializer;
+	public final fun deserialize (Lkotlinx/serialization/encoding/Decoder;)Lio/ygdrasil/wgsl/ir/ExpressionKind$As;
+	public synthetic fun deserialize (Lkotlinx/serialization/encoding/Decoder;)Ljava/lang/Object;
+	public final fun getDescriptor ()Lkotlinx/serialization/descriptors/SerialDescriptor;
+	public final fun serialize (Lkotlinx/serialization/encoding/Encoder;Lio/ygdrasil/wgsl/ir/ExpressionKind$As;)V
+	public synthetic fun serialize (Lkotlinx/serialization/encoding/Encoder;Ljava/lang/Object;)V
+	public fun typeParametersSerializers ()[Lkotlinx/serialization/KSerializer;
+}
+
+public final class io/ygdrasil/wgsl/ir/ExpressionKind$As$Companion {
+	public final fun serializer ()Lkotlinx/serialization/KSerializer;
+}
+
 public final class io/ygdrasil/wgsl/ir/ExpressionKind$Atomic : io/ygdrasil/wgsl/ir/ExpressionKind {
+	public static final field Companion Lio/ygdrasil/wgsl/ir/ExpressionKind$Atomic$Companion;
 	public synthetic fun <init> (ILio/ygdrasil/wgsl/ir/AtomicFunction;Ljava/util/List;Lkotlin/jvm/internal/DefaultConstructorMarker;)V
 	public final fun component1-Weu6vOY ()I
 	public final fun component2 ()Lio/ygdrasil/wgsl/ir/AtomicFunction;
@@ -1540,7 +1956,23 @@ public final class io/ygdrasil/wgsl/ir/ExpressionKind$Atomic : io/ygdrasil/wgsl/
 	public fun toString ()Ljava/lang/String;
 }
 
+public final synthetic class io/ygdrasil/wgsl/ir/ExpressionKind$Atomic$$serializer : kotlinx/serialization/internal/GeneratedSerializer {
+	public static final field INSTANCE Lio/ygdrasil/wgsl/ir/ExpressionKind$Atomic$$serializer;
+	public final fun childSerializers ()[Lkotlinx/serialization/KSerializer;
+	public final fun deserialize (Lkotlinx/serialization/encoding/Decoder;)Lio/ygdrasil/wgsl/ir/ExpressionKind$Atomic;
+	public synthetic fun deserialize (Lkotlinx/serialization/encoding/Decoder;)Ljava/lang/Object;
+	public final fun getDescriptor ()Lkotlinx/serialization/descriptors/SerialDescriptor;
+	public final fun serialize (Lkotlinx/serialization/encoding/Encoder;Lio/ygdrasil/wgsl/ir/ExpressionKind$Atomic;)V
+	public synthetic fun serialize (Lkotlinx/serialization/encoding/Encoder;Ljava/lang/Object;)V
+	public fun typeParametersSerializers ()[Lkotlinx/serialization/KSerializer;
+}
+
+public final class io/ygdrasil/wgsl/ir/ExpressionKind$Atomic$Companion {
+	public final fun serializer ()Lkotlinx/serialization/KSerializer;
+}
+
 public final class io/ygdrasil/wgsl/ir/ExpressionKind$Binary : io/ygdrasil/wgsl/ir/ExpressionKind {
+	public static final field Companion Lio/ygdrasil/wgsl/ir/ExpressionKind$Binary$Companion;
 	public synthetic fun <init> (Lio/ygdrasil/wgsl/ir/BinaryOperator;IILkotlin/jvm/internal/DefaultConstructorMarker;)V
 	public final fun component1 ()Lio/ygdrasil/wgsl/ir/BinaryOperator;
 	public final fun component2-Weu6vOY ()I
@@ -1555,18 +1987,52 @@ public final class io/ygdrasil/wgsl/ir/ExpressionKind$Binary : io/ygdrasil/wgsl/
 	public fun toString ()Ljava/lang/String;
 }
 
+public final synthetic class io/ygdrasil/wgsl/ir/ExpressionKind$Binary$$serializer : kotlinx/serialization/internal/GeneratedSerializer {
+	public static final field INSTANCE Lio/ygdrasil/wgsl/ir/ExpressionKind$Binary$$serializer;
+	public final fun childSerializers ()[Lkotlinx/serialization/KSerializer;
+	public final fun deserialize (Lkotlinx/serialization/encoding/Decoder;)Lio/ygdrasil/wgsl/ir/ExpressionKind$Binary;
+	public synthetic fun deserialize (Lkotlinx/serialization/encoding/Decoder;)Ljava/lang/Object;
+	public final fun getDescriptor ()Lkotlinx/serialization/descriptors/SerialDescriptor;
+	public final fun serialize (Lkotlinx/serialization/encoding/Encoder;Lio/ygdrasil/wgsl/ir/ExpressionKind$Binary;)V
+	public synthetic fun serialize (Lkotlinx/serialization/encoding/Encoder;Ljava/lang/Object;)V
+	public fun typeParametersSerializers ()[Lkotlinx/serialization/KSerializer;
+}
+
+public final class io/ygdrasil/wgsl/ir/ExpressionKind$Binary$Companion {
+	public final fun serializer ()Lkotlinx/serialization/KSerializer;
+}
+
 public final class io/ygdrasil/wgsl/ir/ExpressionKind$Bitcast : io/ygdrasil/wgsl/ir/ExpressionKind {
-	public synthetic fun <init> (ILkotlin/jvm/internal/DefaultConstructorMarker;)V
+	public static final field Companion Lio/ygdrasil/wgsl/ir/ExpressionKind$Bitcast$Companion;
+	public synthetic fun <init> (IILkotlin/jvm/internal/DefaultConstructorMarker;)V
 	public final fun component1-Weu6vOY ()I
-	public final fun copy-GlugwBY (I)Lio/ygdrasil/wgsl/ir/ExpressionKind$Bitcast;
-	public static synthetic fun copy-GlugwBY$default (Lio/ygdrasil/wgsl/ir/ExpressionKind$Bitcast;IILjava/lang/Object;)Lio/ygdrasil/wgsl/ir/ExpressionKind$Bitcast;
+	public final fun component2-Weu6vOY ()I
+	public final fun copy-JWj_Tk4 (II)Lio/ygdrasil/wgsl/ir/ExpressionKind$Bitcast;
+	public static synthetic fun copy-JWj_Tk4$default (Lio/ygdrasil/wgsl/ir/ExpressionKind$Bitcast;IIILjava/lang/Object;)Lio/ygdrasil/wgsl/ir/ExpressionKind$Bitcast;
 	public fun equals (Ljava/lang/Object;)Z
 	public final fun getExpr-Weu6vOY ()I
+	public final fun getTarget-Weu6vOY ()I
 	public fun hashCode ()I
 	public fun toString ()Ljava/lang/String;
 }
 
+public final synthetic class io/ygdrasil/wgsl/ir/ExpressionKind$Bitcast$$serializer : kotlinx/serialization/internal/GeneratedSerializer {
+	public static final field INSTANCE Lio/ygdrasil/wgsl/ir/ExpressionKind$Bitcast$$serializer;
+	public final fun childSerializers ()[Lkotlinx/serialization/KSerializer;
+	public final fun deserialize (Lkotlinx/serialization/encoding/Decoder;)Lio/ygdrasil/wgsl/ir/ExpressionKind$Bitcast;
+	public synthetic fun deserialize (Lkotlinx/serialization/encoding/Decoder;)Ljava/lang/Object;
+	public final fun getDescriptor ()Lkotlinx/serialization/descriptors/SerialDescriptor;
+	public final fun serialize (Lkotlinx/serialization/encoding/Encoder;Lio/ygdrasil/wgsl/ir/ExpressionKind$Bitcast;)V
+	public synthetic fun serialize (Lkotlinx/serialization/encoding/Encoder;Ljava/lang/Object;)V
+	public fun typeParametersSerializers ()[Lkotlinx/serialization/KSerializer;
+}
+
+public final class io/ygdrasil/wgsl/ir/ExpressionKind$Bitcast$Companion {
+	public final fun serializer ()Lkotlinx/serialization/KSerializer;
+}
+
 public final class io/ygdrasil/wgsl/ir/ExpressionKind$BuiltinCall : io/ygdrasil/wgsl/ir/ExpressionKind {
+	public static final field Companion Lio/ygdrasil/wgsl/ir/ExpressionKind$BuiltinCall$Companion;
 	public fun <init> (Lio/ygdrasil/wgsl/ir/BuiltinFunction;Ljava/util/List;)V
 	public final fun component1 ()Lio/ygdrasil/wgsl/ir/BuiltinFunction;
 	public final fun component2 ()Ljava/util/List;
@@ -1579,7 +2045,23 @@ public final class io/ygdrasil/wgsl/ir/ExpressionKind$BuiltinCall : io/ygdrasil/
 	public fun toString ()Ljava/lang/String;
 }
 
+public final synthetic class io/ygdrasil/wgsl/ir/ExpressionKind$BuiltinCall$$serializer : kotlinx/serialization/internal/GeneratedSerializer {
+	public static final field INSTANCE Lio/ygdrasil/wgsl/ir/ExpressionKind$BuiltinCall$$serializer;
+	public final fun childSerializers ()[Lkotlinx/serialization/KSerializer;
+	public final fun deserialize (Lkotlinx/serialization/encoding/Decoder;)Lio/ygdrasil/wgsl/ir/ExpressionKind$BuiltinCall;
+	public synthetic fun deserialize (Lkotlinx/serialization/encoding/Decoder;)Ljava/lang/Object;
+	public final fun getDescriptor ()Lkotlinx/serialization/descriptors/SerialDescriptor;
+	public final fun serialize (Lkotlinx/serialization/encoding/Encoder;Lio/ygdrasil/wgsl/ir/ExpressionKind$BuiltinCall;)V
+	public synthetic fun serialize (Lkotlinx/serialization/encoding/Encoder;Ljava/lang/Object;)V
+	public fun typeParametersSerializers ()[Lkotlinx/serialization/KSerializer;
+}
+
+public final class io/ygdrasil/wgsl/ir/ExpressionKind$BuiltinCall$Companion {
+	public final fun serializer ()Lkotlinx/serialization/KSerializer;
+}
+
 public final class io/ygdrasil/wgsl/ir/ExpressionKind$Call : io/ygdrasil/wgsl/ir/ExpressionKind {
+	public static final field Companion Lio/ygdrasil/wgsl/ir/ExpressionKind$Call$Companion;
 	public synthetic fun <init> (ILjava/util/List;Lkotlin/jvm/internal/DefaultConstructorMarker;)V
 	public final fun component1-Weu6vOY ()I
 	public final fun component2 ()Ljava/util/List;
@@ -1592,11 +2074,27 @@ public final class io/ygdrasil/wgsl/ir/ExpressionKind$Call : io/ygdrasil/wgsl/ir
 	public fun toString ()Ljava/lang/String;
 }
 
+public final synthetic class io/ygdrasil/wgsl/ir/ExpressionKind$Call$$serializer : kotlinx/serialization/internal/GeneratedSerializer {
+	public static final field INSTANCE Lio/ygdrasil/wgsl/ir/ExpressionKind$Call$$serializer;
+	public final fun childSerializers ()[Lkotlinx/serialization/KSerializer;
+	public final fun deserialize (Lkotlinx/serialization/encoding/Decoder;)Lio/ygdrasil/wgsl/ir/ExpressionKind$Call;
+	public synthetic fun deserialize (Lkotlinx/serialization/encoding/Decoder;)Ljava/lang/Object;
+	public final fun getDescriptor ()Lkotlinx/serialization/descriptors/SerialDescriptor;
+	public final fun serialize (Lkotlinx/serialization/encoding/Encoder;Lio/ygdrasil/wgsl/ir/ExpressionKind$Call;)V
+	public synthetic fun serialize (Lkotlinx/serialization/encoding/Encoder;Ljava/lang/Object;)V
+	public fun typeParametersSerializers ()[Lkotlinx/serialization/KSerializer;
+}
+
+public final class io/ygdrasil/wgsl/ir/ExpressionKind$Call$Companion {
+	public final fun serializer ()Lkotlinx/serialization/KSerializer;
+}
+
 public final class io/ygdrasil/wgsl/ir/ExpressionKind$Companion {
 	public final fun serializer ()Lkotlinx/serialization/KSerializer;
 }
 
 public final class io/ygdrasil/wgsl/ir/ExpressionKind$ConstantExpr : io/ygdrasil/wgsl/ir/ExpressionKind {
+	public static final field Companion Lio/ygdrasil/wgsl/ir/ExpressionKind$ConstantExpr$Companion;
 	public synthetic fun <init> (ILkotlin/jvm/internal/DefaultConstructorMarker;)V
 	public final fun component1-Weu6vOY ()I
 	public final fun copy-GlugwBY (I)Lio/ygdrasil/wgsl/ir/ExpressionKind$ConstantExpr;
@@ -1607,7 +2105,23 @@ public final class io/ygdrasil/wgsl/ir/ExpressionKind$ConstantExpr : io/ygdrasil
 	public fun toString ()Ljava/lang/String;
 }
 
+public final synthetic class io/ygdrasil/wgsl/ir/ExpressionKind$ConstantExpr$$serializer : kotlinx/serialization/internal/GeneratedSerializer {
+	public static final field INSTANCE Lio/ygdrasil/wgsl/ir/ExpressionKind$ConstantExpr$$serializer;
+	public final fun childSerializers ()[Lkotlinx/serialization/KSerializer;
+	public final fun deserialize (Lkotlinx/serialization/encoding/Decoder;)Lio/ygdrasil/wgsl/ir/ExpressionKind$ConstantExpr;
+	public synthetic fun deserialize (Lkotlinx/serialization/encoding/Decoder;)Ljava/lang/Object;
+	public final fun getDescriptor ()Lkotlinx/serialization/descriptors/SerialDescriptor;
+	public final fun serialize (Lkotlinx/serialization/encoding/Encoder;Lio/ygdrasil/wgsl/ir/ExpressionKind$ConstantExpr;)V
+	public synthetic fun serialize (Lkotlinx/serialization/encoding/Encoder;Ljava/lang/Object;)V
+	public fun typeParametersSerializers ()[Lkotlinx/serialization/KSerializer;
+}
+
+public final class io/ygdrasil/wgsl/ir/ExpressionKind$ConstantExpr$Companion {
+	public final fun serializer ()Lkotlinx/serialization/KSerializer;
+}
+
 public final class io/ygdrasil/wgsl/ir/ExpressionKind$FunctionArgument : io/ygdrasil/wgsl/ir/ExpressionKind {
+	public static final field Companion Lio/ygdrasil/wgsl/ir/ExpressionKind$FunctionArgument$Companion;
 	public fun <init> (I)V
 	public final fun component1 ()I
 	public final fun copy (I)Lio/ygdrasil/wgsl/ir/ExpressionKind$FunctionArgument;
@@ -1618,7 +2132,23 @@ public final class io/ygdrasil/wgsl/ir/ExpressionKind$FunctionArgument : io/ygdr
 	public fun toString ()Ljava/lang/String;
 }
 
+public final synthetic class io/ygdrasil/wgsl/ir/ExpressionKind$FunctionArgument$$serializer : kotlinx/serialization/internal/GeneratedSerializer {
+	public static final field INSTANCE Lio/ygdrasil/wgsl/ir/ExpressionKind$FunctionArgument$$serializer;
+	public final fun childSerializers ()[Lkotlinx/serialization/KSerializer;
+	public final fun deserialize (Lkotlinx/serialization/encoding/Decoder;)Lio/ygdrasil/wgsl/ir/ExpressionKind$FunctionArgument;
+	public synthetic fun deserialize (Lkotlinx/serialization/encoding/Decoder;)Ljava/lang/Object;
+	public final fun getDescriptor ()Lkotlinx/serialization/descriptors/SerialDescriptor;
+	public final fun serialize (Lkotlinx/serialization/encoding/Encoder;Lio/ygdrasil/wgsl/ir/ExpressionKind$FunctionArgument;)V
+	public synthetic fun serialize (Lkotlinx/serialization/encoding/Encoder;Ljava/lang/Object;)V
+	public fun typeParametersSerializers ()[Lkotlinx/serialization/KSerializer;
+}
+
+public final class io/ygdrasil/wgsl/ir/ExpressionKind$FunctionArgument$Companion {
+	public final fun serializer ()Lkotlinx/serialization/KSerializer;
+}
+
 public final class io/ygdrasil/wgsl/ir/ExpressionKind$GlobalVar : io/ygdrasil/wgsl/ir/ExpressionKind {
+	public static final field Companion Lio/ygdrasil/wgsl/ir/ExpressionKind$GlobalVar$Companion;
 	public synthetic fun <init> (ILkotlin/jvm/internal/DefaultConstructorMarker;)V
 	public final fun component1-Weu6vOY ()I
 	public final fun copy-GlugwBY (I)Lio/ygdrasil/wgsl/ir/ExpressionKind$GlobalVar;
@@ -1629,7 +2159,23 @@ public final class io/ygdrasil/wgsl/ir/ExpressionKind$GlobalVar : io/ygdrasil/wg
 	public fun toString ()Ljava/lang/String;
 }
 
+public final synthetic class io/ygdrasil/wgsl/ir/ExpressionKind$GlobalVar$$serializer : kotlinx/serialization/internal/GeneratedSerializer {
+	public static final field INSTANCE Lio/ygdrasil/wgsl/ir/ExpressionKind$GlobalVar$$serializer;
+	public final fun childSerializers ()[Lkotlinx/serialization/KSerializer;
+	public final fun deserialize (Lkotlinx/serialization/encoding/Decoder;)Lio/ygdrasil/wgsl/ir/ExpressionKind$GlobalVar;
+	public synthetic fun deserialize (Lkotlinx/serialization/encoding/Decoder;)Ljava/lang/Object;
+	public final fun getDescriptor ()Lkotlinx/serialization/descriptors/SerialDescriptor;
+	public final fun serialize (Lkotlinx/serialization/encoding/Encoder;Lio/ygdrasil/wgsl/ir/ExpressionKind$GlobalVar;)V
+	public synthetic fun serialize (Lkotlinx/serialization/encoding/Encoder;Ljava/lang/Object;)V
+	public fun typeParametersSerializers ()[Lkotlinx/serialization/KSerializer;
+}
+
+public final class io/ygdrasil/wgsl/ir/ExpressionKind$GlobalVar$Companion {
+	public final fun serializer ()Lkotlinx/serialization/KSerializer;
+}
+
 public final class io/ygdrasil/wgsl/ir/ExpressionKind$Literal : io/ygdrasil/wgsl/ir/ExpressionKind {
+	public static final field Companion Lio/ygdrasil/wgsl/ir/ExpressionKind$Literal$Companion;
 	public fun <init> (Lio/ygdrasil/wgsl/ir/LiteralValue;)V
 	public final fun component1 ()Lio/ygdrasil/wgsl/ir/LiteralValue;
 	public final fun copy (Lio/ygdrasil/wgsl/ir/LiteralValue;)Lio/ygdrasil/wgsl/ir/ExpressionKind$Literal;
@@ -1640,7 +2186,23 @@ public final class io/ygdrasil/wgsl/ir/ExpressionKind$Literal : io/ygdrasil/wgsl
 	public fun toString ()Ljava/lang/String;
 }
 
+public final synthetic class io/ygdrasil/wgsl/ir/ExpressionKind$Literal$$serializer : kotlinx/serialization/internal/GeneratedSerializer {
+	public static final field INSTANCE Lio/ygdrasil/wgsl/ir/ExpressionKind$Literal$$serializer;
+	public final fun childSerializers ()[Lkotlinx/serialization/KSerializer;
+	public final fun deserialize (Lkotlinx/serialization/encoding/Decoder;)Lio/ygdrasil/wgsl/ir/ExpressionKind$Literal;
+	public synthetic fun deserialize (Lkotlinx/serialization/encoding/Decoder;)Ljava/lang/Object;
+	public final fun getDescriptor ()Lkotlinx/serialization/descriptors/SerialDescriptor;
+	public final fun serialize (Lkotlinx/serialization/encoding/Encoder;Lio/ygdrasil/wgsl/ir/ExpressionKind$Literal;)V
+	public synthetic fun serialize (Lkotlinx/serialization/encoding/Encoder;Ljava/lang/Object;)V
+	public fun typeParametersSerializers ()[Lkotlinx/serialization/KSerializer;
+}
+
+public final class io/ygdrasil/wgsl/ir/ExpressionKind$Literal$Companion {
+	public final fun serializer ()Lkotlinx/serialization/KSerializer;
+}
+
 public final class io/ygdrasil/wgsl/ir/ExpressionKind$Load : io/ygdrasil/wgsl/ir/ExpressionKind {
+	public static final field Companion Lio/ygdrasil/wgsl/ir/ExpressionKind$Load$Companion;
 	public synthetic fun <init> (ILkotlin/jvm/internal/DefaultConstructorMarker;)V
 	public final fun component1-Weu6vOY ()I
 	public final fun copy-GlugwBY (I)Lio/ygdrasil/wgsl/ir/ExpressionKind$Load;
@@ -1651,7 +2213,23 @@ public final class io/ygdrasil/wgsl/ir/ExpressionKind$Load : io/ygdrasil/wgsl/ir
 	public fun toString ()Ljava/lang/String;
 }
 
+public final synthetic class io/ygdrasil/wgsl/ir/ExpressionKind$Load$$serializer : kotlinx/serialization/internal/GeneratedSerializer {
+	public static final field INSTANCE Lio/ygdrasil/wgsl/ir/ExpressionKind$Load$$serializer;
+	public final fun childSerializers ()[Lkotlinx/serialization/KSerializer;
+	public final fun deserialize (Lkotlinx/serialization/encoding/Decoder;)Lio/ygdrasil/wgsl/ir/ExpressionKind$Load;
+	public synthetic fun deserialize (Lkotlinx/serialization/encoding/Decoder;)Ljava/lang/Object;
+	public final fun getDescriptor ()Lkotlinx/serialization/descriptors/SerialDescriptor;
+	public final fun serialize (Lkotlinx/serialization/encoding/Encoder;Lio/ygdrasil/wgsl/ir/ExpressionKind$Load;)V
+	public synthetic fun serialize (Lkotlinx/serialization/encoding/Encoder;Ljava/lang/Object;)V
+	public fun typeParametersSerializers ()[Lkotlinx/serialization/KSerializer;
+}
+
+public final class io/ygdrasil/wgsl/ir/ExpressionKind$Load$Companion {
+	public final fun serializer ()Lkotlinx/serialization/KSerializer;
+}
+
 public final class io/ygdrasil/wgsl/ir/ExpressionKind$LocalVar : io/ygdrasil/wgsl/ir/ExpressionKind {
+	public static final field Companion Lio/ygdrasil/wgsl/ir/ExpressionKind$LocalVar$Companion;
 	public synthetic fun <init> (ILkotlin/jvm/internal/DefaultConstructorMarker;)V
 	public final fun component1-Weu6vOY ()I
 	public final fun copy-GlugwBY (I)Lio/ygdrasil/wgsl/ir/ExpressionKind$LocalVar;
@@ -1662,7 +2240,23 @@ public final class io/ygdrasil/wgsl/ir/ExpressionKind$LocalVar : io/ygdrasil/wgs
 	public fun toString ()Ljava/lang/String;
 }
 
+public final synthetic class io/ygdrasil/wgsl/ir/ExpressionKind$LocalVar$$serializer : kotlinx/serialization/internal/GeneratedSerializer {
+	public static final field INSTANCE Lio/ygdrasil/wgsl/ir/ExpressionKind$LocalVar$$serializer;
+	public final fun childSerializers ()[Lkotlinx/serialization/KSerializer;
+	public final fun deserialize (Lkotlinx/serialization/encoding/Decoder;)Lio/ygdrasil/wgsl/ir/ExpressionKind$LocalVar;
+	public synthetic fun deserialize (Lkotlinx/serialization/encoding/Decoder;)Ljava/lang/Object;
+	public final fun getDescriptor ()Lkotlinx/serialization/descriptors/SerialDescriptor;
+	public final fun serialize (Lkotlinx/serialization/encoding/Encoder;Lio/ygdrasil/wgsl/ir/ExpressionKind$LocalVar;)V
+	public synthetic fun serialize (Lkotlinx/serialization/encoding/Encoder;Ljava/lang/Object;)V
+	public fun typeParametersSerializers ()[Lkotlinx/serialization/KSerializer;
+}
+
+public final class io/ygdrasil/wgsl/ir/ExpressionKind$LocalVar$Companion {
+	public final fun serializer ()Lkotlinx/serialization/KSerializer;
+}
+
 public final class io/ygdrasil/wgsl/ir/ExpressionKind$RayQuery : io/ygdrasil/wgsl/ir/ExpressionKind {
+	public static final field Companion Lio/ygdrasil/wgsl/ir/ExpressionKind$RayQuery$Companion;
 	public fun <init> (Lio/ygdrasil/wgsl/ir/RayQueryKind;Ljava/util/List;)V
 	public final fun component1 ()Lio/ygdrasil/wgsl/ir/RayQueryKind;
 	public final fun component2 ()Ljava/util/List;
@@ -1675,7 +2269,23 @@ public final class io/ygdrasil/wgsl/ir/ExpressionKind$RayQuery : io/ygdrasil/wgs
 	public fun toString ()Ljava/lang/String;
 }
 
+public final synthetic class io/ygdrasil/wgsl/ir/ExpressionKind$RayQuery$$serializer : kotlinx/serialization/internal/GeneratedSerializer {
+	public static final field INSTANCE Lio/ygdrasil/wgsl/ir/ExpressionKind$RayQuery$$serializer;
+	public final fun childSerializers ()[Lkotlinx/serialization/KSerializer;
+	public final fun deserialize (Lkotlinx/serialization/encoding/Decoder;)Lio/ygdrasil/wgsl/ir/ExpressionKind$RayQuery;
+	public synthetic fun deserialize (Lkotlinx/serialization/encoding/Decoder;)Ljava/lang/Object;
+	public final fun getDescriptor ()Lkotlinx/serialization/descriptors/SerialDescriptor;
+	public final fun serialize (Lkotlinx/serialization/encoding/Encoder;Lio/ygdrasil/wgsl/ir/ExpressionKind$RayQuery;)V
+	public synthetic fun serialize (Lkotlinx/serialization/encoding/Encoder;Ljava/lang/Object;)V
+	public fun typeParametersSerializers ()[Lkotlinx/serialization/KSerializer;
+}
+
+public final class io/ygdrasil/wgsl/ir/ExpressionKind$RayQuery$Companion {
+	public final fun serializer ()Lkotlinx/serialization/KSerializer;
+}
+
 public final class io/ygdrasil/wgsl/ir/ExpressionKind$Relational : io/ygdrasil/wgsl/ir/ExpressionKind {
+	public static final field Companion Lio/ygdrasil/wgsl/ir/ExpressionKind$Relational$Companion;
 	public fun <init> (Lio/ygdrasil/wgsl/ir/RelationalFunction;Ljava/util/List;)V
 	public final fun component1 ()Lio/ygdrasil/wgsl/ir/RelationalFunction;
 	public final fun component2 ()Ljava/util/List;
@@ -1688,7 +2298,23 @@ public final class io/ygdrasil/wgsl/ir/ExpressionKind$Relational : io/ygdrasil/w
 	public fun toString ()Ljava/lang/String;
 }
 
+public final synthetic class io/ygdrasil/wgsl/ir/ExpressionKind$Relational$$serializer : kotlinx/serialization/internal/GeneratedSerializer {
+	public static final field INSTANCE Lio/ygdrasil/wgsl/ir/ExpressionKind$Relational$$serializer;
+	public final fun childSerializers ()[Lkotlinx/serialization/KSerializer;
+	public final fun deserialize (Lkotlinx/serialization/encoding/Decoder;)Lio/ygdrasil/wgsl/ir/ExpressionKind$Relational;
+	public synthetic fun deserialize (Lkotlinx/serialization/encoding/Decoder;)Ljava/lang/Object;
+	public final fun getDescriptor ()Lkotlinx/serialization/descriptors/SerialDescriptor;
+	public final fun serialize (Lkotlinx/serialization/encoding/Encoder;Lio/ygdrasil/wgsl/ir/ExpressionKind$Relational;)V
+	public synthetic fun serialize (Lkotlinx/serialization/encoding/Encoder;Ljava/lang/Object;)V
+	public fun typeParametersSerializers ()[Lkotlinx/serialization/KSerializer;
+}
+
+public final class io/ygdrasil/wgsl/ir/ExpressionKind$Relational$Companion {
+	public final fun serializer ()Lkotlinx/serialization/KSerializer;
+}
+
 public final class io/ygdrasil/wgsl/ir/ExpressionKind$Sample : io/ygdrasil/wgsl/ir/ExpressionKind {
+	public static final field Companion Lio/ygdrasil/wgsl/ir/ExpressionKind$Sample$Companion;
 	public synthetic fun <init> (ILio/ygdrasil/wgsl/arena/Handle;ILio/ygdrasil/wgsl/ir/SampleLevel;Lio/ygdrasil/wgsl/arena/Handle;ILkotlin/jvm/internal/DefaultConstructorMarker;)V
 	public synthetic fun <init> (ILio/ygdrasil/wgsl/arena/Handle;ILio/ygdrasil/wgsl/ir/SampleLevel;Lio/ygdrasil/wgsl/arena/Handle;Lkotlin/jvm/internal/DefaultConstructorMarker;)V
 	public final fun component1-Weu6vOY ()I
@@ -1708,7 +2334,23 @@ public final class io/ygdrasil/wgsl/ir/ExpressionKind$Sample : io/ygdrasil/wgsl/
 	public fun toString ()Ljava/lang/String;
 }
 
+public final synthetic class io/ygdrasil/wgsl/ir/ExpressionKind$Sample$$serializer : kotlinx/serialization/internal/GeneratedSerializer {
+	public static final field INSTANCE Lio/ygdrasil/wgsl/ir/ExpressionKind$Sample$$serializer;
+	public final fun childSerializers ()[Lkotlinx/serialization/KSerializer;
+	public final fun deserialize (Lkotlinx/serialization/encoding/Decoder;)Lio/ygdrasil/wgsl/ir/ExpressionKind$Sample;
+	public synthetic fun deserialize (Lkotlinx/serialization/encoding/Decoder;)Ljava/lang/Object;
+	public final fun getDescriptor ()Lkotlinx/serialization/descriptors/SerialDescriptor;
+	public final fun serialize (Lkotlinx/serialization/encoding/Encoder;Lio/ygdrasil/wgsl/ir/ExpressionKind$Sample;)V
+	public synthetic fun serialize (Lkotlinx/serialization/encoding/Encoder;Ljava/lang/Object;)V
+	public fun typeParametersSerializers ()[Lkotlinx/serialization/KSerializer;
+}
+
+public final class io/ygdrasil/wgsl/ir/ExpressionKind$Sample$Companion {
+	public final fun serializer ()Lkotlinx/serialization/KSerializer;
+}
+
 public final class io/ygdrasil/wgsl/ir/ExpressionKind$Select : io/ygdrasil/wgsl/ir/ExpressionKind {
+	public static final field Companion Lio/ygdrasil/wgsl/ir/ExpressionKind$Select$Companion;
 	public synthetic fun <init> (IIILkotlin/jvm/internal/DefaultConstructorMarker;)V
 	public final fun component1-Weu6vOY ()I
 	public final fun component2-Weu6vOY ()I
@@ -1723,7 +2365,23 @@ public final class io/ygdrasil/wgsl/ir/ExpressionKind$Select : io/ygdrasil/wgsl/
 	public fun toString ()Ljava/lang/String;
 }
 
+public final synthetic class io/ygdrasil/wgsl/ir/ExpressionKind$Select$$serializer : kotlinx/serialization/internal/GeneratedSerializer {
+	public static final field INSTANCE Lio/ygdrasil/wgsl/ir/ExpressionKind$Select$$serializer;
+	public final fun childSerializers ()[Lkotlinx/serialization/KSerializer;
+	public final fun deserialize (Lkotlinx/serialization/encoding/Decoder;)Lio/ygdrasil/wgsl/ir/ExpressionKind$Select;
+	public synthetic fun deserialize (Lkotlinx/serialization/encoding/Decoder;)Ljava/lang/Object;
+	public final fun getDescriptor ()Lkotlinx/serialization/descriptors/SerialDescriptor;
+	public final fun serialize (Lkotlinx/serialization/encoding/Encoder;Lio/ygdrasil/wgsl/ir/ExpressionKind$Select;)V
+	public synthetic fun serialize (Lkotlinx/serialization/encoding/Encoder;Ljava/lang/Object;)V
+	public fun typeParametersSerializers ()[Lkotlinx/serialization/KSerializer;
+}
+
+public final class io/ygdrasil/wgsl/ir/ExpressionKind$Select$Companion {
+	public final fun serializer ()Lkotlinx/serialization/KSerializer;
+}
+
 public final class io/ygdrasil/wgsl/ir/ExpressionKind$Splat : io/ygdrasil/wgsl/ir/ExpressionKind {
+	public static final field Companion Lio/ygdrasil/wgsl/ir/ExpressionKind$Splat$Companion;
 	public synthetic fun <init> (Lio/ygdrasil/wgsl/ir/VectorSize;ILkotlin/jvm/internal/DefaultConstructorMarker;)V
 	public final fun component1 ()Lio/ygdrasil/wgsl/ir/VectorSize;
 	public final fun component2-Weu6vOY ()I
@@ -1736,7 +2394,23 @@ public final class io/ygdrasil/wgsl/ir/ExpressionKind$Splat : io/ygdrasil/wgsl/i
 	public fun toString ()Ljava/lang/String;
 }
 
+public final synthetic class io/ygdrasil/wgsl/ir/ExpressionKind$Splat$$serializer : kotlinx/serialization/internal/GeneratedSerializer {
+	public static final field INSTANCE Lio/ygdrasil/wgsl/ir/ExpressionKind$Splat$$serializer;
+	public final fun childSerializers ()[Lkotlinx/serialization/KSerializer;
+	public final fun deserialize (Lkotlinx/serialization/encoding/Decoder;)Lio/ygdrasil/wgsl/ir/ExpressionKind$Splat;
+	public synthetic fun deserialize (Lkotlinx/serialization/encoding/Decoder;)Ljava/lang/Object;
+	public final fun getDescriptor ()Lkotlinx/serialization/descriptors/SerialDescriptor;
+	public final fun serialize (Lkotlinx/serialization/encoding/Encoder;Lio/ygdrasil/wgsl/ir/ExpressionKind$Splat;)V
+	public synthetic fun serialize (Lkotlinx/serialization/encoding/Encoder;Ljava/lang/Object;)V
+	public fun typeParametersSerializers ()[Lkotlinx/serialization/KSerializer;
+}
+
+public final class io/ygdrasil/wgsl/ir/ExpressionKind$Splat$Companion {
+	public final fun serializer ()Lkotlinx/serialization/KSerializer;
+}
+
 public final class io/ygdrasil/wgsl/ir/ExpressionKind$Store : io/ygdrasil/wgsl/ir/ExpressionKind {
+	public static final field Companion Lio/ygdrasil/wgsl/ir/ExpressionKind$Store$Companion;
 	public synthetic fun <init> (IILkotlin/jvm/internal/DefaultConstructorMarker;)V
 	public final fun component1-Weu6vOY ()I
 	public final fun component2-Weu6vOY ()I
@@ -1749,7 +2423,23 @@ public final class io/ygdrasil/wgsl/ir/ExpressionKind$Store : io/ygdrasil/wgsl/i
 	public fun toString ()Ljava/lang/String;
 }
 
+public final synthetic class io/ygdrasil/wgsl/ir/ExpressionKind$Store$$serializer : kotlinx/serialization/internal/GeneratedSerializer {
+	public static final field INSTANCE Lio/ygdrasil/wgsl/ir/ExpressionKind$Store$$serializer;
+	public final fun childSerializers ()[Lkotlinx/serialization/KSerializer;
+	public final fun deserialize (Lkotlinx/serialization/encoding/Decoder;)Lio/ygdrasil/wgsl/ir/ExpressionKind$Store;
+	public synthetic fun deserialize (Lkotlinx/serialization/encoding/Decoder;)Ljava/lang/Object;
+	public final fun getDescriptor ()Lkotlinx/serialization/descriptors/SerialDescriptor;
+	public final fun serialize (Lkotlinx/serialization/encoding/Encoder;Lio/ygdrasil/wgsl/ir/ExpressionKind$Store;)V
+	public synthetic fun serialize (Lkotlinx/serialization/encoding/Encoder;Ljava/lang/Object;)V
+	public fun typeParametersSerializers ()[Lkotlinx/serialization/KSerializer;
+}
+
+public final class io/ygdrasil/wgsl/ir/ExpressionKind$Store$Companion {
+	public final fun serializer ()Lkotlinx/serialization/KSerializer;
+}
+
 public final class io/ygdrasil/wgsl/ir/ExpressionKind$Swizzle : io/ygdrasil/wgsl/ir/ExpressionKind {
+	public static final field Companion Lio/ygdrasil/wgsl/ir/ExpressionKind$Swizzle$Companion;
 	public synthetic fun <init> (Lio/ygdrasil/wgsl/ir/VectorSize;ILjava/util/List;Lkotlin/jvm/internal/DefaultConstructorMarker;)V
 	public final fun component1 ()Lio/ygdrasil/wgsl/ir/VectorSize;
 	public final fun component2-Weu6vOY ()I
@@ -1764,7 +2454,23 @@ public final class io/ygdrasil/wgsl/ir/ExpressionKind$Swizzle : io/ygdrasil/wgsl
 	public fun toString ()Ljava/lang/String;
 }
 
+public final synthetic class io/ygdrasil/wgsl/ir/ExpressionKind$Swizzle$$serializer : kotlinx/serialization/internal/GeneratedSerializer {
+	public static final field INSTANCE Lio/ygdrasil/wgsl/ir/ExpressionKind$Swizzle$$serializer;
+	public final fun childSerializers ()[Lkotlinx/serialization/KSerializer;
+	public final fun deserialize (Lkotlinx/serialization/encoding/Decoder;)Lio/ygdrasil/wgsl/ir/ExpressionKind$Swizzle;
+	public synthetic fun deserialize (Lkotlinx/serialization/encoding/Decoder;)Ljava/lang/Object;
+	public final fun getDescriptor ()Lkotlinx/serialization/descriptors/SerialDescriptor;
+	public final fun serialize (Lkotlinx/serialization/encoding/Encoder;Lio/ygdrasil/wgsl/ir/ExpressionKind$Swizzle;)V
+	public synthetic fun serialize (Lkotlinx/serialization/encoding/Encoder;Ljava/lang/Object;)V
+	public fun typeParametersSerializers ()[Lkotlinx/serialization/KSerializer;
+}
+
+public final class io/ygdrasil/wgsl/ir/ExpressionKind$Swizzle$Companion {
+	public final fun serializer ()Lkotlinx/serialization/KSerializer;
+}
+
 public final class io/ygdrasil/wgsl/ir/ExpressionKind$TextureQuery : io/ygdrasil/wgsl/ir/ExpressionKind {
+	public static final field Companion Lio/ygdrasil/wgsl/ir/ExpressionKind$TextureQuery$Companion;
 	public synthetic fun <init> (ILio/ygdrasil/wgsl/ir/TextureQueryKind;Lkotlin/jvm/internal/DefaultConstructorMarker;)V
 	public final fun component1-Weu6vOY ()I
 	public final fun component2 ()Lio/ygdrasil/wgsl/ir/TextureQueryKind;
@@ -1777,7 +2483,23 @@ public final class io/ygdrasil/wgsl/ir/ExpressionKind$TextureQuery : io/ygdrasil
 	public fun toString ()Ljava/lang/String;
 }
 
+public final synthetic class io/ygdrasil/wgsl/ir/ExpressionKind$TextureQuery$$serializer : kotlinx/serialization/internal/GeneratedSerializer {
+	public static final field INSTANCE Lio/ygdrasil/wgsl/ir/ExpressionKind$TextureQuery$$serializer;
+	public final fun childSerializers ()[Lkotlinx/serialization/KSerializer;
+	public final fun deserialize (Lkotlinx/serialization/encoding/Decoder;)Lio/ygdrasil/wgsl/ir/ExpressionKind$TextureQuery;
+	public synthetic fun deserialize (Lkotlinx/serialization/encoding/Decoder;)Ljava/lang/Object;
+	public final fun getDescriptor ()Lkotlinx/serialization/descriptors/SerialDescriptor;
+	public final fun serialize (Lkotlinx/serialization/encoding/Encoder;Lio/ygdrasil/wgsl/ir/ExpressionKind$TextureQuery;)V
+	public synthetic fun serialize (Lkotlinx/serialization/encoding/Encoder;Ljava/lang/Object;)V
+	public fun typeParametersSerializers ()[Lkotlinx/serialization/KSerializer;
+}
+
+public final class io/ygdrasil/wgsl/ir/ExpressionKind$TextureQuery$Companion {
+	public final fun serializer ()Lkotlinx/serialization/KSerializer;
+}
+
 public final class io/ygdrasil/wgsl/ir/ExpressionKind$TypeConstructor : io/ygdrasil/wgsl/ir/ExpressionKind {
+	public static final field Companion Lio/ygdrasil/wgsl/ir/ExpressionKind$TypeConstructor$Companion;
 	public synthetic fun <init> (ILjava/util/List;Lkotlin/jvm/internal/DefaultConstructorMarker;)V
 	public final fun component1-Weu6vOY ()I
 	public final fun component2 ()Ljava/util/List;
@@ -1790,7 +2512,23 @@ public final class io/ygdrasil/wgsl/ir/ExpressionKind$TypeConstructor : io/ygdra
 	public fun toString ()Ljava/lang/String;
 }
 
+public final synthetic class io/ygdrasil/wgsl/ir/ExpressionKind$TypeConstructor$$serializer : kotlinx/serialization/internal/GeneratedSerializer {
+	public static final field INSTANCE Lio/ygdrasil/wgsl/ir/ExpressionKind$TypeConstructor$$serializer;
+	public final fun childSerializers ()[Lkotlinx/serialization/KSerializer;
+	public final fun deserialize (Lkotlinx/serialization/encoding/Decoder;)Lio/ygdrasil/wgsl/ir/ExpressionKind$TypeConstructor;
+	public synthetic fun deserialize (Lkotlinx/serialization/encoding/Decoder;)Ljava/lang/Object;
+	public final fun getDescriptor ()Lkotlinx/serialization/descriptors/SerialDescriptor;
+	public final fun serialize (Lkotlinx/serialization/encoding/Encoder;Lio/ygdrasil/wgsl/ir/ExpressionKind$TypeConstructor;)V
+	public synthetic fun serialize (Lkotlinx/serialization/encoding/Encoder;Ljava/lang/Object;)V
+	public fun typeParametersSerializers ()[Lkotlinx/serialization/KSerializer;
+}
+
+public final class io/ygdrasil/wgsl/ir/ExpressionKind$TypeConstructor$Companion {
+	public final fun serializer ()Lkotlinx/serialization/KSerializer;
+}
+
 public final class io/ygdrasil/wgsl/ir/ExpressionKind$Unary : io/ygdrasil/wgsl/ir/ExpressionKind {
+	public static final field Companion Lio/ygdrasil/wgsl/ir/ExpressionKind$Unary$Companion;
 	public synthetic fun <init> (Lio/ygdrasil/wgsl/ir/UnaryOperator;ILkotlin/jvm/internal/DefaultConstructorMarker;)V
 	public final fun component1 ()Lio/ygdrasil/wgsl/ir/UnaryOperator;
 	public final fun component2-Weu6vOY ()I
@@ -1803,7 +2541,23 @@ public final class io/ygdrasil/wgsl/ir/ExpressionKind$Unary : io/ygdrasil/wgsl/i
 	public fun toString ()Ljava/lang/String;
 }
 
+public final synthetic class io/ygdrasil/wgsl/ir/ExpressionKind$Unary$$serializer : kotlinx/serialization/internal/GeneratedSerializer {
+	public static final field INSTANCE Lio/ygdrasil/wgsl/ir/ExpressionKind$Unary$$serializer;
+	public final fun childSerializers ()[Lkotlinx/serialization/KSerializer;
+	public final fun deserialize (Lkotlinx/serialization/encoding/Decoder;)Lio/ygdrasil/wgsl/ir/ExpressionKind$Unary;
+	public synthetic fun deserialize (Lkotlinx/serialization/encoding/Decoder;)Ljava/lang/Object;
+	public final fun getDescriptor ()Lkotlinx/serialization/descriptors/SerialDescriptor;
+	public final fun serialize (Lkotlinx/serialization/encoding/Encoder;Lio/ygdrasil/wgsl/ir/ExpressionKind$Unary;)V
+	public synthetic fun serialize (Lkotlinx/serialization/encoding/Encoder;Ljava/lang/Object;)V
+	public fun typeParametersSerializers ()[Lkotlinx/serialization/KSerializer;
+}
+
+public final class io/ygdrasil/wgsl/ir/ExpressionKind$Unary$Companion {
+	public final fun serializer ()Lkotlinx/serialization/KSerializer;
+}
+
 public final class io/ygdrasil/wgsl/ir/ExpressionKind$ValuePointer : io/ygdrasil/wgsl/ir/ExpressionKind {
+	public static final field Companion Lio/ygdrasil/wgsl/ir/ExpressionKind$ValuePointer$Companion;
 	public synthetic fun <init> (ILkotlin/jvm/internal/DefaultConstructorMarker;)V
 	public final fun component1-Weu6vOY ()I
 	public final fun copy-GlugwBY (I)Lio/ygdrasil/wgsl/ir/ExpressionKind$ValuePointer;
@@ -1812,6 +2566,21 @@ public final class io/ygdrasil/wgsl/ir/ExpressionKind$ValuePointer : io/ygdrasil
 	public final fun getBase-Weu6vOY ()I
 	public fun hashCode ()I
 	public fun toString ()Ljava/lang/String;
+}
+
+public final synthetic class io/ygdrasil/wgsl/ir/ExpressionKind$ValuePointer$$serializer : kotlinx/serialization/internal/GeneratedSerializer {
+	public static final field INSTANCE Lio/ygdrasil/wgsl/ir/ExpressionKind$ValuePointer$$serializer;
+	public final fun childSerializers ()[Lkotlinx/serialization/KSerializer;
+	public final fun deserialize (Lkotlinx/serialization/encoding/Decoder;)Lio/ygdrasil/wgsl/ir/ExpressionKind$ValuePointer;
+	public synthetic fun deserialize (Lkotlinx/serialization/encoding/Decoder;)Ljava/lang/Object;
+	public final fun getDescriptor ()Lkotlinx/serialization/descriptors/SerialDescriptor;
+	public final fun serialize (Lkotlinx/serialization/encoding/Encoder;Lio/ygdrasil/wgsl/ir/ExpressionKind$ValuePointer;)V
+	public synthetic fun serialize (Lkotlinx/serialization/encoding/Encoder;Ljava/lang/Object;)V
+	public fun typeParametersSerializers ()[Lkotlinx/serialization/KSerializer;
+}
+
+public final class io/ygdrasil/wgsl/ir/ExpressionKind$ValuePointer$Companion {
+	public final fun serializer ()Lkotlinx/serialization/KSerializer;
 }
 
 public final class io/ygdrasil/wgsl/ir/Function {
@@ -1858,17 +2627,15 @@ public final class io/ygdrasil/wgsl/ir/Function$Companion {
 
 public final class io/ygdrasil/wgsl/ir/FunctionParameter {
 	public static final field Companion Lio/ygdrasil/wgsl/ir/FunctionParameter$Companion;
-	public synthetic fun <init> (Ljava/lang/String;ILio/ygdrasil/wgsl/ir/Binding;Lio/ygdrasil/wgsl/ir/BuiltinValue;ILkotlin/jvm/internal/DefaultConstructorMarker;)V
-	public synthetic fun <init> (Ljava/lang/String;ILio/ygdrasil/wgsl/ir/Binding;Lio/ygdrasil/wgsl/ir/BuiltinValue;Lkotlin/jvm/internal/DefaultConstructorMarker;)V
+	public synthetic fun <init> (Ljava/lang/String;ILio/ygdrasil/wgsl/ir/BindingAttribute;ILkotlin/jvm/internal/DefaultConstructorMarker;)V
+	public synthetic fun <init> (Ljava/lang/String;ILio/ygdrasil/wgsl/ir/BindingAttribute;Lkotlin/jvm/internal/DefaultConstructorMarker;)V
 	public final fun component1 ()Ljava/lang/String;
 	public final fun component2-Weu6vOY ()I
-	public final fun component3 ()Lio/ygdrasil/wgsl/ir/Binding;
-	public final fun component4 ()Lio/ygdrasil/wgsl/ir/BuiltinValue;
-	public final fun copy-gYW9grQ (Ljava/lang/String;ILio/ygdrasil/wgsl/ir/Binding;Lio/ygdrasil/wgsl/ir/BuiltinValue;)Lio/ygdrasil/wgsl/ir/FunctionParameter;
-	public static synthetic fun copy-gYW9grQ$default (Lio/ygdrasil/wgsl/ir/FunctionParameter;Ljava/lang/String;ILio/ygdrasil/wgsl/ir/Binding;Lio/ygdrasil/wgsl/ir/BuiltinValue;ILjava/lang/Object;)Lio/ygdrasil/wgsl/ir/FunctionParameter;
+	public final fun component3 ()Lio/ygdrasil/wgsl/ir/BindingAttribute;
+	public final fun copy-ZxfDn3c (Ljava/lang/String;ILio/ygdrasil/wgsl/ir/BindingAttribute;)Lio/ygdrasil/wgsl/ir/FunctionParameter;
+	public static synthetic fun copy-ZxfDn3c$default (Lio/ygdrasil/wgsl/ir/FunctionParameter;Ljava/lang/String;ILio/ygdrasil/wgsl/ir/BindingAttribute;ILjava/lang/Object;)Lio/ygdrasil/wgsl/ir/FunctionParameter;
 	public fun equals (Ljava/lang/Object;)Z
-	public final fun getBinding ()Lio/ygdrasil/wgsl/ir/Binding;
-	public final fun getBuiltin ()Lio/ygdrasil/wgsl/ir/BuiltinValue;
+	public final fun getBinding ()Lio/ygdrasil/wgsl/ir/BindingAttribute;
 	public final fun getName ()Ljava/lang/String;
 	public final fun getType-Weu6vOY ()I
 	public fun hashCode ()I
@@ -1892,16 +2659,18 @@ public final class io/ygdrasil/wgsl/ir/FunctionParameter$Companion {
 
 public final class io/ygdrasil/wgsl/ir/GlobalVariable {
 	public static final field Companion Lio/ygdrasil/wgsl/ir/GlobalVariable$Companion;
-	public synthetic fun <init> (Ljava/lang/String;Lio/ygdrasil/wgsl/ir/StorageClass;ILio/ygdrasil/wgsl/arena/Handle;Lio/ygdrasil/wgsl/ir/Binding;ILkotlin/jvm/internal/DefaultConstructorMarker;)V
-	public synthetic fun <init> (Ljava/lang/String;Lio/ygdrasil/wgsl/ir/StorageClass;ILio/ygdrasil/wgsl/arena/Handle;Lio/ygdrasil/wgsl/ir/Binding;Lkotlin/jvm/internal/DefaultConstructorMarker;)V
+	public synthetic fun <init> (Ljava/lang/String;Lio/ygdrasil/wgsl/ir/StorageClass;Lio/ygdrasil/wgsl/ir/AccessMode;ILio/ygdrasil/wgsl/arena/Handle;Lio/ygdrasil/wgsl/ir/Binding;ILkotlin/jvm/internal/DefaultConstructorMarker;)V
+	public synthetic fun <init> (Ljava/lang/String;Lio/ygdrasil/wgsl/ir/StorageClass;Lio/ygdrasil/wgsl/ir/AccessMode;ILio/ygdrasil/wgsl/arena/Handle;Lio/ygdrasil/wgsl/ir/Binding;Lkotlin/jvm/internal/DefaultConstructorMarker;)V
 	public final fun component1 ()Ljava/lang/String;
 	public final fun component2 ()Lio/ygdrasil/wgsl/ir/StorageClass;
-	public final fun component3-Weu6vOY ()I
-	public final fun component4-wiBSyKM ()Lio/ygdrasil/wgsl/arena/Handle;
-	public final fun component5 ()Lio/ygdrasil/wgsl/ir/Binding;
-	public final fun copy-rb25XYM (Ljava/lang/String;Lio/ygdrasil/wgsl/ir/StorageClass;ILio/ygdrasil/wgsl/arena/Handle;Lio/ygdrasil/wgsl/ir/Binding;)Lio/ygdrasil/wgsl/ir/GlobalVariable;
-	public static synthetic fun copy-rb25XYM$default (Lio/ygdrasil/wgsl/ir/GlobalVariable;Ljava/lang/String;Lio/ygdrasil/wgsl/ir/StorageClass;ILio/ygdrasil/wgsl/arena/Handle;Lio/ygdrasil/wgsl/ir/Binding;ILjava/lang/Object;)Lio/ygdrasil/wgsl/ir/GlobalVariable;
+	public final fun component3 ()Lio/ygdrasil/wgsl/ir/AccessMode;
+	public final fun component4-Weu6vOY ()I
+	public final fun component5-wiBSyKM ()Lio/ygdrasil/wgsl/arena/Handle;
+	public final fun component6 ()Lio/ygdrasil/wgsl/ir/Binding;
+	public final fun copy-M0zM6ps (Ljava/lang/String;Lio/ygdrasil/wgsl/ir/StorageClass;Lio/ygdrasil/wgsl/ir/AccessMode;ILio/ygdrasil/wgsl/arena/Handle;Lio/ygdrasil/wgsl/ir/Binding;)Lio/ygdrasil/wgsl/ir/GlobalVariable;
+	public static synthetic fun copy-M0zM6ps$default (Lio/ygdrasil/wgsl/ir/GlobalVariable;Ljava/lang/String;Lio/ygdrasil/wgsl/ir/StorageClass;Lio/ygdrasil/wgsl/ir/AccessMode;ILio/ygdrasil/wgsl/arena/Handle;Lio/ygdrasil/wgsl/ir/Binding;ILjava/lang/Object;)Lio/ygdrasil/wgsl/ir/GlobalVariable;
 	public fun equals (Ljava/lang/Object;)Z
+	public final fun getAccessMode ()Lio/ygdrasil/wgsl/ir/AccessMode;
 	public final fun getBinding ()Lio/ygdrasil/wgsl/ir/Binding;
 	public final fun getInit-wiBSyKM ()Lio/ygdrasil/wgsl/arena/Handle;
 	public final fun getName ()Ljava/lang/String;
@@ -1951,6 +2720,7 @@ public final class io/ygdrasil/wgsl/ir/LiteralValue$Companion {
 }
 
 public final class io/ygdrasil/wgsl/ir/LiteralValue$Matrix : io/ygdrasil/wgsl/ir/LiteralValue {
+	public static final field Companion Lio/ygdrasil/wgsl/ir/LiteralValue$Matrix$Companion;
 	public fun <init> (Ljava/util/List;)V
 	public final fun component1 ()Ljava/util/List;
 	public final fun copy (Ljava/util/List;)Lio/ygdrasil/wgsl/ir/LiteralValue$Matrix;
@@ -1961,7 +2731,23 @@ public final class io/ygdrasil/wgsl/ir/LiteralValue$Matrix : io/ygdrasil/wgsl/ir
 	public fun toString ()Ljava/lang/String;
 }
 
+public final synthetic class io/ygdrasil/wgsl/ir/LiteralValue$Matrix$$serializer : kotlinx/serialization/internal/GeneratedSerializer {
+	public static final field INSTANCE Lio/ygdrasil/wgsl/ir/LiteralValue$Matrix$$serializer;
+	public final fun childSerializers ()[Lkotlinx/serialization/KSerializer;
+	public final fun deserialize (Lkotlinx/serialization/encoding/Decoder;)Lio/ygdrasil/wgsl/ir/LiteralValue$Matrix;
+	public synthetic fun deserialize (Lkotlinx/serialization/encoding/Decoder;)Ljava/lang/Object;
+	public final fun getDescriptor ()Lkotlinx/serialization/descriptors/SerialDescriptor;
+	public final fun serialize (Lkotlinx/serialization/encoding/Encoder;Lio/ygdrasil/wgsl/ir/LiteralValue$Matrix;)V
+	public synthetic fun serialize (Lkotlinx/serialization/encoding/Encoder;Ljava/lang/Object;)V
+	public fun typeParametersSerializers ()[Lkotlinx/serialization/KSerializer;
+}
+
+public final class io/ygdrasil/wgsl/ir/LiteralValue$Matrix$Companion {
+	public final fun serializer ()Lkotlinx/serialization/KSerializer;
+}
+
 public final class io/ygdrasil/wgsl/ir/LiteralValue$Scalar : io/ygdrasil/wgsl/ir/LiteralValue {
+	public static final field Companion Lio/ygdrasil/wgsl/ir/LiteralValue$Scalar$Companion;
 	public fun <init> (Lio/ygdrasil/wgsl/ir/ScalarValue;)V
 	public final fun component1 ()Lio/ygdrasil/wgsl/ir/ScalarValue;
 	public final fun copy (Lio/ygdrasil/wgsl/ir/ScalarValue;)Lio/ygdrasil/wgsl/ir/LiteralValue$Scalar;
@@ -1972,7 +2758,23 @@ public final class io/ygdrasil/wgsl/ir/LiteralValue$Scalar : io/ygdrasil/wgsl/ir
 	public fun toString ()Ljava/lang/String;
 }
 
+public final synthetic class io/ygdrasil/wgsl/ir/LiteralValue$Scalar$$serializer : kotlinx/serialization/internal/GeneratedSerializer {
+	public static final field INSTANCE Lio/ygdrasil/wgsl/ir/LiteralValue$Scalar$$serializer;
+	public final fun childSerializers ()[Lkotlinx/serialization/KSerializer;
+	public final fun deserialize (Lkotlinx/serialization/encoding/Decoder;)Lio/ygdrasil/wgsl/ir/LiteralValue$Scalar;
+	public synthetic fun deserialize (Lkotlinx/serialization/encoding/Decoder;)Ljava/lang/Object;
+	public final fun getDescriptor ()Lkotlinx/serialization/descriptors/SerialDescriptor;
+	public final fun serialize (Lkotlinx/serialization/encoding/Encoder;Lio/ygdrasil/wgsl/ir/LiteralValue$Scalar;)V
+	public synthetic fun serialize (Lkotlinx/serialization/encoding/Encoder;Ljava/lang/Object;)V
+	public fun typeParametersSerializers ()[Lkotlinx/serialization/KSerializer;
+}
+
+public final class io/ygdrasil/wgsl/ir/LiteralValue$Scalar$Companion {
+	public final fun serializer ()Lkotlinx/serialization/KSerializer;
+}
+
 public final class io/ygdrasil/wgsl/ir/LiteralValue$Vector : io/ygdrasil/wgsl/ir/LiteralValue {
+	public static final field Companion Lio/ygdrasil/wgsl/ir/LiteralValue$Vector$Companion;
 	public fun <init> (Ljava/util/List;)V
 	public final fun component1 ()Ljava/util/List;
 	public final fun copy (Ljava/util/List;)Lio/ygdrasil/wgsl/ir/LiteralValue$Vector;
@@ -1981,6 +2783,21 @@ public final class io/ygdrasil/wgsl/ir/LiteralValue$Vector : io/ygdrasil/wgsl/ir
 	public final fun getComponents ()Ljava/util/List;
 	public fun hashCode ()I
 	public fun toString ()Ljava/lang/String;
+}
+
+public final synthetic class io/ygdrasil/wgsl/ir/LiteralValue$Vector$$serializer : kotlinx/serialization/internal/GeneratedSerializer {
+	public static final field INSTANCE Lio/ygdrasil/wgsl/ir/LiteralValue$Vector$$serializer;
+	public final fun childSerializers ()[Lkotlinx/serialization/KSerializer;
+	public final fun deserialize (Lkotlinx/serialization/encoding/Decoder;)Lio/ygdrasil/wgsl/ir/LiteralValue$Vector;
+	public synthetic fun deserialize (Lkotlinx/serialization/encoding/Decoder;)Ljava/lang/Object;
+	public final fun getDescriptor ()Lkotlinx/serialization/descriptors/SerialDescriptor;
+	public final fun serialize (Lkotlinx/serialization/encoding/Encoder;Lio/ygdrasil/wgsl/ir/LiteralValue$Vector;)V
+	public synthetic fun serialize (Lkotlinx/serialization/encoding/Encoder;Ljava/lang/Object;)V
+	public fun typeParametersSerializers ()[Lkotlinx/serialization/KSerializer;
+}
+
+public final class io/ygdrasil/wgsl/ir/LiteralValue$Vector$Companion {
+	public final fun serializer ()Lkotlinx/serialization/KSerializer;
 }
 
 public final class io/ygdrasil/wgsl/ir/LocalVariable {
@@ -2125,6 +2942,7 @@ public abstract class io/ygdrasil/wgsl/ir/SampleLevel : io/ygdrasil/wgsl/arena/E
 }
 
 public final class io/ygdrasil/wgsl/ir/SampleLevel$AUTOMATIC : io/ygdrasil/wgsl/ir/SampleLevel {
+	public static final field Companion Lio/ygdrasil/wgsl/ir/SampleLevel$AUTOMATIC$Companion;
 	public synthetic fun <init> (ILkotlin/jvm/internal/DefaultConstructorMarker;)V
 	public final fun component1-Weu6vOY ()I
 	public final fun copy-GlugwBY (I)Lio/ygdrasil/wgsl/ir/SampleLevel$AUTOMATIC;
@@ -2135,11 +2953,27 @@ public final class io/ygdrasil/wgsl/ir/SampleLevel$AUTOMATIC : io/ygdrasil/wgsl/
 	public fun toString ()Ljava/lang/String;
 }
 
+public final synthetic class io/ygdrasil/wgsl/ir/SampleLevel$AUTOMATIC$$serializer : kotlinx/serialization/internal/GeneratedSerializer {
+	public static final field INSTANCE Lio/ygdrasil/wgsl/ir/SampleLevel$AUTOMATIC$$serializer;
+	public final fun childSerializers ()[Lkotlinx/serialization/KSerializer;
+	public final fun deserialize (Lkotlinx/serialization/encoding/Decoder;)Lio/ygdrasil/wgsl/ir/SampleLevel$AUTOMATIC;
+	public synthetic fun deserialize (Lkotlinx/serialization/encoding/Decoder;)Ljava/lang/Object;
+	public final fun getDescriptor ()Lkotlinx/serialization/descriptors/SerialDescriptor;
+	public final fun serialize (Lkotlinx/serialization/encoding/Encoder;Lio/ygdrasil/wgsl/ir/SampleLevel$AUTOMATIC;)V
+	public synthetic fun serialize (Lkotlinx/serialization/encoding/Encoder;Ljava/lang/Object;)V
+	public fun typeParametersSerializers ()[Lkotlinx/serialization/KSerializer;
+}
+
+public final class io/ygdrasil/wgsl/ir/SampleLevel$AUTOMATIC$Companion {
+	public final fun serializer ()Lkotlinx/serialization/KSerializer;
+}
+
 public final class io/ygdrasil/wgsl/ir/SampleLevel$Companion {
 	public final fun serializer ()Lkotlinx/serialization/KSerializer;
 }
 
 public final class io/ygdrasil/wgsl/ir/SampleLevel$MIPMAP : io/ygdrasil/wgsl/ir/SampleLevel {
+	public static final field Companion Lio/ygdrasil/wgsl/ir/SampleLevel$MIPMAP$Companion;
 	public synthetic fun <init> (ILkotlin/jvm/internal/DefaultConstructorMarker;)V
 	public final fun component1-Weu6vOY ()I
 	public final fun copy-GlugwBY (I)Lio/ygdrasil/wgsl/ir/SampleLevel$MIPMAP;
@@ -2150,8 +2984,39 @@ public final class io/ygdrasil/wgsl/ir/SampleLevel$MIPMAP : io/ygdrasil/wgsl/ir/
 	public fun toString ()Ljava/lang/String;
 }
 
+public final synthetic class io/ygdrasil/wgsl/ir/SampleLevel$MIPMAP$$serializer : kotlinx/serialization/internal/GeneratedSerializer {
+	public static final field INSTANCE Lio/ygdrasil/wgsl/ir/SampleLevel$MIPMAP$$serializer;
+	public final fun childSerializers ()[Lkotlinx/serialization/KSerializer;
+	public final fun deserialize (Lkotlinx/serialization/encoding/Decoder;)Lio/ygdrasil/wgsl/ir/SampleLevel$MIPMAP;
+	public synthetic fun deserialize (Lkotlinx/serialization/encoding/Decoder;)Ljava/lang/Object;
+	public final fun getDescriptor ()Lkotlinx/serialization/descriptors/SerialDescriptor;
+	public final fun serialize (Lkotlinx/serialization/encoding/Encoder;Lio/ygdrasil/wgsl/ir/SampleLevel$MIPMAP;)V
+	public synthetic fun serialize (Lkotlinx/serialization/encoding/Encoder;Ljava/lang/Object;)V
+	public fun typeParametersSerializers ()[Lkotlinx/serialization/KSerializer;
+}
+
+public final class io/ygdrasil/wgsl/ir/SampleLevel$MIPMAP$Companion {
+	public final fun serializer ()Lkotlinx/serialization/KSerializer;
+}
+
 public final class io/ygdrasil/wgsl/ir/SampleLevel$Zero : io/ygdrasil/wgsl/ir/SampleLevel {
+	public static final field Companion Lio/ygdrasil/wgsl/ir/SampleLevel$Zero$Companion;
 	public fun <init> ()V
+}
+
+public final synthetic class io/ygdrasil/wgsl/ir/SampleLevel$Zero$$serializer : kotlinx/serialization/internal/GeneratedSerializer {
+	public static final field INSTANCE Lio/ygdrasil/wgsl/ir/SampleLevel$Zero$$serializer;
+	public final fun childSerializers ()[Lkotlinx/serialization/KSerializer;
+	public final fun deserialize (Lkotlinx/serialization/encoding/Decoder;)Lio/ygdrasil/wgsl/ir/SampleLevel$Zero;
+	public synthetic fun deserialize (Lkotlinx/serialization/encoding/Decoder;)Ljava/lang/Object;
+	public final fun getDescriptor ()Lkotlinx/serialization/descriptors/SerialDescriptor;
+	public final fun serialize (Lkotlinx/serialization/encoding/Encoder;Lio/ygdrasil/wgsl/ir/SampleLevel$Zero;)V
+	public synthetic fun serialize (Lkotlinx/serialization/encoding/Encoder;Ljava/lang/Object;)V
+	public fun typeParametersSerializers ()[Lkotlinx/serialization/KSerializer;
+}
+
+public final class io/ygdrasil/wgsl/ir/SampleLevel$Zero$Companion {
+	public final fun serializer ()Lkotlinx/serialization/KSerializer;
 }
 
 public final class io/ygdrasil/wgsl/ir/Sampling : java/lang/Enum {
@@ -2208,6 +3073,7 @@ public abstract class io/ygdrasil/wgsl/ir/ScalarValue {
 }
 
 public final class io/ygdrasil/wgsl/ir/ScalarValue$AbstractFloat : io/ygdrasil/wgsl/ir/ScalarValue {
+	public static final field Companion Lio/ygdrasil/wgsl/ir/ScalarValue$AbstractFloat$Companion;
 	public fun <init> (D)V
 	public final fun component1 ()D
 	public final fun copy (D)Lio/ygdrasil/wgsl/ir/ScalarValue$AbstractFloat;
@@ -2218,7 +3084,23 @@ public final class io/ygdrasil/wgsl/ir/ScalarValue$AbstractFloat : io/ygdrasil/w
 	public fun toString ()Ljava/lang/String;
 }
 
+public final synthetic class io/ygdrasil/wgsl/ir/ScalarValue$AbstractFloat$$serializer : kotlinx/serialization/internal/GeneratedSerializer {
+	public static final field INSTANCE Lio/ygdrasil/wgsl/ir/ScalarValue$AbstractFloat$$serializer;
+	public final fun childSerializers ()[Lkotlinx/serialization/KSerializer;
+	public final fun deserialize (Lkotlinx/serialization/encoding/Decoder;)Lio/ygdrasil/wgsl/ir/ScalarValue$AbstractFloat;
+	public synthetic fun deserialize (Lkotlinx/serialization/encoding/Decoder;)Ljava/lang/Object;
+	public final fun getDescriptor ()Lkotlinx/serialization/descriptors/SerialDescriptor;
+	public final fun serialize (Lkotlinx/serialization/encoding/Encoder;Lio/ygdrasil/wgsl/ir/ScalarValue$AbstractFloat;)V
+	public synthetic fun serialize (Lkotlinx/serialization/encoding/Encoder;Ljava/lang/Object;)V
+	public fun typeParametersSerializers ()[Lkotlinx/serialization/KSerializer;
+}
+
+public final class io/ygdrasil/wgsl/ir/ScalarValue$AbstractFloat$Companion {
+	public final fun serializer ()Lkotlinx/serialization/KSerializer;
+}
+
 public final class io/ygdrasil/wgsl/ir/ScalarValue$AbstractInt : io/ygdrasil/wgsl/ir/ScalarValue {
+	public static final field Companion Lio/ygdrasil/wgsl/ir/ScalarValue$AbstractInt$Companion;
 	public fun <init> (J)V
 	public final fun component1 ()J
 	public final fun copy (J)Lio/ygdrasil/wgsl/ir/ScalarValue$AbstractInt;
@@ -2229,7 +3111,23 @@ public final class io/ygdrasil/wgsl/ir/ScalarValue$AbstractInt : io/ygdrasil/wgs
 	public fun toString ()Ljava/lang/String;
 }
 
+public final synthetic class io/ygdrasil/wgsl/ir/ScalarValue$AbstractInt$$serializer : kotlinx/serialization/internal/GeneratedSerializer {
+	public static final field INSTANCE Lio/ygdrasil/wgsl/ir/ScalarValue$AbstractInt$$serializer;
+	public final fun childSerializers ()[Lkotlinx/serialization/KSerializer;
+	public final fun deserialize (Lkotlinx/serialization/encoding/Decoder;)Lio/ygdrasil/wgsl/ir/ScalarValue$AbstractInt;
+	public synthetic fun deserialize (Lkotlinx/serialization/encoding/Decoder;)Ljava/lang/Object;
+	public final fun getDescriptor ()Lkotlinx/serialization/descriptors/SerialDescriptor;
+	public final fun serialize (Lkotlinx/serialization/encoding/Encoder;Lio/ygdrasil/wgsl/ir/ScalarValue$AbstractInt;)V
+	public synthetic fun serialize (Lkotlinx/serialization/encoding/Encoder;Ljava/lang/Object;)V
+	public fun typeParametersSerializers ()[Lkotlinx/serialization/KSerializer;
+}
+
+public final class io/ygdrasil/wgsl/ir/ScalarValue$AbstractInt$Companion {
+	public final fun serializer ()Lkotlinx/serialization/KSerializer;
+}
+
 public final class io/ygdrasil/wgsl/ir/ScalarValue$Bool : io/ygdrasil/wgsl/ir/ScalarValue {
+	public static final field Companion Lio/ygdrasil/wgsl/ir/ScalarValue$Bool$Companion;
 	public fun <init> (Z)V
 	public final fun component1 ()Z
 	public final fun copy (Z)Lio/ygdrasil/wgsl/ir/ScalarValue$Bool;
@@ -2240,11 +3138,27 @@ public final class io/ygdrasil/wgsl/ir/ScalarValue$Bool : io/ygdrasil/wgsl/ir/Sc
 	public fun toString ()Ljava/lang/String;
 }
 
+public final synthetic class io/ygdrasil/wgsl/ir/ScalarValue$Bool$$serializer : kotlinx/serialization/internal/GeneratedSerializer {
+	public static final field INSTANCE Lio/ygdrasil/wgsl/ir/ScalarValue$Bool$$serializer;
+	public final fun childSerializers ()[Lkotlinx/serialization/KSerializer;
+	public final fun deserialize (Lkotlinx/serialization/encoding/Decoder;)Lio/ygdrasil/wgsl/ir/ScalarValue$Bool;
+	public synthetic fun deserialize (Lkotlinx/serialization/encoding/Decoder;)Ljava/lang/Object;
+	public final fun getDescriptor ()Lkotlinx/serialization/descriptors/SerialDescriptor;
+	public final fun serialize (Lkotlinx/serialization/encoding/Encoder;Lio/ygdrasil/wgsl/ir/ScalarValue$Bool;)V
+	public synthetic fun serialize (Lkotlinx/serialization/encoding/Encoder;Ljava/lang/Object;)V
+	public fun typeParametersSerializers ()[Lkotlinx/serialization/KSerializer;
+}
+
+public final class io/ygdrasil/wgsl/ir/ScalarValue$Bool$Companion {
+	public final fun serializer ()Lkotlinx/serialization/KSerializer;
+}
+
 public final class io/ygdrasil/wgsl/ir/ScalarValue$Companion {
 	public final fun serializer ()Lkotlinx/serialization/KSerializer;
 }
 
 public final class io/ygdrasil/wgsl/ir/ScalarValue$F16 : io/ygdrasil/wgsl/ir/ScalarValue {
+	public static final field Companion Lio/ygdrasil/wgsl/ir/ScalarValue$F16$Companion;
 	public fun <init> (F)V
 	public final fun component1 ()F
 	public final fun copy (F)Lio/ygdrasil/wgsl/ir/ScalarValue$F16;
@@ -2255,7 +3169,23 @@ public final class io/ygdrasil/wgsl/ir/ScalarValue$F16 : io/ygdrasil/wgsl/ir/Sca
 	public fun toString ()Ljava/lang/String;
 }
 
+public final synthetic class io/ygdrasil/wgsl/ir/ScalarValue$F16$$serializer : kotlinx/serialization/internal/GeneratedSerializer {
+	public static final field INSTANCE Lio/ygdrasil/wgsl/ir/ScalarValue$F16$$serializer;
+	public final fun childSerializers ()[Lkotlinx/serialization/KSerializer;
+	public final fun deserialize (Lkotlinx/serialization/encoding/Decoder;)Lio/ygdrasil/wgsl/ir/ScalarValue$F16;
+	public synthetic fun deserialize (Lkotlinx/serialization/encoding/Decoder;)Ljava/lang/Object;
+	public final fun getDescriptor ()Lkotlinx/serialization/descriptors/SerialDescriptor;
+	public final fun serialize (Lkotlinx/serialization/encoding/Encoder;Lio/ygdrasil/wgsl/ir/ScalarValue$F16;)V
+	public synthetic fun serialize (Lkotlinx/serialization/encoding/Encoder;Ljava/lang/Object;)V
+	public fun typeParametersSerializers ()[Lkotlinx/serialization/KSerializer;
+}
+
+public final class io/ygdrasil/wgsl/ir/ScalarValue$F16$Companion {
+	public final fun serializer ()Lkotlinx/serialization/KSerializer;
+}
+
 public final class io/ygdrasil/wgsl/ir/ScalarValue$F32 : io/ygdrasil/wgsl/ir/ScalarValue {
+	public static final field Companion Lio/ygdrasil/wgsl/ir/ScalarValue$F32$Companion;
 	public fun <init> (F)V
 	public final fun component1 ()F
 	public final fun copy (F)Lio/ygdrasil/wgsl/ir/ScalarValue$F32;
@@ -2266,7 +3196,23 @@ public final class io/ygdrasil/wgsl/ir/ScalarValue$F32 : io/ygdrasil/wgsl/ir/Sca
 	public fun toString ()Ljava/lang/String;
 }
 
+public final synthetic class io/ygdrasil/wgsl/ir/ScalarValue$F32$$serializer : kotlinx/serialization/internal/GeneratedSerializer {
+	public static final field INSTANCE Lio/ygdrasil/wgsl/ir/ScalarValue$F32$$serializer;
+	public final fun childSerializers ()[Lkotlinx/serialization/KSerializer;
+	public final fun deserialize (Lkotlinx/serialization/encoding/Decoder;)Lio/ygdrasil/wgsl/ir/ScalarValue$F32;
+	public synthetic fun deserialize (Lkotlinx/serialization/encoding/Decoder;)Ljava/lang/Object;
+	public final fun getDescriptor ()Lkotlinx/serialization/descriptors/SerialDescriptor;
+	public final fun serialize (Lkotlinx/serialization/encoding/Encoder;Lio/ygdrasil/wgsl/ir/ScalarValue$F32;)V
+	public synthetic fun serialize (Lkotlinx/serialization/encoding/Encoder;Ljava/lang/Object;)V
+	public fun typeParametersSerializers ()[Lkotlinx/serialization/KSerializer;
+}
+
+public final class io/ygdrasil/wgsl/ir/ScalarValue$F32$Companion {
+	public final fun serializer ()Lkotlinx/serialization/KSerializer;
+}
+
 public final class io/ygdrasil/wgsl/ir/ScalarValue$F64 : io/ygdrasil/wgsl/ir/ScalarValue {
+	public static final field Companion Lio/ygdrasil/wgsl/ir/ScalarValue$F64$Companion;
 	public fun <init> (D)V
 	public final fun component1 ()D
 	public final fun copy (D)Lio/ygdrasil/wgsl/ir/ScalarValue$F64;
@@ -2277,7 +3223,23 @@ public final class io/ygdrasil/wgsl/ir/ScalarValue$F64 : io/ygdrasil/wgsl/ir/Sca
 	public fun toString ()Ljava/lang/String;
 }
 
+public final synthetic class io/ygdrasil/wgsl/ir/ScalarValue$F64$$serializer : kotlinx/serialization/internal/GeneratedSerializer {
+	public static final field INSTANCE Lio/ygdrasil/wgsl/ir/ScalarValue$F64$$serializer;
+	public final fun childSerializers ()[Lkotlinx/serialization/KSerializer;
+	public final fun deserialize (Lkotlinx/serialization/encoding/Decoder;)Lio/ygdrasil/wgsl/ir/ScalarValue$F64;
+	public synthetic fun deserialize (Lkotlinx/serialization/encoding/Decoder;)Ljava/lang/Object;
+	public final fun getDescriptor ()Lkotlinx/serialization/descriptors/SerialDescriptor;
+	public final fun serialize (Lkotlinx/serialization/encoding/Encoder;Lio/ygdrasil/wgsl/ir/ScalarValue$F64;)V
+	public synthetic fun serialize (Lkotlinx/serialization/encoding/Encoder;Ljava/lang/Object;)V
+	public fun typeParametersSerializers ()[Lkotlinx/serialization/KSerializer;
+}
+
+public final class io/ygdrasil/wgsl/ir/ScalarValue$F64$Companion {
+	public final fun serializer ()Lkotlinx/serialization/KSerializer;
+}
+
 public final class io/ygdrasil/wgsl/ir/ScalarValue$I16 : io/ygdrasil/wgsl/ir/ScalarValue {
+	public static final field Companion Lio/ygdrasil/wgsl/ir/ScalarValue$I16$Companion;
 	public fun <init> (S)V
 	public final fun component1 ()S
 	public final fun copy (S)Lio/ygdrasil/wgsl/ir/ScalarValue$I16;
@@ -2288,7 +3250,23 @@ public final class io/ygdrasil/wgsl/ir/ScalarValue$I16 : io/ygdrasil/wgsl/ir/Sca
 	public fun toString ()Ljava/lang/String;
 }
 
+public final synthetic class io/ygdrasil/wgsl/ir/ScalarValue$I16$$serializer : kotlinx/serialization/internal/GeneratedSerializer {
+	public static final field INSTANCE Lio/ygdrasil/wgsl/ir/ScalarValue$I16$$serializer;
+	public final fun childSerializers ()[Lkotlinx/serialization/KSerializer;
+	public final fun deserialize (Lkotlinx/serialization/encoding/Decoder;)Lio/ygdrasil/wgsl/ir/ScalarValue$I16;
+	public synthetic fun deserialize (Lkotlinx/serialization/encoding/Decoder;)Ljava/lang/Object;
+	public final fun getDescriptor ()Lkotlinx/serialization/descriptors/SerialDescriptor;
+	public final fun serialize (Lkotlinx/serialization/encoding/Encoder;Lio/ygdrasil/wgsl/ir/ScalarValue$I16;)V
+	public synthetic fun serialize (Lkotlinx/serialization/encoding/Encoder;Ljava/lang/Object;)V
+	public fun typeParametersSerializers ()[Lkotlinx/serialization/KSerializer;
+}
+
+public final class io/ygdrasil/wgsl/ir/ScalarValue$I16$Companion {
+	public final fun serializer ()Lkotlinx/serialization/KSerializer;
+}
+
 public final class io/ygdrasil/wgsl/ir/ScalarValue$I32 : io/ygdrasil/wgsl/ir/ScalarValue {
+	public static final field Companion Lio/ygdrasil/wgsl/ir/ScalarValue$I32$Companion;
 	public fun <init> (I)V
 	public final fun component1 ()I
 	public final fun copy (I)Lio/ygdrasil/wgsl/ir/ScalarValue$I32;
@@ -2299,7 +3277,23 @@ public final class io/ygdrasil/wgsl/ir/ScalarValue$I32 : io/ygdrasil/wgsl/ir/Sca
 	public fun toString ()Ljava/lang/String;
 }
 
+public final synthetic class io/ygdrasil/wgsl/ir/ScalarValue$I32$$serializer : kotlinx/serialization/internal/GeneratedSerializer {
+	public static final field INSTANCE Lio/ygdrasil/wgsl/ir/ScalarValue$I32$$serializer;
+	public final fun childSerializers ()[Lkotlinx/serialization/KSerializer;
+	public final fun deserialize (Lkotlinx/serialization/encoding/Decoder;)Lio/ygdrasil/wgsl/ir/ScalarValue$I32;
+	public synthetic fun deserialize (Lkotlinx/serialization/encoding/Decoder;)Ljava/lang/Object;
+	public final fun getDescriptor ()Lkotlinx/serialization/descriptors/SerialDescriptor;
+	public final fun serialize (Lkotlinx/serialization/encoding/Encoder;Lio/ygdrasil/wgsl/ir/ScalarValue$I32;)V
+	public synthetic fun serialize (Lkotlinx/serialization/encoding/Encoder;Ljava/lang/Object;)V
+	public fun typeParametersSerializers ()[Lkotlinx/serialization/KSerializer;
+}
+
+public final class io/ygdrasil/wgsl/ir/ScalarValue$I32$Companion {
+	public final fun serializer ()Lkotlinx/serialization/KSerializer;
+}
+
 public final class io/ygdrasil/wgsl/ir/ScalarValue$I64 : io/ygdrasil/wgsl/ir/ScalarValue {
+	public static final field Companion Lio/ygdrasil/wgsl/ir/ScalarValue$I64$Companion;
 	public fun <init> (J)V
 	public final fun component1 ()J
 	public final fun copy (J)Lio/ygdrasil/wgsl/ir/ScalarValue$I64;
@@ -2310,7 +3304,23 @@ public final class io/ygdrasil/wgsl/ir/ScalarValue$I64 : io/ygdrasil/wgsl/ir/Sca
 	public fun toString ()Ljava/lang/String;
 }
 
+public final synthetic class io/ygdrasil/wgsl/ir/ScalarValue$I64$$serializer : kotlinx/serialization/internal/GeneratedSerializer {
+	public static final field INSTANCE Lio/ygdrasil/wgsl/ir/ScalarValue$I64$$serializer;
+	public final fun childSerializers ()[Lkotlinx/serialization/KSerializer;
+	public final fun deserialize (Lkotlinx/serialization/encoding/Decoder;)Lio/ygdrasil/wgsl/ir/ScalarValue$I64;
+	public synthetic fun deserialize (Lkotlinx/serialization/encoding/Decoder;)Ljava/lang/Object;
+	public final fun getDescriptor ()Lkotlinx/serialization/descriptors/SerialDescriptor;
+	public final fun serialize (Lkotlinx/serialization/encoding/Encoder;Lio/ygdrasil/wgsl/ir/ScalarValue$I64;)V
+	public synthetic fun serialize (Lkotlinx/serialization/encoding/Encoder;Ljava/lang/Object;)V
+	public fun typeParametersSerializers ()[Lkotlinx/serialization/KSerializer;
+}
+
+public final class io/ygdrasil/wgsl/ir/ScalarValue$I64$Companion {
+	public final fun serializer ()Lkotlinx/serialization/KSerializer;
+}
+
 public final class io/ygdrasil/wgsl/ir/ScalarValue$I8 : io/ygdrasil/wgsl/ir/ScalarValue {
+	public static final field Companion Lio/ygdrasil/wgsl/ir/ScalarValue$I8$Companion;
 	public fun <init> (B)V
 	public final fun component1 ()B
 	public final fun copy (B)Lio/ygdrasil/wgsl/ir/ScalarValue$I8;
@@ -2321,7 +3331,23 @@ public final class io/ygdrasil/wgsl/ir/ScalarValue$I8 : io/ygdrasil/wgsl/ir/Scal
 	public fun toString ()Ljava/lang/String;
 }
 
+public final synthetic class io/ygdrasil/wgsl/ir/ScalarValue$I8$$serializer : kotlinx/serialization/internal/GeneratedSerializer {
+	public static final field INSTANCE Lio/ygdrasil/wgsl/ir/ScalarValue$I8$$serializer;
+	public final fun childSerializers ()[Lkotlinx/serialization/KSerializer;
+	public final fun deserialize (Lkotlinx/serialization/encoding/Decoder;)Lio/ygdrasil/wgsl/ir/ScalarValue$I8;
+	public synthetic fun deserialize (Lkotlinx/serialization/encoding/Decoder;)Ljava/lang/Object;
+	public final fun getDescriptor ()Lkotlinx/serialization/descriptors/SerialDescriptor;
+	public final fun serialize (Lkotlinx/serialization/encoding/Encoder;Lio/ygdrasil/wgsl/ir/ScalarValue$I8;)V
+	public synthetic fun serialize (Lkotlinx/serialization/encoding/Encoder;Ljava/lang/Object;)V
+	public fun typeParametersSerializers ()[Lkotlinx/serialization/KSerializer;
+}
+
+public final class io/ygdrasil/wgsl/ir/ScalarValue$I8$Companion {
+	public final fun serializer ()Lkotlinx/serialization/KSerializer;
+}
+
 public final class io/ygdrasil/wgsl/ir/ScalarValue$U16 : io/ygdrasil/wgsl/ir/ScalarValue {
+	public static final field Companion Lio/ygdrasil/wgsl/ir/ScalarValue$U16$Companion;
 	public fun <init> (I)V
 	public final fun component1 ()I
 	public final fun copy (I)Lio/ygdrasil/wgsl/ir/ScalarValue$U16;
@@ -2332,7 +3358,23 @@ public final class io/ygdrasil/wgsl/ir/ScalarValue$U16 : io/ygdrasil/wgsl/ir/Sca
 	public fun toString ()Ljava/lang/String;
 }
 
+public final synthetic class io/ygdrasil/wgsl/ir/ScalarValue$U16$$serializer : kotlinx/serialization/internal/GeneratedSerializer {
+	public static final field INSTANCE Lio/ygdrasil/wgsl/ir/ScalarValue$U16$$serializer;
+	public final fun childSerializers ()[Lkotlinx/serialization/KSerializer;
+	public final fun deserialize (Lkotlinx/serialization/encoding/Decoder;)Lio/ygdrasil/wgsl/ir/ScalarValue$U16;
+	public synthetic fun deserialize (Lkotlinx/serialization/encoding/Decoder;)Ljava/lang/Object;
+	public final fun getDescriptor ()Lkotlinx/serialization/descriptors/SerialDescriptor;
+	public final fun serialize (Lkotlinx/serialization/encoding/Encoder;Lio/ygdrasil/wgsl/ir/ScalarValue$U16;)V
+	public synthetic fun serialize (Lkotlinx/serialization/encoding/Encoder;Ljava/lang/Object;)V
+	public fun typeParametersSerializers ()[Lkotlinx/serialization/KSerializer;
+}
+
+public final class io/ygdrasil/wgsl/ir/ScalarValue$U16$Companion {
+	public final fun serializer ()Lkotlinx/serialization/KSerializer;
+}
+
 public final class io/ygdrasil/wgsl/ir/ScalarValue$U32 : io/ygdrasil/wgsl/ir/ScalarValue {
+	public static final field Companion Lio/ygdrasil/wgsl/ir/ScalarValue$U32$Companion;
 	public fun <init> (J)V
 	public final fun component1 ()J
 	public final fun copy (J)Lio/ygdrasil/wgsl/ir/ScalarValue$U32;
@@ -2343,7 +3385,23 @@ public final class io/ygdrasil/wgsl/ir/ScalarValue$U32 : io/ygdrasil/wgsl/ir/Sca
 	public fun toString ()Ljava/lang/String;
 }
 
+public final synthetic class io/ygdrasil/wgsl/ir/ScalarValue$U32$$serializer : kotlinx/serialization/internal/GeneratedSerializer {
+	public static final field INSTANCE Lio/ygdrasil/wgsl/ir/ScalarValue$U32$$serializer;
+	public final fun childSerializers ()[Lkotlinx/serialization/KSerializer;
+	public final fun deserialize (Lkotlinx/serialization/encoding/Decoder;)Lio/ygdrasil/wgsl/ir/ScalarValue$U32;
+	public synthetic fun deserialize (Lkotlinx/serialization/encoding/Decoder;)Ljava/lang/Object;
+	public final fun getDescriptor ()Lkotlinx/serialization/descriptors/SerialDescriptor;
+	public final fun serialize (Lkotlinx/serialization/encoding/Encoder;Lio/ygdrasil/wgsl/ir/ScalarValue$U32;)V
+	public synthetic fun serialize (Lkotlinx/serialization/encoding/Encoder;Ljava/lang/Object;)V
+	public fun typeParametersSerializers ()[Lkotlinx/serialization/KSerializer;
+}
+
+public final class io/ygdrasil/wgsl/ir/ScalarValue$U32$Companion {
+	public final fun serializer ()Lkotlinx/serialization/KSerializer;
+}
+
 public final class io/ygdrasil/wgsl/ir/ScalarValue$U64 : io/ygdrasil/wgsl/ir/ScalarValue {
+	public static final field Companion Lio/ygdrasil/wgsl/ir/ScalarValue$U64$Companion;
 	public synthetic fun <init> (JLkotlin/jvm/internal/DefaultConstructorMarker;)V
 	public final fun component1-s-VKNKU ()J
 	public final fun copy-VKZWuLQ (J)Lio/ygdrasil/wgsl/ir/ScalarValue$U64;
@@ -2354,7 +3412,23 @@ public final class io/ygdrasil/wgsl/ir/ScalarValue$U64 : io/ygdrasil/wgsl/ir/Sca
 	public fun toString ()Ljava/lang/String;
 }
 
+public final synthetic class io/ygdrasil/wgsl/ir/ScalarValue$U64$$serializer : kotlinx/serialization/internal/GeneratedSerializer {
+	public static final field INSTANCE Lio/ygdrasil/wgsl/ir/ScalarValue$U64$$serializer;
+	public final fun childSerializers ()[Lkotlinx/serialization/KSerializer;
+	public final fun deserialize (Lkotlinx/serialization/encoding/Decoder;)Lio/ygdrasil/wgsl/ir/ScalarValue$U64;
+	public synthetic fun deserialize (Lkotlinx/serialization/encoding/Decoder;)Ljava/lang/Object;
+	public final fun getDescriptor ()Lkotlinx/serialization/descriptors/SerialDescriptor;
+	public final fun serialize (Lkotlinx/serialization/encoding/Encoder;Lio/ygdrasil/wgsl/ir/ScalarValue$U64;)V
+	public synthetic fun serialize (Lkotlinx/serialization/encoding/Encoder;Ljava/lang/Object;)V
+	public fun typeParametersSerializers ()[Lkotlinx/serialization/KSerializer;
+}
+
+public final class io/ygdrasil/wgsl/ir/ScalarValue$U64$Companion {
+	public final fun serializer ()Lkotlinx/serialization/KSerializer;
+}
+
 public final class io/ygdrasil/wgsl/ir/ScalarValue$U8 : io/ygdrasil/wgsl/ir/ScalarValue {
+	public static final field Companion Lio/ygdrasil/wgsl/ir/ScalarValue$U8$Companion;
 	public fun <init> (S)V
 	public final fun component1 ()S
 	public final fun copy (S)Lio/ygdrasil/wgsl/ir/ScalarValue$U8;
@@ -2363,6 +3437,21 @@ public final class io/ygdrasil/wgsl/ir/ScalarValue$U8 : io/ygdrasil/wgsl/ir/Scal
 	public final fun getValue ()S
 	public fun hashCode ()I
 	public fun toString ()Ljava/lang/String;
+}
+
+public final synthetic class io/ygdrasil/wgsl/ir/ScalarValue$U8$$serializer : kotlinx/serialization/internal/GeneratedSerializer {
+	public static final field INSTANCE Lio/ygdrasil/wgsl/ir/ScalarValue$U8$$serializer;
+	public final fun childSerializers ()[Lkotlinx/serialization/KSerializer;
+	public final fun deserialize (Lkotlinx/serialization/encoding/Decoder;)Lio/ygdrasil/wgsl/ir/ScalarValue$U8;
+	public synthetic fun deserialize (Lkotlinx/serialization/encoding/Decoder;)Ljava/lang/Object;
+	public final fun getDescriptor ()Lkotlinx/serialization/descriptors/SerialDescriptor;
+	public final fun serialize (Lkotlinx/serialization/encoding/Encoder;Lio/ygdrasil/wgsl/ir/ScalarValue$U8;)V
+	public synthetic fun serialize (Lkotlinx/serialization/encoding/Encoder;Ljava/lang/Object;)V
+	public fun typeParametersSerializers ()[Lkotlinx/serialization/KSerializer;
+}
+
+public final class io/ygdrasil/wgsl/ir/ScalarValue$U8$Companion {
+	public final fun serializer ()Lkotlinx/serialization/KSerializer;
 }
 
 public final class io/ygdrasil/wgsl/ir/ShaderError : java/lang/Exception {
@@ -2492,6 +3581,7 @@ public abstract class io/ygdrasil/wgsl/ir/Statement {
 }
 
 public final class io/ygdrasil/wgsl/ir/Statement$Assign : io/ygdrasil/wgsl/ir/Statement {
+	public static final field Companion Lio/ygdrasil/wgsl/ir/Statement$Assign$Companion;
 	public synthetic fun <init> (IILkotlin/jvm/internal/DefaultConstructorMarker;)V
 	public final fun component1-Weu6vOY ()I
 	public final fun component2-Weu6vOY ()I
@@ -2504,7 +3594,23 @@ public final class io/ygdrasil/wgsl/ir/Statement$Assign : io/ygdrasil/wgsl/ir/St
 	public fun toString ()Ljava/lang/String;
 }
 
+public final synthetic class io/ygdrasil/wgsl/ir/Statement$Assign$$serializer : kotlinx/serialization/internal/GeneratedSerializer {
+	public static final field INSTANCE Lio/ygdrasil/wgsl/ir/Statement$Assign$$serializer;
+	public final fun childSerializers ()[Lkotlinx/serialization/KSerializer;
+	public final fun deserialize (Lkotlinx/serialization/encoding/Decoder;)Lio/ygdrasil/wgsl/ir/Statement$Assign;
+	public synthetic fun deserialize (Lkotlinx/serialization/encoding/Decoder;)Ljava/lang/Object;
+	public final fun getDescriptor ()Lkotlinx/serialization/descriptors/SerialDescriptor;
+	public final fun serialize (Lkotlinx/serialization/encoding/Encoder;Lio/ygdrasil/wgsl/ir/Statement$Assign;)V
+	public synthetic fun serialize (Lkotlinx/serialization/encoding/Encoder;Ljava/lang/Object;)V
+	public fun typeParametersSerializers ()[Lkotlinx/serialization/KSerializer;
+}
+
+public final class io/ygdrasil/wgsl/ir/Statement$Assign$Companion {
+	public final fun serializer ()Lkotlinx/serialization/KSerializer;
+}
+
 public final class io/ygdrasil/wgsl/ir/Statement$Block : io/ygdrasil/wgsl/ir/Statement {
+	public static final field Companion Lio/ygdrasil/wgsl/ir/Statement$Block$Companion;
 	public synthetic fun <init> (ILkotlin/jvm/internal/DefaultConstructorMarker;)V
 	public final fun component1-Weu6vOY ()I
 	public final fun copy-GlugwBY (I)Lio/ygdrasil/wgsl/ir/Statement$Block;
@@ -2515,8 +3621,24 @@ public final class io/ygdrasil/wgsl/ir/Statement$Block : io/ygdrasil/wgsl/ir/Sta
 	public fun toString ()Ljava/lang/String;
 }
 
+public final synthetic class io/ygdrasil/wgsl/ir/Statement$Block$$serializer : kotlinx/serialization/internal/GeneratedSerializer {
+	public static final field INSTANCE Lio/ygdrasil/wgsl/ir/Statement$Block$$serializer;
+	public final fun childSerializers ()[Lkotlinx/serialization/KSerializer;
+	public final fun deserialize (Lkotlinx/serialization/encoding/Decoder;)Lio/ygdrasil/wgsl/ir/Statement$Block;
+	public synthetic fun deserialize (Lkotlinx/serialization/encoding/Decoder;)Ljava/lang/Object;
+	public final fun getDescriptor ()Lkotlinx/serialization/descriptors/SerialDescriptor;
+	public final fun serialize (Lkotlinx/serialization/encoding/Encoder;Lio/ygdrasil/wgsl/ir/Statement$Block;)V
+	public synthetic fun serialize (Lkotlinx/serialization/encoding/Encoder;Ljava/lang/Object;)V
+	public fun typeParametersSerializers ()[Lkotlinx/serialization/KSerializer;
+}
+
+public final class io/ygdrasil/wgsl/ir/Statement$Block$Companion {
+	public final fun serializer ()Lkotlinx/serialization/KSerializer;
+}
+
 public final class io/ygdrasil/wgsl/ir/Statement$Break : io/ygdrasil/wgsl/ir/Statement {
 	public static final field INSTANCE Lio/ygdrasil/wgsl/ir/Statement$Break;
+	public final fun serializer ()Lkotlinx/serialization/KSerializer;
 }
 
 public final class io/ygdrasil/wgsl/ir/Statement$Companion {
@@ -2525,9 +3647,11 @@ public final class io/ygdrasil/wgsl/ir/Statement$Companion {
 
 public final class io/ygdrasil/wgsl/ir/Statement$Continue : io/ygdrasil/wgsl/ir/Statement {
 	public static final field INSTANCE Lio/ygdrasil/wgsl/ir/Statement$Continue;
+	public final fun serializer ()Lkotlinx/serialization/KSerializer;
 }
 
 public final class io/ygdrasil/wgsl/ir/Statement$Declare : io/ygdrasil/wgsl/ir/Statement {
+	public static final field Companion Lio/ygdrasil/wgsl/ir/Statement$Declare$Companion;
 	public synthetic fun <init> (ILkotlin/jvm/internal/DefaultConstructorMarker;)V
 	public final fun component1-Weu6vOY ()I
 	public final fun copy-GlugwBY (I)Lio/ygdrasil/wgsl/ir/Statement$Declare;
@@ -2538,11 +3662,28 @@ public final class io/ygdrasil/wgsl/ir/Statement$Declare : io/ygdrasil/wgsl/ir/S
 	public fun toString ()Ljava/lang/String;
 }
 
+public final synthetic class io/ygdrasil/wgsl/ir/Statement$Declare$$serializer : kotlinx/serialization/internal/GeneratedSerializer {
+	public static final field INSTANCE Lio/ygdrasil/wgsl/ir/Statement$Declare$$serializer;
+	public final fun childSerializers ()[Lkotlinx/serialization/KSerializer;
+	public final fun deserialize (Lkotlinx/serialization/encoding/Decoder;)Lio/ygdrasil/wgsl/ir/Statement$Declare;
+	public synthetic fun deserialize (Lkotlinx/serialization/encoding/Decoder;)Ljava/lang/Object;
+	public final fun getDescriptor ()Lkotlinx/serialization/descriptors/SerialDescriptor;
+	public final fun serialize (Lkotlinx/serialization/encoding/Encoder;Lio/ygdrasil/wgsl/ir/Statement$Declare;)V
+	public synthetic fun serialize (Lkotlinx/serialization/encoding/Encoder;Ljava/lang/Object;)V
+	public fun typeParametersSerializers ()[Lkotlinx/serialization/KSerializer;
+}
+
+public final class io/ygdrasil/wgsl/ir/Statement$Declare$Companion {
+	public final fun serializer ()Lkotlinx/serialization/KSerializer;
+}
+
 public final class io/ygdrasil/wgsl/ir/Statement$Discard : io/ygdrasil/wgsl/ir/Statement {
 	public static final field INSTANCE Lio/ygdrasil/wgsl/ir/Statement$Discard;
+	public final fun serializer ()Lkotlinx/serialization/KSerializer;
 }
 
 public final class io/ygdrasil/wgsl/ir/Statement$Emit : io/ygdrasil/wgsl/ir/Statement {
+	public static final field Companion Lio/ygdrasil/wgsl/ir/Statement$Emit$Companion;
 	public synthetic fun <init> (Lkotlin/ranges/IntRange;Lkotlin/jvm/internal/DefaultConstructorMarker;)V
 	public final fun component1-urof_VE ()Lkotlin/ranges/IntRange;
 	public final fun copy-RnneWQM (Lkotlin/ranges/IntRange;)Lio/ygdrasil/wgsl/ir/Statement$Emit;
@@ -2553,7 +3694,23 @@ public final class io/ygdrasil/wgsl/ir/Statement$Emit : io/ygdrasil/wgsl/ir/Stat
 	public fun toString ()Ljava/lang/String;
 }
 
+public final synthetic class io/ygdrasil/wgsl/ir/Statement$Emit$$serializer : kotlinx/serialization/internal/GeneratedSerializer {
+	public static final field INSTANCE Lio/ygdrasil/wgsl/ir/Statement$Emit$$serializer;
+	public final fun childSerializers ()[Lkotlinx/serialization/KSerializer;
+	public final fun deserialize (Lkotlinx/serialization/encoding/Decoder;)Lio/ygdrasil/wgsl/ir/Statement$Emit;
+	public synthetic fun deserialize (Lkotlinx/serialization/encoding/Decoder;)Ljava/lang/Object;
+	public final fun getDescriptor ()Lkotlinx/serialization/descriptors/SerialDescriptor;
+	public final fun serialize (Lkotlinx/serialization/encoding/Encoder;Lio/ygdrasil/wgsl/ir/Statement$Emit;)V
+	public synthetic fun serialize (Lkotlinx/serialization/encoding/Encoder;Ljava/lang/Object;)V
+	public fun typeParametersSerializers ()[Lkotlinx/serialization/KSerializer;
+}
+
+public final class io/ygdrasil/wgsl/ir/Statement$Emit$Companion {
+	public final fun serializer ()Lkotlinx/serialization/KSerializer;
+}
+
 public final class io/ygdrasil/wgsl/ir/Statement$If : io/ygdrasil/wgsl/ir/Statement {
+	public static final field Companion Lio/ygdrasil/wgsl/ir/Statement$If$Companion;
 	public synthetic fun <init> (IILio/ygdrasil/wgsl/arena/Handle;ILkotlin/jvm/internal/DefaultConstructorMarker;)V
 	public synthetic fun <init> (IILio/ygdrasil/wgsl/arena/Handle;Lkotlin/jvm/internal/DefaultConstructorMarker;)V
 	public final fun component1-Weu6vOY ()I
@@ -2569,7 +3726,23 @@ public final class io/ygdrasil/wgsl/ir/Statement$If : io/ygdrasil/wgsl/ir/Statem
 	public fun toString ()Ljava/lang/String;
 }
 
+public final synthetic class io/ygdrasil/wgsl/ir/Statement$If$$serializer : kotlinx/serialization/internal/GeneratedSerializer {
+	public static final field INSTANCE Lio/ygdrasil/wgsl/ir/Statement$If$$serializer;
+	public final fun childSerializers ()[Lkotlinx/serialization/KSerializer;
+	public final fun deserialize (Lkotlinx/serialization/encoding/Decoder;)Lio/ygdrasil/wgsl/ir/Statement$If;
+	public synthetic fun deserialize (Lkotlinx/serialization/encoding/Decoder;)Ljava/lang/Object;
+	public final fun getDescriptor ()Lkotlinx/serialization/descriptors/SerialDescriptor;
+	public final fun serialize (Lkotlinx/serialization/encoding/Encoder;Lio/ygdrasil/wgsl/ir/Statement$If;)V
+	public synthetic fun serialize (Lkotlinx/serialization/encoding/Encoder;Ljava/lang/Object;)V
+	public fun typeParametersSerializers ()[Lkotlinx/serialization/KSerializer;
+}
+
+public final class io/ygdrasil/wgsl/ir/Statement$If$Companion {
+	public final fun serializer ()Lkotlinx/serialization/KSerializer;
+}
+
 public final class io/ygdrasil/wgsl/ir/Statement$Init : io/ygdrasil/wgsl/ir/Statement {
+	public static final field Companion Lio/ygdrasil/wgsl/ir/Statement$Init$Companion;
 	public synthetic fun <init> (ILkotlin/jvm/internal/DefaultConstructorMarker;)V
 	public final fun component1-Weu6vOY ()I
 	public final fun copy-GlugwBY (I)Lio/ygdrasil/wgsl/ir/Statement$Init;
@@ -2580,11 +3753,28 @@ public final class io/ygdrasil/wgsl/ir/Statement$Init : io/ygdrasil/wgsl/ir/Stat
 	public fun toString ()Ljava/lang/String;
 }
 
+public final synthetic class io/ygdrasil/wgsl/ir/Statement$Init$$serializer : kotlinx/serialization/internal/GeneratedSerializer {
+	public static final field INSTANCE Lio/ygdrasil/wgsl/ir/Statement$Init$$serializer;
+	public final fun childSerializers ()[Lkotlinx/serialization/KSerializer;
+	public final fun deserialize (Lkotlinx/serialization/encoding/Decoder;)Lio/ygdrasil/wgsl/ir/Statement$Init;
+	public synthetic fun deserialize (Lkotlinx/serialization/encoding/Decoder;)Ljava/lang/Object;
+	public final fun getDescriptor ()Lkotlinx/serialization/descriptors/SerialDescriptor;
+	public final fun serialize (Lkotlinx/serialization/encoding/Encoder;Lio/ygdrasil/wgsl/ir/Statement$Init;)V
+	public synthetic fun serialize (Lkotlinx/serialization/encoding/Encoder;Ljava/lang/Object;)V
+	public fun typeParametersSerializers ()[Lkotlinx/serialization/KSerializer;
+}
+
+public final class io/ygdrasil/wgsl/ir/Statement$Init$Companion {
+	public final fun serializer ()Lkotlinx/serialization/KSerializer;
+}
+
 public final class io/ygdrasil/wgsl/ir/Statement$Kill : io/ygdrasil/wgsl/ir/Statement {
 	public static final field INSTANCE Lio/ygdrasil/wgsl/ir/Statement$Kill;
+	public final fun serializer ()Lkotlinx/serialization/KSerializer;
 }
 
 public final class io/ygdrasil/wgsl/ir/Statement$Loop : io/ygdrasil/wgsl/ir/Statement {
+	public static final field Companion Lio/ygdrasil/wgsl/ir/Statement$Loop$Companion;
 	public synthetic fun <init> (ILio/ygdrasil/wgsl/arena/Handle;ILkotlin/jvm/internal/DefaultConstructorMarker;)V
 	public synthetic fun <init> (ILio/ygdrasil/wgsl/arena/Handle;Lkotlin/jvm/internal/DefaultConstructorMarker;)V
 	public final fun component1-Weu6vOY ()I
@@ -2598,11 +3788,28 @@ public final class io/ygdrasil/wgsl/ir/Statement$Loop : io/ygdrasil/wgsl/ir/Stat
 	public fun toString ()Ljava/lang/String;
 }
 
+public final synthetic class io/ygdrasil/wgsl/ir/Statement$Loop$$serializer : kotlinx/serialization/internal/GeneratedSerializer {
+	public static final field INSTANCE Lio/ygdrasil/wgsl/ir/Statement$Loop$$serializer;
+	public final fun childSerializers ()[Lkotlinx/serialization/KSerializer;
+	public final fun deserialize (Lkotlinx/serialization/encoding/Decoder;)Lio/ygdrasil/wgsl/ir/Statement$Loop;
+	public synthetic fun deserialize (Lkotlinx/serialization/encoding/Decoder;)Ljava/lang/Object;
+	public final fun getDescriptor ()Lkotlinx/serialization/descriptors/SerialDescriptor;
+	public final fun serialize (Lkotlinx/serialization/encoding/Encoder;Lio/ygdrasil/wgsl/ir/Statement$Loop;)V
+	public synthetic fun serialize (Lkotlinx/serialization/encoding/Encoder;Ljava/lang/Object;)V
+	public fun typeParametersSerializers ()[Lkotlinx/serialization/KSerializer;
+}
+
+public final class io/ygdrasil/wgsl/ir/Statement$Loop$Companion {
+	public final fun serializer ()Lkotlinx/serialization/KSerializer;
+}
+
 public final class io/ygdrasil/wgsl/ir/Statement$Nop : io/ygdrasil/wgsl/ir/Statement {
 	public static final field INSTANCE Lio/ygdrasil/wgsl/ir/Statement$Nop;
+	public final fun serializer ()Lkotlinx/serialization/KSerializer;
 }
 
 public final class io/ygdrasil/wgsl/ir/Statement$Return : io/ygdrasil/wgsl/ir/Statement {
+	public static final field Companion Lio/ygdrasil/wgsl/ir/Statement$Return$Companion;
 	public synthetic fun <init> (Lio/ygdrasil/wgsl/arena/Handle;ILkotlin/jvm/internal/DefaultConstructorMarker;)V
 	public synthetic fun <init> (Lio/ygdrasil/wgsl/arena/Handle;Lkotlin/jvm/internal/DefaultConstructorMarker;)V
 	public final fun component1-wiBSyKM ()Lio/ygdrasil/wgsl/arena/Handle;
@@ -2614,7 +3821,23 @@ public final class io/ygdrasil/wgsl/ir/Statement$Return : io/ygdrasil/wgsl/ir/St
 	public fun toString ()Ljava/lang/String;
 }
 
+public final synthetic class io/ygdrasil/wgsl/ir/Statement$Return$$serializer : kotlinx/serialization/internal/GeneratedSerializer {
+	public static final field INSTANCE Lio/ygdrasil/wgsl/ir/Statement$Return$$serializer;
+	public final fun childSerializers ()[Lkotlinx/serialization/KSerializer;
+	public final fun deserialize (Lkotlinx/serialization/encoding/Decoder;)Lio/ygdrasil/wgsl/ir/Statement$Return;
+	public synthetic fun deserialize (Lkotlinx/serialization/encoding/Decoder;)Ljava/lang/Object;
+	public final fun getDescriptor ()Lkotlinx/serialization/descriptors/SerialDescriptor;
+	public final fun serialize (Lkotlinx/serialization/encoding/Encoder;Lio/ygdrasil/wgsl/ir/Statement$Return;)V
+	public synthetic fun serialize (Lkotlinx/serialization/encoding/Encoder;Ljava/lang/Object;)V
+	public fun typeParametersSerializers ()[Lkotlinx/serialization/KSerializer;
+}
+
+public final class io/ygdrasil/wgsl/ir/Statement$Return$Companion {
+	public final fun serializer ()Lkotlinx/serialization/KSerializer;
+}
+
 public final class io/ygdrasil/wgsl/ir/Statement$Switch : io/ygdrasil/wgsl/ir/Statement {
+	public static final field Companion Lio/ygdrasil/wgsl/ir/Statement$Switch$Companion;
 	public synthetic fun <init> (IILio/ygdrasil/wgsl/arena/Handle;Ljava/util/List;ILkotlin/jvm/internal/DefaultConstructorMarker;)V
 	public synthetic fun <init> (IILio/ygdrasil/wgsl/arena/Handle;Ljava/util/List;Lkotlin/jvm/internal/DefaultConstructorMarker;)V
 	public final fun component1-Weu6vOY ()I
@@ -2630,6 +3853,21 @@ public final class io/ygdrasil/wgsl/ir/Statement$Switch : io/ygdrasil/wgsl/ir/St
 	public final fun getSelector-Weu6vOY ()I
 	public fun hashCode ()I
 	public fun toString ()Ljava/lang/String;
+}
+
+public final synthetic class io/ygdrasil/wgsl/ir/Statement$Switch$$serializer : kotlinx/serialization/internal/GeneratedSerializer {
+	public static final field INSTANCE Lio/ygdrasil/wgsl/ir/Statement$Switch$$serializer;
+	public final fun childSerializers ()[Lkotlinx/serialization/KSerializer;
+	public final fun deserialize (Lkotlinx/serialization/encoding/Decoder;)Lio/ygdrasil/wgsl/ir/Statement$Switch;
+	public synthetic fun deserialize (Lkotlinx/serialization/encoding/Decoder;)Ljava/lang/Object;
+	public final fun getDescriptor ()Lkotlinx/serialization/descriptors/SerialDescriptor;
+	public final fun serialize (Lkotlinx/serialization/encoding/Encoder;Lio/ygdrasil/wgsl/ir/Statement$Switch;)V
+	public synthetic fun serialize (Lkotlinx/serialization/encoding/Encoder;Ljava/lang/Object;)V
+	public fun typeParametersSerializers ()[Lkotlinx/serialization/KSerializer;
+}
+
+public final class io/ygdrasil/wgsl/ir/Statement$Switch$Companion {
+	public final fun serializer ()Lkotlinx/serialization/KSerializer;
 }
 
 public final class io/ygdrasil/wgsl/ir/StorageClass : java/lang/Enum {
@@ -2656,16 +3894,16 @@ public final class io/ygdrasil/wgsl/ir/StorageClassKt {
 
 public final class io/ygdrasil/wgsl/ir/StructMember {
 	public static final field Companion Lio/ygdrasil/wgsl/ir/StructMember$Companion;
-	public synthetic fun <init> (Ljava/lang/String;ILio/ygdrasil/wgsl/arena/Handle;IILkotlin/jvm/internal/DefaultConstructorMarker;)V
-	public synthetic fun <init> (Ljava/lang/String;ILio/ygdrasil/wgsl/arena/Handle;ILkotlin/jvm/internal/DefaultConstructorMarker;)V
+	public synthetic fun <init> (Ljava/lang/String;ILio/ygdrasil/wgsl/ir/BindingAttribute;IILkotlin/jvm/internal/DefaultConstructorMarker;)V
+	public synthetic fun <init> (Ljava/lang/String;ILio/ygdrasil/wgsl/ir/BindingAttribute;ILkotlin/jvm/internal/DefaultConstructorMarker;)V
 	public final fun component1 ()Ljava/lang/String;
 	public final fun component2-Weu6vOY ()I
-	public final fun component3-wiBSyKM ()Lio/ygdrasil/wgsl/arena/Handle;
+	public final fun component3 ()Lio/ygdrasil/wgsl/ir/BindingAttribute;
 	public final fun component4 ()I
-	public final fun copy-mUfRK3g (Ljava/lang/String;ILio/ygdrasil/wgsl/arena/Handle;I)Lio/ygdrasil/wgsl/ir/StructMember;
-	public static synthetic fun copy-mUfRK3g$default (Lio/ygdrasil/wgsl/ir/StructMember;Ljava/lang/String;ILio/ygdrasil/wgsl/arena/Handle;IILjava/lang/Object;)Lio/ygdrasil/wgsl/ir/StructMember;
+	public final fun copy-gYW9grQ (Ljava/lang/String;ILio/ygdrasil/wgsl/ir/BindingAttribute;I)Lio/ygdrasil/wgsl/ir/StructMember;
+	public static synthetic fun copy-gYW9grQ$default (Lio/ygdrasil/wgsl/ir/StructMember;Ljava/lang/String;ILio/ygdrasil/wgsl/ir/BindingAttribute;IILjava/lang/Object;)Lio/ygdrasil/wgsl/ir/StructMember;
 	public fun equals (Ljava/lang/Object;)Z
-	public final fun getBinding-wiBSyKM ()Lio/ygdrasil/wgsl/arena/Handle;
+	public final fun getBinding ()Lio/ygdrasil/wgsl/ir/BindingAttribute;
 	public final fun getName ()Ljava/lang/String;
 	public final fun getOffset ()I
 	public final fun getType-Weu6vOY ()I
@@ -2740,6 +3978,7 @@ public abstract class io/ygdrasil/wgsl/ir/TypeInner : io/ygdrasil/wgsl/arena/Equ
 }
 
 public final class io/ygdrasil/wgsl/ir/TypeInner$Abstract : io/ygdrasil/wgsl/ir/TypeInner {
+	public static final field Companion Lio/ygdrasil/wgsl/ir/TypeInner$Abstract$Companion;
 	public fun <init> (Lio/ygdrasil/wgsl/ir/ScalarKind;)V
 	public final fun component1 ()Lio/ygdrasil/wgsl/ir/ScalarKind;
 	public final fun copy (Lio/ygdrasil/wgsl/ir/ScalarKind;)Lio/ygdrasil/wgsl/ir/TypeInner$Abstract;
@@ -2750,7 +3989,23 @@ public final class io/ygdrasil/wgsl/ir/TypeInner$Abstract : io/ygdrasil/wgsl/ir/
 	public fun toString ()Ljava/lang/String;
 }
 
+public final synthetic class io/ygdrasil/wgsl/ir/TypeInner$Abstract$$serializer : kotlinx/serialization/internal/GeneratedSerializer {
+	public static final field INSTANCE Lio/ygdrasil/wgsl/ir/TypeInner$Abstract$$serializer;
+	public final fun childSerializers ()[Lkotlinx/serialization/KSerializer;
+	public final fun deserialize (Lkotlinx/serialization/encoding/Decoder;)Lio/ygdrasil/wgsl/ir/TypeInner$Abstract;
+	public synthetic fun deserialize (Lkotlinx/serialization/encoding/Decoder;)Ljava/lang/Object;
+	public final fun getDescriptor ()Lkotlinx/serialization/descriptors/SerialDescriptor;
+	public final fun serialize (Lkotlinx/serialization/encoding/Encoder;Lio/ygdrasil/wgsl/ir/TypeInner$Abstract;)V
+	public synthetic fun serialize (Lkotlinx/serialization/encoding/Encoder;Ljava/lang/Object;)V
+	public fun typeParametersSerializers ()[Lkotlinx/serialization/KSerializer;
+}
+
+public final class io/ygdrasil/wgsl/ir/TypeInner$Abstract$Companion {
+	public final fun serializer ()Lkotlinx/serialization/KSerializer;
+}
+
 public final class io/ygdrasil/wgsl/ir/TypeInner$Array : io/ygdrasil/wgsl/ir/TypeInner {
+	public static final field Companion Lio/ygdrasil/wgsl/ir/TypeInner$Array$Companion;
 	public synthetic fun <init> (ILio/ygdrasil/wgsl/ir/ArraySize;Lkotlin/jvm/internal/DefaultConstructorMarker;)V
 	public final fun component1-Weu6vOY ()I
 	public final fun component2 ()Lio/ygdrasil/wgsl/ir/ArraySize;
@@ -2763,15 +4018,32 @@ public final class io/ygdrasil/wgsl/ir/TypeInner$Array : io/ygdrasil/wgsl/ir/Typ
 	public fun toString ()Ljava/lang/String;
 }
 
+public final synthetic class io/ygdrasil/wgsl/ir/TypeInner$Array$$serializer : kotlinx/serialization/internal/GeneratedSerializer {
+	public static final field INSTANCE Lio/ygdrasil/wgsl/ir/TypeInner$Array$$serializer;
+	public final fun childSerializers ()[Lkotlinx/serialization/KSerializer;
+	public final fun deserialize (Lkotlinx/serialization/encoding/Decoder;)Lio/ygdrasil/wgsl/ir/TypeInner$Array;
+	public synthetic fun deserialize (Lkotlinx/serialization/encoding/Decoder;)Ljava/lang/Object;
+	public final fun getDescriptor ()Lkotlinx/serialization/descriptors/SerialDescriptor;
+	public final fun serialize (Lkotlinx/serialization/encoding/Encoder;Lio/ygdrasil/wgsl/ir/TypeInner$Array;)V
+	public synthetic fun serialize (Lkotlinx/serialization/encoding/Encoder;Ljava/lang/Object;)V
+	public fun typeParametersSerializers ()[Lkotlinx/serialization/KSerializer;
+}
+
+public final class io/ygdrasil/wgsl/ir/TypeInner$Array$Companion {
+	public final fun serializer ()Lkotlinx/serialization/KSerializer;
+}
+
 public final class io/ygdrasil/wgsl/ir/TypeInner$Companion {
 	public final fun serializer ()Lkotlinx/serialization/KSerializer;
 }
 
 public final class io/ygdrasil/wgsl/ir/TypeInner$Error : io/ygdrasil/wgsl/ir/TypeInner {
 	public static final field INSTANCE Lio/ygdrasil/wgsl/ir/TypeInner$Error;
+	public final fun serializer ()Lkotlinx/serialization/KSerializer;
 }
 
 public final class io/ygdrasil/wgsl/ir/TypeInner$Matrix : io/ygdrasil/wgsl/ir/TypeInner {
+	public static final field Companion Lio/ygdrasil/wgsl/ir/TypeInner$Matrix$Companion;
 	public synthetic fun <init> (Lio/ygdrasil/wgsl/ir/VectorSize;Lio/ygdrasil/wgsl/ir/VectorSize;ILkotlin/jvm/internal/DefaultConstructorMarker;)V
 	public final fun component1 ()Lio/ygdrasil/wgsl/ir/VectorSize;
 	public final fun component2 ()Lio/ygdrasil/wgsl/ir/VectorSize;
@@ -2786,7 +4058,23 @@ public final class io/ygdrasil/wgsl/ir/TypeInner$Matrix : io/ygdrasil/wgsl/ir/Ty
 	public fun toString ()Ljava/lang/String;
 }
 
+public final synthetic class io/ygdrasil/wgsl/ir/TypeInner$Matrix$$serializer : kotlinx/serialization/internal/GeneratedSerializer {
+	public static final field INSTANCE Lio/ygdrasil/wgsl/ir/TypeInner$Matrix$$serializer;
+	public final fun childSerializers ()[Lkotlinx/serialization/KSerializer;
+	public final fun deserialize (Lkotlinx/serialization/encoding/Decoder;)Lio/ygdrasil/wgsl/ir/TypeInner$Matrix;
+	public synthetic fun deserialize (Lkotlinx/serialization/encoding/Decoder;)Ljava/lang/Object;
+	public final fun getDescriptor ()Lkotlinx/serialization/descriptors/SerialDescriptor;
+	public final fun serialize (Lkotlinx/serialization/encoding/Encoder;Lio/ygdrasil/wgsl/ir/TypeInner$Matrix;)V
+	public synthetic fun serialize (Lkotlinx/serialization/encoding/Encoder;Ljava/lang/Object;)V
+	public fun typeParametersSerializers ()[Lkotlinx/serialization/KSerializer;
+}
+
+public final class io/ygdrasil/wgsl/ir/TypeInner$Matrix$Companion {
+	public final fun serializer ()Lkotlinx/serialization/KSerializer;
+}
+
 public final class io/ygdrasil/wgsl/ir/TypeInner$Opaque : io/ygdrasil/wgsl/ir/TypeInner {
+	public static final field Companion Lio/ygdrasil/wgsl/ir/TypeInner$Opaque$Companion;
 	public fun <init> (Ljava/lang/String;)V
 	public final fun component1 ()Ljava/lang/String;
 	public final fun copy (Ljava/lang/String;)Lio/ygdrasil/wgsl/ir/TypeInner$Opaque;
@@ -2797,20 +4085,55 @@ public final class io/ygdrasil/wgsl/ir/TypeInner$Opaque : io/ygdrasil/wgsl/ir/Ty
 	public fun toString ()Ljava/lang/String;
 }
 
+public final synthetic class io/ygdrasil/wgsl/ir/TypeInner$Opaque$$serializer : kotlinx/serialization/internal/GeneratedSerializer {
+	public static final field INSTANCE Lio/ygdrasil/wgsl/ir/TypeInner$Opaque$$serializer;
+	public final fun childSerializers ()[Lkotlinx/serialization/KSerializer;
+	public final fun deserialize (Lkotlinx/serialization/encoding/Decoder;)Lio/ygdrasil/wgsl/ir/TypeInner$Opaque;
+	public synthetic fun deserialize (Lkotlinx/serialization/encoding/Decoder;)Ljava/lang/Object;
+	public final fun getDescriptor ()Lkotlinx/serialization/descriptors/SerialDescriptor;
+	public final fun serialize (Lkotlinx/serialization/encoding/Encoder;Lio/ygdrasil/wgsl/ir/TypeInner$Opaque;)V
+	public synthetic fun serialize (Lkotlinx/serialization/encoding/Encoder;Ljava/lang/Object;)V
+	public fun typeParametersSerializers ()[Lkotlinx/serialization/KSerializer;
+}
+
+public final class io/ygdrasil/wgsl/ir/TypeInner$Opaque$Companion {
+	public final fun serializer ()Lkotlinx/serialization/KSerializer;
+}
+
 public final class io/ygdrasil/wgsl/ir/TypeInner$Pointer : io/ygdrasil/wgsl/ir/TypeInner {
-	public synthetic fun <init> (ILio/ygdrasil/wgsl/ir/AddressSpace;Lkotlin/jvm/internal/DefaultConstructorMarker;)V
+	public static final field Companion Lio/ygdrasil/wgsl/ir/TypeInner$Pointer$Companion;
+	public synthetic fun <init> (ILio/ygdrasil/wgsl/ir/AddressSpace;Lio/ygdrasil/wgsl/ir/AccessMode;ILkotlin/jvm/internal/DefaultConstructorMarker;)V
+	public synthetic fun <init> (ILio/ygdrasil/wgsl/ir/AddressSpace;Lio/ygdrasil/wgsl/ir/AccessMode;Lkotlin/jvm/internal/DefaultConstructorMarker;)V
 	public final fun component1-Weu6vOY ()I
 	public final fun component2 ()Lio/ygdrasil/wgsl/ir/AddressSpace;
-	public final fun copy-Dv_J50E (ILio/ygdrasil/wgsl/ir/AddressSpace;)Lio/ygdrasil/wgsl/ir/TypeInner$Pointer;
-	public static synthetic fun copy-Dv_J50E$default (Lio/ygdrasil/wgsl/ir/TypeInner$Pointer;ILio/ygdrasil/wgsl/ir/AddressSpace;ILjava/lang/Object;)Lio/ygdrasil/wgsl/ir/TypeInner$Pointer;
+	public final fun component3 ()Lio/ygdrasil/wgsl/ir/AccessMode;
+	public final fun copy-gLNdcEg (ILio/ygdrasil/wgsl/ir/AddressSpace;Lio/ygdrasil/wgsl/ir/AccessMode;)Lio/ygdrasil/wgsl/ir/TypeInner$Pointer;
+	public static synthetic fun copy-gLNdcEg$default (Lio/ygdrasil/wgsl/ir/TypeInner$Pointer;ILio/ygdrasil/wgsl/ir/AddressSpace;Lio/ygdrasil/wgsl/ir/AccessMode;ILjava/lang/Object;)Lio/ygdrasil/wgsl/ir/TypeInner$Pointer;
 	public fun equals (Ljava/lang/Object;)Z
+	public final fun getAccessMode ()Lio/ygdrasil/wgsl/ir/AccessMode;
 	public final fun getAddressSpace ()Lio/ygdrasil/wgsl/ir/AddressSpace;
 	public final fun getBase-Weu6vOY ()I
 	public fun hashCode ()I
 	public fun toString ()Ljava/lang/String;
 }
 
+public final synthetic class io/ygdrasil/wgsl/ir/TypeInner$Pointer$$serializer : kotlinx/serialization/internal/GeneratedSerializer {
+	public static final field INSTANCE Lio/ygdrasil/wgsl/ir/TypeInner$Pointer$$serializer;
+	public final fun childSerializers ()[Lkotlinx/serialization/KSerializer;
+	public final fun deserialize (Lkotlinx/serialization/encoding/Decoder;)Lio/ygdrasil/wgsl/ir/TypeInner$Pointer;
+	public synthetic fun deserialize (Lkotlinx/serialization/encoding/Decoder;)Ljava/lang/Object;
+	public final fun getDescriptor ()Lkotlinx/serialization/descriptors/SerialDescriptor;
+	public final fun serialize (Lkotlinx/serialization/encoding/Encoder;Lio/ygdrasil/wgsl/ir/TypeInner$Pointer;)V
+	public synthetic fun serialize (Lkotlinx/serialization/encoding/Encoder;Ljava/lang/Object;)V
+	public fun typeParametersSerializers ()[Lkotlinx/serialization/KSerializer;
+}
+
+public final class io/ygdrasil/wgsl/ir/TypeInner$Pointer$Companion {
+	public final fun serializer ()Lkotlinx/serialization/KSerializer;
+}
+
 public final class io/ygdrasil/wgsl/ir/TypeInner$Scalar : io/ygdrasil/wgsl/ir/TypeInner {
+	public static final field Companion Lio/ygdrasil/wgsl/ir/TypeInner$Scalar$Companion;
 	public fun <init> (Lio/ygdrasil/wgsl/ir/ScalarKind;I)V
 	public final fun component1 ()Lio/ygdrasil/wgsl/ir/ScalarKind;
 	public final fun component2 ()I
@@ -2823,7 +4146,23 @@ public final class io/ygdrasil/wgsl/ir/TypeInner$Scalar : io/ygdrasil/wgsl/ir/Ty
 	public fun toString ()Ljava/lang/String;
 }
 
+public final synthetic class io/ygdrasil/wgsl/ir/TypeInner$Scalar$$serializer : kotlinx/serialization/internal/GeneratedSerializer {
+	public static final field INSTANCE Lio/ygdrasil/wgsl/ir/TypeInner$Scalar$$serializer;
+	public final fun childSerializers ()[Lkotlinx/serialization/KSerializer;
+	public final fun deserialize (Lkotlinx/serialization/encoding/Decoder;)Lio/ygdrasil/wgsl/ir/TypeInner$Scalar;
+	public synthetic fun deserialize (Lkotlinx/serialization/encoding/Decoder;)Ljava/lang/Object;
+	public final fun getDescriptor ()Lkotlinx/serialization/descriptors/SerialDescriptor;
+	public final fun serialize (Lkotlinx/serialization/encoding/Encoder;Lio/ygdrasil/wgsl/ir/TypeInner$Scalar;)V
+	public synthetic fun serialize (Lkotlinx/serialization/encoding/Encoder;Ljava/lang/Object;)V
+	public fun typeParametersSerializers ()[Lkotlinx/serialization/KSerializer;
+}
+
+public final class io/ygdrasil/wgsl/ir/TypeInner$Scalar$Companion {
+	public final fun serializer ()Lkotlinx/serialization/KSerializer;
+}
+
 public final class io/ygdrasil/wgsl/ir/TypeInner$Struct : io/ygdrasil/wgsl/ir/TypeInner {
+	public static final field Companion Lio/ygdrasil/wgsl/ir/TypeInner$Struct$Companion;
 	public fun <init> (Ljava/util/List;)V
 	public final fun component1 ()Ljava/util/List;
 	public final fun copy (Ljava/util/List;)Lio/ygdrasil/wgsl/ir/TypeInner$Struct;
@@ -2834,7 +4173,23 @@ public final class io/ygdrasil/wgsl/ir/TypeInner$Struct : io/ygdrasil/wgsl/ir/Ty
 	public fun toString ()Ljava/lang/String;
 }
 
+public final synthetic class io/ygdrasil/wgsl/ir/TypeInner$Struct$$serializer : kotlinx/serialization/internal/GeneratedSerializer {
+	public static final field INSTANCE Lio/ygdrasil/wgsl/ir/TypeInner$Struct$$serializer;
+	public final fun childSerializers ()[Lkotlinx/serialization/KSerializer;
+	public final fun deserialize (Lkotlinx/serialization/encoding/Decoder;)Lio/ygdrasil/wgsl/ir/TypeInner$Struct;
+	public synthetic fun deserialize (Lkotlinx/serialization/encoding/Decoder;)Ljava/lang/Object;
+	public final fun getDescriptor ()Lkotlinx/serialization/descriptors/SerialDescriptor;
+	public final fun serialize (Lkotlinx/serialization/encoding/Encoder;Lio/ygdrasil/wgsl/ir/TypeInner$Struct;)V
+	public synthetic fun serialize (Lkotlinx/serialization/encoding/Encoder;Ljava/lang/Object;)V
+	public fun typeParametersSerializers ()[Lkotlinx/serialization/KSerializer;
+}
+
+public final class io/ygdrasil/wgsl/ir/TypeInner$Struct$Companion {
+	public final fun serializer ()Lkotlinx/serialization/KSerializer;
+}
+
 public final class io/ygdrasil/wgsl/ir/TypeInner$ValuePointer : io/ygdrasil/wgsl/ir/TypeInner {
+	public static final field Companion Lio/ygdrasil/wgsl/ir/TypeInner$ValuePointer$Companion;
 	public synthetic fun <init> (ILkotlin/jvm/internal/DefaultConstructorMarker;)V
 	public final fun component1-Weu6vOY ()I
 	public final fun copy-GlugwBY (I)Lio/ygdrasil/wgsl/ir/TypeInner$ValuePointer;
@@ -2845,7 +4200,23 @@ public final class io/ygdrasil/wgsl/ir/TypeInner$ValuePointer : io/ygdrasil/wgsl
 	public fun toString ()Ljava/lang/String;
 }
 
+public final synthetic class io/ygdrasil/wgsl/ir/TypeInner$ValuePointer$$serializer : kotlinx/serialization/internal/GeneratedSerializer {
+	public static final field INSTANCE Lio/ygdrasil/wgsl/ir/TypeInner$ValuePointer$$serializer;
+	public final fun childSerializers ()[Lkotlinx/serialization/KSerializer;
+	public final fun deserialize (Lkotlinx/serialization/encoding/Decoder;)Lio/ygdrasil/wgsl/ir/TypeInner$ValuePointer;
+	public synthetic fun deserialize (Lkotlinx/serialization/encoding/Decoder;)Ljava/lang/Object;
+	public final fun getDescriptor ()Lkotlinx/serialization/descriptors/SerialDescriptor;
+	public final fun serialize (Lkotlinx/serialization/encoding/Encoder;Lio/ygdrasil/wgsl/ir/TypeInner$ValuePointer;)V
+	public synthetic fun serialize (Lkotlinx/serialization/encoding/Encoder;Ljava/lang/Object;)V
+	public fun typeParametersSerializers ()[Lkotlinx/serialization/KSerializer;
+}
+
+public final class io/ygdrasil/wgsl/ir/TypeInner$ValuePointer$Companion {
+	public final fun serializer ()Lkotlinx/serialization/KSerializer;
+}
+
 public final class io/ygdrasil/wgsl/ir/TypeInner$Vector : io/ygdrasil/wgsl/ir/TypeInner {
+	public static final field Companion Lio/ygdrasil/wgsl/ir/TypeInner$Vector$Companion;
 	public synthetic fun <init> (Lio/ygdrasil/wgsl/ir/VectorSize;ILkotlin/jvm/internal/DefaultConstructorMarker;)V
 	public final fun component1 ()Lio/ygdrasil/wgsl/ir/VectorSize;
 	public final fun component2-Weu6vOY ()I
@@ -2856,6 +4227,21 @@ public final class io/ygdrasil/wgsl/ir/TypeInner$Vector : io/ygdrasil/wgsl/ir/Ty
 	public final fun getSize ()Lio/ygdrasil/wgsl/ir/VectorSize;
 	public fun hashCode ()I
 	public fun toString ()Ljava/lang/String;
+}
+
+public final synthetic class io/ygdrasil/wgsl/ir/TypeInner$Vector$$serializer : kotlinx/serialization/internal/GeneratedSerializer {
+	public static final field INSTANCE Lio/ygdrasil/wgsl/ir/TypeInner$Vector$$serializer;
+	public final fun childSerializers ()[Lkotlinx/serialization/KSerializer;
+	public final fun deserialize (Lkotlinx/serialization/encoding/Decoder;)Lio/ygdrasil/wgsl/ir/TypeInner$Vector;
+	public synthetic fun deserialize (Lkotlinx/serialization/encoding/Decoder;)Ljava/lang/Object;
+	public final fun getDescriptor ()Lkotlinx/serialization/descriptors/SerialDescriptor;
+	public final fun serialize (Lkotlinx/serialization/encoding/Encoder;Lio/ygdrasil/wgsl/ir/TypeInner$Vector;)V
+	public synthetic fun serialize (Lkotlinx/serialization/encoding/Encoder;Ljava/lang/Object;)V
+	public fun typeParametersSerializers ()[Lkotlinx/serialization/KSerializer;
+}
+
+public final class io/ygdrasil/wgsl/ir/TypeInner$Vector$Companion {
+	public final fun serializer ()Lkotlinx/serialization/KSerializer;
 }
 
 public final class io/ygdrasil/wgsl/ir/TypeKt {

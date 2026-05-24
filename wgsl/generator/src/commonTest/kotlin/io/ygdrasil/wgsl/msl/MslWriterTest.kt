@@ -88,6 +88,7 @@ class MslWriterTest : FunSpec({
 
         // Types
         val f32 = module.types.append(Type(TypeInner.Scalar(ScalarKind.F32, 4)))
+        val u32 = module.types.append(Type(TypeInner.Scalar(ScalarKind.Uint, 4)))
         val vec4f = module.types.append(Type(TypeInner.Vector(VectorSize.Quad, f32)))
         val pointer = module.types.append(Type(TypeInner.Pointer(f32, AddressSpace.Uniform)))
 
@@ -109,7 +110,10 @@ class MslWriterTest : FunSpec({
         val funcHandle = module.functions.append(
             Function(
                 name = "vs_main_func",
-                parameters = emptyList(),
+                parameters = listOf(
+                    FunctionParameter("vertex_index", u32, BindingAttribute.Builtin(BuiltinValue.VertexIndex)),
+                    FunctionParameter("loc_0", vec4f, BindingAttribute.Location(0)),
+                ),
                 returnType = vec4f,
                 localVariables = Arena(),
                 expressions = expressions,
@@ -123,10 +127,7 @@ class MslWriterTest : FunSpec({
             name = "vs_main",
             function = funcHandle,
             stage = ShaderStage.Vertex,
-            bindings = listOf(
-                BindingAttribute.Builtin(BuiltinValue.VertexIndex),
-                BindingAttribute.Location(0)
-            )
+            bindings = emptyList()
         )
 
         val moduleWithEp = module.copy(entryPoints = mutableListOf(ep))
@@ -295,6 +296,7 @@ class MslWriterTest : FunSpec({
     test("testEntryPointWithStructs") {
         val module = Module()
         val f32 = module.types.append(Type(TypeInner.Scalar(ScalarKind.F32, 4)))
+        val u32 = module.types.append(Type(TypeInner.Scalar(ScalarKind.Uint, 4)))
         val vec4f = module.types.append(Type(TypeInner.Vector(VectorSize.Quad, f32)))
 
         val expressions = Arena<Expression>()
@@ -310,7 +312,10 @@ class MslWriterTest : FunSpec({
         val funcHandle = module.functions.append(
             Function(
                 name = "vs_main_impl",
-                parameters = emptyList(),
+                parameters = listOf(
+                    FunctionParameter("loc_0", vec4f, BindingAttribute.Location(0)),
+                    FunctionParameter("vertex_index", u32, BindingAttribute.Builtin(BuiltinValue.VertexIndex)),
+                ),
                 returnType = vec4f,
                 localVariables = Arena(),
                 expressions = expressions,
@@ -323,10 +328,7 @@ class MslWriterTest : FunSpec({
             name = "vs_main",
             stage = ShaderStage.Vertex,
             function = funcHandle,
-            bindings = listOf(
-                BindingAttribute.Location(0),
-                BindingAttribute.Builtin(BuiltinValue.VertexIndex)
-            )
+            bindings = emptyList()
         ))
 
         val code = MslModule.writeString(module)

@@ -3,7 +3,7 @@ package io.ygdrasil.wgsl.tests
 import io.ygdrasil.wgsl.back.BackendRegistry
 import io.ygdrasil.wgsl.wgsl.WgslWriterFactory
 
-class RoundTripTest : GoldenTestBase("wgsl") {
+class RoundTripTest : GoldenTestBase("wgsl", "roundtrip") {
     init {
         // Ensure WGSL backend is registered
         BackendRegistry.DEFAULT.register("wgsl", WgslWriterFactory())

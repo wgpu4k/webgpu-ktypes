@@ -17,7 +17,6 @@ import io.ygdrasil.wgsl.arena.Handle
 import io.kotest.matchers.shouldNotBe
 import java.io.File
 import java.nio.file.Files
-import java.nio.file.Paths
 
 private val logger = KotlinLogging.logger {}
 
@@ -42,14 +41,15 @@ private fun handleGoldenError(fileName: String, backend: String, phase: String, 
     throw GoldenTestException(fileName, backend, phase, e.message ?: "Unknown error", e)
 }
 
-abstract class GoldenTestBase(val backendName: String) : FunSpec({
+abstract class GoldenTestBase(val backendName: String, val suiteName: String = backendName) : FunSpec({
 
     registerAllBackends()
     val goldenUpdate = System.getenv("GOLDEN_UPDATE")?.toBoolean() ?: false
     val goldenFilter = System.getenv("GOLDEN_FILTER")?.takeIf { it.isNotEmpty() }
-    val rootDir = findProjectRoot()
+    val rootDir = GoldenCorpus.findProjectRoot()
     val inputDir = rootDir.resolve("tests/golden/inputs")
     val outputBaseDir = rootDir.resolve("tests/golden/outputs")
+    val expectedFailures = GoldenExpectedFailures.load(rootDir)
 
     context("$backendName Golden Tests") {
         val inputFiles = Files.list(inputDir)
@@ -69,58 +69,69 @@ abstract class GoldenTestBase(val backendName: String) : FunSpec({
         inputFiles.forEach { inputFile ->
             val fileName = inputFile.fileName.toString()
             test("Golden test: $fileName") {
-                logger.debug { "Testing $fileName" }
-                val source = Files.readString(inputFile)
+                val skippedPhases = mutableSetOf<String>()
+                val failure = runCatching {
+                    logger.debug { "Testing $fileName" }
+                    val source = Files.readString(inputFile)
                 
-                // 1. Parse
-                logger.debug { "Parsing..." }
-                val unit = try {
-                    parseWgsl(source)
-                } catch (e: Exception) {
-                    handleGoldenError(fileName, backendName, "parse", e)
-                }
+                    // 1. Parse
+                    logger.debug { "Parsing..." }
+                    val unit = try {
+                        parseWgsl(source)
+                    } catch (e: Exception) {
+                        handleGoldenError(fileName, backendName, "parse", e)
+                    }
                 
-                // 2. Resolve types
-                logger.debug { "Resolving types..." }
-                val resolver = TypeResolver()
-                val resolutionResult = try {
-                    resolver.resolve(unit)
-                } catch (e: Exception) {
-                    handleGoldenError(fileName, backendName, "type-resolution", e)
-                }
-                if (!resolutionResult.isSuccess) {
-                    throw GoldenTestException(
-                        fileName, backendName, "type-resolution",
-                        "Unresolved references: ${resolutionResult.unresolvedReferences}"
-                    )
-                }
+                    // 2. Resolve types
+                    logger.debug { "Resolving types..." }
+                    val resolver = TypeResolver()
+                    val resolutionResult = try {
+                        resolver.resolve(unit)
+                    } catch (e: Exception) {
+                        handleGoldenError(fileName, backendName, "type-resolution", e)
+                    }
+                    if (!resolutionResult.isSuccess) {
+                        throw GoldenTestException(
+                            fileName, backendName, "type-resolution",
+                            "Unresolved references: ${resolutionResult.unresolvedReferences}"
+                        )
+                    }
                 
-                // 3. Lower to IR
-                logger.debug { "Lowering to IR..." }
-                val lowerer = Lowerer()
-                val module = try {
-                    lowerer.lower(resolutionResult.resolvedUnit)
-                } catch (e: Exception) {
-                    handleGoldenError(fileName, backendName, "lowering", e)
-                }
+                    // 3. Lower to IR
+                    logger.debug { "Lowering to IR..." }
+                    val lowerer = Lowerer()
+                    val module = try {
+                        lowerer.lower(resolutionResult.resolvedUnit)
+                    } catch (e: Exception) {
+                        handleGoldenError(fileName, backendName, "lowering", e)
+                    }
                 
-                // 4. Generate backend code
-                logger.debug { "Generating backend code for $backendName..." }
-                val writer = BackendRegistry.DEFAULT.get(backendName)
-                    ?: throw GoldenTestException(fileName, backendName, "backend-lookup", "Backend $backendName not found")
-                val output = try {
-                    writer.write(module, io.ygdrasil.wgsl.valid.ModuleInfo())
-                } catch (e: Exception) {
-                    handleGoldenError(fileName, backendName, "code-generation", e)
-                }
+                    // 4. Generate backend code
+                    logger.debug { "Generating backend code for $backendName..." }
+                    val writer = BackendRegistry.DEFAULT.get(backendName)
+                        ?: throw GoldenTestException(fileName, backendName, "backend-lookup", "Backend $backendName not found")
+                    val output = try {
+                        writer.write(module, io.ygdrasil.wgsl.valid.ModuleInfo())
+                    } catch (e: Exception) {
+                        handleGoldenError(fileName, backendName, "code-generation", e)
+                    }
                 
-                // 5. Compare or Update
-                val outputFile = outputBaseDir.resolve(backendName).resolve(fileName.replace(".wgsl", getExtension(backendName)))
-                Files.createDirectories(outputFile.parent)
-                
-                if (goldenUpdate || !Files.exists(outputFile)) {
+                    // 5. Compare or Update
+                    val outputFile = GoldenCorpus.outputPath(rootDir, backendName, fileName)
+
+                if (goldenUpdate) {
+                    Files.createDirectories(outputFile.parent)
                     Files.writeString(outputFile, output)
                 } else {
+                    if (!Files.exists(outputFile)) {
+                        throw GoldenTestException(
+                            fileName,
+                            backendName,
+                            "missing-golden",
+                            "Expected output is missing: ${rootDir.relativize(outputFile)}. " +
+                                "Run with GOLDEN_UPDATE=true only after reviewing the support status."
+                        )
+                    }
                     val expected = Files.readString(outputFile)
                     if (backendName.lowercase() == "wgsl") {
                         val normalizedActual = WgslNormalizer.normalize(output)
@@ -149,76 +160,76 @@ abstract class GoldenTestBase(val backendName: String) : FunSpec({
                             val moduleRoundtrip = lowererRoundtrip.lower(resolutionResultRoundtrip.resolvedUnit)
 
                             assertModulesEquivalent(module, moduleRoundtrip)
-                        } catch (e: Exception) {
+                        } catch (e: Throwable) {
                             handleGoldenError(fileName, backendName, "roundtrip-semantic-isomorphism", e)
                         }
                     } else {
+                        val normalizedActual = output.normalizeGoldenLineEndings()
+                        val normalizedExpected = expected.normalizeGoldenLineEndings()
                         try {
-                            output shouldBe expected
+                            normalizedActual shouldBe normalizedExpected
                         } catch (e: AssertionError) {
                             handleGoldenError(fileName, backendName, "comparison", e)
                         }
                     }
                 }
 
-                // 6. Native Validation (if available)
-                val type = when (backendName.lowercase()) {
-                    "msl" -> BackendType.MSL
-                    "glsl" -> BackendType.GLSL
-                    "hlsl" -> BackendType.HLSL
-                    "spirv" -> BackendType.SPIRV
-                    else -> null
-                }
+                    // 6. Native Validation (if available)
+                    val type = when (backendName.lowercase()) {
+                        "msl" -> BackendType.MSL
+                        "glsl" -> BackendType.GLSL
+                        "hlsl" -> BackendType.HLSL
+                        "spirv" -> BackendType.SPIRV
+                        else -> null
+                    }
 
-                if (type != null && ValidatorFactory.isAvailable(type)) {
-                    logger.debug { "Native validation for $backendName..." }
-                    val stage = module.entryPoints.firstOrNull()?.stage?.let {
-                        when (it) {
-                            io.ygdrasil.wgsl.ir.ShaderStage.Vertex -> io.ygdrasil.wgsl.tests.validator.ShaderStage.VERTEX
-                            io.ygdrasil.wgsl.ir.ShaderStage.Fragment -> io.ygdrasil.wgsl.tests.validator.ShaderStage.FRAGMENT
-                            io.ygdrasil.wgsl.ir.ShaderStage.Compute -> io.ygdrasil.wgsl.tests.validator.ShaderStage.COMPUTE
+                    val validatorAvailable = type != null && ValidatorFactory.isAvailable(type)
+                    if (type != null && !validatorAvailable) {
+                        skippedPhases.add("native-validation")
+                    }
+
+                    if (type != null && validatorAvailable) {
+                        logger.debug { "Native validation for $backendName..." }
+                        val stage = module.entryPoints.firstOrNull()?.stage?.let {
+                            when (it) {
+                                io.ygdrasil.wgsl.ir.ShaderStage.Vertex -> io.ygdrasil.wgsl.tests.validator.ShaderStage.VERTEX
+                                io.ygdrasil.wgsl.ir.ShaderStage.Fragment -> io.ygdrasil.wgsl.tests.validator.ShaderStage.FRAGMENT
+                                io.ygdrasil.wgsl.ir.ShaderStage.Compute -> io.ygdrasil.wgsl.tests.validator.ShaderStage.COMPUTE
+                            }
+                        }
+
+                        val validator = ValidatorFactory.getValidator(type)!!
+                        val validationResult = try {
+                            validator.validate(output, stage = stage)
+                        } catch (e: Exception) {
+                            handleGoldenError(fileName, backendName, "validation", e)
+                        }
+                        if (validationResult.isFailure) {
+                            logger.debug { "Native validation FAILED for $fileName ($backendName): ${validationResult.output}" }
+                            throw GoldenTestException(
+                                fileName, backendName, "native-validation",
+                                "Validation failed: ${validationResult.output}"
+                            )
+                        } else {
+                            logger.debug { "Native validation SUCCESS for $fileName ($backendName)" }
                         }
                     }
+                }.exceptionOrNull()
 
-                    val validator = ValidatorFactory.getValidator(type)!!
-                    val validationResult = try {
-                        validator.validate(output, stage = stage)
-                    } catch (e: Exception) {
-                        handleGoldenError(fileName, backendName, "validation", e)
-                    }
-                    if (validationResult.isFailure) {
-                        logger.debug { "Native validation FAILED for $fileName ($backendName): ${validationResult.output}" }
-                        throw GoldenTestException(
-                            fileName, backendName, "native-validation",
-                            "Validation failed: ${validationResult.output}"
-                        )
-                    } else {
-                        logger.debug { "Native validation SUCCESS for $fileName ($backendName)" }
-                    }
+                if (goldenUpdate && failure != null) {
+                    throw failure
+                }
+
+                if (!goldenUpdate) {
+                    expectedFailures.verify(suiteName, fileName, failure, skippedPhases)
                 }
             }
         }
     }
 })
 
-private fun findProjectRoot(): java.nio.file.Path {
-    var current = Paths.get(".").toAbsolutePath()
-    while (current != null) {
-        if (Files.exists(current.resolve("settings.gradle.kts"))) {
-            return current
-        }
-        current = current.parent
-    }
-    return Paths.get(".")
-}
-
-private fun getExtension(backend: String): String = when (backend.lowercase()) {
-    "msl" -> ".metal"
-    "hlsl" -> ".hlsl"
-    "glsl" -> ".glsl"
-    "wgsl" -> ".wgsl"
-    "ir" -> ".json"
-    else -> ".txt"
+private fun String.normalizeGoldenLineEndings(): String {
+    return replace("\r\n", "\n").replace('\r', '\n')
 }
 
 private fun assertModulesEquivalent(original: Module, roundtrip: Module) {

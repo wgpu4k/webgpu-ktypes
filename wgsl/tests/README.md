@@ -61,10 +61,29 @@ tests/golden/
 # Run all golden tests for all backends
 ./gradlew :wgsl:tests:jvmTest
 
+# Generate a markdown inventory of golden corpus coverage
+./gradlew :wgsl:tests:goldenCoverageReport
+
 # Run tests for a specific backend only
 ./gradlew :wgsl:tests:jvmTest --tests "*WgslGoldenTest*"
 ./gradlew :wgsl:tests:jvmTest --tests "*MslGoldenTest*"
 ```
+
+The coverage report is written to `wgsl/tests/build/reports/golden-coverage/summary.md`.
+It lists input counts, output coverage per backend, missing outputs, orphan outputs, and,
+when JUnit XML results already exist, suite pass/fail counts plus a phase failure breakdown.
+
+### Expected Failures
+
+Known failing golden cases are listed in `wgsl/tests/docs/golden-expected-failures.md`.
+Those cases are still executed. A listed case fails the suite if it starts passing unexpectedly,
+or if it fails at a different compiler phase than the documented baseline. This keeps the current
+debt explicit while allowing unrelated golden regressions to fail normally.
+Expected failures in the `native-validation` phase are enforced when the corresponding native
+validator is available; otherwise that optional phase is recorded as skipped for the run.
+
+`GOLDEN_UPDATE=true` bypasses expected-failure handling so output refreshes still expose real
+compiler and writer errors directly.
 
 ### Filtering Tests
 
