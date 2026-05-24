@@ -395,6 +395,14 @@ class Lowerer {
         io.ygdrasil.wgsl.ast.StorageClass.PUSH_CONSTANT -> IrStorageClass.PushConstant
     }
 
+    private fun lowerBuiltinBinding(name: String?): io.ygdrasil.wgsl.ir.BindingAttribute.Builtin? {
+        val builtin = when (name) {
+            "draw_index" -> io.ygdrasil.wgsl.ir.BuiltinValue.DrawIndex
+            else -> io.ygdrasil.wgsl.ir.BuiltinValue.entries.find { it.name.lowercase() == name?.lowercase() }
+        }
+        return builtin?.let { io.ygdrasil.wgsl.ir.BindingAttribute.Builtin(it) }
+    }
+
     private fun lowerStruct(decl: StructDecl) {
         val members = decl.members.map { member ->
             val binding = member.attributes.find { it.name == "location" }?.let {
@@ -402,8 +410,7 @@ class Lowerer {
                 io.ygdrasil.wgsl.ir.BindingAttribute.Location(loc)
             } ?: member.attributes.find { it.name == "builtin" }?.let {
                 val builtinName = (it.args.firstOrNull() as? IdentExpr)?.name
-                val builtin = io.ygdrasil.wgsl.ir.BuiltinValue.entries.find { it.name.lowercase() == builtinName?.lowercase() }
-                if (builtin != null) io.ygdrasil.wgsl.ir.BindingAttribute.Builtin(builtin) else null
+                lowerBuiltinBinding(builtinName)
             }
 
             IrStructMember(
@@ -566,8 +573,7 @@ class Lowerer {
                 io.ygdrasil.wgsl.ir.BindingAttribute.Location(loc)
             } ?: param.attributes.find { it.name == "builtin" }?.let {
                 val builtinName = (it.args.firstOrNull() as? IdentExpr)?.name
-                val builtin = io.ygdrasil.wgsl.ir.BuiltinValue.entries.find { it.name.lowercase() == builtinName?.lowercase() }
-                if (builtin != null) io.ygdrasil.wgsl.ir.BindingAttribute.Builtin(builtin) else null
+                lowerBuiltinBinding(builtinName)
             }
 
             IrFunctionParameter(

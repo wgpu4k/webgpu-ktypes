@@ -175,7 +175,7 @@ class PredeclaredEnumerantValidationTest : FunSpec({
         }
         
         test("all BuiltinValue values are valid") {
-            val values = listOf("position", "vertex_index", "instance_index", "front_facing", 
+            val values = listOf("position", "vertex_index", "instance_index", "draw_index", "front_facing",
                 "primitive_index", "sample_index", "sample_mask", "viewport_index")
             for (value in values) {
                 val source = "let x = BuiltinValue.$value;"
@@ -304,7 +304,7 @@ class PredeclaredEnumerantValidationTest : FunSpec({
             
             parser.errors.isNotEmpty() shouldBe true
             val errorMessage = parser.errors[0].message
-            errorMessage shouldBe "Invalid BuiltinValue value 'invalid_value'. Valid values are: position, vertex_index, instance_index, front_facing, primitive_index, sample_index, sample_mask, viewport_index"
+            errorMessage shouldBe "Invalid BuiltinValue value 'invalid_value'. Valid values are: position, vertex_index, instance_index, draw_index, front_facing, primitive_index, sample_index, sample_mask, viewport_index"
         }
         
         test("MipmapFilterMode.invalid_value generates error with message") {

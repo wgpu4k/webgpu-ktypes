@@ -3,6 +3,9 @@ package io.ygdrasil.wgsl.parser
 import io.kotest.core.spec.style.FunSpec
 import io.kotest.matchers.collections.shouldNotBeEmpty
 import io.kotest.matchers.shouldBe
+import io.ygdrasil.wgsl.ast.FunctionDecl
+import io.ygdrasil.wgsl.ast.IdentExpr
+import io.ygdrasil.wgsl.ast.StructDecl
 import io.ygdrasil.wgsl.lexer.Lexer
 
 /**
@@ -76,6 +79,30 @@ class AttributeValidationTest : FunSpec({
             val parser = Parser(lexer)
             val unit = parser.parse()
             unit.declarations.shouldNotBeEmpty()
+        }
+
+        test("draw_index builtin attribute remains a builtin argument, not an unresolved identifier") {
+            val source = """
+                enable draw_index;
+
+                struct Input {
+                    @builtin(draw_index) draw_index: u32,
+                }
+
+                @vertex
+                fn vertex(input: Input) -> @builtin(position) vec4<f32> {
+                    return vec4<f32>(f32(input.draw_index), 1.0, 1.0, 1.0);
+                }
+            """.trimIndent()
+            val lexer = Lexer(source)
+            val parser = Parser(lexer)
+            val unit = parser.parse()
+            val input = unit.declarations.filterIsInstance<StructDecl>().single()
+            val vertex = unit.declarations.filterIsInstance<FunctionDecl>().single()
+
+            (input.members.single().attributes.single { it.name == "builtin" }.args.single() as IdentExpr).name shouldBe "draw_index"
+            (vertex.returnAttributes.single { it.name == "builtin" }.args.single() as IdentExpr).name shouldBe "position"
+            TypeResolver().resolve(unit).isSuccess shouldBe true
         }
     }
 

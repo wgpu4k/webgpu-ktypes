@@ -297,12 +297,12 @@ class PredeclaredEnumerantRegistryTest : FunSpec({
     context("BuiltinValue category") {
         test("has all required values") {
             val values = listOf(
-                "position", "vertex_index", "instance_index", "front_facing",
+                "position", "vertex_index", "instance_index", "draw_index", "front_facing",
                 "primitive_index", "sample_index", "sample_mask", "viewport_index"
             )
             val builtinValues = getPredeclaredEnumerantValues("BuiltinValue")
             
-            builtinValues shouldHaveSize 8
+            builtinValues shouldHaveSize 9
             values.forEach { value ->
                 builtinValues shouldContain value
             }
@@ -310,7 +310,7 @@ class PredeclaredEnumerantRegistryTest : FunSpec({
         
         test("getPredeclaredEnumerant returns enumerant for each value") {
             val values = listOf(
-                "position", "vertex_index", "instance_index", "front_facing",
+                "position", "vertex_index", "instance_index", "draw_index", "front_facing",
                 "primitive_index", "sample_index", "sample_mask", "viewport_index"
             )
             val span = Span(0u, 10u)

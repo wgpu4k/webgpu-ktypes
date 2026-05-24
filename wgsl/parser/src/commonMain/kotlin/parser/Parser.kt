@@ -1512,6 +1512,10 @@ class Parser(
                 advance(); return BuiltinValue.INSTANCE_INDEX
             }
 
+            TokenKind.DRAW_INDEX -> {
+                advance(); return BuiltinValue.DRAW_INDEX
+            }
+
             TokenKind.FRONT_FACING -> {
                 advance(); return BuiltinValue.FRONT_FACING
             }
@@ -2053,6 +2057,7 @@ class Parser(
             TokenKind.TEXTURE_1D, TokenKind.TEXTURE_2D, TokenKind.TEXTURE_3D,
             TokenKind.TEXTURE_CUBE, TokenKind.TEXTURE_EXTERNAL,
             TokenKind.BUILTIN, TokenKind.COMPUTE, TokenKind.POSITION, TokenKind.VERTEX_INDEX, TokenKind.INSTANCE_INDEX,
+            TokenKind.DRAW_INDEX,
             TokenKind.FRONT_FACING, TokenKind.PRIMITIVE_INDEX, TokenKind.SAMPLE_INDEX,
             TokenKind.SAMPLE_MASK, TokenKind.VIEWPORT_INDEX, TokenKind.POINTSIZE,
             TokenKind.CLIP_DISTANCES, TokenKind.CULL_DISTANCES, TokenKind.DEVICE_INDEX,

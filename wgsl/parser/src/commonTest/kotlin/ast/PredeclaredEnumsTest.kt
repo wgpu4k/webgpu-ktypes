@@ -167,6 +167,15 @@ class PredeclaredEnumsTest : FunSpec({
             value.value shouldBe "instance_index"
             value.span shouldBe span
         }
+
+        test("DrawIndex has correct properties") {
+            val span = Span(0u, 10u)
+            val value = DrawIndex(span)
+
+            value.category shouldBe "BuiltinValue"
+            value.value shouldBe "draw_index"
+            value.span shouldBe span
+        }
         
         test("FrontFacing has correct properties") {
             val span = Span(0u, 12u)
