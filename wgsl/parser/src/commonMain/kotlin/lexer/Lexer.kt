@@ -985,6 +985,7 @@ class Lexer(
         "position" -> TokenKind.POSITION
         "vertex_index" -> TokenKind.VERTEX_INDEX
         "instance_index" -> TokenKind.INSTANCE_INDEX
+        "draw_index" -> TokenKind.DRAW_INDEX
         "front_facing" -> TokenKind.FRONT_FACING
         "primitive_index" -> TokenKind.PRIMITIVE_INDEX
         "sample_index" -> TokenKind.SAMPLE_INDEX

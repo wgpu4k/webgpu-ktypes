@@ -181,6 +181,11 @@ data class InstanceIndex(override val span: Span) : BuiltinValueEnum(span) {
     override val value: String = "instance_index"
 }
 
+// Draw Index
+data class DrawIndex(override val span: Span) : BuiltinValueEnum(span) {
+    override val value: String = "draw_index"
+}
+
 // Front Facing
 data class FrontFacing(override val span: Span) : BuiltinValueEnum(span) {
     override val value: String = "front_facing"
@@ -428,6 +433,7 @@ fun getPredeclaredEnumerant(category: String, value: String, span: Span): Predec
             "position" -> Position(span)
             "vertex_index" -> VertexIndex(span)
             "instance_index" -> InstanceIndex(span)
+            "draw_index" -> DrawIndex(span)
             "front_facing" -> FrontFacing(span)
             "primitive_index" -> PrimitiveIndex(span)
             "sample_index" -> SampleIndex(span)
@@ -473,7 +479,7 @@ fun getPredeclaredEnumerantValues(category: String): List<String> = when (catego
     "InterpolationType" -> listOf("perspective", "linear", "flat")
     "InterpolationSampling" -> listOf("center", "centroid", "sample")
     "BuiltinValue" -> listOf(
-        "position", "vertex_index", "instance_index", "front_facing",
+        "position", "vertex_index", "instance_index", "draw_index", "front_facing",
         "primitive_index", "sample_index", "sample_mask", "viewport_index"
     )
     else -> emptyList()

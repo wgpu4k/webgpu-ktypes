@@ -103,7 +103,7 @@ class PredeclaredEnumerantValidatorTest : FunSpec({
         
         test("all BuiltinValue values are valid") {
             val values = listOf(
-                "position", "vertex_index", "instance_index", "front_facing",
+                "position", "vertex_index", "instance_index", "draw_index", "front_facing",
                 "primitive_index", "sample_index", "sample_mask", "viewport_index"
             )
             values.forEach { value ->

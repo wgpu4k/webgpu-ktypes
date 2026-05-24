@@ -145,7 +145,7 @@ class TypeIndex {
     private fun isBuiltinValueKeyword(name: String): Boolean {
         return name in setOf(
             // Builtin values
-            "position", "vertex_index", "instance_index", "front_facing",
+            "position", "vertex_index", "instance_index", "draw_index", "front_facing",
             "primitive_index", "sample_index", "sample_mask", "viewport_index",
             "pointsize", "clip_distances", "cull_distances", "device_index",
             "view_index", "workgroup_id", "num_workgroups", "global_invocation_id",

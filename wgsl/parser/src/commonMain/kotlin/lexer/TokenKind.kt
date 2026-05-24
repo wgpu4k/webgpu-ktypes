@@ -215,6 +215,7 @@ enum class TokenKind {
     POSITION,
     VERTEX_INDEX,
     INSTANCE_INDEX,
+    DRAW_INDEX,
     FRONT_FACING,
     PRIMITIVE_INDEX,
     SAMPLE_INDEX,
@@ -277,7 +278,7 @@ val TokenKind.isKeyword: Boolean
         TokenKind.SAMPLER, TokenKind.SAMPLER_COMPARISON, TokenKind.ATOMIC, TokenKind.RAY_QUERY, TokenKind.HANDLE -> true
         // Built-in values
         TokenKind.TRUE, TokenKind.FALSE, TokenKind.POSITION, TokenKind.VERTEX_INDEX,
-        TokenKind.INSTANCE_INDEX, TokenKind.FRONT_FACING, TokenKind.PRIMITIVE_INDEX,
+        TokenKind.INSTANCE_INDEX, TokenKind.DRAW_INDEX, TokenKind.FRONT_FACING, TokenKind.PRIMITIVE_INDEX,
         TokenKind.SAMPLE_INDEX, TokenKind.SAMPLE_MASK, TokenKind.VIEWPORT_INDEX,
         TokenKind.POINTSIZE, TokenKind.CLIP_DISTANCES, TokenKind.CULL_DISTANCES,
         TokenKind.DEVICE_INDEX, TokenKind.VIEW_INDEX, TokenKind.WORKGROUP_ID,
@@ -445,6 +446,7 @@ val TokenKind.isBuiltinValue: Boolean
         TokenKind.POSITION,
         TokenKind.VERTEX_INDEX,
         TokenKind.INSTANCE_INDEX,
+        TokenKind.DRAW_INDEX,
         TokenKind.FRONT_FACING,
         TokenKind.PRIMITIVE_INDEX,
         TokenKind.SAMPLE_INDEX,

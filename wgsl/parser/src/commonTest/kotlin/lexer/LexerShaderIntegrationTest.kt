@@ -46,6 +46,28 @@ class LexerShaderIntegrationTest : FunSpec({
         }
     }
 
+    context("Vertex shader: draw index input") {
+        test("@builtin(draw_index) is tokenized as a builtin value") {
+            val source = """
+                enable draw_index;
+
+                struct Input {
+                    @builtin(draw_index) draw_index: u32,
+                }
+
+                @vertex
+                fn vertex(input: Input) -> @builtin(position) vec4<f32> {
+                    return vec4<f32>(f32(input.draw_index), 1.0, 1.0, 1.0);
+                }
+            """.trimIndent()
+            val tokens = tokenizeSignificant(source)
+
+            tokens.none { it.kind == TokenKind.UNKNOWN } shouldBe true
+            tokens.any { it.kind == TokenKind.ENABLE } shouldBe true
+            tokens.count { it.kind == TokenKind.DRAW_INDEX } shouldBe 4
+        }
+    }
+
     context("Fragment shader: uniform buffer and texture sampling") {
         /**
          * @group(0) @binding(0) var<uniform> ubo: MyUBO;

@@ -239,6 +239,7 @@ enum class BuiltinValue {
     POSITION,
     VERTEX_INDEX,
     INSTANCE_INDEX,
+    DRAW_INDEX,
     FRONT_FACING,
     PRIMITIVE_INDEX,
     SAMPLE_INDEX,

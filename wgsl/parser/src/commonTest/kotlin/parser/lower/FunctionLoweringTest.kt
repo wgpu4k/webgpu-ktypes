@@ -4,7 +4,10 @@ import io.kotest.core.spec.style.FunSpec
 import io.kotest.matchers.collections.shouldHaveSize
 import io.kotest.matchers.shouldBe
 import io.kotest.matchers.shouldNotBe
+import io.ygdrasil.wgsl.ir.BindingAttribute
+import io.ygdrasil.wgsl.ir.BuiltinValue
 import io.ygdrasil.wgsl.ir.ShaderStage
+import io.ygdrasil.wgsl.ir.TypeInner
 import io.ygdrasil.wgsl.parser.TestUtils.lowerWgsl
 
 class FunctionLoweringTest : FunSpec({
@@ -56,5 +59,39 @@ class FunctionLoweringTest : FunSpec({
         
         module.entryPoints shouldHaveSize 1
         module.entryPoints[0].stage shouldBe ShaderStage.Compute
+    }
+
+    test("should lower draw_index builtin on vertex input struct member") {
+        val module = lowerWgsl("""
+            enable draw_index;
+
+            struct Input {
+                @builtin(draw_index) draw_index: u32,
+            }
+
+            @vertex
+            fn vertex(input: Input) -> @builtin(position) vec4<f32> {
+                return vec4<f32>(f32(input.draw_index), 1.0, 1.0, 1.0);
+            }
+        """.trimIndent())
+        val input = module.types.toList()
+            .map { it.inner }
+            .filterIsInstance<TypeInner.Struct>()
+            .single { it.members.singleOrNull()?.name == "draw_index" }
+
+        input.members.single().binding shouldBe BindingAttribute.Builtin(BuiltinValue.DrawIndex)
+        module.entryPoints.single().stage shouldBe ShaderStage.Vertex
+    }
+
+    test("should keep existing snake-case builtin lowering behavior outside draw_index") {
+        val module = lowerWgsl("""
+            @vertex
+            fn vertex(@builtin(vertex_index) vertex_index: u32) -> @builtin(position) vec4<f32> {
+                return vec4<f32>(f32(vertex_index), 1.0, 1.0, 1.0);
+            }
+        """.trimIndent())
+        val function = module.functions[module.entryPoints.single().function]
+
+        function.parameters.single().binding shouldBe null
     }
 })
