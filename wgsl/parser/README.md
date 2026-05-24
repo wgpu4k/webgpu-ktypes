@@ -244,9 +244,8 @@ The `ModuleIndexer` performs:
 3. **Topological Sort**: Orders declarations so all dependencies are resolved first
 
 ```kotlin
-val indexer = ModuleIndexer(translationUnit)
-val resolutionResult = indexer.index()
-// resolutionResult.sortedDeclarations: List<GlobalDecl> in correct order
+val sortedUnit = ModuleIndexer().reorderDeclarations(translationUnit)
+// sortedUnit.declarations contains declarations in dependency order
 ```
 
 ### Step 4: Type Resolution (`TypeResolver.kt`)
@@ -257,8 +256,7 @@ val resolutionResult = indexer.index()
 Validates and resolves all type references:
 
 ```kotlin
-val resolver = TypeResolver(translationUnit)
-val resolutionResult = resolver.resolve()
+val resolutionResult = TypeResolver().resolve(translationUnit)
 
 // resolutionResult contains:
 // - resolvedUnit: TranslationUnit with all types resolved
@@ -291,8 +289,7 @@ val resolutionResult = resolver.resolve()
 Transforms high-level AST into low-level Intermediate Representation:
 
 ```kotlin
-val lowerer = Lowerer(resolvedUnit)
-val irModule = lowerer.lower()
+val irModule = Lowerer().lower(resolvedUnit)
 
 // irModule contains:
 // - types: List<Type>
@@ -399,8 +396,8 @@ Resolves type references and validates type compatibility.
 **Resolution Process:**
 
 ```kotlin
-class TypeResolver(private val translationUnit: TranslationUnit) {
-    fun resolve(): ResolutionResult {
+class TypeResolver {
+    fun resolve(translationUnit: TranslationUnit): ResolutionResult {
         // Phase 1: Build type index
         val typeIndex = buildTypeIndex()
         
@@ -437,8 +434,8 @@ Converts AST to Intermediate Representation (IR).
 **Lowering Strategy:**
 
 ```kotlin
-class Lowerer(private val resolvedUnit: TranslationUnit) {
-    fun lower(): Module {
+class Lowerer {
+    fun lower(resolvedUnit: TranslationUnit): Module {
         val irModule = Module()
         
         // Lower all global declarations
@@ -549,6 +546,27 @@ class Lowerer(private val resolvedUnit: TranslationUnit) {
 
 The parser module implements robust error handling to provide meaningful diagnostics:
 
+### Public Parse Result
+
+Use `parseWgslResult(source)` when callers need diagnostics. It returns the parsed `TranslationUnit`, which can be partial after recovery, plus the collected `ParseError` list and an `isSuccess` convenience flag.
+
+```kotlin
+import io.ygdrasil.wgsl.parser.parseWgslResult
+
+val result = parseWgslResult(source)
+
+if (!result.isSuccess) {
+    result.errors.forEach { error ->
+        println("${error.span}: ${error.message}")
+    }
+    return
+}
+
+val translationUnit = result.translationUnit
+```
+
+`parseWgsl(source)` remains available as a compatibility helper for callers that only need the AST. New integrations should prefer `parseWgslResult` so syntax errors are not lost.
+
 ### Error Recovery (`ErrorRecovery.kt`)
 
 Allows the parser to continue after encountering errors, enabling reporting of multiple issues in a single pass.
@@ -581,7 +599,7 @@ class Diagnostic(
     val code: String? = null    // Optional error code
 )
 
-// Collection of diagnostics
+// Collection of diagnostics used by semantic phases
 class DiagnosticCollection {
     val diagnostics: MutableList<Diagnostic> = mutableListOf()
     
@@ -638,9 +656,8 @@ error[E0001]: expected expression
 #### Basic Usage
 
 ```kotlin
-// Parse WGSL source to AST
-import io.ygdrasil.wgsl.lexer.Lexer
-import io.ygdrasil.wgsl.parser.Parser
+// Parse WGSL source to AST plus parse diagnostics
+import io.ygdrasil.wgsl.parser.parseWgslResult
 
 val source = """
     @vertex
@@ -649,40 +666,39 @@ val source = """
     }
 """
 
-val lexer = Lexer(source)
-val parser = Parser(lexer)
-val translationUnit = parser.parse()
+val result = parseWgslResult(source)
 
-// translationUnit now contains the parsed AST
+if (!result.isSuccess) {
+    error("WGSL parse failed: ${result.errors.joinToString { it.message }}")
+}
+
+val translationUnit = result.translationUnit
 ```
 
 #### Full Pipeline to IR
 
 ```kotlin
-import io.ygdrasil.wgsl.lexer.Lexer
-import io.ygdrasil.wgsl.parser.Parser
 import io.ygdrasil.wgsl.parser.TypeResolver
 import io.ygdrasil.wgsl.parser.Lowerer
+import io.ygdrasil.wgsl.parser.parseWgslResult
 
 fun parseWgslToIr(source: String): Module {
-    // Step 1: Lexing
-    val lexer = Lexer(source)
+    // Step 1: Parsing
+    val parseResult = parseWgslResult(source)
+    if (!parseResult.isSuccess) {
+        throw IllegalStateException("Parse errors: ${parseResult.errors.joinToString()}")
+    }
+    val translationUnit = parseResult.translationUnit
     
-    // Step 2: Parsing
-    val parser = Parser(lexer)
-    val translationUnit = parser.parse()
-    
-    // Step 3: Type Resolution
-    val resolver = TypeResolver(translationUnit)
-    val resolutionResult = resolver.resolve()
+    // Step 2: Type Resolution
+    val resolutionResult = TypeResolver().resolve(translationUnit)
     
     if (!resolutionResult.isSuccess) {
         throw IllegalStateException("Type resolution failed: ${resolutionResult.unresolvedReferences}")
     }
     
-    // Step 4: Lowering to IR
-    val lowerer = Lowerer(resolutionResult.resolvedUnit)
-    return lowerer.lower()
+    // Step 3: Lowering to IR
+    return Lowerer().lower(resolutionResult.resolvedUnit)
 }
 ```
 
@@ -691,19 +707,17 @@ fun parseWgslToIr(source: String): Module {
 ```kotlin
 fun parseWithErrorHandling(source: String): Result<Module> {
     return try {
-        val lexer = Lexer(source)
-        val parser = Parser(lexer)
-        val tu = parser.parse()
+        val parseResult = parseWgslResult(source)
         
         // Check for parse errors
-        if (tu.diagnostics.hasErrors()) {
+        if (!parseResult.isSuccess) {
             return Result.failure(
-                ParseException("Parse errors: ${tu.diagnostics.getErrors().joinToString()}")
+                ParseException("Parse errors: ${parseResult.errors.joinToString()}")
             )
         }
+        val tu = parseResult.translationUnit
         
-        val resolver = TypeResolver(tu)
-        val resolutionResult = resolver.resolve()
+        val resolutionResult = TypeResolver().resolve(tu)
         
         if (!resolutionResult.isSuccess) {
             return Result.failure(
@@ -711,14 +725,20 @@ fun parseWithErrorHandling(source: String): Result<Module> {
             )
         }
         
-        val lowerer = Lowerer(resolutionResult.resolvedUnit)
-        Result.success(lowerer.lower())
+        Result.success(Lowerer().lower(resolutionResult.resolvedUnit))
         
     } catch (e: Exception) {
         Result.failure(e)
     }
 }
 ```
+
+### Known Limitations
+
+- The parser has broad WGSL syntax coverage, but overall WGSL conformance is not claimed as 100%. Use the compliance corpus and report in [WGSL_PARSER_COMPLIANCE.md](./docs/WGSL_PARSER_COMPLIANCE.md) to track the measured state.
+- `parseWgslResult` reports syntax errors from the parser. Type resolution and lowering have separate result/error paths and should be handled explicitly by pipeline callers.
+- Lowering now fails explicitly for unsupported or unknown types instead of silently substituting a default scalar type. Callers should treat `LoweringError` as a real pipeline failure.
+- Generator output conformance is outside the parser API contract and must be validated in the generator modules.
 
 ### Module Dependencies
 
@@ -922,6 +942,7 @@ Detailed documentation is available in the `docs/` directory:
 | [PREDECLARED_ENUMERANTS.md](./docs/PREDECLARED_ENUMERANTS.md) | Complete guide to predeclared enumerants support |
 | [ENUM_SUPPORT.md](./docs/ENUM_SUPPORT.md) | User-defined enums and predeclared enumerants |
 | [CONFORMANCE.md](./docs/CONFORMANCE.md) | Conformance with WGSL specification |
+| [WGSL_PARSER_COMPLIANCE.md](./docs/WGSL_PARSER_COMPLIANCE.md) | Parser compliance corpus, measured stages, and known gaps |
 | [BREAKING_CHANGES.md](./docs/BREAKING_CHANGES.md) | Breaking changes tracking |
 | [EXAMPLES.md](./docs/EXAMPLES.md) | Comprehensive usage examples |
 

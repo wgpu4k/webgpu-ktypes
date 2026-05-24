@@ -136,34 +136,13 @@ class Lowerer {
         return typeMap.getOrPut(typeDecl) {
             val inner = when (typeDecl) {
                 is ScalarType -> {
-                    val width = when (typeDecl.kind) {
-                        ScalarKind.BOOL -> 1
-                        else -> 4
-                    }
-                    IrTypeInner.Scalar(lowerScalarKind(typeDecl.kind), width)
+                    IrTypeInner.Scalar(lowerScalarKind(typeDecl.kind), lowerScalarWidth(typeDecl.kind))
                 }
                 is VectorType -> IrTypeInner.Vector(lowerVectorSize(typeDecl.size), lowerType(typeDecl.elementType))
                 is MatrixType -> IrTypeInner.Matrix(lowerVectorSize(typeDecl.columns), lowerVectorSize(typeDecl.rows), lowerType(typeDecl.elementType))
-                is ArrayType -> {
-                    val arraySize = typeDecl.length?.let { len ->
-                        when (len) {
-                            is IntLiteral -> IrArraySize.Constant(len.value.toInt())
-                            is IdentExpr -> {
-                                val valInt = len.name.toIntOrNull()
-                                if (valInt != null) {
-                                    IrArraySize.Constant(valInt)
-                                } else {
-                                    IrArraySize.Dynamic(Handle(0))
-                                }
-                            }
-                            else -> IrArraySize.Dynamic(Handle(0))
-                        }
-                    } ?: IrArraySize.Dynamic(Handle(0))
-                    IrTypeInner.Array(lowerType(typeDecl.elementType), arraySize)
-                }
+                is ArrayType -> IrTypeInner.Array(lowerType(typeDecl.elementType), lowerArraySize(typeDecl.length))
                 is StructType -> {
-                    // Fallback: create empty struct (shouldn't happen if all structs are processed first)
-                    IrTypeInner.Struct(emptyList())
+                    throw LoweringError("Unknown struct type: '${typeDecl.name}'")
                 }
                 is PointerType -> IrTypeInner.Pointer(
                     lowerType(typeDecl.elementType),
@@ -174,22 +153,22 @@ class Lowerer {
                     val name = typeDecl.name
                     when {
                         name == "f32" -> IrTypeInner.Scalar(IrScalarKind.F32, 4)
+                        name == "f16" -> IrTypeInner.Scalar(IrScalarKind.F16, 2)
+                        name == "f64" -> IrTypeInner.Scalar(IrScalarKind.F64, 8)
+                        name == "i8" -> IrTypeInner.Scalar(IrScalarKind.Sint, 1)
+                        name == "u8" -> IrTypeInner.Scalar(IrScalarKind.Uint, 1)
+                        name == "i16" -> IrTypeInner.Scalar(IrScalarKind.Sint, 2)
+                        name == "u16" -> IrTypeInner.Scalar(IrScalarKind.Uint, 2)
                         name == "i32" -> IrTypeInner.Scalar(IrScalarKind.Sint, 4)
                         name == "u32" -> IrTypeInner.Scalar(IrScalarKind.Uint, 4)
+                        name == "i64" -> IrTypeInner.Scalar(IrScalarKind.Sint, 8)
+                        name == "u64" -> IrTypeInner.Scalar(IrScalarKind.Uint, 8)
                         name == "bool" -> IrTypeInner.Scalar(IrScalarKind.Bool, 1)
                         name == "acceleration_structure" || name == "ray_query" || name == "RayDesc" || name == "RayIntersection" -> {
                             IrTypeInner.Opaque(name)
                         }
-                        name.startsWith("vec") -> {
-                            val size = name.substring(3, 4).toIntOrNull() ?: 4
-                            IrTypeInner.Vector(lowerVectorSize(size), module.types.append(IrType(IrTypeInner.Scalar(IrScalarKind.F32, 4))))
-                        }
-                        name.startsWith("mat") -> {
-                            val cols = name.substring(3, 4).toIntOrNull() ?: 4
-                            val rows = name.substring(5, 6).toIntOrNull() ?: 4
-                            IrTypeInner.Matrix(lowerVectorSize(cols), lowerVectorSize(rows), module.types.append(IrType(IrTypeInner.Scalar(IrScalarKind.F32, 4))))
-                        }
-                        else -> IrTypeInner.Scalar(IrScalarKind.F32, 4)
+                        else -> lowerBuiltinShorthandType(name)
+                            ?: throw LoweringError("Unknown named type: '$name'")
                     }
                 }
                 is AbstractIntType -> IrTypeInner.Abstract(IrScalarKind.AbstractInt)
@@ -199,49 +178,29 @@ class Lowerer {
                     when (name) {
                         "array" -> {
                             val elemType = typeDecl.args.getOrNull(0)?.let { lowerType(it) }
-                                ?: module.types.append(IrType(IrTypeInner.Scalar(IrScalarKind.F32, 4)))
-                            val arraySize = typeDecl.args.getOrNull(1)?.let { arg ->
-                                when (arg) {
-                                    is ConstantType -> {
-                                        val expr = arg.expression
-                                        if (expr is IntLiteral) {
-                                            IrArraySize.Constant(expr.value.toInt())
-                                        } else {
-                                            IrArraySize.Dynamic(Handle(0))
-                                        }
-                                    }
-                                    is NamedType -> {
-                                        val valInt = arg.name.toIntOrNull()
-                                        if (valInt != null) {
-                                            IrArraySize.Constant(valInt)
-                                        } else {
-                                            IrArraySize.Dynamic(Handle(0))
-                                        }
-                                    }
-                                    else -> IrArraySize.Dynamic(Handle(0))
-                                }
-                            } ?: IrArraySize.Dynamic(Handle(0))
+                                ?: throw LoweringError("array template requires an element type")
+                            val arraySize = typeDecl.args.getOrNull(1)?.let { lowerArraySizeArgument(it) } ?: IrArraySize.Dynamic(Handle(0))
                             IrTypeInner.Array(elemType, arraySize)
                         }
                         "vec2", "vec3", "vec4" -> {
                             val size = name.substring(3).toInt()
                             val elemType = typeDecl.args.getOrNull(0)?.let { lowerType(it) }
-                                ?: module.types.append(IrType(IrTypeInner.Scalar(IrScalarKind.F32, 4)))
+                                ?: throw LoweringError("$name template requires an element type")
                             IrTypeInner.Vector(lowerVectorSize(size), elemType)
                         }
                         "mat2x2", "mat2x3", "mat2x4", "mat3x2", "mat3x3", "mat3x4", "mat4x2", "mat4x3", "mat4x4" -> {
                             val cols = name.substring(3, 4).toInt()
                             val rows = name.substring(5, 6).toInt()
                             val elemType = typeDecl.args.getOrNull(0)?.let { lowerType(it) }
-                                ?: module.types.append(IrType(IrTypeInner.Scalar(IrScalarKind.F32, 4)))
+                                ?: throw LoweringError("$name template requires an element type")
                             IrTypeInner.Matrix(lowerVectorSize(cols), lowerVectorSize(rows), elemType)
                         }
                         "atomic" -> {
                             val elemType = typeDecl.args.getOrNull(0)?.let { lowerType(it) }
-                                ?: module.types.append(IrType(IrTypeInner.Scalar(IrScalarKind.F32, 4)))
+                                ?: throw LoweringError("atomic template requires an element type")
                             module.types[elemType].inner
                         }
-                        else -> IrTypeInner.Scalar(IrScalarKind.F32, 4)
+                        else -> throw LoweringError("Unsupported template type: '$name'")
                     }
                 }
                 is AtomicType -> {
@@ -289,10 +248,71 @@ class Lowerer {
                 is RayQueryType -> {
                     IrTypeInner.Opaque("ray_query")
                 }
-                else -> IrTypeInner.Scalar(IrScalarKind.F32, 4)
+                is ReferenceType -> IrTypeInner.ValuePointer(lowerType(typeDecl.elementType))
+                is EnumType -> IrTypeInner.Opaque(typeDecl.name)
+                else -> throw LoweringError("Unsupported type declaration: ${typeDecl::class.simpleName}")
             }
             module.types.append(IrType(inner))
         }
+    }
+
+    private fun lowerArraySize(length: Expression?): IrArraySize {
+        return when (length) {
+            null -> IrArraySize.Dynamic(Handle(0))
+            is IntLiteral -> IrArraySize.Constant(length.value.toInt())
+            is IdentExpr -> length.name.toIntOrNull()?.let { IrArraySize.Constant(it) } ?: IrArraySize.Dynamic(Handle(0))
+            else -> IrArraySize.Dynamic(Handle(0))
+        }
+    }
+
+    private fun lowerArraySizeArgument(typeDecl: TypeDecl): IrArraySize {
+        return when (typeDecl) {
+            is ConstantType -> lowerArraySize(typeDecl.expression)
+            is NamedType -> typeDecl.name.toIntOrNull()?.let { IrArraySize.Constant(it) } ?: IrArraySize.Dynamic(Handle(0))
+            else -> IrArraySize.Dynamic(Handle(0))
+        }
+    }
+
+    private fun lowerBuiltinShorthandType(name: String): IrTypeInner? {
+        val vectorMatch = Regex("""vec([234])([fiuh])?""").matchEntire(name)
+        if (vectorMatch != null) {
+            val size = vectorMatch.groupValues[1].toInt()
+            val scalar = lowerShorthandScalar(vectorMatch.groupValues.getOrNull(2).orEmpty())
+            return IrTypeInner.Vector(lowerVectorSize(size), lowerType(ScalarType(scalar, io.ygdrasil.wgsl.ir.Span.UNDEFINED)))
+        }
+
+        val matrixMatch = Regex("""mat([234])x([234])([fh])?""").matchEntire(name)
+        if (matrixMatch != null) {
+            val cols = matrixMatch.groupValues[1].toInt()
+            val rows = matrixMatch.groupValues[2].toInt()
+            val scalar = lowerShorthandScalar(matrixMatch.groupValues.getOrNull(3).orEmpty())
+            return IrTypeInner.Matrix(lowerVectorSize(cols), lowerVectorSize(rows), lowerType(ScalarType(scalar, io.ygdrasil.wgsl.ir.Span.UNDEFINED)))
+        }
+
+        return null
+    }
+
+    private fun lowerShorthandScalar(suffix: String): ScalarKind {
+        return when (suffix) {
+            "", "f" -> ScalarKind.F32
+            "h" -> ScalarKind.F16
+            "i" -> ScalarKind.I32
+            "u" -> ScalarKind.U32
+            else -> throw LoweringError("Unsupported shorthand scalar suffix: '$suffix'")
+        }
+    }
+
+    private fun isBuiltinConstructorType(name: String): Boolean {
+        return name in setOf(
+            "bool",
+            "i8", "u8",
+            "i16", "u16",
+            "i32", "u32",
+            "i64", "u64",
+            "f16", "f32", "f64",
+            "array",
+        ) || Regex("""vec([234])([fiuh])?""").matches(name) ||
+                Regex("""mat([234])x([234])([fh])?""").matches(name)
     }
 
     private fun getTypeDeclName(typeDecl: TypeDecl): String {
@@ -325,23 +345,32 @@ class Lowerer {
             is AbstractFloatType -> "abstract_float"
             is StructType -> typeDecl.name
             is EnumType -> typeDecl.name
-            else -> "f32"
+            else -> throw LoweringError("Unsupported type declaration name: ${typeDecl::class.simpleName}")
         }
     }
 
     private fun lowerScalarKind(kind: ScalarKind): IrScalarKind = when (kind) {
         ScalarKind.BOOL -> IrScalarKind.Bool
-        ScalarKind.U32 -> IrScalarKind.Uint
-        ScalarKind.I32 -> IrScalarKind.Sint
+        ScalarKind.U8, ScalarKind.U16, ScalarKind.U32, ScalarKind.U64 -> IrScalarKind.Uint
+        ScalarKind.I8, ScalarKind.I16, ScalarKind.I32, ScalarKind.I64 -> IrScalarKind.Sint
+        ScalarKind.F16 -> IrScalarKind.F16
         ScalarKind.F32 -> IrScalarKind.F32
-        else -> IrScalarKind.F32
+        ScalarKind.F64 -> IrScalarKind.F64
+    }
+
+    private fun lowerScalarWidth(kind: ScalarKind): Int = when (kind) {
+        ScalarKind.BOOL -> 1
+        ScalarKind.I8, ScalarKind.U8 -> 1
+        ScalarKind.I16, ScalarKind.U16, ScalarKind.F16 -> 2
+        ScalarKind.I32, ScalarKind.U32, ScalarKind.F32 -> 4
+        ScalarKind.I64, ScalarKind.U64, ScalarKind.F64 -> 8
     }
 
     private fun lowerVectorSize(size: Int): IrVectorSize = when (size) {
         2 -> IrVectorSize.Bi
         3 -> IrVectorSize.Tri
         4 -> IrVectorSize.Quad
-        else -> IrVectorSize.Quad
+        else -> throw LoweringError("Unsupported vector size: $size")
     }
 
     private fun lowerAddressSpace(storageClass: io.ygdrasil.wgsl.ast.StorageClass): IrAddressSpace = when (storageClass) {
@@ -612,9 +641,9 @@ class Lowerer {
             }
             is VariableDeclStatement -> {
                 val initHandle = astStmt.initializer?.let { lowerExpression(it) }
-                val type = astStmt.type?.let { lowerType(it) }
-                    ?: initHandle?.let { resolveExpressionType(it) }
-                    ?: lowerInferredType(astStmt.initializer)
+                    val type = astStmt.type?.let { lowerType(it) }
+                        ?: initHandle?.let { resolveExpressionType(it) }
+                    ?: lowerInferredType()
                 val localVar = IrLocalVariable(
                     name = astStmt.name,
                     type = type,
@@ -879,7 +908,7 @@ class Lowerer {
                 // Heuristic: if callee is IdentExpr and matches a function name, it's a call
                 // If it matches a type name, it's a TypeConstructor
                 val calleeName = (astExpr.callee as? IdentExpr)?.name
-                val isBuiltinType = calleeName == "f32" || calleeName == "i32" || calleeName == "u32" || calleeName == "bool" || calleeName?.startsWith("vec") == true || calleeName?.startsWith("mat") == true || calleeName?.startsWith("array") == true
+                val isBuiltinType = calleeName != null && isBuiltinConstructorType(calleeName)
                 val isStructType = calleeName != null && structNameMap.containsKey(calleeName)
                 val isAliasType = calleeName != null && typeAliasMap.containsKey(calleeName)
                 
@@ -890,7 +919,7 @@ class Lowerer {
                     val elemType = if (loweredArgs.isNotEmpty()) {
                         resolveExpressionType(loweredArgs[0])
                     } else {
-                        module.types.append(IrType(IrTypeInner.Scalar(IrScalarKind.F32, 4)))
+                        throw LoweringError("Cannot infer element type for empty array constructor")
                     }
                     val arraySize = IrArraySize.Constant(loweredArgs.size)
                     val arrayTypeInner = IrTypeInner.Array(elemType, arraySize)
@@ -1055,9 +1084,8 @@ class Lowerer {
         else -> IrUnaryOperator.Not
     }
 
-    private fun lowerInferredType(initializer: Expression?): Handle<IrType> {
-        // Very simplified inference
-        return module.types.append(IrType(IrTypeInner.Scalar(IrScalarKind.F32, 4)))
+    private fun lowerInferredType(): Handle<IrType> {
+        throw LoweringError("Cannot infer variable type without an initializer")
     }
 
     private fun resolveExpressionType(expr: Handle<IrExpression>): Handle<IrType> {

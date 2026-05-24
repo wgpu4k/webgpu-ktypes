@@ -47,4 +47,20 @@ class ParserTest : FunSpec({
         val returnType = func.returnType as ScalarType
         returnType.kind shouldBe ScalarKind.I32
     }
+
+    test("parseWgslResult returns AST and success state") {
+        val result = parseWgslResult("fn main() {}")
+
+        result.isSuccess shouldBe true
+        result.errors shouldHaveSize 0
+        result.translationUnit.declarations shouldHaveSize 1
+    }
+
+    test("parseWgslResult exposes parser errors") {
+        val result = parseWgslResult("@location(0)")
+
+        result.isSuccess shouldBe false
+        result.errors shouldHaveSize 1
+        result.errors.first().message shouldBe "Attributes must be followed by a declaration"
+    }
 })

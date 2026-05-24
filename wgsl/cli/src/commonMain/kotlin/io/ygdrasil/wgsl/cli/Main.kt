@@ -1,6 +1,7 @@
 package io.ygdrasil.wgsl.cli
 
 import com.github.ajalt.clikt.core.CliktCommand
+import com.github.ajalt.clikt.core.CliktError
 import com.github.ajalt.clikt.core.main
 import com.github.ajalt.clikt.core.subcommands
 import com.github.ajalt.clikt.parameters.arguments.argument
@@ -24,13 +25,16 @@ class ConvertCommand : CliktCommand(name = "convert") {
 
     override fun run() {
         val source = input.readText()
-        val translationUnit = io.ygdrasil.wgsl.parser.parseWgsl(source)
-        
-        // Note: For now we don't have an easy way to get parser errors via parseWgsl
-        // but we can check if it returned something sensible or use the Parser directly
+        val parseResult = io.ygdrasil.wgsl.parser.parseWgslResult(source)
+
+        if (!parseResult.isSuccess) {
+            echo("Errors during parsing:", err = true)
+            parseResult.errors.forEach { echo("${it.message} at ${it.span}", err = true) }
+            throw CliktError("Parsing failed", statusCode = 1)
+        }
 
         val resolver = io.ygdrasil.wgsl.parser.TypeResolver()
-        val resolutionResult = resolver.resolve(translationUnit)
+        val resolutionResult = resolver.resolve(parseResult.translationUnit)
         
         if (!resolutionResult.isSuccess) {
             echo("Errors during type resolution:", err = true)

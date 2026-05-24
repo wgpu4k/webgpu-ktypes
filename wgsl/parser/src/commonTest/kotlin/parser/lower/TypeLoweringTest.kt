@@ -1,17 +1,22 @@
 package io.ygdrasil.wgsl.parser.lower
 
 import io.kotest.core.spec.style.FunSpec
+import io.kotest.assertions.throwables.shouldThrow
 import io.kotest.matchers.collections.shouldHaveSize
 import io.kotest.matchers.shouldBe
 import io.kotest.matchers.shouldNotBe
+import io.kotest.matchers.string.shouldContain
 import io.kotest.matchers.types.beInstanceOf
 import io.ygdrasil.wgsl.ir.ScalarKind
 import io.ygdrasil.wgsl.ir.TypeInner
 import io.ygdrasil.wgsl.ir.VectorSize
 import io.ygdrasil.wgsl.parser.lowerWgsl
+import io.ygdrasil.wgsl.parser.Lowerer
+import io.ygdrasil.wgsl.parser.LoweringError
 import io.ygdrasil.wgsl.parser.findScalarType
 import io.ygdrasil.wgsl.parser.findType
 import io.ygdrasil.wgsl.parser.findVectorType
+import io.ygdrasil.wgsl.parser.parseWgsl
 
 class TypeLoweringTest : FunSpec({
     test("T001: should lower simple function with i32 return type") {
@@ -36,6 +41,45 @@ class TypeLoweringTest : FunSpec({
         // Find the bool type by kind and width
         val boolType = module.findScalarType(ScalarKind.Bool, 1)
         boolType shouldNotBe null
+    }
+
+    test("all scalar return types preserve kind and width") {
+        val cases = listOf(
+            "bool" to TypeInner.Scalar(ScalarKind.Bool, 1),
+            "i8" to TypeInner.Scalar(ScalarKind.Sint, 1),
+            "u8" to TypeInner.Scalar(ScalarKind.Uint, 1),
+            "i16" to TypeInner.Scalar(ScalarKind.Sint, 2),
+            "u16" to TypeInner.Scalar(ScalarKind.Uint, 2),
+            "i32" to TypeInner.Scalar(ScalarKind.Sint, 4),
+            "u32" to TypeInner.Scalar(ScalarKind.Uint, 4),
+            "i64" to TypeInner.Scalar(ScalarKind.Sint, 8),
+            "u64" to TypeInner.Scalar(ScalarKind.Uint, 8),
+            "f16" to TypeInner.Scalar(ScalarKind.F16, 2),
+            "f32" to TypeInner.Scalar(ScalarKind.F32, 4),
+            "f64" to TypeInner.Scalar(ScalarKind.F64, 8),
+        )
+
+        cases.forEach { (typeName, expected) ->
+            val module = lowerWgsl("fn main() -> $typeName { return 0; }")
+            val function = module.functions.toList().single { it.name == "main" }
+            module.types[function.returnType!!].inner shouldBe expected
+        }
+    }
+
+    test("scalar constructors preserve target scalar type") {
+        val module = lowerWgsl("""
+            fn main() {
+                let half = f16(1.0);
+                let short = i16(1);
+            }
+        """.trimIndent())
+        val function = module.functions.toList().single { it.name == "main" }
+
+        val half = function.localVariables.toList().single { it.name == "half" }
+        module.types[half.type].inner shouldBe TypeInner.Scalar(ScalarKind.F16, 2)
+
+        val short = function.localVariables.toList().single { it.name == "short" }
+        module.types[short.type].inner shouldBe TypeInner.Scalar(ScalarKind.Sint, 2)
     }
 
     test("T004: should lower vec2<f32> type") {
@@ -130,5 +174,21 @@ class TypeLoweringTest : FunSpec({
         // Le type du membre inner doit pointer vers Inner (pas un struct vide)
         val innerType = module.types[innerMember!!.type]
         (innerType.inner as? TypeInner.Struct)?.members?.isEmpty() shouldBe false
+    }
+
+    test("unknown_named_type_should_fail_lowering_instead_of_defaulting_to_f32") {
+        val error = shouldThrow<LoweringError> {
+            Lowerer().lower(parseWgsl("type Bad = definitely_unknown;"))
+        }
+
+        error.message shouldContain "Unknown named type"
+    }
+
+    test("empty_array_constructor_should_fail_when_element_type_cannot_be_inferred") {
+        val error = shouldThrow<LoweringError> {
+            lowerWgsl("fn main() { let values = array(); }")
+        }
+
+        error.message shouldContain "Cannot infer element type for empty array constructor"
     }
 })

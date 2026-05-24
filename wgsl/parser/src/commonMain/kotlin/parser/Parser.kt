@@ -2541,10 +2541,31 @@ data class ParseError(
 )
 
 /**
+ * Result of parsing a WGSL source string.
+ */
+data class ParseResult(
+    /** The parsed translation unit. It may be partial when [errors] is not empty. */
+    val translationUnit: TranslationUnit,
+    /** Parse errors collected while building the translation unit. */
+    val errors: List<ParseError>,
+) {
+    /** Whether parsing completed without syntax errors. */
+    val isSuccess: Boolean get() = errors.isEmpty()
+}
+
+/**
  * Parses a WGSL source string and returns the AST.
  */
 fun parseWgsl(source: String): TranslationUnit {
+    return parseWgslResult(source).translationUnit
+}
+
+/**
+ * Parses a WGSL source string and returns both the AST and parse errors.
+ */
+fun parseWgslResult(source: String): ParseResult {
     val lexer = Lexer(source)
     val parser = Parser(lexer)
-    return parser.parse()
+    val unit = parser.parse()
+    return ParseResult(unit, parser.errors.toList())
 }
