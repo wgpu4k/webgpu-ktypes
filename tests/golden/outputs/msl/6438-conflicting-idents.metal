@@ -7,6 +7,7 @@ struct Struct_3 {
 
 [[fragment]]
 float4 fs() {
+    return float4(1.0f, 0.0f, 0.0f, 1.0f);
 }
 
 struct vs_Input {
@@ -19,4 +20,7 @@ struct vs_Output {
 [[vertex]]
 vs_Output vs(vs_Input in [[stage_in]]) {
     float2 xy = in.xy;
+    Struct_3 local_0;
+    local_0.position = float4(xy, 0.0f, 1.0f);
+    return local_0;
 }

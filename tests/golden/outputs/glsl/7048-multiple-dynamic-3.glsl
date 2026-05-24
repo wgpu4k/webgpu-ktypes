@@ -39,6 +39,7 @@ Struct_2 foobar(vec3[12] normals, uint count) {
 
 void wgsl_main() {
     vec3[12] arr;
+    foobar(arr, 1);
 }
 
 void main() {

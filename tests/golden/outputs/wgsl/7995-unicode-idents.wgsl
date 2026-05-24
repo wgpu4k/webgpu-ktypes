@@ -2,9 +2,12 @@
 @group(0) @binding(0)
 var<storage> asdf: f32;
 
-fn () {
+fn compute() -> f32 {
+    var θ2: f32 = (asdf + 9001.0f);
+    return θ2;
 }
 
 @compute
 fn main() {
+    compute();
 }

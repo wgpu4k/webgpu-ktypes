@@ -20,6 +20,8 @@ struct no_padding_frag_Output {
 };
 no_padding_frag_Output no_padding_frag() {
     no_padding_frag_Output stage_out;
+    input;
+    return float4(0.0f);
     return stage_out;
 }
 
@@ -28,6 +30,8 @@ struct no_padding_vert_Output {
 };
 no_padding_vert_Output no_padding_vert() {
     no_padding_vert_Output stage_out;
+    input;
+    return float4(0.0f);
     return stage_out;
 }
 
@@ -36,6 +40,8 @@ struct needs_padding_frag_Output {
 };
 needs_padding_frag_Output needs_padding_frag() {
     needs_padding_frag_Output stage_out;
+    input;
+    return float4(0.0f);
     return stage_out;
 }
 
@@ -44,13 +50,21 @@ struct needs_padding_vert_Output {
 };
 needs_padding_vert_Output needs_padding_vert() {
     needs_padding_vert_Output stage_out;
+    input;
+    return float4(0.0f);
     return stage_out;
 }
 
 [numthreads(1, 1, 1)]
 void no_padding_comp() {
+    Struct_2 local_0;
+    local_0 = global_0;
+    local_0 = global_1;
 }
 
 [numthreads(1, 1, 1)]
 void needs_padding_comp() {
+    Struct_3 local_0;
+    local_0 = global_2;
+    local_0 = global_3;
 }

@@ -5,12 +5,14 @@ precision highp int;
 
 void wgsl_main() {
     int idx = 2;
+    unpack4xI8(12u)[idx];
+    unpack4xU8(12u)[1];
 }
 
-void unpack4xI8() {
+uint unpack4xI8(uint arg_0) {
 }
 
-void unpack4xU8() {
+uint unpack4xU8(uint arg_0) {
 }
 
 void main() {

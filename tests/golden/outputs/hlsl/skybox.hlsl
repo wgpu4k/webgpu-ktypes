@@ -18,10 +18,11 @@ struct fs_main_Output {
 };
 fs_main_Output fs_main() {
     fs_main_Output stage_out;
+    return textureSample(global_0, global_1, in.uv);
     return stage_out;
 }
 
-void textureSample() {
+TextureCube<float4> textureSample(TextureCube<float4> arg_0, SamplerState arg_1, float3 arg_2) {
 }
 
 struct vs_main_Output {
@@ -30,8 +31,14 @@ struct vs_main_Output {
 };
 vs_main_Output vs_main() {
     vs_main_Output stage_out;
+    int local_0 = (int(vertex_index) / 2);
+    int local_1 = (int(vertex_index) & 1);
+    float4 local_2 = float4(((float(local_0) * 4.0f) - 1.0f), ((float(local_1) * 4.0f) - 1.0f), 0.0f, 1.0f);
+    float3x3 local_3 = transpose(float3x3(global_2.view[0].xyz, global_2.view[1].xyz, global_2.view[2].xyz));
+    float4 local_4 = (global_2.proj_inv * local_2);
+    return Struct_3(local_2, (local_3 * local_4.xyz));
     return stage_out;
 }
 
-void transpose() {
+float3x3 transpose(float3x3 arg_0) {
 }

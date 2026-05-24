@@ -24,4 +24,7 @@ void index_dynamic_array(int i, uint v) {
 
 [[kernel]]
 void main(Struct_2 global_0 [[buffer(0)]]) {
+    f();
+    index_unsized(1, 1);
+    index_dynamic_array(1, 1);
 }

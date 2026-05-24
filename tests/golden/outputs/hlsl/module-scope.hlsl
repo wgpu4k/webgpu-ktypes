@@ -16,13 +16,17 @@ Struct_1 returns() {
 }
 
 void call() {
+    statement();
     Struct_1 local_0 = returns();
     float local_1 = float(global_0);
     Texture2D<float4> local_2 = textureSample(global_1, global_2, float2(local_1));
 }
 
-void textureSample() {
+Texture2D<float4> textureSample(Texture2D<float4> arg_0, SamplerState arg_1, float2 arg_2) {
 }
 
 void main() {
+    call();
+    statement();
+    returns();
 }

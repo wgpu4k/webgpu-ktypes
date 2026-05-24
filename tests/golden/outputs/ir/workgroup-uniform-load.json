@@ -94,7 +94,7 @@
                         "__type": "io.ygdrasil.wgsl.ir.LiteralValue.Scalar",
                         "value": {
                             "__type": "io.ygdrasil.wgsl.ir.ScalarValue.U32",
-                            "value": 0
+                            "value": 128
                         }
                     }
                 }
@@ -232,7 +232,8 @@
                         {
                             "statements": [
                                 {
-                                    "__type": "io.ygdrasil.wgsl.ir.Statement.Nop"
+                                    "__type": "io.ygdrasil.wgsl.ir.Statement.Emit",
+                                    "range": 1010
                                 }
                             ]
                         },
@@ -259,7 +260,13 @@
             },
             {
                 "name": "workgroupUniformLoad",
-                "parameters": [],
+                "parameters": [
+                    {
+                        "name": "arg_0",
+                        "type": 4
+                    }
+                ],
+                "returnType": 4,
                 "localVariables": {},
                 "expressions": {},
                 "blocks": {

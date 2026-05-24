@@ -13,7 +13,7 @@ struct Struct_7 {
     float3x2 m;
 };
 struct Struct_10 {
-    void am;
+    float4x2 am[2];
 };
 struct Struct_11 {
     uint x;
@@ -26,11 +26,11 @@ struct Struct_13 {
 };
 struct Struct_21 {
     float4x3 _matrix;
-    void matrix_array;
+    float2x2 matrix_array[2];
     int atom;
-    void atom_arr;
-    void arr;
-    void data;
+    int atom_arr[10];
+    uint2 arr[2];
+    Struct_4 data[];
 };
 struct Struct_22 {
     Struct_13 om_nom_nom;
@@ -46,35 +46,37 @@ float read_from_private(float* foo) {
     return foo;
 }
 
-float test_arr_as_arg(void a) {
+float test_arr_as_arg(float a[5][10]) {
     return a[4][9];
 }
 
 void assign_through_ptr_fn(uint* p) {
-    p = 0u;
+    p = 42u;
 }
 
-void assign_array_through_ptr_fn(void* foo) {
-    foo = void(float4(1.0f), float4(2.0f));
+void assign_array_through_ptr_fn(float4[2]* foo) {
+    foo = float4[2](float4(1.0f), float4(2.0f));
 }
 
-uint fetch_arg_ptr_array_element(void* p) {
+uint fetch_arg_ptr_array_element(uint[4]* p) {
     return p[1];
 }
 
-void assign_to_arg_ptr_array_element(void* p) {
-    p[1] = 0u;
+void assign_to_arg_ptr_array_element(uint[4]* p) {
+    p[1] = 10u;
 }
 
 bool index_ptr(bool value) {
-    void local_0 = void(value);
+    bool local_0[1] = bool[1](value);
     void local_1 = &local_0;
     return local_1[0];
 }
 
 void assign_through_ptr() {
-    uint local_0 = 0u;
-    void local_1 = void(float4(6.0f), float4(7.0f));
+    uint local_0 = 33u;
+    assign_through_ptr_fn(&local_0);
+    float4 local_1[2] = float4[2](float4(6.0f), float4(7.0f));
+    assign_array_through_ptr_fn(&local_1);
 }
 
 uint fetch_arg_ptr_member(Struct_11* p) {
@@ -82,7 +84,7 @@ uint fetch_arg_ptr_member(Struct_11* p) {
 }
 
 void assign_to_arg_ptr_member(Struct_11* p) {
-    p.x = 0u;
+    p.x = 10u;
 }
 
 int member_ptr() {
@@ -115,7 +117,7 @@ void test_matrix_within_struct_accesses() {
 void test_matrix_within_array_within_struct_accesses() {
     int local_0 = 1;
     local_0 = (local_0 - 1);
-    void local_1 = global_3.am;
+    float4x2 local_1[2] = global_3.am;
     float4x2 local_2 = global_3.am[0];
     float2 local_3 = global_3.am[0][0];
     float2 local_4 = global_3.am[0][local_0];
@@ -123,9 +125,9 @@ void test_matrix_within_array_within_struct_accesses() {
     float local_6 = global_3.am[0][0][local_0];
     float local_7 = global_3.am[0][local_0][1];
     float local_8 = global_3.am[0][local_0][local_0];
-    Struct_10 local_9 = Struct_10(void());
+    Struct_10 local_9 = Struct_10(float4x2[2]());
     local_0 = (local_0 + 1);
-    local_9.am = void();
+    local_9.am = float4x2[2]();
     local_9.am[0] = float4x2(float2(8.0f), float2(7.0f), float2(6.0f), float2(5.0f));
     local_9.am[0][0] = float2(9.0f);
     local_9.am[0][local_0] = float2(90.0f);
@@ -137,7 +139,11 @@ void test_matrix_within_array_within_struct_accesses() {
 
 void assign_to_ptr_components() {
     Struct_11 local_0;
-    void local_1;
+    assign_to_arg_ptr_member(&local_0);
+    fetch_arg_ptr_member(&local_0);
+    uint local_1[4];
+    assign_to_arg_ptr_array_element(&local_1);
+    fetch_arg_ptr_array_element(&local_1);
 }
 
 int let_members_of_members() {
@@ -163,6 +169,12 @@ struct foo_frag_Output {
 };
 foo_frag_Output foo_frag() {
     foo_frag_Output stage_out;
+    global_4._matrix[1][2] = 1.0f;
+    global_4._matrix = float4x3(float3(0.0f), float3(1.0f), float3(2.0f), float3(3.0f));
+    global_4.arr = uint2[2](uint2(0u), uint2(1u));
+    global_4.data[1].value = 1;
+    global_0 = int2();
+    return float4(0.0f);
     return stage_out;
 }
 
@@ -171,9 +183,37 @@ struct foo_vert_Output {
 };
 foo_vert_Output foo_vert() {
     foo_vert_Output stage_out;
+    float local_0 = 0.0f;
+    float local_1 = local_0;
+    local_0 = 1.0f;
+    global_1;
+    test_matrix_within_struct_accesses();
+    test_matrix_within_array_within_struct_accesses();
+    float4x3 local_2 = global_4._matrix;
+    uint2 local_3[2] = global_4.arr;
+    uint local_4 = 3u;
+    float local_5 = global_4._matrix[local_4][0];
+    int local_6 = global_4.data[(arrayLength(&global_4.data) - 2u)].value;
+    int2 local_7 = global_0;
+    int* local_8 = &global_4.data[0].value;
+    float local_9 = read_from_private(&local_0);
+    int local_10[5] = int[5](local_6, int(local_5), 3, 4, 5);
+    local_10[(vi + 1u)] = 42;
+    int local_11 = local_10[vi];
+    test_arr_as_arg(float[10][5]());
+    return float4((local_2 * float4(int4(local_11))), 2.0f);
     return stage_out;
+}
+
+void arrayLength(void arg_0) {
 }
 
 [numthreads(1, 1, 1)]
 void foo_compute() {
+    assign_through_ptr();
+    assign_to_ptr_components();
+    index_ptr(true);
+    member_ptr();
+    let_members_of_members();
+    var_members_of_members();
 }

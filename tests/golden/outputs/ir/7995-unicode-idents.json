@@ -38,6 +38,76 @@
     "functions": {
         "data": [
             {
+                "name": "compute",
+                "parameters": [],
+                "returnType": 0,
+                "localVariables": {
+                    "data": [
+                        {
+                            "name": "θ2",
+                            "type": 0,
+                            "init": 2
+                        }
+                    ]
+                },
+                "expressions": {
+                    "data": [
+                        {
+                            "kind": {
+                                "__type": "io.ygdrasil.wgsl.ir.ExpressionKind.GlobalVar",
+                                "handle": 0
+                            }
+                        },
+                        {
+                            "kind": {
+                                "__type": "io.ygdrasil.wgsl.ir.ExpressionKind.Literal",
+                                "value": {
+                                    "__type": "io.ygdrasil.wgsl.ir.LiteralValue.Scalar",
+                                    "value": {
+                                        "__type": "io.ygdrasil.wgsl.ir.ScalarValue.F32",
+                                        "value": 9001.0
+                                    }
+                                }
+                            }
+                        },
+                        {
+                            "kind": {
+                                "__type": "io.ygdrasil.wgsl.ir.ExpressionKind.Binary",
+                                "operator": "Add",
+                                "left": 0,
+                                "right": 1
+                            }
+                        },
+                        {
+                            "kind": {
+                                "__type": "io.ygdrasil.wgsl.ir.ExpressionKind.LocalVar",
+                                "handle": 0
+                            }
+                        }
+                    ]
+                },
+                "blocks": {
+                    "data": [
+                        {
+                            "statements": []
+                        },
+                        {
+                            "statements": [
+                                {
+                                    "__type": "io.ygdrasil.wgsl.ir.Statement.Init",
+                                    "variable": 0
+                                },
+                                {
+                                    "__type": "io.ygdrasil.wgsl.ir.Statement.Return",
+                                    "value": 3
+                                }
+                            ]
+                        }
+                    ]
+                },
+                "body": 1
+            },
+            {
                 "name": "main",
                 "parameters": [],
                 "localVariables": {},
@@ -46,7 +116,7 @@
                         {
                             "kind": {
                                 "__type": "io.ygdrasil.wgsl.ir.ExpressionKind.Call",
-                                "function": 1,
+                                "function": 0,
                                 "arguments": []
                             }
                         }
@@ -60,34 +130,21 @@
                         {
                             "statements": [
                                 {
-                                    "__type": "io.ygdrasil.wgsl.ir.Statement.Nop"
+                                    "__type": "io.ygdrasil.wgsl.ir.Statement.Emit",
+                                    "range": 00
                                 }
                             ]
                         }
                     ]
                 },
                 "body": 1
-            },
-            {
-                "name": "",
-                "parameters": [],
-                "localVariables": {},
-                "expressions": {},
-                "blocks": {
-                    "data": [
-                        {
-                            "statements": []
-                        }
-                    ]
-                },
-                "body": 0
             }
         ]
     },
     "entryPoints": [
         {
             "name": "main",
-            "function": 0,
+            "function": 1,
             "stage": "Compute"
         }
     ],

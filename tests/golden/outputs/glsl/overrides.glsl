@@ -19,6 +19,10 @@ void wgsl_main() {
     bool x = a;
     float gain_x_100 = (global_8 * 10.0f);
     global_7 = global_2;
+    global_1;
+    global_3;
+    global_5;
+    global_6;
 }
 
 void main() {

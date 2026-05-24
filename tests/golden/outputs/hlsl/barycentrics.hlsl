@@ -7,6 +7,7 @@ struct fs_main_Output {
 };
 fs_main_Output fs_main() {
     fs_main_Output stage_out;
+    return float4(bary, 1.0f);
     return stage_out;
 }
 
@@ -15,5 +16,6 @@ struct fs_main_no_perspective_Output {
 };
 fs_main_no_perspective_Output fs_main_no_perspective() {
     fs_main_no_perspective_Output stage_out;
+    return float4(bary, 1.0f);
     return stage_out;
 }

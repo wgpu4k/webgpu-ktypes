@@ -7,4 +7,5 @@ fn atomicCompareExchangeWeak(arg_0: ptr<function, u32>, arg_1: u32, arg_2: u32) 
 
 @compute
 fn f() {
+    atomicCompareExchangeWeak(&a, u32(o), 1u);
 }

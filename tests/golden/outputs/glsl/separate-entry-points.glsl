@@ -9,16 +9,19 @@ void derivatives() {
     float width = fwidth(0.0f);
 }
 
-void dpdx() {
+float dpdx(float arg_0) {
 }
 
-void dpdy() {
+float dpdy(float arg_0) {
 }
 
-void fwidth() {
+float fwidth(float arg_0) {
 }
 
 void barriers() {
+    storageBarrier();
+    workgroupBarrier();
+    textureBarrier();
 }
 
 void storageBarrier() {
@@ -31,10 +34,12 @@ void textureBarrier() {
 }
 
 vec4 wgsl_fragment() {
-    return vec4();
+    derivatives();
+    return vec4(0.0f);
 }
 
 void wgsl_compute() {
+    barriers();
 }
 
 layout(location = 0) out vec4 outColor;

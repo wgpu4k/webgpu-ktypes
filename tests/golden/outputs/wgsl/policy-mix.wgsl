@@ -19,9 +19,10 @@ fn mock_function(c: vec2<i32>, i: i32, l: i32) -> vec4<f32> {
     return (((((in_storage.a[i] + in_uniform.a[i]) + textureLoad(image_2d_array, c, i, l)) + in_workgroup[i]) + in_private[i]) + in_function[i]);
 }
 
-fn textureLoad() {
+fn textureLoad(arg_0: texture_2d_array<f32>, arg_1: vec2<i32>, arg_2: i32, arg_3: i32) -> texture_2d_array<f32> {
 }
 
 @compute
 fn main() {
+    mock_function(vec2<f32>(1, 2), 3, 4);
 }

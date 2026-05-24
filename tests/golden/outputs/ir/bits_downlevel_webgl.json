@@ -639,7 +639,13 @@
             },
             {
                 "name": "pack4xI8",
-                "parameters": [],
+                "parameters": [
+                    {
+                        "name": "arg_0",
+                        "type": 3
+                    }
+                ],
+                "returnType": 3,
                 "localVariables": {},
                 "expressions": {},
                 "blocks": {
@@ -653,7 +659,13 @@
             },
             {
                 "name": "pack4xU8",
-                "parameters": [],
+                "parameters": [
+                    {
+                        "name": "arg_0",
+                        "type": 7
+                    }
+                ],
+                "returnType": 7,
                 "localVariables": {},
                 "expressions": {},
                 "blocks": {
@@ -667,7 +679,13 @@
             },
             {
                 "name": "unpack4x8snorm",
-                "parameters": [],
+                "parameters": [
+                    {
+                        "name": "arg_0",
+                        "type": 4
+                    }
+                ],
+                "returnType": 4,
                 "localVariables": {},
                 "expressions": {},
                 "blocks": {
@@ -681,7 +699,13 @@
             },
             {
                 "name": "unpack4x8unorm",
-                "parameters": [],
+                "parameters": [
+                    {
+                        "name": "arg_0",
+                        "type": 4
+                    }
+                ],
+                "returnType": 4,
                 "localVariables": {},
                 "expressions": {},
                 "blocks": {
@@ -695,7 +719,13 @@
             },
             {
                 "name": "unpack2x16snorm",
-                "parameters": [],
+                "parameters": [
+                    {
+                        "name": "arg_0",
+                        "type": 4
+                    }
+                ],
+                "returnType": 4,
                 "localVariables": {},
                 "expressions": {},
                 "blocks": {
@@ -709,7 +739,13 @@
             },
             {
                 "name": "unpack2x16unorm",
-                "parameters": [],
+                "parameters": [
+                    {
+                        "name": "arg_0",
+                        "type": 4
+                    }
+                ],
+                "returnType": 4,
                 "localVariables": {},
                 "expressions": {},
                 "blocks": {

@@ -2,13 +2,14 @@
 #pragma pack_matrix(column_major)
 
 struct Struct_5 {
-    void arr;
+    uint arr[512];
     int atom;
-    void atom_arr;
+    int atom_arr[8][8];
 };
-void global_0 : register(u0);
+uint global_0[512] : register(u0);
 Struct_5 global_1;
 
 [numthreads(1, 1, 1)]
 void main() {
+    global_0 = global_1.arr;
 }

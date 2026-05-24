@@ -24,4 +24,5 @@ void const_in_fn() {
 
 [[kernel]]
 void main() {
+    const_in_fn();
 }

@@ -12,16 +12,16 @@ var<uniform> uniformOne: vec2<f32>;
 @group(1) @binding(0)
 var<uniform> uniformTwo: vec2<f32>;
 
-fn textureSample() {
+fn textureSample(arg_0: texture_2d<f32>, arg_1: sampler, arg_2: vec2<f32>) -> texture_2d<f32> {
 }
 
-fn textureSample() {
+fn textureSample(arg_0: texture_2d<f32>, arg_1: sampler, arg_2: vec2<f32>) -> texture_2d<f32> {
 }
 
-fn textureSample() {
+fn textureSample(arg_0: texture_2d<f32>, arg_1: sampler, arg_2: vec2<f32>) -> texture_2d<f32> {
 }
 
-fn textureSample() {
+fn textureSample(arg_0: texture_2d<f32>, arg_1: sampler, arg_2: vec2<f32>) -> texture_2d<f32> {
 }
 
 @fragment

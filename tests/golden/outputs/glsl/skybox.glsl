@@ -18,7 +18,7 @@ vec4 wgsl_fs_main(Struct_3 in) {
     return textureSample(global_0, global_1, in.uv);
 }
 
-void textureSample() {
+textureCube textureSample(textureCube arg_0, sampler arg_1, vec3 arg_2) {
 }
 
 Struct_3 wgsl_vs_main(uint vertex_index) {
@@ -30,7 +30,7 @@ Struct_3 wgsl_vs_main(uint vertex_index) {
     return Struct_3(pos, (inv_model_view * unprojected.xyz));
 }
 
-void transpose() {
+mat3x3 transpose(mat3x3 arg_0) {
 }
 
 layout(location = 0) out vec4 outColor;

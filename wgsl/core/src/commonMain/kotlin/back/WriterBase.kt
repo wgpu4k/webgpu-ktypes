@@ -144,8 +144,9 @@ abstract class WriterBase<T : BackendOptions>(
                 writeLine("$pointer = $value;")
             }
             is Statement.Emit -> {
-                // In some backends, Emit might be a no-op or might trigger something
-                // For now, we skip it as it's IR metadata for expression ranges
+                stmt.range.toList().forEach { index ->
+                    writeLine("${writeExpression(Handle.fromIndex<Expression>(index))};")
+                }
             }
             is Statement.If -> {
                 val cond = writeExpression(stmt.condition)

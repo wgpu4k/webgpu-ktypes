@@ -18,12 +18,13 @@ fn ray_gen_main(id: vec3<u32>, num_invocations: vec3<u32>) {
     hit_num = Struct_1();
     var shift: vec3<f32> = (vec3<f32>(id) / vec3<f32>(num_invocations));
     var ray_shift: vec3<f32> = ((vec3<f32>(shift[0], 0.0f, shift[1]) * 2.0f) - 1.0f);
+    traceRay(acc_struct, RayDesc(0u, 0, 0.01f, 100.0f, vec3<f32>(0.0f), (vec3<f32>(0.0f, 1.0f, 0.0f) + ray_shift)), &hit_num);
 }
 
-fn traceRay() {
+fn RayDesc(arg_0: u32, arg_1: i32, arg_2: f32, arg_3: f32, arg_4: vec3<f32>, arg_5: vec3<f32>) -> u32 {
 }
 
-fn RayDesc() {
+fn traceRay(arg_0: acceleration_structure, arg_1: u32, arg_2: ptr<function, Struct_1>) -> acceleration_structure {
 }
 
 fn any_hit_main(data: u32, geo_idx: u32, max: f32, kind: u32) {

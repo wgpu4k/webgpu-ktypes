@@ -19,4 +19,5 @@ void break_from_loop() {
 
 [[kernel]]
 void main() {
+    break_from_loop();
 }

@@ -4,7 +4,7 @@ precision highp int;
 
 
 void wgsl_f() {
-    void b = void();
+    vec3[2] b = vec3[2]();
     vec4 poly = vec4(0);
     int k = 0;
     int j = 0;

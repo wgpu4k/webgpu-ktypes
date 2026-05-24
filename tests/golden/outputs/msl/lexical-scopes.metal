@@ -74,4 +74,10 @@ void switchLexicalScope(int a) {
 
 [[kernel]]
 void main() {
+    blockLexicalScope(false);
+    ifLexicalScope(true);
+    loopLexicalScope(false);
+    forLexicalScope(1.0f);
+    whileLexicalScope(1);
+    switchLexicalScope(1);
 }

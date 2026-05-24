@@ -23,4 +23,5 @@ fn const_in_fn() {
 
 @compute
 fn main() {
+    const_in_fn();
 }

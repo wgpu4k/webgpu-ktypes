@@ -52,7 +52,7 @@ float test_arr_as_arg(float[10][5] a) {
 }
 
 void assign_through_ptr_fn(uint p) {
-    p = 0u;
+    p = 42u;
 }
 
 void assign_array_through_ptr_fn(vec4[2] foo) {
@@ -64,7 +64,7 @@ uint fetch_arg_ptr_array_element(uint[4] p) {
 }
 
 void assign_to_arg_ptr_array_element(uint[4] p) {
-    p[1] = 0u;
+    p[1] = 10u;
 }
 
 bool index_ptr(bool value) {
@@ -74,8 +74,10 @@ bool index_ptr(bool value) {
 }
 
 void assign_through_ptr() {
-    uint val = 0u;
+    uint val = 33u;
+    assign_through_ptr_fn(val);
     vec4[2] arr = vec4[2](vec4(6.0f), vec4(7.0f));
+    assign_array_through_ptr_fn(arr);
 }
 
 uint fetch_arg_ptr_member(Struct_11 p) {
@@ -83,7 +85,7 @@ uint fetch_arg_ptr_member(Struct_11 p) {
 }
 
 void assign_to_arg_ptr_member(Struct_11 p) {
-    p.x = 0u;
+    p.x = 10u;
 }
 
 int member_ptr() {
@@ -138,7 +140,11 @@ void test_matrix_within_array_within_struct_accesses() {
 
 void assign_to_ptr_components() {
     Struct_11 s1;
+    assign_to_arg_ptr_member(s1);
+    fetch_arg_ptr_member(s1);
     uint[4] a1;
+    assign_to_arg_ptr_array_element(a1);
+    fetch_arg_ptr_array_element(a1);
 }
 
 int let_members_of_members() {
@@ -162,9 +168,9 @@ int var_members_of_members() {
 vec4 wgsl_foo_frag() {
     global_4._matrix[1][2] = 1.0f;
     global_4._matrix = mat4x3(vec3(0.0f), vec3(1.0f), vec3(2.0f), vec3(3.0f));
-    global_4.arr = uvec2[2](uvec2(0u), uvec2(0u));
+    global_4.arr = uvec2[2](uvec2(0u), uvec2(1u));
     global_4.data[1].value = 1;
-    global_0 = ivec2();
+    global_0 = ivec2(0);
     return vec4(0.0f);
 }
 
@@ -172,21 +178,34 @@ vec4 wgsl_foo_vert(uint vi) {
     float foo = 0.0f;
     float baz = foo;
     foo = 1.0f;
+    global_1;
+    test_matrix_within_struct_accesses();
+    test_matrix_within_array_within_struct_accesses();
     mat4x3 _matrix = global_4._matrix;
     uvec2[2] arr = global_4.arr;
-    uint index = 0u;
+    uint index = 3u;
     float b = global_4._matrix[index][0];
-    int a = global_4.data[(float(global_4.data) - 0u)].value;
+    int a = global_4.data[(arrayLength(global_4.data) - 2u)].value;
     ivec2 c = global_0;
     int data_pointer = global_4.data[0].value;
     float foo_value = read_from_private(foo);
     int[5] c2 = int[5](a, int(b), 3, 4, 5);
-    c2[(vi + 0u)] = 42;
+    c2[(vi + 1u)] = 42;
     int value = c2[vi];
+    test_arr_as_arg(float[10][5]());
     return vec4((_matrix * vec4(ivec4(value))), 2.0f);
 }
 
+Struct_4[] arrayLength(Struct_4[] arg_0) {
+}
+
 void wgsl_foo_compute() {
+    assign_through_ptr();
+    assign_to_ptr_components();
+    index_ptr(true);
+    member_ptr();
+    let_members_of_members();
+    var_members_of_members();
 }
 
 layout(location = 0) out vec4 outColor;

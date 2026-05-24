@@ -11,9 +11,10 @@ struct Struct_5 {
 
 [[fragment]]
 float4 fs_main(texturecube<float> global_0 [[texture(1)]], sampler global_1 [[sampler(2)]], Struct_5 global_2 [[buffer(0)]]) {
+    return textureSample(global_0, global_1, in.uv);
 }
 
-void textureSample() {
+texturecube<float> textureSample(texturecube<float> arg_0, sampler arg_1, float3 arg_2) {
 }
 
 struct vs_main_Output {
@@ -22,7 +23,13 @@ struct vs_main_Output {
 };
 [[vertex]]
 vs_main_Output vs_main(texturecube<float> global_0 [[texture(1)]], sampler global_1 [[sampler(2)]], Struct_5 global_2 [[buffer(0)]]) {
+    int local_0 = (int(vertex_index) / 2);
+    int local_1 = (int(vertex_index) & 1);
+    float4 local_2 = float4(((float(local_0) * 4.0f) - 1.0f), ((float(local_1) * 4.0f) - 1.0f), 0.0f, 1.0f);
+    float3x3 local_3 = transpose(float3x3(global_2.view[0].xyz, global_2.view[1].xyz, global_2.view[2].xyz));
+    float4 local_4 = (global_2.proj_inv * local_2);
+    return Struct_3(local_2, (local_3 * local_4.xyz));
 }
 
-void transpose() {
+float3x3 transpose(float3x3 arg_0) {
 }

@@ -134,7 +134,8 @@
                                     "accept": 1
                                 },
                                 {
-                                    "__type": "io.ygdrasil.wgsl.ir.Statement.Nop"
+                                    "__type": "io.ygdrasil.wgsl.ir.Statement.Emit",
+                                    "range": 66
                                 },
                                 {
                                     "__type": "io.ygdrasil.wgsl.ir.Statement.Return"

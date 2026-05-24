@@ -22,9 +22,14 @@ int use_assign_let() {
 }
 
 void use_phony_assign() {
+    use_me();
 }
 
 void wgsl_main() {
+    use_return();
+    use_assign_var();
+    use_assign_let();
+    use_phony_assign();
 }
 
 void main() {

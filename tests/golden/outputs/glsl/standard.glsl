@@ -8,10 +8,10 @@ bool test_any_and_all_for_bool() {
     return all(a);
 }
 
-void any() {
+bool any(bool arg_0) {
 }
 
-void all() {
+bool all(bool arg_0) {
 }
 
 vec4 wgsl_derivatives(vec4 foo) {
@@ -28,31 +28,31 @@ vec4 wgsl_derivatives(vec4 foo) {
     return ((x + y) * z);
 }
 
-void dpdxCoarse() {
+vec4 dpdxCoarse(vec4 arg_0) {
 }
 
-void dpdyCoarse() {
+vec4 dpdyCoarse(vec4 arg_0) {
 }
 
-void fwidthCoarse() {
+vec4 fwidthCoarse(vec4 arg_0) {
 }
 
-void dpdxFine() {
+vec4 dpdxFine(vec4 arg_0) {
 }
 
-void dpdyFine() {
+vec4 dpdyFine(vec4 arg_0) {
 }
 
-void fwidthFine() {
+vec4 fwidthFine(vec4 arg_0) {
 }
 
-void dpdx() {
+vec4 dpdx(vec4 arg_0) {
 }
 
-void dpdy() {
+vec4 dpdy(vec4 arg_0) {
 }
 
-void fwidth() {
+vec4 fwidth(vec4 arg_0) {
 }
 
 layout(location = 0) out vec4 outColor;

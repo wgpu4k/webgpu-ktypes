@@ -10,67 +10,82 @@ var<storage, read_write> storage_atomic_arr: array<f32, 2>;
 @group(0) @binding(2)
 var<storage, read_write> storage_struct: Struct_2;
 
-fn atomicStore() {
+fn atomicStore(arg_0: ptr<function, f32>, arg_1: f32) -> ptr<function, f32> {
 }
 
-fn atomicStore() {
+fn atomicStore(arg_0: ptr<function, f32>, arg_1: f32) -> ptr<function, f32> {
 }
 
-fn atomicStore() {
+fn atomicStore(arg_0: ptr<function, f32>, arg_1: f32) -> ptr<function, f32> {
 }
 
-fn atomicStore() {
-}
-
-fn workgroupBarrier() {
-}
-
-fn atomicLoad() {
-}
-
-fn atomicLoad() {
-}
-
-fn atomicLoad() {
-}
-
-fn atomicLoad() {
+fn atomicStore(arg_0: ptr<function, f32>, arg_1: f32) -> ptr<function, f32> {
 }
 
 fn workgroupBarrier() {
 }
 
-fn atomicAdd() {
+fn atomicLoad(arg_0: ptr<function, f32>) -> ptr<function, f32> {
 }
 
-fn atomicAdd() {
+fn atomicLoad(arg_0: ptr<function, f32>) -> ptr<function, f32> {
 }
 
-fn atomicAdd() {
+fn atomicLoad(arg_0: ptr<function, f32>) -> ptr<function, f32> {
 }
 
-fn atomicAdd() {
+fn atomicLoad(arg_0: ptr<function, f32>) -> ptr<function, f32> {
 }
 
 fn workgroupBarrier() {
 }
 
-fn atomicExchange() {
+fn atomicAdd(arg_0: ptr<function, f32>, arg_1: f32) -> ptr<function, f32> {
 }
 
-fn atomicExchange() {
+fn atomicAdd(arg_0: ptr<function, f32>, arg_1: f32) -> ptr<function, f32> {
 }
 
-fn atomicExchange() {
+fn atomicAdd(arg_0: ptr<function, f32>, arg_1: f32) -> ptr<function, f32> {
 }
 
-fn atomicExchange() {
+fn atomicAdd(arg_0: ptr<function, f32>, arg_1: f32) -> ptr<function, f32> {
+}
+
+fn workgroupBarrier() {
+}
+
+fn atomicExchange(arg_0: ptr<function, f32>, arg_1: f32) -> ptr<function, f32> {
+}
+
+fn atomicExchange(arg_0: ptr<function, f32>, arg_1: f32) -> ptr<function, f32> {
+}
+
+fn atomicExchange(arg_0: ptr<function, f32>, arg_1: f32) -> ptr<function, f32> {
+}
+
+fn atomicExchange(arg_0: ptr<function, f32>, arg_1: f32) -> ptr<function, f32> {
 }
 
 @compute
 fn cs_main(id: vec3<u32>) {
+    atomicStore(&storage_atomic_scalar, 1.5f);
+    atomicStore(&storage_atomic_arr[1], 1.5f);
+    atomicStore(&storage_struct.atomic_scalar, 1.5f);
+    atomicStore(&storage_struct.atomic_arr[1], 1.5f);
+    workgroupBarrier();
     var l0: ptr<function, f32> = atomicLoad(&storage_atomic_scalar);
     var l1: ptr<function, f32> = atomicLoad(&storage_atomic_arr[1]);
     var l2: ptr<function, f32> = atomicLoad(&storage_struct.atomic_scalar);
     var l3: ptr<function, f32> = atomicLoad(&storage_struct.atomic_arr[1]);
+    workgroupBarrier();
+    atomicAdd(&storage_atomic_scalar, 1.5f);
+    atomicAdd(&storage_atomic_arr[1], 1.5f);
+    atomicAdd(&storage_struct.atomic_scalar, 1.5f);
+    atomicAdd(&storage_struct.atomic_arr[1], 1.5f);
+    workgroupBarrier();
+    atomicExchange(&storage_atomic_scalar, 1.5f);
+    atomicExchange(&storage_atomic_arr[1], 1.5f);
+    atomicExchange(&storage_struct.atomic_scalar, 1.5f);
+    atomicExchange(&storage_struct.atomic_arr[1], 1.5f);
 }

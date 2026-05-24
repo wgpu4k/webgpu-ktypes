@@ -6,10 +6,10 @@ fn all_constant_arguments() {
     var xvfpaiai: vec2<f32> = vec2<f32>(46, 47);
     var xvfpafaf: vec2<f32> = vec2<f32>(48.0f, 49.0f);
     var xvfpaiaf: vec2<f32> = vec2<f32>(48, 49.0f);
-    var xvupuai: vec2<u32> = vec2<f32>(0u, 43);
-    var xvupaiu: vec2<u32> = vec2<f32>(42, 0u);
-    var xvuuai: vec2<u32> = vec2<u32>(0u, 43);
-    var xvuaiu: vec2<u32> = vec2<u32>(42, 0u);
+    var xvupuai: vec2<u32> = vec2<f32>(42u, 43);
+    var xvupaiu: vec2<u32> = vec2<f32>(42, 43u);
+    var xvuuai: vec2<u32> = vec2<u32>(42u, 43);
+    var xvuaiu: vec2<u32> = vec2<u32>(42, 43u);
     var xvip____: vec2<i32> = vec2<f32>();
     var xvup____: vec2<u32> = vec2<f32>();
     var xvfp____: vec2<f32> = vec2<f32>();
@@ -29,28 +29,28 @@ fn all_constant_arguments() {
     var xvus_ai: vec2<u32> = vec2<u32>(1);
     var xvfs_ai: vec2<f32> = vec2<f32>(1);
     var xvfs_af: vec2<f32> = vec2<f32>(1.0f);
-    var xafafaf: array<f32> = array<f32, 2>(1.0f, 2.0f);
-    var xaf_faf: array<f32> = array<f32, 2>(1.0f, 2.0f);
-    var xafaf_f: array<f32> = array<f32, 2>(1.0f, 2.0f);
-    var xafaiai: array<f32> = array<f32, 2>(1, 2);
-    var xai_iai: array<i32> = array<i32, 2>(0, 2);
-    var xaiai_i: array<i32> = array<i32, 2>(1, 0);
-    var xaipaiai: array<i32> = f32(1, 2);
-    var xafpaiai: array<f32> = f32(1, 2);
-    var xafpaiaf: array<f32> = f32(1, 2.0f);
-    var xafpafai: array<f32> = f32(1.0f, 2);
-    var xafpafaf: array<f32> = f32(1.0f, 2.0f);
-    var xavipai: array<vec3<i32>> = f32(vec3<f32>(1));
-    var xavfpai: array<vec3<f32>> = f32(vec3<f32>(1));
-    var xavfpaf: array<vec3<f32>> = f32(vec3<f32>(1.0f));
+    var xafafaf: array<f32, 2> = array<f32, 2>(1.0f, 2.0f);
+    var xaf_faf: array<f32, 2> = array<f32, 2>(1.0f, 2.0f);
+    var xafaf_f: array<f32, 2> = array<f32, 2>(1.0f, 2.0f);
+    var xafaiai: array<f32, 2> = array<f32, 2>(1, 2);
+    var xai_iai: array<i32, 2> = array<i32, 2>(1, 2);
+    var xaiai_i: array<i32, 2> = array<i32, 2>(1, 2);
+    var xaipaiai: array<i32, 2> = array<i32, 2>(1, 2);
+    var xafpaiai: array<f32, 2> = array<f32, 2>(1, 2);
+    var xafpaiaf: array<f32, 2> = array<f32, 2>(1, 2.0f);
+    var xafpafai: array<f32, 2> = array<f32, 2>(1.0f, 2);
+    var xafpafaf: array<f32, 2> = array<f32, 2>(1.0f, 2.0f);
+    var xavipai: array<vec3<i32>, 1> = array<vec3<i32>, 1>(vec3<f32>(1));
+    var xavfpai: array<vec3<f32>, 1> = array<vec3<f32>, 1>(vec3<f32>(1));
+    var xavfpaf: array<vec3<f32>, 1> = array<vec3<f32>, 1>(vec3<f32>(1.0f));
     var xvisai: vec2<i32> = vec2<f32>(1);
     var xvusai: vec2<u32> = vec2<f32>(1);
     var xvfsai: vec2<f32> = vec2<f32>(1);
     var xvfsaf: vec2<f32> = vec2<f32>(1.0f);
-    var iaipaiai: f32 = f32(1, 2);
-    var iafpaiaf: f32 = f32(1, 2.0f);
-    var iafpafai: f32 = f32(1.0f, 2);
-    var iafpafaf: f32 = f32(1.0f, 2.0f);
+    var iaipaiai: array<i32, 2> = array<i32, 2>(1, 2);
+    var iafpaiaf: array<i32, 2> = array<i32, 2>(1, 2.0f);
+    var iafpafai: array<f32, 2> = array<f32, 2>(1.0f, 2);
+    var iafpafaf: array<f32, 2> = array<f32, 2>(1.0f, 2.0f);
 }
 
 fn mixed_constant_and_runtime_arguments() {
@@ -67,18 +67,18 @@ fn mixed_constant_and_runtime_arguments() {
     var xmfpai_faiai: mat2x2<f32> = mat2x2<f32>(1, f, 3, 4);
     var xmfpaiai_fai: mat2x2<f32> = mat2x2<f32>(1, 2, f, 4);
     var xmfpaiaiai_f: mat2x2<f32> = mat2x2<f32>(1, 2, 3, f);
-    var xaf_faf: array<f32> = array<f32, 2>(f, 2.0f);
-    var xafaf_f: array<f32> = array<f32, 2>(1.0f, f);
-    var xaf_fai: array<f32> = array<f32, 2>(f, 2);
-    var xafai_f: array<f32> = array<f32, 2>(1, f);
-    var xai_iai: array<i32> = array<i32, 2>(i, 2);
-    var xaiai_i: array<i32> = array<i32, 2>(1, i);
-    var xafp_faf: array<f32> = f32(f, 2.0f);
-    var xafpaf_f: array<f32> = f32(1.0f, f);
-    var xafp_fai: array<f32> = f32(f, 2);
-    var xafpai_f: array<f32> = f32(1, f);
-    var xaip_iai: array<i32> = f32(i, 2);
-    var xaipai_i: array<i32> = f32(1, i);
+    var xaf_faf: array<f32, 2> = array<f32, 2>(f, 2.0f);
+    var xafaf_f: array<f32, 2> = array<f32, 2>(1.0f, f);
+    var xaf_fai: array<f32, 2> = array<f32, 2>(f, 2);
+    var xafai_f: array<f32, 2> = array<f32, 2>(1, f);
+    var xai_iai: array<i32, 2> = array<i32, 2>(i, 2);
+    var xaiai_i: array<i32, 2> = array<i32, 2>(1, i);
+    var xafp_faf: array<f32, 2> = array<f32, 2>(f, 2.0f);
+    var xafpaf_f: array<f32, 2> = array<f32, 2>(1.0f, f);
+    var xafp_fai: array<f32, 2> = array<f32, 2>(f, 2);
+    var xafpai_f: array<f32, 2> = array<f32, 2>(1, f);
+    var xaip_iai: array<i32, 2> = array<i32, 2>(i, 2);
+    var xaipai_i: array<i32, 2> = array<i32, 2>(1, i);
     var xvisi: vec2<i32> = vec2<f32>(i);
     var xvusu: vec2<u32> = vec2<f32>(u);
     var xvfsf: vec2<f32> = vec2<f32>(f);
@@ -86,4 +86,6 @@ fn mixed_constant_and_runtime_arguments() {
 
 @compute
 fn main() {
+    all_constant_arguments();
+    mixed_constant_and_runtime_arguments();
 }

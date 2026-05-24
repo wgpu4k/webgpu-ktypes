@@ -3,16 +3,16 @@ struct Struct_2 {
     m: mat2x2<f32>,
 }
 struct Struct_4 {
-    a: array<Struct_2>,
+    a: array<Struct_2, 4>,
 }
 @group(0) @binding(0)
 var<storage, read_write> s_m: mat2x2<f32>;
 @group(0) @binding(1)
 var<uniform> u_m: mat2x2<f32>;
 @group(2) @binding(0)
-var<storage, read_write> s_am: array<mat2x2<f32>>;
+var<storage, read_write> s_am: array<mat2x2<f32>, 4>;
 @group(2) @binding(1)
-var<uniform> u_am: array<mat2x2<f32>>;
+var<uniform> u_am: array<mat2x2<f32>, 4>;
 @group(1) @binding(0)
 var<storage, read_write> s_sm: Struct_2;
 @group(1) @binding(1)
@@ -51,7 +51,7 @@ fn access_m() {
 fn access_am() {
     var idx: i32 = 1;
     idx = (idx - 1);
-    var l_s_a: array<mat2x2<f32>> = s_am;
+    var l_s_a: array<mat2x2<f32>, 4> = s_am;
     var l_s_m_c: mat2x2<f32> = s_am[0];
     var l_s_m_v: mat2x2<f32> = s_am[idx];
     var l_s_c_cc: vec2<f32> = s_am[0][0];
@@ -66,7 +66,7 @@ fn access_am() {
     var l_s_e_vcv: f32 = s_am[idx][0][idx];
     var l_s_e_vvc: f32 = s_am[idx][idx][0];
     var l_s_e_vvv: f32 = s_am[idx][idx][idx];
-    var l_u_a: array<mat2x2<f32>> = u_am;
+    var l_u_a: array<mat2x2<f32>, 4> = u_am;
     var l_u_m_c: mat2x2<f32> = u_am[0];
     var l_u_m_v: mat2x2<f32> = u_am[idx];
     var l_u_c_cc: vec2<f32> = u_am[0][0];
@@ -131,7 +131,7 @@ fn access_sasm() {
     var idx: i32 = 1;
     idx = (idx - 1);
     var l_s_s: Struct_4 = s_sasm;
-    var l_s_a: array<Struct_2> = s_sasm.a;
+    var l_s_a: array<Struct_2, 4> = s_sasm.a;
     var l_s_m_c: mat2x2<f32> = s_sasm.a[0].m;
     var l_s_m_v: mat2x2<f32> = s_sasm.a[idx].m;
     var l_s_c_cc: vec2<f32> = s_sasm.a[0].m[0];
@@ -147,7 +147,7 @@ fn access_sasm() {
     var l_s_e_vvc: f32 = s_sasm.a[idx].m[idx][0];
     var l_s_e_vvv: f32 = s_sasm.a[idx].m[idx][idx];
     var l_u_s: Struct_4 = u_sasm;
-    var l_u_a: array<Struct_2> = u_sasm.a;
+    var l_u_a: array<Struct_2, 4> = u_sasm.a;
     var l_u_m_c: mat2x2<f32> = u_sasm.a[0].m;
     var l_u_m_v: mat2x2<f32> = u_sasm.a[idx].m;
     var l_u_c_cc: vec2<f32> = u_sasm.a[0].m[0];
@@ -182,4 +182,8 @@ fn access_sasm() {
 
 @compute
 fn main() {
+    access_m();
+    access_sm();
+    access_am();
+    access_sasm();
 }

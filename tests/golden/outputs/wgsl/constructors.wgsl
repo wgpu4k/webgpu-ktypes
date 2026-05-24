@@ -3,6 +3,21 @@ struct Struct_3 {
     a: vec4<f32>,
     b: i32,
 }
+var<private> const1: vec3<f32> = vec3<f32>(0.0f);
+var<private> const2: vec3<f32> = vec3<f32>(0.0f, 1.0f, 2.0f);
+var<private> const3: mat2x2<f32> = mat2x2<f32>(0.0f, 1.0f, 2.0f, 3.0f);
+var<private> const4: array<mat2x2<f32>, 1> = array<mat2x2<f32>, 1>(mat2x2<f32>(0.0f, 1.0f, 2.0f, 3.0f));
+var<private> cz0: bool = bool();
+var<private> cz1: i32 = i32();
+var<private> cz2: u32 = u32();
+var<private> cz3: f32 = f32();
+var<private> cz4: vec2<u32> = vec2<u32>();
+var<private> cz5: mat2x2<f32> = mat2x2<f32>();
+var<private> cp1: vec2<f32> = vec2<f32>(0u);
+var<private> cp2: mat2x2<f32> = mat2x2<f32>(vec2<f32>(0.0f), vec2<f32>(0.0f));
+var<private> cp3: array<i32, 4> = array<i32, 4>(0, 1, 2, 3);
+var<private> cz6: array<Struct_3, 3> = array<Struct_3, 3>();
+var<private> cz7: Struct_3 = Struct_3();
 
 @compute
 fn main() {
@@ -31,23 +46,23 @@ fn main() {
     var ic5: mat2x3<f32> = mat2x3<f32>(mat2x3<f32>());
     var ic6: vec2<f32> = vec2<f32>(vec2<u32>());
     var ic7: mat2x3<f32> = mat2x3<f32>(mat2x3<f32>());
-    var cc00: i32 = i32(0u);
+    var cc00: i32 = i32(1u);
     var cc01: i32 = i32(1.0f);
     var cc02: i32 = i32(1);
     var cc03: i32 = i32(1.0f);
     var cc04: i32 = i32(true);
-    var cc05: u32 = u32(0);
+    var cc05: u32 = u32(1);
     var cc06: u32 = u32(1.0f);
     var cc07: u32 = u32(1);
     var cc08: u32 = u32(1.0f);
     var cc09: u32 = u32(true);
-    var cc10: f32 = f32(0);
-    var cc11: f32 = f32(0u);
+    var cc10: f32 = f32(1);
+    var cc11: f32 = f32(1u);
     var cc12: f32 = f32(1);
     var cc13: f32 = f32(1.0f);
     var cc14: f32 = f32(true);
-    var cc15: bool = bool(0);
-    var cc16: bool = bool(0u);
+    var cc15: bool = bool(1);
+    var cc16: bool = bool(1u);
     var cc17: bool = bool(1.0f);
     var cc18: bool = bool(1);
     var cc19: bool = bool(1.0f);

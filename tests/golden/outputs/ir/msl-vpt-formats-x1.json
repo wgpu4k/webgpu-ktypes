@@ -46,6 +46,13 @@
             },
             {
                 "inner": {
+                    "__type": "io.ygdrasil.wgsl.ir.TypeInner.Scalar",
+                    "kind": "F16",
+                    "width": 2
+                }
+            },
+            {
+                "inner": {
                     "__type": "io.ygdrasil.wgsl.ir.TypeInner.Struct",
                     "members": [
                         {
@@ -378,7 +385,7 @@
                         },
                         {
                             "name": "v_float16_as_f16",
-                            "type": 0,
+                            "type": 5,
                             "binding": {
                                 "__type": "io.ygdrasil.wgsl.ir.BindingAttribute.Location",
                                 "location": 41
@@ -386,7 +393,7 @@
                         },
                         {
                             "name": "v_float16x2_as_f16",
-                            "type": 0,
+                            "type": 5,
                             "binding": {
                                 "__type": "io.ygdrasil.wgsl.ir.BindingAttribute.Location",
                                 "location": 42
@@ -394,7 +401,7 @@
                         },
                         {
                             "name": "v_float16x4_as_f16",
-                            "type": 0,
+                            "type": 5,
                             "binding": {
                                 "__type": "io.ygdrasil.wgsl.ir.BindingAttribute.Location",
                                 "location": 43
@@ -455,6 +462,14 @@
             4,
             {
                 "inner": {
+                    "__type": "io.ygdrasil.wgsl.ir.TypeInner.Scalar",
+                    "kind": "F16",
+                    "width": 2
+                }
+            },
+            5,
+            {
+                "inner": {
                     "__type": "io.ygdrasil.wgsl.ir.TypeInner.Struct",
                     "members": [
                         {
@@ -787,7 +802,7 @@
                         },
                         {
                             "name": "v_float16_as_f16",
-                            "type": 0,
+                            "type": 5,
                             "binding": {
                                 "__type": "io.ygdrasil.wgsl.ir.BindingAttribute.Location",
                                 "location": 41
@@ -795,7 +810,7 @@
                         },
                         {
                             "name": "v_float16x2_as_f16",
-                            "type": 0,
+                            "type": 5,
                             "binding": {
                                 "__type": "io.ygdrasil.wgsl.ir.BindingAttribute.Location",
                                 "location": 42
@@ -803,7 +818,7 @@
                         },
                         {
                             "name": "v_float16x4_as_f16",
-                            "type": 0,
+                            "type": 5,
                             "binding": {
                                 "__type": "io.ygdrasil.wgsl.ir.BindingAttribute.Location",
                                 "location": 43
@@ -812,7 +827,7 @@
                     ]
                 }
             },
-            5
+            6
         ]
     },
     "constants": {},
@@ -825,7 +840,7 @@
                 "parameters": [
                     {
                         "name": "v_in",
-                        "type": 5
+                        "type": 6
                     }
                 ],
                 "returnType": 2,

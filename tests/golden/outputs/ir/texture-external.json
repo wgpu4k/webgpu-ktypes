@@ -377,7 +377,21 @@
             },
             {
                 "name": "textureSampleBaseClampToEdge",
-                "parameters": [],
+                "parameters": [
+                    {
+                        "name": "arg_0",
+                        "type": 0
+                    },
+                    {
+                        "name": "arg_1",
+                        "type": 1
+                    },
+                    {
+                        "name": "arg_2",
+                        "type": 4
+                    }
+                ],
+                "returnType": 0,
                 "localVariables": {},
                 "expressions": {},
                 "blocks": {
@@ -391,7 +405,17 @@
             },
             {
                 "name": "textureLoad",
-                "parameters": [],
+                "parameters": [
+                    {
+                        "name": "arg_0",
+                        "type": 0
+                    },
+                    {
+                        "name": "arg_1",
+                        "type": 4
+                    }
+                ],
+                "returnType": 0,
                 "localVariables": {},
                 "expressions": {},
                 "blocks": {
@@ -405,7 +429,17 @@
             },
             {
                 "name": "textureLoad",
-                "parameters": [],
+                "parameters": [
+                    {
+                        "name": "arg_0",
+                        "type": 0
+                    },
+                    {
+                        "name": "arg_1",
+                        "type": 4
+                    }
+                ],
+                "returnType": 0,
                 "localVariables": {},
                 "expressions": {},
                 "blocks": {
@@ -419,7 +453,13 @@
             },
             {
                 "name": "textureDimensions",
-                "parameters": [],
+                "parameters": [
+                    {
+                        "name": "arg_0",
+                        "type": 0
+                    }
+                ],
+                "returnType": 0,
                 "localVariables": {},
                 "expressions": {},
                 "blocks": {
@@ -544,7 +584,8 @@
                         {
                             "statements": [
                                 {
-                                    "__type": "io.ygdrasil.wgsl.ir.Statement.Nop"
+                                    "__type": "io.ygdrasil.wgsl.ir.Statement.Emit",
+                                    "range": 11
                                 }
                             ]
                         }

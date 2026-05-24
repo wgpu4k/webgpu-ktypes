@@ -75,4 +75,10 @@ void switchLexicalScope(int a) {
 
 [numthreads(1, 1, 1)]
 void main() {
+    blockLexicalScope(false);
+    ifLexicalScope(true);
+    loopLexicalScope(false);
+    forLexicalScope(1.0f);
+    whileLexicalScope(1);
+    switchLexicalScope(1);
 }

@@ -7,5 +7,6 @@ struct func_Output {
 };
 func_Output func() {
     func_Output stage_out;
+    return float4(float(index), 1.0f, 1.0f, 1.0f);
     return stage_out;
 }

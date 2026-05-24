@@ -4,81 +4,106 @@ struct Struct_1 {
     subgroup_size: u32,
 }
 
-fn subgroupBallot() {
+fn subgroupBallot(arg_0: u32) -> u32 {
 }
 
 fn subgroupBallot() {
 }
 
-fn subgroupAll() {
+fn subgroupAll(arg_0: u32) -> u32 {
 }
 
-fn subgroupAny() {
+fn subgroupAny(arg_0: u32) -> u32 {
 }
 
-fn subgroupAdd() {
+fn subgroupAdd(arg_0: u32) -> u32 {
 }
 
-fn subgroupMul() {
+fn subgroupMul(arg_0: u32) -> u32 {
 }
 
-fn subgroupMin() {
+fn subgroupMin(arg_0: u32) -> u32 {
 }
 
-fn subgroupMax() {
+fn subgroupMax(arg_0: u32) -> u32 {
 }
 
-fn subgroupAnd() {
+fn subgroupAnd(arg_0: u32) -> u32 {
 }
 
-fn subgroupOr() {
+fn subgroupOr(arg_0: u32) -> u32 {
 }
 
-fn subgroupXor() {
+fn subgroupXor(arg_0: u32) -> u32 {
 }
 
-fn subgroupExclusiveAdd() {
+fn subgroupExclusiveAdd(arg_0: u32) -> u32 {
 }
 
-fn subgroupExclusiveMul() {
+fn subgroupExclusiveMul(arg_0: u32) -> u32 {
 }
 
-fn subgroupInclusiveAdd() {
+fn subgroupInclusiveAdd(arg_0: u32) -> u32 {
 }
 
-fn subgroupInclusiveMul() {
+fn subgroupInclusiveMul(arg_0: u32) -> u32 {
 }
 
-fn subgroupBroadcastFirst() {
+fn subgroupBroadcastFirst(arg_0: u32) -> u32 {
 }
 
-fn subgroupBroadcast() {
+fn subgroupBroadcast(arg_0: u32, arg_1: u32) -> u32 {
 }
 
-fn subgroupShuffle() {
+fn subgroupShuffle(arg_0: u32, arg_1: u32) -> u32 {
 }
 
-fn subgroupShuffleDown() {
+fn subgroupShuffleDown(arg_0: u32, arg_1: u32) -> u32 {
 }
 
-fn subgroupShuffleUp() {
+fn subgroupShuffleUp(arg_0: u32, arg_1: u32) -> u32 {
 }
 
-fn subgroupShuffleXor() {
+fn subgroupShuffleXor(arg_0: u32, arg_1: u32) -> u32 {
 }
 
-fn quadBroadcast() {
+fn quadBroadcast(arg_0: u32, arg_1: u32) -> u32 {
 }
 
-fn quadSwapX() {
+fn quadSwapX(arg_0: u32) -> u32 {
 }
 
-fn quadSwapY() {
+fn quadSwapY(arg_0: u32) -> u32 {
 }
 
-fn quadSwapDiagonal() {
+fn quadSwapDiagonal(arg_0: u32) -> u32 {
 }
 
 @compute
 fn main(sizes: Struct_1, subgroup_id: u32, subgroup_invocation_id: u32) {
+    subgroupBallot(((subgroup_invocation_id & 1u) == 1u));
+    subgroupBallot();
+    subgroupAll((subgroup_invocation_id != 0u));
+    subgroupAny((subgroup_invocation_id == 0u));
+    subgroupAdd(subgroup_invocation_id);
+    subgroupMul(subgroup_invocation_id);
+    subgroupMin(subgroup_invocation_id);
+    subgroupMax(subgroup_invocation_id);
+    subgroupAnd(subgroup_invocation_id);
+    subgroupOr(subgroup_invocation_id);
+    subgroupXor(subgroup_invocation_id);
+    subgroupExclusiveAdd(subgroup_invocation_id);
+    subgroupExclusiveMul(subgroup_invocation_id);
+    subgroupInclusiveAdd(subgroup_invocation_id);
+    subgroupInclusiveMul(subgroup_invocation_id);
+    subgroupBroadcastFirst(subgroup_invocation_id);
+    subgroupBroadcast(subgroup_invocation_id, 4u);
+    subgroupShuffle(subgroup_invocation_id, ((sizes.subgroup_size - 1u) - subgroup_invocation_id));
+    subgroupShuffleDown(subgroup_invocation_id, 1u);
+    subgroupShuffleUp(subgroup_invocation_id, 1u);
+    subgroupShuffleXor(subgroup_invocation_id, (sizes.subgroup_size - 1u));
+    quadBroadcast(subgroup_invocation_id, 4u);
+    quadSwapX(subgroup_invocation_id);
+    quadSwapY(subgroup_invocation_id);
+    quadSwapDiagonal(subgroup_invocation_id);
 }

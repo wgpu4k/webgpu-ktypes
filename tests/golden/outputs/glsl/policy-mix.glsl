@@ -19,10 +19,11 @@ vec4 mock_function(ivec2 c, int i, int l) {
     return (((((global_3.a[i] + global_4.a[i]) + textureLoad(global_0, c, i, l)) + global_1[i]) + global_2[i]) + in_function[i]);
 }
 
-void textureLoad() {
+texture2DArray textureLoad(texture2DArray arg_0, ivec2 arg_1, int arg_2, int arg_3) {
 }
 
 void wgsl_main() {
+    mock_function(vec2(1, 2), 3, 4);
 }
 
 void main() {

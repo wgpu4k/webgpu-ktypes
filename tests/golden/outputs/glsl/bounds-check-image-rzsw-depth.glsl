@@ -10,31 +10,35 @@ float test_textureLoad_depth_2d(ivec2 coords, int level) {
     return textureLoad(global_0, coords, level);
 }
 
-void textureLoad() {
+texture2D textureLoad(texture2D arg_0, ivec2 arg_1, int arg_2) {
 }
 
 float test_textureLoad_depth_2d_array_u(ivec2 coords, uint index, int level) {
     return textureLoad(global_1, coords, index, level);
 }
 
-void textureLoad() {
+texture2D textureLoad(texture2D arg_0, ivec2 arg_1, uint arg_2, int arg_3) {
 }
 
 float test_textureLoad_depth_2d_array_s(ivec2 coords, int index, int level) {
     return textureLoad(global_1, coords, index, level);
 }
 
-void textureLoad() {
+texture2D textureLoad(texture2D arg_0, ivec2 arg_1, int arg_2, int arg_3) {
 }
 
 float test_textureLoad_depth_multisampled_2d(ivec2 coords, int _sample) {
     return textureLoad(global_2, coords, _sample);
 }
 
-void textureLoad() {
+texture2D textureLoad(texture2D arg_0, ivec2 arg_1, int arg_2) {
 }
 
 vec4 wgsl_fragment_shader() {
+    test_textureLoad_depth_2d(ivec2(0), 0);
+    test_textureLoad_depth_2d_array_u(ivec2(0), 0u, 0);
+    test_textureLoad_depth_2d_array_s(ivec2(0), 0, 0);
+    test_textureLoad_depth_multisampled_2d(ivec2(0), 0);
     return vec4(0.0f, 0.0f, 0.0f, 0.0f);
 }
 

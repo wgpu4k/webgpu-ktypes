@@ -2,12 +2,17 @@ package io.ygdrasil.wgsl.wgsl
 
 import io.kotest.core.spec.style.FunSpec
 import io.kotest.matchers.string.shouldContain
+import io.ygdrasil.wgsl.arena.rangeOf
 import io.ygdrasil.wgsl.arena.Arena
 import io.ygdrasil.wgsl.ir.Block
 import io.ygdrasil.wgsl.ir.Expression
+import io.ygdrasil.wgsl.ir.ExpressionKind
 import io.ygdrasil.wgsl.ir.Function
+import io.ygdrasil.wgsl.ir.LiteralValue
 import io.ygdrasil.wgsl.ir.Module
 import io.ygdrasil.wgsl.ir.ScalarKind
+import io.ygdrasil.wgsl.ir.ScalarValue
+import io.ygdrasil.wgsl.ir.Statement
 import io.ygdrasil.wgsl.ir.StructMember
 import io.ygdrasil.wgsl.ir.Type
 import io.ygdrasil.wgsl.ir.TypeInner
@@ -58,5 +63,30 @@ class WgslWriterTest : FunSpec({
         code shouldContain "struct Struct_1"
         code shouldContain "a: f32"
         code shouldContain "fn my_func()"
+    }
+
+    test("emit non call expression writes phony assignment") {
+        val module = Module()
+        val expressions = Arena<Expression>()
+        val expression = expressions.append(
+            Expression(ExpressionKind.Literal(LiteralValue.Scalar(ScalarValue.I32(1))))
+        )
+        val blocks = Arena<Block>()
+        val body = blocks.append(Block(listOf(Statement.Emit(rangeOf(expression)))))
+
+        module.functions.append(
+            Function(
+                name = "main",
+                parameters = emptyList(),
+                returnType = null,
+                localVariables = Arena(),
+                expressions = expressions,
+                blocks = blocks,
+                body = body
+            )
+        )
+
+        val code = WgslModule.writeString(module)
+        code shouldContain "_ = 1;"
     }
 })

@@ -8,7 +8,7 @@ fn test(Passed_Texture: texture_2d<f32>, Passed_Sampler: sampler) -> vec4<f32> {
     return textureSample(Passed_Texture, Passed_Sampler, vec2<f32>(0.0f, 0.0f));
 }
 
-fn textureSample() {
+fn textureSample(arg_0: texture_2d<f32>, arg_1: sampler, arg_2: vec2<f32>) -> texture_2d<f32> {
 }
 
 @fragment

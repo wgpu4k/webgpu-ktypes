@@ -6,6 +6,7 @@ precision highp int;
 void wgsl_comp(uvec3 id) {
     if ((id[0] == 0)) {
     }
+    (1 + 1);
     return;
 }
 

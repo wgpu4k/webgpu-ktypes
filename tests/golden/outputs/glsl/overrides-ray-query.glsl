@@ -9,6 +9,7 @@ layout(set = 0, binding = 0) uniform accelerationStructureEXT global_1;
 void wgsl_main() {
     rayQueryEXT rq;
     uint desc = RayDesc(256u, 0u, (global_0 * 17.0f), (global_0 * 19.0f), vec3((global_0 * 23.0f)), vec3((global_0 * 29.0f), (global_0 * 31.0f), (global_0 * 37.0f)));
+    rayQueryInitialize(rq, global_1, desc);
     while (true) {
         if (rayQueryProceed(rq)) {
         } else {

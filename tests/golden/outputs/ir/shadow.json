@@ -448,7 +448,7 @@
                         "__type": "io.ygdrasil.wgsl.ir.LiteralValue.Scalar",
                         "value": {
                             "__type": "io.ygdrasil.wgsl.ir.ScalarValue.U32",
-                            "value": 0
+                            "value": 10
                         }
                     }
                 }
@@ -887,7 +887,29 @@
             },
             {
                 "name": "textureSampleCompareLevel",
-                "parameters": [],
+                "parameters": [
+                    {
+                        "name": "arg_0",
+                        "type": 10
+                    },
+                    {
+                        "name": "arg_1",
+                        "type": 11
+                    },
+                    {
+                        "name": "arg_2",
+                        "type": 14
+                    },
+                    {
+                        "name": "arg_3",
+                        "type": 15
+                    },
+                    {
+                        "name": "arg_4",
+                        "type": 0
+                    }
+                ],
+                "returnType": 10,
                 "localVariables": {},
                 "expressions": {},
                 "blocks": {
@@ -929,7 +951,7 @@
                         },
                         {
                             "name": "world_pos",
-                            "type": 1,
+                            "type": 5,
                             "init": 6
                         },
                         {
@@ -1487,7 +1509,7 @@
                         {
                             "kind": {
                                 "__type": "io.ygdrasil.wgsl.ir.ExpressionKind.Call",
-                                "function": 7,
+                                "function": 6,
                                 "arguments": [
                                     24,
                                     25
@@ -1497,7 +1519,7 @@
                         {
                             "kind": {
                                 "__type": "io.ygdrasil.wgsl.ir.ExpressionKind.Call",
-                                "function": 6,
+                                "function": 7,
                                 "arguments": [
                                     23,
                                     26
@@ -1788,7 +1810,13 @@
             },
             {
                 "name": "normalize",
-                "parameters": [],
+                "parameters": [
+                    {
+                        "name": "arg_0",
+                        "type": 7
+                    }
+                ],
+                "returnType": 7,
                 "localVariables": {},
                 "expressions": {},
                 "blocks": {
@@ -1802,21 +1830,13 @@
             },
             {
                 "name": "normalize",
-                "parameters": [],
-                "localVariables": {},
-                "expressions": {},
-                "blocks": {
-                    "data": [
-                        {
-                            "statements": []
-                        }
-                    ]
-                },
-                "body": 0
-            },
-            {
-                "name": "max",
-                "parameters": [],
+                "parameters": [
+                    {
+                        "name": "arg_0",
+                        "type": 7
+                    }
+                ],
+                "returnType": 7,
                 "localVariables": {},
                 "expressions": {},
                 "blocks": {
@@ -1830,7 +1850,41 @@
             },
             {
                 "name": "dot",
-                "parameters": [],
+                "parameters": [
+                    {
+                        "name": "arg_0",
+                        "type": 7
+                    },
+                    {
+                        "name": "arg_1",
+                        "type": 7
+                    }
+                ],
+                "returnType": 7,
+                "localVariables": {},
+                "expressions": {},
+                "blocks": {
+                    "data": [
+                        {
+                            "statements": []
+                        }
+                    ]
+                },
+                "body": 0
+            },
+            {
+                "name": "max",
+                "parameters": [
+                    {
+                        "name": "arg_0",
+                        "type": 0
+                    },
+                    {
+                        "name": "arg_1",
+                        "type": 7
+                    }
+                ],
+                "returnType": 0,
                 "localVariables": {},
                 "expressions": {},
                 "blocks": {
@@ -1844,7 +1898,17 @@
             },
             {
                 "name": "min",
-                "parameters": [],
+                "parameters": [
+                    {
+                        "name": "arg_0",
+                        "type": 2
+                    },
+                    {
+                        "name": "arg_1",
+                        "type": 2
+                    }
+                ],
+                "returnType": 2,
                 "localVariables": {},
                 "expressions": {},
                 "blocks": {
@@ -2109,7 +2173,7 @@
                         {
                             "kind": {
                                 "__type": "io.ygdrasil.wgsl.ir.ExpressionKind.Call",
-                                "function": 13,
+                                "function": 12,
                                 "arguments": [
                                     24,
                                     25
@@ -2119,7 +2183,7 @@
                         {
                             "kind": {
                                 "__type": "io.ygdrasil.wgsl.ir.ExpressionKind.Call",
-                                "function": 12,
+                                "function": 13,
                                 "arguments": [
                                     23,
                                     26
@@ -2410,7 +2474,13 @@
             },
             {
                 "name": "normalize",
-                "parameters": [],
+                "parameters": [
+                    {
+                        "name": "arg_0",
+                        "type": 7
+                    }
+                ],
+                "returnType": 7,
                 "localVariables": {},
                 "expressions": {},
                 "blocks": {
@@ -2424,21 +2494,13 @@
             },
             {
                 "name": "normalize",
-                "parameters": [],
-                "localVariables": {},
-                "expressions": {},
-                "blocks": {
-                    "data": [
-                        {
-                            "statements": []
-                        }
-                    ]
-                },
-                "body": 0
-            },
-            {
-                "name": "max",
-                "parameters": [],
+                "parameters": [
+                    {
+                        "name": "arg_0",
+                        "type": 7
+                    }
+                ],
+                "returnType": 7,
                 "localVariables": {},
                 "expressions": {},
                 "blocks": {
@@ -2452,7 +2514,41 @@
             },
             {
                 "name": "dot",
-                "parameters": [],
+                "parameters": [
+                    {
+                        "name": "arg_0",
+                        "type": 7
+                    },
+                    {
+                        "name": "arg_1",
+                        "type": 7
+                    }
+                ],
+                "returnType": 7,
+                "localVariables": {},
+                "expressions": {},
+                "blocks": {
+                    "data": [
+                        {
+                            "statements": []
+                        }
+                    ]
+                },
+                "body": 0
+            },
+            {
+                "name": "max",
+                "parameters": [
+                    {
+                        "name": "arg_0",
+                        "type": 0
+                    },
+                    {
+                        "name": "arg_1",
+                        "type": 7
+                    }
+                ],
+                "returnType": 0,
                 "localVariables": {},
                 "expressions": {},
                 "blocks": {
@@ -2466,7 +2562,17 @@
             },
             {
                 "name": "min",
-                "parameters": [],
+                "parameters": [
+                    {
+                        "name": "arg_0",
+                        "type": 2
+                    },
+                    {
+                        "name": "arg_1",
+                        "type": 2
+                    }
+                ],
+                "returnType": 2,
                 "localVariables": {},
                 "expressions": {},
                 "blocks": {

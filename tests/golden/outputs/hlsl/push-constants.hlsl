@@ -18,6 +18,7 @@ struct vert_main_Output {
 vert_main_Output vert_main(vert_main_Input stage_in) {
     vert_main_Output stage_out;
     float2 pos = stage_in.pos;
+    return float4((((float(ii) * float(vi)) * global_0.multiplier) * pos), 0.0f, 1.0f);
     return stage_out;
 }
 
@@ -26,5 +27,6 @@ struct main_Output {
 };
 main_Output main() {
     main_Output stage_out;
+    return (in.color * global_0.multiplier);
     return stage_out;
 }

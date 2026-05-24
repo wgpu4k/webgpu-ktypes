@@ -9,14 +9,14 @@ void all_constant_arguments() {
     vec2 xvfpaiai = vec2(46, 47);
     vec2 xvfpafaf = vec2(48.0f, 49.0f);
     vec2 xvfpaiaf = vec2(48, 49.0f);
-    uvec2 xvupuai = vec2(0u, 43);
-    uvec2 xvupaiu = vec2(42, 0u);
-    uvec2 xvuuai = uvec2(0u, 43);
-    uvec2 xvuaiu = uvec2(42, 0u);
-    ivec2 xvip____ = vec2();
-    uvec2 xvup____ = vec2();
-    vec2 xvfp____ = vec2();
-    mat2x2 xmfp____ = mat2x2(vec2(), vec2());
+    uvec2 xvupuai = vec2(42u, 43);
+    uvec2 xvupaiu = vec2(42, 43u);
+    uvec2 xvuuai = uvec2(42u, 43);
+    uvec2 xvuaiu = uvec2(42, 43u);
+    ivec2 xvip____ = vec2(0.0f);
+    uvec2 xvup____ = vec2(0.0f);
+    vec2 xvfp____ = vec2(0.0f);
+    mat2x2 xmfp____ = mat2x2(vec2(0.0f), vec2(0.0f));
     mat2x2 xmfpaiaiaiai = mat2x2(1, 2, 3, 4);
     mat2x2 xmfpafaiaiai = mat2x2(1.0f, 2, 3, 4);
     mat2x2 xmfpaiafaiai = mat2x2(1, 2.0f, 3, 4);
@@ -36,14 +36,14 @@ void all_constant_arguments() {
     float[2] xaf_faf = float[2](1.0f, 2.0f);
     float[2] xafaf_f = float[2](1.0f, 2.0f);
     float[2] xafaiai = float[2](1, 2);
-    int[2] xai_iai = int[2](0, 2);
-    int[2] xaiai_i = int[2](1, 0);
+    int[2] xai_iai = int[2](1, 2);
+    int[2] xaiai_i = int[2](1, 2);
     int[2] xaipaiai = int[2](1, 2);
-    float[2] xafpaiai = int[2](1, 2);
-    float[2] xafpaiaf = int[2](1, 2.0f);
+    float[2] xafpaiai = float[2](1, 2);
+    float[2] xafpaiaf = float[2](1, 2.0f);
     float[2] xafpafai = float[2](1.0f, 2);
     float[2] xafpafaf = float[2](1.0f, 2.0f);
-    ivec3[1] xavipai = vec3[1](vec3(1));
+    ivec3[1] xavipai = ivec3[1](vec3(1));
     vec3[1] xavfpai = vec3[1](vec3(1));
     vec3[1] xavfpaf = vec3[1](vec3(1.0f));
     ivec2 xvisai = vec2(1);
@@ -79,7 +79,7 @@ void mixed_constant_and_runtime_arguments() {
     float[2] xafp_faf = float[2](f, 2.0f);
     float[2] xafpaf_f = float[2](1.0f, f);
     float[2] xafp_fai = float[2](f, 2);
-    float[2] xafpai_f = int[2](1, f);
+    float[2] xafpai_f = float[2](1, f);
     int[2] xaip_iai = int[2](i, 2);
     int[2] xaipai_i = int[2](1, i);
     ivec2 xvisi = vec2(i);
@@ -88,6 +88,8 @@ void mixed_constant_and_runtime_arguments() {
 }
 
 void wgsl_main() {
+    all_constant_arguments();
+    mixed_constant_and_runtime_arguments();
 }
 
 void main() {

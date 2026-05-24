@@ -5,7 +5,7 @@
 void takes_ptr(int* p) {
 }
 
-void takes_array_ptr(void* p) {
+void takes_array_ptr(int[4]* p) {
 }
 
 void takes_vec_ptr(int2* p) {
@@ -14,34 +14,63 @@ void takes_vec_ptr(int2* p) {
 void takes_mat_ptr(float2x2* p) {
 }
 
-void argument(void* v, uint i) {
+void argument(int[4]* v, uint i) {
+    takes_ptr(&v[i]);
 }
 
-void argument_nested_x3(void* v, uint i, uint j) {
+void argument_nested_x3(int[4][4][4]* v, uint i, uint j) {
+    takes_ptr(&v[i][0][j]);
+    takes_ptr(&v[i][j][0]);
+    takes_ptr(&v[0][i][j]);
 }
 
-void index_from_self(void* v, uint i) {
+void index_from_self(int[4]* v, uint i) {
+    takes_ptr(&v[v[i]]);
 }
 
-void local_var_from_arg(void a, uint i) {
-    void local_0 = a;
+void local_var_from_arg(int a[4], uint i) {
+    int local_0[4] = a;
+    takes_ptr(&local_0[i]);
 }
 
-void let_binding(void* a, uint i) {
+void let_binding(int[4]* a, uint i) {
     void local_0 = &a[i];
+    takes_ptr(local_0);
     void local_1 = &a[0];
+    takes_ptr(local_1);
 }
 
 void local_var(uint i) {
-    void local_0 = void(1, 2, 3, 4);
+    int local_0[4] = int[4](1, 2, 3, 4);
+    takes_ptr(&local_0[i]);
+    takes_array_ptr(&local_0);
 }
 
-void argument_nested_x2(void* v, uint i, uint j) {
+void argument_nested_x2(int[4][4]* v, uint i, uint j) {
+    takes_ptr(&v[i][j]);
+    takes_ptr(&v[i][0]);
+    takes_ptr(&v[0][j]);
+    takes_array_ptr(&v[i]);
 }
 
-void mat_vec_ptrs(void* pv, void* pm, uint i) {
+void mat_vec_ptrs(int2[4]* pv, float2x2[4]* pm, uint i) {
+    takes_vec_ptr(&pv[i]);
+    takes_mat_ptr(&pm[i]);
 }
 
 [numthreads(1, 1, 1)]
 void main() {
+    int2 local_0[4];
+    float2x2 local_1[4];
+    int local_2[4];
+    int local_3[4][4];
+    int local_4[4][4][4];
+    local_var(1);
+    mat_vec_ptrs(&local_0, &local_1, 1);
+    argument(&local_2, 1);
+    argument_nested_x2(&local_3, 1, 2);
+    argument_nested_x3(&local_4, 1, 2);
+    index_from_self(&local_2, 1);
+    local_var_from_arg(int[4](1, 2, 3, 4), 5);
+    let_binding(&local_2, 1);
 }

@@ -3,303 +3,399 @@
 
 struct Struct_3 {
     uint atomic_scalar;
-    void atomic_arr;
+    int atomic_arr[2];
 };
 uint global_0 : register(u0);
-void global_1 : register(u1);
+int global_1[2] : register(u1);
 uint global_2;
-void global_3;
+int global_3[2];
 Struct_3 global_4 : register(u2);
 Struct_3 global_5;
 
 [numthreads(1, 1, 1)]
 void cs_main() {
+    atomicStore(&global_0, 1u);
+    atomicStore(&global_1[1], 1);
+    atomicStore(&global_4.atomic_scalar, 1u);
+    atomicStore(&global_4.atomic_arr[1], 1);
+    atomicStore(&global_2, 1u);
+    atomicStore(&global_3[1], 1);
+    atomicStore(&global_5.atomic_scalar, 1u);
+    atomicStore(&global_5.atomic_arr[1], 1);
+    workgroupBarrier();
+    void local_0 = atomicLoad(&global_0);
+    void local_1 = atomicLoad(&global_1[1]);
+    void local_2 = atomicLoad(&global_4.atomic_scalar);
+    void local_3 = atomicLoad(&global_4.atomic_arr[1]);
+    void local_4 = atomicLoad(&global_2);
+    void local_5 = atomicLoad(&global_3[1]);
+    void local_6 = atomicLoad(&global_5.atomic_scalar);
+    void local_7 = atomicLoad(&global_5.atomic_arr[1]);
+    workgroupBarrier();
+    atomicAdd(&global_0, 1u);
+    atomicAdd(&global_1[1], 1);
+    atomicAdd(&global_4.atomic_scalar, 1u);
+    atomicAdd(&global_4.atomic_arr[1], 1);
+    atomicAdd(&global_2, 1u);
+    atomicAdd(&global_3[1], 1);
+    atomicAdd(&global_5.atomic_scalar, 1u);
+    atomicAdd(&global_5.atomic_arr[1], 1);
+    workgroupBarrier();
+    atomicSub(&global_0, 1u);
+    atomicSub(&global_1[1], 1);
+    atomicSub(&global_4.atomic_scalar, 1u);
+    atomicSub(&global_4.atomic_arr[1], 1);
+    atomicSub(&global_2, 1u);
+    atomicSub(&global_3[1], 1);
+    atomicSub(&global_5.atomic_scalar, 1u);
+    atomicSub(&global_5.atomic_arr[1], 1);
+    workgroupBarrier();
+    atomicMax(&global_0, 1u);
+    atomicMax(&global_1[1], 1);
+    atomicMax(&global_4.atomic_scalar, 1u);
+    atomicMax(&global_4.atomic_arr[1], 1);
+    atomicMax(&global_2, 1u);
+    atomicMax(&global_3[1], 1);
+    atomicMax(&global_5.atomic_scalar, 1u);
+    atomicMax(&global_5.atomic_arr[1], 1);
+    workgroupBarrier();
+    atomicMin(&global_0, 1u);
+    atomicMin(&global_1[1], 1);
+    atomicMin(&global_4.atomic_scalar, 1u);
+    atomicMin(&global_4.atomic_arr[1], 1);
+    atomicMin(&global_2, 1u);
+    atomicMin(&global_3[1], 1);
+    atomicMin(&global_5.atomic_scalar, 1u);
+    atomicMin(&global_5.atomic_arr[1], 1);
+    workgroupBarrier();
+    atomicAnd(&global_0, 1u);
+    atomicAnd(&global_1[1], 1);
+    atomicAnd(&global_4.atomic_scalar, 1u);
+    atomicAnd(&global_4.atomic_arr[1], 1);
+    atomicAnd(&global_2, 1u);
+    atomicAnd(&global_3[1], 1);
+    atomicAnd(&global_5.atomic_scalar, 1u);
+    atomicAnd(&global_5.atomic_arr[1], 1);
+    workgroupBarrier();
+    atomicOr(&global_0, 1u);
+    atomicOr(&global_1[1], 1);
+    atomicOr(&global_4.atomic_scalar, 1u);
+    atomicOr(&global_4.atomic_arr[1], 1);
+    atomicOr(&global_2, 1u);
+    atomicOr(&global_3[1], 1);
+    atomicOr(&global_5.atomic_scalar, 1u);
+    atomicOr(&global_5.atomic_arr[1], 1);
+    workgroupBarrier();
+    atomicXor(&global_0, 1u);
+    atomicXor(&global_1[1], 1);
+    atomicXor(&global_4.atomic_scalar, 1u);
+    atomicXor(&global_4.atomic_arr[1], 1);
+    atomicXor(&global_2, 1u);
+    atomicXor(&global_3[1], 1);
+    atomicXor(&global_5.atomic_scalar, 1u);
+    atomicXor(&global_5.atomic_arr[1], 1);
+    atomicExchange(&global_0, 1u);
+    atomicExchange(&global_1[1], 1);
+    atomicExchange(&global_4.atomic_scalar, 1u);
+    atomicExchange(&global_4.atomic_arr[1], 1);
+    atomicExchange(&global_2, 1u);
+    atomicExchange(&global_3[1], 1);
+    atomicExchange(&global_5.atomic_scalar, 1u);
+    atomicExchange(&global_5.atomic_arr[1], 1);
+    void local_8 = atomicCompareExchangeWeak(&global_0, 1u, 2u);
+    void local_9 = atomicCompareExchangeWeak(&global_1[1], 1, 2);
+    void local_10 = atomicCompareExchangeWeak(&global_4.atomic_scalar, 1u, 2u);
+    void local_11 = atomicCompareExchangeWeak(&global_4.atomic_arr[1], 1, 2);
+    void local_12 = atomicCompareExchangeWeak(&global_2, 1u, 2u);
+    void local_13 = atomicCompareExchangeWeak(&global_3[1], 1, 2);
+    void local_14 = atomicCompareExchangeWeak(&global_5.atomic_scalar, 1u, 2u);
+    void local_15 = atomicCompareExchangeWeak(&global_5.atomic_arr[1], 1, 2);
 }
 
-void atomicStore() {
+void atomicStore(void arg_0, uint arg_1) {
 }
 
-void atomicStore() {
+void atomicStore(void arg_0, int arg_1) {
 }
 
-void atomicStore() {
+void atomicStore(void arg_0, uint arg_1) {
 }
 
-void atomicStore() {
+void atomicStore(void arg_0, int arg_1) {
 }
 
-void atomicStore() {
+void atomicStore(void arg_0, uint arg_1) {
 }
 
-void atomicStore() {
+void atomicStore(void arg_0, int arg_1) {
 }
 
-void atomicStore() {
+void atomicStore(void arg_0, uint arg_1) {
 }
 
-void atomicStore() {
-}
-
-void workgroupBarrier() {
-}
-
-void atomicLoad() {
-}
-
-void atomicLoad() {
-}
-
-void atomicLoad() {
-}
-
-void atomicLoad() {
-}
-
-void atomicLoad() {
-}
-
-void atomicLoad() {
-}
-
-void atomicLoad() {
-}
-
-void atomicLoad() {
-}
-
-void workgroupBarrier() {
-}
-
-void atomicAdd() {
-}
-
-void atomicAdd() {
-}
-
-void atomicAdd() {
-}
-
-void atomicAdd() {
-}
-
-void atomicAdd() {
-}
-
-void atomicAdd() {
-}
-
-void atomicAdd() {
-}
-
-void atomicAdd() {
-}
-
-void workgroupBarrier() {
-}
-
-void atomicSub() {
-}
-
-void atomicSub() {
-}
-
-void atomicSub() {
-}
-
-void atomicSub() {
-}
-
-void atomicSub() {
-}
-
-void atomicSub() {
-}
-
-void atomicSub() {
-}
-
-void atomicSub() {
-}
-
-void workgroupBarrier() {
-}
-
-void atomicMax() {
-}
-
-void atomicMax() {
-}
-
-void atomicMax() {
-}
-
-void atomicMax() {
-}
-
-void atomicMax() {
-}
-
-void atomicMax() {
-}
-
-void atomicMax() {
-}
-
-void atomicMax() {
+void atomicStore(void arg_0, int arg_1) {
 }
 
 void workgroupBarrier() {
 }
 
-void atomicMin() {
+void atomicLoad(void arg_0) {
 }
 
-void atomicMin() {
+void atomicLoad(void arg_0) {
 }
 
-void atomicMin() {
+void atomicLoad(void arg_0) {
 }
 
-void atomicMin() {
+void atomicLoad(void arg_0) {
 }
 
-void atomicMin() {
+void atomicLoad(void arg_0) {
 }
 
-void atomicMin() {
+void atomicLoad(void arg_0) {
 }
 
-void atomicMin() {
+void atomicLoad(void arg_0) {
 }
 
-void atomicMin() {
-}
-
-void workgroupBarrier() {
-}
-
-void atomicAnd() {
-}
-
-void atomicAnd() {
-}
-
-void atomicAnd() {
-}
-
-void atomicAnd() {
-}
-
-void atomicAnd() {
-}
-
-void atomicAnd() {
-}
-
-void atomicAnd() {
-}
-
-void atomicAnd() {
+void atomicLoad(void arg_0) {
 }
 
 void workgroupBarrier() {
 }
 
-void atomicOr() {
+void atomicAdd(void arg_0, uint arg_1) {
 }
 
-void atomicOr() {
+void atomicAdd(void arg_0, int arg_1) {
 }
 
-void atomicOr() {
+void atomicAdd(void arg_0, uint arg_1) {
 }
 
-void atomicOr() {
+void atomicAdd(void arg_0, int arg_1) {
 }
 
-void atomicOr() {
+void atomicAdd(void arg_0, uint arg_1) {
 }
 
-void atomicOr() {
+void atomicAdd(void arg_0, int arg_1) {
 }
 
-void atomicOr() {
+void atomicAdd(void arg_0, uint arg_1) {
 }
 
-void atomicOr() {
+void atomicAdd(void arg_0, int arg_1) {
 }
 
 void workgroupBarrier() {
 }
 
-void atomicXor() {
+void atomicSub(void arg_0, uint arg_1) {
 }
 
-void atomicXor() {
+void atomicSub(void arg_0, int arg_1) {
 }
 
-void atomicXor() {
+void atomicSub(void arg_0, uint arg_1) {
 }
 
-void atomicXor() {
+void atomicSub(void arg_0, int arg_1) {
 }
 
-void atomicXor() {
+void atomicSub(void arg_0, uint arg_1) {
 }
 
-void atomicXor() {
+void atomicSub(void arg_0, int arg_1) {
 }
 
-void atomicXor() {
+void atomicSub(void arg_0, uint arg_1) {
 }
 
-void atomicXor() {
+void atomicSub(void arg_0, int arg_1) {
 }
 
-void atomicExchange() {
+void workgroupBarrier() {
 }
 
-void atomicExchange() {
+void atomicMax(void arg_0, uint arg_1) {
 }
 
-void atomicExchange() {
+void atomicMax(void arg_0, int arg_1) {
 }
 
-void atomicExchange() {
+void atomicMax(void arg_0, uint arg_1) {
 }
 
-void atomicExchange() {
+void atomicMax(void arg_0, int arg_1) {
 }
 
-void atomicExchange() {
+void atomicMax(void arg_0, uint arg_1) {
 }
 
-void atomicExchange() {
+void atomicMax(void arg_0, int arg_1) {
 }
 
-void atomicExchange() {
+void atomicMax(void arg_0, uint arg_1) {
 }
 
-void atomicCompareExchangeWeak() {
+void atomicMax(void arg_0, int arg_1) {
 }
 
-void atomicCompareExchangeWeak() {
+void workgroupBarrier() {
 }
 
-void atomicCompareExchangeWeak() {
+void atomicMin(void arg_0, uint arg_1) {
 }
 
-void atomicCompareExchangeWeak() {
+void atomicMin(void arg_0, int arg_1) {
 }
 
-void atomicCompareExchangeWeak() {
+void atomicMin(void arg_0, uint arg_1) {
 }
 
-void atomicCompareExchangeWeak() {
+void atomicMin(void arg_0, int arg_1) {
 }
 
-void atomicCompareExchangeWeak() {
+void atomicMin(void arg_0, uint arg_1) {
 }
 
-void atomicCompareExchangeWeak() {
+void atomicMin(void arg_0, int arg_1) {
+}
+
+void atomicMin(void arg_0, uint arg_1) {
+}
+
+void atomicMin(void arg_0, int arg_1) {
+}
+
+void workgroupBarrier() {
+}
+
+void atomicAnd(void arg_0, uint arg_1) {
+}
+
+void atomicAnd(void arg_0, int arg_1) {
+}
+
+void atomicAnd(void arg_0, uint arg_1) {
+}
+
+void atomicAnd(void arg_0, int arg_1) {
+}
+
+void atomicAnd(void arg_0, uint arg_1) {
+}
+
+void atomicAnd(void arg_0, int arg_1) {
+}
+
+void atomicAnd(void arg_0, uint arg_1) {
+}
+
+void atomicAnd(void arg_0, int arg_1) {
+}
+
+void workgroupBarrier() {
+}
+
+void atomicOr(void arg_0, uint arg_1) {
+}
+
+void atomicOr(void arg_0, int arg_1) {
+}
+
+void atomicOr(void arg_0, uint arg_1) {
+}
+
+void atomicOr(void arg_0, int arg_1) {
+}
+
+void atomicOr(void arg_0, uint arg_1) {
+}
+
+void atomicOr(void arg_0, int arg_1) {
+}
+
+void atomicOr(void arg_0, uint arg_1) {
+}
+
+void atomicOr(void arg_0, int arg_1) {
+}
+
+void workgroupBarrier() {
+}
+
+void atomicXor(void arg_0, uint arg_1) {
+}
+
+void atomicXor(void arg_0, int arg_1) {
+}
+
+void atomicXor(void arg_0, uint arg_1) {
+}
+
+void atomicXor(void arg_0, int arg_1) {
+}
+
+void atomicXor(void arg_0, uint arg_1) {
+}
+
+void atomicXor(void arg_0, int arg_1) {
+}
+
+void atomicXor(void arg_0, uint arg_1) {
+}
+
+void atomicXor(void arg_0, int arg_1) {
+}
+
+void atomicExchange(void arg_0, uint arg_1) {
+}
+
+void atomicExchange(void arg_0, int arg_1) {
+}
+
+void atomicExchange(void arg_0, uint arg_1) {
+}
+
+void atomicExchange(void arg_0, int arg_1) {
+}
+
+void atomicExchange(void arg_0, uint arg_1) {
+}
+
+void atomicExchange(void arg_0, int arg_1) {
+}
+
+void atomicExchange(void arg_0, uint arg_1) {
+}
+
+void atomicExchange(void arg_0, int arg_1) {
+}
+
+void atomicCompareExchangeWeak(void arg_0, uint arg_1, uint arg_2) {
+}
+
+void atomicCompareExchangeWeak(void arg_0, int arg_1, int arg_2) {
+}
+
+void atomicCompareExchangeWeak(void arg_0, uint arg_1, uint arg_2) {
+}
+
+void atomicCompareExchangeWeak(void arg_0, int arg_1, int arg_2) {
+}
+
+void atomicCompareExchangeWeak(void arg_0, uint arg_1, uint arg_2) {
+}
+
+void atomicCompareExchangeWeak(void arg_0, int arg_1, int arg_2) {
+}
+
+void atomicCompareExchangeWeak(void arg_0, uint arg_1, uint arg_2) {
+}
+
+void atomicCompareExchangeWeak(void arg_0, int arg_1, int arg_2) {
 }

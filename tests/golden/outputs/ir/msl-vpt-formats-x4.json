@@ -60,6 +60,20 @@
             },
             {
                 "inner": {
+                    "__type": "io.ygdrasil.wgsl.ir.TypeInner.Scalar",
+                    "kind": "F16",
+                    "width": 2
+                }
+            },
+            {
+                "inner": {
+                    "__type": "io.ygdrasil.wgsl.ir.TypeInner.Vector",
+                    "size": "Quad",
+                    "scalar": 7
+                }
+            },
+            {
+                "inner": {
                     "__type": "io.ygdrasil.wgsl.ir.TypeInner.Struct",
                     "members": [
                         {
@@ -392,7 +406,7 @@
                         },
                         {
                             "name": "v_float16_as_f16",
-                            "type": 1,
+                            "type": 8,
                             "binding": {
                                 "__type": "io.ygdrasil.wgsl.ir.BindingAttribute.Location",
                                 "location": 41
@@ -400,7 +414,7 @@
                         },
                         {
                             "name": "v_float16x2_as_f16",
-                            "type": 1,
+                            "type": 8,
                             "binding": {
                                 "__type": "io.ygdrasil.wgsl.ir.BindingAttribute.Location",
                                 "location": 42
@@ -408,7 +422,7 @@
                         },
                         {
                             "name": "v_float16x4_as_f16",
-                            "type": 1,
+                            "type": 8,
                             "binding": {
                                 "__type": "io.ygdrasil.wgsl.ir.BindingAttribute.Location",
                                 "location": 43
@@ -485,6 +499,22 @@
             6,
             {
                 "inner": {
+                    "__type": "io.ygdrasil.wgsl.ir.TypeInner.Scalar",
+                    "kind": "F16",
+                    "width": 2
+                }
+            },
+            7,
+            {
+                "inner": {
+                    "__type": "io.ygdrasil.wgsl.ir.TypeInner.Vector",
+                    "size": "Quad",
+                    "scalar": 7
+                }
+            },
+            8,
+            {
+                "inner": {
                     "__type": "io.ygdrasil.wgsl.ir.TypeInner.Struct",
                     "members": [
                         {
@@ -817,7 +847,7 @@
                         },
                         {
                             "name": "v_float16_as_f16",
-                            "type": 1,
+                            "type": 8,
                             "binding": {
                                 "__type": "io.ygdrasil.wgsl.ir.BindingAttribute.Location",
                                 "location": 41
@@ -825,7 +855,7 @@
                         },
                         {
                             "name": "v_float16x2_as_f16",
-                            "type": 1,
+                            "type": 8,
                             "binding": {
                                 "__type": "io.ygdrasil.wgsl.ir.BindingAttribute.Location",
                                 "location": 42
@@ -833,7 +863,7 @@
                         },
                         {
                             "name": "v_float16x4_as_f16",
-                            "type": 1,
+                            "type": 8,
                             "binding": {
                                 "__type": "io.ygdrasil.wgsl.ir.BindingAttribute.Location",
                                 "location": 43
@@ -842,7 +872,7 @@
                     ]
                 }
             },
-            7
+            9
         ]
     },
     "constants": {},
@@ -855,7 +885,7 @@
                 "parameters": [
                     {
                         "name": "v_in",
-                        "type": 7
+                        "type": 9
                     }
                 ],
                 "returnType": 2,

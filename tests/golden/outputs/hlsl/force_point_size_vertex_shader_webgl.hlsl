@@ -7,6 +7,9 @@ struct vs_main_Output {
 };
 vs_main_Output vs_main() {
     vs_main_Output stage_out;
+    float local_0 = float((int(in_vertex_index) - 1));
+    float local_1 = float(((int((in_vertex_index & 1u)) * 2) - 1));
+    return float4(local_0, local_1, 0.0f, 1.0f);
     return stage_out;
 }
 
@@ -15,5 +18,6 @@ struct fs_main_Output {
 };
 fs_main_Output fs_main() {
     fs_main_Output stage_out;
+    return float4(1.0f, 0.0f, 0.0f, 1.0f);
     return stage_out;
 }

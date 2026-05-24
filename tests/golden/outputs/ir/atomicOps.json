@@ -20,8 +20,8 @@
                     "__type": "io.ygdrasil.wgsl.ir.TypeInner.Array",
                     "element": 1,
                     "size": {
-                        "__type": "io.ygdrasil.wgsl.ir.ArraySize.Dynamic",
-                        "expression": 0
+                        "__type": "io.ygdrasil.wgsl.ir.ArraySize.Constant",
+                        "value": 2
                     }
                 }
             },
@@ -45,8 +45,8 @@
                     "__type": "io.ygdrasil.wgsl.ir.TypeInner.Array",
                     "element": 1,
                     "size": {
-                        "__type": "io.ygdrasil.wgsl.ir.ArraySize.Dynamic",
-                        "expression": 0
+                        "__type": "io.ygdrasil.wgsl.ir.ArraySize.Constant",
+                        "value": 2
                     }
                 }
             },
@@ -55,8 +55,8 @@
                     "__type": "io.ygdrasil.wgsl.ir.TypeInner.Array",
                     "element": 1,
                     "size": {
-                        "__type": "io.ygdrasil.wgsl.ir.ArraySize.Dynamic",
-                        "expression": 0
+                        "__type": "io.ygdrasil.wgsl.ir.ArraySize.Constant",
+                        "value": 2
                     }
                 }
             },
@@ -102,8 +102,8 @@
                     "__type": "io.ygdrasil.wgsl.ir.TypeInner.Array",
                     "element": 1,
                     "size": {
-                        "__type": "io.ygdrasil.wgsl.ir.ArraySize.Dynamic",
-                        "expression": 0
+                        "__type": "io.ygdrasil.wgsl.ir.ArraySize.Constant",
+                        "value": 2
                     }
                 }
             },
@@ -129,8 +129,8 @@
                     "__type": "io.ygdrasil.wgsl.ir.TypeInner.Array",
                     "element": 1,
                     "size": {
-                        "__type": "io.ygdrasil.wgsl.ir.ArraySize.Dynamic",
-                        "expression": 0
+                        "__type": "io.ygdrasil.wgsl.ir.ArraySize.Constant",
+                        "value": 2
                     }
                 }
             },
@@ -140,8 +140,8 @@
                     "__type": "io.ygdrasil.wgsl.ir.TypeInner.Array",
                     "element": 1,
                     "size": {
-                        "__type": "io.ygdrasil.wgsl.ir.ArraySize.Dynamic",
-                        "expression": 0
+                        "__type": "io.ygdrasil.wgsl.ir.ArraySize.Constant",
+                        "value": 2
                     }
                 }
             },
@@ -336,7 +336,7 @@
                                     "__type": "io.ygdrasil.wgsl.ir.LiteralValue.Scalar",
                                     "value": {
                                         "__type": "io.ygdrasil.wgsl.ir.ScalarValue.U32",
-                                        "value": 0
+                                        "value": 1
                                     }
                                 }
                             }
@@ -377,7 +377,7 @@
                                     "__type": "io.ygdrasil.wgsl.ir.LiteralValue.Scalar",
                                     "value": {
                                         "__type": "io.ygdrasil.wgsl.ir.ScalarValue.I32",
-                                        "value": 0
+                                        "value": 1
                                     }
                                 }
                             }
@@ -418,7 +418,7 @@
                                     "__type": "io.ygdrasil.wgsl.ir.LiteralValue.Scalar",
                                     "value": {
                                         "__type": "io.ygdrasil.wgsl.ir.ScalarValue.U32",
-                                        "value": 0
+                                        "value": 1
                                     }
                                 }
                             }
@@ -466,7 +466,7 @@
                                     "__type": "io.ygdrasil.wgsl.ir.LiteralValue.Scalar",
                                     "value": {
                                         "__type": "io.ygdrasil.wgsl.ir.ScalarValue.I32",
-                                        "value": 0
+                                        "value": 1
                                     }
                                 }
                             }
@@ -500,7 +500,7 @@
                                     "__type": "io.ygdrasil.wgsl.ir.LiteralValue.Scalar",
                                     "value": {
                                         "__type": "io.ygdrasil.wgsl.ir.ScalarValue.U32",
-                                        "value": 0
+                                        "value": 1
                                     }
                                 }
                             }
@@ -541,7 +541,7 @@
                                     "__type": "io.ygdrasil.wgsl.ir.LiteralValue.Scalar",
                                     "value": {
                                         "__type": "io.ygdrasil.wgsl.ir.ScalarValue.I32",
-                                        "value": 0
+                                        "value": 1
                                     }
                                 }
                             }
@@ -582,7 +582,7 @@
                                     "__type": "io.ygdrasil.wgsl.ir.LiteralValue.Scalar",
                                     "value": {
                                         "__type": "io.ygdrasil.wgsl.ir.ScalarValue.U32",
-                                        "value": 0
+                                        "value": 1
                                     }
                                 }
                             }
@@ -630,7 +630,7 @@
                                     "__type": "io.ygdrasil.wgsl.ir.LiteralValue.Scalar",
                                     "value": {
                                         "__type": "io.ygdrasil.wgsl.ir.ScalarValue.I32",
-                                        "value": 0
+                                        "value": 1
                                     }
                                 }
                             }
@@ -902,7 +902,7 @@
                                     "__type": "io.ygdrasil.wgsl.ir.LiteralValue.Scalar",
                                     "value": {
                                         "__type": "io.ygdrasil.wgsl.ir.ScalarValue.U32",
-                                        "value": 0
+                                        "value": 1
                                     }
                                 }
                             }
@@ -943,7 +943,7 @@
                                     "__type": "io.ygdrasil.wgsl.ir.LiteralValue.Scalar",
                                     "value": {
                                         "__type": "io.ygdrasil.wgsl.ir.ScalarValue.I32",
-                                        "value": 0
+                                        "value": 1
                                     }
                                 }
                             }
@@ -984,7 +984,7 @@
                                     "__type": "io.ygdrasil.wgsl.ir.LiteralValue.Scalar",
                                     "value": {
                                         "__type": "io.ygdrasil.wgsl.ir.ScalarValue.U32",
-                                        "value": 0
+                                        "value": 1
                                     }
                                 }
                             }
@@ -1032,7 +1032,7 @@
                                     "__type": "io.ygdrasil.wgsl.ir.LiteralValue.Scalar",
                                     "value": {
                                         "__type": "io.ygdrasil.wgsl.ir.ScalarValue.I32",
-                                        "value": 0
+                                        "value": 1
                                     }
                                 }
                             }
@@ -1066,7 +1066,7 @@
                                     "__type": "io.ygdrasil.wgsl.ir.LiteralValue.Scalar",
                                     "value": {
                                         "__type": "io.ygdrasil.wgsl.ir.ScalarValue.U32",
-                                        "value": 0
+                                        "value": 1
                                     }
                                 }
                             }
@@ -1107,7 +1107,7 @@
                                     "__type": "io.ygdrasil.wgsl.ir.LiteralValue.Scalar",
                                     "value": {
                                         "__type": "io.ygdrasil.wgsl.ir.ScalarValue.I32",
-                                        "value": 0
+                                        "value": 1
                                     }
                                 }
                             }
@@ -1148,7 +1148,7 @@
                                     "__type": "io.ygdrasil.wgsl.ir.LiteralValue.Scalar",
                                     "value": {
                                         "__type": "io.ygdrasil.wgsl.ir.ScalarValue.U32",
-                                        "value": 0
+                                        "value": 1
                                     }
                                 }
                             }
@@ -1196,7 +1196,7 @@
                                     "__type": "io.ygdrasil.wgsl.ir.LiteralValue.Scalar",
                                     "value": {
                                         "__type": "io.ygdrasil.wgsl.ir.ScalarValue.I32",
-                                        "value": 0
+                                        "value": 1
                                     }
                                 }
                             }
@@ -1237,7 +1237,7 @@
                                     "__type": "io.ygdrasil.wgsl.ir.LiteralValue.Scalar",
                                     "value": {
                                         "__type": "io.ygdrasil.wgsl.ir.ScalarValue.U32",
-                                        "value": 0
+                                        "value": 1
                                     }
                                 }
                             }
@@ -1278,7 +1278,7 @@
                                     "__type": "io.ygdrasil.wgsl.ir.LiteralValue.Scalar",
                                     "value": {
                                         "__type": "io.ygdrasil.wgsl.ir.ScalarValue.I32",
-                                        "value": 0
+                                        "value": 1
                                     }
                                 }
                             }
@@ -1319,7 +1319,7 @@
                                     "__type": "io.ygdrasil.wgsl.ir.LiteralValue.Scalar",
                                     "value": {
                                         "__type": "io.ygdrasil.wgsl.ir.ScalarValue.U32",
-                                        "value": 0
+                                        "value": 1
                                     }
                                 }
                             }
@@ -1367,7 +1367,7 @@
                                     "__type": "io.ygdrasil.wgsl.ir.LiteralValue.Scalar",
                                     "value": {
                                         "__type": "io.ygdrasil.wgsl.ir.ScalarValue.I32",
-                                        "value": 0
+                                        "value": 1
                                     }
                                 }
                             }
@@ -1401,7 +1401,7 @@
                                     "__type": "io.ygdrasil.wgsl.ir.LiteralValue.Scalar",
                                     "value": {
                                         "__type": "io.ygdrasil.wgsl.ir.ScalarValue.U32",
-                                        "value": 0
+                                        "value": 1
                                     }
                                 }
                             }
@@ -1442,7 +1442,7 @@
                                     "__type": "io.ygdrasil.wgsl.ir.LiteralValue.Scalar",
                                     "value": {
                                         "__type": "io.ygdrasil.wgsl.ir.ScalarValue.I32",
-                                        "value": 0
+                                        "value": 1
                                     }
                                 }
                             }
@@ -1483,7 +1483,7 @@
                                     "__type": "io.ygdrasil.wgsl.ir.LiteralValue.Scalar",
                                     "value": {
                                         "__type": "io.ygdrasil.wgsl.ir.ScalarValue.U32",
-                                        "value": 0
+                                        "value": 1
                                     }
                                 }
                             }
@@ -1531,7 +1531,7 @@
                                     "__type": "io.ygdrasil.wgsl.ir.LiteralValue.Scalar",
                                     "value": {
                                         "__type": "io.ygdrasil.wgsl.ir.ScalarValue.I32",
-                                        "value": 0
+                                        "value": 1
                                     }
                                 }
                             }
@@ -1572,7 +1572,7 @@
                                     "__type": "io.ygdrasil.wgsl.ir.LiteralValue.Scalar",
                                     "value": {
                                         "__type": "io.ygdrasil.wgsl.ir.ScalarValue.U32",
-                                        "value": 0
+                                        "value": 1
                                     }
                                 }
                             }
@@ -1613,7 +1613,7 @@
                                     "__type": "io.ygdrasil.wgsl.ir.LiteralValue.Scalar",
                                     "value": {
                                         "__type": "io.ygdrasil.wgsl.ir.ScalarValue.I32",
-                                        "value": 0
+                                        "value": 1
                                     }
                                 }
                             }
@@ -1654,7 +1654,7 @@
                                     "__type": "io.ygdrasil.wgsl.ir.LiteralValue.Scalar",
                                     "value": {
                                         "__type": "io.ygdrasil.wgsl.ir.ScalarValue.U32",
-                                        "value": 0
+                                        "value": 1
                                     }
                                 }
                             }
@@ -1702,7 +1702,7 @@
                                     "__type": "io.ygdrasil.wgsl.ir.LiteralValue.Scalar",
                                     "value": {
                                         "__type": "io.ygdrasil.wgsl.ir.ScalarValue.I32",
-                                        "value": 0
+                                        "value": 1
                                     }
                                 }
                             }
@@ -1736,7 +1736,7 @@
                                     "__type": "io.ygdrasil.wgsl.ir.LiteralValue.Scalar",
                                     "value": {
                                         "__type": "io.ygdrasil.wgsl.ir.ScalarValue.U32",
-                                        "value": 0
+                                        "value": 1
                                     }
                                 }
                             }
@@ -1777,7 +1777,7 @@
                                     "__type": "io.ygdrasil.wgsl.ir.LiteralValue.Scalar",
                                     "value": {
                                         "__type": "io.ygdrasil.wgsl.ir.ScalarValue.I32",
-                                        "value": 0
+                                        "value": 1
                                     }
                                 }
                             }
@@ -1818,7 +1818,7 @@
                                     "__type": "io.ygdrasil.wgsl.ir.LiteralValue.Scalar",
                                     "value": {
                                         "__type": "io.ygdrasil.wgsl.ir.ScalarValue.U32",
-                                        "value": 0
+                                        "value": 1
                                     }
                                 }
                             }
@@ -1866,7 +1866,7 @@
                                     "__type": "io.ygdrasil.wgsl.ir.LiteralValue.Scalar",
                                     "value": {
                                         "__type": "io.ygdrasil.wgsl.ir.ScalarValue.I32",
-                                        "value": 0
+                                        "value": 1
                                     }
                                 }
                             }
@@ -1907,7 +1907,7 @@
                                     "__type": "io.ygdrasil.wgsl.ir.LiteralValue.Scalar",
                                     "value": {
                                         "__type": "io.ygdrasil.wgsl.ir.ScalarValue.U32",
-                                        "value": 0
+                                        "value": 1
                                     }
                                 }
                             }
@@ -1948,7 +1948,7 @@
                                     "__type": "io.ygdrasil.wgsl.ir.LiteralValue.Scalar",
                                     "value": {
                                         "__type": "io.ygdrasil.wgsl.ir.ScalarValue.I32",
-                                        "value": 0
+                                        "value": 1
                                     }
                                 }
                             }
@@ -1989,7 +1989,7 @@
                                     "__type": "io.ygdrasil.wgsl.ir.LiteralValue.Scalar",
                                     "value": {
                                         "__type": "io.ygdrasil.wgsl.ir.ScalarValue.U32",
-                                        "value": 0
+                                        "value": 1
                                     }
                                 }
                             }
@@ -2037,7 +2037,7 @@
                                     "__type": "io.ygdrasil.wgsl.ir.LiteralValue.Scalar",
                                     "value": {
                                         "__type": "io.ygdrasil.wgsl.ir.ScalarValue.I32",
-                                        "value": 0
+                                        "value": 1
                                     }
                                 }
                             }
@@ -2071,7 +2071,7 @@
                                     "__type": "io.ygdrasil.wgsl.ir.LiteralValue.Scalar",
                                     "value": {
                                         "__type": "io.ygdrasil.wgsl.ir.ScalarValue.U32",
-                                        "value": 0
+                                        "value": 1
                                     }
                                 }
                             }
@@ -2112,7 +2112,7 @@
                                     "__type": "io.ygdrasil.wgsl.ir.LiteralValue.Scalar",
                                     "value": {
                                         "__type": "io.ygdrasil.wgsl.ir.ScalarValue.I32",
-                                        "value": 0
+                                        "value": 1
                                     }
                                 }
                             }
@@ -2153,7 +2153,7 @@
                                     "__type": "io.ygdrasil.wgsl.ir.LiteralValue.Scalar",
                                     "value": {
                                         "__type": "io.ygdrasil.wgsl.ir.ScalarValue.U32",
-                                        "value": 0
+                                        "value": 1
                                     }
                                 }
                             }
@@ -2201,7 +2201,7 @@
                                     "__type": "io.ygdrasil.wgsl.ir.LiteralValue.Scalar",
                                     "value": {
                                         "__type": "io.ygdrasil.wgsl.ir.ScalarValue.I32",
-                                        "value": 0
+                                        "value": 1
                                     }
                                 }
                             }
@@ -2242,7 +2242,7 @@
                                     "__type": "io.ygdrasil.wgsl.ir.LiteralValue.Scalar",
                                     "value": {
                                         "__type": "io.ygdrasil.wgsl.ir.ScalarValue.U32",
-                                        "value": 0
+                                        "value": 1
                                     }
                                 }
                             }
@@ -2283,7 +2283,7 @@
                                     "__type": "io.ygdrasil.wgsl.ir.LiteralValue.Scalar",
                                     "value": {
                                         "__type": "io.ygdrasil.wgsl.ir.ScalarValue.I32",
-                                        "value": 0
+                                        "value": 1
                                     }
                                 }
                             }
@@ -2324,7 +2324,7 @@
                                     "__type": "io.ygdrasil.wgsl.ir.LiteralValue.Scalar",
                                     "value": {
                                         "__type": "io.ygdrasil.wgsl.ir.ScalarValue.U32",
-                                        "value": 0
+                                        "value": 1
                                     }
                                 }
                             }
@@ -2372,7 +2372,7 @@
                                     "__type": "io.ygdrasil.wgsl.ir.LiteralValue.Scalar",
                                     "value": {
                                         "__type": "io.ygdrasil.wgsl.ir.ScalarValue.I32",
-                                        "value": 0
+                                        "value": 1
                                     }
                                 }
                             }
@@ -2406,7 +2406,7 @@
                                     "__type": "io.ygdrasil.wgsl.ir.LiteralValue.Scalar",
                                     "value": {
                                         "__type": "io.ygdrasil.wgsl.ir.ScalarValue.U32",
-                                        "value": 0
+                                        "value": 1
                                     }
                                 }
                             }
@@ -2447,7 +2447,7 @@
                                     "__type": "io.ygdrasil.wgsl.ir.LiteralValue.Scalar",
                                     "value": {
                                         "__type": "io.ygdrasil.wgsl.ir.ScalarValue.I32",
-                                        "value": 0
+                                        "value": 1
                                     }
                                 }
                             }
@@ -2488,7 +2488,7 @@
                                     "__type": "io.ygdrasil.wgsl.ir.LiteralValue.Scalar",
                                     "value": {
                                         "__type": "io.ygdrasil.wgsl.ir.ScalarValue.U32",
-                                        "value": 0
+                                        "value": 1
                                     }
                                 }
                             }
@@ -2536,7 +2536,7 @@
                                     "__type": "io.ygdrasil.wgsl.ir.LiteralValue.Scalar",
                                     "value": {
                                         "__type": "io.ygdrasil.wgsl.ir.ScalarValue.I32",
-                                        "value": 0
+                                        "value": 1
                                     }
                                 }
                             }
@@ -2577,7 +2577,7 @@
                                     "__type": "io.ygdrasil.wgsl.ir.LiteralValue.Scalar",
                                     "value": {
                                         "__type": "io.ygdrasil.wgsl.ir.ScalarValue.U32",
-                                        "value": 0
+                                        "value": 1
                                     }
                                 }
                             }
@@ -2618,7 +2618,7 @@
                                     "__type": "io.ygdrasil.wgsl.ir.LiteralValue.Scalar",
                                     "value": {
                                         "__type": "io.ygdrasil.wgsl.ir.ScalarValue.I32",
-                                        "value": 0
+                                        "value": 1
                                     }
                                 }
                             }
@@ -2659,7 +2659,7 @@
                                     "__type": "io.ygdrasil.wgsl.ir.LiteralValue.Scalar",
                                     "value": {
                                         "__type": "io.ygdrasil.wgsl.ir.ScalarValue.U32",
-                                        "value": 0
+                                        "value": 1
                                     }
                                 }
                             }
@@ -2707,7 +2707,7 @@
                                     "__type": "io.ygdrasil.wgsl.ir.LiteralValue.Scalar",
                                     "value": {
                                         "__type": "io.ygdrasil.wgsl.ir.ScalarValue.I32",
-                                        "value": 0
+                                        "value": 1
                                     }
                                 }
                             }
@@ -2741,7 +2741,7 @@
                                     "__type": "io.ygdrasil.wgsl.ir.LiteralValue.Scalar",
                                     "value": {
                                         "__type": "io.ygdrasil.wgsl.ir.ScalarValue.U32",
-                                        "value": 0
+                                        "value": 1
                                     }
                                 }
                             }
@@ -2782,7 +2782,7 @@
                                     "__type": "io.ygdrasil.wgsl.ir.LiteralValue.Scalar",
                                     "value": {
                                         "__type": "io.ygdrasil.wgsl.ir.ScalarValue.I32",
-                                        "value": 0
+                                        "value": 1
                                     }
                                 }
                             }
@@ -2823,7 +2823,7 @@
                                     "__type": "io.ygdrasil.wgsl.ir.LiteralValue.Scalar",
                                     "value": {
                                         "__type": "io.ygdrasil.wgsl.ir.ScalarValue.U32",
-                                        "value": 0
+                                        "value": 1
                                     }
                                 }
                             }
@@ -2871,7 +2871,7 @@
                                     "__type": "io.ygdrasil.wgsl.ir.LiteralValue.Scalar",
                                     "value": {
                                         "__type": "io.ygdrasil.wgsl.ir.ScalarValue.I32",
-                                        "value": 0
+                                        "value": 1
                                     }
                                 }
                             }
@@ -2912,7 +2912,7 @@
                                     "__type": "io.ygdrasil.wgsl.ir.LiteralValue.Scalar",
                                     "value": {
                                         "__type": "io.ygdrasil.wgsl.ir.ScalarValue.U32",
-                                        "value": 0
+                                        "value": 1
                                     }
                                 }
                             }
@@ -2953,7 +2953,7 @@
                                     "__type": "io.ygdrasil.wgsl.ir.LiteralValue.Scalar",
                                     "value": {
                                         "__type": "io.ygdrasil.wgsl.ir.ScalarValue.I32",
-                                        "value": 0
+                                        "value": 1
                                     }
                                 }
                             }
@@ -2994,7 +2994,7 @@
                                     "__type": "io.ygdrasil.wgsl.ir.LiteralValue.Scalar",
                                     "value": {
                                         "__type": "io.ygdrasil.wgsl.ir.ScalarValue.U32",
-                                        "value": 0
+                                        "value": 1
                                     }
                                 }
                             }
@@ -3042,7 +3042,7 @@
                                     "__type": "io.ygdrasil.wgsl.ir.LiteralValue.Scalar",
                                     "value": {
                                         "__type": "io.ygdrasil.wgsl.ir.ScalarValue.I32",
-                                        "value": 0
+                                        "value": 1
                                     }
                                 }
                             }
@@ -3076,7 +3076,7 @@
                                     "__type": "io.ygdrasil.wgsl.ir.LiteralValue.Scalar",
                                     "value": {
                                         "__type": "io.ygdrasil.wgsl.ir.ScalarValue.U32",
-                                        "value": 0
+                                        "value": 1
                                     }
                                 }
                             }
@@ -3117,7 +3117,7 @@
                                     "__type": "io.ygdrasil.wgsl.ir.LiteralValue.Scalar",
                                     "value": {
                                         "__type": "io.ygdrasil.wgsl.ir.ScalarValue.I32",
-                                        "value": 0
+                                        "value": 1
                                     }
                                 }
                             }
@@ -3158,7 +3158,7 @@
                                     "__type": "io.ygdrasil.wgsl.ir.LiteralValue.Scalar",
                                     "value": {
                                         "__type": "io.ygdrasil.wgsl.ir.ScalarValue.U32",
-                                        "value": 0
+                                        "value": 1
                                     }
                                 }
                             }
@@ -3206,7 +3206,7 @@
                                     "__type": "io.ygdrasil.wgsl.ir.LiteralValue.Scalar",
                                     "value": {
                                         "__type": "io.ygdrasil.wgsl.ir.ScalarValue.I32",
-                                        "value": 0
+                                        "value": 1
                                     }
                                 }
                             }
@@ -3240,7 +3240,7 @@
                                     "__type": "io.ygdrasil.wgsl.ir.LiteralValue.Scalar",
                                     "value": {
                                         "__type": "io.ygdrasil.wgsl.ir.ScalarValue.U32",
-                                        "value": 0
+                                        "value": 1
                                     }
                                 }
                             }
@@ -3281,7 +3281,7 @@
                                     "__type": "io.ygdrasil.wgsl.ir.LiteralValue.Scalar",
                                     "value": {
                                         "__type": "io.ygdrasil.wgsl.ir.ScalarValue.I32",
-                                        "value": 0
+                                        "value": 1
                                     }
                                 }
                             }
@@ -3322,7 +3322,7 @@
                                     "__type": "io.ygdrasil.wgsl.ir.LiteralValue.Scalar",
                                     "value": {
                                         "__type": "io.ygdrasil.wgsl.ir.ScalarValue.U32",
-                                        "value": 0
+                                        "value": 1
                                     }
                                 }
                             }
@@ -3370,7 +3370,7 @@
                                     "__type": "io.ygdrasil.wgsl.ir.LiteralValue.Scalar",
                                     "value": {
                                         "__type": "io.ygdrasil.wgsl.ir.ScalarValue.I32",
-                                        "value": 0
+                                        "value": 1
                                     }
                                 }
                             }
@@ -3404,7 +3404,7 @@
                                     "__type": "io.ygdrasil.wgsl.ir.LiteralValue.Scalar",
                                     "value": {
                                         "__type": "io.ygdrasil.wgsl.ir.ScalarValue.U32",
-                                        "value": 0
+                                        "value": 1
                                     }
                                 }
                             }
@@ -3445,7 +3445,7 @@
                                     "__type": "io.ygdrasil.wgsl.ir.LiteralValue.Scalar",
                                     "value": {
                                         "__type": "io.ygdrasil.wgsl.ir.ScalarValue.I32",
-                                        "value": 0
+                                        "value": 1
                                     }
                                 }
                             }
@@ -3486,7 +3486,7 @@
                                     "__type": "io.ygdrasil.wgsl.ir.LiteralValue.Scalar",
                                     "value": {
                                         "__type": "io.ygdrasil.wgsl.ir.ScalarValue.U32",
-                                        "value": 0
+                                        "value": 1
                                     }
                                 }
                             }
@@ -3534,7 +3534,7 @@
                                     "__type": "io.ygdrasil.wgsl.ir.LiteralValue.Scalar",
                                     "value": {
                                         "__type": "io.ygdrasil.wgsl.ir.ScalarValue.I32",
-                                        "value": 0
+                                        "value": 1
                                     }
                                 }
                             }
@@ -3568,7 +3568,7 @@
                                     "__type": "io.ygdrasil.wgsl.ir.LiteralValue.Scalar",
                                     "value": {
                                         "__type": "io.ygdrasil.wgsl.ir.ScalarValue.U32",
-                                        "value": 0
+                                        "value": 1
                                     }
                                 }
                             }
@@ -3580,7 +3580,7 @@
                                     "__type": "io.ygdrasil.wgsl.ir.LiteralValue.Scalar",
                                     "value": {
                                         "__type": "io.ygdrasil.wgsl.ir.ScalarValue.U32",
-                                        "value": 0
+                                        "value": 2
                                     }
                                 }
                             }
@@ -3622,7 +3622,7 @@
                                     "__type": "io.ygdrasil.wgsl.ir.LiteralValue.Scalar",
                                     "value": {
                                         "__type": "io.ygdrasil.wgsl.ir.ScalarValue.I32",
-                                        "value": 0
+                                        "value": 1
                                     }
                                 }
                             }
@@ -3634,7 +3634,7 @@
                                     "__type": "io.ygdrasil.wgsl.ir.LiteralValue.Scalar",
                                     "value": {
                                         "__type": "io.ygdrasil.wgsl.ir.ScalarValue.I32",
-                                        "value": 0
+                                        "value": 2
                                     }
                                 }
                             }
@@ -3676,7 +3676,7 @@
                                     "__type": "io.ygdrasil.wgsl.ir.LiteralValue.Scalar",
                                     "value": {
                                         "__type": "io.ygdrasil.wgsl.ir.ScalarValue.U32",
-                                        "value": 0
+                                        "value": 1
                                     }
                                 }
                             }
@@ -3688,7 +3688,7 @@
                                     "__type": "io.ygdrasil.wgsl.ir.LiteralValue.Scalar",
                                     "value": {
                                         "__type": "io.ygdrasil.wgsl.ir.ScalarValue.U32",
-                                        "value": 0
+                                        "value": 2
                                     }
                                 }
                             }
@@ -3737,7 +3737,7 @@
                                     "__type": "io.ygdrasil.wgsl.ir.LiteralValue.Scalar",
                                     "value": {
                                         "__type": "io.ygdrasil.wgsl.ir.ScalarValue.I32",
-                                        "value": 0
+                                        "value": 1
                                     }
                                 }
                             }
@@ -3749,7 +3749,7 @@
                                     "__type": "io.ygdrasil.wgsl.ir.LiteralValue.Scalar",
                                     "value": {
                                         "__type": "io.ygdrasil.wgsl.ir.ScalarValue.I32",
-                                        "value": 0
+                                        "value": 2
                                     }
                                 }
                             }
@@ -3784,7 +3784,7 @@
                                     "__type": "io.ygdrasil.wgsl.ir.LiteralValue.Scalar",
                                     "value": {
                                         "__type": "io.ygdrasil.wgsl.ir.ScalarValue.U32",
-                                        "value": 0
+                                        "value": 1
                                     }
                                 }
                             }
@@ -3796,7 +3796,7 @@
                                     "__type": "io.ygdrasil.wgsl.ir.LiteralValue.Scalar",
                                     "value": {
                                         "__type": "io.ygdrasil.wgsl.ir.ScalarValue.U32",
-                                        "value": 0
+                                        "value": 2
                                     }
                                 }
                             }
@@ -3838,7 +3838,7 @@
                                     "__type": "io.ygdrasil.wgsl.ir.LiteralValue.Scalar",
                                     "value": {
                                         "__type": "io.ygdrasil.wgsl.ir.ScalarValue.I32",
-                                        "value": 0
+                                        "value": 1
                                     }
                                 }
                             }
@@ -3850,7 +3850,7 @@
                                     "__type": "io.ygdrasil.wgsl.ir.LiteralValue.Scalar",
                                     "value": {
                                         "__type": "io.ygdrasil.wgsl.ir.ScalarValue.I32",
-                                        "value": 0
+                                        "value": 2
                                     }
                                 }
                             }
@@ -3892,7 +3892,7 @@
                                     "__type": "io.ygdrasil.wgsl.ir.LiteralValue.Scalar",
                                     "value": {
                                         "__type": "io.ygdrasil.wgsl.ir.ScalarValue.U32",
-                                        "value": 0
+                                        "value": 1
                                     }
                                 }
                             }
@@ -3904,7 +3904,7 @@
                                     "__type": "io.ygdrasil.wgsl.ir.LiteralValue.Scalar",
                                     "value": {
                                         "__type": "io.ygdrasil.wgsl.ir.ScalarValue.U32",
-                                        "value": 0
+                                        "value": 2
                                     }
                                 }
                             }
@@ -3953,7 +3953,7 @@
                                     "__type": "io.ygdrasil.wgsl.ir.LiteralValue.Scalar",
                                     "value": {
                                         "__type": "io.ygdrasil.wgsl.ir.ScalarValue.I32",
-                                        "value": 0
+                                        "value": 1
                                     }
                                 }
                             }
@@ -3965,7 +3965,7 @@
                                     "__type": "io.ygdrasil.wgsl.ir.LiteralValue.Scalar",
                                     "value": {
                                         "__type": "io.ygdrasil.wgsl.ir.ScalarValue.I32",
-                                        "value": 0
+                                        "value": 2
                                     }
                                 }
                             }
@@ -3991,31 +3991,40 @@
                         {
                             "statements": [
                                 {
-                                    "__type": "io.ygdrasil.wgsl.ir.Statement.Nop"
+                                    "__type": "io.ygdrasil.wgsl.ir.Statement.Emit",
+                                    "range": 33
                                 },
                                 {
-                                    "__type": "io.ygdrasil.wgsl.ir.Statement.Nop"
+                                    "__type": "io.ygdrasil.wgsl.ir.Statement.Emit",
+                                    "range": 88
                                 },
                                 {
-                                    "__type": "io.ygdrasil.wgsl.ir.Statement.Nop"
+                                    "__type": "io.ygdrasil.wgsl.ir.Statement.Emit",
+                                    "range": 1313
                                 },
                                 {
-                                    "__type": "io.ygdrasil.wgsl.ir.Statement.Nop"
+                                    "__type": "io.ygdrasil.wgsl.ir.Statement.Emit",
+                                    "range": 1919
                                 },
                                 {
-                                    "__type": "io.ygdrasil.wgsl.ir.Statement.Nop"
+                                    "__type": "io.ygdrasil.wgsl.ir.Statement.Emit",
+                                    "range": 2323
                                 },
                                 {
-                                    "__type": "io.ygdrasil.wgsl.ir.Statement.Nop"
+                                    "__type": "io.ygdrasil.wgsl.ir.Statement.Emit",
+                                    "range": 2828
                                 },
                                 {
-                                    "__type": "io.ygdrasil.wgsl.ir.Statement.Nop"
+                                    "__type": "io.ygdrasil.wgsl.ir.Statement.Emit",
+                                    "range": 3333
                                 },
                                 {
-                                    "__type": "io.ygdrasil.wgsl.ir.Statement.Nop"
+                                    "__type": "io.ygdrasil.wgsl.ir.Statement.Emit",
+                                    "range": 3939
                                 },
                                 {
-                                    "__type": "io.ygdrasil.wgsl.ir.Statement.Nop"
+                                    "__type": "io.ygdrasil.wgsl.ir.Statement.Emit",
+                                    "range": 4040
                                 },
                                 {
                                     "__type": "io.ygdrasil.wgsl.ir.Statement.Init",
@@ -4050,217 +4059,288 @@
                                     "variable": 7
                                 },
                                 {
-                                    "__type": "io.ygdrasil.wgsl.ir.Statement.Nop"
+                                    "__type": "io.ygdrasil.wgsl.ir.Statement.Emit",
+                                    "range": 7373
                                 },
                                 {
-                                    "__type": "io.ygdrasil.wgsl.ir.Statement.Nop"
+                                    "__type": "io.ygdrasil.wgsl.ir.Statement.Emit",
+                                    "range": 7777
                                 },
                                 {
-                                    "__type": "io.ygdrasil.wgsl.ir.Statement.Nop"
+                                    "__type": "io.ygdrasil.wgsl.ir.Statement.Emit",
+                                    "range": 8282
                                 },
                                 {
-                                    "__type": "io.ygdrasil.wgsl.ir.Statement.Nop"
+                                    "__type": "io.ygdrasil.wgsl.ir.Statement.Emit",
+                                    "range": 8787
                                 },
                                 {
-                                    "__type": "io.ygdrasil.wgsl.ir.Statement.Nop"
+                                    "__type": "io.ygdrasil.wgsl.ir.Statement.Emit",
+                                    "range": 9393
                                 },
                                 {
-                                    "__type": "io.ygdrasil.wgsl.ir.Statement.Nop"
+                                    "__type": "io.ygdrasil.wgsl.ir.Statement.Emit",
+                                    "range": 9797
                                 },
                                 {
-                                    "__type": "io.ygdrasil.wgsl.ir.Statement.Nop"
+                                    "__type": "io.ygdrasil.wgsl.ir.Statement.Emit",
+                                    "range": 102102
                                 },
                                 {
-                                    "__type": "io.ygdrasil.wgsl.ir.Statement.Nop"
+                                    "__type": "io.ygdrasil.wgsl.ir.Statement.Emit",
+                                    "range": 107107
                                 },
                                 {
-                                    "__type": "io.ygdrasil.wgsl.ir.Statement.Nop"
+                                    "__type": "io.ygdrasil.wgsl.ir.Statement.Emit",
+                                    "range": 113113
                                 },
                                 {
-                                    "__type": "io.ygdrasil.wgsl.ir.Statement.Nop"
+                                    "__type": "io.ygdrasil.wgsl.ir.Statement.Emit",
+                                    "range": 114114
                                 },
                                 {
-                                    "__type": "io.ygdrasil.wgsl.ir.Statement.Nop"
+                                    "__type": "io.ygdrasil.wgsl.ir.Statement.Emit",
+                                    "range": 118118
                                 },
                                 {
-                                    "__type": "io.ygdrasil.wgsl.ir.Statement.Nop"
+                                    "__type": "io.ygdrasil.wgsl.ir.Statement.Emit",
+                                    "range": 123123
                                 },
                                 {
-                                    "__type": "io.ygdrasil.wgsl.ir.Statement.Nop"
+                                    "__type": "io.ygdrasil.wgsl.ir.Statement.Emit",
+                                    "range": 128128
                                 },
                                 {
-                                    "__type": "io.ygdrasil.wgsl.ir.Statement.Nop"
+                                    "__type": "io.ygdrasil.wgsl.ir.Statement.Emit",
+                                    "range": 134134
                                 },
                                 {
-                                    "__type": "io.ygdrasil.wgsl.ir.Statement.Nop"
+                                    "__type": "io.ygdrasil.wgsl.ir.Statement.Emit",
+                                    "range": 138138
                                 },
                                 {
-                                    "__type": "io.ygdrasil.wgsl.ir.Statement.Nop"
+                                    "__type": "io.ygdrasil.wgsl.ir.Statement.Emit",
+                                    "range": 143143
                                 },
                                 {
-                                    "__type": "io.ygdrasil.wgsl.ir.Statement.Nop"
+                                    "__type": "io.ygdrasil.wgsl.ir.Statement.Emit",
+                                    "range": 148148
                                 },
                                 {
-                                    "__type": "io.ygdrasil.wgsl.ir.Statement.Nop"
+                                    "__type": "io.ygdrasil.wgsl.ir.Statement.Emit",
+                                    "range": 154154
                                 },
                                 {
-                                    "__type": "io.ygdrasil.wgsl.ir.Statement.Nop"
+                                    "__type": "io.ygdrasil.wgsl.ir.Statement.Emit",
+                                    "range": 155155
                                 },
                                 {
-                                    "__type": "io.ygdrasil.wgsl.ir.Statement.Nop"
+                                    "__type": "io.ygdrasil.wgsl.ir.Statement.Emit",
+                                    "range": 159159
                                 },
                                 {
-                                    "__type": "io.ygdrasil.wgsl.ir.Statement.Nop"
+                                    "__type": "io.ygdrasil.wgsl.ir.Statement.Emit",
+                                    "range": 164164
                                 },
                                 {
-                                    "__type": "io.ygdrasil.wgsl.ir.Statement.Nop"
+                                    "__type": "io.ygdrasil.wgsl.ir.Statement.Emit",
+                                    "range": 169169
                                 },
                                 {
-                                    "__type": "io.ygdrasil.wgsl.ir.Statement.Nop"
+                                    "__type": "io.ygdrasil.wgsl.ir.Statement.Emit",
+                                    "range": 175175
                                 },
                                 {
-                                    "__type": "io.ygdrasil.wgsl.ir.Statement.Nop"
+                                    "__type": "io.ygdrasil.wgsl.ir.Statement.Emit",
+                                    "range": 179179
                                 },
                                 {
-                                    "__type": "io.ygdrasil.wgsl.ir.Statement.Nop"
+                                    "__type": "io.ygdrasil.wgsl.ir.Statement.Emit",
+                                    "range": 184184
                                 },
                                 {
-                                    "__type": "io.ygdrasil.wgsl.ir.Statement.Nop"
+                                    "__type": "io.ygdrasil.wgsl.ir.Statement.Emit",
+                                    "range": 189189
                                 },
                                 {
-                                    "__type": "io.ygdrasil.wgsl.ir.Statement.Nop"
+                                    "__type": "io.ygdrasil.wgsl.ir.Statement.Emit",
+                                    "range": 195195
                                 },
                                 {
-                                    "__type": "io.ygdrasil.wgsl.ir.Statement.Nop"
+                                    "__type": "io.ygdrasil.wgsl.ir.Statement.Emit",
+                                    "range": 196196
                                 },
                                 {
-                                    "__type": "io.ygdrasil.wgsl.ir.Statement.Nop"
+                                    "__type": "io.ygdrasil.wgsl.ir.Statement.Emit",
+                                    "range": 200200
                                 },
                                 {
-                                    "__type": "io.ygdrasil.wgsl.ir.Statement.Nop"
+                                    "__type": "io.ygdrasil.wgsl.ir.Statement.Emit",
+                                    "range": 205205
                                 },
                                 {
-                                    "__type": "io.ygdrasil.wgsl.ir.Statement.Nop"
+                                    "__type": "io.ygdrasil.wgsl.ir.Statement.Emit",
+                                    "range": 210210
                                 },
                                 {
-                                    "__type": "io.ygdrasil.wgsl.ir.Statement.Nop"
+                                    "__type": "io.ygdrasil.wgsl.ir.Statement.Emit",
+                                    "range": 216216
                                 },
                                 {
-                                    "__type": "io.ygdrasil.wgsl.ir.Statement.Nop"
+                                    "__type": "io.ygdrasil.wgsl.ir.Statement.Emit",
+                                    "range": 220220
                                 },
                                 {
-                                    "__type": "io.ygdrasil.wgsl.ir.Statement.Nop"
+                                    "__type": "io.ygdrasil.wgsl.ir.Statement.Emit",
+                                    "range": 225225
                                 },
                                 {
-                                    "__type": "io.ygdrasil.wgsl.ir.Statement.Nop"
+                                    "__type": "io.ygdrasil.wgsl.ir.Statement.Emit",
+                                    "range": 230230
                                 },
                                 {
-                                    "__type": "io.ygdrasil.wgsl.ir.Statement.Nop"
+                                    "__type": "io.ygdrasil.wgsl.ir.Statement.Emit",
+                                    "range": 236236
                                 },
                                 {
-                                    "__type": "io.ygdrasil.wgsl.ir.Statement.Nop"
+                                    "__type": "io.ygdrasil.wgsl.ir.Statement.Emit",
+                                    "range": 237237
                                 },
                                 {
-                                    "__type": "io.ygdrasil.wgsl.ir.Statement.Nop"
+                                    "__type": "io.ygdrasil.wgsl.ir.Statement.Emit",
+                                    "range": 241241
                                 },
                                 {
-                                    "__type": "io.ygdrasil.wgsl.ir.Statement.Nop"
+                                    "__type": "io.ygdrasil.wgsl.ir.Statement.Emit",
+                                    "range": 246246
                                 },
                                 {
-                                    "__type": "io.ygdrasil.wgsl.ir.Statement.Nop"
+                                    "__type": "io.ygdrasil.wgsl.ir.Statement.Emit",
+                                    "range": 251251
                                 },
                                 {
-                                    "__type": "io.ygdrasil.wgsl.ir.Statement.Nop"
+                                    "__type": "io.ygdrasil.wgsl.ir.Statement.Emit",
+                                    "range": 257257
                                 },
                                 {
-                                    "__type": "io.ygdrasil.wgsl.ir.Statement.Nop"
+                                    "__type": "io.ygdrasil.wgsl.ir.Statement.Emit",
+                                    "range": 261261
                                 },
                                 {
-                                    "__type": "io.ygdrasil.wgsl.ir.Statement.Nop"
+                                    "__type": "io.ygdrasil.wgsl.ir.Statement.Emit",
+                                    "range": 266266
                                 },
                                 {
-                                    "__type": "io.ygdrasil.wgsl.ir.Statement.Nop"
+                                    "__type": "io.ygdrasil.wgsl.ir.Statement.Emit",
+                                    "range": 271271
                                 },
                                 {
-                                    "__type": "io.ygdrasil.wgsl.ir.Statement.Nop"
+                                    "__type": "io.ygdrasil.wgsl.ir.Statement.Emit",
+                                    "range": 277277
                                 },
                                 {
-                                    "__type": "io.ygdrasil.wgsl.ir.Statement.Nop"
+                                    "__type": "io.ygdrasil.wgsl.ir.Statement.Emit",
+                                    "range": 278278
                                 },
                                 {
-                                    "__type": "io.ygdrasil.wgsl.ir.Statement.Nop"
+                                    "__type": "io.ygdrasil.wgsl.ir.Statement.Emit",
+                                    "range": 282282
                                 },
                                 {
-                                    "__type": "io.ygdrasil.wgsl.ir.Statement.Nop"
+                                    "__type": "io.ygdrasil.wgsl.ir.Statement.Emit",
+                                    "range": 287287
                                 },
                                 {
-                                    "__type": "io.ygdrasil.wgsl.ir.Statement.Nop"
+                                    "__type": "io.ygdrasil.wgsl.ir.Statement.Emit",
+                                    "range": 292292
                                 },
                                 {
-                                    "__type": "io.ygdrasil.wgsl.ir.Statement.Nop"
+                                    "__type": "io.ygdrasil.wgsl.ir.Statement.Emit",
+                                    "range": 298298
                                 },
                                 {
-                                    "__type": "io.ygdrasil.wgsl.ir.Statement.Nop"
+                                    "__type": "io.ygdrasil.wgsl.ir.Statement.Emit",
+                                    "range": 302302
                                 },
                                 {
-                                    "__type": "io.ygdrasil.wgsl.ir.Statement.Nop"
+                                    "__type": "io.ygdrasil.wgsl.ir.Statement.Emit",
+                                    "range": 307307
                                 },
                                 {
-                                    "__type": "io.ygdrasil.wgsl.ir.Statement.Nop"
+                                    "__type": "io.ygdrasil.wgsl.ir.Statement.Emit",
+                                    "range": 312312
                                 },
                                 {
-                                    "__type": "io.ygdrasil.wgsl.ir.Statement.Nop"
+                                    "__type": "io.ygdrasil.wgsl.ir.Statement.Emit",
+                                    "range": 318318
                                 },
                                 {
-                                    "__type": "io.ygdrasil.wgsl.ir.Statement.Nop"
+                                    "__type": "io.ygdrasil.wgsl.ir.Statement.Emit",
+                                    "range": 319319
                                 },
                                 {
-                                    "__type": "io.ygdrasil.wgsl.ir.Statement.Nop"
+                                    "__type": "io.ygdrasil.wgsl.ir.Statement.Emit",
+                                    "range": 323323
                                 },
                                 {
-                                    "__type": "io.ygdrasil.wgsl.ir.Statement.Nop"
+                                    "__type": "io.ygdrasil.wgsl.ir.Statement.Emit",
+                                    "range": 328328
                                 },
                                 {
-                                    "__type": "io.ygdrasil.wgsl.ir.Statement.Nop"
+                                    "__type": "io.ygdrasil.wgsl.ir.Statement.Emit",
+                                    "range": 333333
                                 },
                                 {
-                                    "__type": "io.ygdrasil.wgsl.ir.Statement.Nop"
+                                    "__type": "io.ygdrasil.wgsl.ir.Statement.Emit",
+                                    "range": 339339
                                 },
                                 {
-                                    "__type": "io.ygdrasil.wgsl.ir.Statement.Nop"
+                                    "__type": "io.ygdrasil.wgsl.ir.Statement.Emit",
+                                    "range": 343343
                                 },
                                 {
-                                    "__type": "io.ygdrasil.wgsl.ir.Statement.Nop"
+                                    "__type": "io.ygdrasil.wgsl.ir.Statement.Emit",
+                                    "range": 348348
                                 },
                                 {
-                                    "__type": "io.ygdrasil.wgsl.ir.Statement.Nop"
+                                    "__type": "io.ygdrasil.wgsl.ir.Statement.Emit",
+                                    "range": 353353
                                 },
                                 {
-                                    "__type": "io.ygdrasil.wgsl.ir.Statement.Nop"
+                                    "__type": "io.ygdrasil.wgsl.ir.Statement.Emit",
+                                    "range": 359359
                                 },
                                 {
-                                    "__type": "io.ygdrasil.wgsl.ir.Statement.Nop"
+                                    "__type": "io.ygdrasil.wgsl.ir.Statement.Emit",
+                                    "range": 363363
                                 },
                                 {
-                                    "__type": "io.ygdrasil.wgsl.ir.Statement.Nop"
+                                    "__type": "io.ygdrasil.wgsl.ir.Statement.Emit",
+                                    "range": 368368
                                 },
                                 {
-                                    "__type": "io.ygdrasil.wgsl.ir.Statement.Nop"
+                                    "__type": "io.ygdrasil.wgsl.ir.Statement.Emit",
+                                    "range": 373373
                                 },
                                 {
-                                    "__type": "io.ygdrasil.wgsl.ir.Statement.Nop"
+                                    "__type": "io.ygdrasil.wgsl.ir.Statement.Emit",
+                                    "range": 379379
                                 },
                                 {
-                                    "__type": "io.ygdrasil.wgsl.ir.Statement.Nop"
+                                    "__type": "io.ygdrasil.wgsl.ir.Statement.Emit",
+                                    "range": 383383
                                 },
                                 {
-                                    "__type": "io.ygdrasil.wgsl.ir.Statement.Nop"
+                                    "__type": "io.ygdrasil.wgsl.ir.Statement.Emit",
+                                    "range": 388388
                                 },
                                 {
-                                    "__type": "io.ygdrasil.wgsl.ir.Statement.Nop"
+                                    "__type": "io.ygdrasil.wgsl.ir.Statement.Emit",
+                                    "range": 393393
                                 },
                                 {
-                                    "__type": "io.ygdrasil.wgsl.ir.Statement.Nop"
+                                    "__type": "io.ygdrasil.wgsl.ir.Statement.Emit",
+                                    "range": 399399
                                 },
                                 {
                                     "__type": "io.ygdrasil.wgsl.ir.Statement.Init",
@@ -4302,7 +4382,17 @@
             },
             {
                 "name": "atomicStore",
-                "parameters": [],
+                "parameters": [
+                    {
+                        "name": "arg_0",
+                        "type": 7
+                    },
+                    {
+                        "name": "arg_1",
+                        "type": 0
+                    }
+                ],
+                "returnType": 7,
                 "localVariables": {},
                 "expressions": {},
                 "blocks": {
@@ -4316,7 +4406,17 @@
             },
             {
                 "name": "atomicStore",
-                "parameters": [],
+                "parameters": [
+                    {
+                        "name": "arg_0",
+                        "type": 8
+                    },
+                    {
+                        "name": "arg_1",
+                        "type": 1
+                    }
+                ],
+                "returnType": 8,
                 "localVariables": {},
                 "expressions": {},
                 "blocks": {
@@ -4330,7 +4430,17 @@
             },
             {
                 "name": "atomicStore",
-                "parameters": [],
+                "parameters": [
+                    {
+                        "name": "arg_0",
+                        "type": 7
+                    },
+                    {
+                        "name": "arg_1",
+                        "type": 0
+                    }
+                ],
+                "returnType": 7,
                 "localVariables": {},
                 "expressions": {},
                 "blocks": {
@@ -4344,7 +4454,17 @@
             },
             {
                 "name": "atomicStore",
-                "parameters": [],
+                "parameters": [
+                    {
+                        "name": "arg_0",
+                        "type": 8
+                    },
+                    {
+                        "name": "arg_1",
+                        "type": 1
+                    }
+                ],
+                "returnType": 8,
                 "localVariables": {},
                 "expressions": {},
                 "blocks": {
@@ -4358,7 +4478,17 @@
             },
             {
                 "name": "atomicStore",
-                "parameters": [],
+                "parameters": [
+                    {
+                        "name": "arg_0",
+                        "type": 7
+                    },
+                    {
+                        "name": "arg_1",
+                        "type": 0
+                    }
+                ],
+                "returnType": 7,
                 "localVariables": {},
                 "expressions": {},
                 "blocks": {
@@ -4372,7 +4502,17 @@
             },
             {
                 "name": "atomicStore",
-                "parameters": [],
+                "parameters": [
+                    {
+                        "name": "arg_0",
+                        "type": 8
+                    },
+                    {
+                        "name": "arg_1",
+                        "type": 1
+                    }
+                ],
+                "returnType": 8,
                 "localVariables": {},
                 "expressions": {},
                 "blocks": {
@@ -4386,7 +4526,17 @@
             },
             {
                 "name": "atomicStore",
-                "parameters": [],
+                "parameters": [
+                    {
+                        "name": "arg_0",
+                        "type": 7
+                    },
+                    {
+                        "name": "arg_1",
+                        "type": 0
+                    }
+                ],
+                "returnType": 7,
                 "localVariables": {},
                 "expressions": {},
                 "blocks": {
@@ -4400,7 +4550,17 @@
             },
             {
                 "name": "atomicStore",
-                "parameters": [],
+                "parameters": [
+                    {
+                        "name": "arg_0",
+                        "type": 8
+                    },
+                    {
+                        "name": "arg_1",
+                        "type": 1
+                    }
+                ],
+                "returnType": 8,
                 "localVariables": {},
                 "expressions": {},
                 "blocks": {
@@ -4428,7 +4588,13 @@
             },
             {
                 "name": "atomicLoad",
-                "parameters": [],
+                "parameters": [
+                    {
+                        "name": "arg_0",
+                        "type": 7
+                    }
+                ],
+                "returnType": 7,
                 "localVariables": {},
                 "expressions": {},
                 "blocks": {
@@ -4442,7 +4608,13 @@
             },
             {
                 "name": "atomicLoad",
-                "parameters": [],
+                "parameters": [
+                    {
+                        "name": "arg_0",
+                        "type": 8
+                    }
+                ],
+                "returnType": 8,
                 "localVariables": {},
                 "expressions": {},
                 "blocks": {
@@ -4456,7 +4628,13 @@
             },
             {
                 "name": "atomicLoad",
-                "parameters": [],
+                "parameters": [
+                    {
+                        "name": "arg_0",
+                        "type": 7
+                    }
+                ],
+                "returnType": 7,
                 "localVariables": {},
                 "expressions": {},
                 "blocks": {
@@ -4470,7 +4648,13 @@
             },
             {
                 "name": "atomicLoad",
-                "parameters": [],
+                "parameters": [
+                    {
+                        "name": "arg_0",
+                        "type": 8
+                    }
+                ],
+                "returnType": 8,
                 "localVariables": {},
                 "expressions": {},
                 "blocks": {
@@ -4484,7 +4668,13 @@
             },
             {
                 "name": "atomicLoad",
-                "parameters": [],
+                "parameters": [
+                    {
+                        "name": "arg_0",
+                        "type": 7
+                    }
+                ],
+                "returnType": 7,
                 "localVariables": {},
                 "expressions": {},
                 "blocks": {
@@ -4498,7 +4688,13 @@
             },
             {
                 "name": "atomicLoad",
-                "parameters": [],
+                "parameters": [
+                    {
+                        "name": "arg_0",
+                        "type": 8
+                    }
+                ],
+                "returnType": 8,
                 "localVariables": {},
                 "expressions": {},
                 "blocks": {
@@ -4512,7 +4708,13 @@
             },
             {
                 "name": "atomicLoad",
-                "parameters": [],
+                "parameters": [
+                    {
+                        "name": "arg_0",
+                        "type": 7
+                    }
+                ],
+                "returnType": 7,
                 "localVariables": {},
                 "expressions": {},
                 "blocks": {
@@ -4526,7 +4728,13 @@
             },
             {
                 "name": "atomicLoad",
-                "parameters": [],
+                "parameters": [
+                    {
+                        "name": "arg_0",
+                        "type": 8
+                    }
+                ],
+                "returnType": 8,
                 "localVariables": {},
                 "expressions": {},
                 "blocks": {
@@ -4554,7 +4762,17 @@
             },
             {
                 "name": "atomicAdd",
-                "parameters": [],
+                "parameters": [
+                    {
+                        "name": "arg_0",
+                        "type": 7
+                    },
+                    {
+                        "name": "arg_1",
+                        "type": 0
+                    }
+                ],
+                "returnType": 7,
                 "localVariables": {},
                 "expressions": {},
                 "blocks": {
@@ -4568,7 +4786,17 @@
             },
             {
                 "name": "atomicAdd",
-                "parameters": [],
+                "parameters": [
+                    {
+                        "name": "arg_0",
+                        "type": 8
+                    },
+                    {
+                        "name": "arg_1",
+                        "type": 1
+                    }
+                ],
+                "returnType": 8,
                 "localVariables": {},
                 "expressions": {},
                 "blocks": {
@@ -4582,7 +4810,17 @@
             },
             {
                 "name": "atomicAdd",
-                "parameters": [],
+                "parameters": [
+                    {
+                        "name": "arg_0",
+                        "type": 7
+                    },
+                    {
+                        "name": "arg_1",
+                        "type": 0
+                    }
+                ],
+                "returnType": 7,
                 "localVariables": {},
                 "expressions": {},
                 "blocks": {
@@ -4596,7 +4834,17 @@
             },
             {
                 "name": "atomicAdd",
-                "parameters": [],
+                "parameters": [
+                    {
+                        "name": "arg_0",
+                        "type": 8
+                    },
+                    {
+                        "name": "arg_1",
+                        "type": 1
+                    }
+                ],
+                "returnType": 8,
                 "localVariables": {},
                 "expressions": {},
                 "blocks": {
@@ -4610,7 +4858,17 @@
             },
             {
                 "name": "atomicAdd",
-                "parameters": [],
+                "parameters": [
+                    {
+                        "name": "arg_0",
+                        "type": 7
+                    },
+                    {
+                        "name": "arg_1",
+                        "type": 0
+                    }
+                ],
+                "returnType": 7,
                 "localVariables": {},
                 "expressions": {},
                 "blocks": {
@@ -4624,7 +4882,17 @@
             },
             {
                 "name": "atomicAdd",
-                "parameters": [],
+                "parameters": [
+                    {
+                        "name": "arg_0",
+                        "type": 8
+                    },
+                    {
+                        "name": "arg_1",
+                        "type": 1
+                    }
+                ],
+                "returnType": 8,
                 "localVariables": {},
                 "expressions": {},
                 "blocks": {
@@ -4638,7 +4906,17 @@
             },
             {
                 "name": "atomicAdd",
-                "parameters": [],
+                "parameters": [
+                    {
+                        "name": "arg_0",
+                        "type": 7
+                    },
+                    {
+                        "name": "arg_1",
+                        "type": 0
+                    }
+                ],
+                "returnType": 7,
                 "localVariables": {},
                 "expressions": {},
                 "blocks": {
@@ -4652,7 +4930,17 @@
             },
             {
                 "name": "atomicAdd",
-                "parameters": [],
+                "parameters": [
+                    {
+                        "name": "arg_0",
+                        "type": 8
+                    },
+                    {
+                        "name": "arg_1",
+                        "type": 1
+                    }
+                ],
+                "returnType": 8,
                 "localVariables": {},
                 "expressions": {},
                 "blocks": {
@@ -4680,7 +4968,17 @@
             },
             {
                 "name": "atomicSub",
-                "parameters": [],
+                "parameters": [
+                    {
+                        "name": "arg_0",
+                        "type": 7
+                    },
+                    {
+                        "name": "arg_1",
+                        "type": 0
+                    }
+                ],
+                "returnType": 7,
                 "localVariables": {},
                 "expressions": {},
                 "blocks": {
@@ -4694,7 +4992,17 @@
             },
             {
                 "name": "atomicSub",
-                "parameters": [],
+                "parameters": [
+                    {
+                        "name": "arg_0",
+                        "type": 8
+                    },
+                    {
+                        "name": "arg_1",
+                        "type": 1
+                    }
+                ],
+                "returnType": 8,
                 "localVariables": {},
                 "expressions": {},
                 "blocks": {
@@ -4708,7 +5016,17 @@
             },
             {
                 "name": "atomicSub",
-                "parameters": [],
+                "parameters": [
+                    {
+                        "name": "arg_0",
+                        "type": 7
+                    },
+                    {
+                        "name": "arg_1",
+                        "type": 0
+                    }
+                ],
+                "returnType": 7,
                 "localVariables": {},
                 "expressions": {},
                 "blocks": {
@@ -4722,7 +5040,17 @@
             },
             {
                 "name": "atomicSub",
-                "parameters": [],
+                "parameters": [
+                    {
+                        "name": "arg_0",
+                        "type": 8
+                    },
+                    {
+                        "name": "arg_1",
+                        "type": 1
+                    }
+                ],
+                "returnType": 8,
                 "localVariables": {},
                 "expressions": {},
                 "blocks": {
@@ -4736,7 +5064,17 @@
             },
             {
                 "name": "atomicSub",
-                "parameters": [],
+                "parameters": [
+                    {
+                        "name": "arg_0",
+                        "type": 7
+                    },
+                    {
+                        "name": "arg_1",
+                        "type": 0
+                    }
+                ],
+                "returnType": 7,
                 "localVariables": {},
                 "expressions": {},
                 "blocks": {
@@ -4750,7 +5088,17 @@
             },
             {
                 "name": "atomicSub",
-                "parameters": [],
+                "parameters": [
+                    {
+                        "name": "arg_0",
+                        "type": 8
+                    },
+                    {
+                        "name": "arg_1",
+                        "type": 1
+                    }
+                ],
+                "returnType": 8,
                 "localVariables": {},
                 "expressions": {},
                 "blocks": {
@@ -4764,7 +5112,17 @@
             },
             {
                 "name": "atomicSub",
-                "parameters": [],
+                "parameters": [
+                    {
+                        "name": "arg_0",
+                        "type": 7
+                    },
+                    {
+                        "name": "arg_1",
+                        "type": 0
+                    }
+                ],
+                "returnType": 7,
                 "localVariables": {},
                 "expressions": {},
                 "blocks": {
@@ -4778,7 +5136,17 @@
             },
             {
                 "name": "atomicSub",
-                "parameters": [],
+                "parameters": [
+                    {
+                        "name": "arg_0",
+                        "type": 8
+                    },
+                    {
+                        "name": "arg_1",
+                        "type": 1
+                    }
+                ],
+                "returnType": 8,
                 "localVariables": {},
                 "expressions": {},
                 "blocks": {
@@ -4806,7 +5174,17 @@
             },
             {
                 "name": "atomicMax",
-                "parameters": [],
+                "parameters": [
+                    {
+                        "name": "arg_0",
+                        "type": 7
+                    },
+                    {
+                        "name": "arg_1",
+                        "type": 0
+                    }
+                ],
+                "returnType": 7,
                 "localVariables": {},
                 "expressions": {},
                 "blocks": {
@@ -4820,7 +5198,17 @@
             },
             {
                 "name": "atomicMax",
-                "parameters": [],
+                "parameters": [
+                    {
+                        "name": "arg_0",
+                        "type": 8
+                    },
+                    {
+                        "name": "arg_1",
+                        "type": 1
+                    }
+                ],
+                "returnType": 8,
                 "localVariables": {},
                 "expressions": {},
                 "blocks": {
@@ -4834,7 +5222,17 @@
             },
             {
                 "name": "atomicMax",
-                "parameters": [],
+                "parameters": [
+                    {
+                        "name": "arg_0",
+                        "type": 7
+                    },
+                    {
+                        "name": "arg_1",
+                        "type": 0
+                    }
+                ],
+                "returnType": 7,
                 "localVariables": {},
                 "expressions": {},
                 "blocks": {
@@ -4848,7 +5246,17 @@
             },
             {
                 "name": "atomicMax",
-                "parameters": [],
+                "parameters": [
+                    {
+                        "name": "arg_0",
+                        "type": 8
+                    },
+                    {
+                        "name": "arg_1",
+                        "type": 1
+                    }
+                ],
+                "returnType": 8,
                 "localVariables": {},
                 "expressions": {},
                 "blocks": {
@@ -4862,7 +5270,17 @@
             },
             {
                 "name": "atomicMax",
-                "parameters": [],
+                "parameters": [
+                    {
+                        "name": "arg_0",
+                        "type": 7
+                    },
+                    {
+                        "name": "arg_1",
+                        "type": 0
+                    }
+                ],
+                "returnType": 7,
                 "localVariables": {},
                 "expressions": {},
                 "blocks": {
@@ -4876,7 +5294,17 @@
             },
             {
                 "name": "atomicMax",
-                "parameters": [],
+                "parameters": [
+                    {
+                        "name": "arg_0",
+                        "type": 8
+                    },
+                    {
+                        "name": "arg_1",
+                        "type": 1
+                    }
+                ],
+                "returnType": 8,
                 "localVariables": {},
                 "expressions": {},
                 "blocks": {
@@ -4890,7 +5318,17 @@
             },
             {
                 "name": "atomicMax",
-                "parameters": [],
+                "parameters": [
+                    {
+                        "name": "arg_0",
+                        "type": 7
+                    },
+                    {
+                        "name": "arg_1",
+                        "type": 0
+                    }
+                ],
+                "returnType": 7,
                 "localVariables": {},
                 "expressions": {},
                 "blocks": {
@@ -4904,7 +5342,17 @@
             },
             {
                 "name": "atomicMax",
-                "parameters": [],
+                "parameters": [
+                    {
+                        "name": "arg_0",
+                        "type": 8
+                    },
+                    {
+                        "name": "arg_1",
+                        "type": 1
+                    }
+                ],
+                "returnType": 8,
                 "localVariables": {},
                 "expressions": {},
                 "blocks": {
@@ -4932,7 +5380,17 @@
             },
             {
                 "name": "atomicMin",
-                "parameters": [],
+                "parameters": [
+                    {
+                        "name": "arg_0",
+                        "type": 7
+                    },
+                    {
+                        "name": "arg_1",
+                        "type": 0
+                    }
+                ],
+                "returnType": 7,
                 "localVariables": {},
                 "expressions": {},
                 "blocks": {
@@ -4946,7 +5404,17 @@
             },
             {
                 "name": "atomicMin",
-                "parameters": [],
+                "parameters": [
+                    {
+                        "name": "arg_0",
+                        "type": 8
+                    },
+                    {
+                        "name": "arg_1",
+                        "type": 1
+                    }
+                ],
+                "returnType": 8,
                 "localVariables": {},
                 "expressions": {},
                 "blocks": {
@@ -4960,7 +5428,17 @@
             },
             {
                 "name": "atomicMin",
-                "parameters": [],
+                "parameters": [
+                    {
+                        "name": "arg_0",
+                        "type": 7
+                    },
+                    {
+                        "name": "arg_1",
+                        "type": 0
+                    }
+                ],
+                "returnType": 7,
                 "localVariables": {},
                 "expressions": {},
                 "blocks": {
@@ -4974,7 +5452,17 @@
             },
             {
                 "name": "atomicMin",
-                "parameters": [],
+                "parameters": [
+                    {
+                        "name": "arg_0",
+                        "type": 8
+                    },
+                    {
+                        "name": "arg_1",
+                        "type": 1
+                    }
+                ],
+                "returnType": 8,
                 "localVariables": {},
                 "expressions": {},
                 "blocks": {
@@ -4988,7 +5476,17 @@
             },
             {
                 "name": "atomicMin",
-                "parameters": [],
+                "parameters": [
+                    {
+                        "name": "arg_0",
+                        "type": 7
+                    },
+                    {
+                        "name": "arg_1",
+                        "type": 0
+                    }
+                ],
+                "returnType": 7,
                 "localVariables": {},
                 "expressions": {},
                 "blocks": {
@@ -5002,7 +5500,17 @@
             },
             {
                 "name": "atomicMin",
-                "parameters": [],
+                "parameters": [
+                    {
+                        "name": "arg_0",
+                        "type": 8
+                    },
+                    {
+                        "name": "arg_1",
+                        "type": 1
+                    }
+                ],
+                "returnType": 8,
                 "localVariables": {},
                 "expressions": {},
                 "blocks": {
@@ -5016,7 +5524,17 @@
             },
             {
                 "name": "atomicMin",
-                "parameters": [],
+                "parameters": [
+                    {
+                        "name": "arg_0",
+                        "type": 7
+                    },
+                    {
+                        "name": "arg_1",
+                        "type": 0
+                    }
+                ],
+                "returnType": 7,
                 "localVariables": {},
                 "expressions": {},
                 "blocks": {
@@ -5030,7 +5548,17 @@
             },
             {
                 "name": "atomicMin",
-                "parameters": [],
+                "parameters": [
+                    {
+                        "name": "arg_0",
+                        "type": 8
+                    },
+                    {
+                        "name": "arg_1",
+                        "type": 1
+                    }
+                ],
+                "returnType": 8,
                 "localVariables": {},
                 "expressions": {},
                 "blocks": {
@@ -5058,7 +5586,17 @@
             },
             {
                 "name": "atomicAnd",
-                "parameters": [],
+                "parameters": [
+                    {
+                        "name": "arg_0",
+                        "type": 7
+                    },
+                    {
+                        "name": "arg_1",
+                        "type": 0
+                    }
+                ],
+                "returnType": 7,
                 "localVariables": {},
                 "expressions": {},
                 "blocks": {
@@ -5072,7 +5610,17 @@
             },
             {
                 "name": "atomicAnd",
-                "parameters": [],
+                "parameters": [
+                    {
+                        "name": "arg_0",
+                        "type": 8
+                    },
+                    {
+                        "name": "arg_1",
+                        "type": 1
+                    }
+                ],
+                "returnType": 8,
                 "localVariables": {},
                 "expressions": {},
                 "blocks": {
@@ -5086,7 +5634,17 @@
             },
             {
                 "name": "atomicAnd",
-                "parameters": [],
+                "parameters": [
+                    {
+                        "name": "arg_0",
+                        "type": 7
+                    },
+                    {
+                        "name": "arg_1",
+                        "type": 0
+                    }
+                ],
+                "returnType": 7,
                 "localVariables": {},
                 "expressions": {},
                 "blocks": {
@@ -5100,7 +5658,17 @@
             },
             {
                 "name": "atomicAnd",
-                "parameters": [],
+                "parameters": [
+                    {
+                        "name": "arg_0",
+                        "type": 8
+                    },
+                    {
+                        "name": "arg_1",
+                        "type": 1
+                    }
+                ],
+                "returnType": 8,
                 "localVariables": {},
                 "expressions": {},
                 "blocks": {
@@ -5114,7 +5682,17 @@
             },
             {
                 "name": "atomicAnd",
-                "parameters": [],
+                "parameters": [
+                    {
+                        "name": "arg_0",
+                        "type": 7
+                    },
+                    {
+                        "name": "arg_1",
+                        "type": 0
+                    }
+                ],
+                "returnType": 7,
                 "localVariables": {},
                 "expressions": {},
                 "blocks": {
@@ -5128,7 +5706,17 @@
             },
             {
                 "name": "atomicAnd",
-                "parameters": [],
+                "parameters": [
+                    {
+                        "name": "arg_0",
+                        "type": 8
+                    },
+                    {
+                        "name": "arg_1",
+                        "type": 1
+                    }
+                ],
+                "returnType": 8,
                 "localVariables": {},
                 "expressions": {},
                 "blocks": {
@@ -5142,7 +5730,17 @@
             },
             {
                 "name": "atomicAnd",
-                "parameters": [],
+                "parameters": [
+                    {
+                        "name": "arg_0",
+                        "type": 7
+                    },
+                    {
+                        "name": "arg_1",
+                        "type": 0
+                    }
+                ],
+                "returnType": 7,
                 "localVariables": {},
                 "expressions": {},
                 "blocks": {
@@ -5156,7 +5754,17 @@
             },
             {
                 "name": "atomicAnd",
-                "parameters": [],
+                "parameters": [
+                    {
+                        "name": "arg_0",
+                        "type": 8
+                    },
+                    {
+                        "name": "arg_1",
+                        "type": 1
+                    }
+                ],
+                "returnType": 8,
                 "localVariables": {},
                 "expressions": {},
                 "blocks": {
@@ -5184,7 +5792,17 @@
             },
             {
                 "name": "atomicOr",
-                "parameters": [],
+                "parameters": [
+                    {
+                        "name": "arg_0",
+                        "type": 7
+                    },
+                    {
+                        "name": "arg_1",
+                        "type": 0
+                    }
+                ],
+                "returnType": 7,
                 "localVariables": {},
                 "expressions": {},
                 "blocks": {
@@ -5198,7 +5816,17 @@
             },
             {
                 "name": "atomicOr",
-                "parameters": [],
+                "parameters": [
+                    {
+                        "name": "arg_0",
+                        "type": 8
+                    },
+                    {
+                        "name": "arg_1",
+                        "type": 1
+                    }
+                ],
+                "returnType": 8,
                 "localVariables": {},
                 "expressions": {},
                 "blocks": {
@@ -5212,7 +5840,17 @@
             },
             {
                 "name": "atomicOr",
-                "parameters": [],
+                "parameters": [
+                    {
+                        "name": "arg_0",
+                        "type": 7
+                    },
+                    {
+                        "name": "arg_1",
+                        "type": 0
+                    }
+                ],
+                "returnType": 7,
                 "localVariables": {},
                 "expressions": {},
                 "blocks": {
@@ -5226,7 +5864,17 @@
             },
             {
                 "name": "atomicOr",
-                "parameters": [],
+                "parameters": [
+                    {
+                        "name": "arg_0",
+                        "type": 8
+                    },
+                    {
+                        "name": "arg_1",
+                        "type": 1
+                    }
+                ],
+                "returnType": 8,
                 "localVariables": {},
                 "expressions": {},
                 "blocks": {
@@ -5240,7 +5888,17 @@
             },
             {
                 "name": "atomicOr",
-                "parameters": [],
+                "parameters": [
+                    {
+                        "name": "arg_0",
+                        "type": 7
+                    },
+                    {
+                        "name": "arg_1",
+                        "type": 0
+                    }
+                ],
+                "returnType": 7,
                 "localVariables": {},
                 "expressions": {},
                 "blocks": {
@@ -5254,7 +5912,17 @@
             },
             {
                 "name": "atomicOr",
-                "parameters": [],
+                "parameters": [
+                    {
+                        "name": "arg_0",
+                        "type": 8
+                    },
+                    {
+                        "name": "arg_1",
+                        "type": 1
+                    }
+                ],
+                "returnType": 8,
                 "localVariables": {},
                 "expressions": {},
                 "blocks": {
@@ -5268,7 +5936,17 @@
             },
             {
                 "name": "atomicOr",
-                "parameters": [],
+                "parameters": [
+                    {
+                        "name": "arg_0",
+                        "type": 7
+                    },
+                    {
+                        "name": "arg_1",
+                        "type": 0
+                    }
+                ],
+                "returnType": 7,
                 "localVariables": {},
                 "expressions": {},
                 "blocks": {
@@ -5282,7 +5960,17 @@
             },
             {
                 "name": "atomicOr",
-                "parameters": [],
+                "parameters": [
+                    {
+                        "name": "arg_0",
+                        "type": 8
+                    },
+                    {
+                        "name": "arg_1",
+                        "type": 1
+                    }
+                ],
+                "returnType": 8,
                 "localVariables": {},
                 "expressions": {},
                 "blocks": {
@@ -5310,7 +5998,17 @@
             },
             {
                 "name": "atomicXor",
-                "parameters": [],
+                "parameters": [
+                    {
+                        "name": "arg_0",
+                        "type": 7
+                    },
+                    {
+                        "name": "arg_1",
+                        "type": 0
+                    }
+                ],
+                "returnType": 7,
                 "localVariables": {},
                 "expressions": {},
                 "blocks": {
@@ -5324,7 +6022,17 @@
             },
             {
                 "name": "atomicXor",
-                "parameters": [],
+                "parameters": [
+                    {
+                        "name": "arg_0",
+                        "type": 8
+                    },
+                    {
+                        "name": "arg_1",
+                        "type": 1
+                    }
+                ],
+                "returnType": 8,
                 "localVariables": {},
                 "expressions": {},
                 "blocks": {
@@ -5338,7 +6046,17 @@
             },
             {
                 "name": "atomicXor",
-                "parameters": [],
+                "parameters": [
+                    {
+                        "name": "arg_0",
+                        "type": 7
+                    },
+                    {
+                        "name": "arg_1",
+                        "type": 0
+                    }
+                ],
+                "returnType": 7,
                 "localVariables": {},
                 "expressions": {},
                 "blocks": {
@@ -5352,7 +6070,17 @@
             },
             {
                 "name": "atomicXor",
-                "parameters": [],
+                "parameters": [
+                    {
+                        "name": "arg_0",
+                        "type": 8
+                    },
+                    {
+                        "name": "arg_1",
+                        "type": 1
+                    }
+                ],
+                "returnType": 8,
                 "localVariables": {},
                 "expressions": {},
                 "blocks": {
@@ -5366,7 +6094,17 @@
             },
             {
                 "name": "atomicXor",
-                "parameters": [],
+                "parameters": [
+                    {
+                        "name": "arg_0",
+                        "type": 7
+                    },
+                    {
+                        "name": "arg_1",
+                        "type": 0
+                    }
+                ],
+                "returnType": 7,
                 "localVariables": {},
                 "expressions": {},
                 "blocks": {
@@ -5380,7 +6118,17 @@
             },
             {
                 "name": "atomicXor",
-                "parameters": [],
+                "parameters": [
+                    {
+                        "name": "arg_0",
+                        "type": 8
+                    },
+                    {
+                        "name": "arg_1",
+                        "type": 1
+                    }
+                ],
+                "returnType": 8,
                 "localVariables": {},
                 "expressions": {},
                 "blocks": {
@@ -5394,7 +6142,17 @@
             },
             {
                 "name": "atomicXor",
-                "parameters": [],
+                "parameters": [
+                    {
+                        "name": "arg_0",
+                        "type": 7
+                    },
+                    {
+                        "name": "arg_1",
+                        "type": 0
+                    }
+                ],
+                "returnType": 7,
                 "localVariables": {},
                 "expressions": {},
                 "blocks": {
@@ -5408,7 +6166,17 @@
             },
             {
                 "name": "atomicXor",
-                "parameters": [],
+                "parameters": [
+                    {
+                        "name": "arg_0",
+                        "type": 8
+                    },
+                    {
+                        "name": "arg_1",
+                        "type": 1
+                    }
+                ],
+                "returnType": 8,
                 "localVariables": {},
                 "expressions": {},
                 "blocks": {
@@ -5422,7 +6190,17 @@
             },
             {
                 "name": "atomicExchange",
-                "parameters": [],
+                "parameters": [
+                    {
+                        "name": "arg_0",
+                        "type": 7
+                    },
+                    {
+                        "name": "arg_1",
+                        "type": 0
+                    }
+                ],
+                "returnType": 7,
                 "localVariables": {},
                 "expressions": {},
                 "blocks": {
@@ -5436,7 +6214,17 @@
             },
             {
                 "name": "atomicExchange",
-                "parameters": [],
+                "parameters": [
+                    {
+                        "name": "arg_0",
+                        "type": 8
+                    },
+                    {
+                        "name": "arg_1",
+                        "type": 1
+                    }
+                ],
+                "returnType": 8,
                 "localVariables": {},
                 "expressions": {},
                 "blocks": {
@@ -5450,7 +6238,17 @@
             },
             {
                 "name": "atomicExchange",
-                "parameters": [],
+                "parameters": [
+                    {
+                        "name": "arg_0",
+                        "type": 7
+                    },
+                    {
+                        "name": "arg_1",
+                        "type": 0
+                    }
+                ],
+                "returnType": 7,
                 "localVariables": {},
                 "expressions": {},
                 "blocks": {
@@ -5464,7 +6262,17 @@
             },
             {
                 "name": "atomicExchange",
-                "parameters": [],
+                "parameters": [
+                    {
+                        "name": "arg_0",
+                        "type": 8
+                    },
+                    {
+                        "name": "arg_1",
+                        "type": 1
+                    }
+                ],
+                "returnType": 8,
                 "localVariables": {},
                 "expressions": {},
                 "blocks": {
@@ -5478,7 +6286,17 @@
             },
             {
                 "name": "atomicExchange",
-                "parameters": [],
+                "parameters": [
+                    {
+                        "name": "arg_0",
+                        "type": 7
+                    },
+                    {
+                        "name": "arg_1",
+                        "type": 0
+                    }
+                ],
+                "returnType": 7,
                 "localVariables": {},
                 "expressions": {},
                 "blocks": {
@@ -5492,7 +6310,17 @@
             },
             {
                 "name": "atomicExchange",
-                "parameters": [],
+                "parameters": [
+                    {
+                        "name": "arg_0",
+                        "type": 8
+                    },
+                    {
+                        "name": "arg_1",
+                        "type": 1
+                    }
+                ],
+                "returnType": 8,
                 "localVariables": {},
                 "expressions": {},
                 "blocks": {
@@ -5506,7 +6334,17 @@
             },
             {
                 "name": "atomicExchange",
-                "parameters": [],
+                "parameters": [
+                    {
+                        "name": "arg_0",
+                        "type": 7
+                    },
+                    {
+                        "name": "arg_1",
+                        "type": 0
+                    }
+                ],
+                "returnType": 7,
                 "localVariables": {},
                 "expressions": {},
                 "blocks": {
@@ -5520,7 +6358,17 @@
             },
             {
                 "name": "atomicExchange",
-                "parameters": [],
+                "parameters": [
+                    {
+                        "name": "arg_0",
+                        "type": 8
+                    },
+                    {
+                        "name": "arg_1",
+                        "type": 1
+                    }
+                ],
+                "returnType": 8,
                 "localVariables": {},
                 "expressions": {},
                 "blocks": {
@@ -5534,7 +6382,21 @@
             },
             {
                 "name": "atomicCompareExchangeWeak",
-                "parameters": [],
+                "parameters": [
+                    {
+                        "name": "arg_0",
+                        "type": 7
+                    },
+                    {
+                        "name": "arg_1",
+                        "type": 0
+                    },
+                    {
+                        "name": "arg_2",
+                        "type": 0
+                    }
+                ],
+                "returnType": 7,
                 "localVariables": {},
                 "expressions": {},
                 "blocks": {
@@ -5548,7 +6410,21 @@
             },
             {
                 "name": "atomicCompareExchangeWeak",
-                "parameters": [],
+                "parameters": [
+                    {
+                        "name": "arg_0",
+                        "type": 8
+                    },
+                    {
+                        "name": "arg_1",
+                        "type": 1
+                    },
+                    {
+                        "name": "arg_2",
+                        "type": 1
+                    }
+                ],
+                "returnType": 8,
                 "localVariables": {},
                 "expressions": {},
                 "blocks": {
@@ -5562,7 +6438,21 @@
             },
             {
                 "name": "atomicCompareExchangeWeak",
-                "parameters": [],
+                "parameters": [
+                    {
+                        "name": "arg_0",
+                        "type": 7
+                    },
+                    {
+                        "name": "arg_1",
+                        "type": 0
+                    },
+                    {
+                        "name": "arg_2",
+                        "type": 0
+                    }
+                ],
+                "returnType": 7,
                 "localVariables": {},
                 "expressions": {},
                 "blocks": {
@@ -5576,7 +6466,21 @@
             },
             {
                 "name": "atomicCompareExchangeWeak",
-                "parameters": [],
+                "parameters": [
+                    {
+                        "name": "arg_0",
+                        "type": 8
+                    },
+                    {
+                        "name": "arg_1",
+                        "type": 1
+                    },
+                    {
+                        "name": "arg_2",
+                        "type": 1
+                    }
+                ],
+                "returnType": 8,
                 "localVariables": {},
                 "expressions": {},
                 "blocks": {
@@ -5590,7 +6494,21 @@
             },
             {
                 "name": "atomicCompareExchangeWeak",
-                "parameters": [],
+                "parameters": [
+                    {
+                        "name": "arg_0",
+                        "type": 7
+                    },
+                    {
+                        "name": "arg_1",
+                        "type": 0
+                    },
+                    {
+                        "name": "arg_2",
+                        "type": 0
+                    }
+                ],
+                "returnType": 7,
                 "localVariables": {},
                 "expressions": {},
                 "blocks": {
@@ -5604,7 +6522,21 @@
             },
             {
                 "name": "atomicCompareExchangeWeak",
-                "parameters": [],
+                "parameters": [
+                    {
+                        "name": "arg_0",
+                        "type": 8
+                    },
+                    {
+                        "name": "arg_1",
+                        "type": 1
+                    },
+                    {
+                        "name": "arg_2",
+                        "type": 1
+                    }
+                ],
+                "returnType": 8,
                 "localVariables": {},
                 "expressions": {},
                 "blocks": {
@@ -5618,7 +6550,21 @@
             },
             {
                 "name": "atomicCompareExchangeWeak",
-                "parameters": [],
+                "parameters": [
+                    {
+                        "name": "arg_0",
+                        "type": 7
+                    },
+                    {
+                        "name": "arg_1",
+                        "type": 0
+                    },
+                    {
+                        "name": "arg_2",
+                        "type": 0
+                    }
+                ],
+                "returnType": 7,
                 "localVariables": {},
                 "expressions": {},
                 "blocks": {
@@ -5632,7 +6578,21 @@
             },
             {
                 "name": "atomicCompareExchangeWeak",
-                "parameters": [],
+                "parameters": [
+                    {
+                        "name": "arg_0",
+                        "type": 8
+                    },
+                    {
+                        "name": "arg_1",
+                        "type": 1
+                    },
+                    {
+                        "name": "arg_2",
+                        "type": 1
+                    }
+                ],
+                "returnType": 8,
                 "localVariables": {},
                 "expressions": {},
                 "blocks": {

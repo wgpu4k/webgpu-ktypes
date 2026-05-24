@@ -236,7 +236,7 @@
                         "__type": "io.ygdrasil.wgsl.ir.LiteralValue.Scalar",
                         "value": {
                             "__type": "io.ygdrasil.wgsl.ir.ScalarValue.U32",
-                            "value": 0
+                            "value": 1500
                         }
                     }
                 }
@@ -1009,7 +1009,7 @@
                                     "__type": "io.ygdrasil.wgsl.ir.LiteralValue.Scalar",
                                     "value": {
                                         "__type": "io.ygdrasil.wgsl.ir.ScalarValue.U32",
-                                        "value": 0
+                                        "value": 1
                                     }
                                 }
                             }
@@ -1305,7 +1305,7 @@
                         {
                             "kind": {
                                 "__type": "io.ygdrasil.wgsl.ir.ExpressionKind.Call",
-                                "function": 6,
+                                "function": 5,
                                 "arguments": [
                                     127
                                 ]
@@ -1338,7 +1338,7 @@
                         {
                             "kind": {
                                 "__type": "io.ygdrasil.wgsl.ir.ExpressionKind.Call",
-                                "function": 5,
+                                "function": 6,
                                 "arguments": [
                                     128,
                                     129,
@@ -2025,7 +2025,17 @@
             },
             {
                 "name": "distance",
-                "parameters": [],
+                "parameters": [
+                    {
+                        "name": "arg_0",
+                        "type": 1
+                    },
+                    {
+                        "name": "arg_1",
+                        "type": 1
+                    }
+                ],
+                "returnType": 1,
                 "localVariables": {},
                 "expressions": {},
                 "blocks": {
@@ -2039,7 +2049,17 @@
             },
             {
                 "name": "distance",
-                "parameters": [],
+                "parameters": [
+                    {
+                        "name": "arg_0",
+                        "type": 1
+                    },
+                    {
+                        "name": "arg_1",
+                        "type": 1
+                    }
+                ],
+                "returnType": 1,
                 "localVariables": {},
                 "expressions": {},
                 "blocks": {
@@ -2053,7 +2073,17 @@
             },
             {
                 "name": "distance",
-                "parameters": [],
+                "parameters": [
+                    {
+                        "name": "arg_0",
+                        "type": 1
+                    },
+                    {
+                        "name": "arg_1",
+                        "type": 1
+                    }
+                ],
+                "returnType": 1,
                 "localVariables": {},
                 "expressions": {},
                 "blocks": {
@@ -2067,21 +2097,13 @@
             },
             {
                 "name": "normalize",
-                "parameters": [],
-                "localVariables": {},
-                "expressions": {},
-                "blocks": {
-                    "data": [
-                        {
-                            "statements": []
-                        }
-                    ]
-                },
-                "body": 0
-            },
-            {
-                "name": "clamp",
-                "parameters": [],
+                "parameters": [
+                    {
+                        "name": "arg_0",
+                        "type": 1
+                    }
+                ],
+                "returnType": 1,
                 "localVariables": {},
                 "expressions": {},
                 "blocks": {
@@ -2095,7 +2117,41 @@
             },
             {
                 "name": "length",
-                "parameters": [],
+                "parameters": [
+                    {
+                        "name": "arg_0",
+                        "type": 1
+                    }
+                ],
+                "returnType": 1,
+                "localVariables": {},
+                "expressions": {},
+                "blocks": {
+                    "data": [
+                        {
+                            "statements": []
+                        }
+                    ]
+                },
+                "body": 0
+            },
+            {
+                "name": "clamp",
+                "parameters": [
+                    {
+                        "name": "arg_0",
+                        "type": 1
+                    },
+                    {
+                        "name": "arg_1",
+                        "type": 0
+                    },
+                    {
+                        "name": "arg_2",
+                        "type": 0
+                    }
+                ],
+                "returnType": 1,
                 "localVariables": {},
                 "expressions": {},
                 "blocks": {

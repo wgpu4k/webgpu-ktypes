@@ -4,5 +4,6 @@
 fn comp(id: vec3<u32>) {
     if ((id[0] == 0)) {
     }
+    _ = (1 + 1);
     return;
 }

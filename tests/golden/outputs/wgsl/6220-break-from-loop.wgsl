@@ -3,7 +3,7 @@
 fn break_from_loop() {
     {
         var i: i32 = 0;
-        while (true) {
+        loop {
             if ((i < 4)) {
                 {
                     break;
@@ -18,4 +18,5 @@ fn break_from_loop() {
 
 @compute
 fn main() {
+    break_from_loop();
 }

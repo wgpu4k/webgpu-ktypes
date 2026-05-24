@@ -1,10 +1,10 @@
 #include <metal_stdlib>
 using namespace metal;
 struct Struct_5 {
-    /* unknown type */ void a;
+    array<float, 10> a;
     float4 v;
     float3x4 m;
-    /* unknown type */ void d;
+    array<float> d;
 };
 
 float index_vector_by_value(float4 v, int i) {
@@ -35,7 +35,7 @@ float index_expensive(int i) {
     return global_0.a[int((sin((float(i) / 100.0f)) * 100.0f))];
 }
 
-void sin() {
+float sin(float arg_0) {
 }
 
 float index_in_bounds() {
@@ -66,7 +66,7 @@ void set_expensive(int i, float v) {
     global_0.a[int((sin((float(i) / 100.0f)) * 100.0f))] = v;
 }
 
-void sin() {
+float sin(float arg_0) {
 }
 
 void set_in_bounds(float v) {
@@ -85,4 +85,21 @@ void set_dynamic_array_constant_index(float v) {
 
 [[kernel]]
 void main(Struct_5 global_0 [[buffer(0)]]) {
+    index_array(1);
+    index_dynamic_array(1);
+    index_vector(1);
+    index_vector_by_value(float4(2, 3, 4, 5), 6);
+    index_matrix(1);
+    index_twice(1, 2);
+    index_expensive(1);
+    index_in_bounds();
+    set_array(1, 2.0f);
+    set_dynamic_array(1, 2.0f);
+    set_vector(1, 2.0f);
+    set_matrix(1, float4(2, 3, 4, 5));
+    set_index_twice(1, 2, 1.0f);
+    set_expensive(1, 1.0f);
+    set_in_bounds(1.0f);
+    index_dynamic_array_constant_index();
+    set_dynamic_array_constant_index(1.0f);
 }

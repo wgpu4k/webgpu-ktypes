@@ -6,39 +6,50 @@ bool test_any_and_all_for_bool() {
     return all(local_0);
 }
 
-void any() {
+bool any(bool arg_0) {
 }
 
-void all() {
+bool all(bool arg_0) {
 }
 
 [[fragment]]
 float4 derivatives(float4 foo [[position]]) {
+    float4 local_0 = dpdxCoarse(foo);
+    float4 local_1 = dpdyCoarse(foo);
+    float4 local_2 = fwidthCoarse(foo);
+    local_0 = dpdxFine(foo);
+    local_1 = dpdyFine(foo);
+    local_2 = fwidthFine(foo);
+    local_0 = dpdx(foo);
+    local_1 = dpdy(foo);
+    local_2 = fwidth(foo);
+    bool local_3 = test_any_and_all_for_bool();
+    return ((local_0 + local_1) * local_2);
 }
 
-void dpdxCoarse() {
+float4 dpdxCoarse(float4 arg_0) {
 }
 
-void dpdyCoarse() {
+float4 dpdyCoarse(float4 arg_0) {
 }
 
-void fwidthCoarse() {
+float4 fwidthCoarse(float4 arg_0) {
 }
 
-void dpdxFine() {
+float4 dpdxFine(float4 arg_0) {
 }
 
-void dpdyFine() {
+float4 dpdyFine(float4 arg_0) {
 }
 
-void fwidthFine() {
+float4 fwidthFine(float4 arg_0) {
 }
 
-void dpdx() {
+float4 dpdx(float4 arg_0) {
 }
 
-void dpdy() {
+float4 dpdy(float4 arg_0) {
 }
 
-void fwidth() {
+float4 fwidth(float4 arg_0) {
 }

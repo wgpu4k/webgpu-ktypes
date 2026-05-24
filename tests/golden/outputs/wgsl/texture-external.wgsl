@@ -12,16 +12,16 @@ fn test(t: texture_external) -> vec4<f32> {
     return (((a + b) + c) + vec2<f32>(d).xyxy);
 }
 
-fn textureSampleBaseClampToEdge() {
+fn textureSampleBaseClampToEdge(arg_0: texture_external, arg_1: sampler, arg_2: vec2<f32>) -> texture_external {
 }
 
-fn textureLoad() {
+fn textureLoad(arg_0: texture_external, arg_1: vec2<f32>) -> texture_external {
 }
 
-fn textureLoad() {
+fn textureLoad(arg_0: texture_external, arg_1: vec2<f32>) -> texture_external {
 }
 
-fn textureDimensions() {
+fn textureDimensions(arg_0: texture_external) -> texture_external {
 }
 
 @fragment
@@ -36,4 +36,5 @@ fn vertex_main() -> vec4<f32> {
 
 @compute
 fn compute_main() {
+    test(tex);
 }

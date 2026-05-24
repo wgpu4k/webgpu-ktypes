@@ -26,6 +26,9 @@ void index_dynamic_array(int i, uint v) {
 }
 
 void wgsl_main() {
+    f();
+    index_unsized(1, 1);
+    index_dynamic_array(1, 1);
 }
 
 void main() {

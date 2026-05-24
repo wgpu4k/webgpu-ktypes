@@ -438,7 +438,8 @@
                                     "variable": 1
                                 },
                                 {
-                                    "__type": "io.ygdrasil.wgsl.ir.Statement.Nop"
+                                    "__type": "io.ygdrasil.wgsl.ir.Statement.Emit",
+                                    "range": 2727
                                 },
                                 {
                                     "__type": "io.ygdrasil.wgsl.ir.Statement.Loop",

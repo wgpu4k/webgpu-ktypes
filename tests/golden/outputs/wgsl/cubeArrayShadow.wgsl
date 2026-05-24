@@ -4,7 +4,7 @@ var<private> point_shadow_textures: texture_depth_cube_array;
 @group(0) @binding(5)
 var<private> point_shadow_textures_sampler: sampler_comparison;
 
-fn textureSampleCompare() {
+fn textureSampleCompare(arg_0: texture_depth_cube_array, arg_1: sampler_comparison, arg_2: vec3<f32>, arg_3: i32, arg_4: f32) -> texture_depth_cube_array {
 }
 
 @fragment

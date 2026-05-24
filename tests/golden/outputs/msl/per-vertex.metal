@@ -2,9 +2,10 @@
 using namespace metal;
 
 struct fs_main_Input {
-    /* unknown type */ void v [[user(loc0)]];
+    array<float, 3> v [[user(loc0)]];
 };
 [[fragment]]
 float4 fs_main(fs_main_Input in [[stage_in]]) {
-    /* unknown type */ void v = in.v;
+    array<float, 3> v = in.v;
+    return float4(v[0], v[1], v[2], 1.0f);
 }

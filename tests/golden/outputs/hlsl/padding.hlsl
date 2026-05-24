@@ -5,7 +5,7 @@ struct Struct_2 {
     float3 a;
 };
 struct Struct_4 {
-    void a;
+    float3 a[2];
     float b;
 };
 struct Struct_6 {
@@ -25,5 +25,6 @@ struct vertex_Output {
 };
 vertex_Output vertex() {
     vertex_Output stage_out;
+    return (((float4(1.0f) * global_2.b) * global_0.b) * global_1.b);
     return stage_out;
 }

@@ -176,4 +176,8 @@ void access_sasm() {
 
 [numthreads(1, 1, 1)]
 void main() {
+    access_m();
+    access_sm();
+    access_am();
+    access_sasm();
 }

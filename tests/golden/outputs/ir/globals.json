@@ -43,7 +43,7 @@
                     "element": 0,
                     "size": {
                         "__type": "io.ygdrasil.wgsl.ir.ArraySize.Constant",
-                        "value": 0
+                        "value": 10
                     }
                 }
             },
@@ -166,6 +166,18 @@
                     "rows": "Tri",
                     "scalar": 0
                 }
+            },
+            {
+                "inner": {
+                    "__type": "io.ygdrasil.wgsl.ir.TypeInner.ValuePointer",
+                    "base": 7
+                }
+            },
+            {
+                "inner": {
+                    "__type": "io.ygdrasil.wgsl.ir.TypeInner.ValuePointer",
+                    "base": 5
+                }
             }
         ],
         "indexMap": [
@@ -215,7 +227,7 @@
                     "element": 0,
                     "size": {
                         "__type": "io.ygdrasil.wgsl.ir.ArraySize.Constant",
-                        "value": 0
+                        "value": 10
                     }
                 }
             },
@@ -353,7 +365,21 @@
                     "scalar": 0
                 }
             },
-            18
+            18,
+            {
+                "inner": {
+                    "__type": "io.ygdrasil.wgsl.ir.TypeInner.ValuePointer",
+                    "base": 7
+                }
+            },
+            19,
+            {
+                "inner": {
+                    "__type": "io.ygdrasil.wgsl.ir.TypeInner.ValuePointer",
+                    "base": 5
+                }
+            },
+            20
         ]
     },
     "constants": {},
@@ -911,7 +937,8 @@
                                     "variable": 3
                                 },
                                 {
-                                    "__type": "io.ygdrasil.wgsl.ir.Statement.Nop"
+                                    "__type": "io.ygdrasil.wgsl.ir.Statement.Emit",
+                                    "range": 2626
                                 },
                                 {
                                     "__type": "io.ygdrasil.wgsl.ir.Statement.Init",
@@ -1253,8 +1280,8 @@
                         },
                         {
                             "kind": {
-                                "__type": "io.ygdrasil.wgsl.ir.ExpressionKind.TypeConstructor",
-                                "type": 0,
+                                "__type": "io.ygdrasil.wgsl.ir.ExpressionKind.Call",
+                                "function": 3,
                                 "arguments": [
                                     43
                                 ]
@@ -1288,7 +1315,7 @@
                                     "__type": "io.ygdrasil.wgsl.ir.LiteralValue.Scalar",
                                     "value": {
                                         "__type": "io.ygdrasil.wgsl.ir.ScalarValue.U32",
-                                        "value": 0
+                                        "value": 2
                                     }
                                 }
                             }
@@ -1296,7 +1323,7 @@
                         {
                             "kind": {
                                 "__type": "io.ygdrasil.wgsl.ir.ExpressionKind.Call",
-                                "function": 3,
+                                "function": 4,
                                 "arguments": [
                                     47,
                                     48
@@ -1337,7 +1364,8 @@
                         {
                             "statements": [
                                 {
-                                    "__type": "io.ygdrasil.wgsl.ir.Statement.Nop"
+                                    "__type": "io.ygdrasil.wgsl.ir.Statement.Emit",
+                                    "range": 00
                                 },
                                 {
                                     "__type": "io.ygdrasil.wgsl.ir.Statement.Assign",
@@ -1380,7 +1408,8 @@
                                     "value": 45
                                 },
                                 {
-                                    "__type": "io.ygdrasil.wgsl.ir.Statement.Nop"
+                                    "__type": "io.ygdrasil.wgsl.ir.Statement.Emit",
+                                    "range": 4949
                                 },
                                 {
                                     "__type": "io.ygdrasil.wgsl.ir.Statement.Init",
@@ -1397,8 +1426,38 @@
                 "body": 1
             },
             {
+                "name": "arrayLength",
+                "parameters": [
+                    {
+                        "name": "arg_0",
+                        "type": 19
+                    }
+                ],
+                "returnType": 19,
+                "localVariables": {},
+                "expressions": {},
+                "blocks": {
+                    "data": [
+                        {
+                            "statements": []
+                        }
+                    ]
+                },
+                "body": 0
+            },
+            {
                 "name": "atomicStore",
-                "parameters": [],
+                "parameters": [
+                    {
+                        "name": "arg_0",
+                        "type": 20
+                    },
+                    {
+                        "name": "arg_1",
+                        "type": 5
+                    }
+                ],
+                "returnType": 20,
                 "localVariables": {},
                 "expressions": {},
                 "blocks": {

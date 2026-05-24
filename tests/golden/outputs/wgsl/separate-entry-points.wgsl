@@ -6,16 +6,19 @@ fn derivatives() {
     var width: f32 = fwidth(0.0f);
 }
 
-fn dpdx() {
+fn dpdx(arg_0: f32) -> f32 {
 }
 
-fn dpdy() {
+fn dpdy(arg_0: f32) -> f32 {
 }
 
-fn fwidth() {
+fn fwidth(arg_0: f32) -> f32 {
 }
 
 fn barriers() {
+    storageBarrier();
+    workgroupBarrier();
+    textureBarrier();
 }
 
 fn storageBarrier() {
@@ -29,9 +32,11 @@ fn textureBarrier() {
 
 @fragment
 fn fragment() -> vec4<f32> {
+    derivatives();
     return vec4<f32>();
 }
 
 @compute
 fn compute() {
+    barriers();
 }

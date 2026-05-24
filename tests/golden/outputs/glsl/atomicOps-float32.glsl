@@ -11,67 +11,82 @@ layout(set = 0, binding = 1) buffer float[2] global_1;
 layout(set = 0, binding = 2) buffer Struct_2 global_2;
 
 void wgsl_cs_main(uvec3 id) {
+    atomicStore(global_0, 1.5f);
+    atomicStore(global_1[1], 1.5f);
+    atomicStore(global_2.atomic_scalar, 1.5f);
+    atomicStore(global_2.atomic_arr[1], 1.5f);
+    workgroupBarrier();
     float l0 = atomicLoad(global_0);
     float l1 = atomicLoad(global_1[1]);
     float l2 = atomicLoad(global_2.atomic_scalar);
     float l3 = atomicLoad(global_2.atomic_arr[1]);
+    workgroupBarrier();
+    atomicAdd(global_0, 1.5f);
+    atomicAdd(global_1[1], 1.5f);
+    atomicAdd(global_2.atomic_scalar, 1.5f);
+    atomicAdd(global_2.atomic_arr[1], 1.5f);
+    workgroupBarrier();
+    atomicExchange(global_0, 1.5f);
+    atomicExchange(global_1[1], 1.5f);
+    atomicExchange(global_2.atomic_scalar, 1.5f);
+    atomicExchange(global_2.atomic_arr[1], 1.5f);
 }
 
-void atomicStore() {
+float atomicStore(float arg_0, float arg_1) {
 }
 
-void atomicStore() {
+float atomicStore(float arg_0, float arg_1) {
 }
 
-void atomicStore() {
+float atomicStore(float arg_0, float arg_1) {
 }
 
-void atomicStore() {
-}
-
-void workgroupBarrier() {
-}
-
-void atomicLoad() {
-}
-
-void atomicLoad() {
-}
-
-void atomicLoad() {
-}
-
-void atomicLoad() {
+float atomicStore(float arg_0, float arg_1) {
 }
 
 void workgroupBarrier() {
 }
 
-void atomicAdd() {
+float atomicLoad(float arg_0) {
 }
 
-void atomicAdd() {
+float atomicLoad(float arg_0) {
 }
 
-void atomicAdd() {
+float atomicLoad(float arg_0) {
 }
 
-void atomicAdd() {
+float atomicLoad(float arg_0) {
 }
 
 void workgroupBarrier() {
 }
 
-void atomicExchange() {
+float atomicAdd(float arg_0, float arg_1) {
 }
 
-void atomicExchange() {
+float atomicAdd(float arg_0, float arg_1) {
 }
 
-void atomicExchange() {
+float atomicAdd(float arg_0, float arg_1) {
 }
 
-void atomicExchange() {
+float atomicAdd(float arg_0, float arg_1) {
+}
+
+void workgroupBarrier() {
+}
+
+float atomicExchange(float arg_0, float arg_1) {
+}
+
+float atomicExchange(float arg_0, float arg_1) {
+}
+
+float atomicExchange(float arg_0, float arg_1) {
+}
+
+float atomicExchange(float arg_0, float arg_1) {
 }
 
 void main() {

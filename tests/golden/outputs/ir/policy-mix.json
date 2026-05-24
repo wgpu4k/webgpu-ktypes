@@ -331,7 +331,7 @@
                     "data": [
                         {
                             "name": "in_function",
-                            "type": 12,
+                            "type": 11,
                             "init": 10
                         }
                     ]
@@ -461,7 +461,7 @@
                         {
                             "kind": {
                                 "__type": "io.ygdrasil.wgsl.ir.ExpressionKind.TypeConstructor",
-                                "type": 11,
+                                "type": 12,
                                 "arguments": [
                                     4,
                                     9
@@ -678,7 +678,25 @@
             },
             {
                 "name": "textureLoad",
-                "parameters": [],
+                "parameters": [
+                    {
+                        "name": "arg_0",
+                        "type": 6
+                    },
+                    {
+                        "name": "arg_1",
+                        "type": 10
+                    },
+                    {
+                        "name": "arg_2",
+                        "type": 9
+                    },
+                    {
+                        "name": "arg_3",
+                        "type": 9
+                    }
+                ],
+                "returnType": 6,
                 "localVariables": {},
                 "expressions": {},
                 "blocks": {
@@ -775,7 +793,8 @@
                         {
                             "statements": [
                                 {
-                                    "__type": "io.ygdrasil.wgsl.ir.Statement.Nop"
+                                    "__type": "io.ygdrasil.wgsl.ir.Statement.Emit",
+                                    "range": 55
                                 }
                             ]
                         }

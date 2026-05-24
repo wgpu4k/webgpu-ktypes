@@ -213,8 +213,64 @@ void all_constant_arguments() {
 }
 
 void globals() {
+    global_0;
+    global_1;
+    global_2;
+    global_3;
+    global_4;
+    global_5;
+    global_6;
+    global_7;
+    global_8;
+    global_9;
+    global_10;
+    global_11;
+    global_12;
+    global_13;
+    global_14;
+    global_15;
+    global_16;
+    global_17;
+    global_18;
+    global_19;
+    global_20;
+    global_21;
+    global_22;
+    global_23;
+    global_24;
+    global_25;
+    global_26;
+    global_27;
+    global_28;
+    global_29;
+    global_30;
+    global_31;
+    global_32;
+    global_33;
+    global_34;
+    global_35;
+    global_36;
+    global_37;
+    global_38;
+    global_39;
+    global_40;
+    global_41;
+    global_42;
+    global_43;
+    global_44;
+    global_45;
+    global_46;
+    global_47;
+    global_48;
+    global_49;
+    global_50;
+    global_51;
+    global_52;
 }
 
 [numthreads(1, 1, 1)]
 void main() {
+    globals();
+    all_constant_arguments();
+    mixed_constant_and_runtime_arguments();
 }

@@ -17,4 +17,7 @@ void test_g() {
 
 [numthreads(1, 1, 1)]
 void test_ep() {
+    global_2;
+    Struct_1();
+    test_g();
 }

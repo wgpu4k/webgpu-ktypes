@@ -26,4 +26,7 @@ void index_dynamic_array(int i, uint v) {
 
 [numthreads(1, 1, 1)]
 void main() {
+    f();
+    index_unsized(1, 1);
+    index_dynamic_array(1, 1);
 }

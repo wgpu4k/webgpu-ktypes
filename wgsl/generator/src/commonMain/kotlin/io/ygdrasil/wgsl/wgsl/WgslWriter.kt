@@ -285,6 +285,18 @@ class WgslWriter(
                 }
                 writeLine("}")
             }
+            is Statement.Emit -> {
+                stmt.range.toList().forEach { index ->
+                    val handle = Handle<Expression>(index)
+                    val expression = currentFunction!!.expressions[handle]
+                    val rendered = writeExpression(handle)
+                    when (expression.kind) {
+                        is ExpressionKind.Call,
+                        is ExpressionKind.BuiltinCall -> writeLine("$rendered;")
+                        else -> writeLine("_ = $rendered;")
+                    }
+                }
+            }
             else -> super.writeStatement(stmt)
         }
     }

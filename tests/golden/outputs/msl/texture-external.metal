@@ -9,20 +9,21 @@ float4 test(texture2d<float> t) {
     return (((local_0 + local_1) + local_2) + float2(local_3).xyxy);
 }
 
-void textureSampleBaseClampToEdge() {
+texture2d<float> textureSampleBaseClampToEdge(texture2d<float> arg_0, sampler arg_1, float2 arg_2) {
 }
 
-void textureLoad() {
+texture2d<float> textureLoad(texture2d<float> arg_0, float2 arg_1) {
 }
 
-void textureLoad() {
+texture2d<float> textureLoad(texture2d<float> arg_0, float2 arg_1) {
 }
 
-void textureDimensions() {
+texture2d<float> textureDimensions(texture2d<float> arg_0) {
 }
 
 [[fragment]]
 float4 fragment_main(texture2d<float> global_0 [[texture(0)]], sampler global_1 [[sampler(1)]]) {
+    return test(global_0);
 }
 
 struct vertex_main_Output {
@@ -30,8 +31,10 @@ struct vertex_main_Output {
 };
 [[vertex]]
 vertex_main_Output vertex_main(texture2d<float> global_0 [[texture(0)]], sampler global_1 [[sampler(1)]]) {
+    return test(global_0);
 }
 
 [[kernel]]
 void compute_main(texture2d<float> global_0 [[texture(0)]], sampler global_1 [[sampler(1)]]) {
+    test(global_0);
 }

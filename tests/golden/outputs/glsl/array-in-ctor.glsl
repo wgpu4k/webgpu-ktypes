@@ -3,7 +3,7 @@ precision highp float;
 precision highp int;
 
 struct Struct_2 {
-    void inner;
+    float[2] inner;
 };
 layout(set = 0, binding = 0) buffer Struct_2 global_0;
 

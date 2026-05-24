@@ -2,17 +2,18 @@
 precision highp float;
 precision highp int;
 
- uint global_0 = 0u;
+ uint global_0 = 128u;
 shared int[] global_1;
 
 void wgsl_test_workgroupUniformLoad(uvec3 workgroup_id) {
     int x = global_1[workgroup_id[0]];
     int val = workgroupUniformLoad(x);
     if ((val > 10)) {
+        workgroupBarrier();
     }
 }
 
-void workgroupUniformLoad() {
+int workgroupUniformLoad(int arg_0) {
 }
 
 void workgroupBarrier() {

@@ -19,4 +19,8 @@ void main() {
     bool local_2 = local_1;
     float local_3 = (global_8 * 10.0f);
     global_7 = global_2;
+    global_1;
+    global_3;
+    global_5;
+    global_6;
 }

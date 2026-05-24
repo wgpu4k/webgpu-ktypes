@@ -7,7 +7,7 @@ fn test_fma() -> vec2<f32> {
     return fma(a, b, c);
 }
 
-fn fma() {
+fn fma(arg_0: vec2<f32>, arg_1: vec2<f32>, arg_2: vec2<f32>) -> vec2<f32> {
 }
 
 @fragment

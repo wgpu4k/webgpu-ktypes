@@ -12,5 +12,6 @@ struct main_Output {
 };
 main_Output main() {
     main_Output stage_out;
+    return Struct_2(float4(0.4f, 0.3f, 0.2f, 0.1f), float4(0.9f, 0.8f, 0.7f, 0.6f));
     return stage_out;
 }

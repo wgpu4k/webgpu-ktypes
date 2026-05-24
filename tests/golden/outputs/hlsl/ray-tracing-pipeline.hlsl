@@ -19,12 +19,13 @@ void ray_gen_main(uint3 id, uint3 num_invocations) {
     global_1 = Struct_1();
     float3 local_0 = (float3(id) / float3(num_invocations));
     float3 local_1 = ((float3(local_0[0], 0.0f, local_0[1]) * 2.0f) - 1.0f);
+    traceRay(global_0, RayDesc(0u, 0, 0.01f, 100.0f, float3(0.0f), (float3(0.0f, 1.0f, 0.0f) + local_1)), &global_1);
 }
 
-void traceRay() {
+uint RayDesc(uint arg_0, int arg_1, float arg_2, float arg_3, float3 arg_4, float3 arg_5) {
 }
 
-void RayDesc() {
+RaytracingAccelerationStructure traceRay(RaytracingAccelerationStructure arg_0, uint arg_1, void arg_2) {
 }
 
 void any_hit_main(uint data, uint geo_idx, float max, uint kind) {

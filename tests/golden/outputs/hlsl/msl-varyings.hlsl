@@ -16,6 +16,8 @@ struct vs_main_Output {
 };
 vs_main_Output vs_main() {
     vs_main_Output stage_out;
+    Struct_5 local_0;
+    return local_0;
     return stage_out;
 }
 
@@ -24,5 +26,7 @@ struct fs_main_Output {
 };
 fs_main_Output fs_main() {
     fs_main_Output stage_out;
+    float3 local_0 = float3(1.0f);
+    return in.position;
     return stage_out;
 }

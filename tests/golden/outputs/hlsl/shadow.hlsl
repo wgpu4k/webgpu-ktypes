@@ -22,11 +22,11 @@ struct Struct_9 {
 Texture2D<float> global_0 : register(t2);
 sampler_comparison global_1 : register(t3);
 float3 global_2 = float3(0.05f, 0.05f, 0.05f);
-uint global_3 = 0u;
+uint global_3 = 10u;
 Struct_4 global_4 : register(b0);
 Struct_6 global_5 : register(b0);
-void global_6 : register(u1);
-void global_7 : register(b1);
+Struct_9 global_6[] : register(u1);
+Struct_9 global_7[10] : register(b1);
 
 float fetch_shadow(uint light_id, float4 homogeneous_coords) {
     if ((homogeneous_coords[3] <= 0.0f)) {
@@ -38,7 +38,7 @@ float fetch_shadow(uint light_id, float4 homogeneous_coords) {
     return textureSampleCompareLevel(global_0, global_1, local_2, int(light_id), (homogeneous_coords[2] * local_1));
 }
 
-void textureSampleCompareLevel() {
+Texture2D<float> textureSampleCompareLevel(Texture2D<float> arg_0, sampler_comparison arg_1, float2 arg_2, int arg_3, float arg_4) {
 }
 
 struct vs_main_Input {
@@ -54,6 +54,13 @@ vs_main_Output vs_main(vs_main_Input stage_in) {
     vs_main_Output stage_out;
     int4 position = stage_in.position;
     int4 normal = stage_in.normal;
+    float4x4 local_0 = global_5.world;
+    float4 local_1 = (global_5.world * float4(position));
+    Struct_8 local_2;
+    local_2.world_normal = (float3x3(local_0[0].xyz, local_0[1].xyz, local_0[2].xyz) * float3(normal.xyz));
+    local_2.world_position = local_1;
+    local_2.proj_position = (global_4.view_proj * local_1);
+    return local_2;
     return stage_out;
 }
 
@@ -62,22 +69,42 @@ struct fs_main_Output {
 };
 fs_main_Output fs_main() {
     fs_main_Output stage_out;
+    float3 local_0 = normalize(in.world_normal);
+    float3 local_1 = global_2;
+    {
+        uint local_2 = 0u;
+        while (true) {
+            if ((local_2 < min(global_4.num_lights[0], global_3))) {
+                {
+                    Struct_9 local_3 = global_6[local_2];
+                    float local_4 = fetch_shadow(local_2, (local_3.proj * in.world_position));
+                    float3 local_5 = normalize((local_3.pos.xyz - in.world_position.xyz));
+                    float local_6 = max(0.0f, dot(local_0, local_5));
+                    local_1 = ((local_4 * local_6) * local_3.color.xyz);
+                }
+                local_2 = (local_2 + 1u);
+            } else {
+                break;
+            }
+        }
+    }
+    return (float4(local_1, 1.0f) * global_5.color);
     return stage_out;
 }
 
-void normalize() {
+float3 normalize(float3 arg_0) {
 }
 
-void normalize() {
+float3 normalize(float3 arg_0) {
 }
 
-void max() {
+float3 dot(float3 arg_0, float3 arg_1) {
 }
 
-void dot() {
+float max(float arg_0, float3 arg_1) {
 }
 
-void min() {
+uint min(uint arg_0, uint arg_1) {
 }
 
 struct fs_main_without_storage_Output {
@@ -85,20 +112,40 @@ struct fs_main_without_storage_Output {
 };
 fs_main_without_storage_Output fs_main_without_storage() {
     fs_main_without_storage_Output stage_out;
+    float3 local_0 = normalize(in.world_normal);
+    float3 local_1 = global_2;
+    {
+        uint local_2 = 0u;
+        while (true) {
+            if ((local_2 < min(global_4.num_lights[0], global_3))) {
+                {
+                    Struct_9 local_3 = global_7[local_2];
+                    float local_4 = fetch_shadow(local_2, (local_3.proj * in.world_position));
+                    float3 local_5 = normalize((local_3.pos.xyz - in.world_position.xyz));
+                    float local_6 = max(0.0f, dot(local_0, local_5));
+                    local_1 = ((local_4 * local_6) * local_3.color.xyz);
+                }
+                local_2 = (local_2 + 1u);
+            } else {
+                break;
+            }
+        }
+    }
+    return (float4(local_1, 1.0f) * global_5.color);
     return stage_out;
 }
 
-void normalize() {
+float3 normalize(float3 arg_0) {
 }
 
-void normalize() {
+float3 normalize(float3 arg_0) {
 }
 
-void max() {
+float3 dot(float3 arg_0, float3 arg_1) {
 }
 
-void dot() {
+float max(float arg_0, float3 arg_1) {
 }
 
-void min() {
+uint min(uint arg_0, uint arg_1) {
 }

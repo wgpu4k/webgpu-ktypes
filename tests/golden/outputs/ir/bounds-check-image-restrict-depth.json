@@ -220,7 +220,21 @@
             },
             {
                 "name": "textureLoad",
-                "parameters": [],
+                "parameters": [
+                    {
+                        "name": "arg_0",
+                        "type": 0
+                    },
+                    {
+                        "name": "arg_1",
+                        "type": 4
+                    },
+                    {
+                        "name": "arg_2",
+                        "type": 3
+                    }
+                ],
+                "returnType": 0,
                 "localVariables": {},
                 "expressions": {},
                 "blocks": {
@@ -309,7 +323,25 @@
             },
             {
                 "name": "textureLoad",
-                "parameters": [],
+                "parameters": [
+                    {
+                        "name": "arg_0",
+                        "type": 1
+                    },
+                    {
+                        "name": "arg_1",
+                        "type": 4
+                    },
+                    {
+                        "name": "arg_2",
+                        "type": 6
+                    },
+                    {
+                        "name": "arg_3",
+                        "type": 3
+                    }
+                ],
+                "returnType": 1,
                 "localVariables": {},
                 "expressions": {},
                 "blocks": {
@@ -398,7 +430,25 @@
             },
             {
                 "name": "textureLoad",
-                "parameters": [],
+                "parameters": [
+                    {
+                        "name": "arg_0",
+                        "type": 1
+                    },
+                    {
+                        "name": "arg_1",
+                        "type": 4
+                    },
+                    {
+                        "name": "arg_2",
+                        "type": 3
+                    },
+                    {
+                        "name": "arg_3",
+                        "type": 3
+                    }
+                ],
+                "returnType": 1,
                 "localVariables": {},
                 "expressions": {},
                 "blocks": {
@@ -476,7 +526,21 @@
             },
             {
                 "name": "textureLoad",
-                "parameters": [],
+                "parameters": [
+                    {
+                        "name": "arg_0",
+                        "type": 2
+                    },
+                    {
+                        "name": "arg_1",
+                        "type": 4
+                    },
+                    {
+                        "name": "arg_2",
+                        "type": 3
+                    }
+                ],
+                "returnType": 2,
                 "localVariables": {},
                 "expressions": {},
                 "blocks": {
@@ -707,16 +771,20 @@
                         {
                             "statements": [
                                 {
-                                    "__type": "io.ygdrasil.wgsl.ir.Statement.Nop"
+                                    "__type": "io.ygdrasil.wgsl.ir.Statement.Emit",
+                                    "range": 22
                                 },
                                 {
-                                    "__type": "io.ygdrasil.wgsl.ir.Statement.Nop"
+                                    "__type": "io.ygdrasil.wgsl.ir.Statement.Emit",
+                                    "range": 66
                                 },
                                 {
-                                    "__type": "io.ygdrasil.wgsl.ir.Statement.Nop"
+                                    "__type": "io.ygdrasil.wgsl.ir.Statement.Emit",
+                                    "range": 1010
                                 },
                                 {
-                                    "__type": "io.ygdrasil.wgsl.ir.Statement.Nop"
+                                    "__type": "io.ygdrasil.wgsl.ir.Statement.Emit",
+                                    "range": 1313
                                 },
                                 {
                                     "__type": "io.ygdrasil.wgsl.ir.Statement.Return",

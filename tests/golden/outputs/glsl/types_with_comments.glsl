@@ -17,6 +17,9 @@ void test_g() {
 }
 
 void wgsl_test_ep() {
+    global_2;
+    Struct_1();
+    test_g();
 }
 
 void main() {

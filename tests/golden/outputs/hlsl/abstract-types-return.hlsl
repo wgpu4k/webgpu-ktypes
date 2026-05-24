@@ -38,4 +38,12 @@ float return_const_f32_const_ai() {
 
 [numthreads(1, 1, 1)]
 void main() {
+    return_i32_ai();
+    return_u32_ai();
+    return_f32_ai();
+    return_f32_af();
+    return_vec2f32_ai();
+    return_arrf32_ai();
+    return_const_f32_const_ai();
+    return_vec2f32_const_ai();
 }

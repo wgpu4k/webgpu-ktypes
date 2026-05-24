@@ -12,16 +12,16 @@ float4 test(texture_external t) {
     return (((local_0 + local_1) + local_2) + float2(local_3).xyxy);
 }
 
-void textureSampleBaseClampToEdge() {
+texture_external textureSampleBaseClampToEdge(texture_external arg_0, SamplerState arg_1, float2 arg_2) {
 }
 
-void textureLoad() {
+texture_external textureLoad(texture_external arg_0, float2 arg_1) {
 }
 
-void textureLoad() {
+texture_external textureLoad(texture_external arg_0, float2 arg_1) {
 }
 
-void textureDimensions() {
+texture_external textureDimensions(texture_external arg_0) {
 }
 
 struct fragment_main_Output {
@@ -29,6 +29,7 @@ struct fragment_main_Output {
 };
 fragment_main_Output fragment_main() {
     fragment_main_Output stage_out;
+    return test(global_0);
     return stage_out;
 }
 
@@ -37,9 +38,11 @@ struct vertex_main_Output {
 };
 vertex_main_Output vertex_main() {
     vertex_main_Output stage_out;
+    return test(global_0);
     return stage_out;
 }
 
 [numthreads(1, 1, 1)]
 void compute_main() {
+    test(global_0);
 }

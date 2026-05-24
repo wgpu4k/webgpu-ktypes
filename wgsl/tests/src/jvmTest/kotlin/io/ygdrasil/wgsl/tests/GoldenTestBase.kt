@@ -393,7 +393,22 @@ private fun assertStatementsEquivalent(
         is Statement.Kill -> {}
         is Statement.Discard -> {}
         is Statement.Nop -> {}
-        is Statement.Emit -> {}
+        is Statement.Emit -> {
+            val roundEmit = roundStmt as Statement.Emit
+            val origExpressions = origStmt.range.toList()
+            val roundExpressions = roundEmit.range.toList()
+            origExpressions.size shouldBe roundExpressions.size
+            origExpressions.forEachIndexed { index, origExpr ->
+                assertExpressionsEquivalent(
+                    Handle<Expression>(origExpr),
+                    origFunc,
+                    origMod,
+                    Handle<Expression>(roundExpressions[index]),
+                    roundFunc,
+                    roundMod
+                )
+            }
+        }
         else -> {
             origStmt.toString() shouldBe roundStmt.toString()
         }

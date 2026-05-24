@@ -9,8 +9,12 @@ struct main_Output {
 };
 main_Output main() {
     main_Output stage_out;
+    float3 local_0 = float3(0.0f);
+    int local_1 = 0;
+    float local_2 = 0.0f;
+    return textureSampleCompareLevel(global_0, global_1, local_0, local_1, local_2);
     return stage_out;
 }
 
-void textureSampleCompareLevel() {
+Texture2D<float> textureSampleCompareLevel(Texture2D<float> arg_0, sampler_comparison arg_1, float3 arg_2, int arg_3, float arg_4) {
 }

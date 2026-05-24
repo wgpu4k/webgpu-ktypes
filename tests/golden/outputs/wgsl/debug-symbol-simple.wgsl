@@ -21,7 +21,7 @@ fn fs_main(in: Struct_4) -> vec4<f32> {
     var color: vec3<f32> = in.color;
     {
         var i: i32 = 0;
-        while (true) {
+        loop {
             if ((i < 10)) {
                 {
                     var ii: f32 = f32(i);

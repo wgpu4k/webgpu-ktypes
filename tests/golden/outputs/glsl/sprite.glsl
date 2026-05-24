@@ -9,7 +9,7 @@ vec4 wgsl_main(vec2 uv) {
     return textureSample(global_0, global_1, uv);
 }
 
-void textureSample() {
+texture2D textureSample(texture2D arg_0, sampler arg_1, vec2 arg_2) {
 }
 
 layout(location = 0) in vec2 uv;

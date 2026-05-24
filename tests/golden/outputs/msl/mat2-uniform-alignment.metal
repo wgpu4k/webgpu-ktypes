@@ -7,4 +7,5 @@ struct Struct_3 {
 
 [[kernel]]
 void main(Struct_3 global_0 [[buffer(0)]]) {
+    Struct_3 local_0 = global_0;
 }

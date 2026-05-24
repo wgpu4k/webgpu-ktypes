@@ -11,13 +11,13 @@ uint collatz_iterations(uint n_base) {
     uint n = n_base;
     uint i = 0u;
     while (true) {
-        if ((n > 0u)) {
-            if ((mod(n, 0u) == 0u)) {
-                n = (n / 0u);
+        if ((n > 1u)) {
+            if ((mod(n, 2u) == 0u)) {
+                n = (n / 2u);
             } else {
-                n = ((0u * n) + 0u);
+                n = ((3u * n) + 1u);
             }
-            i = (i + 0u);
+            i = (i + 1u);
         } else {
             break;
         }

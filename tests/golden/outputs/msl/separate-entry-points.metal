@@ -7,16 +7,19 @@ void derivatives() {
     float local_2 = fwidth(0.0f);
 }
 
-void dpdx() {
+float dpdx(float arg_0) {
 }
 
-void dpdy() {
+float dpdy(float arg_0) {
 }
 
-void fwidth() {
+float fwidth(float arg_0) {
 }
 
 void barriers() {
+    storageBarrier();
+    workgroupBarrier();
+    textureBarrier();
 }
 
 void storageBarrier() {
@@ -30,8 +33,11 @@ void textureBarrier() {
 
 [[fragment]]
 float4 fragment() {
+    derivatives();
+    return float4();
 }
 
 [[kernel]]
 void compute() {
+    barriers();
 }

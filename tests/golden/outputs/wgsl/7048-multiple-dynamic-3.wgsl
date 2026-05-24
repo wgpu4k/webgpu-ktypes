@@ -7,7 +7,7 @@ struct Struct_2 {
 fn foobar(normals: array<vec3<f32>, 12>, count: u32) -> Struct_2 {
     {
         var i: u32 = 0u;
-        while (true) {
+        loop {
             if ((i < count)) {
                 {
                     var n0: vec3<f32> = normals[i];
@@ -20,7 +20,7 @@ fn foobar(normals: array<vec3<f32>, 12>, count: u32) -> Struct_2 {
     }
     {
         var j: u32 = 0u;
-        while (true) {
+        loop {
             if ((j < count)) {
                 {
                     var n1: vec3<f32> = normals[j];
@@ -37,4 +37,5 @@ fn foobar(normals: array<vec3<f32>, 12>, count: u32) -> Struct_2 {
 @fragment
 fn main() {
     var arr: array<vec3<f32>, 12>;
+    foobar(arr, 1);
 }

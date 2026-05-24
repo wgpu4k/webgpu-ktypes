@@ -53,7 +53,7 @@ fn test_arr_as_arg(a: array<array<f32, 10>, 5>) -> f32 {
 }
 
 fn assign_through_ptr_fn(p: ptr<function, u32>) {
-    p = 0u;
+    p = 42u;
 }
 
 fn assign_array_through_ptr_fn(foo: ptr<function, array<vec4<f32>, 2>>) {
@@ -65,7 +65,7 @@ fn fetch_arg_ptr_array_element(p: ptr<function, array<u32, 4>>) -> u32 {
 }
 
 fn assign_to_arg_ptr_array_element(p: ptr<function, array<u32, 4>>) {
-    p[1] = 0u;
+    p[1] = 10u;
 }
 
 fn index_ptr(value: bool) -> bool {
@@ -75,8 +75,10 @@ fn index_ptr(value: bool) -> bool {
 }
 
 fn assign_through_ptr() {
-    var val: u32 = 0u;
+    var val: u32 = 33u;
+    assign_through_ptr_fn(&val);
     var arr: array<vec4<f32>, 2> = array<vec4<f32>, 2>(vec4<f32>(6.0f), vec4<f32>(7.0f));
+    assign_array_through_ptr_fn(&arr);
 }
 
 fn fetch_arg_ptr_member(p: ptr<function, Struct_11>) -> u32 {
@@ -84,7 +86,7 @@ fn fetch_arg_ptr_member(p: ptr<function, Struct_11>) -> u32 {
 }
 
 fn assign_to_arg_ptr_member(p: ptr<function, Struct_11>) {
-    p.x = 0u;
+    p.x = 10u;
 }
 
 fn member_ptr() -> i32 {
@@ -139,7 +141,11 @@ fn test_matrix_within_array_within_struct_accesses() {
 
 fn assign_to_ptr_components() {
     var s1: Struct_11;
+    assign_to_arg_ptr_member(&s1);
+    fetch_arg_ptr_member(&s1);
     var a1: array<u32, 4>;
+    assign_to_arg_ptr_array_element(&a1);
+    fetch_arg_ptr_array_element(&a1);
 }
 
 fn let_members_of_members() -> i32 {
@@ -160,11 +166,14 @@ fn var_members_of_members() -> i32 {
     return thing.om_nom_nom.delicious;
 }
 
+fn arrayLength(arg_0: ptr<function, array<Struct_4>>) -> ptr<function, array<Struct_4>> {
+}
+
 @fragment
 fn foo_frag() -> vec4<f32> {
     bar._matrix[1][2] = 1.0f;
     bar._matrix = mat4x3<f32>(vec3<f32>(0.0f), vec3<f32>(1.0f), vec3<f32>(2.0f), vec3<f32>(3.0f));
-    bar.arr = array<vec2<u32>, 2>(vec2<u32>(0u), vec2<u32>(0u));
+    bar.arr = array<vec2<u32>, 2>(vec2<u32>(0u), vec2<u32>(1u));
     bar.data[1].value = 1;
     qux = vec2<i32>();
     return vec4<f32>(0.0f);
@@ -175,20 +184,30 @@ fn foo_vert(vi: u32) -> vec4<f32> {
     var foo: f32 = 0.0f;
     var baz: f32 = foo;
     foo = 1.0f;
+    _ = msl_padding_global_const;
+    test_matrix_within_struct_accesses();
+    test_matrix_within_array_within_struct_accesses();
     var _matrix: mat4x3<f32> = bar._matrix;
     var arr: array<vec2<u32>, 2> = bar.arr;
-    var index: u32 = 0u;
+    var index: u32 = 3u;
     var b: f32 = bar._matrix[index][0];
-    var a: i32 = bar.data[(f32(&bar.data) - 0u)].value;
+    var a: i32 = bar.data[(arrayLength(&bar.data) - 2u)].value;
     var c: vec2<i32> = qux;
     var data_pointer: ptr<storage, i32, read_write> = &bar.data[0].value;
     var foo_value: f32 = read_from_private(&foo);
     var c2: array<i32, 5> = array<i32, 5>(a, i32(b), 3, 4, 5);
-    c2[(vi + 0u)] = 42;
+    c2[(vi + 1u)] = 42;
     var value: i32 = c2[vi];
+    test_arr_as_arg(array<array<f32, 10>, 5>());
     return vec4<f32>((_matrix * vec4<f32>(vec4<i32>(value))), 2.0f);
 }
 
 @compute
 fn foo_compute() {
+    assign_through_ptr();
+    assign_to_ptr_components();
+    index_ptr(true);
+    member_ptr();
+    let_members_of_members();
+    var_members_of_members();
 }

@@ -7,5 +7,6 @@ struct main_Output {
 };
 main_Output main() {
     main_Output stage_out;
+    return float4(0.4f, 0.3f, 0.2f, 0.1f);
     return stage_out;
 }

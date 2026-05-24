@@ -22,5 +22,8 @@ fn index_let_array_1d(vi: u32) -> vec4<f32> {
 
 @vertex
 fn main(vi: u32) -> vec4<f32> {
+    index_arg_array(array<i32, 5>(1, 2, 3, 4, 5), 6);
+    index_let_array(1, 2);
+    index_let_matrix(1, 2);
     return index_let_array_1d(vi);
 }

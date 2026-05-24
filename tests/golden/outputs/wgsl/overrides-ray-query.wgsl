@@ -16,6 +16,7 @@ fn rayQueryProceed(arg_0: ptr<function, ray_query>) -> ptr<function, ray_query> 
 fn main() {
     var rq: ray_query;
     var desc: u32 = RayDesc(256u, 0u, (o * 17.0f), (o * 19.0f), vec3<f32>((o * 23.0f)), vec3<f32>((o * 29.0f), (o * 31.0f), (o * 37.0f)));
+    rayQueryInitialize(&rq, acc_struct, desc);
     loop {
         if (rayQueryProceed(&rq)) {
         } else {

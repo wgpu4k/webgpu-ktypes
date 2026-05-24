@@ -36,4 +36,12 @@ fn return_const_f32_const_ai() -> f32 {
 
 @compute
 fn main() {
+    return_i32_ai();
+    return_u32_ai();
+    return_f32_ai();
+    return_f32_af();
+    return_vec2f32_ai();
+    return_arrf32_ai();
+    return_const_f32_const_ai();
+    return_vec2f32_const_ai();
 }

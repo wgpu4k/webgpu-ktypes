@@ -1,4 +1,4 @@
-#version 450 core
+#version 460 core
 #extension GL_EXT_ray_query : enable
 precision highp float;
 precision highp int;
@@ -21,12 +21,13 @@ void ray_gen_main(uvec3 id, uvec3 num_invocations) {
     global_1 = Struct_1();
     vec3 shift = (vec3(id) / vec3(num_invocations));
     vec3 ray_shift = ((vec3(shift[0], 0.0f, shift[1]) * 2.0f) - 1.0f);
+    traceRay(global_0, RayDesc(0u, 0, 0.01f, 100.0f, vec3(0.0f), (vec3(0.0f, 1.0f, 0.0f) + ray_shift)), global_1);
 }
 
-void traceRay() {
+uint RayDesc(uint arg_0, int arg_1, float arg_2, float arg_3, vec3 arg_4, vec3 arg_5) {
 }
 
-void RayDesc() {
+accelerationStructureEXT traceRay(accelerationStructureEXT arg_0, uint arg_1, Struct_1 arg_2) {
 }
 
 void any_hit_main(uint data, uint geo_idx, float max, uint kind) {

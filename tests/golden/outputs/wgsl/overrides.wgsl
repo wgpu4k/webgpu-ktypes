@@ -17,4 +17,8 @@ fn main() {
     var x: bool = a;
     var gain_x_100: f32 = (gain_x_10 * 10.0f);
     store_override = gain;
+    _ = specular_param;
+    _ = width;
+    _ = inferred_f32;
+    _ = auto_conversion;
 }

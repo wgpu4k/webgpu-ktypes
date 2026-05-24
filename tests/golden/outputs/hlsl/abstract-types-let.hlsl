@@ -8,10 +8,10 @@ void all_constant_arguments() {
     float2 local_2 = float2(46, 47);
     float2 local_3 = float2(48.0f, 49.0f);
     float2 local_4 = float2(48, 49.0f);
-    uint2 local_5 = float2(0u, 43);
-    uint2 local_6 = float2(42, 0u);
-    uint2 local_7 = uint2(0u, 43);
-    uint2 local_8 = uint2(42, 0u);
+    uint2 local_5 = float2(42u, 43);
+    uint2 local_6 = float2(42, 43u);
+    uint2 local_7 = uint2(42u, 43);
+    uint2 local_8 = uint2(42, 43u);
     int2 local_9 = float2();
     uint2 local_10 = float2();
     float2 local_11 = float2();
@@ -31,28 +31,28 @@ void all_constant_arguments() {
     uint2 local_25 = uint2(1);
     float2 local_26 = float2(1);
     float2 local_27 = float2(1.0f);
-    void local_28 = void(1.0f, 2.0f);
-    void local_29 = void(1.0f, 2.0f);
-    void local_30 = void(1.0f, 2.0f);
-    void local_31 = void(1, 2);
-    void local_32 = void(0, 2);
-    void local_33 = void(1, 0);
-    void local_34 = float(1, 2);
-    void local_35 = float(1, 2);
-    void local_36 = float(1, 2.0f);
-    void local_37 = float(1.0f, 2);
-    void local_38 = float(1.0f, 2.0f);
-    void local_39 = float(float3(1));
-    void local_40 = float(float3(1));
-    void local_41 = float(float3(1.0f));
+    float local_28[2] = float[2](1.0f, 2.0f);
+    float local_29[2] = float[2](1.0f, 2.0f);
+    float local_30[2] = float[2](1.0f, 2.0f);
+    float local_31[2] = float[2](1, 2);
+    int local_32[2] = int[2](1, 2);
+    int local_33[2] = int[2](1, 2);
+    int local_34[2] = int[2](1, 2);
+    float local_35[2] = float[2](1, 2);
+    float local_36[2] = float[2](1, 2.0f);
+    float local_37[2] = float[2](1.0f, 2);
+    float local_38[2] = float[2](1.0f, 2.0f);
+    int3 local_39[1] = int3[1](float3(1));
+    float3 local_40[1] = float3[1](float3(1));
+    float3 local_41[1] = float3[1](float3(1.0f));
     int2 local_42 = float2(1);
     uint2 local_43 = float2(1);
     float2 local_44 = float2(1);
     float2 local_45 = float2(1.0f);
-    float local_46 = float(1, 2);
-    float local_47 = float(1, 2.0f);
-    float local_48 = float(1.0f, 2);
-    float local_49 = float(1.0f, 2.0f);
+    int local_46[2] = int[2](1, 2);
+    int local_47[2] = int[2](1, 2.0f);
+    float local_48[2] = float[2](1.0f, 2);
+    float local_49[2] = float[2](1.0f, 2.0f);
 }
 
 void mixed_constant_and_runtime_arguments() {
@@ -69,18 +69,18 @@ void mixed_constant_and_runtime_arguments() {
     float2x2 local_10 = float2x2(1, local_2, 3, 4);
     float2x2 local_11 = float2x2(1, 2, local_2, 4);
     float2x2 local_12 = float2x2(1, 2, 3, local_2);
-    void local_13 = void(local_2, 2.0f);
-    void local_14 = void(1.0f, local_2);
-    void local_15 = void(local_2, 2);
-    void local_16 = void(1, local_2);
-    void local_17 = void(local_1, 2);
-    void local_18 = void(1, local_1);
-    void local_19 = float(local_2, 2.0f);
-    void local_20 = float(1.0f, local_2);
-    void local_21 = float(local_2, 2);
-    void local_22 = float(1, local_2);
-    void local_23 = float(local_1, 2);
-    void local_24 = float(1, local_1);
+    float local_13[2] = float[2](local_2, 2.0f);
+    float local_14[2] = float[2](1.0f, local_2);
+    float local_15[2] = float[2](local_2, 2);
+    float local_16[2] = float[2](1, local_2);
+    int local_17[2] = int[2](local_1, 2);
+    int local_18[2] = int[2](1, local_1);
+    float local_19[2] = float[2](local_2, 2.0f);
+    float local_20[2] = float[2](1.0f, local_2);
+    float local_21[2] = float[2](local_2, 2);
+    float local_22[2] = float[2](1, local_2);
+    int local_23[2] = int[2](local_1, 2);
+    int local_24[2] = int[2](1, local_1);
     int2 local_25 = float2(local_1);
     uint2 local_26 = float2(local_0);
     float2 local_27 = float2(local_2);
@@ -88,4 +88,6 @@ void mixed_constant_and_runtime_arguments() {
 
 [numthreads(1, 1, 1)]
 void main() {
+    all_constant_arguments();
+    mixed_constant_and_runtime_arguments();
 }

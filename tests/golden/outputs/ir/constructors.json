@@ -39,6 +39,13 @@
             },
             {
                 "inner": {
+                    "__type": "io.ygdrasil.wgsl.ir.TypeInner.Vector",
+                    "size": "Tri",
+                    "scalar": 0
+                }
+            },
+            {
+                "inner": {
                     "__type": "io.ygdrasil.wgsl.ir.TypeInner.Matrix",
                     "columns": "Bi",
                     "rows": "Bi",
@@ -47,10 +54,12 @@
             },
             {
                 "inner": {
-                    "__type": "io.ygdrasil.wgsl.ir.TypeInner.Matrix",
-                    "columns": "Quad",
-                    "rows": "Quad",
-                    "scalar": 0
+                    "__type": "io.ygdrasil.wgsl.ir.TypeInner.Array",
+                    "element": 5,
+                    "size": {
+                        "__type": "io.ygdrasil.wgsl.ir.ArraySize.Constant",
+                        "value": 1
+                    }
                 }
             },
             {
@@ -71,7 +80,24 @@
                 "inner": {
                     "__type": "io.ygdrasil.wgsl.ir.TypeInner.Vector",
                     "size": "Bi",
-                    "scalar": 7
+                    "scalar": 8
+                }
+            },
+            {
+                "inner": {
+                    "__type": "io.ygdrasil.wgsl.ir.TypeInner.Vector",
+                    "size": "Bi",
+                    "scalar": 0
+                }
+            },
+            {
+                "inner": {
+                    "__type": "io.ygdrasil.wgsl.ir.TypeInner.Array",
+                    "element": 2,
+                    "size": {
+                        "__type": "io.ygdrasil.wgsl.ir.ArraySize.Constant",
+                        "value": 4
+                    }
                 }
             },
             {
@@ -86,9 +112,20 @@
             },
             {
                 "inner": {
-                    "__type": "io.ygdrasil.wgsl.ir.TypeInner.Vector",
-                    "size": "Bi",
+                    "__type": "io.ygdrasil.wgsl.ir.TypeInner.Matrix",
+                    "columns": "Quad",
+                    "rows": "Quad",
                     "scalar": 0
+                }
+            },
+            {
+                "inner": {
+                    "__type": "io.ygdrasil.wgsl.ir.TypeInner.Array",
+                    "element": 3,
+                    "size": {
+                        "__type": "io.ygdrasil.wgsl.ir.ArraySize.Constant",
+                        "value": 3
+                    }
                 }
             },
             {
@@ -153,9 +190,8 @@
             3,
             {
                 "inner": {
-                    "__type": "io.ygdrasil.wgsl.ir.TypeInner.Matrix",
-                    "columns": "Bi",
-                    "rows": "Bi",
+                    "__type": "io.ygdrasil.wgsl.ir.TypeInner.Vector",
+                    "size": "Tri",
                     "scalar": 0
                 }
             },
@@ -163,12 +199,23 @@
             {
                 "inner": {
                     "__type": "io.ygdrasil.wgsl.ir.TypeInner.Matrix",
-                    "columns": "Quad",
-                    "rows": "Quad",
+                    "columns": "Bi",
+                    "rows": "Bi",
                     "scalar": 0
                 }
             },
             5,
+            {
+                "inner": {
+                    "__type": "io.ygdrasil.wgsl.ir.TypeInner.Array",
+                    "element": 5,
+                    "size": {
+                        "__type": "io.ygdrasil.wgsl.ir.ArraySize.Constant",
+                        "value": 1
+                    }
+                }
+            },
+            6,
             {
                 "inner": {
                     "__type": "io.ygdrasil.wgsl.ir.TypeInner.Scalar",
@@ -176,7 +223,7 @@
                     "width": 1
                 }
             },
-            6,
+            7,
             {
                 "inner": {
                     "__type": "io.ygdrasil.wgsl.ir.TypeInner.Scalar",
@@ -184,23 +231,12 @@
                     "width": 4
                 }
             },
-            7,
+            8,
             {
                 "inner": {
                     "__type": "io.ygdrasil.wgsl.ir.TypeInner.Vector",
                     "size": "Bi",
-                    "scalar": 7
-                }
-            },
-            8,
-            {
-                "inner": {
-                    "__type": "io.ygdrasil.wgsl.ir.TypeInner.Array",
-                    "element": 3,
-                    "size": {
-                        "__type": "io.ygdrasil.wgsl.ir.ArraySize.Constant",
-                        "value": 3
-                    }
+                    "scalar": 8
                 }
             },
             9,
@@ -225,18 +261,542 @@
             11,
             {
                 "inner": {
+                    "__type": "io.ygdrasil.wgsl.ir.TypeInner.Array",
+                    "element": 3,
+                    "size": {
+                        "__type": "io.ygdrasil.wgsl.ir.ArraySize.Constant",
+                        "value": 3
+                    }
+                }
+            },
+            12,
+            {
+                "inner": {
+                    "__type": "io.ygdrasil.wgsl.ir.TypeInner.Matrix",
+                    "columns": "Quad",
+                    "rows": "Quad",
+                    "scalar": 0
+                }
+            },
+            13,
+            {
+                "inner": {
+                    "__type": "io.ygdrasil.wgsl.ir.TypeInner.Array",
+                    "element": 3,
+                    "size": {
+                        "__type": "io.ygdrasil.wgsl.ir.ArraySize.Constant",
+                        "value": 3
+                    }
+                }
+            },
+            14,
+            {
+                "inner": {
+                    "__type": "io.ygdrasil.wgsl.ir.TypeInner.Array",
+                    "element": 2,
+                    "size": {
+                        "__type": "io.ygdrasil.wgsl.ir.ArraySize.Constant",
+                        "value": 4
+                    }
+                }
+            },
+            15,
+            {
+                "inner": {
                     "__type": "io.ygdrasil.wgsl.ir.TypeInner.Matrix",
                     "columns": "Bi",
                     "rows": "Tri",
                     "scalar": 0
                 }
             },
-            12
+            16
         ]
     },
     "constants": {},
-    "globalExpressions": {},
-    "globalVariables": {},
+    "globalExpressions": {
+        "data": [
+            {
+                "kind": {
+                    "__type": "io.ygdrasil.wgsl.ir.ExpressionKind.Literal",
+                    "value": {
+                        "__type": "io.ygdrasil.wgsl.ir.LiteralValue.Scalar",
+                        "value": {
+                            "__type": "io.ygdrasil.wgsl.ir.ScalarValue.F32",
+                            "value": 0.0
+                        }
+                    }
+                }
+            },
+            {
+                "kind": {
+                    "__type": "io.ygdrasil.wgsl.ir.ExpressionKind.TypeConstructor",
+                    "type": 4,
+                    "arguments": [
+                        0
+                    ]
+                }
+            },
+            {
+                "kind": {
+                    "__type": "io.ygdrasil.wgsl.ir.ExpressionKind.Literal",
+                    "value": {
+                        "__type": "io.ygdrasil.wgsl.ir.LiteralValue.Scalar",
+                        "value": {
+                            "__type": "io.ygdrasil.wgsl.ir.ScalarValue.F32",
+                            "value": 0.0
+                        }
+                    }
+                }
+            },
+            {
+                "kind": {
+                    "__type": "io.ygdrasil.wgsl.ir.ExpressionKind.Literal",
+                    "value": {
+                        "__type": "io.ygdrasil.wgsl.ir.LiteralValue.Scalar",
+                        "value": {
+                            "__type": "io.ygdrasil.wgsl.ir.ScalarValue.F32",
+                            "value": 1.0
+                        }
+                    }
+                }
+            },
+            {
+                "kind": {
+                    "__type": "io.ygdrasil.wgsl.ir.ExpressionKind.Literal",
+                    "value": {
+                        "__type": "io.ygdrasil.wgsl.ir.LiteralValue.Scalar",
+                        "value": {
+                            "__type": "io.ygdrasil.wgsl.ir.ScalarValue.F32",
+                            "value": 2.0
+                        }
+                    }
+                }
+            },
+            {
+                "kind": {
+                    "__type": "io.ygdrasil.wgsl.ir.ExpressionKind.TypeConstructor",
+                    "type": 4,
+                    "arguments": [
+                        2,
+                        3,
+                        4
+                    ]
+                }
+            },
+            {
+                "kind": {
+                    "__type": "io.ygdrasil.wgsl.ir.ExpressionKind.Literal",
+                    "value": {
+                        "__type": "io.ygdrasil.wgsl.ir.LiteralValue.Scalar",
+                        "value": {
+                            "__type": "io.ygdrasil.wgsl.ir.ScalarValue.F32",
+                            "value": 0.0
+                        }
+                    }
+                }
+            },
+            {
+                "kind": {
+                    "__type": "io.ygdrasil.wgsl.ir.ExpressionKind.Literal",
+                    "value": {
+                        "__type": "io.ygdrasil.wgsl.ir.LiteralValue.Scalar",
+                        "value": {
+                            "__type": "io.ygdrasil.wgsl.ir.ScalarValue.F32",
+                            "value": 1.0
+                        }
+                    }
+                }
+            },
+            {
+                "kind": {
+                    "__type": "io.ygdrasil.wgsl.ir.ExpressionKind.Literal",
+                    "value": {
+                        "__type": "io.ygdrasil.wgsl.ir.LiteralValue.Scalar",
+                        "value": {
+                            "__type": "io.ygdrasil.wgsl.ir.ScalarValue.F32",
+                            "value": 2.0
+                        }
+                    }
+                }
+            },
+            {
+                "kind": {
+                    "__type": "io.ygdrasil.wgsl.ir.ExpressionKind.Literal",
+                    "value": {
+                        "__type": "io.ygdrasil.wgsl.ir.LiteralValue.Scalar",
+                        "value": {
+                            "__type": "io.ygdrasil.wgsl.ir.ScalarValue.F32",
+                            "value": 3.0
+                        }
+                    }
+                }
+            },
+            {
+                "kind": {
+                    "__type": "io.ygdrasil.wgsl.ir.ExpressionKind.TypeConstructor",
+                    "type": 5,
+                    "arguments": [
+                        6,
+                        7,
+                        8,
+                        9
+                    ]
+                }
+            },
+            {
+                "kind": {
+                    "__type": "io.ygdrasil.wgsl.ir.ExpressionKind.Literal",
+                    "value": {
+                        "__type": "io.ygdrasil.wgsl.ir.LiteralValue.Scalar",
+                        "value": {
+                            "__type": "io.ygdrasil.wgsl.ir.ScalarValue.F32",
+                            "value": 0.0
+                        }
+                    }
+                }
+            },
+            {
+                "kind": {
+                    "__type": "io.ygdrasil.wgsl.ir.ExpressionKind.Literal",
+                    "value": {
+                        "__type": "io.ygdrasil.wgsl.ir.LiteralValue.Scalar",
+                        "value": {
+                            "__type": "io.ygdrasil.wgsl.ir.ScalarValue.F32",
+                            "value": 1.0
+                        }
+                    }
+                }
+            },
+            {
+                "kind": {
+                    "__type": "io.ygdrasil.wgsl.ir.ExpressionKind.Literal",
+                    "value": {
+                        "__type": "io.ygdrasil.wgsl.ir.LiteralValue.Scalar",
+                        "value": {
+                            "__type": "io.ygdrasil.wgsl.ir.ScalarValue.F32",
+                            "value": 2.0
+                        }
+                    }
+                }
+            },
+            {
+                "kind": {
+                    "__type": "io.ygdrasil.wgsl.ir.ExpressionKind.Literal",
+                    "value": {
+                        "__type": "io.ygdrasil.wgsl.ir.LiteralValue.Scalar",
+                        "value": {
+                            "__type": "io.ygdrasil.wgsl.ir.ScalarValue.F32",
+                            "value": 3.0
+                        }
+                    }
+                }
+            },
+            {
+                "kind": {
+                    "__type": "io.ygdrasil.wgsl.ir.ExpressionKind.TypeConstructor",
+                    "type": 5,
+                    "arguments": [
+                        11,
+                        12,
+                        13,
+                        14
+                    ]
+                }
+            },
+            {
+                "kind": {
+                    "__type": "io.ygdrasil.wgsl.ir.ExpressionKind.TypeConstructor",
+                    "type": 6,
+                    "arguments": [
+                        15
+                    ]
+                }
+            },
+            {
+                "kind": {
+                    "__type": "io.ygdrasil.wgsl.ir.ExpressionKind.TypeConstructor",
+                    "type": 7,
+                    "arguments": []
+                }
+            },
+            {
+                "kind": {
+                    "__type": "io.ygdrasil.wgsl.ir.ExpressionKind.TypeConstructor",
+                    "type": 2,
+                    "arguments": []
+                }
+            },
+            {
+                "kind": {
+                    "__type": "io.ygdrasil.wgsl.ir.ExpressionKind.TypeConstructor",
+                    "type": 8,
+                    "arguments": []
+                }
+            },
+            {
+                "kind": {
+                    "__type": "io.ygdrasil.wgsl.ir.ExpressionKind.TypeConstructor",
+                    "type": 0,
+                    "arguments": []
+                }
+            },
+            {
+                "kind": {
+                    "__type": "io.ygdrasil.wgsl.ir.ExpressionKind.TypeConstructor",
+                    "type": 9,
+                    "arguments": []
+                }
+            },
+            {
+                "kind": {
+                    "__type": "io.ygdrasil.wgsl.ir.ExpressionKind.TypeConstructor",
+                    "type": 5,
+                    "arguments": []
+                }
+            },
+            {
+                "kind": {
+                    "__type": "io.ygdrasil.wgsl.ir.ExpressionKind.Literal",
+                    "value": {
+                        "__type": "io.ygdrasil.wgsl.ir.LiteralValue.Scalar",
+                        "value": {
+                            "__type": "io.ygdrasil.wgsl.ir.ScalarValue.U32",
+                            "value": 0
+                        }
+                    }
+                }
+            },
+            {
+                "kind": {
+                    "__type": "io.ygdrasil.wgsl.ir.ExpressionKind.TypeConstructor",
+                    "type": 10,
+                    "arguments": [
+                        23
+                    ]
+                }
+            },
+            {
+                "kind": {
+                    "__type": "io.ygdrasil.wgsl.ir.ExpressionKind.Literal",
+                    "value": {
+                        "__type": "io.ygdrasil.wgsl.ir.LiteralValue.Scalar",
+                        "value": {
+                            "__type": "io.ygdrasil.wgsl.ir.ScalarValue.F32",
+                            "value": 0.0
+                        }
+                    }
+                }
+            },
+            {
+                "kind": {
+                    "__type": "io.ygdrasil.wgsl.ir.ExpressionKind.TypeConstructor",
+                    "type": 10,
+                    "arguments": [
+                        25
+                    ]
+                }
+            },
+            {
+                "kind": {
+                    "__type": "io.ygdrasil.wgsl.ir.ExpressionKind.Literal",
+                    "value": {
+                        "__type": "io.ygdrasil.wgsl.ir.LiteralValue.Scalar",
+                        "value": {
+                            "__type": "io.ygdrasil.wgsl.ir.ScalarValue.F32",
+                            "value": 0.0
+                        }
+                    }
+                }
+            },
+            {
+                "kind": {
+                    "__type": "io.ygdrasil.wgsl.ir.ExpressionKind.TypeConstructor",
+                    "type": 10,
+                    "arguments": [
+                        27
+                    ]
+                }
+            },
+            {
+                "kind": {
+                    "__type": "io.ygdrasil.wgsl.ir.ExpressionKind.TypeConstructor",
+                    "type": 5,
+                    "arguments": [
+                        26,
+                        28
+                    ]
+                }
+            },
+            {
+                "kind": {
+                    "__type": "io.ygdrasil.wgsl.ir.ExpressionKind.Literal",
+                    "value": {
+                        "__type": "io.ygdrasil.wgsl.ir.LiteralValue.Scalar",
+                        "value": {
+                            "__type": "io.ygdrasil.wgsl.ir.ScalarValue.I32",
+                            "value": 0
+                        }
+                    }
+                }
+            },
+            {
+                "kind": {
+                    "__type": "io.ygdrasil.wgsl.ir.ExpressionKind.Literal",
+                    "value": {
+                        "__type": "io.ygdrasil.wgsl.ir.LiteralValue.Scalar",
+                        "value": {
+                            "__type": "io.ygdrasil.wgsl.ir.ScalarValue.I32",
+                            "value": 1
+                        }
+                    }
+                }
+            },
+            {
+                "kind": {
+                    "__type": "io.ygdrasil.wgsl.ir.ExpressionKind.Literal",
+                    "value": {
+                        "__type": "io.ygdrasil.wgsl.ir.LiteralValue.Scalar",
+                        "value": {
+                            "__type": "io.ygdrasil.wgsl.ir.ScalarValue.I32",
+                            "value": 2
+                        }
+                    }
+                }
+            },
+            {
+                "kind": {
+                    "__type": "io.ygdrasil.wgsl.ir.ExpressionKind.Literal",
+                    "value": {
+                        "__type": "io.ygdrasil.wgsl.ir.LiteralValue.Scalar",
+                        "value": {
+                            "__type": "io.ygdrasil.wgsl.ir.ScalarValue.I32",
+                            "value": 3
+                        }
+                    }
+                }
+            },
+            {
+                "kind": {
+                    "__type": "io.ygdrasil.wgsl.ir.ExpressionKind.TypeConstructor",
+                    "type": 11,
+                    "arguments": [
+                        30,
+                        31,
+                        32,
+                        33
+                    ]
+                }
+            },
+            {
+                "kind": {
+                    "__type": "io.ygdrasil.wgsl.ir.ExpressionKind.TypeConstructor",
+                    "type": 12,
+                    "arguments": []
+                }
+            },
+            {
+                "kind": {
+                    "__type": "io.ygdrasil.wgsl.ir.ExpressionKind.TypeConstructor",
+                    "type": 3,
+                    "arguments": []
+                }
+            }
+        ]
+    },
+    "globalVariables": {
+        "data": [
+            {
+                "name": "const1",
+                "storageClass": "Private",
+                "type": 4,
+                "init": 1
+            },
+            {
+                "name": "const2",
+                "storageClass": "Private",
+                "type": 4,
+                "init": 5
+            },
+            {
+                "name": "const3",
+                "storageClass": "Private",
+                "type": 5,
+                "init": 10
+            },
+            {
+                "name": "const4",
+                "storageClass": "Private",
+                "type": 6,
+                "init": 16
+            },
+            {
+                "name": "cz0",
+                "storageClass": "Private",
+                "type": 7,
+                "init": 17
+            },
+            {
+                "name": "cz1",
+                "storageClass": "Private",
+                "type": 2,
+                "init": 18
+            },
+            {
+                "name": "cz2",
+                "storageClass": "Private",
+                "type": 8,
+                "init": 19
+            },
+            {
+                "name": "cz3",
+                "storageClass": "Private",
+                "type": 0,
+                "init": 20
+            },
+            {
+                "name": "cz4",
+                "storageClass": "Private",
+                "type": 9,
+                "init": 21
+            },
+            {
+                "name": "cz5",
+                "storageClass": "Private",
+                "type": 5,
+                "init": 22
+            },
+            {
+                "name": "cp1",
+                "storageClass": "Private",
+                "type": 10,
+                "init": 24
+            },
+            {
+                "name": "cp2",
+                "storageClass": "Private",
+                "type": 5,
+                "init": 29
+            },
+            {
+                "name": "cp3",
+                "storageClass": "Private",
+                "type": 11,
+                "init": 34
+            },
+            {
+                "name": "cz6",
+                "storageClass": "Private",
+                "type": 12,
+                "init": 35
+            },
+            {
+                "name": "cz7",
+                "storageClass": "Private",
+                "type": 3,
+                "init": 36
+            }
+        ]
+    },
     "functions": {
         "data": [
             {
@@ -250,17 +810,17 @@
                         },
                         {
                             "name": "m0",
-                            "type": 4,
+                            "type": 5,
                             "init": 9
                         },
                         {
                             "name": "m1",
-                            "type": 5,
+                            "type": 13,
                             "init": 26
                         },
                         {
                             "name": "zvc0",
-                            "type": 6,
+                            "type": 7,
                             "init": 27
                         },
                         {
@@ -270,7 +830,7 @@
                         },
                         {
                             "name": "zvc2",
-                            "type": 7,
+                            "type": 8,
                             "init": 29
                         },
                         {
@@ -280,17 +840,17 @@
                         },
                         {
                             "name": "zvc4",
-                            "type": 8,
+                            "type": 9,
                             "init": 31
                         },
                         {
                             "name": "zvc5",
-                            "type": 4,
+                            "type": 5,
                             "init": 32
                         },
                         {
                             "name": "zvc6",
-                            "type": 9,
+                            "type": 14,
                             "init": 33
                         },
                         {
@@ -300,7 +860,7 @@
                         },
                         {
                             "name": "zvc8",
-                            "type": 8,
+                            "type": 9,
                             "init": 35
                         },
                         {
@@ -315,17 +875,17 @@
                         },
                         {
                             "name": "cit1",
-                            "type": 4,
+                            "type": 5,
                             "init": 43
                         },
                         {
                             "name": "cit2",
-                            "type": 11,
+                            "type": 15,
                             "init": 48
                         },
                         {
                             "name": "ic0",
-                            "type": 6,
+                            "type": 7,
                             "init": 50
                         },
                         {
@@ -335,7 +895,7 @@
                         },
                         {
                             "name": "ic2",
-                            "type": 7,
+                            "type": 8,
                             "init": 54
                         },
                         {
@@ -345,12 +905,12 @@
                         },
                         {
                             "name": "ic4",
-                            "type": 8,
+                            "type": 9,
                             "init": 58
                         },
                         {
                             "name": "ic5",
-                            "type": 12,
+                            "type": 16,
                             "init": 60
                         },
                         {
@@ -360,7 +920,7 @@
                         },
                         {
                             "name": "ic7",
-                            "type": 12,
+                            "type": 16,
                             "init": 64
                         },
                         {
@@ -390,27 +950,27 @@
                         },
                         {
                             "name": "cc05",
-                            "type": 7,
+                            "type": 8,
                             "init": 76
                         },
                         {
                             "name": "cc06",
-                            "type": 7,
+                            "type": 8,
                             "init": 78
                         },
                         {
                             "name": "cc07",
-                            "type": 7,
+                            "type": 8,
                             "init": 80
                         },
                         {
                             "name": "cc08",
-                            "type": 7,
+                            "type": 8,
                             "init": 82
                         },
                         {
                             "name": "cc09",
-                            "type": 7,
+                            "type": 8,
                             "init": 84
                         },
                         {
@@ -440,27 +1000,27 @@
                         },
                         {
                             "name": "cc15",
-                            "type": 6,
+                            "type": 7,
                             "init": 96
                         },
                         {
                             "name": "cc16",
-                            "type": 6,
+                            "type": 7,
                             "init": 98
                         },
                         {
                             "name": "cc17",
-                            "type": 6,
+                            "type": 7,
                             "init": 100
                         },
                         {
                             "name": "cc18",
-                            "type": 6,
+                            "type": 7,
                             "init": 102
                         },
                         {
                             "name": "cc19",
-                            "type": 6,
+                            "type": 7,
                             "init": 104
                         }
                     ]
@@ -567,7 +1127,7 @@
                         {
                             "kind": {
                                 "__type": "io.ygdrasil.wgsl.ir.ExpressionKind.TypeConstructor",
-                                "type": 4,
+                                "type": 5,
                                 "arguments": [
                                     5,
                                     6,
@@ -771,7 +1331,7 @@
                         {
                             "kind": {
                                 "__type": "io.ygdrasil.wgsl.ir.ExpressionKind.TypeConstructor",
-                                "type": 5,
+                                "type": 13,
                                 "arguments": [
                                     10,
                                     11,
@@ -795,7 +1355,7 @@
                         {
                             "kind": {
                                 "__type": "io.ygdrasil.wgsl.ir.ExpressionKind.TypeConstructor",
-                                "type": 6,
+                                "type": 7,
                                 "arguments": []
                             }
                         },
@@ -809,7 +1369,7 @@
                         {
                             "kind": {
                                 "__type": "io.ygdrasil.wgsl.ir.ExpressionKind.TypeConstructor",
-                                "type": 7,
+                                "type": 8,
                                 "arguments": []
                             }
                         },
@@ -823,21 +1383,21 @@
                         {
                             "kind": {
                                 "__type": "io.ygdrasil.wgsl.ir.ExpressionKind.TypeConstructor",
-                                "type": 8,
-                                "arguments": []
-                            }
-                        },
-                        {
-                            "kind": {
-                                "__type": "io.ygdrasil.wgsl.ir.ExpressionKind.TypeConstructor",
-                                "type": 4,
-                                "arguments": []
-                            }
-                        },
-                        {
-                            "kind": {
-                                "__type": "io.ygdrasil.wgsl.ir.ExpressionKind.TypeConstructor",
                                 "type": 9,
+                                "arguments": []
+                            }
+                        },
+                        {
+                            "kind": {
+                                "__type": "io.ygdrasil.wgsl.ir.ExpressionKind.TypeConstructor",
+                                "type": 5,
+                                "arguments": []
+                            }
+                        },
+                        {
+                            "kind": {
+                                "__type": "io.ygdrasil.wgsl.ir.ExpressionKind.TypeConstructor",
+                                "type": 14,
                                 "arguments": []
                             }
                         },
@@ -928,7 +1488,7 @@
                         {
                             "kind": {
                                 "__type": "io.ygdrasil.wgsl.ir.ExpressionKind.TypeConstructor",
-                                "type": 4,
+                                "type": 5,
                                 "arguments": [
                                     40,
                                     42
@@ -986,7 +1546,7 @@
                         {
                             "kind": {
                                 "__type": "io.ygdrasil.wgsl.ir.ExpressionKind.TypeConstructor",
-                                "type": 11,
+                                "type": 15,
                                 "arguments": [
                                     44,
                                     45,
@@ -998,14 +1558,14 @@
                         {
                             "kind": {
                                 "__type": "io.ygdrasil.wgsl.ir.ExpressionKind.TypeConstructor",
-                                "type": 6,
+                                "type": 7,
                                 "arguments": []
                             }
                         },
                         {
                             "kind": {
                                 "__type": "io.ygdrasil.wgsl.ir.ExpressionKind.TypeConstructor",
-                                "type": 6,
+                                "type": 7,
                                 "arguments": [
                                     49
                                 ]
@@ -1030,14 +1590,14 @@
                         {
                             "kind": {
                                 "__type": "io.ygdrasil.wgsl.ir.ExpressionKind.TypeConstructor",
-                                "type": 7,
+                                "type": 8,
                                 "arguments": []
                             }
                         },
                         {
                             "kind": {
                                 "__type": "io.ygdrasil.wgsl.ir.ExpressionKind.TypeConstructor",
-                                "type": 7,
+                                "type": 8,
                                 "arguments": [
                                     53
                                 ]
@@ -1062,14 +1622,14 @@
                         {
                             "kind": {
                                 "__type": "io.ygdrasil.wgsl.ir.ExpressionKind.TypeConstructor",
-                                "type": 8,
+                                "type": 9,
                                 "arguments": []
                             }
                         },
                         {
                             "kind": {
                                 "__type": "io.ygdrasil.wgsl.ir.ExpressionKind.TypeConstructor",
-                                "type": 8,
+                                "type": 9,
                                 "arguments": [
                                     57
                                 ]
@@ -1078,14 +1638,14 @@
                         {
                             "kind": {
                                 "__type": "io.ygdrasil.wgsl.ir.ExpressionKind.TypeConstructor",
-                                "type": 12,
+                                "type": 16,
                                 "arguments": []
                             }
                         },
                         {
                             "kind": {
                                 "__type": "io.ygdrasil.wgsl.ir.ExpressionKind.TypeConstructor",
-                                "type": 12,
+                                "type": 16,
                                 "arguments": [
                                     59
                                 ]
@@ -1094,7 +1654,7 @@
                         {
                             "kind": {
                                 "__type": "io.ygdrasil.wgsl.ir.ExpressionKind.TypeConstructor",
-                                "type": 8,
+                                "type": 9,
                                 "arguments": []
                             }
                         },
@@ -1110,14 +1670,14 @@
                         {
                             "kind": {
                                 "__type": "io.ygdrasil.wgsl.ir.ExpressionKind.TypeConstructor",
-                                "type": 12,
+                                "type": 16,
                                 "arguments": []
                             }
                         },
                         {
                             "kind": {
                                 "__type": "io.ygdrasil.wgsl.ir.ExpressionKind.TypeConstructor",
-                                "type": 12,
+                                "type": 16,
                                 "arguments": [
                                     63
                                 ]
@@ -1130,7 +1690,7 @@
                                     "__type": "io.ygdrasil.wgsl.ir.LiteralValue.Scalar",
                                     "value": {
                                         "__type": "io.ygdrasil.wgsl.ir.ScalarValue.U32",
-                                        "value": 0
+                                        "value": 1
                                     }
                                 }
                             }
@@ -1235,7 +1795,7 @@
                                     "__type": "io.ygdrasil.wgsl.ir.LiteralValue.Scalar",
                                     "value": {
                                         "__type": "io.ygdrasil.wgsl.ir.ScalarValue.I32",
-                                        "value": 0
+                                        "value": 1
                                     }
                                 }
                             }
@@ -1243,7 +1803,7 @@
                         {
                             "kind": {
                                 "__type": "io.ygdrasil.wgsl.ir.ExpressionKind.TypeConstructor",
-                                "type": 7,
+                                "type": 8,
                                 "arguments": [
                                     75
                                 ]
@@ -1264,7 +1824,7 @@
                         {
                             "kind": {
                                 "__type": "io.ygdrasil.wgsl.ir.ExpressionKind.TypeConstructor",
-                                "type": 7,
+                                "type": 8,
                                 "arguments": [
                                     77
                                 ]
@@ -1285,7 +1845,7 @@
                         {
                             "kind": {
                                 "__type": "io.ygdrasil.wgsl.ir.ExpressionKind.TypeConstructor",
-                                "type": 7,
+                                "type": 8,
                                 "arguments": [
                                     79
                                 ]
@@ -1306,7 +1866,7 @@
                         {
                             "kind": {
                                 "__type": "io.ygdrasil.wgsl.ir.ExpressionKind.TypeConstructor",
-                                "type": 7,
+                                "type": 8,
                                 "arguments": [
                                     81
                                 ]
@@ -1327,7 +1887,7 @@
                         {
                             "kind": {
                                 "__type": "io.ygdrasil.wgsl.ir.ExpressionKind.TypeConstructor",
-                                "type": 7,
+                                "type": 8,
                                 "arguments": [
                                     83
                                 ]
@@ -1340,7 +1900,7 @@
                                     "__type": "io.ygdrasil.wgsl.ir.LiteralValue.Scalar",
                                     "value": {
                                         "__type": "io.ygdrasil.wgsl.ir.ScalarValue.I32",
-                                        "value": 0
+                                        "value": 1
                                     }
                                 }
                             }
@@ -1361,7 +1921,7 @@
                                     "__type": "io.ygdrasil.wgsl.ir.LiteralValue.Scalar",
                                     "value": {
                                         "__type": "io.ygdrasil.wgsl.ir.ScalarValue.U32",
-                                        "value": 0
+                                        "value": 1
                                     }
                                 }
                             }
@@ -1445,7 +2005,7 @@
                                     "__type": "io.ygdrasil.wgsl.ir.LiteralValue.Scalar",
                                     "value": {
                                         "__type": "io.ygdrasil.wgsl.ir.ScalarValue.I32",
-                                        "value": 0
+                                        "value": 1
                                     }
                                 }
                             }
@@ -1453,7 +2013,7 @@
                         {
                             "kind": {
                                 "__type": "io.ygdrasil.wgsl.ir.ExpressionKind.TypeConstructor",
-                                "type": 6,
+                                "type": 7,
                                 "arguments": [
                                     95
                                 ]
@@ -1466,7 +2026,7 @@
                                     "__type": "io.ygdrasil.wgsl.ir.LiteralValue.Scalar",
                                     "value": {
                                         "__type": "io.ygdrasil.wgsl.ir.ScalarValue.U32",
-                                        "value": 0
+                                        "value": 1
                                     }
                                 }
                             }
@@ -1474,7 +2034,7 @@
                         {
                             "kind": {
                                 "__type": "io.ygdrasil.wgsl.ir.ExpressionKind.TypeConstructor",
-                                "type": 6,
+                                "type": 7,
                                 "arguments": [
                                     97
                                 ]
@@ -1495,7 +2055,7 @@
                         {
                             "kind": {
                                 "__type": "io.ygdrasil.wgsl.ir.ExpressionKind.TypeConstructor",
-                                "type": 6,
+                                "type": 7,
                                 "arguments": [
                                     99
                                 ]
@@ -1516,7 +2076,7 @@
                         {
                             "kind": {
                                 "__type": "io.ygdrasil.wgsl.ir.ExpressionKind.TypeConstructor",
-                                "type": 6,
+                                "type": 7,
                                 "arguments": [
                                     101
                                 ]
@@ -1537,7 +2097,7 @@
                         {
                             "kind": {
                                 "__type": "io.ygdrasil.wgsl.ir.ExpressionKind.TypeConstructor",
-                                "type": 6,
+                                "type": 7,
                                 "arguments": [
                                     103
                                 ]

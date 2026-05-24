@@ -2,10 +2,11 @@
 #pragma pack_matrix(column_major)
 
 struct Struct_2 {
-    void inner;
+    float inner[2];
 };
 Struct_2 global_0 : register(u0);
 
 [numthreads(1, 1, 1)]
 void cs_main() {
+    Struct_2 local_0 = global_0;
 }

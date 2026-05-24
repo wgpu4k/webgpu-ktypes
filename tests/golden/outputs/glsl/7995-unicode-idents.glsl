@@ -4,10 +4,13 @@ precision highp int;
 
 layout(set = 0, binding = 0) buffer float global_0;
 
-void wgsl_main() {
+float compute() {
+    float θ2 = (global_0 + 9001.0f);
+    return θ2;
 }
 
-void () {
+void wgsl_main() {
+    compute();
 }
 
 void main() {

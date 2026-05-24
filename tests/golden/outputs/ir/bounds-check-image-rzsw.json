@@ -367,7 +367,21 @@
             },
             {
                 "name": "textureLoad",
-                "parameters": [],
+                "parameters": [
+                    {
+                        "name": "arg_0",
+                        "type": 0
+                    },
+                    {
+                        "name": "arg_1",
+                        "type": 9
+                    },
+                    {
+                        "name": "arg_2",
+                        "type": 9
+                    }
+                ],
+                "returnType": 0,
                 "localVariables": {},
                 "expressions": {},
                 "blocks": {
@@ -445,7 +459,21 @@
             },
             {
                 "name": "textureLoad",
-                "parameters": [],
+                "parameters": [
+                    {
+                        "name": "arg_0",
+                        "type": 1
+                    },
+                    {
+                        "name": "arg_1",
+                        "type": 12
+                    },
+                    {
+                        "name": "arg_2",
+                        "type": 9
+                    }
+                ],
+                "returnType": 1,
                 "localVariables": {},
                 "expressions": {},
                 "blocks": {
@@ -534,7 +562,25 @@
             },
             {
                 "name": "textureLoad",
-                "parameters": [],
+                "parameters": [
+                    {
+                        "name": "arg_0",
+                        "type": 2
+                    },
+                    {
+                        "name": "arg_1",
+                        "type": 12
+                    },
+                    {
+                        "name": "arg_2",
+                        "type": 13
+                    },
+                    {
+                        "name": "arg_3",
+                        "type": 9
+                    }
+                ],
+                "returnType": 2,
                 "localVariables": {},
                 "expressions": {},
                 "blocks": {
@@ -623,7 +669,25 @@
             },
             {
                 "name": "textureLoad",
-                "parameters": [],
+                "parameters": [
+                    {
+                        "name": "arg_0",
+                        "type": 2
+                    },
+                    {
+                        "name": "arg_1",
+                        "type": 12
+                    },
+                    {
+                        "name": "arg_2",
+                        "type": 9
+                    },
+                    {
+                        "name": "arg_3",
+                        "type": 9
+                    }
+                ],
+                "returnType": 2,
                 "localVariables": {},
                 "expressions": {},
                 "blocks": {
@@ -701,7 +765,21 @@
             },
             {
                 "name": "textureLoad",
-                "parameters": [],
+                "parameters": [
+                    {
+                        "name": "arg_0",
+                        "type": 3
+                    },
+                    {
+                        "name": "arg_1",
+                        "type": 14
+                    },
+                    {
+                        "name": "arg_2",
+                        "type": 9
+                    }
+                ],
+                "returnType": 3,
                 "localVariables": {},
                 "expressions": {},
                 "blocks": {
@@ -779,7 +857,21 @@
             },
             {
                 "name": "textureLoad",
-                "parameters": [],
+                "parameters": [
+                    {
+                        "name": "arg_0",
+                        "type": 4
+                    },
+                    {
+                        "name": "arg_1",
+                        "type": 12
+                    },
+                    {
+                        "name": "arg_2",
+                        "type": 9
+                    }
+                ],
+                "returnType": 4,
                 "localVariables": {},
                 "expressions": {},
                 "blocks": {
@@ -845,7 +937,8 @@
                         {
                             "statements": [
                                 {
-                                    "__type": "io.ygdrasil.wgsl.ir.Statement.Nop"
+                                    "__type": "io.ygdrasil.wgsl.ir.Statement.Emit",
+                                    "range": 33
                                 }
                             ]
                         }
@@ -855,7 +948,21 @@
             },
             {
                 "name": "textureStore",
-                "parameters": [],
+                "parameters": [
+                    {
+                        "name": "arg_0",
+                        "type": 5
+                    },
+                    {
+                        "name": "arg_1",
+                        "type": 9
+                    },
+                    {
+                        "name": "arg_2",
+                        "type": 11
+                    }
+                ],
+                "returnType": 5,
                 "localVariables": {},
                 "expressions": {},
                 "blocks": {
@@ -921,7 +1028,8 @@
                         {
                             "statements": [
                                 {
-                                    "__type": "io.ygdrasil.wgsl.ir.Statement.Nop"
+                                    "__type": "io.ygdrasil.wgsl.ir.Statement.Emit",
+                                    "range": 33
                                 }
                             ]
                         }
@@ -931,7 +1039,21 @@
             },
             {
                 "name": "textureStore",
-                "parameters": [],
+                "parameters": [
+                    {
+                        "name": "arg_0",
+                        "type": 6
+                    },
+                    {
+                        "name": "arg_1",
+                        "type": 12
+                    },
+                    {
+                        "name": "arg_2",
+                        "type": 11
+                    }
+                ],
+                "returnType": 6,
                 "localVariables": {},
                 "expressions": {},
                 "blocks": {
@@ -1008,7 +1130,8 @@
                         {
                             "statements": [
                                 {
-                                    "__type": "io.ygdrasil.wgsl.ir.Statement.Nop"
+                                    "__type": "io.ygdrasil.wgsl.ir.Statement.Emit",
+                                    "range": 44
                                 }
                             ]
                         }
@@ -1018,7 +1141,25 @@
             },
             {
                 "name": "textureStore",
-                "parameters": [],
+                "parameters": [
+                    {
+                        "name": "arg_0",
+                        "type": 7
+                    },
+                    {
+                        "name": "arg_1",
+                        "type": 12
+                    },
+                    {
+                        "name": "arg_2",
+                        "type": 13
+                    },
+                    {
+                        "name": "arg_3",
+                        "type": 11
+                    }
+                ],
+                "returnType": 7,
                 "localVariables": {},
                 "expressions": {},
                 "blocks": {
@@ -1095,7 +1236,8 @@
                         {
                             "statements": [
                                 {
-                                    "__type": "io.ygdrasil.wgsl.ir.Statement.Nop"
+                                    "__type": "io.ygdrasil.wgsl.ir.Statement.Emit",
+                                    "range": 44
                                 }
                             ]
                         }
@@ -1105,7 +1247,25 @@
             },
             {
                 "name": "textureStore",
-                "parameters": [],
+                "parameters": [
+                    {
+                        "name": "arg_0",
+                        "type": 7
+                    },
+                    {
+                        "name": "arg_1",
+                        "type": 12
+                    },
+                    {
+                        "name": "arg_2",
+                        "type": 9
+                    },
+                    {
+                        "name": "arg_3",
+                        "type": 11
+                    }
+                ],
+                "returnType": 7,
                 "localVariables": {},
                 "expressions": {},
                 "blocks": {
@@ -1171,7 +1331,8 @@
                         {
                             "statements": [
                                 {
-                                    "__type": "io.ygdrasil.wgsl.ir.Statement.Nop"
+                                    "__type": "io.ygdrasil.wgsl.ir.Statement.Emit",
+                                    "range": 33
                                 }
                             ]
                         }
@@ -1181,7 +1342,21 @@
             },
             {
                 "name": "textureStore",
-                "parameters": [],
+                "parameters": [
+                    {
+                        "name": "arg_0",
+                        "type": 8
+                    },
+                    {
+                        "name": "arg_1",
+                        "type": 14
+                    },
+                    {
+                        "name": "arg_2",
+                        "type": 11
+                    }
+                ],
+                "returnType": 8,
                 "localVariables": {},
                 "expressions": {},
                 "blocks": {
@@ -1626,37 +1801,48 @@
                         {
                             "statements": [
                                 {
-                                    "__type": "io.ygdrasil.wgsl.ir.Statement.Nop"
+                                    "__type": "io.ygdrasil.wgsl.ir.Statement.Emit",
+                                    "range": 22
                                 },
                                 {
-                                    "__type": "io.ygdrasil.wgsl.ir.Statement.Nop"
+                                    "__type": "io.ygdrasil.wgsl.ir.Statement.Emit",
+                                    "range": 55
                                 },
                                 {
-                                    "__type": "io.ygdrasil.wgsl.ir.Statement.Nop"
+                                    "__type": "io.ygdrasil.wgsl.ir.Statement.Emit",
+                                    "range": 99
                                 },
                                 {
-                                    "__type": "io.ygdrasil.wgsl.ir.Statement.Nop"
+                                    "__type": "io.ygdrasil.wgsl.ir.Statement.Emit",
+                                    "range": 1313
                                 },
                                 {
-                                    "__type": "io.ygdrasil.wgsl.ir.Statement.Nop"
+                                    "__type": "io.ygdrasil.wgsl.ir.Statement.Emit",
+                                    "range": 1616
                                 },
                                 {
-                                    "__type": "io.ygdrasil.wgsl.ir.Statement.Nop"
+                                    "__type": "io.ygdrasil.wgsl.ir.Statement.Emit",
+                                    "range": 1919
                                 },
                                 {
-                                    "__type": "io.ygdrasil.wgsl.ir.Statement.Nop"
+                                    "__type": "io.ygdrasil.wgsl.ir.Statement.Emit",
+                                    "range": 2222
                                 },
                                 {
-                                    "__type": "io.ygdrasil.wgsl.ir.Statement.Nop"
+                                    "__type": "io.ygdrasil.wgsl.ir.Statement.Emit",
+                                    "range": 2525
                                 },
                                 {
-                                    "__type": "io.ygdrasil.wgsl.ir.Statement.Nop"
+                                    "__type": "io.ygdrasil.wgsl.ir.Statement.Emit",
+                                    "range": 2929
                                 },
                                 {
-                                    "__type": "io.ygdrasil.wgsl.ir.Statement.Nop"
+                                    "__type": "io.ygdrasil.wgsl.ir.Statement.Emit",
+                                    "range": 3333
                                 },
                                 {
-                                    "__type": "io.ygdrasil.wgsl.ir.Statement.Nop"
+                                    "__type": "io.ygdrasil.wgsl.ir.Statement.Emit",
+                                    "range": 3636
                                 },
                                 {
                                     "__type": "io.ygdrasil.wgsl.ir.Statement.Return",
