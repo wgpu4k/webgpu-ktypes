@@ -11,7 +11,7 @@ class GoldenCompletenessTest : FunSpec({
 
     test("all missing golden outputs are explicitly documented") {
         inputNames.size shouldBe 160
-        documentedMissingOutputs.size shouldBe 43
+        documentedMissingOutputs.size shouldBe 42
 
         GoldenCorpus.backends.forEach { backend ->
             GoldenCorpus.missingOutputs(backend, rootDir) shouldBe documentedMissingOutputs
@@ -29,6 +29,6 @@ class GoldenCompletenessTest : FunSpec({
     }
 
     test("expected golden failures are validated and versioned") {
-        GoldenExpectedFailures.load(rootDir).size shouldBe 701
+        GoldenExpectedFailures.load(rootDir).size shouldBe 695
     }
 })
