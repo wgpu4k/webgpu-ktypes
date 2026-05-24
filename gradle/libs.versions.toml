@@ -15,6 +15,7 @@ dokka = "2.2.0"
 
 # Tests
 kotest = "6.1.11"
+kover = "0.9.8"
 ksp = "2.3.4"
 clikt = "5.0.2"
 
@@ -56,6 +57,7 @@ dokka = { id = "org.jetbrains.dokka", version.ref = "dokka" }
 
 # Tests
 kotest = { id = "io.kotest", version.ref = "kotest" }
+kover = { id = "org.jetbrains.kotlinx.kover", version.ref = "kover" }
 ksp = { id = "com.google.devtools.ksp", version.ref = "ksp" }
 
 [bundles]
