@@ -433,30 +433,35 @@ class Lowerer {
     }
 
     private fun lowerGlobalVariable(decl: VariableDecl) {
-        val type = decl.type?.let { lowerType(it) } ?: return
-        
+        val initHandle = decl.initializer?.let { initializerExpr ->
+            val savedExpressions = currentExpressions
+            try {
+                currentExpressions = module.globalExpressions
+                lowerExpression(initializerExpr)
+            } finally {
+                currentExpressions = savedExpressions
+            }
+        }
+
+        val type = decl.type?.let { lowerType(it) }
+            ?: initHandle?.let { handle ->
+                val savedExpressions = currentExpressions
+                try {
+                    currentExpressions = module.globalExpressions
+                    resolveExpressionType(handle)
+                } finally {
+                    currentExpressions = savedExpressions
+                }
+            }
+            ?: return
+
         val storageClass = if (decl.storageClass != null) {
             lowerStorageClassText(decl.storageClass)
         } else {
             lowerStorageClass(decl.kind.toStorageClass())
         }
-        
-        val accessMode = lowerAccessModeText(decl.accessMode)
 
-        // Lower the initializer if present (P003 fix)
-        val initHandle = decl.initializer?.let { initializerExpr ->
-            val savedExpressions = currentExpressions
-            try {
-                // Use global expressions arena for global variable initializers
-                currentExpressions = module.globalExpressions
-                val result = lowerExpression(initializerExpr)
-                currentExpressions = savedExpressions
-                result
-            } catch (e: Exception) {
-                currentExpressions = savedExpressions
-                throw e
-            }
-        }
+        val accessMode = lowerAccessModeText(decl.accessMode)
 
         val group = decl.attributes.find { it.name == "group" }?.let {
             (it.args.firstOrNull() as? IntLiteral)?.value?.toInt()
