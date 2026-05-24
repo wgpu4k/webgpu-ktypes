@@ -134,8 +134,42 @@ class GlslWriter(
         if (kind is ExpressionKind.ValuePointer) {
             return writeExpression(kind.base)
         }
+        if (kind is ExpressionKind.TypeConstructor && kind.arguments.isEmpty()) {
+            return writeZeroValueConstructor(kind.type)
+        }
 
         return super.writeExpression(handle)
+    }
+
+    private fun writeZeroValueConstructor(type: Handle<Type>): String {
+        return when (val inner = module.types[type].inner) {
+            is TypeInner.Scalar -> writeZeroScalarValue(inner)
+            is TypeInner.Vector -> {
+                val scalar = module.types[inner.scalar].inner as TypeInner.Scalar
+                "${getTypeName(type)}(${writeZeroScalarValue(scalar)})"
+            }
+            is TypeInner.Matrix -> {
+                val scalar = module.types[inner.scalar].inner as TypeInner.Scalar
+                val vectorType = Type(TypeInner.Vector(inner.rows, inner.scalar))
+                val vectorHandle = module.types.append(vectorType)
+                val zeroColumn = "${getTypeName(vectorHandle)}(${writeZeroScalarValue(scalar)})"
+                val columns = List(inner.columns.value) { zeroColumn }.joinToString()
+                "${getTypeName(type)}($columns)"
+            }
+            else -> "${getTypeName(type)}()"
+        }
+    }
+
+    private fun writeZeroScalarValue(scalar: TypeInner.Scalar): String {
+        return when (scalar.kind) {
+            ScalarKind.Bool -> "false"
+            ScalarKind.Uint -> "0u"
+            ScalarKind.Sint -> "0"
+            ScalarKind.F32 -> "0.0f"
+            ScalarKind.F64 -> "0.0"
+            ScalarKind.F16 -> "0.0f"
+            else -> "0"
+        }
     }
 
     override fun getFunctionName(handle: Handle<Function>): String {

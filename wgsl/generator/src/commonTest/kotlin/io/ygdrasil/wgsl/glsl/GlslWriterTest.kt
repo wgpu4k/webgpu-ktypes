@@ -5,7 +5,9 @@ import io.kotest.matchers.string.shouldContain
 import io.ygdrasil.wgsl.arena.Arena
 import io.ygdrasil.wgsl.ir.*
 import io.ygdrasil.wgsl.ir.Function
-import io.ygdrasil.wgsl.valid.ModuleInfo
+import io.ygdrasil.wgsl.parser.Lowerer
+import io.ygdrasil.wgsl.parser.TypeResolver
+import io.ygdrasil.wgsl.parser.parseWgsl
 
 class GlslWriterTest : FunSpec({
 
@@ -50,4 +52,41 @@ class GlslWriterTest : FunSpec({
         code shouldContain "float a;"
         code shouldContain "void my_func()"
     }
+
+    test("empty_vector_constructor_writes_typed_zero_value") {
+        val module = lowerWgsl("""
+            @compute @workgroup_size(1)
+            fn main() {
+                var i = vec4<i32>();
+                var f = vec2<f32>();
+            }
+        """.trimIndent())
+
+        val code = GlslModule.writeString(module)
+
+        code shouldContain "ivec4 i = ivec4(0);"
+        code shouldContain "vec2 f = vec2(0.0f);"
+    }
+
+    test("empty_matrix_constructor_writes_zero_columns") {
+        val module = lowerWgsl("""
+            @compute @workgroup_size(1)
+            fn main() {
+                var m = mat2x2<f32>();
+                var n = mat2x2<f32>(vec2(), vec2());
+            }
+        """.trimIndent())
+
+        val code = GlslModule.writeString(module)
+
+        code shouldContain "mat2x2 m = mat2x2(vec2(0.0f), vec2(0.0f));"
+        code shouldContain "mat2x2 n = mat2x2(vec2(0.0f), vec2(0.0f));"
+    }
 })
+
+private fun lowerWgsl(source: String): Module {
+    val unit = parseWgsl(source)
+    val result = TypeResolver().resolve(unit)
+    check(result.isSuccess) { "WGSL test fixture did not resolve: ${result.unresolvedReferences}" }
+    return Lowerer().lower(result.resolvedUnit)
+}
