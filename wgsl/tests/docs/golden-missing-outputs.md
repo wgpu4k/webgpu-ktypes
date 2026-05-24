@@ -4,7 +4,7 @@ This file documents WGSL golden inputs that do not yet have expected outputs in 
 The list is intentionally consumed by `GoldenCompletenessTest` so missing outputs stay explicit until they
 are either generated and reviewed or moved to a narrower unsupported-feature manifest.
 
-Current status: 37 inputs are missing expected outputs for `wgsl`, `glsl`, `hlsl`, `msl`, and `ir`.
+Current status: 36 inputs are missing expected outputs for `wgsl`, `glsl`, `hlsl`, `msl`, and `ir`.
 
 - `aliased-ray-query.wgsl` - pending parser/resolver/lowering support.
 - `atomicCompareExchange.wgsl` - pending parser/resolver/lowering support.
@@ -39,7 +39,6 @@ Current status: 37 inputs are missing expected outputs for `wgsl`, `glsl`, `hlsl
 - `mesh-shader-empty.wgsl` - pending parser/resolver/lowering support.
 - `mesh-shader-lines.wgsl` - pending parser/resolver/lowering support.
 - `mesh-shader-points.wgsl` - pending parser/resolver/lowering support.
-- `operators.wgsl` - parser/resolver/lowering support now passes after inferred global const lowering fix; golden output needs review and generation.
 - `quad.wgsl` - pending parser/resolver/lowering support.
 - `ray-query.wgsl` - pending parser/resolver/lowering support.
 - `ray-query-no-init-tracking.wgsl` - pending parser/resolver/lowering support.

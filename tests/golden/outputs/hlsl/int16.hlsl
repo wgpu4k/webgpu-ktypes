@@ -56,12 +56,12 @@ int int16_function(int x) {
     local_0 = (local_0 << 2u);
     local_0 = (local_0 >> 1u);
     local_0 = -(local_0);
-    int local_1 = (local_0 < int(0));
-    int local_2 = (local_0 <= int(0));
-    int local_3 = (local_0 > int(0));
-    int local_4 = (local_0 >= int(0));
-    int local_5 = (local_0 == int(0));
-    int local_6 = (local_0 != int(0));
+    bool local_1 = (local_0 < int(0));
+    bool local_2 = (local_0 <= int(0));
+    bool local_3 = (local_0 > int(0));
+    bool local_4 = (local_0 >= int(0));
+    bool local_5 = (local_0 == int(0));
+    bool local_6 = (local_0 != int(0));
     local_0 = select(int(1), int(2), local_1);
     int local_7[4] = int[4](int(1), int(2), int(3), int(4));
     local_7[0] = local_0;
@@ -95,7 +95,7 @@ int clamp(int arg_0, int arg_1, int arg_2) {
 int sign(int arg_0) {
 }
 
-int select(int arg_0, int arg_1, int arg_2) {
+int select(int arg_0, int arg_1, bool arg_2) {
 }
 
 uint uint16_function(uint x) {

@@ -11,5 +11,5 @@ void main() {
 int select(int arg_0, float arg_1, bool arg_2) {
 }
 
-float2 select(float2 arg_0, float2 arg_1, float arg_2) {
+float2 select(float2 arg_0, float2 arg_1, bool arg_2) {
 }

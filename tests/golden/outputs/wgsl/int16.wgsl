@@ -59,12 +59,12 @@ fn int16_function(x: i32) -> i32 {
     val = (val << 2u);
     val = (val >> 1u);
     val = -(val);
-    var cmp_lt: i32 = (val < i32(0));
-    var cmp_le: i32 = (val <= i32(0));
-    var cmp_gt: i32 = (val > i32(0));
-    var cmp_ge: i32 = (val >= i32(0));
-    var cmp_eq: i32 = (val == i32(0));
-    var cmp_ne: i32 = (val != i32(0));
+    var cmp_lt: bool = (val < i32(0));
+    var cmp_le: bool = (val <= i32(0));
+    var cmp_gt: bool = (val > i32(0));
+    var cmp_ge: bool = (val >= i32(0));
+    var cmp_eq: bool = (val == i32(0));
+    var cmp_ne: bool = (val != i32(0));
     val = select(i32(1), i32(2), cmp_lt);
     var arr: array<i32, 4> = array<i32, 4>(i32(1), i32(2), i32(3), i32(4));
     arr[0] = val;
@@ -98,7 +98,7 @@ fn clamp(arg_0: i32, arg_1: i32, arg_2: i32) -> i32 {
 fn sign(arg_0: i32) -> i32 {
 }
 
-fn select(arg_0: i32, arg_1: i32, arg_2: i32) -> i32 {
+fn select(arg_0: i32, arg_1: i32, arg_2: bool) -> i32 {
 }
 
 fn uint16_function(x: u32) -> u32 {

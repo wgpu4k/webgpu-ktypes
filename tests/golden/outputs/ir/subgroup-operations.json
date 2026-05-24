@@ -22,6 +22,13 @@
                         }
                     ]
                 }
+            },
+            {
+                "inner": {
+                    "__type": "io.ygdrasil.wgsl.ir.TypeInner.Scalar",
+                    "kind": "Bool",
+                    "width": 1
+                }
             }
         ],
         "indexMap": [
@@ -48,7 +55,15 @@
                     ]
                 }
             },
-            1
+            1,
+            {
+                "inner": {
+                    "__type": "io.ygdrasil.wgsl.ir.TypeInner.Scalar",
+                    "kind": "Bool",
+                    "width": 1
+                }
+            },
+            2
         ]
     },
     "constants": {},
@@ -776,10 +791,10 @@
                 "parameters": [
                     {
                         "name": "arg_0",
-                        "type": 0
+                        "type": 2
                     }
                 ],
-                "returnType": 0,
+                "returnType": 2,
                 "localVariables": {},
                 "expressions": {},
                 "blocks": {
@@ -810,10 +825,10 @@
                 "parameters": [
                     {
                         "name": "arg_0",
-                        "type": 0
+                        "type": 2
                     }
                 ],
-                "returnType": 0,
+                "returnType": 2,
                 "localVariables": {},
                 "expressions": {},
                 "blocks": {
@@ -830,10 +845,10 @@
                 "parameters": [
                     {
                         "name": "arg_0",
-                        "type": 0
+                        "type": 2
                     }
                 ],
-                "returnType": 0,
+                "returnType": 2,
                 "localVariables": {},
                 "expressions": {},
                 "blocks": {

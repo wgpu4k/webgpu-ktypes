@@ -407,7 +407,7 @@ abstract class WriterBase<T : BackendOptions>(
                     else -> Type(TypeInner.Error)
                 }
             }
-            is ExpressionKind.Binary -> getExpressionType(kind.left) // Simplified
+            is ExpressionKind.Binary -> getBinaryExpressionType(kind)
             is ExpressionKind.Unary -> getExpressionType(kind.expr)
             is ExpressionKind.Load -> {
                 val ptrType = getExpressionType(kind.pointer)
@@ -527,6 +527,26 @@ abstract class WriterBase<T : BackendOptions>(
     protected open fun getGlobalVariableName(handle: Handle<GlobalVariable>): String = "global_${handle.index}"
     protected open fun getFunctionName(handle: Handle<Function>): String = module.functions[handle].name
     protected open fun getLocalVariableName(handle: Handle<LocalVariable>): String = "local_${handle.index}"
+
+    private fun getBinaryExpressionType(kind: ExpressionKind.Binary): Type {
+        val leftType = getExpressionType(kind.left)
+        val rightType = getExpressionType(kind.right)
+        return when {
+            kind.operator.isComparison -> {
+                val boolType = Type(TypeInner.Scalar(ScalarKind.Bool, 1))
+                val leftInner = leftType.inner
+                val rightInner = rightType.inner
+                if (leftInner is TypeInner.Vector) {
+                    Type(TypeInner.Vector(leftInner.size, module.types.append(boolType)))
+                } else if (rightInner is TypeInner.Vector) {
+                    Type(TypeInner.Vector(rightInner.size, module.types.append(boolType)))
+                } else {
+                    boolType
+                }
+            }
+            else -> leftType
+        }
+    }
 
     protected fun indent(block: () -> Unit) {
         indentLevel++

@@ -3,7 +3,7 @@
 fn select(arg_0: i32, arg_1: f32, arg_2: bool) -> i32 {
 }
 
-fn select(arg_0: vec2<f32>, arg_1: vec2<f32>, arg_2: f32) -> vec2<f32> {
+fn select(arg_0: vec2<f32>, arg_1: vec2<f32>, arg_2: bool) -> vec2<f32> {
 }
 
 @compute
