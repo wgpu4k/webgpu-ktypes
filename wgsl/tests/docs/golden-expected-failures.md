@@ -18,7 +18,7 @@ Each listed case is still executed. The test fails if the case starts passing un
 | `glsl` | `abstract-types-let.wgsl` | `comparison` | Baseline debt from issue 16 golden stabilization. | `#16` |
 | `glsl` | `abstract-types-operators.wgsl` | `comparison` | Baseline debt from issue 16 golden stabilization. | `#16` |
 | `glsl` | `abstract-types-texture.wgsl` | `type-resolution` | Baseline debt from issue 16 golden stabilization. | `#16` |
-| `glsl` | `abstract-types-var.wgsl` | `missing-golden` | Parser/resolver/lowering now pass after inferred global const lowering fix; golden output still needs review and generation. | `#16` |
+| `glsl` | `abstract-types-var.wgsl` | `native-validation` | Golden output is reviewed, but GLSL native validation rejects current abstract composite initializer conversions. | `#16` |
 | `glsl` | `access.wgsl` | `comparison` | Baseline debt from issue 16 golden stabilization. | `#16` |
 | `glsl` | `aliased-ray-query.wgsl` | `type-resolution` | Baseline debt from issue 16 golden stabilization. | `#16` |
 | `glsl` | `array-in-ctor.wgsl` | `comparison` | Baseline debt from issue 16 golden stabilization. | `#16` |
@@ -160,7 +160,6 @@ Each listed case is still executed. The test fails if the case starts passing un
 | `hlsl` | `abstract-types-let.wgsl` | `comparison` | Baseline debt from issue 16 golden stabilization. | `#16` |
 | `hlsl` | `abstract-types-operators.wgsl` | `comparison` | Baseline debt from issue 16 golden stabilization. | `#16` |
 | `hlsl` | `abstract-types-texture.wgsl` | `type-resolution` | Baseline debt from issue 16 golden stabilization. | `#16` |
-| `hlsl` | `abstract-types-var.wgsl` | `missing-golden` | Parser/resolver/lowering now pass after inferred global const lowering fix; golden output still needs review and generation. | `#16` |
 | `hlsl` | `access.wgsl` | `comparison` | Baseline debt from issue 16 golden stabilization. | `#16` |
 | `hlsl` | `aliased-ray-query.wgsl` | `type-resolution` | Baseline debt from issue 16 golden stabilization. | `#16` |
 | `hlsl` | `array-in-ctor.wgsl` | `comparison` | Baseline debt from issue 16 golden stabilization. | `#16` |
@@ -294,7 +293,6 @@ Each listed case is still executed. The test fails if the case starts passing un
 | `ir` | `abstract-types-let.wgsl` | `comparison` | Baseline debt from issue 16 golden stabilization. | `#16` |
 | `ir` | `abstract-types-operators.wgsl` | `comparison` | Baseline debt from issue 16 golden stabilization. | `#16` |
 | `ir` | `abstract-types-texture.wgsl` | `type-resolution` | Baseline debt from issue 16 golden stabilization. | `#16` |
-| `ir` | `abstract-types-var.wgsl` | `missing-golden` | Parser/resolver/lowering now pass after inferred global const lowering fix; golden output still needs review and generation. | `#16` |
 | `ir` | `access.wgsl` | `comparison` | Baseline debt from issue 16 golden stabilization. | `#16` |
 | `ir` | `aliased-ray-query.wgsl` | `type-resolution` | Baseline debt from issue 16 golden stabilization. | `#16` |
 | `ir` | `atomicCompareExchange-int64.wgsl` | `type-resolution` | Baseline debt from issue 16 golden stabilization. | `#16` |
@@ -399,7 +397,6 @@ Each listed case is still executed. The test fails if the case starts passing un
 | `msl` | `abstract-types-let.wgsl` | `comparison` | Baseline debt from issue 16 golden stabilization. | `#16` |
 | `msl` | `abstract-types-operators.wgsl` | `comparison` | Baseline debt from issue 16 golden stabilization. | `#16` |
 | `msl` | `abstract-types-texture.wgsl` | `type-resolution` | Baseline debt from issue 16 golden stabilization. | `#16` |
-| `msl` | `abstract-types-var.wgsl` | `missing-golden` | Parser/resolver/lowering now pass after inferred global const lowering fix; golden output still needs review and generation. | `#16` |
 | `msl` | `access.wgsl` | `comparison` | Baseline debt from issue 16 golden stabilization. | `#16` |
 | `msl` | `aliased-ray-query.wgsl` | `type-resolution` | Baseline debt from issue 16 golden stabilization. | `#16` |
 | `msl` | `array-in-ctor.wgsl` | `comparison` | Baseline debt from issue 16 golden stabilization. | `#16` |
@@ -528,7 +525,6 @@ Each listed case is still executed. The test fails if the case starts passing un
 | `roundtrip` | `abstract-types-atomic.wgsl` | `roundtrip-semantic-isomorphism` | Baseline debt from issue 16 golden stabilization. | `#16` |
 | `roundtrip` | `abstract-types-function-calls.wgsl` | `missing-golden` | Parser/resolver/lowering now pass after inferred global const lowering fix; golden output still needs review and generation. | `#16` |
 | `roundtrip` | `abstract-types-texture.wgsl` | `type-resolution` | Baseline debt from issue 16 golden stabilization. | `#16` |
-| `roundtrip` | `abstract-types-var.wgsl` | `missing-golden` | Parser/resolver/lowering now pass after inferred global const lowering fix; golden output still needs review and generation. | `#16` |
 | `roundtrip` | `access.wgsl` | `roundtrip-semantic-isomorphism` | Baseline debt from issue 16 golden stabilization. | `#16` |
 | `roundtrip` | `aliased-ray-query.wgsl` | `type-resolution` | Baseline debt from issue 16 golden stabilization. | `#16` |
 | `roundtrip` | `atomicCompareExchange-int64.wgsl` | `type-resolution` | Baseline debt from issue 16 golden stabilization. | `#16` |
@@ -608,7 +604,6 @@ Each listed case is still executed. The test fails if the case starts passing un
 | `wgsl` | `abstract-types-atomic.wgsl` | `roundtrip-semantic-isomorphism` | Baseline debt from issue 16 golden stabilization. | `#16` |
 | `wgsl` | `abstract-types-function-calls.wgsl` | `missing-golden` | Parser/resolver/lowering now pass after inferred global const lowering fix; golden output still needs review and generation. | `#16` |
 | `wgsl` | `abstract-types-texture.wgsl` | `type-resolution` | Baseline debt from issue 16 golden stabilization. | `#16` |
-| `wgsl` | `abstract-types-var.wgsl` | `missing-golden` | Parser/resolver/lowering now pass after inferred global const lowering fix; golden output still needs review and generation. | `#16` |
 | `wgsl` | `access.wgsl` | `roundtrip-semantic-isomorphism` | Baseline debt from issue 16 golden stabilization. | `#16` |
 | `wgsl` | `aliased-ray-query.wgsl` | `type-resolution` | Baseline debt from issue 16 golden stabilization. | `#16` |
 | `wgsl` | `atomicCompareExchange-int64.wgsl` | `type-resolution` | Baseline debt from issue 16 golden stabilization. | `#16` |
