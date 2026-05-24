@@ -109,7 +109,7 @@ Each listed case is still executed. The test fails if the case starts passing un
 | `glsl` | `msl-vpt.wgsl` | `native-validation` | Baseline debt from issue 16 golden stabilization. | `#16` |
 | `glsl` | `multiview.wgsl` | `native-validation` | Baseline debt from issue 16 golden stabilization. | `#16` |
 | `glsl` | `multiview_webgl.wgsl` | `native-validation` | Baseline debt from issue 16 golden stabilization. | `#16` |
-| `glsl` | `operators.wgsl` | `type-resolution` | Baseline debt from issue 16 golden stabilization. | `#16` |
+| `glsl` | `operators.wgsl` | `lowering` | Parser/type-resolution now reach lowering after template-state fix; lowering still fails on undefined variable `v_f32_zero`. | `#16` |
 | `glsl` | `overrides-atomicCompareExchangeWeak.wgsl` | `native-validation` | Baseline debt from issue 16 golden stabilization. | `#16` |
 | `glsl` | `overrides-ray-query.wgsl` | `native-validation` | Baseline debt from issue 16 golden stabilization. | `#16` |
 | `glsl` | `packed-vec3-bitcast.wgsl` | `native-validation` | Baseline debt from issue 16 golden stabilization. | `#16` |
@@ -145,7 +145,7 @@ Each listed case is still executed. The test fails if the case starts passing un
 | `glsl` | `types_with_comments.wgsl` | `native-validation` | Baseline debt from issue 16 golden stabilization. | `#16` |
 | `glsl` | `unconsumed_vertex_outputs_frag.wgsl` | `native-validation` | Baseline debt from issue 16 golden stabilization. | `#16` |
 | `glsl` | `use-gl-ext-over-grad-workaround-if-instructed.wgsl` | `comparison` | Baseline debt from issue 16 golden stabilization. | `#16` |
-| `glsl` | `workgroup-uniform-load-atomic.wgsl` | `type-resolution` | Baseline debt from issue 16 golden stabilization. | `#16` |
+| `glsl` | `workgroup-uniform-load-atomic.wgsl` | `missing-golden` | Parser/resolver/lowering now pass; golden output still needs review and generation. | `#16` |
 | `glsl` | `workgroup-uniform-load.wgsl` | `comparison` | Baseline debt from issue 16 golden stabilization. | `#16` |
 | `glsl` | `workgroup-var-init.wgsl` | `native-validation` | Baseline debt from issue 16 golden stabilization. | `#16` |
 | `hlsl` | `6438-conflicting-idents.wgsl` | `comparison` | Baseline debt from issue 16 golden stabilization. | `#16` |
@@ -254,7 +254,7 @@ Each listed case is still executed. The test fails if the case starts passing un
 | `hlsl` | `msl-vpt-formats-x3.wgsl` | `comparison` | Baseline debt from issue 16 golden stabilization. | `#16` |
 | `hlsl` | `msl-vpt-formats-x4.wgsl` | `comparison` | Baseline debt from issue 16 golden stabilization. | `#16` |
 | `hlsl` | `msl-vpt.wgsl` | `comparison` | Baseline debt from issue 16 golden stabilization. | `#16` |
-| `hlsl` | `operators.wgsl` | `type-resolution` | Baseline debt from issue 16 golden stabilization. | `#16` |
+| `hlsl` | `operators.wgsl` | `lowering` | Parser/type-resolution now reach lowering after template-state fix; lowering still fails on undefined variable `v_f32_zero`. | `#16` |
 | `hlsl` | `packed-vec3-bitcast.wgsl` | `comparison` | Baseline debt from issue 16 golden stabilization. | `#16` |
 | `hlsl` | `padding.wgsl` | `comparison` | Baseline debt from issue 16 golden stabilization. | `#16` |
 | `hlsl` | `per-vertex.wgsl` | `comparison` | Baseline debt from issue 16 golden stabilization. | `#16` |
@@ -290,7 +290,7 @@ Each listed case is still executed. The test fails if the case starts passing un
 | `hlsl` | `unconsumed_vertex_outputs_frag.wgsl` | `comparison` | Baseline debt from issue 16 golden stabilization. | `#16` |
 | `hlsl` | `unconsumed_vertex_outputs_vert.wgsl` | `comparison` | Baseline debt from issue 16 golden stabilization. | `#16` |
 | `hlsl` | `use-gl-ext-over-grad-workaround-if-instructed.wgsl` | `comparison` | Baseline debt from issue 16 golden stabilization. | `#16` |
-| `hlsl` | `workgroup-uniform-load-atomic.wgsl` | `type-resolution` | Baseline debt from issue 16 golden stabilization. | `#16` |
+| `hlsl` | `workgroup-uniform-load-atomic.wgsl` | `missing-golden` | Parser/resolver/lowering now pass; golden output still needs review and generation. | `#16` |
 | `hlsl` | `workgroup-uniform-load.wgsl` | `comparison` | Baseline debt from issue 16 golden stabilization. | `#16` |
 | `hlsl` | `workgroup-var-init.wgsl` | `comparison` | Baseline debt from issue 16 golden stabilization. | `#16` |
 | `ir` | `6772-unpack-expr-accesses.wgsl` | `comparison` | Baseline debt from issue 16 golden stabilization. | `#16` |
@@ -373,7 +373,7 @@ Each listed case is still executed. The test fails if the case starts passing un
 | `ir` | `msl-vpt-formats-x2.wgsl` | `comparison` | Baseline debt from issue 16 golden stabilization. | `#16` |
 | `ir` | `msl-vpt-formats-x3.wgsl` | `comparison` | Baseline debt from issue 16 golden stabilization. | `#16` |
 | `ir` | `msl-vpt-formats-x4.wgsl` | `comparison` | Baseline debt from issue 16 golden stabilization. | `#16` |
-| `ir` | `operators.wgsl` | `type-resolution` | Baseline debt from issue 16 golden stabilization. | `#16` |
+| `ir` | `operators.wgsl` | `lowering` | Parser/type-resolution now reach lowering after template-state fix; lowering still fails on undefined variable `v_f32_zero`. | `#16` |
 | `ir` | `policy-mix.wgsl` | `comparison` | Baseline debt from issue 16 golden stabilization. | `#16` |
 | `ir` | `quad.wgsl` | `lowering` | Baseline debt from issue 16 golden stabilization. | `#16` |
 | `ir` | `ray-query-no-init-tracking.wgsl` | `type-resolution` | Baseline debt from issue 16 golden stabilization. | `#16` |
@@ -393,7 +393,7 @@ Each listed case is still executed. The test fails if the case starts passing un
 | `ir` | `texture-external.wgsl` | `comparison` | Baseline debt from issue 16 golden stabilization. | `#16` |
 | `ir` | `type-inference.wgsl` | `lowering` | Baseline debt from issue 16 golden stabilization. | `#16` |
 | `ir` | `use-gl-ext-over-grad-workaround-if-instructed.wgsl` | `comparison` | Baseline debt from issue 16 golden stabilization. | `#16` |
-| `ir` | `workgroup-uniform-load-atomic.wgsl` | `type-resolution` | Baseline debt from issue 16 golden stabilization. | `#16` |
+| `ir` | `workgroup-uniform-load-atomic.wgsl` | `missing-golden` | Parser/resolver/lowering now pass; golden output still needs review and generation. | `#16` |
 | `ir` | `workgroup-uniform-load.wgsl` | `comparison` | Baseline debt from issue 16 golden stabilization. | `#16` |
 | `msl` | `6438-conflicting-idents.wgsl` | `comparison` | Baseline debt from issue 16 golden stabilization. | `#16` |
 | `msl` | `6772-unpack-expr-accesses.wgsl` | `comparison` | Baseline debt from issue 16 golden stabilization. | `#16` |
@@ -501,7 +501,7 @@ Each listed case is still executed. The test fails if the case starts passing un
 | `msl` | `msl-vpt-formats-x3.wgsl` | `comparison` | Baseline debt from issue 16 golden stabilization. | `#16` |
 | `msl` | `msl-vpt-formats-x4.wgsl` | `comparison` | Baseline debt from issue 16 golden stabilization. | `#16` |
 | `msl` | `msl-vpt.wgsl` | `comparison` | Baseline debt from issue 16 golden stabilization. | `#16` |
-| `msl` | `operators.wgsl` | `type-resolution` | Baseline debt from issue 16 golden stabilization. | `#16` |
+| `msl` | `operators.wgsl` | `lowering` | Parser/type-resolution now reach lowering after template-state fix; lowering still fails on undefined variable `v_f32_zero`. | `#16` |
 | `msl` | `packed-vec3-bitcast.wgsl` | `comparison` | Baseline debt from issue 16 golden stabilization. | `#16` |
 | `msl` | `padding.wgsl` | `comparison` | Baseline debt from issue 16 golden stabilization. | `#16` |
 | `msl` | `per-vertex.wgsl` | `comparison` | Baseline debt from issue 16 golden stabilization. | `#16` |
@@ -537,7 +537,7 @@ Each listed case is still executed. The test fails if the case starts passing un
 | `msl` | `unconsumed_vertex_outputs_frag.wgsl` | `comparison` | Baseline debt from issue 16 golden stabilization. | `#16` |
 | `msl` | `unconsumed_vertex_outputs_vert.wgsl` | `comparison` | Baseline debt from issue 16 golden stabilization. | `#16` |
 | `msl` | `use-gl-ext-over-grad-workaround-if-instructed.wgsl` | `comparison` | Baseline debt from issue 16 golden stabilization. | `#16` |
-| `msl` | `workgroup-uniform-load-atomic.wgsl` | `type-resolution` | Baseline debt from issue 16 golden stabilization. | `#16` |
+| `msl` | `workgroup-uniform-load-atomic.wgsl` | `missing-golden` | Parser/resolver/lowering now pass; golden output still needs review and generation. | `#16` |
 | `msl` | `workgroup-uniform-load.wgsl` | `comparison` | Baseline debt from issue 16 golden stabilization. | `#16` |
 | `msl` | `workgroup-var-init.wgsl` | `comparison` | Baseline debt from issue 16 golden stabilization. | `#16` |
 | `roundtrip` | `6438-conflicting-idents.wgsl` | `roundtrip-semantic-isomorphism` | Baseline debt from issue 16 golden stabilization. | `#16` |
@@ -603,7 +603,7 @@ Each listed case is still executed. The test fails if the case starts passing un
 | `roundtrip` | `msl-vpt-formats-x3.wgsl` | `roundtrip-semantic-isomorphism` | Baseline debt from issue 16 golden stabilization. | `#16` |
 | `roundtrip` | `msl-vpt-formats-x4.wgsl` | `roundtrip-semantic-isomorphism` | Baseline debt from issue 16 golden stabilization. | `#16` |
 | `roundtrip` | `msl-vpt.wgsl` | `roundtrip-semantic-isomorphism` | Baseline debt from issue 16 golden stabilization. | `#16` |
-| `roundtrip` | `operators.wgsl` | `type-resolution` | Baseline debt from issue 16 golden stabilization. | `#16` |
+| `roundtrip` | `operators.wgsl` | `lowering` | Parser/type-resolution now reach lowering after template-state fix; lowering still fails on undefined variable `v_f32_zero`. | `#16` |
 | `roundtrip` | `overrides-atomicCompareExchangeWeak.wgsl` | `roundtrip-semantic-isomorphism` | Baseline debt from issue 16 golden stabilization. | `#16` |
 | `roundtrip` | `overrides-ray-query.wgsl` | `roundtrip-semantic-isomorphism` | Baseline debt from issue 16 golden stabilization. | `#16` |
 | `roundtrip` | `packed-vec3-bitcast.wgsl` | `roundtrip-semantic-isomorphism` | Baseline debt from issue 16 golden stabilization. | `#16` |
@@ -622,7 +622,7 @@ Each listed case is still executed. The test fails if the case starts passing un
 | `roundtrip` | `type-inference.wgsl` | `lowering` | Baseline debt from issue 16 golden stabilization. | `#16` |
 | `roundtrip` | `unconsumed_vertex_outputs_frag.wgsl` | `roundtrip-semantic-isomorphism` | Baseline debt from issue 16 golden stabilization. | `#16` |
 | `roundtrip` | `unconsumed_vertex_outputs_vert.wgsl` | `roundtrip-semantic-isomorphism` | Baseline debt from issue 16 golden stabilization. | `#16` |
-| `roundtrip` | `workgroup-uniform-load-atomic.wgsl` | `type-resolution` | Baseline debt from issue 16 golden stabilization. | `#16` |
+| `roundtrip` | `workgroup-uniform-load-atomic.wgsl` | `missing-golden` | Parser/resolver/lowering now pass; golden output still needs review and generation. | `#16` |
 | `roundtrip` | `workgroup-uniform-load.wgsl` | `roundtrip-semantic-isomorphism` | Baseline debt from issue 16 golden stabilization. | `#16` |
 | `wgsl` | `6438-conflicting-idents.wgsl` | `roundtrip-semantic-isomorphism` | Baseline debt from issue 16 golden stabilization. | `#16` |
 | `wgsl` | `abstract-types-atomic.wgsl` | `roundtrip-semantic-isomorphism` | Baseline debt from issue 16 golden stabilization. | `#16` |
@@ -687,7 +687,7 @@ Each listed case is still executed. The test fails if the case starts passing un
 | `wgsl` | `msl-vpt-formats-x3.wgsl` | `roundtrip-semantic-isomorphism` | Baseline debt from issue 16 golden stabilization. | `#16` |
 | `wgsl` | `msl-vpt-formats-x4.wgsl` | `roundtrip-semantic-isomorphism` | Baseline debt from issue 16 golden stabilization. | `#16` |
 | `wgsl` | `msl-vpt.wgsl` | `roundtrip-semantic-isomorphism` | Baseline debt from issue 16 golden stabilization. | `#16` |
-| `wgsl` | `operators.wgsl` | `type-resolution` | Baseline debt from issue 16 golden stabilization. | `#16` |
+| `wgsl` | `operators.wgsl` | `lowering` | Parser/type-resolution now reach lowering after template-state fix; lowering still fails on undefined variable `v_f32_zero`. | `#16` |
 | `wgsl` | `overrides-atomicCompareExchangeWeak.wgsl` | `roundtrip-semantic-isomorphism` | Baseline debt from issue 16 golden stabilization. | `#16` |
 | `wgsl` | `overrides-ray-query.wgsl` | `roundtrip-semantic-isomorphism` | Baseline debt from issue 16 golden stabilization. | `#16` |
 | `wgsl` | `packed-vec3-bitcast.wgsl` | `roundtrip-semantic-isomorphism` | Baseline debt from issue 16 golden stabilization. | `#16` |
@@ -706,5 +706,5 @@ Each listed case is still executed. The test fails if the case starts passing un
 | `wgsl` | `type-inference.wgsl` | `lowering` | Baseline debt from issue 16 golden stabilization. | `#16` |
 | `wgsl` | `unconsumed_vertex_outputs_frag.wgsl` | `roundtrip-semantic-isomorphism` | Baseline debt from issue 16 golden stabilization. | `#16` |
 | `wgsl` | `unconsumed_vertex_outputs_vert.wgsl` | `roundtrip-semantic-isomorphism` | Baseline debt from issue 16 golden stabilization. | `#16` |
-| `wgsl` | `workgroup-uniform-load-atomic.wgsl` | `type-resolution` | Baseline debt from issue 16 golden stabilization. | `#16` |
+| `wgsl` | `workgroup-uniform-load-atomic.wgsl` | `missing-golden` | Parser/resolver/lowering now pass; golden output still needs review and generation. | `#16` |
 | `wgsl` | `workgroup-uniform-load.wgsl` | `roundtrip-semantic-isomorphism` | Baseline debt from issue 16 golden stabilization. | `#16` |

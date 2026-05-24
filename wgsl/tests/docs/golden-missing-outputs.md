@@ -43,9 +43,9 @@ Current status: 43 inputs are missing expected outputs for `wgsl`, `glsl`, `hlsl
 - `mesh-shader-empty.wgsl` - pending parser/resolver/lowering support.
 - `mesh-shader-lines.wgsl` - pending parser/resolver/lowering support.
 - `mesh-shader-points.wgsl` - pending parser/resolver/lowering support.
-- `operators.wgsl` - pending parser/resolver/lowering support.
+- `operators.wgsl` - parser/type-resolution now reach lowering after template-state fix; lowering still fails on undefined variable `v_f32_zero`.
 - `quad.wgsl` - pending parser/resolver/lowering support.
 - `ray-query.wgsl` - pending parser/resolver/lowering support.
 - `ray-query-no-init-tracking.wgsl` - pending parser/resolver/lowering support.
 - `type-inference.wgsl` - pending parser/resolver/lowering support.
-- `workgroup-uniform-load-atomic.wgsl` - pending parser/resolver/lowering support.
+- `workgroup-uniform-load-atomic.wgsl` - parser/resolver/lowering support now passes; golden output needs review and generation.

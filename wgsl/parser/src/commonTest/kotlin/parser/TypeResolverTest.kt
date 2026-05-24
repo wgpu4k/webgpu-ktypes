@@ -122,4 +122,28 @@ class TypeResolverTest : FunSpec({
         result.isSuccess shouldBe true
         result.unresolvedReferences shouldHaveSize 0
     }
+
+    test("resolve relational expressions after nested template types") {
+        val source = """
+            struct AtomicStruct {
+                atomic_arr: array<atomic<i32>, 2>,
+            }
+
+            fn main() {
+                let value: i32 = 1i;
+                if value > 0i {
+                    return;
+                }
+            }
+        """.trimIndent()
+
+        val parseResult = parseWgslResult(source)
+        parseResult.isSuccess shouldBe true
+
+        val resolver = TypeResolver()
+        val result = resolver.resolve(parseResult.translationUnit)
+
+        result.isSuccess shouldBe true
+        result.unresolvedReferences shouldHaveSize 0
+    }
 })
