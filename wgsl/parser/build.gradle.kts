@@ -9,6 +9,7 @@ plugins {
     kotlin("multiplatform")
     alias(libs.plugins.android.library)
     alias(libs.plugins.kotest)
+    alias(libs.plugins.kover)
     alias(libs.plugins.ksp)
 }
 
@@ -100,6 +101,18 @@ java {
     }
 }
 
+kover {
+    reports {
+        variant("jvm") {
+            verify {
+                rule("WGSL parser JVM line coverage") {
+                    minBound(65)
+                }
+            }
+        }
+    }
+}
+
 
 tasks.withType<Test>().configureEach {
     filter {
@@ -123,4 +136,8 @@ tasks.named<Test>("jvmTest") {
         )
         exceptionFormat = org.gradle.api.tasks.testing.logging.TestExceptionFormat.FULL
     }
+}
+
+tasks.named("check") {
+    dependsOn("koverVerifyJvm")
 }

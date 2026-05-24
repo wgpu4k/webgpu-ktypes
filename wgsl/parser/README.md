@@ -15,6 +15,7 @@
 7. [Integration](#-integration)
 8. [Examples](#-examples)
 9. [Module Dependencies](#-module-dependencies)
+10. [Coverage](docs/WGSL_PARSER_COVERAGE.md)
 
 ---
 
