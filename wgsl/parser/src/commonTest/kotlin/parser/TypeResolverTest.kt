@@ -97,4 +97,29 @@ class TypeResolverTest : FunSpec({
         result.isSuccess shouldBe true
         result.resolvedUnit.declarations shouldHaveSize 1
     }
+
+    test("resolve unicode local identifiers and contextual keyword function calls") {
+        val source = """
+            var<storage> asdf: f32;
+
+            fn compute() -> f32 {
+              let θ2 = asdf + 9001.0;
+              return θ2;
+            }
+
+            @compute @workgroup_size(1, 1)
+            fn main() {
+              compute();
+            }
+        """.trimIndent()
+
+        val parseResult = parseWgslResult(source)
+        parseResult.isSuccess shouldBe true
+
+        val resolver = TypeResolver()
+        val result = resolver.resolve(parseResult.translationUnit)
+
+        result.isSuccess shouldBe true
+        result.unresolvedReferences shouldHaveSize 0
+    }
 })
