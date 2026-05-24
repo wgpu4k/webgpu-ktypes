@@ -22,7 +22,7 @@ var<private> t_shadow: texture_depth_2d_array;
 @group(0) @binding(3)
 var<private> sampler_shadow: sampler_comparison;
 var<private> c_ambient: vec3<f32> = vec3<f32>(0.05f, 0.05f, 0.05f);
-var<private> c_max_lights: u32 = 0u;
+var<private> c_max_lights: u32 = 10u;
 @group(0) @binding(0)
 var<uniform> u_globals: Struct_4;
 @group(1) @binding(0)
@@ -42,43 +42,43 @@ fn fetch_shadow(light_id: u32, homogeneous_coords: vec4<f32>) -> f32 {
     return textureSampleCompareLevel(t_shadow, sampler_shadow, light_local, i32(light_id), (homogeneous_coords[2] * proj_correction));
 }
 
-fn textureSampleCompareLevel() {
+fn textureSampleCompareLevel(arg_0: texture_depth_2d_array, arg_1: sampler_comparison, arg_2: vec2<f32>, arg_3: i32, arg_4: f32) -> texture_depth_2d_array {
 }
 
-fn normalize() {
+fn normalize(arg_0: vec3<f32>) -> vec3<f32> {
 }
 
-fn normalize() {
+fn normalize(arg_0: vec3<f32>) -> vec3<f32> {
 }
 
-fn max() {
+fn dot(arg_0: vec3<f32>, arg_1: vec3<f32>) -> vec3<f32> {
 }
 
-fn dot() {
+fn max(arg_0: f32, arg_1: vec3<f32>) -> f32 {
 }
 
-fn min() {
+fn min(arg_0: u32, arg_1: u32) -> u32 {
 }
 
-fn normalize() {
+fn normalize(arg_0: vec3<f32>) -> vec3<f32> {
 }
 
-fn normalize() {
+fn normalize(arg_0: vec3<f32>) -> vec3<f32> {
 }
 
-fn max() {
+fn dot(arg_0: vec3<f32>, arg_1: vec3<f32>) -> vec3<f32> {
 }
 
-fn dot() {
+fn max(arg_0: f32, arg_1: vec3<f32>) -> f32 {
 }
 
-fn min() {
+fn min(arg_0: u32, arg_1: u32) -> u32 {
 }
 
 @vertex
 fn vs_main(@location(0) position: vec4<i32>, @location(1) normal: vec4<i32>) -> Struct_8 {
     var w: mat4x4<f32> = u_entity.world;
-    var world_pos: mat4x4<f32> = (u_entity.world * vec4<f32>(position));
+    var world_pos: vec4<f32> = (u_entity.world * vec4<f32>(position));
     var out: Struct_8;
     out.world_normal = (mat3x3<f32>(w[0].xyz, w[1].xyz, w[2].xyz) * vec3<f32>(normal.xyz));
     out.world_position = world_pos;
@@ -92,7 +92,7 @@ fn fs_main(in: Struct_8) -> vec4<f32> {
     var color: vec3<f32> = c_ambient;
     {
         var i: u32 = 0u;
-        while (true) {
+        loop {
             if ((i < min(u_globals.num_lights[0], c_max_lights))) {
                 {
                     var light: Struct_9 = s_lights[i];
@@ -116,7 +116,7 @@ fn fs_main_without_storage(in: Struct_8) -> vec4<f32> {
     var color: vec3<f32> = c_ambient;
     {
         var i: u32 = 0u;
-        while (true) {
+        loop {
             if ((i < min(u_globals.num_lights[0], c_max_lights))) {
                 {
                     var light: Struct_9 = u_lights[i];

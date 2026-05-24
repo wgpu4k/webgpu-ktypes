@@ -15,72 +15,77 @@ float4 test_textureLoad_1d(int coords, int level) {
     return textureLoad(global_0, coords, level);
 }
 
-void textureLoad() {
+Texture1D<float4> textureLoad(Texture1D<float4> arg_0, int arg_1, int arg_2) {
 }
 
 float4 test_textureLoad_2d(int2 coords, int level) {
     return textureLoad(global_1, coords, level);
 }
 
-void textureLoad() {
+Texture2D<float4> textureLoad(Texture2D<float4> arg_0, int2 arg_1, int arg_2) {
 }
 
 float4 test_textureLoad_2d_array_u(int2 coords, uint index, int level) {
     return textureLoad(global_2, coords, index, level);
 }
 
-void textureLoad() {
+Texture2DArray<float4> textureLoad(Texture2DArray<float4> arg_0, int2 arg_1, uint arg_2, int arg_3) {
 }
 
 float4 test_textureLoad_2d_array_s(int2 coords, int index, int level) {
     return textureLoad(global_2, coords, index, level);
 }
 
-void textureLoad() {
+Texture2DArray<float4> textureLoad(Texture2DArray<float4> arg_0, int2 arg_1, int arg_2, int arg_3) {
 }
 
 float4 test_textureLoad_3d(int3 coords, int level) {
     return textureLoad(global_3, coords, level);
 }
 
-void textureLoad() {
+Texture3D<float4> textureLoad(Texture3D<float4> arg_0, int3 arg_1, int arg_2) {
 }
 
 float4 test_textureLoad_multisampled_2d(int2 coords, int _sample) {
     return textureLoad(global_4, coords, _sample);
 }
 
-void textureLoad() {
+Texture2DMS<float4> textureLoad(Texture2DMS<float4> arg_0, int2 arg_1, int arg_2) {
 }
 
 void test_textureStore_1d(int coords, float4 value) {
+    textureStore(global_5, coords, value);
 }
 
-void textureStore() {
+texture_storage_1d<rgba8unorm, write> textureStore(texture_storage_1d<rgba8unorm, write> arg_0, int arg_1, float4 arg_2) {
 }
 
 void test_textureStore_2d(int2 coords, float4 value) {
+    textureStore(global_6, coords, value);
 }
 
-void textureStore() {
+texture_storage_2d<rgba8unorm, write> textureStore(texture_storage_2d<rgba8unorm, write> arg_0, int2 arg_1, float4 arg_2) {
 }
 
 void test_textureStore_2d_array_u(int2 coords, uint array_index, float4 value) {
+    textureStore(global_7, coords, array_index, value);
 }
 
-void textureStore() {
+texture_storage_2d_array<rgba8unorm, write> textureStore(texture_storage_2d_array<rgba8unorm, write> arg_0, int2 arg_1, uint arg_2, float4 arg_3) {
 }
 
 void test_textureStore_2d_array_s(int2 coords, int array_index, float4 value) {
+    textureStore(global_7, coords, array_index, value);
 }
 
-void textureStore() {
+texture_storage_2d_array<rgba8unorm, write> textureStore(texture_storage_2d_array<rgba8unorm, write> arg_0, int2 arg_1, int arg_2, float4 arg_3) {
 }
 
 void test_textureStore_3d(int3 coords, float4 value) {
+    textureStore(global_8, coords, value);
 }
 
-void textureStore() {
+texture_storage_3d<rgba8unorm, write> textureStore(texture_storage_3d<rgba8unorm, write> arg_0, int3 arg_1, float4 arg_2) {
 }
 
 struct fragment_shader_Output {
@@ -88,5 +93,17 @@ struct fragment_shader_Output {
 };
 fragment_shader_Output fragment_shader() {
     fragment_shader_Output stage_out;
+    test_textureLoad_1d(0, 0);
+    test_textureLoad_2d(int2(), 0);
+    test_textureLoad_2d_array_u(int2(), 0u, 0);
+    test_textureLoad_2d_array_s(int2(), 0, 0);
+    test_textureLoad_3d(int3(), 0);
+    test_textureLoad_multisampled_2d(int2(), 0);
+    test_textureStore_1d(0, float4());
+    test_textureStore_2d(int2(), float4());
+    test_textureStore_2d_array_u(int2(), 0u, float4());
+    test_textureStore_2d_array_s(int2(), 0, float4());
+    test_textureStore_3d(int3(), float4());
+    return float4(0.0f, 0.0f, 0.0f, 0.0f);
     return stage_out;
 }

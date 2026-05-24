@@ -19,8 +19,13 @@ fn use_assign_let() -> i32 {
 }
 
 fn use_phony_assign() {
+    use_me();
 }
 
 @compute
 fn main() {
+    use_return();
+    use_assign_var();
+    use_assign_let();
+    use_phony_assign();
 }

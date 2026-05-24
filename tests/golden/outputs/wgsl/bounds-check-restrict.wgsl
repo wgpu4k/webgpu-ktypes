@@ -36,7 +36,7 @@ fn index_expensive(i: i32) -> f32 {
     return globals.a[i32((sin((f32(i) / 100.0f)) * 100.0f))];
 }
 
-fn sin() {
+fn sin(arg_0: f32) -> f32 {
 }
 
 fn index_in_bounds() -> f32 {
@@ -67,7 +67,7 @@ fn set_expensive(i: i32, v: f32) {
     globals.a[i32((sin((f32(i) / 100.0f)) * 100.0f))] = v;
 }
 
-fn sin() {
+fn sin(arg_0: f32) -> f32 {
 }
 
 fn set_in_bounds(v: f32) {
@@ -86,4 +86,21 @@ fn set_dynamic_array_constant_index(v: f32) {
 
 @compute
 fn main() {
+    index_array(1);
+    index_dynamic_array(1);
+    index_vector(1);
+    index_vector_by_value(vec4<f32>(2, 3, 4, 5), 6);
+    index_matrix(1);
+    index_twice(1, 2);
+    index_expensive(1);
+    index_in_bounds();
+    set_array(1, 2.0f);
+    set_dynamic_array(1, 2.0f);
+    set_vector(1, 2.0f);
+    set_matrix(1, vec4<f32>(2, 3, 4, 5));
+    set_index_twice(1, 2, 1.0f);
+    set_expensive(1, 1.0f);
+    set_in_bounds(1.0f);
+    index_dynamic_array_constant_index();
+    set_dynamic_array_constant_index(1.0f);
 }

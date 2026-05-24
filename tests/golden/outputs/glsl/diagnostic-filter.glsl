@@ -10,6 +10,8 @@ void with_diagnostic() {
 }
 
 void wgsl_main() {
+    thing();
+    with_diagnostic();
 }
 
 void main() {

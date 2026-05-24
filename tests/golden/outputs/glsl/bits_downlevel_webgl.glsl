@@ -22,22 +22,22 @@ void wgsl_main() {
     f2 = unpack2x16unorm(u);
 }
 
-void pack4xI8() {
+ivec4 pack4xI8(ivec4 arg_0) {
 }
 
-void pack4xU8() {
+uvec4 pack4xU8(uvec4 arg_0) {
 }
 
-void unpack4x8snorm() {
+uint unpack4x8snorm(uint arg_0) {
 }
 
-void unpack4x8unorm() {
+uint unpack4x8unorm(uint arg_0) {
 }
 
-void unpack2x16snorm() {
+uint unpack2x16snorm(uint arg_0) {
 }
 
-void unpack2x16unorm() {
+uint unpack2x16unorm(uint arg_0) {
 }
 
 void main() {

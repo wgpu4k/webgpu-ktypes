@@ -3,7 +3,7 @@
 @vertex
 fn vs_main(in_vertex_index: u32) -> vec4<f32> {
     var x: f32 = f32((i32(in_vertex_index) - 1));
-    var y: f32 = f32(((i32((in_vertex_index & 0u)) * 2) - 1));
+    var y: f32 = f32(((i32((in_vertex_index & 1u)) * 2) - 1));
     return vec4<f32>(x, y, 0.0f, 1.0f);
 }
 

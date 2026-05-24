@@ -2,11 +2,12 @@
 #pragma pack_matrix(column_major)
 
 struct Struct_2 {
-    void values;
+    uint values[];
 };
 Struct_2 global_0 : register(u0);
 Struct_2 global_1 : register(u1);
 
 [numthreads(1, 1, 1)]
 void main() {
+    global_0.values[0] = global_1.values[0];
 }

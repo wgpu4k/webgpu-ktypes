@@ -14,5 +14,8 @@ struct vs_main_Output {
 };
 vs_main_Output vs_main() {
     vs_main_Output stage_out;
+    Struct_6 local_0;
+    float3 local_1 = float3((in.chunk - int3(5)));
+    return local_0;
     return stage_out;
 }

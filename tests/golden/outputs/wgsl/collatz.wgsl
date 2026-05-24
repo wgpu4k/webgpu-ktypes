@@ -8,14 +8,14 @@ var<storage, read_write> v_indices: Struct_2;
 fn collatz_iterations(n_base: u32) -> u32 {
     var n: u32 = n_base;
     var i: u32 = 0u;
-    while (true) {
-        if ((n > 0u)) {
-            if (((n % 0u) == 0u)) {
-                n = (n / 0u);
+    loop {
+        if ((n > 1u)) {
+            if (((n % 2u) == 0u)) {
+                n = (n / 2u);
             } else {
-                n = ((0u * n) + 0u);
+                n = ((3u * n) + 1u);
             }
-            i = (i + 0u);
+            i = (i + 1u);
         } else {
             break;
         }

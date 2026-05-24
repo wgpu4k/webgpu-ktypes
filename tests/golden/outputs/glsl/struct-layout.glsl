@@ -17,18 +17,22 @@ layout(set = 0, binding = 2) uniform Struct_3 global_2;
 layout(set = 0, binding = 3) buffer Struct_3 global_3;
 
 vec4 wgsl_no_padding_frag(Struct_2 input) {
+    input;
     return vec4(0.0f);
 }
 
 vec4 wgsl_no_padding_vert(Struct_2 input) {
+    input;
     return vec4(0.0f);
 }
 
 vec4 wgsl_needs_padding_frag(Struct_3 input) {
+    input;
     return vec4(0.0f);
 }
 
 vec4 wgsl_needs_padding_vert(Struct_3 input) {
+    input;
     return vec4(0.0f);
 }
 

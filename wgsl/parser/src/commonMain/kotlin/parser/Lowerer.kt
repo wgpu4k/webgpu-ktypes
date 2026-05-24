@@ -3,6 +3,7 @@ package io.ygdrasil.wgsl.parser
 import io.ygdrasil.wgsl.ast.*
 import io.ygdrasil.wgsl.arena.Handle
 import io.ygdrasil.wgsl.arena.Arena
+import io.ygdrasil.wgsl.arena.rangeOf
 import io.ygdrasil.wgsl.ir.ScalarKind as IrScalarKind
 import io.ygdrasil.wgsl.ir.Block as IrBlock
 import io.ygdrasil.wgsl.ir.Expression as IrExpression
@@ -748,14 +749,10 @@ class Lowerer {
                 IrStatement.Continue
             }
             is ExpressionStatement -> {
-                // Evaluate expression for side effects, discard result
-                lowerExpression(astStmt.expr)
-                IrStatement.Nop
+                IrStatement.Emit(rangeOf(lowerExpression(astStmt.expr)))
             }
             is PhonyAssignmentStatement -> {
-                // Evaluate expression for side effects, discard result
-                lowerExpression(astStmt.expression)
-                IrStatement.Nop
+                IrStatement.Emit(rangeOf(lowerExpression(astStmt.expression)))
             }
             is DiagnosticStatement -> IrStatement.Nop
             is DiscardStatement -> IrStatement.Discard

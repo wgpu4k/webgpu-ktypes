@@ -9,4 +9,6 @@ void with_diagnostic() {
 
 [[kernel]]
 void main() {
+    thing();
+    with_diagnostic();
 }

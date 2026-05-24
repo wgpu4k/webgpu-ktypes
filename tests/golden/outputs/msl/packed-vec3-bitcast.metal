@@ -13,4 +13,7 @@ struct vs_main_Output {
 };
 [[vertex]]
 vs_main_Output vs_main() {
+    Struct_6 local_0;
+    float3 local_1 = float3((in.chunk - int3(5)));
+    return local_0;
 }

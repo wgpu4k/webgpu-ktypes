@@ -4,4 +4,22 @@
 
 [numthreads(1, 1, 1)]
 void main() {
+    int2 local_0 = int2(0);
+    int3 local_1 = int3(0);
+    int4 local_2 = int4(0);
+    uint2 local_3 = uint2(0u);
+    uint3 local_4 = uint3(0u);
+    uint4 local_5 = uint4(0u);
+    float2 local_6 = float2(0.0f);
+    float3 local_7 = float3(0.0f);
+    float4 local_8 = float4(0.0f);
+    local_3 = asuint(local_0);
+    local_4 = asuint(local_1);
+    local_5 = asuint(local_2);
+    local_0 = asint(local_3);
+    local_1 = asint(local_4);
+    local_2 = asint(local_5);
+    local_6 = asfloat(local_0);
+    local_7 = asfloat(local_1);
+    local_8 = asfloat(local_2);
 }

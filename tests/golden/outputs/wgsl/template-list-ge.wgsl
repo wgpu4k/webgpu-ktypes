@@ -7,7 +7,7 @@ fn main() {
     var tmp: array<i32>;
     {
         var i: i32 = 0;
-        while (true) {
+        loop {
             if ((i < 2)) {
                 {
                     out[i] = tmp[i];

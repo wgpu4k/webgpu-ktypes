@@ -12,28 +12,34 @@ var<private> s_rg_w: texture_storage_2d<rg32float, write>;
 @group(1) @binding(2)
 var<private> s_rgba_w: texture_storage_2d<rgba32float, write>;
 
-fn textureLoad() {
+fn textureLoad(arg_0: texture_storage_2d<r32float, read>, arg_1: vec2<u32>) -> texture_storage_2d<r32float, read> {
 }
 
-fn textureLoad() {
+fn textureLoad(arg_0: texture_storage_2d<rg32float, read>, arg_1: vec2<u32>) -> texture_storage_2d<rg32float, read> {
 }
 
-fn textureLoad() {
+fn textureLoad(arg_0: texture_storage_2d<rgba32float, read>, arg_1: vec2<u32>) -> texture_storage_2d<rgba32float, read> {
 }
 
-fn textureStore() {
+fn textureStore(arg_0: texture_storage_2d<r32float, write>, arg_1: vec2<u32>, arg_2: vec4<f32>) -> texture_storage_2d<r32float, write> {
 }
 
-fn textureStore() {
+fn textureStore(arg_0: texture_storage_2d<rg32float, write>, arg_1: vec2<u32>, arg_2: vec4<f32>) -> texture_storage_2d<rg32float, write> {
 }
 
-fn textureStore() {
+fn textureStore(arg_0: texture_storage_2d<rgba32float, write>, arg_1: vec2<u32>, arg_2: vec4<f32>) -> texture_storage_2d<rgba32float, write> {
 }
 
 @compute
 fn csLoad() {
+    textureLoad(s_r_r, vec2<u32>(0));
+    textureLoad(s_rg_r, vec2<u32>(0));
+    textureLoad(s_rgba_r, vec2<u32>(0));
 }
 
 @compute
 fn csStore() {
+    textureStore(s_r_w, vec2<u32>(0), vec4<f32>(0.0f));
+    textureStore(s_rg_w, vec2<u32>(0), vec4<f32>(0.0f));
+    textureStore(s_rgba_w, vec2<u32>(0), vec4<f32>(0.0f));
 }

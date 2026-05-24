@@ -13,5 +13,6 @@ func_Output func(func_Input stage_in) {
     func_Output stage_out;
     float input_location = stage_in.input_location;
     float4 arbitrary_position = stage_in.arbitrary_position;
+    return float4(arbitrary_position.xy, input_location, float(index));
     return stage_out;
 }

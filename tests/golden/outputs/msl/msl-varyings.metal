@@ -15,8 +15,12 @@ struct vs_main_Output {
 };
 [[vertex]]
 vs_main_Output vs_main() {
+    Struct_5 local_0;
+    return local_0;
 }
 
 [[fragment]]
 float4 fs_main() {
+    float3 local_0 = float3(1.0f);
+    return in.position;
 }

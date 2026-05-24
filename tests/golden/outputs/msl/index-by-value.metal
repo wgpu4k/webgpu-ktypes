@@ -1,12 +1,12 @@
 #include <metal_stdlib>
 using namespace metal;
 
-int index_arg_array(/* unknown type */ void a, int i) {
+int index_arg_array(array<int, 5> a, int i) {
     return a[i];
 }
 
 int index_let_array(int i, int j) {
-    /* unknown type */ void local_0 = /* unknown type */ void(/* unknown type */ void(1, 2), /* unknown type */ void(3, 4));
+    array<array<int, 2>, 2> local_0 = array<array<int, 2>, 2>(array<int, 2>(1, 2), array<int, 2>(3, 4));
     return local_0[i][j];
 }
 
@@ -16,7 +16,7 @@ float index_let_matrix(int i, int j) {
 }
 
 float4 index_let_array_1d(uint vi) {
-    /* unknown type */ void local_0 = /* unknown type */ void(1, 2, 3, 4, 5);
+    array<int, 5> local_0 = array<int, 5>(1, 2, 3, 4, 5);
     int local_1 = local_0[vi];
     return float4(int4(local_1));
 }
@@ -26,4 +26,8 @@ struct main_Output {
 };
 [[vertex]]
 main_Output main() {
+    index_arg_array(array<int, 5>(1, 2, 3, 4, 5), 6);
+    index_let_array(1, 2);
+    index_let_matrix(1, 2);
+    return index_let_array_1d(vi);
 }

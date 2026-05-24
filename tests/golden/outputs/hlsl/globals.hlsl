@@ -6,14 +6,14 @@ struct Struct_2 {
     float v1;
 };
 bool global_0 = true;
-void global_1;
+float global_1[10];
 uint global_2;
-void global_3 : register(u2);
-void global_4 : register(b3);
+float2 global_3[] : register(u2);
+float4 global_4[20] : register(b3);
 float3 global_5 : register(b4);
 float3x2 global_6 : register(b5);
-void global_7 : register(b6);
-void global_8 : register(b7);
+float2x4 global_7[2][2] : register(b6);
+float4x2 global_8[2][2] : register(b7);
 Struct_2 global_9 : register(u1);
 
 void test_msl_packed_vec3_as_arg(float3 arg) {
@@ -28,6 +28,7 @@ void test_msl_packed_vec3() {
     Struct_2 local_1 = global_9;
     float3 local_2 = local_1.v3;
     float2 local_3 = local_1.v3.zx;
+    test_msl_packed_vec3_as_arg(local_1.v3);
     float3 local_4 = (local_1.v3 * float3x3());
     float3 local_5 = (float3x3() * local_1.v3);
     float3 local_6 = (local_1.v3 * 2.0f);
@@ -36,7 +37,22 @@ void test_msl_packed_vec3() {
 
 [numthreads(1, 1, 1)]
 void main() {
+    test_msl_packed_vec3();
+    global_1[7] = (global_8[0][0] * global_7[0][0][0])[0];
+    global_1[6] = (global_6 * global_5)[0];
+    global_1[5] = global_3[1][1];
+    global_1[4] = global_4[0][3];
+    global_1[3] = global_9.v1;
+    global_1[2] = global_9.v3[0];
+    global_9.v1 = 4.0f;
+    global_1[1] = float(arrayLength(&global_3));
+    atomicStore(&global_2, 2u);
+    float local_0 = 1.0f;
+    bool local_1 = true;
 }
 
-void atomicStore() {
+void arrayLength(void arg_0) {
+}
+
+void atomicStore(void arg_0, uint arg_1) {
 }

@@ -167,4 +167,8 @@ void access_sasm() {
 
 [[kernel]]
 void main(float2x2 global_0 [[buffer(0)]], float2x2 global_1 [[buffer(1)]], array<float2x2, 4> global_2 [[buffer(0)]], array<float2x2, 4> global_3 [[buffer(1)]], Struct_2 global_4 [[buffer(0)]], Struct_2 global_5 [[buffer(1)]], Struct_4 global_6 [[buffer(0)]], Struct_4 global_7 [[buffer(1)]]) {
+    access_m();
+    access_sm();
+    access_am();
+    access_sasm();
 }

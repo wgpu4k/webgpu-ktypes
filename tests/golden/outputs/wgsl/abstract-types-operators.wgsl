@@ -9,25 +9,31 @@ var<private> plus_f_faf: f32 = (1.0f + 2.0f);
 var<private> plus_f_fai: f32 = (1.0f + 2);
 var<private> plus_f_f_f: f32 = (1.0f + 2.0f);
 var<private> plus_iaiai: i32 = (1 + 2);
-var<private> plus_iai_i: i32 = (1 + 0);
-var<private> plus_i_iai: i32 = (0 + 2);
-var<private> plus_i_i_i: i32 = (0 + 0);
+var<private> plus_iai_i: i32 = (1 + 2);
+var<private> plus_i_iai: i32 = (1 + 2);
+var<private> plus_i_i_i: i32 = (1 + 2);
 var<private> plus_uaiai: u32 = (1 + 2);
-var<private> plus_uai_u: u32 = (1 + 0u);
-var<private> plus_u_uai: u32 = (0u + 2);
-var<private> plus_u_u_u: u32 = (0u + 0u);
+var<private> plus_uai_u: u32 = (1 + 2u);
+var<private> plus_u_uai: u32 = (1u + 2);
+var<private> plus_u_u_u: u32 = (1u + 2u);
 var<private> bitflip_u_u: u32 = ~(0u);
 var<private> bitflip_uai: u32 = (~(0) & (0 - 1));
 var<private> least_i32: i32 = -(-2147483648);
 var<private> least_f32: f32 = -(3.4028235E38f);
 var<private> shl_iaiai: i32 = (1 << 2);
-var<private> shl_iai_u: i32 = (1 << 0u);
+var<private> shl_iai_u: i32 = (1 << 2u);
 var<private> shl_uaiai: u32 = (1 << 2);
-var<private> shl_uai_u: u32 = (1 << 0u);
+var<private> shl_uai_u: u32 = (1 << 2u);
+var<private> shlaiaiai: i32 = (1 << 2);
+var<private> shlaiai_u: i32 = (1 << 2u);
 var<private> shr_iaiai: i32 = (1 >> 2);
-var<private> shr_iai_u: i32 = (1 >> 0u);
+var<private> shr_iai_u: i32 = (1 >> 2u);
 var<private> shr_uaiai: u32 = (1 >> 2);
-var<private> shr_uai_u: u32 = (1 >> 0u);
+var<private> shr_uai_u: u32 = (1 >> 2u);
+var<private> shraiaiai: i32 = (1 >> 2);
+var<private> shraiai_u: i32 = (1 >> 2u);
+var<private> wgpu_4492: i32 = i32(-(0));
+var<private> wgpu_4492_2: i32 = -(-2147483648);
 var<workgroup> a: array<u32, 64>;
 
 fn runtime_values() {
@@ -68,4 +74,7 @@ fn wgpu_4435() {
 
 @compute
 fn main() {
+    runtime_values();
+    wgpu_4445();
+    wgpu_4435();
 }

@@ -16,4 +16,7 @@ fn test_g() {
 
 @compute
 fn test_ep() {
+    _ = w_mem2;
+    _ = Struct_1();
+    test_g();
 }

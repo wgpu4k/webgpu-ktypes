@@ -322,7 +322,21 @@
             },
             {
                 "name": "textureSample",
-                "parameters": [],
+                "parameters": [
+                    {
+                        "name": "arg_0",
+                        "type": 6
+                    },
+                    {
+                        "name": "arg_1",
+                        "type": 7
+                    },
+                    {
+                        "name": "arg_2",
+                        "type": 2
+                    }
+                ],
+                "returnType": 6,
                 "localVariables": {},
                 "expressions": {},
                 "blocks": {
@@ -822,7 +836,13 @@
             },
             {
                 "name": "transpose",
-                "parameters": [],
+                "parameters": [
+                    {
+                        "name": "arg_0",
+                        "type": 10
+                    }
+                ],
+                "returnType": 10,
                 "localVariables": {},
                 "expressions": {},
                 "blocks": {

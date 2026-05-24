@@ -73,4 +73,10 @@ fn switchLexicalScope(a: i32) {
 
 @compute
 fn main() {
+    blockLexicalScope(false);
+    ifLexicalScope(true);
+    loopLexicalScope(false);
+    forLexicalScope(1.0f);
+    whileLexicalScope(1);
+    switchLexicalScope(1);
 }

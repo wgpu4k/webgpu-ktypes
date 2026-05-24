@@ -13,8 +13,9 @@ struct main_Output {
 main_Output main(main_Input stage_in) {
     main_Output stage_out;
     float2 uv = stage_in.uv;
+    return textureSample(global_0, global_1, uv);
     return stage_out;
 }
 
-void textureSample() {
+Texture2D<float4> textureSample(Texture2D<float4> arg_0, SamplerState arg_1, float2 arg_2) {
 }

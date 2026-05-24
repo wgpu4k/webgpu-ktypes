@@ -3,7 +3,7 @@ using namespace metal;
 struct Struct_2 {
     float4 position;
 };
-struct Struct_5 {
+struct Struct_6 {
     uint v_uint8;
     uint v_uint8x2;
     uint v_uint8x4;
@@ -45,9 +45,9 @@ struct Struct_5 {
     int v_sint32x4;
     float v_unorm10_10_10_2;
     float v_unorm8x4_bgra;
-    float v_float16_as_f16;
-    float v_float16x2_as_f16;
-    float v_float16x4_as_f16;
+    half v_float16_as_f16;
+    half v_float16x2_as_f16;
+    half v_float16x4_as_f16;
 };
 
 struct render_vertex_Output {
@@ -55,4 +55,5 @@ struct render_vertex_Output {
 };
 [[vertex]]
 render_vertex_Output render_vertex() {
+    return Struct_2(float4(v_in.v_float32));
 }

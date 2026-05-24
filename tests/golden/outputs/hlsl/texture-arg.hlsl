@@ -8,7 +8,7 @@ float4 test(Texture2D<float4> Passed_Texture, SamplerState Passed_Sampler) {
     return textureSample(Passed_Texture, Passed_Sampler, float2(0.0f, 0.0f));
 }
 
-void textureSample() {
+Texture2D<float4> textureSample(Texture2D<float4> arg_0, SamplerState arg_1, float2 arg_2) {
 }
 
 struct main_Output {
@@ -16,5 +16,6 @@ struct main_Output {
 };
 main_Output main() {
     main_Output stage_out;
+    return test(global_0, global_1);
     return stage_out;
 }

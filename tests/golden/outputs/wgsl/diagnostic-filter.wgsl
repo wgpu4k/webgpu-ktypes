@@ -8,4 +8,6 @@ fn with_diagnostic() {
 
 @compute
 fn main() {
+    thing();
+    with_diagnostic();
 }

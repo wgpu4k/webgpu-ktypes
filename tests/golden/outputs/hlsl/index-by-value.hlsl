@@ -2,12 +2,12 @@
 #pragma pack_matrix(column_major)
 
 
-int index_arg_array(void a, int i) {
+int index_arg_array(int a[5], int i) {
     return a[i];
 }
 
 int index_let_array(int i, int j) {
-    void local_0 = void(void(1, 2), void(3, 4));
+    int local_0[2][2] = int[2][2](int[2](1, 2), int[2](3, 4));
     return local_0[i][j];
 }
 
@@ -17,7 +17,7 @@ float index_let_matrix(int i, int j) {
 }
 
 float4 index_let_array_1d(uint vi) {
-    void local_0 = void(1, 2, 3, 4, 5);
+    int local_0[5] = int[5](1, 2, 3, 4, 5);
     int local_1 = local_0[vi];
     return float4(int4(local_1));
 }
@@ -27,5 +27,9 @@ struct main_Output {
 };
 main_Output main() {
     main_Output stage_out;
+    index_arg_array(int[5](1, 2, 3, 4, 5), 6);
+    index_let_array(1, 2);
+    index_let_matrix(1, 2);
+    return index_let_array_1d(vi);
     return stage_out;
 }

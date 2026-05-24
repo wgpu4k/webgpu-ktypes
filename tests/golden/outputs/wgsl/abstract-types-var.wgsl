@@ -211,8 +211,64 @@ fn all_constant_arguments() {
 }
 
 fn globals() {
+    _ = xvipaiai;
+    _ = xvupaiai;
+    _ = xvfpaiai;
+    _ = xvfpafaf;
+    _ = xvfpaiaf;
+    _ = xvupuai;
+    _ = xvupaiu;
+    _ = xvuuai;
+    _ = xvuaiu;
+    _ = xvip____;
+    _ = xvup____;
+    _ = xvfp____;
+    _ = xmfp____;
+    _ = xmfpaiaiaiai;
+    _ = xmfpafaiaiai;
+    _ = xmfpaiafaiai;
+    _ = xmfpaiaiafai;
+    _ = xmfpaiaiaiaf;
+    _ = xvispai;
+    _ = xvfspaf;
+    _ = xvis_ai;
+    _ = xvus_ai;
+    _ = xvfs_ai;
+    _ = xvfs_af;
+    _ = xafafaf;
+    _ = xafaiai;
+    _ = xaipaiai;
+    _ = xaupaiai;
+    _ = xafpaiaf;
+    _ = xafpafai;
+    _ = xafpafaf;
+    _ = xavipai;
+    _ = xavfpai;
+    _ = xavfpaf;
+    _ = xvisai;
+    _ = xvusai;
+    _ = xvfsai;
+    _ = xvfsaf;
+    _ = ivispai;
+    _ = ivfspaf;
+    _ = ivis_ai;
+    _ = ivus_ai;
+    _ = ivfs_ai;
+    _ = ivfs_af;
+    _ = iafafaf;
+    _ = iafaiai;
+    _ = iaipaiai;
+    _ = iafpafaf;
+    _ = iafpaiaf;
+    _ = iafpafai;
+    _ = iavipai;
+    _ = iavfpai;
+    _ = iavfpaf;
 }
 
 @compute
 fn main() {
+    globals();
+    all_constant_arguments();
+    mixed_constant_and_runtime_arguments();
 }

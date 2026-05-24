@@ -248,7 +248,29 @@
             },
             {
                 "name": "textureSampleCompareLevel",
-                "parameters": [],
+                "parameters": [
+                    {
+                        "name": "arg_0",
+                        "type": 0
+                    },
+                    {
+                        "name": "arg_1",
+                        "type": 1
+                    },
+                    {
+                        "name": "arg_2",
+                        "type": 3
+                    },
+                    {
+                        "name": "arg_3",
+                        "type": 4
+                    },
+                    {
+                        "name": "arg_4",
+                        "type": 2
+                    }
+                ],
+                "returnType": 0,
                 "localVariables": {},
                 "expressions": {},
                 "blocks": {

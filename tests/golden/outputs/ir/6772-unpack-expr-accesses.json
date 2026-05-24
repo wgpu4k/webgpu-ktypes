@@ -7,6 +7,13 @@
                     "kind": "Sint",
                     "width": 4
                 }
+            },
+            {
+                "inner": {
+                    "__type": "io.ygdrasil.wgsl.ir.TypeInner.Scalar",
+                    "kind": "Uint",
+                    "width": 4
+                }
             }
         ],
         "indexMap": [
@@ -17,7 +24,15 @@
                     "width": 4
                 }
             },
-            0
+            0,
+            {
+                "inner": {
+                    "__type": "io.ygdrasil.wgsl.ir.TypeInner.Scalar",
+                    "kind": "Uint",
+                    "width": 4
+                }
+            },
+            1
         ]
     },
     "constants": {},
@@ -58,7 +73,7 @@
                                     "__type": "io.ygdrasil.wgsl.ir.LiteralValue.Scalar",
                                     "value": {
                                         "__type": "io.ygdrasil.wgsl.ir.ScalarValue.U32",
-                                        "value": 0
+                                        "value": 12
                                     }
                                 }
                             }
@@ -92,7 +107,7 @@
                                     "__type": "io.ygdrasil.wgsl.ir.LiteralValue.Scalar",
                                     "value": {
                                         "__type": "io.ygdrasil.wgsl.ir.ScalarValue.U32",
-                                        "value": 0
+                                        "value": 12
                                     }
                                 }
                             }
@@ -127,10 +142,12 @@
                                     "variable": 0
                                 },
                                 {
-                                    "__type": "io.ygdrasil.wgsl.ir.Statement.Nop"
+                                    "__type": "io.ygdrasil.wgsl.ir.Statement.Emit",
+                                    "range": 44
                                 },
                                 {
-                                    "__type": "io.ygdrasil.wgsl.ir.Statement.Nop"
+                                    "__type": "io.ygdrasil.wgsl.ir.Statement.Emit",
+                                    "range": 77
                                 }
                             ]
                         }
@@ -140,7 +157,13 @@
             },
             {
                 "name": "unpack4xI8",
-                "parameters": [],
+                "parameters": [
+                    {
+                        "name": "arg_0",
+                        "type": 1
+                    }
+                ],
+                "returnType": 1,
                 "localVariables": {},
                 "expressions": {},
                 "blocks": {
@@ -154,7 +177,13 @@
             },
             {
                 "name": "unpack4xU8",
-                "parameters": [],
+                "parameters": [
+                    {
+                        "name": "arg_0",
+                        "type": 1
+                    }
+                ],
+                "returnType": 1,
                 "localVariables": {},
                 "expressions": {},
                 "blocks": {

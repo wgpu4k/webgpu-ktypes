@@ -3,13 +3,14 @@
 
 
 struct fs_main_Input {
-    void v : TEXCOORD0;
+    float v[3] : TEXCOORD0;
 };
 struct fs_main_Output {
     float4 color : SV_Target;
 };
 fs_main_Output fs_main(fs_main_Input stage_in) {
     fs_main_Output stage_out;
-    void v = stage_in.v;
+    float[3] v = stage_in.v;
+    return float4(v[0], v[1], v[2], 1.0f);
     return stage_out;
 }

@@ -10793,163 +10793,216 @@
                         {
                             "statements": [
                                 {
-                                    "__type": "io.ygdrasil.wgsl.ir.Statement.Nop"
+                                    "__type": "io.ygdrasil.wgsl.ir.Statement.Emit",
+                                    "range": 00
                                 },
                                 {
-                                    "__type": "io.ygdrasil.wgsl.ir.Statement.Nop"
+                                    "__type": "io.ygdrasil.wgsl.ir.Statement.Emit",
+                                    "range": 11
                                 },
                                 {
-                                    "__type": "io.ygdrasil.wgsl.ir.Statement.Nop"
+                                    "__type": "io.ygdrasil.wgsl.ir.Statement.Emit",
+                                    "range": 22
                                 },
                                 {
-                                    "__type": "io.ygdrasil.wgsl.ir.Statement.Nop"
+                                    "__type": "io.ygdrasil.wgsl.ir.Statement.Emit",
+                                    "range": 33
                                 },
                                 {
-                                    "__type": "io.ygdrasil.wgsl.ir.Statement.Nop"
+                                    "__type": "io.ygdrasil.wgsl.ir.Statement.Emit",
+                                    "range": 44
                                 },
                                 {
-                                    "__type": "io.ygdrasil.wgsl.ir.Statement.Nop"
+                                    "__type": "io.ygdrasil.wgsl.ir.Statement.Emit",
+                                    "range": 55
                                 },
                                 {
-                                    "__type": "io.ygdrasil.wgsl.ir.Statement.Nop"
+                                    "__type": "io.ygdrasil.wgsl.ir.Statement.Emit",
+                                    "range": 66
                                 },
                                 {
-                                    "__type": "io.ygdrasil.wgsl.ir.Statement.Nop"
+                                    "__type": "io.ygdrasil.wgsl.ir.Statement.Emit",
+                                    "range": 77
                                 },
                                 {
-                                    "__type": "io.ygdrasil.wgsl.ir.Statement.Nop"
+                                    "__type": "io.ygdrasil.wgsl.ir.Statement.Emit",
+                                    "range": 88
                                 },
                                 {
-                                    "__type": "io.ygdrasil.wgsl.ir.Statement.Nop"
+                                    "__type": "io.ygdrasil.wgsl.ir.Statement.Emit",
+                                    "range": 99
                                 },
                                 {
-                                    "__type": "io.ygdrasil.wgsl.ir.Statement.Nop"
+                                    "__type": "io.ygdrasil.wgsl.ir.Statement.Emit",
+                                    "range": 1010
                                 },
                                 {
-                                    "__type": "io.ygdrasil.wgsl.ir.Statement.Nop"
+                                    "__type": "io.ygdrasil.wgsl.ir.Statement.Emit",
+                                    "range": 1111
                                 },
                                 {
-                                    "__type": "io.ygdrasil.wgsl.ir.Statement.Nop"
+                                    "__type": "io.ygdrasil.wgsl.ir.Statement.Emit",
+                                    "range": 1212
                                 },
                                 {
-                                    "__type": "io.ygdrasil.wgsl.ir.Statement.Nop"
+                                    "__type": "io.ygdrasil.wgsl.ir.Statement.Emit",
+                                    "range": 1313
                                 },
                                 {
-                                    "__type": "io.ygdrasil.wgsl.ir.Statement.Nop"
+                                    "__type": "io.ygdrasil.wgsl.ir.Statement.Emit",
+                                    "range": 1414
                                 },
                                 {
-                                    "__type": "io.ygdrasil.wgsl.ir.Statement.Nop"
+                                    "__type": "io.ygdrasil.wgsl.ir.Statement.Emit",
+                                    "range": 1515
                                 },
                                 {
-                                    "__type": "io.ygdrasil.wgsl.ir.Statement.Nop"
+                                    "__type": "io.ygdrasil.wgsl.ir.Statement.Emit",
+                                    "range": 1616
                                 },
                                 {
-                                    "__type": "io.ygdrasil.wgsl.ir.Statement.Nop"
+                                    "__type": "io.ygdrasil.wgsl.ir.Statement.Emit",
+                                    "range": 1717
                                 },
                                 {
-                                    "__type": "io.ygdrasil.wgsl.ir.Statement.Nop"
+                                    "__type": "io.ygdrasil.wgsl.ir.Statement.Emit",
+                                    "range": 1818
                                 },
                                 {
-                                    "__type": "io.ygdrasil.wgsl.ir.Statement.Nop"
+                                    "__type": "io.ygdrasil.wgsl.ir.Statement.Emit",
+                                    "range": 1919
                                 },
                                 {
-                                    "__type": "io.ygdrasil.wgsl.ir.Statement.Nop"
+                                    "__type": "io.ygdrasil.wgsl.ir.Statement.Emit",
+                                    "range": 2020
                                 },
                                 {
-                                    "__type": "io.ygdrasil.wgsl.ir.Statement.Nop"
+                                    "__type": "io.ygdrasil.wgsl.ir.Statement.Emit",
+                                    "range": 2121
                                 },
                                 {
-                                    "__type": "io.ygdrasil.wgsl.ir.Statement.Nop"
+                                    "__type": "io.ygdrasil.wgsl.ir.Statement.Emit",
+                                    "range": 2222
                                 },
                                 {
-                                    "__type": "io.ygdrasil.wgsl.ir.Statement.Nop"
+                                    "__type": "io.ygdrasil.wgsl.ir.Statement.Emit",
+                                    "range": 2323
                                 },
                                 {
-                                    "__type": "io.ygdrasil.wgsl.ir.Statement.Nop"
+                                    "__type": "io.ygdrasil.wgsl.ir.Statement.Emit",
+                                    "range": 2424
                                 },
                                 {
-                                    "__type": "io.ygdrasil.wgsl.ir.Statement.Nop"
+                                    "__type": "io.ygdrasil.wgsl.ir.Statement.Emit",
+                                    "range": 2525
                                 },
                                 {
-                                    "__type": "io.ygdrasil.wgsl.ir.Statement.Nop"
+                                    "__type": "io.ygdrasil.wgsl.ir.Statement.Emit",
+                                    "range": 2626
                                 },
                                 {
-                                    "__type": "io.ygdrasil.wgsl.ir.Statement.Nop"
+                                    "__type": "io.ygdrasil.wgsl.ir.Statement.Emit",
+                                    "range": 2727
                                 },
                                 {
-                                    "__type": "io.ygdrasil.wgsl.ir.Statement.Nop"
+                                    "__type": "io.ygdrasil.wgsl.ir.Statement.Emit",
+                                    "range": 2828
                                 },
                                 {
-                                    "__type": "io.ygdrasil.wgsl.ir.Statement.Nop"
+                                    "__type": "io.ygdrasil.wgsl.ir.Statement.Emit",
+                                    "range": 2929
                                 },
                                 {
-                                    "__type": "io.ygdrasil.wgsl.ir.Statement.Nop"
+                                    "__type": "io.ygdrasil.wgsl.ir.Statement.Emit",
+                                    "range": 3030
                                 },
                                 {
-                                    "__type": "io.ygdrasil.wgsl.ir.Statement.Nop"
+                                    "__type": "io.ygdrasil.wgsl.ir.Statement.Emit",
+                                    "range": 3131
                                 },
                                 {
-                                    "__type": "io.ygdrasil.wgsl.ir.Statement.Nop"
+                                    "__type": "io.ygdrasil.wgsl.ir.Statement.Emit",
+                                    "range": 3232
                                 },
                                 {
-                                    "__type": "io.ygdrasil.wgsl.ir.Statement.Nop"
+                                    "__type": "io.ygdrasil.wgsl.ir.Statement.Emit",
+                                    "range": 3333
                                 },
                                 {
-                                    "__type": "io.ygdrasil.wgsl.ir.Statement.Nop"
+                                    "__type": "io.ygdrasil.wgsl.ir.Statement.Emit",
+                                    "range": 3434
                                 },
                                 {
-                                    "__type": "io.ygdrasil.wgsl.ir.Statement.Nop"
+                                    "__type": "io.ygdrasil.wgsl.ir.Statement.Emit",
+                                    "range": 3535
                                 },
                                 {
-                                    "__type": "io.ygdrasil.wgsl.ir.Statement.Nop"
+                                    "__type": "io.ygdrasil.wgsl.ir.Statement.Emit",
+                                    "range": 3636
                                 },
                                 {
-                                    "__type": "io.ygdrasil.wgsl.ir.Statement.Nop"
+                                    "__type": "io.ygdrasil.wgsl.ir.Statement.Emit",
+                                    "range": 3737
                                 },
                                 {
-                                    "__type": "io.ygdrasil.wgsl.ir.Statement.Nop"
+                                    "__type": "io.ygdrasil.wgsl.ir.Statement.Emit",
+                                    "range": 3838
                                 },
                                 {
-                                    "__type": "io.ygdrasil.wgsl.ir.Statement.Nop"
+                                    "__type": "io.ygdrasil.wgsl.ir.Statement.Emit",
+                                    "range": 3939
                                 },
                                 {
-                                    "__type": "io.ygdrasil.wgsl.ir.Statement.Nop"
+                                    "__type": "io.ygdrasil.wgsl.ir.Statement.Emit",
+                                    "range": 4040
                                 },
                                 {
-                                    "__type": "io.ygdrasil.wgsl.ir.Statement.Nop"
+                                    "__type": "io.ygdrasil.wgsl.ir.Statement.Emit",
+                                    "range": 4141
                                 },
                                 {
-                                    "__type": "io.ygdrasil.wgsl.ir.Statement.Nop"
+                                    "__type": "io.ygdrasil.wgsl.ir.Statement.Emit",
+                                    "range": 4242
                                 },
                                 {
-                                    "__type": "io.ygdrasil.wgsl.ir.Statement.Nop"
+                                    "__type": "io.ygdrasil.wgsl.ir.Statement.Emit",
+                                    "range": 4343
                                 },
                                 {
-                                    "__type": "io.ygdrasil.wgsl.ir.Statement.Nop"
+                                    "__type": "io.ygdrasil.wgsl.ir.Statement.Emit",
+                                    "range": 4444
                                 },
                                 {
-                                    "__type": "io.ygdrasil.wgsl.ir.Statement.Nop"
+                                    "__type": "io.ygdrasil.wgsl.ir.Statement.Emit",
+                                    "range": 4545
                                 },
                                 {
-                                    "__type": "io.ygdrasil.wgsl.ir.Statement.Nop"
+                                    "__type": "io.ygdrasil.wgsl.ir.Statement.Emit",
+                                    "range": 4646
                                 },
                                 {
-                                    "__type": "io.ygdrasil.wgsl.ir.Statement.Nop"
+                                    "__type": "io.ygdrasil.wgsl.ir.Statement.Emit",
+                                    "range": 4747
                                 },
                                 {
-                                    "__type": "io.ygdrasil.wgsl.ir.Statement.Nop"
+                                    "__type": "io.ygdrasil.wgsl.ir.Statement.Emit",
+                                    "range": 4848
                                 },
                                 {
-                                    "__type": "io.ygdrasil.wgsl.ir.Statement.Nop"
+                                    "__type": "io.ygdrasil.wgsl.ir.Statement.Emit",
+                                    "range": 4949
                                 },
                                 {
-                                    "__type": "io.ygdrasil.wgsl.ir.Statement.Nop"
+                                    "__type": "io.ygdrasil.wgsl.ir.Statement.Emit",
+                                    "range": 5050
                                 },
                                 {
-                                    "__type": "io.ygdrasil.wgsl.ir.Statement.Nop"
+                                    "__type": "io.ygdrasil.wgsl.ir.Statement.Emit",
+                                    "range": 5151
                                 },
                                 {
-                                    "__type": "io.ygdrasil.wgsl.ir.Statement.Nop"
+                                    "__type": "io.ygdrasil.wgsl.ir.Statement.Emit",
+                                    "range": 5252
                                 }
                             ]
                         }
@@ -10994,13 +11047,16 @@
                         {
                             "statements": [
                                 {
-                                    "__type": "io.ygdrasil.wgsl.ir.Statement.Nop"
+                                    "__type": "io.ygdrasil.wgsl.ir.Statement.Emit",
+                                    "range": 00
                                 },
                                 {
-                                    "__type": "io.ygdrasil.wgsl.ir.Statement.Nop"
+                                    "__type": "io.ygdrasil.wgsl.ir.Statement.Emit",
+                                    "range": 11
                                 },
                                 {
-                                    "__type": "io.ygdrasil.wgsl.ir.Statement.Nop"
+                                    "__type": "io.ygdrasil.wgsl.ir.Statement.Emit",
+                                    "range": 22
                                 }
                             ]
                         }

@@ -7,5 +7,10 @@ struct fs_main_Output {
 };
 fs_main_Output fs_main() {
     fs_main_Output stage_out;
+    float2 local_0[2] = float2[2](float2(0.0f, 0.0f), float2(0.0f, 0.0f));
+    int local_1 = 0;
+    float2 local_2 = local_0[local_1];
+    float2 local_3 = local_0[local_1];
+    return (local_2 * local_3).xxyy;
     return stage_out;
 }

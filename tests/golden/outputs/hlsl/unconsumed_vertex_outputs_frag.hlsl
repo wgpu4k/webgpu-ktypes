@@ -12,5 +12,6 @@ struct fs_main_Output {
 };
 fs_main_Output fs_main() {
     fs_main_Output stage_out;
+    return float4(v_out.value, v_out.value, v_out.value2, v_out.value2);
     return stage_out;
 }

@@ -12,6 +12,8 @@ struct Struct_3 {
 
 [[fragment]]
 float4 no_padding_frag(Struct_2 global_0 [[buffer(0)]], Struct_2 global_1 [[buffer(1)]], Struct_3 global_2 [[buffer(2)]], Struct_3 global_3 [[buffer(3)]]) {
+    input;
+    return float4(0.0f);
 }
 
 struct no_padding_vert_Output {
@@ -19,10 +21,14 @@ struct no_padding_vert_Output {
 };
 [[vertex]]
 no_padding_vert_Output no_padding_vert(Struct_2 global_0 [[buffer(0)]], Struct_2 global_1 [[buffer(1)]], Struct_3 global_2 [[buffer(2)]], Struct_3 global_3 [[buffer(3)]]) {
+    input;
+    return float4(0.0f);
 }
 
 [[fragment]]
 float4 needs_padding_frag(Struct_2 global_0 [[buffer(0)]], Struct_2 global_1 [[buffer(1)]], Struct_3 global_2 [[buffer(2)]], Struct_3 global_3 [[buffer(3)]]) {
+    input;
+    return float4(0.0f);
 }
 
 struct needs_padding_vert_Output {
@@ -30,12 +36,20 @@ struct needs_padding_vert_Output {
 };
 [[vertex]]
 needs_padding_vert_Output needs_padding_vert(Struct_2 global_0 [[buffer(0)]], Struct_2 global_1 [[buffer(1)]], Struct_3 global_2 [[buffer(2)]], Struct_3 global_3 [[buffer(3)]]) {
+    input;
+    return float4(0.0f);
 }
 
 [[kernel]]
 void no_padding_comp(Struct_2 global_0 [[buffer(0)]], Struct_2 global_1 [[buffer(1)]], Struct_3 global_2 [[buffer(2)]], Struct_3 global_3 [[buffer(3)]]) {
+    Struct_2 local_0;
+    local_0 = global_0;
+    local_0 = global_1;
 }
 
 [[kernel]]
 void needs_padding_comp(Struct_2 global_0 [[buffer(0)]], Struct_2 global_1 [[buffer(1)]], Struct_3 global_2 [[buffer(2)]], Struct_3 global_3 [[buffer(3)]]) {
+    Struct_3 local_0;
+    local_0 = global_2;
+    local_0 = global_3;
 }

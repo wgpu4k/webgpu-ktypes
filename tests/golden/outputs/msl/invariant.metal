@@ -6,6 +6,7 @@ struct vs_Output {
 };
 [[vertex]]
 vs_Output vs() {
+    return float4(0.0f);
 }
 
 [[fragment]]

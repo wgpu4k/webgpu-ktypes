@@ -2,7 +2,7 @@
 #pragma pack_matrix(column_major)
 
 struct Struct_2 {
-    void data;
+    uint data[];
 };
 Struct_2 global_0 : register(u0);
 
@@ -10,13 +10,13 @@ uint collatz_iterations(uint n_base) {
     uint local_0 = n_base;
     uint local_1 = 0u;
     while (true) {
-        if ((local_0 > 0u)) {
-            if (((local_0 % 0u) == 0u)) {
-                local_0 = (local_0 / 0u);
+        if ((local_0 > 1u)) {
+            if (((local_0 % 2u) == 0u)) {
+                local_0 = (local_0 / 2u);
             } else {
-                local_0 = ((0u * local_0) + 0u);
+                local_0 = ((3u * local_0) + 1u);
             }
-            local_1 = (local_1 + 0u);
+            local_1 = (local_1 + 1u);
         } else {
             break;
         }
@@ -26,4 +26,5 @@ uint collatz_iterations(uint n_base) {
 
 [numthreads(1, 1, 1)]
 void main() {
+    global_0.data[global_id[0]] = collatz_iterations(global_0.data[global_id[0]]);
 }

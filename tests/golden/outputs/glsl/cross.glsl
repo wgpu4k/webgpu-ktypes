@@ -7,7 +7,7 @@ void wgsl_main() {
     vec3 a = cross(vec3(1.0f, 0.0f, 0.0f), vec3(0.0f, 1.0f, 0.0f));
 }
 
-void cross() {
+vec3 cross(vec3 arg_0, vec3 arg_1) {
 }
 
 void main() {

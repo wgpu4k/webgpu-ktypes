@@ -6,6 +6,7 @@ uint global_1;
 
 [numthreads(1, 1, 1)]
 void f() {
+    atomicCompareExchangeWeak(&global_1, uint(global_0), 1u);
 }
 
 void atomicCompareExchangeWeak(void arg_0, uint arg_1, uint arg_2) {

@@ -9,4 +9,5 @@ Struct_3 global_0 : register(b0);
 
 [numthreads(1, 1, 1)]
 void main() {
+    Struct_3 local_0 = global_0;
 }

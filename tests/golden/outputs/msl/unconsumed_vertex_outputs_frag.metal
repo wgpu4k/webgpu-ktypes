@@ -8,4 +8,5 @@ struct Struct_2 {
 
 [[fragment]]
 float4 fs_main() {
+    return float4(v_out.value, v_out.value, v_out.value2, v_out.value2);
 }

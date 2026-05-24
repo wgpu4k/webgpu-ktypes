@@ -8,7 +8,11 @@ fn five() -> i32 {
 
 @compute
 fn main(id: vec3<u32>) {
+    _ = binding;
+    _ = binding;
     var a: i32 = 5;
+    _ = a;
+    five();
     var b: i32 = five();
     var phony: f32 = binding;
 }

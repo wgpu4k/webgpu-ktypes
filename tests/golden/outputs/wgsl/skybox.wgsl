@@ -14,10 +14,10 @@ var<private> r_sampler: sampler;
 @group(0) @binding(0)
 var<uniform> r_data: Struct_5;
 
-fn textureSample() {
+fn textureSample(arg_0: texture_cube<f32>, arg_1: sampler, arg_2: vec3<f32>) -> texture_cube<f32> {
 }
 
-fn transpose() {
+fn transpose(arg_0: mat3x3<f32>) -> mat3x3<f32> {
 }
 
 @fragment

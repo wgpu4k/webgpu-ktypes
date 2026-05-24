@@ -11,6 +11,7 @@ struct fs_Output {
 };
 fs_Output fs() {
     fs_Output stage_out;
+    return float4(1.0f, 0.0f, 0.0f, 1.0f);
     return stage_out;
 }
 
@@ -24,5 +25,8 @@ struct vs_Output {
 vs_Output vs(vs_Input stage_in) {
     vs_Output stage_out;
     float2 xy = stage_in.xy;
+    Struct_3 local_0;
+    local_0.position = float4(xy, 0.0f, 1.0f);
+    return local_0;
     return stage_out;
 }

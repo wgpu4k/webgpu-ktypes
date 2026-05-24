@@ -18,7 +18,7 @@ struct Struct_3 {
 struct Struct_5 {
     Struct_2[] particles;
 };
- uint global_0 = 0u;
+ uint global_0 = 1500u;
 layout(set = 0, binding = 0) uniform Struct_3 global_1;
 layout(set = 0, binding = 1) buffer Struct_5 global_2;
 layout(set = 0, binding = 2) buffer Struct_5 global_3;
@@ -58,7 +58,7 @@ void wgsl_main(uvec3 global_invocation_id) {
             cVel = (cVel + vel);
             cVelCount = (cVelCount + 1);
         }
-        i = (i + 0u);
+        i = (i + 1u);
     }
     if ((cMassCount > 0)) {
         cMass = ((cMass / float(cMassCount)) - vPos);
@@ -85,22 +85,22 @@ void wgsl_main(uvec3 global_invocation_id) {
     global_3.particles[index].vel = vVel;
 }
 
-void distance() {
+vec2 distance(vec2 arg_0, vec2 arg_1) {
 }
 
-void distance() {
+vec2 distance(vec2 arg_0, vec2 arg_1) {
 }
 
-void distance() {
+vec2 distance(vec2 arg_0, vec2 arg_1) {
 }
 
-void normalize() {
+vec2 normalize(vec2 arg_0) {
 }
 
-void clamp() {
+vec2 length(vec2 arg_0) {
 }
 
-void length() {
+vec2 clamp(vec2 arg_0, float arg_1, float arg_2) {
 }
 
 void main() {

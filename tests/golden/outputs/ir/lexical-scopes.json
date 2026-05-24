@@ -949,22 +949,28 @@
                         {
                             "statements": [
                                 {
-                                    "__type": "io.ygdrasil.wgsl.ir.Statement.Nop"
+                                    "__type": "io.ygdrasil.wgsl.ir.Statement.Emit",
+                                    "range": 11
                                 },
                                 {
-                                    "__type": "io.ygdrasil.wgsl.ir.Statement.Nop"
+                                    "__type": "io.ygdrasil.wgsl.ir.Statement.Emit",
+                                    "range": 33
                                 },
                                 {
-                                    "__type": "io.ygdrasil.wgsl.ir.Statement.Nop"
+                                    "__type": "io.ygdrasil.wgsl.ir.Statement.Emit",
+                                    "range": 55
                                 },
                                 {
-                                    "__type": "io.ygdrasil.wgsl.ir.Statement.Nop"
+                                    "__type": "io.ygdrasil.wgsl.ir.Statement.Emit",
+                                    "range": 77
                                 },
                                 {
-                                    "__type": "io.ygdrasil.wgsl.ir.Statement.Nop"
+                                    "__type": "io.ygdrasil.wgsl.ir.Statement.Emit",
+                                    "range": 99
                                 },
                                 {
-                                    "__type": "io.ygdrasil.wgsl.ir.Statement.Nop"
+                                    "__type": "io.ygdrasil.wgsl.ir.Statement.Emit",
+                                    "range": 1111
                                 }
                             ]
                         }

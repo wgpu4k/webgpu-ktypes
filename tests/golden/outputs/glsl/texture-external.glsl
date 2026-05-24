@@ -13,16 +13,16 @@ vec4 test(texture_external t) {
     return (((a + b) + c) + vec2(d).xyxy);
 }
 
-void textureSampleBaseClampToEdge() {
+texture_external textureSampleBaseClampToEdge(texture_external arg_0, sampler arg_1, vec2 arg_2) {
 }
 
-void textureLoad() {
+texture_external textureLoad(texture_external arg_0, vec2 arg_1) {
 }
 
-void textureLoad() {
+texture_external textureLoad(texture_external arg_0, vec2 arg_1) {
 }
 
-void textureDimensions() {
+texture_external textureDimensions(texture_external arg_0) {
 }
 
 vec4 wgsl_fragment_main() {
@@ -34,6 +34,7 @@ vec4 wgsl_vertex_main() {
 }
 
 void wgsl_compute_main() {
+    test(global_0);
 }
 
 layout(location = 0) out vec4 outColor;

@@ -9,7 +9,11 @@ int five() {
 }
 
 void wgsl_main(uvec3 id) {
+    global_0;
+    global_0;
     int a = 5;
+    a;
+    five();
     int b = five();
     float phony = global_0;
 }

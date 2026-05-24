@@ -5,77 +5,101 @@ var<storage, read_write> atomic_i32: i32;
 var<storage, read_write> atomic_u32: u32;
 
 fn test_atomic_i32() {
+    atomicStore(&atomic_i32, 1);
+    atomicCompareExchangeWeak(&atomic_i32, 1, 1);
+    atomicCompareExchangeWeak(&atomic_i32, 1, 1);
+    atomicAdd(&atomic_i32, 1);
+    atomicSub(&atomic_i32, 1);
+    atomicAnd(&atomic_i32, 1);
+    atomicXor(&atomic_i32, 1);
+    atomicOr(&atomic_i32, 1);
+    atomicMin(&atomic_i32, 1);
+    atomicMax(&atomic_i32, 1);
+    atomicExchange(&atomic_i32, 1);
 }
 
-fn atomicStore() {
+fn atomicStore(arg_0: ptr<function, i32>, arg_1: i32) -> ptr<function, i32> {
 }
 
-fn atomicCompareExchangeWeak() {
+fn atomicCompareExchangeWeak(arg_0: ptr<function, i32>, arg_1: i32, arg_2: i32) -> ptr<function, i32> {
 }
 
-fn atomicCompareExchangeWeak() {
+fn atomicCompareExchangeWeak(arg_0: ptr<function, i32>, arg_1: i32, arg_2: i32) -> ptr<function, i32> {
 }
 
-fn atomicAdd() {
+fn atomicAdd(arg_0: ptr<function, i32>, arg_1: i32) -> ptr<function, i32> {
 }
 
-fn atomicSub() {
+fn atomicSub(arg_0: ptr<function, i32>, arg_1: i32) -> ptr<function, i32> {
 }
 
-fn atomicAnd() {
+fn atomicAnd(arg_0: ptr<function, i32>, arg_1: i32) -> ptr<function, i32> {
 }
 
-fn atomicXor() {
+fn atomicXor(arg_0: ptr<function, i32>, arg_1: i32) -> ptr<function, i32> {
 }
 
-fn atomicOr() {
+fn atomicOr(arg_0: ptr<function, i32>, arg_1: i32) -> ptr<function, i32> {
 }
 
-fn atomicMin() {
+fn atomicMin(arg_0: ptr<function, i32>, arg_1: i32) -> ptr<function, i32> {
 }
 
-fn atomicMax() {
+fn atomicMax(arg_0: ptr<function, i32>, arg_1: i32) -> ptr<function, i32> {
 }
 
-fn atomicExchange() {
+fn atomicExchange(arg_0: ptr<function, i32>, arg_1: i32) -> ptr<function, i32> {
 }
 
 fn test_atomic_u32() {
+    atomicStore(&atomic_u32, 1);
+    atomicCompareExchangeWeak(&atomic_u32, 1, 1u);
+    atomicCompareExchangeWeak(&atomic_u32, 1u, 1);
+    atomicAdd(&atomic_u32, 1);
+    atomicSub(&atomic_u32, 1);
+    atomicAnd(&atomic_u32, 1);
+    atomicXor(&atomic_u32, 1);
+    atomicOr(&atomic_u32, 1);
+    atomicMin(&atomic_u32, 1);
+    atomicMax(&atomic_u32, 1);
+    atomicExchange(&atomic_u32, 1);
 }
 
-fn atomicStore() {
+fn atomicStore(arg_0: ptr<function, u32>, arg_1: i32) -> ptr<function, u32> {
 }
 
-fn atomicCompareExchangeWeak() {
+fn atomicCompareExchangeWeak(arg_0: ptr<function, u32>, arg_1: i32, arg_2: u32) -> ptr<function, u32> {
 }
 
-fn atomicCompareExchangeWeak() {
+fn atomicCompareExchangeWeak(arg_0: ptr<function, u32>, arg_1: u32, arg_2: i32) -> ptr<function, u32> {
 }
 
-fn atomicAdd() {
+fn atomicAdd(arg_0: ptr<function, u32>, arg_1: i32) -> ptr<function, u32> {
 }
 
-fn atomicSub() {
+fn atomicSub(arg_0: ptr<function, u32>, arg_1: i32) -> ptr<function, u32> {
 }
 
-fn atomicAnd() {
+fn atomicAnd(arg_0: ptr<function, u32>, arg_1: i32) -> ptr<function, u32> {
 }
 
-fn atomicXor() {
+fn atomicXor(arg_0: ptr<function, u32>, arg_1: i32) -> ptr<function, u32> {
 }
 
-fn atomicOr() {
+fn atomicOr(arg_0: ptr<function, u32>, arg_1: i32) -> ptr<function, u32> {
 }
 
-fn atomicMin() {
+fn atomicMin(arg_0: ptr<function, u32>, arg_1: i32) -> ptr<function, u32> {
 }
 
-fn atomicMax() {
+fn atomicMax(arg_0: ptr<function, u32>, arg_1: i32) -> ptr<function, u32> {
 }
 
-fn atomicExchange() {
+fn atomicExchange(arg_0: ptr<function, u32>, arg_1: i32) -> ptr<function, u32> {
 }
 
 @compute
 fn main() {
+    test_atomic_i32();
+    test_atomic_u32();
 }

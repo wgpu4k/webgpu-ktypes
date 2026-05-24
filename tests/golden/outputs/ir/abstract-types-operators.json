@@ -413,7 +413,7 @@
                         "__type": "io.ygdrasil.wgsl.ir.LiteralValue.Scalar",
                         "value": {
                             "__type": "io.ygdrasil.wgsl.ir.ScalarValue.I32",
-                            "value": 0
+                            "value": 2
                         }
                     }
                 }
@@ -433,7 +433,7 @@
                         "__type": "io.ygdrasil.wgsl.ir.LiteralValue.Scalar",
                         "value": {
                             "__type": "io.ygdrasil.wgsl.ir.ScalarValue.I32",
-                            "value": 0
+                            "value": 1
                         }
                     }
                 }
@@ -465,7 +465,7 @@
                         "__type": "io.ygdrasil.wgsl.ir.LiteralValue.Scalar",
                         "value": {
                             "__type": "io.ygdrasil.wgsl.ir.ScalarValue.I32",
-                            "value": 0
+                            "value": 1
                         }
                     }
                 }
@@ -477,7 +477,7 @@
                         "__type": "io.ygdrasil.wgsl.ir.LiteralValue.Scalar",
                         "value": {
                             "__type": "io.ygdrasil.wgsl.ir.ScalarValue.I32",
-                            "value": 0
+                            "value": 2
                         }
                     }
                 }
@@ -541,7 +541,7 @@
                         "__type": "io.ygdrasil.wgsl.ir.LiteralValue.Scalar",
                         "value": {
                             "__type": "io.ygdrasil.wgsl.ir.ScalarValue.U32",
-                            "value": 0
+                            "value": 2
                         }
                     }
                 }
@@ -561,7 +561,7 @@
                         "__type": "io.ygdrasil.wgsl.ir.LiteralValue.Scalar",
                         "value": {
                             "__type": "io.ygdrasil.wgsl.ir.ScalarValue.U32",
-                            "value": 0
+                            "value": 1
                         }
                     }
                 }
@@ -593,7 +593,7 @@
                         "__type": "io.ygdrasil.wgsl.ir.LiteralValue.Scalar",
                         "value": {
                             "__type": "io.ygdrasil.wgsl.ir.ScalarValue.U32",
-                            "value": 0
+                            "value": 1
                         }
                     }
                 }
@@ -605,7 +605,7 @@
                         "__type": "io.ygdrasil.wgsl.ir.LiteralValue.Scalar",
                         "value": {
                             "__type": "io.ygdrasil.wgsl.ir.ScalarValue.U32",
-                            "value": 0
+                            "value": 2
                         }
                     }
                 }
@@ -785,7 +785,7 @@
                         "__type": "io.ygdrasil.wgsl.ir.LiteralValue.Scalar",
                         "value": {
                             "__type": "io.ygdrasil.wgsl.ir.ScalarValue.U32",
-                            "value": 0
+                            "value": 2
                         }
                     }
                 }
@@ -849,7 +849,7 @@
                         "__type": "io.ygdrasil.wgsl.ir.LiteralValue.Scalar",
                         "value": {
                             "__type": "io.ygdrasil.wgsl.ir.ScalarValue.U32",
-                            "value": 0
+                            "value": 2
                         }
                     }
                 }
@@ -889,7 +889,7 @@
             {
                 "kind": {
                     "__type": "io.ygdrasil.wgsl.ir.ExpressionKind.Binary",
-                    "operator": "ShiftRight",
+                    "operator": "ShiftLeft",
                     "left": 75,
                     "right": 76
                 }
@@ -913,7 +913,7 @@
                         "__type": "io.ygdrasil.wgsl.ir.LiteralValue.Scalar",
                         "value": {
                             "__type": "io.ygdrasil.wgsl.ir.ScalarValue.U32",
-                            "value": 0
+                            "value": 2
                         }
                     }
                 }
@@ -921,7 +921,7 @@
             {
                 "kind": {
                     "__type": "io.ygdrasil.wgsl.ir.ExpressionKind.Binary",
-                    "operator": "ShiftRight",
+                    "operator": "ShiftLeft",
                     "left": 78,
                     "right": 79
                 }
@@ -977,7 +977,7 @@
                         "__type": "io.ygdrasil.wgsl.ir.LiteralValue.Scalar",
                         "value": {
                             "__type": "io.ygdrasil.wgsl.ir.ScalarValue.U32",
-                            "value": 0
+                            "value": 2
                         }
                     }
                 }
@@ -988,6 +988,181 @@
                     "operator": "ShiftRight",
                     "left": 84,
                     "right": 85
+                }
+            },
+            {
+                "kind": {
+                    "__type": "io.ygdrasil.wgsl.ir.ExpressionKind.Literal",
+                    "value": {
+                        "__type": "io.ygdrasil.wgsl.ir.LiteralValue.Scalar",
+                        "value": {
+                            "__type": "io.ygdrasil.wgsl.ir.ScalarValue.I32",
+                            "value": 1
+                        }
+                    }
+                }
+            },
+            {
+                "kind": {
+                    "__type": "io.ygdrasil.wgsl.ir.ExpressionKind.Literal",
+                    "value": {
+                        "__type": "io.ygdrasil.wgsl.ir.LiteralValue.Scalar",
+                        "value": {
+                            "__type": "io.ygdrasil.wgsl.ir.ScalarValue.I32",
+                            "value": 2
+                        }
+                    }
+                }
+            },
+            {
+                "kind": {
+                    "__type": "io.ygdrasil.wgsl.ir.ExpressionKind.Binary",
+                    "operator": "ShiftRight",
+                    "left": 87,
+                    "right": 88
+                }
+            },
+            {
+                "kind": {
+                    "__type": "io.ygdrasil.wgsl.ir.ExpressionKind.Literal",
+                    "value": {
+                        "__type": "io.ygdrasil.wgsl.ir.LiteralValue.Scalar",
+                        "value": {
+                            "__type": "io.ygdrasil.wgsl.ir.ScalarValue.I32",
+                            "value": 1
+                        }
+                    }
+                }
+            },
+            {
+                "kind": {
+                    "__type": "io.ygdrasil.wgsl.ir.ExpressionKind.Literal",
+                    "value": {
+                        "__type": "io.ygdrasil.wgsl.ir.LiteralValue.Scalar",
+                        "value": {
+                            "__type": "io.ygdrasil.wgsl.ir.ScalarValue.U32",
+                            "value": 2
+                        }
+                    }
+                }
+            },
+            {
+                "kind": {
+                    "__type": "io.ygdrasil.wgsl.ir.ExpressionKind.Binary",
+                    "operator": "ShiftRight",
+                    "left": 90,
+                    "right": 91
+                }
+            },
+            {
+                "kind": {
+                    "__type": "io.ygdrasil.wgsl.ir.ExpressionKind.Literal",
+                    "value": {
+                        "__type": "io.ygdrasil.wgsl.ir.LiteralValue.Scalar",
+                        "value": {
+                            "__type": "io.ygdrasil.wgsl.ir.ScalarValue.I32",
+                            "value": 1
+                        }
+                    }
+                }
+            },
+            {
+                "kind": {
+                    "__type": "io.ygdrasil.wgsl.ir.ExpressionKind.Literal",
+                    "value": {
+                        "__type": "io.ygdrasil.wgsl.ir.LiteralValue.Scalar",
+                        "value": {
+                            "__type": "io.ygdrasil.wgsl.ir.ScalarValue.I32",
+                            "value": 2
+                        }
+                    }
+                }
+            },
+            {
+                "kind": {
+                    "__type": "io.ygdrasil.wgsl.ir.ExpressionKind.Binary",
+                    "operator": "ShiftRight",
+                    "left": 93,
+                    "right": 94
+                }
+            },
+            {
+                "kind": {
+                    "__type": "io.ygdrasil.wgsl.ir.ExpressionKind.Literal",
+                    "value": {
+                        "__type": "io.ygdrasil.wgsl.ir.LiteralValue.Scalar",
+                        "value": {
+                            "__type": "io.ygdrasil.wgsl.ir.ScalarValue.I32",
+                            "value": 1
+                        }
+                    }
+                }
+            },
+            {
+                "kind": {
+                    "__type": "io.ygdrasil.wgsl.ir.ExpressionKind.Literal",
+                    "value": {
+                        "__type": "io.ygdrasil.wgsl.ir.LiteralValue.Scalar",
+                        "value": {
+                            "__type": "io.ygdrasil.wgsl.ir.ScalarValue.U32",
+                            "value": 2
+                        }
+                    }
+                }
+            },
+            {
+                "kind": {
+                    "__type": "io.ygdrasil.wgsl.ir.ExpressionKind.Binary",
+                    "operator": "ShiftRight",
+                    "left": 96,
+                    "right": 97
+                }
+            },
+            {
+                "kind": {
+                    "__type": "io.ygdrasil.wgsl.ir.ExpressionKind.Literal",
+                    "value": {
+                        "__type": "io.ygdrasil.wgsl.ir.LiteralValue.Scalar",
+                        "value": {
+                            "__type": "io.ygdrasil.wgsl.ir.ScalarValue.I32",
+                            "value": 0
+                        }
+                    }
+                }
+            },
+            {
+                "kind": {
+                    "__type": "io.ygdrasil.wgsl.ir.ExpressionKind.Unary",
+                    "operator": "Negate",
+                    "expr": 99
+                }
+            },
+            {
+                "kind": {
+                    "__type": "io.ygdrasil.wgsl.ir.ExpressionKind.TypeConstructor",
+                    "type": 1,
+                    "arguments": [
+                        100
+                    ]
+                }
+            },
+            {
+                "kind": {
+                    "__type": "io.ygdrasil.wgsl.ir.ExpressionKind.Literal",
+                    "value": {
+                        "__type": "io.ygdrasil.wgsl.ir.LiteralValue.Scalar",
+                        "value": {
+                            "__type": "io.ygdrasil.wgsl.ir.ScalarValue.I32",
+                            "value": -2147483648
+                        }
+                    }
+                }
+            },
+            {
+                "kind": {
+                    "__type": "io.ygdrasil.wgsl.ir.ExpressionKind.Unary",
+                    "operator": "Negate",
+                    "expr": 102
                 }
             }
         ]
@@ -1145,28 +1320,64 @@
                 "init": 74
             },
             {
-                "name": "shr_iaiai",
+                "name": "shlaiaiai",
                 "storageClass": "Private",
                 "type": 1,
                 "init": 77
             },
             {
-                "name": "shr_iai_u",
+                "name": "shlaiai_u",
                 "storageClass": "Private",
                 "type": 1,
                 "init": 80
             },
             {
+                "name": "shr_iaiai",
+                "storageClass": "Private",
+                "type": 1,
+                "init": 83
+            },
+            {
+                "name": "shr_iai_u",
+                "storageClass": "Private",
+                "type": 1,
+                "init": 86
+            },
+            {
                 "name": "shr_uaiai",
                 "storageClass": "Private",
                 "type": 2,
-                "init": 83
+                "init": 89
             },
             {
                 "name": "shr_uai_u",
                 "storageClass": "Private",
                 "type": 2,
-                "init": 86
+                "init": 92
+            },
+            {
+                "name": "shraiaiai",
+                "storageClass": "Private",
+                "type": 1,
+                "init": 95
+            },
+            {
+                "name": "shraiai_u",
+                "storageClass": "Private",
+                "type": 1,
+                "init": 98
+            },
+            {
+                "name": "wgpu_4492",
+                "storageClass": "Private",
+                "type": 1,
+                "init": 101
+            },
+            {
+                "name": "wgpu_4492_2",
+                "storageClass": "Private",
+                "type": 1,
+                "init": 103
             },
             {
                 "name": "a",
@@ -2248,7 +2459,7 @@
                         {
                             "kind": {
                                 "__type": "io.ygdrasil.wgsl.ir.ExpressionKind.GlobalVar",
-                                "handle": 29
+                                "handle": 35
                             }
                         },
                         {
@@ -2344,13 +2555,16 @@
                         {
                             "statements": [
                                 {
-                                    "__type": "io.ygdrasil.wgsl.ir.Statement.Nop"
+                                    "__type": "io.ygdrasil.wgsl.ir.Statement.Emit",
+                                    "range": 00
                                 },
                                 {
-                                    "__type": "io.ygdrasil.wgsl.ir.Statement.Nop"
+                                    "__type": "io.ygdrasil.wgsl.ir.Statement.Emit",
+                                    "range": 11
                                 },
                                 {
-                                    "__type": "io.ygdrasil.wgsl.ir.Statement.Nop"
+                                    "__type": "io.ygdrasil.wgsl.ir.Statement.Emit",
+                                    "range": 22
                                 }
                             ]
                         }

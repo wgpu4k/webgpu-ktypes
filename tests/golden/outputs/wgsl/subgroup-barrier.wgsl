@@ -5,4 +5,5 @@ fn subgroupBarrier() {
 
 @compute
 fn main() {
+    subgroupBarrier();
 }

@@ -3,14 +3,17 @@
 
 struct Struct_3 {
     float4 position;
-    void clip_distances;
+    float clip_distances[1];
 };
 
 struct main_Output {
     float4 position : SV_Position;
-    void clip_distances : COLOR;
+    float clip_distances[1] : COLOR;
 };
 main_Output main() {
     main_Output stage_out;
+    Struct_3 local_0;
+    local_0.clip_distances[0] = 0.5f;
+    return local_0;
     return stage_out;
 }

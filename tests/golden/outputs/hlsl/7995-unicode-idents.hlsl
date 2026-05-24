@@ -3,9 +3,12 @@
 
 float global_0 : register(u0);
 
-[numthreads(1, 1, 1)]
-void main() {
+float compute() {
+    float local_0 = (global_0 + 9001.0f);
+    return local_0;
 }
 
-void () {
+[numthreads(1, 1, 1)]
+void main() {
+    compute();
 }

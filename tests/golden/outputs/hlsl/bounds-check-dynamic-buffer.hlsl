@@ -5,12 +5,17 @@ struct Struct_1 {
     uint t;
 };
 uint global_0 : register(u0);
-void global_1 : register(u1);
-void global_2 : register(b2);
-void global_3 : register(u3);
-void global_4 : register(u4);
-void global_5 : register(u0);
+uint global_1[] : register(u1);
+Struct_1 global_2[1] : register(b2);
+Struct_1 global_3[1] : register(u3);
+Struct_1 global_4[1] : register(u4);
+Struct_1 global_5[1] : register(u0);
 
 [numthreads(1, 1, 1)]
 void main() {
+    uint local_0 = global_0;
+    global_1[0] = global_2[local_0].t;
+    global_1[1] = global_3[local_0].t;
+    global_1[2] = global_4[local_0].t;
+    global_1[3] = global_5[local_0].t;
 }

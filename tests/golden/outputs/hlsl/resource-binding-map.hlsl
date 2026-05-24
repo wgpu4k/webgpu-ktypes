@@ -17,10 +17,11 @@ struct entry_point_one_Output {
 entry_point_one_Output entry_point_one(entry_point_one_Input stage_in) {
     entry_point_one_Output stage_out;
     float4 pos = stage_in.pos;
+    return textureSample(global_0, global_2, pos.xy);
     return stage_out;
 }
 
-void textureSample() {
+Texture2D<float4> textureSample(Texture2D<float4> arg_0, SamplerState arg_1, float2 arg_2) {
 }
 
 struct entry_point_two_Output {
@@ -28,10 +29,11 @@ struct entry_point_two_Output {
 };
 entry_point_two_Output entry_point_two() {
     entry_point_two_Output stage_out;
+    return textureSample(global_0, global_2, global_4);
     return stage_out;
 }
 
-void textureSample() {
+Texture2D<float4> textureSample(Texture2D<float4> arg_0, SamplerState arg_1, float2 arg_2) {
 }
 
 struct entry_point_three_Output {
@@ -39,11 +41,12 @@ struct entry_point_three_Output {
 };
 entry_point_three_Output entry_point_three() {
     entry_point_three_Output stage_out;
+    return (textureSample(global_0, global_2, (global_5 + global_4)) + textureSample(global_1, global_3, global_4));
     return stage_out;
 }
 
-void textureSample() {
+Texture2D<float4> textureSample(Texture2D<float4> arg_0, SamplerState arg_1, float2 arg_2) {
 }
 
-void textureSample() {
+Texture2D<float4> textureSample(Texture2D<float4> arg_0, SamplerState arg_1, float2 arg_2) {
 }

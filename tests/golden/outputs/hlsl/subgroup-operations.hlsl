@@ -8,79 +8,104 @@ struct Struct_1 {
 
 [numthreads(1, 1, 1)]
 void main() {
+    subgroupBallot(((subgroup_invocation_id & 1u) == 1u));
+    subgroupBallot();
+    subgroupAll((subgroup_invocation_id != 0u));
+    subgroupAny((subgroup_invocation_id == 0u));
+    subgroupAdd(subgroup_invocation_id);
+    subgroupMul(subgroup_invocation_id);
+    subgroupMin(subgroup_invocation_id);
+    subgroupMax(subgroup_invocation_id);
+    subgroupAnd(subgroup_invocation_id);
+    subgroupOr(subgroup_invocation_id);
+    subgroupXor(subgroup_invocation_id);
+    subgroupExclusiveAdd(subgroup_invocation_id);
+    subgroupExclusiveMul(subgroup_invocation_id);
+    subgroupInclusiveAdd(subgroup_invocation_id);
+    subgroupInclusiveMul(subgroup_invocation_id);
+    subgroupBroadcastFirst(subgroup_invocation_id);
+    subgroupBroadcast(subgroup_invocation_id, 4u);
+    subgroupShuffle(subgroup_invocation_id, ((sizes.subgroup_size - 1u) - subgroup_invocation_id));
+    subgroupShuffleDown(subgroup_invocation_id, 1u);
+    subgroupShuffleUp(subgroup_invocation_id, 1u);
+    subgroupShuffleXor(subgroup_invocation_id, (sizes.subgroup_size - 1u));
+    quadBroadcast(subgroup_invocation_id, 4u);
+    quadSwapX(subgroup_invocation_id);
+    quadSwapY(subgroup_invocation_id);
+    quadSwapDiagonal(subgroup_invocation_id);
+}
+
+uint subgroupBallot(uint arg_0) {
 }
 
 void subgroupBallot() {
 }
 
-void subgroupBallot() {
+uint subgroupAll(uint arg_0) {
 }
 
-void subgroupAll() {
+uint subgroupAny(uint arg_0) {
 }
 
-void subgroupAny() {
+uint subgroupAdd(uint arg_0) {
 }
 
-void subgroupAdd() {
+uint subgroupMul(uint arg_0) {
 }
 
-void subgroupMul() {
+uint subgroupMin(uint arg_0) {
 }
 
-void subgroupMin() {
+uint subgroupMax(uint arg_0) {
 }
 
-void subgroupMax() {
+uint subgroupAnd(uint arg_0) {
 }
 
-void subgroupAnd() {
+uint subgroupOr(uint arg_0) {
 }
 
-void subgroupOr() {
+uint subgroupXor(uint arg_0) {
 }
 
-void subgroupXor() {
+uint subgroupExclusiveAdd(uint arg_0) {
 }
 
-void subgroupExclusiveAdd() {
+uint subgroupExclusiveMul(uint arg_0) {
 }
 
-void subgroupExclusiveMul() {
+uint subgroupInclusiveAdd(uint arg_0) {
 }
 
-void subgroupInclusiveAdd() {
+uint subgroupInclusiveMul(uint arg_0) {
 }
 
-void subgroupInclusiveMul() {
+uint subgroupBroadcastFirst(uint arg_0) {
 }
 
-void subgroupBroadcastFirst() {
+uint subgroupBroadcast(uint arg_0, uint arg_1) {
 }
 
-void subgroupBroadcast() {
+uint subgroupShuffle(uint arg_0, uint arg_1) {
 }
 
-void subgroupShuffle() {
+uint subgroupShuffleDown(uint arg_0, uint arg_1) {
 }
 
-void subgroupShuffleDown() {
+uint subgroupShuffleUp(uint arg_0, uint arg_1) {
 }
 
-void subgroupShuffleUp() {
+uint subgroupShuffleXor(uint arg_0, uint arg_1) {
 }
 
-void subgroupShuffleXor() {
+uint quadBroadcast(uint arg_0, uint arg_1) {
 }
 
-void quadBroadcast() {
+uint quadSwapX(uint arg_0) {
 }
 
-void quadSwapX() {
+uint quadSwapY(uint arg_0) {
 }
 
-void quadSwapY() {
-}
-
-void quadSwapDiagonal() {
+uint quadSwapDiagonal(uint arg_0) {
 }

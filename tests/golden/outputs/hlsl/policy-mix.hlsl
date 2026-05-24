@@ -2,25 +2,26 @@
 #pragma pack_matrix(column_major)
 
 struct Struct_3 {
-    void a;
+    float4 a[10];
 };
 struct Struct_5 {
-    void a;
+    float4 a[20];
 };
 Texture2DArray<float4> global_0 : register(t2);
-void global_1;
-void global_2;
+float global_1[30];
+float global_2[40];
 Struct_3 global_3 : register(u0);
 Struct_5 global_4 : register(b1);
 
 float4 mock_function(int2 c, int i, int l) {
-    void local_0 = void(float4(0.707f, 0.0f, 0.0f, 1.0f), float4(0.0f, 0.707f, 0.0f, 1.0f));
+    float4 local_0[2] = float4[2](float4(0.707f, 0.0f, 0.0f, 1.0f), float4(0.0f, 0.707f, 0.0f, 1.0f));
     return (((((global_3.a[i] + global_4.a[i]) + textureLoad(global_0, c, i, l)) + global_1[i]) + global_2[i]) + local_0[i]);
 }
 
-void textureLoad() {
+Texture2DArray<float4> textureLoad(Texture2DArray<float4> arg_0, int2 arg_1, int arg_2, int arg_3) {
 }
 
 [numthreads(1, 1, 1)]
 void main() {
+    mock_function(float2(1, 2), 3, 4);
 }

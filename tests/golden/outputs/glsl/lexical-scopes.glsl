@@ -75,6 +75,12 @@ void switchLexicalScope(int a) {
 }
 
 void wgsl_main() {
+    blockLexicalScope(false);
+    ifLexicalScope(true);
+    loopLexicalScope(false);
+    forLexicalScope(1.0f);
+    whileLexicalScope(1);
+    switchLexicalScope(1);
 }
 
 void main() {

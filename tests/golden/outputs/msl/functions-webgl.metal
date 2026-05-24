@@ -8,9 +8,10 @@ float2 test_fma() {
     return fma(local_0, local_1, local_2);
 }
 
-void fma() {
+float2 fma(float2 arg_0, float2 arg_1, float2 arg_2) {
 }
 
 [[fragment]]
 void main() {
+    float2 local_0 = test_fma();
 }

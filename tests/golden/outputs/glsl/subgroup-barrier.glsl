@@ -4,6 +4,7 @@ precision highp int;
 
 
 void wgsl_main() {
+    subgroupBarrier();
 }
 
 void subgroupBarrier() {

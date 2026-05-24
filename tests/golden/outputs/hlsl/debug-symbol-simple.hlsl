@@ -16,6 +16,10 @@ struct vs_main_Output {
 };
 vs_main_Output vs_main() {
     vs_main_Output stage_out;
+    Struct_4 local_0;
+    local_0.color = model.color;
+    local_0.clip_position = float4(model.position, 1.0f);
+    return local_0;
     return stage_out;
 }
 
@@ -24,5 +28,22 @@ struct fs_main_Output {
 };
 fs_main_Output fs_main() {
     fs_main_Output stage_out;
+    float3 local_0 = in.color;
+    {
+        int local_1 = 0;
+        while (true) {
+            if ((local_1 < 10)) {
+                {
+                    float local_2 = float(local_1);
+                    local_0[0] = (local_2 * 0.001f);
+                    local_0[1] = (local_2 * 0.002f);
+                }
+                local_1 = 1;
+            } else {
+                break;
+            }
+        }
+    }
+    return float4(local_0, 1.0f);
     return stage_out;
 }

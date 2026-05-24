@@ -5,7 +5,7 @@ struct Struct_2 {
     float3 b;
 };
 
-Struct_2 foobar(/* unknown type */ void normals, uint count) {
+Struct_2 foobar(array<float3, 12> normals, uint count) {
     {
         uint local_0 = 0u;
         while (true) {
@@ -37,4 +37,6 @@ Struct_2 foobar(/* unknown type */ void normals, uint count) {
 
 [[fragment]]
 void main() {
+    array<float3, 12> local_0;
+    foobar(local_0, 1);
 }

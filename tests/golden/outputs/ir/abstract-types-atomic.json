@@ -14,6 +14,18 @@
                     "kind": "Uint",
                     "width": 4
                 }
+            },
+            {
+                "inner": {
+                    "__type": "io.ygdrasil.wgsl.ir.TypeInner.ValuePointer",
+                    "base": 0
+                }
+            },
+            {
+                "inner": {
+                    "__type": "io.ygdrasil.wgsl.ir.TypeInner.ValuePointer",
+                    "base": 1
+                }
             }
         ],
         "indexMap": [
@@ -32,7 +44,21 @@
                     "width": 4
                 }
             },
-            1
+            1,
+            {
+                "inner": {
+                    "__type": "io.ygdrasil.wgsl.ir.TypeInner.ValuePointer",
+                    "base": 0
+                }
+            },
+            2,
+            {
+                "inner": {
+                    "__type": "io.ygdrasil.wgsl.ir.TypeInner.ValuePointer",
+                    "base": 1
+                }
+            },
+            3
         ]
     },
     "constants": {},
@@ -134,7 +160,7 @@
                                     "__type": "io.ygdrasil.wgsl.ir.LiteralValue.Scalar",
                                     "value": {
                                         "__type": "io.ygdrasil.wgsl.ir.ScalarValue.I32",
-                                        "value": 0
+                                        "value": 1
                                     }
                                 }
                             }
@@ -169,7 +195,7 @@
                                     "__type": "io.ygdrasil.wgsl.ir.LiteralValue.Scalar",
                                     "value": {
                                         "__type": "io.ygdrasil.wgsl.ir.ScalarValue.I32",
-                                        "value": 0
+                                        "value": 1
                                     }
                                 }
                             }
@@ -479,37 +505,48 @@
                         {
                             "statements": [
                                 {
-                                    "__type": "io.ygdrasil.wgsl.ir.Statement.Nop"
+                                    "__type": "io.ygdrasil.wgsl.ir.Statement.Emit",
+                                    "range": 33
                                 },
                                 {
-                                    "__type": "io.ygdrasil.wgsl.ir.Statement.Nop"
+                                    "__type": "io.ygdrasil.wgsl.ir.Statement.Emit",
+                                    "range": 88
                                 },
                                 {
-                                    "__type": "io.ygdrasil.wgsl.ir.Statement.Nop"
+                                    "__type": "io.ygdrasil.wgsl.ir.Statement.Emit",
+                                    "range": 1313
                                 },
                                 {
-                                    "__type": "io.ygdrasil.wgsl.ir.Statement.Nop"
+                                    "__type": "io.ygdrasil.wgsl.ir.Statement.Emit",
+                                    "range": 1717
                                 },
                                 {
-                                    "__type": "io.ygdrasil.wgsl.ir.Statement.Nop"
+                                    "__type": "io.ygdrasil.wgsl.ir.Statement.Emit",
+                                    "range": 2121
                                 },
                                 {
-                                    "__type": "io.ygdrasil.wgsl.ir.Statement.Nop"
+                                    "__type": "io.ygdrasil.wgsl.ir.Statement.Emit",
+                                    "range": 2525
                                 },
                                 {
-                                    "__type": "io.ygdrasil.wgsl.ir.Statement.Nop"
+                                    "__type": "io.ygdrasil.wgsl.ir.Statement.Emit",
+                                    "range": 2929
                                 },
                                 {
-                                    "__type": "io.ygdrasil.wgsl.ir.Statement.Nop"
+                                    "__type": "io.ygdrasil.wgsl.ir.Statement.Emit",
+                                    "range": 3333
                                 },
                                 {
-                                    "__type": "io.ygdrasil.wgsl.ir.Statement.Nop"
+                                    "__type": "io.ygdrasil.wgsl.ir.Statement.Emit",
+                                    "range": 3737
                                 },
                                 {
-                                    "__type": "io.ygdrasil.wgsl.ir.Statement.Nop"
+                                    "__type": "io.ygdrasil.wgsl.ir.Statement.Emit",
+                                    "range": 4141
                                 },
                                 {
-                                    "__type": "io.ygdrasil.wgsl.ir.Statement.Nop"
+                                    "__type": "io.ygdrasil.wgsl.ir.Statement.Emit",
+                                    "range": 4545
                                 }
                             ]
                         }
@@ -519,7 +556,17 @@
             },
             {
                 "name": "atomicStore",
-                "parameters": [],
+                "parameters": [
+                    {
+                        "name": "arg_0",
+                        "type": 2
+                    },
+                    {
+                        "name": "arg_1",
+                        "type": 0
+                    }
+                ],
+                "returnType": 2,
                 "localVariables": {},
                 "expressions": {},
                 "blocks": {
@@ -533,7 +580,21 @@
             },
             {
                 "name": "atomicCompareExchangeWeak",
-                "parameters": [],
+                "parameters": [
+                    {
+                        "name": "arg_0",
+                        "type": 2
+                    },
+                    {
+                        "name": "arg_1",
+                        "type": 0
+                    },
+                    {
+                        "name": "arg_2",
+                        "type": 0
+                    }
+                ],
+                "returnType": 2,
                 "localVariables": {},
                 "expressions": {},
                 "blocks": {
@@ -547,7 +608,21 @@
             },
             {
                 "name": "atomicCompareExchangeWeak",
-                "parameters": [],
+                "parameters": [
+                    {
+                        "name": "arg_0",
+                        "type": 2
+                    },
+                    {
+                        "name": "arg_1",
+                        "type": 0
+                    },
+                    {
+                        "name": "arg_2",
+                        "type": 0
+                    }
+                ],
+                "returnType": 2,
                 "localVariables": {},
                 "expressions": {},
                 "blocks": {
@@ -561,7 +636,17 @@
             },
             {
                 "name": "atomicAdd",
-                "parameters": [],
+                "parameters": [
+                    {
+                        "name": "arg_0",
+                        "type": 2
+                    },
+                    {
+                        "name": "arg_1",
+                        "type": 0
+                    }
+                ],
+                "returnType": 2,
                 "localVariables": {},
                 "expressions": {},
                 "blocks": {
@@ -575,7 +660,17 @@
             },
             {
                 "name": "atomicSub",
-                "parameters": [],
+                "parameters": [
+                    {
+                        "name": "arg_0",
+                        "type": 2
+                    },
+                    {
+                        "name": "arg_1",
+                        "type": 0
+                    }
+                ],
+                "returnType": 2,
                 "localVariables": {},
                 "expressions": {},
                 "blocks": {
@@ -589,7 +684,17 @@
             },
             {
                 "name": "atomicAnd",
-                "parameters": [],
+                "parameters": [
+                    {
+                        "name": "arg_0",
+                        "type": 2
+                    },
+                    {
+                        "name": "arg_1",
+                        "type": 0
+                    }
+                ],
+                "returnType": 2,
                 "localVariables": {},
                 "expressions": {},
                 "blocks": {
@@ -603,7 +708,17 @@
             },
             {
                 "name": "atomicXor",
-                "parameters": [],
+                "parameters": [
+                    {
+                        "name": "arg_0",
+                        "type": 2
+                    },
+                    {
+                        "name": "arg_1",
+                        "type": 0
+                    }
+                ],
+                "returnType": 2,
                 "localVariables": {},
                 "expressions": {},
                 "blocks": {
@@ -617,7 +732,17 @@
             },
             {
                 "name": "atomicOr",
-                "parameters": [],
+                "parameters": [
+                    {
+                        "name": "arg_0",
+                        "type": 2
+                    },
+                    {
+                        "name": "arg_1",
+                        "type": 0
+                    }
+                ],
+                "returnType": 2,
                 "localVariables": {},
                 "expressions": {},
                 "blocks": {
@@ -631,7 +756,17 @@
             },
             {
                 "name": "atomicMin",
-                "parameters": [],
+                "parameters": [
+                    {
+                        "name": "arg_0",
+                        "type": 2
+                    },
+                    {
+                        "name": "arg_1",
+                        "type": 0
+                    }
+                ],
+                "returnType": 2,
                 "localVariables": {},
                 "expressions": {},
                 "blocks": {
@@ -645,7 +780,17 @@
             },
             {
                 "name": "atomicMax",
-                "parameters": [],
+                "parameters": [
+                    {
+                        "name": "arg_0",
+                        "type": 2
+                    },
+                    {
+                        "name": "arg_1",
+                        "type": 0
+                    }
+                ],
+                "returnType": 2,
                 "localVariables": {},
                 "expressions": {},
                 "blocks": {
@@ -659,7 +804,17 @@
             },
             {
                 "name": "atomicExchange",
-                "parameters": [],
+                "parameters": [
+                    {
+                        "name": "arg_0",
+                        "type": 2
+                    },
+                    {
+                        "name": "arg_1",
+                        "type": 0
+                    }
+                ],
+                "returnType": 2,
                 "localVariables": {},
                 "expressions": {},
                 "blocks": {
@@ -742,7 +897,7 @@
                                     "__type": "io.ygdrasil.wgsl.ir.LiteralValue.Scalar",
                                     "value": {
                                         "__type": "io.ygdrasil.wgsl.ir.ScalarValue.U32",
-                                        "value": 0
+                                        "value": 1
                                     }
                                 }
                             }
@@ -777,7 +932,7 @@
                                     "__type": "io.ygdrasil.wgsl.ir.LiteralValue.Scalar",
                                     "value": {
                                         "__type": "io.ygdrasil.wgsl.ir.ScalarValue.U32",
-                                        "value": 0
+                                        "value": 1
                                     }
                                 }
                             }
@@ -1087,37 +1242,48 @@
                         {
                             "statements": [
                                 {
-                                    "__type": "io.ygdrasil.wgsl.ir.Statement.Nop"
+                                    "__type": "io.ygdrasil.wgsl.ir.Statement.Emit",
+                                    "range": 33
                                 },
                                 {
-                                    "__type": "io.ygdrasil.wgsl.ir.Statement.Nop"
+                                    "__type": "io.ygdrasil.wgsl.ir.Statement.Emit",
+                                    "range": 88
                                 },
                                 {
-                                    "__type": "io.ygdrasil.wgsl.ir.Statement.Nop"
+                                    "__type": "io.ygdrasil.wgsl.ir.Statement.Emit",
+                                    "range": 1313
                                 },
                                 {
-                                    "__type": "io.ygdrasil.wgsl.ir.Statement.Nop"
+                                    "__type": "io.ygdrasil.wgsl.ir.Statement.Emit",
+                                    "range": 1717
                                 },
                                 {
-                                    "__type": "io.ygdrasil.wgsl.ir.Statement.Nop"
+                                    "__type": "io.ygdrasil.wgsl.ir.Statement.Emit",
+                                    "range": 2121
                                 },
                                 {
-                                    "__type": "io.ygdrasil.wgsl.ir.Statement.Nop"
+                                    "__type": "io.ygdrasil.wgsl.ir.Statement.Emit",
+                                    "range": 2525
                                 },
                                 {
-                                    "__type": "io.ygdrasil.wgsl.ir.Statement.Nop"
+                                    "__type": "io.ygdrasil.wgsl.ir.Statement.Emit",
+                                    "range": 2929
                                 },
                                 {
-                                    "__type": "io.ygdrasil.wgsl.ir.Statement.Nop"
+                                    "__type": "io.ygdrasil.wgsl.ir.Statement.Emit",
+                                    "range": 3333
                                 },
                                 {
-                                    "__type": "io.ygdrasil.wgsl.ir.Statement.Nop"
+                                    "__type": "io.ygdrasil.wgsl.ir.Statement.Emit",
+                                    "range": 3737
                                 },
                                 {
-                                    "__type": "io.ygdrasil.wgsl.ir.Statement.Nop"
+                                    "__type": "io.ygdrasil.wgsl.ir.Statement.Emit",
+                                    "range": 4141
                                 },
                                 {
-                                    "__type": "io.ygdrasil.wgsl.ir.Statement.Nop"
+                                    "__type": "io.ygdrasil.wgsl.ir.Statement.Emit",
+                                    "range": 4545
                                 }
                             ]
                         }
@@ -1127,7 +1293,17 @@
             },
             {
                 "name": "atomicStore",
-                "parameters": [],
+                "parameters": [
+                    {
+                        "name": "arg_0",
+                        "type": 3
+                    },
+                    {
+                        "name": "arg_1",
+                        "type": 0
+                    }
+                ],
+                "returnType": 3,
                 "localVariables": {},
                 "expressions": {},
                 "blocks": {
@@ -1141,7 +1317,21 @@
             },
             {
                 "name": "atomicCompareExchangeWeak",
-                "parameters": [],
+                "parameters": [
+                    {
+                        "name": "arg_0",
+                        "type": 3
+                    },
+                    {
+                        "name": "arg_1",
+                        "type": 0
+                    },
+                    {
+                        "name": "arg_2",
+                        "type": 1
+                    }
+                ],
+                "returnType": 3,
                 "localVariables": {},
                 "expressions": {},
                 "blocks": {
@@ -1155,7 +1345,21 @@
             },
             {
                 "name": "atomicCompareExchangeWeak",
-                "parameters": [],
+                "parameters": [
+                    {
+                        "name": "arg_0",
+                        "type": 3
+                    },
+                    {
+                        "name": "arg_1",
+                        "type": 1
+                    },
+                    {
+                        "name": "arg_2",
+                        "type": 0
+                    }
+                ],
+                "returnType": 3,
                 "localVariables": {},
                 "expressions": {},
                 "blocks": {
@@ -1169,7 +1373,17 @@
             },
             {
                 "name": "atomicAdd",
-                "parameters": [],
+                "parameters": [
+                    {
+                        "name": "arg_0",
+                        "type": 3
+                    },
+                    {
+                        "name": "arg_1",
+                        "type": 0
+                    }
+                ],
+                "returnType": 3,
                 "localVariables": {},
                 "expressions": {},
                 "blocks": {
@@ -1183,7 +1397,17 @@
             },
             {
                 "name": "atomicSub",
-                "parameters": [],
+                "parameters": [
+                    {
+                        "name": "arg_0",
+                        "type": 3
+                    },
+                    {
+                        "name": "arg_1",
+                        "type": 0
+                    }
+                ],
+                "returnType": 3,
                 "localVariables": {},
                 "expressions": {},
                 "blocks": {
@@ -1197,7 +1421,17 @@
             },
             {
                 "name": "atomicAnd",
-                "parameters": [],
+                "parameters": [
+                    {
+                        "name": "arg_0",
+                        "type": 3
+                    },
+                    {
+                        "name": "arg_1",
+                        "type": 0
+                    }
+                ],
+                "returnType": 3,
                 "localVariables": {},
                 "expressions": {},
                 "blocks": {
@@ -1211,7 +1445,17 @@
             },
             {
                 "name": "atomicXor",
-                "parameters": [],
+                "parameters": [
+                    {
+                        "name": "arg_0",
+                        "type": 3
+                    },
+                    {
+                        "name": "arg_1",
+                        "type": 0
+                    }
+                ],
+                "returnType": 3,
                 "localVariables": {},
                 "expressions": {},
                 "blocks": {
@@ -1225,7 +1469,17 @@
             },
             {
                 "name": "atomicOr",
-                "parameters": [],
+                "parameters": [
+                    {
+                        "name": "arg_0",
+                        "type": 3
+                    },
+                    {
+                        "name": "arg_1",
+                        "type": 0
+                    }
+                ],
+                "returnType": 3,
                 "localVariables": {},
                 "expressions": {},
                 "blocks": {
@@ -1239,7 +1493,17 @@
             },
             {
                 "name": "atomicMin",
-                "parameters": [],
+                "parameters": [
+                    {
+                        "name": "arg_0",
+                        "type": 3
+                    },
+                    {
+                        "name": "arg_1",
+                        "type": 0
+                    }
+                ],
+                "returnType": 3,
                 "localVariables": {},
                 "expressions": {},
                 "blocks": {
@@ -1253,7 +1517,17 @@
             },
             {
                 "name": "atomicMax",
-                "parameters": [],
+                "parameters": [
+                    {
+                        "name": "arg_0",
+                        "type": 3
+                    },
+                    {
+                        "name": "arg_1",
+                        "type": 0
+                    }
+                ],
+                "returnType": 3,
                 "localVariables": {},
                 "expressions": {},
                 "blocks": {
@@ -1267,7 +1541,17 @@
             },
             {
                 "name": "atomicExchange",
-                "parameters": [],
+                "parameters": [
+                    {
+                        "name": "arg_0",
+                        "type": 3
+                    },
+                    {
+                        "name": "arg_1",
+                        "type": 0
+                    }
+                ],
+                "returnType": 3,
                 "localVariables": {},
                 "expressions": {},
                 "blocks": {
@@ -1309,10 +1593,12 @@
                         {
                             "statements": [
                                 {
-                                    "__type": "io.ygdrasil.wgsl.ir.Statement.Nop"
+                                    "__type": "io.ygdrasil.wgsl.ir.Statement.Emit",
+                                    "range": 00
                                 },
                                 {
-                                    "__type": "io.ygdrasil.wgsl.ir.Statement.Nop"
+                                    "__type": "io.ygdrasil.wgsl.ir.Statement.Emit",
+                                    "range": 11
                                 }
                             ]
                         }

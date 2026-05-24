@@ -4,4 +4,8 @@
 
 [numthreads(1, 1, 1)]
 void comp() {
+    if ((id[0] == 0)) {
+    }
+    (1 + 1);
+    return;
 }

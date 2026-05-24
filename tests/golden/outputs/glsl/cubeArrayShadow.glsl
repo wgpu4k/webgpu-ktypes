@@ -11,7 +11,7 @@ vec4 wgsl_fragment() {
     return vec4(a, 1.0f, 1.0f, 1.0f);
 }
 
-void textureSampleCompare() {
+texture2D textureSampleCompare(texture2D arg_0, sampler_comparison arg_1, vec3 arg_2, int arg_3, float arg_4) {
 }
 
 layout(location = 0) out vec4 outColor;

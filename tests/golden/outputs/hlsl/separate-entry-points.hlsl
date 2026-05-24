@@ -8,16 +8,19 @@ void derivatives() {
     float local_2 = fwidth(0.0f);
 }
 
-void dpdx() {
+float dpdx(float arg_0) {
 }
 
-void dpdy() {
+float dpdy(float arg_0) {
 }
 
-void fwidth() {
+float fwidth(float arg_0) {
 }
 
 void barriers() {
+    storageBarrier();
+    workgroupBarrier();
+    textureBarrier();
 }
 
 void storageBarrier() {
@@ -34,9 +37,12 @@ struct fragment_Output {
 };
 fragment_Output fragment() {
     fragment_Output stage_out;
+    derivatives();
+    return float4();
     return stage_out;
 }
 
 [numthreads(1, 1, 1)]
 void compute() {
+    barriers();
 }

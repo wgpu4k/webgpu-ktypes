@@ -12,26 +12,32 @@ precision highp int;
  float global_7 = (1.0f + 2);
  float global_8 = (1.0f + 2.0f);
  int global_9 = (1 + 2);
- int global_10 = (1 + 0);
- int global_11 = (0 + 2);
- int global_12 = (0 + 0);
+ int global_10 = (1 + 2);
+ int global_11 = (1 + 2);
+ int global_12 = (1 + 2);
  uint global_13 = (1 + 2);
- uint global_14 = (1 + 0u);
- uint global_15 = (0u + 2);
- uint global_16 = (0u + 0u);
+ uint global_14 = (1 + 2u);
+ uint global_15 = (1u + 2);
+ uint global_16 = (1u + 2u);
  uint global_17 = ~(0u);
  uint global_18 = (~(0) & (0 - 1));
  int global_19 = -(-2147483648);
  float global_20 = -(3.4028235E38f);
  int global_21 = (1 << 2);
- int global_22 = (1 << 0u);
+ int global_22 = (1 << 2u);
  uint global_23 = (1 << 2);
- uint global_24 = (1 << 0u);
- int global_25 = (1 >> 2);
- int global_26 = (1 >> 0u);
- uint global_27 = (1 >> 2);
- uint global_28 = (1 >> 0u);
-shared uint[64] global_29;
+ uint global_24 = (1 << 2u);
+ int global_25 = (1 << 2);
+ int global_26 = (1 << 2u);
+ int global_27 = (1 >> 2);
+ int global_28 = (1 >> 2u);
+ uint global_29 = (1 >> 2);
+ uint global_30 = (1 >> 2u);
+ int global_31 = (1 >> 2);
+ int global_32 = (1 >> 2u);
+ int global_33 = int(-(0));
+ int global_34 = -(-2147483648);
+shared uint[64] global_35;
 
 void runtime_values() {
     float f = 42;
@@ -66,10 +72,13 @@ void wgpu_4445() {
 
 void wgpu_4435() {
     int x = 1;
-    uint y = global_29[(x - 1)];
+    uint y = global_35[(x - 1)];
 }
 
 void wgsl_main() {
+    runtime_values();
+    wgpu_4445();
+    wgpu_4435();
 }
 
 void main() {

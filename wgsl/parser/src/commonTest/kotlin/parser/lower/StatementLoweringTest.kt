@@ -5,6 +5,8 @@ import io.kotest.matchers.collections.shouldHaveSize
 import io.kotest.matchers.should
 import io.kotest.matchers.shouldBe
 import io.kotest.matchers.types.beInstanceOf
+import io.kotest.matchers.types.shouldBeInstanceOf
+import io.ygdrasil.wgsl.ir.ExpressionKind
 import io.ygdrasil.wgsl.ir.Statement
 import io.ygdrasil.wgsl.parser.TestUtils.lowerWgsl
 import io.kotest.matchers.shouldNotBe
@@ -243,5 +245,46 @@ class StatementLoweringTest : FunSpec({
         
         // Default case handle must not be null
         switchStmt.default shouldNotBe null
+    }
+
+    test("function call expression statement is preserved as emit") {
+        val module = lowerWgsl("""
+            fn callee() {
+            }
+
+            fn main() {
+                callee();
+            }
+        """)
+
+        val mainFunc = module.functions.toList().first { func -> func.name == "main" }
+        val bodyBlock = mainFunc.blocks[mainFunc.body]
+        bodyBlock.statements shouldHaveSize 1
+
+        val emit = bodyBlock.statements[0].shouldBeInstanceOf<Statement.Emit>()
+        emit.range.count shouldBe 1
+        val call = mainFunc.expressions[emit.range.start].kind.shouldBeInstanceOf<ExpressionKind.Call>()
+        module.functions[call.function].name shouldBe "callee"
+    }
+
+    test("phony assignment expression is preserved as emit") {
+        val module = lowerWgsl("""
+            fn callee() -> i32 {
+                return 1;
+            }
+
+            fn main() {
+                _ = callee();
+            }
+        """)
+
+        val mainFunc = module.functions.toList().first { func -> func.name == "main" }
+        val bodyBlock = mainFunc.blocks[mainFunc.body]
+        bodyBlock.statements shouldHaveSize 1
+
+        val emit = bodyBlock.statements[0].shouldBeInstanceOf<Statement.Emit>()
+        emit.range.count shouldBe 1
+        val call = mainFunc.expressions[emit.range.start].kind.shouldBeInstanceOf<ExpressionKind.Call>()
+        module.functions[call.function].name shouldBe "callee"
     }
 })

@@ -5,7 +5,7 @@ precision highp int;
 struct Struct_2 {
     vec4 position;
 };
-struct Struct_5 {
+struct Struct_6 {
     uint v_uint8;
     uint v_uint8x2;
     uint v_uint8x4;
@@ -47,12 +47,12 @@ struct Struct_5 {
     int v_sint32x4;
     float v_unorm10_10_10_2;
     float v_unorm8x4_bgra;
-    float v_float16_as_f16;
-    float v_float16x2_as_f16;
-    float v_float16x4_as_f16;
+    float16_t v_float16_as_f16;
+    float16_t v_float16x2_as_f16;
+    float16_t v_float16x4_as_f16;
 };
 
-Struct_2 wgsl_render_vertex(Struct_5 v_in) {
+Struct_2 wgsl_render_vertex(Struct_6 v_in) {
     return Struct_2(vec4(v_in.v_float32));
 }
 

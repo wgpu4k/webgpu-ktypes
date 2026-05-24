@@ -15,4 +15,7 @@ void test_g() {
 
 [[kernel]]
 void test_ep(float4x4 global_0 [[buffer(0)]]) {
+    global_2;
+    Struct_1();
+    test_g();
 }

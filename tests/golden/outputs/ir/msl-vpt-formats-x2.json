@@ -67,6 +67,20 @@
             },
             {
                 "inner": {
+                    "__type": "io.ygdrasil.wgsl.ir.TypeInner.Scalar",
+                    "kind": "F16",
+                    "width": 2
+                }
+            },
+            {
+                "inner": {
+                    "__type": "io.ygdrasil.wgsl.ir.TypeInner.Vector",
+                    "size": "Bi",
+                    "scalar": 8
+                }
+            },
+            {
+                "inner": {
                     "__type": "io.ygdrasil.wgsl.ir.TypeInner.Struct",
                     "members": [
                         {
@@ -399,7 +413,7 @@
                         },
                         {
                             "name": "v_float16_as_f16",
-                            "type": 7,
+                            "type": 9,
                             "binding": {
                                 "__type": "io.ygdrasil.wgsl.ir.BindingAttribute.Location",
                                 "location": 41
@@ -407,7 +421,7 @@
                         },
                         {
                             "name": "v_float16x2_as_f16",
-                            "type": 7,
+                            "type": 9,
                             "binding": {
                                 "__type": "io.ygdrasil.wgsl.ir.BindingAttribute.Location",
                                 "location": 42
@@ -415,7 +429,7 @@
                         },
                         {
                             "name": "v_float16x4_as_f16",
-                            "type": 7,
+                            "type": 9,
                             "binding": {
                                 "__type": "io.ygdrasil.wgsl.ir.BindingAttribute.Location",
                                 "location": 43
@@ -500,6 +514,22 @@
             7,
             {
                 "inner": {
+                    "__type": "io.ygdrasil.wgsl.ir.TypeInner.Scalar",
+                    "kind": "F16",
+                    "width": 2
+                }
+            },
+            8,
+            {
+                "inner": {
+                    "__type": "io.ygdrasil.wgsl.ir.TypeInner.Vector",
+                    "size": "Bi",
+                    "scalar": 8
+                }
+            },
+            9,
+            {
+                "inner": {
                     "__type": "io.ygdrasil.wgsl.ir.TypeInner.Struct",
                     "members": [
                         {
@@ -832,7 +862,7 @@
                         },
                         {
                             "name": "v_float16_as_f16",
-                            "type": 7,
+                            "type": 9,
                             "binding": {
                                 "__type": "io.ygdrasil.wgsl.ir.BindingAttribute.Location",
                                 "location": 41
@@ -840,7 +870,7 @@
                         },
                         {
                             "name": "v_float16x2_as_f16",
-                            "type": 7,
+                            "type": 9,
                             "binding": {
                                 "__type": "io.ygdrasil.wgsl.ir.BindingAttribute.Location",
                                 "location": 42
@@ -848,7 +878,7 @@
                         },
                         {
                             "name": "v_float16x4_as_f16",
-                            "type": 7,
+                            "type": 9,
                             "binding": {
                                 "__type": "io.ygdrasil.wgsl.ir.BindingAttribute.Location",
                                 "location": 43
@@ -857,7 +887,7 @@
                     ]
                 }
             },
-            8
+            10
         ]
     },
     "constants": {},
@@ -870,7 +900,7 @@
                 "parameters": [
                     {
                         "name": "v_in",
-                        "type": 8
+                        "type": 10
                     }
                 ],
                 "returnType": 2,

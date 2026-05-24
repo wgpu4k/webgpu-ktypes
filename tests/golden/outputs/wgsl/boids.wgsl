@@ -15,7 +15,7 @@ struct Struct_3 {
 struct Struct_5 {
     particles: array<Struct_2>,
 }
-var<private> NUM_PARTICLES: u32 = 0u;
+var<private> NUM_PARTICLES: u32 = 1500u;
 @group(0) @binding(0)
 var<uniform> params: Struct_3;
 @group(0) @binding(1)
@@ -23,22 +23,22 @@ var<storage> particlesSrc: Struct_5;
 @group(0) @binding(2)
 var<storage, read_write> particlesDst: Struct_5;
 
-fn distance() {
+fn distance(arg_0: vec2<f32>, arg_1: vec2<f32>) -> vec2<f32> {
 }
 
-fn distance() {
+fn distance(arg_0: vec2<f32>, arg_1: vec2<f32>) -> vec2<f32> {
 }
 
-fn distance() {
+fn distance(arg_0: vec2<f32>, arg_1: vec2<f32>) -> vec2<f32> {
 }
 
-fn normalize() {
+fn normalize(arg_0: vec2<f32>) -> vec2<f32> {
 }
 
-fn clamp() {
+fn length(arg_0: vec2<f32>) -> vec2<f32> {
 }
 
-fn length() {
+fn clamp(arg_0: vec2<f32>, arg_1: f32, arg_2: f32) -> vec2<f32> {
 }
 
 @compute
@@ -78,7 +78,7 @@ fn main(global_invocation_id: vec3<u32>) {
             cVelCount = (cVelCount + 1);
         }
         continuing {
-            i = (i + 0u);
+            i = (i + 1u);
         }
     }
     if ((cMassCount > 0)) {

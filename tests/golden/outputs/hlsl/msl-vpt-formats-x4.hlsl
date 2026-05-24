@@ -4,7 +4,7 @@
 struct Struct_2 {
     float4 position;
 };
-struct Struct_7 {
+struct Struct_9 {
     uint4 v_uint8;
     uint4 v_uint8x2;
     uint4 v_uint8x4;
@@ -46,9 +46,9 @@ struct Struct_7 {
     int4 v_sint32x4;
     float4 v_unorm10_10_10_2;
     float4 v_unorm8x4_bgra;
-    float4 v_float16_as_f16;
-    float4 v_float16x2_as_f16;
-    float4 v_float16x4_as_f16;
+    half4 v_float16_as_f16;
+    half4 v_float16x2_as_f16;
+    half4 v_float16x4_as_f16;
 };
 
 struct render_vertex_Output {
@@ -56,5 +56,6 @@ struct render_vertex_Output {
 };
 render_vertex_Output render_vertex() {
     render_vertex_Output stage_out;
+    return Struct_2(float4(v_in.v_float32[0]));
     return stage_out;
 }

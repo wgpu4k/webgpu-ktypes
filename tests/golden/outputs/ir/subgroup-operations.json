@@ -88,7 +88,7 @@
                                     "__type": "io.ygdrasil.wgsl.ir.LiteralValue.Scalar",
                                     "value": {
                                         "__type": "io.ygdrasil.wgsl.ir.ScalarValue.U32",
-                                        "value": 0
+                                        "value": 1
                                     }
                                 }
                             }
@@ -108,7 +108,7 @@
                                     "__type": "io.ygdrasil.wgsl.ir.LiteralValue.Scalar",
                                     "value": {
                                         "__type": "io.ygdrasil.wgsl.ir.ScalarValue.U32",
-                                        "value": 0
+                                        "value": 1
                                     }
                                 }
                             }
@@ -400,7 +400,7 @@
                                     "__type": "io.ygdrasil.wgsl.ir.LiteralValue.Scalar",
                                     "value": {
                                         "__type": "io.ygdrasil.wgsl.ir.ScalarValue.U32",
-                                        "value": 0
+                                        "value": 4
                                     }
                                 }
                             }
@@ -441,7 +441,7 @@
                                     "__type": "io.ygdrasil.wgsl.ir.LiteralValue.Scalar",
                                     "value": {
                                         "__type": "io.ygdrasil.wgsl.ir.ScalarValue.U32",
-                                        "value": 0
+                                        "value": 1
                                     }
                                 }
                             }
@@ -491,7 +491,7 @@
                                     "__type": "io.ygdrasil.wgsl.ir.LiteralValue.Scalar",
                                     "value": {
                                         "__type": "io.ygdrasil.wgsl.ir.ScalarValue.U32",
-                                        "value": 0
+                                        "value": 1
                                     }
                                 }
                             }
@@ -519,7 +519,7 @@
                                     "__type": "io.ygdrasil.wgsl.ir.LiteralValue.Scalar",
                                     "value": {
                                         "__type": "io.ygdrasil.wgsl.ir.ScalarValue.U32",
-                                        "value": 0
+                                        "value": 1
                                     }
                                 }
                             }
@@ -560,7 +560,7 @@
                                     "__type": "io.ygdrasil.wgsl.ir.LiteralValue.Scalar",
                                     "value": {
                                         "__type": "io.ygdrasil.wgsl.ir.ScalarValue.U32",
-                                        "value": 0
+                                        "value": 1
                                     }
                                 }
                             }
@@ -596,7 +596,7 @@
                                     "__type": "io.ygdrasil.wgsl.ir.LiteralValue.Scalar",
                                     "value": {
                                         "__type": "io.ygdrasil.wgsl.ir.ScalarValue.U32",
-                                        "value": 0
+                                        "value": 4
                                     }
                                 }
                             }
@@ -666,79 +666,104 @@
                         {
                             "statements": [
                                 {
-                                    "__type": "io.ygdrasil.wgsl.ir.Statement.Nop"
+                                    "__type": "io.ygdrasil.wgsl.ir.Statement.Emit",
+                                    "range": 55
                                 },
                                 {
-                                    "__type": "io.ygdrasil.wgsl.ir.Statement.Nop"
+                                    "__type": "io.ygdrasil.wgsl.ir.Statement.Emit",
+                                    "range": 66
                                 },
                                 {
-                                    "__type": "io.ygdrasil.wgsl.ir.Statement.Nop"
+                                    "__type": "io.ygdrasil.wgsl.ir.Statement.Emit",
+                                    "range": 1010
                                 },
                                 {
-                                    "__type": "io.ygdrasil.wgsl.ir.Statement.Nop"
+                                    "__type": "io.ygdrasil.wgsl.ir.Statement.Emit",
+                                    "range": 1414
                                 },
                                 {
-                                    "__type": "io.ygdrasil.wgsl.ir.Statement.Nop"
+                                    "__type": "io.ygdrasil.wgsl.ir.Statement.Emit",
+                                    "range": 1616
                                 },
                                 {
-                                    "__type": "io.ygdrasil.wgsl.ir.Statement.Nop"
+                                    "__type": "io.ygdrasil.wgsl.ir.Statement.Emit",
+                                    "range": 1818
                                 },
                                 {
-                                    "__type": "io.ygdrasil.wgsl.ir.Statement.Nop"
+                                    "__type": "io.ygdrasil.wgsl.ir.Statement.Emit",
+                                    "range": 2020
                                 },
                                 {
-                                    "__type": "io.ygdrasil.wgsl.ir.Statement.Nop"
+                                    "__type": "io.ygdrasil.wgsl.ir.Statement.Emit",
+                                    "range": 2222
                                 },
                                 {
-                                    "__type": "io.ygdrasil.wgsl.ir.Statement.Nop"
+                                    "__type": "io.ygdrasil.wgsl.ir.Statement.Emit",
+                                    "range": 2424
                                 },
                                 {
-                                    "__type": "io.ygdrasil.wgsl.ir.Statement.Nop"
+                                    "__type": "io.ygdrasil.wgsl.ir.Statement.Emit",
+                                    "range": 2626
                                 },
                                 {
-                                    "__type": "io.ygdrasil.wgsl.ir.Statement.Nop"
+                                    "__type": "io.ygdrasil.wgsl.ir.Statement.Emit",
+                                    "range": 2828
                                 },
                                 {
-                                    "__type": "io.ygdrasil.wgsl.ir.Statement.Nop"
+                                    "__type": "io.ygdrasil.wgsl.ir.Statement.Emit",
+                                    "range": 3030
                                 },
                                 {
-                                    "__type": "io.ygdrasil.wgsl.ir.Statement.Nop"
+                                    "__type": "io.ygdrasil.wgsl.ir.Statement.Emit",
+                                    "range": 3232
                                 },
                                 {
-                                    "__type": "io.ygdrasil.wgsl.ir.Statement.Nop"
+                                    "__type": "io.ygdrasil.wgsl.ir.Statement.Emit",
+                                    "range": 3434
                                 },
                                 {
-                                    "__type": "io.ygdrasil.wgsl.ir.Statement.Nop"
+                                    "__type": "io.ygdrasil.wgsl.ir.Statement.Emit",
+                                    "range": 3636
                                 },
                                 {
-                                    "__type": "io.ygdrasil.wgsl.ir.Statement.Nop"
+                                    "__type": "io.ygdrasil.wgsl.ir.Statement.Emit",
+                                    "range": 3838
                                 },
                                 {
-                                    "__type": "io.ygdrasil.wgsl.ir.Statement.Nop"
+                                    "__type": "io.ygdrasil.wgsl.ir.Statement.Emit",
+                                    "range": 4141
                                 },
                                 {
-                                    "__type": "io.ygdrasil.wgsl.ir.Statement.Nop"
+                                    "__type": "io.ygdrasil.wgsl.ir.Statement.Emit",
+                                    "range": 4949
                                 },
                                 {
-                                    "__type": "io.ygdrasil.wgsl.ir.Statement.Nop"
+                                    "__type": "io.ygdrasil.wgsl.ir.Statement.Emit",
+                                    "range": 5252
                                 },
                                 {
-                                    "__type": "io.ygdrasil.wgsl.ir.Statement.Nop"
+                                    "__type": "io.ygdrasil.wgsl.ir.Statement.Emit",
+                                    "range": 5555
                                 },
                                 {
-                                    "__type": "io.ygdrasil.wgsl.ir.Statement.Nop"
+                                    "__type": "io.ygdrasil.wgsl.ir.Statement.Emit",
+                                    "range": 6161
                                 },
                                 {
-                                    "__type": "io.ygdrasil.wgsl.ir.Statement.Nop"
+                                    "__type": "io.ygdrasil.wgsl.ir.Statement.Emit",
+                                    "range": 6464
                                 },
                                 {
-                                    "__type": "io.ygdrasil.wgsl.ir.Statement.Nop"
+                                    "__type": "io.ygdrasil.wgsl.ir.Statement.Emit",
+                                    "range": 6666
                                 },
                                 {
-                                    "__type": "io.ygdrasil.wgsl.ir.Statement.Nop"
+                                    "__type": "io.ygdrasil.wgsl.ir.Statement.Emit",
+                                    "range": 6868
                                 },
                                 {
-                                    "__type": "io.ygdrasil.wgsl.ir.Statement.Nop"
+                                    "__type": "io.ygdrasil.wgsl.ir.Statement.Emit",
+                                    "range": 7070
                                 }
                             ]
                         }
@@ -748,7 +773,13 @@
             },
             {
                 "name": "subgroupBallot",
-                "parameters": [],
+                "parameters": [
+                    {
+                        "name": "arg_0",
+                        "type": 0
+                    }
+                ],
+                "returnType": 0,
                 "localVariables": {},
                 "expressions": {},
                 "blocks": {
@@ -776,7 +807,13 @@
             },
             {
                 "name": "subgroupAll",
-                "parameters": [],
+                "parameters": [
+                    {
+                        "name": "arg_0",
+                        "type": 0
+                    }
+                ],
+                "returnType": 0,
                 "localVariables": {},
                 "expressions": {},
                 "blocks": {
@@ -790,7 +827,13 @@
             },
             {
                 "name": "subgroupAny",
-                "parameters": [],
+                "parameters": [
+                    {
+                        "name": "arg_0",
+                        "type": 0
+                    }
+                ],
+                "returnType": 0,
                 "localVariables": {},
                 "expressions": {},
                 "blocks": {
@@ -804,7 +847,13 @@
             },
             {
                 "name": "subgroupAdd",
-                "parameters": [],
+                "parameters": [
+                    {
+                        "name": "arg_0",
+                        "type": 0
+                    }
+                ],
+                "returnType": 0,
                 "localVariables": {},
                 "expressions": {},
                 "blocks": {
@@ -818,7 +867,13 @@
             },
             {
                 "name": "subgroupMul",
-                "parameters": [],
+                "parameters": [
+                    {
+                        "name": "arg_0",
+                        "type": 0
+                    }
+                ],
+                "returnType": 0,
                 "localVariables": {},
                 "expressions": {},
                 "blocks": {
@@ -832,7 +887,13 @@
             },
             {
                 "name": "subgroupMin",
-                "parameters": [],
+                "parameters": [
+                    {
+                        "name": "arg_0",
+                        "type": 0
+                    }
+                ],
+                "returnType": 0,
                 "localVariables": {},
                 "expressions": {},
                 "blocks": {
@@ -846,7 +907,13 @@
             },
             {
                 "name": "subgroupMax",
-                "parameters": [],
+                "parameters": [
+                    {
+                        "name": "arg_0",
+                        "type": 0
+                    }
+                ],
+                "returnType": 0,
                 "localVariables": {},
                 "expressions": {},
                 "blocks": {
@@ -860,7 +927,13 @@
             },
             {
                 "name": "subgroupAnd",
-                "parameters": [],
+                "parameters": [
+                    {
+                        "name": "arg_0",
+                        "type": 0
+                    }
+                ],
+                "returnType": 0,
                 "localVariables": {},
                 "expressions": {},
                 "blocks": {
@@ -874,7 +947,13 @@
             },
             {
                 "name": "subgroupOr",
-                "parameters": [],
+                "parameters": [
+                    {
+                        "name": "arg_0",
+                        "type": 0
+                    }
+                ],
+                "returnType": 0,
                 "localVariables": {},
                 "expressions": {},
                 "blocks": {
@@ -888,7 +967,13 @@
             },
             {
                 "name": "subgroupXor",
-                "parameters": [],
+                "parameters": [
+                    {
+                        "name": "arg_0",
+                        "type": 0
+                    }
+                ],
+                "returnType": 0,
                 "localVariables": {},
                 "expressions": {},
                 "blocks": {
@@ -902,7 +987,13 @@
             },
             {
                 "name": "subgroupExclusiveAdd",
-                "parameters": [],
+                "parameters": [
+                    {
+                        "name": "arg_0",
+                        "type": 0
+                    }
+                ],
+                "returnType": 0,
                 "localVariables": {},
                 "expressions": {},
                 "blocks": {
@@ -916,7 +1007,13 @@
             },
             {
                 "name": "subgroupExclusiveMul",
-                "parameters": [],
+                "parameters": [
+                    {
+                        "name": "arg_0",
+                        "type": 0
+                    }
+                ],
+                "returnType": 0,
                 "localVariables": {},
                 "expressions": {},
                 "blocks": {
@@ -930,7 +1027,13 @@
             },
             {
                 "name": "subgroupInclusiveAdd",
-                "parameters": [],
+                "parameters": [
+                    {
+                        "name": "arg_0",
+                        "type": 0
+                    }
+                ],
+                "returnType": 0,
                 "localVariables": {},
                 "expressions": {},
                 "blocks": {
@@ -944,7 +1047,13 @@
             },
             {
                 "name": "subgroupInclusiveMul",
-                "parameters": [],
+                "parameters": [
+                    {
+                        "name": "arg_0",
+                        "type": 0
+                    }
+                ],
+                "returnType": 0,
                 "localVariables": {},
                 "expressions": {},
                 "blocks": {
@@ -958,7 +1067,13 @@
             },
             {
                 "name": "subgroupBroadcastFirst",
-                "parameters": [],
+                "parameters": [
+                    {
+                        "name": "arg_0",
+                        "type": 0
+                    }
+                ],
+                "returnType": 0,
                 "localVariables": {},
                 "expressions": {},
                 "blocks": {
@@ -972,7 +1087,17 @@
             },
             {
                 "name": "subgroupBroadcast",
-                "parameters": [],
+                "parameters": [
+                    {
+                        "name": "arg_0",
+                        "type": 0
+                    },
+                    {
+                        "name": "arg_1",
+                        "type": 0
+                    }
+                ],
+                "returnType": 0,
                 "localVariables": {},
                 "expressions": {},
                 "blocks": {
@@ -986,7 +1111,17 @@
             },
             {
                 "name": "subgroupShuffle",
-                "parameters": [],
+                "parameters": [
+                    {
+                        "name": "arg_0",
+                        "type": 0
+                    },
+                    {
+                        "name": "arg_1",
+                        "type": 0
+                    }
+                ],
+                "returnType": 0,
                 "localVariables": {},
                 "expressions": {},
                 "blocks": {
@@ -1000,7 +1135,17 @@
             },
             {
                 "name": "subgroupShuffleDown",
-                "parameters": [],
+                "parameters": [
+                    {
+                        "name": "arg_0",
+                        "type": 0
+                    },
+                    {
+                        "name": "arg_1",
+                        "type": 0
+                    }
+                ],
+                "returnType": 0,
                 "localVariables": {},
                 "expressions": {},
                 "blocks": {
@@ -1014,7 +1159,17 @@
             },
             {
                 "name": "subgroupShuffleUp",
-                "parameters": [],
+                "parameters": [
+                    {
+                        "name": "arg_0",
+                        "type": 0
+                    },
+                    {
+                        "name": "arg_1",
+                        "type": 0
+                    }
+                ],
+                "returnType": 0,
                 "localVariables": {},
                 "expressions": {},
                 "blocks": {
@@ -1028,7 +1183,17 @@
             },
             {
                 "name": "subgroupShuffleXor",
-                "parameters": [],
+                "parameters": [
+                    {
+                        "name": "arg_0",
+                        "type": 0
+                    },
+                    {
+                        "name": "arg_1",
+                        "type": 0
+                    }
+                ],
+                "returnType": 0,
                 "localVariables": {},
                 "expressions": {},
                 "blocks": {
@@ -1042,7 +1207,17 @@
             },
             {
                 "name": "quadBroadcast",
-                "parameters": [],
+                "parameters": [
+                    {
+                        "name": "arg_0",
+                        "type": 0
+                    },
+                    {
+                        "name": "arg_1",
+                        "type": 0
+                    }
+                ],
+                "returnType": 0,
                 "localVariables": {},
                 "expressions": {},
                 "blocks": {
@@ -1056,7 +1231,13 @@
             },
             {
                 "name": "quadSwapX",
-                "parameters": [],
+                "parameters": [
+                    {
+                        "name": "arg_0",
+                        "type": 0
+                    }
+                ],
+                "returnType": 0,
                 "localVariables": {},
                 "expressions": {},
                 "blocks": {
@@ -1070,7 +1251,13 @@
             },
             {
                 "name": "quadSwapY",
-                "parameters": [],
+                "parameters": [
+                    {
+                        "name": "arg_0",
+                        "type": 0
+                    }
+                ],
+                "returnType": 0,
                 "localVariables": {},
                 "expressions": {},
                 "blocks": {
@@ -1084,7 +1271,13 @@
             },
             {
                 "name": "quadSwapDiagonal",
-                "parameters": [],
+                "parameters": [
+                    {
+                        "name": "arg_0",
+                        "type": 0
+                    }
+                ],
+                "returnType": 0,
                 "localVariables": {},
                 "expressions": {},
                 "blocks": {

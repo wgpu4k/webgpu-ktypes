@@ -16,5 +16,10 @@ struct main_Output {
 };
 main_Output main() {
     main_Output stage_out;
+    if ((in.primitive_index == global_0.index)) {
+        return in.color;
+    } else {
+        return float4((float3(1.0f) - in.color.xyz), in.color[3]);
+    }
     return stage_out;
 }

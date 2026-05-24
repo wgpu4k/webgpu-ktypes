@@ -6,7 +6,7 @@ struct Struct_2 {
     float3 b;
 };
 
-Struct_2 foobar(void normals, uint count) {
+Struct_2 foobar(float3 normals[12], uint count) {
     {
         uint local_0 = 0u;
         while (true) {
@@ -37,4 +37,6 @@ Struct_2 foobar(void normals, uint count) {
 }
 
 void main() {
+    float3 local_0[12];
+    foobar(local_0, 1);
 }

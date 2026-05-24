@@ -20,4 +20,5 @@ void break_from_loop() {
 
 [numthreads(1, 1, 1)]
 void main() {
+    break_from_loop();
 }

@@ -7,7 +7,7 @@ struct Struct_2 {
     float v1;
 };
  bool global_0 = true;
-shared float[0] global_1;
+shared float[10] global_1;
 shared uint global_2;
 layout(set = 0, binding = 2) buffer vec2[] global_3;
 layout(set = 0, binding = 3) uniform vec4[20] global_4;
@@ -29,13 +29,15 @@ void test_msl_packed_vec3() {
     Struct_2 data = global_9;
     vec3 l0 = data.v3;
     vec2 l1 = data.v3.zx;
-    vec3 mvm0 = (data.v3 * mat3x3());
-    vec3 mvm1 = (mat3x3() * data.v3);
+    test_msl_packed_vec3_as_arg(data.v3);
+    vec3 mvm0 = (data.v3 * mat3x3(vec3(0.0f), vec3(0.0f), vec3(0.0f)));
+    vec3 mvm1 = (mat3x3(vec3(0.0f), vec3(0.0f), vec3(0.0f)) * data.v3);
     vec3 svm0 = (data.v3 * 2.0f);
     vec3 svm1 = (2.0f * data.v3);
 }
 
 void wgsl_main() {
+    test_msl_packed_vec3();
     global_1[7] = (global_8[0][0] * global_7[0][0][0])[0];
     global_1[6] = (global_6 * global_5)[0];
     global_1[5] = global_3[1][1];
@@ -43,12 +45,16 @@ void wgsl_main() {
     global_1[3] = global_9.v1;
     global_1[2] = global_9.v3[0];
     global_9.v1 = 4.0f;
-    global_1[1] = float(float(global_3));
+    global_1[1] = float(arrayLength(global_3));
+    atomicStore(global_2, 2u);
     float Foo = 1.0f;
     bool at = true;
 }
 
-void atomicStore() {
+vec2[] arrayLength(vec2[] arg_0) {
+}
+
+uint atomicStore(uint arg_0, uint arg_1) {
 }
 
 void main() {

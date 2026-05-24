@@ -2,12 +2,12 @@
 #pragma pack_matrix(column_major)
 
 
-void ret_array() {
-    return void(1.0f, 2.0f);
+float ret_array()[2] {
+    return float[2](1.0f, 2.0f);
 }
 
-void ret_array_array() {
-    return void(ret_array(), ret_array(), ret_array());
+float ret_array_array()[3][2] {
+    return float[2][3](ret_array(), ret_array(), ret_array());
 }
 
 struct main_Output {
@@ -15,5 +15,7 @@ struct main_Output {
 };
 main_Output main() {
     main_Output stage_out;
+    float local_0[3][2] = ret_array_array();
+    return float4(local_0[0][0], local_0[0][1], 0.0f, 1.0f);
     return stage_out;
 }

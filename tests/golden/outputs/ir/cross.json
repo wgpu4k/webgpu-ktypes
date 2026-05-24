@@ -179,7 +179,17 @@
             },
             {
                 "name": "cross",
-                "parameters": [],
+                "parameters": [
+                    {
+                        "name": "arg_0",
+                        "type": 1
+                    },
+                    {
+                        "name": "arg_1",
+                        "type": 1
+                    }
+                ],
+                "returnType": 1,
                 "localVariables": {},
                 "expressions": {},
                 "blocks": {

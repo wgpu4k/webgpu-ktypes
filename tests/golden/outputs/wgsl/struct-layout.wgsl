@@ -19,21 +19,25 @@ var<storage, read_write> needs_padding_storage: Struct_3;
 
 @fragment
 fn no_padding_frag(input: Struct_2) -> vec4<f32> {
+    _ = input;
     return vec4<f32>(0.0f);
 }
 
 @vertex
 fn no_padding_vert(input: Struct_2) -> vec4<f32> {
+    _ = input;
     return vec4<f32>(0.0f);
 }
 
 @fragment
 fn needs_padding_frag(input: Struct_3) -> vec4<f32> {
+    _ = input;
     return vec4<f32>(0.0f);
 }
 
 @vertex
 fn needs_padding_vert(input: Struct_3) -> vec4<f32> {
+    _ = input;
     return vec4<f32>(0.0f);
 }
 

@@ -8,4 +8,6 @@ uint global_0;
 
 [[kernel]]
 void compute1() {
+    global_0 = (input.local_invocation_index * 2);
+    global_0 = input.local_invocation_id[0];
 }

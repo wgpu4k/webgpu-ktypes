@@ -12,7 +12,7 @@ struct Struct_7 {
     float3x2 m;
 };
 struct Struct_10 {
-    /* unknown type */ void am;
+    array<float4x2, 2> am;
 };
 struct Struct_11 {
     uint x;
@@ -25,11 +25,11 @@ struct Struct_13 {
 };
 struct Struct_21 {
     float4x3 _matrix;
-    /* unknown type */ void matrix_array;
+    array<float2x2, 2> matrix_array;
     int atom;
-    /* unknown type */ void atom_arr;
-    /* unknown type */ void arr;
-    /* unknown type */ void data;
+    array<int, 10> atom_arr;
+    array<uint2, 2> arr;
+    array<Struct_4> data;
 };
 struct Struct_22 {
     Struct_13 om_nom_nom;
@@ -41,35 +41,37 @@ float read_from_private(thread float* foo) {
     return foo;
 }
 
-float test_arr_as_arg(/* unknown type */ void a) {
+float test_arr_as_arg(array<array<float, 10>, 5> a) {
     return a[4][9];
 }
 
 void assign_through_ptr_fn(thread uint* p) {
-    p = 0u;
+    p = 42u;
 }
 
-void assign_array_through_ptr_fn(thread /* unknown type */ void* foo) {
-    foo = /* unknown type */ void(float4(1.0f), float4(2.0f));
+void assign_array_through_ptr_fn(thread array<float4, 2>* foo) {
+    foo = array<float4, 2>(float4(1.0f), float4(2.0f));
 }
 
-uint fetch_arg_ptr_array_element(thread /* unknown type */ void* p) {
+uint fetch_arg_ptr_array_element(thread array<uint, 4>* p) {
     return p[1];
 }
 
-void assign_to_arg_ptr_array_element(thread /* unknown type */ void* p) {
-    p[1] = 0u;
+void assign_to_arg_ptr_array_element(thread array<uint, 4>* p) {
+    p[1] = 10u;
 }
 
 bool index_ptr(bool value) {
-    /* unknown type */ void local_0 = /* unknown type */ void(value);
+    array<bool, 1> local_0 = array<bool, 1>(value);
     /* unknown type */ void local_1 = &local_0;
     return local_1[0];
 }
 
 void assign_through_ptr() {
-    uint local_0 = 0u;
-    /* unknown type */ void local_1 = /* unknown type */ void(float4(6.0f), float4(7.0f));
+    uint local_0 = 33u;
+    assign_through_ptr_fn(&local_0);
+    array<float4, 2> local_1 = array<float4, 2>(float4(6.0f), float4(7.0f));
+    assign_array_through_ptr_fn(&local_1);
 }
 
 uint fetch_arg_ptr_member(thread Struct_11* p) {
@@ -77,7 +79,7 @@ uint fetch_arg_ptr_member(thread Struct_11* p) {
 }
 
 void assign_to_arg_ptr_member(thread Struct_11* p) {
-    p.x = 0u;
+    p.x = 10u;
 }
 
 int member_ptr() {
@@ -110,7 +112,7 @@ void test_matrix_within_struct_accesses() {
 void test_matrix_within_array_within_struct_accesses() {
     int local_0 = 1;
     local_0 = (local_0 - 1);
-    /* unknown type */ void local_1 = global_3.am;
+    array<float4x2, 2> local_1 = global_3.am;
     float4x2 local_2 = global_3.am[0];
     float2 local_3 = global_3.am[0][0];
     float2 local_4 = global_3.am[0][local_0];
@@ -118,9 +120,9 @@ void test_matrix_within_array_within_struct_accesses() {
     float local_6 = global_3.am[0][0][local_0];
     float local_7 = global_3.am[0][local_0][1];
     float local_8 = global_3.am[0][local_0][local_0];
-    Struct_10 local_9 = Struct_10(/* unknown type */ void());
+    Struct_10 local_9 = Struct_10(array<float4x2, 2>());
     local_0 = (local_0 + 1);
-    local_9.am = /* unknown type */ void();
+    local_9.am = array<float4x2, 2>();
     local_9.am[0] = float4x2(float2(8.0f), float2(7.0f), float2(6.0f), float2(5.0f));
     local_9.am[0][0] = float2(9.0f);
     local_9.am[0][local_0] = float2(90.0f);
@@ -132,7 +134,11 @@ void test_matrix_within_array_within_struct_accesses() {
 
 void assign_to_ptr_components() {
     Struct_11 local_0;
-    /* unknown type */ void local_1;
+    assign_to_arg_ptr_member(&local_0);
+    fetch_arg_ptr_member(&local_0);
+    array<uint, 4> local_1;
+    assign_to_arg_ptr_array_element(&local_1);
+    fetch_arg_ptr_array_element(&local_1);
 }
 
 int let_members_of_members() {
@@ -155,6 +161,12 @@ int var_members_of_members() {
 
 [[fragment]]
 float4 foo_frag(int2 global_0 [[buffer(2)]], Struct_7 global_2 [[buffer(1)]], Struct_10 global_3 [[buffer(3)]], Struct_21 global_4 [[buffer(0)]]) {
+    global_4._matrix[1][2] = 1.0f;
+    global_4._matrix = float4x3(float3(0.0f), float3(1.0f), float3(2.0f), float3(3.0f));
+    global_4.arr = array<uint2, 2>(uint2(0u), uint2(1u));
+    global_4.data[1].value = 1;
+    global_0 = int2();
+    return float4(0.0f);
 }
 
 struct foo_vert_Output {
@@ -162,8 +174,36 @@ struct foo_vert_Output {
 };
 [[vertex]]
 foo_vert_Output foo_vert(int2 global_0 [[buffer(2)]], Struct_7 global_2 [[buffer(1)]], Struct_10 global_3 [[buffer(3)]], Struct_21 global_4 [[buffer(0)]]) {
+    float local_0 = 0.0f;
+    float local_1 = local_0;
+    local_0 = 1.0f;
+    global_1;
+    test_matrix_within_struct_accesses();
+    test_matrix_within_array_within_struct_accesses();
+    float4x3 local_2 = global_4._matrix;
+    array<uint2, 2> local_3 = global_4.arr;
+    uint local_4 = 3u;
+    float local_5 = global_4._matrix[local_4][0];
+    int local_6 = global_4.data[(arrayLength(&global_4.data) - 2u)].value;
+    int2 local_7 = global_0;
+    device int* local_8 = &global_4.data[0].value;
+    float local_9 = read_from_private(&local_0);
+    array<int, 5> local_10 = array<int, 5>(local_6, int(local_5), 3, 4, 5);
+    local_10[(vi + 1u)] = 42;
+    int local_11 = local_10[vi];
+    test_arr_as_arg(array<array<float, 10>, 5>());
+    return float4((local_2 * float4(int4(local_11))), 2.0f);
+}
+
+/* unknown type */ void arrayLength(/* unknown type */ void arg_0) {
 }
 
 [[kernel]]
 void foo_compute(int2 global_0 [[buffer(2)]], Struct_7 global_2 [[buffer(1)]], Struct_10 global_3 [[buffer(3)]], Struct_21 global_4 [[buffer(0)]]) {
+    assign_through_ptr();
+    assign_to_ptr_components();
+    index_ptr(true);
+    member_ptr();
+    let_members_of_members();
+    var_members_of_members();
 }

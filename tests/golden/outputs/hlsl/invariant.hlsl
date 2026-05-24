@@ -7,6 +7,7 @@ struct vs_Output {
 };
 vs_Output vs() {
     vs_Output stage_out;
+    return float4(0.0f);
     return stage_out;
 }
 

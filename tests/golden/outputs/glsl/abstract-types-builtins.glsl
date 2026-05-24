@@ -6,13 +6,13 @@ precision highp int;
 void wgsl_f() {
     int clamp_aiaiai = clamp(1, 1, 1);
     float clamp_aiaiaf = clamp(1, 1, 1.0f);
-    int clamp_aiaii = clamp(1, 1, 0);
+    int clamp_aiaii = clamp(1, 1, 1);
     float clamp_aiaif = clamp(1, 1, 1.0f);
     float clamp_aiafai = clamp(1, 1.0f, 1);
     float clamp_aiafaf = clamp(1, 1.0f, 1.0f);
     float clamp_aiaff = clamp(1, 1.0f, 1.0f);
-    int clamp_aiiai = clamp(1, 0, 1);
-    int clamp_aiii = clamp(1, 0, 0);
+    int clamp_aiiai = clamp(1, 1, 1);
+    int clamp_aiii = clamp(1, 1, 1);
     float clamp_aifai = clamp(1, 1.0f, 1);
     float clamp_aifaf = clamp(1, 1.0f, 1.0f);
     float clamp_aiff = clamp(1, 1.0f, 1.0f);
@@ -25,10 +25,10 @@ void wgsl_f() {
     float clamp_affai = clamp(1.0f, 1.0f, 1);
     float clamp_affaf = clamp(1.0f, 1.0f, 1.0f);
     float clamp_afff = clamp(1.0f, 1.0f, 1.0f);
-    int clamp_iaiai = clamp(0, 1, 1);
-    int clamp_iaii = clamp(0, 1, 0);
-    int clamp_iiai = clamp(0, 0, 1);
-    int clamp_iii = clamp(0, 0, 0);
+    int clamp_iaiai = clamp(1, 1, 1);
+    int clamp_iaii = clamp(1, 1, 1);
+    int clamp_iiai = clamp(1, 1, 1);
+    int clamp_iii = clamp(1, 1, 1);
     float clamp_faiai = clamp(1.0f, 1, 1);
     float clamp_faiaf = clamp(1.0f, 1, 1.0f);
     float clamp_faif = clamp(1.0f, 1, 1.0f);
@@ -40,13 +40,13 @@ void wgsl_f() {
     float clamp_fff = clamp(1.0f, 1.0f, 1.0f);
     int min_aiai = min(1, 1);
     float min_aiaf = min(1, 1.0f);
-    int min_aii = min(1, 0);
+    int min_aii = min(1, 1);
     float min_aif = min(1, 1.0f);
     float min_afai = min(1.0f, 1);
     float min_afaf = min(1.0f, 1.0f);
     float min_aff = min(1.0f, 1.0f);
-    int min_iai = min(0, 1);
-    int min_ii = min(0, 0);
+    int min_iai = min(1, 1);
+    int min_ii = min(1, 1);
     float min_fai = min(1.0f, 1);
     float min_faf = min(1.0f, 1.0f);
     float min_ff = min(1.0f, 1.0f);
@@ -61,169 +61,169 @@ void wgsl_f() {
     float pow_ff = pow(1.0f, 1.0f);
 }
 
-void clamp() {
+int clamp(int arg_0, int arg_1, int arg_2) {
 }
 
-void clamp() {
+int clamp(int arg_0, int arg_1, float arg_2) {
 }
 
-void clamp() {
+int clamp(int arg_0, int arg_1, int arg_2) {
 }
 
-void clamp() {
+int clamp(int arg_0, int arg_1, float arg_2) {
 }
 
-void clamp() {
+int clamp(int arg_0, float arg_1, int arg_2) {
 }
 
-void clamp() {
+int clamp(int arg_0, float arg_1, float arg_2) {
 }
 
-void clamp() {
+int clamp(int arg_0, float arg_1, float arg_2) {
 }
 
-void clamp() {
+int clamp(int arg_0, int arg_1, int arg_2) {
 }
 
-void clamp() {
+int clamp(int arg_0, int arg_1, int arg_2) {
 }
 
-void clamp() {
+int clamp(int arg_0, float arg_1, int arg_2) {
 }
 
-void clamp() {
+int clamp(int arg_0, float arg_1, float arg_2) {
 }
 
-void clamp() {
+int clamp(int arg_0, float arg_1, float arg_2) {
 }
 
-void clamp() {
+float clamp(float arg_0, int arg_1, int arg_2) {
 }
 
-void clamp() {
+float clamp(float arg_0, int arg_1, float arg_2) {
 }
 
-void clamp() {
+float clamp(float arg_0, int arg_1, float arg_2) {
 }
 
-void clamp() {
+float clamp(float arg_0, float arg_1, int arg_2) {
 }
 
-void clamp() {
+float clamp(float arg_0, float arg_1, float arg_2) {
 }
 
-void clamp() {
+float clamp(float arg_0, float arg_1, float arg_2) {
 }
 
-void clamp() {
+float clamp(float arg_0, float arg_1, int arg_2) {
 }
 
-void clamp() {
+float clamp(float arg_0, float arg_1, float arg_2) {
 }
 
-void clamp() {
+float clamp(float arg_0, float arg_1, float arg_2) {
 }
 
-void clamp() {
+int clamp(int arg_0, int arg_1, int arg_2) {
 }
 
-void clamp() {
+int clamp(int arg_0, int arg_1, int arg_2) {
 }
 
-void clamp() {
+int clamp(int arg_0, int arg_1, int arg_2) {
 }
 
-void clamp() {
+int clamp(int arg_0, int arg_1, int arg_2) {
 }
 
-void clamp() {
+float clamp(float arg_0, int arg_1, int arg_2) {
 }
 
-void clamp() {
+float clamp(float arg_0, int arg_1, float arg_2) {
 }
 
-void clamp() {
+float clamp(float arg_0, int arg_1, float arg_2) {
 }
 
-void clamp() {
+float clamp(float arg_0, float arg_1, int arg_2) {
 }
 
-void clamp() {
+float clamp(float arg_0, float arg_1, float arg_2) {
 }
 
-void clamp() {
+float clamp(float arg_0, float arg_1, float arg_2) {
 }
 
-void clamp() {
+float clamp(float arg_0, float arg_1, int arg_2) {
 }
 
-void clamp() {
+float clamp(float arg_0, float arg_1, float arg_2) {
 }
 
-void clamp() {
+float clamp(float arg_0, float arg_1, float arg_2) {
 }
 
-void min() {
+int min(int arg_0, int arg_1) {
 }
 
-void min() {
+int min(int arg_0, float arg_1) {
 }
 
-void min() {
+int min(int arg_0, int arg_1) {
 }
 
-void min() {
+int min(int arg_0, float arg_1) {
 }
 
-void min() {
+float min(float arg_0, int arg_1) {
 }
 
-void min() {
+float min(float arg_0, float arg_1) {
 }
 
-void min() {
+float min(float arg_0, float arg_1) {
 }
 
-void min() {
+int min(int arg_0, int arg_1) {
 }
 
-void min() {
+int min(int arg_0, int arg_1) {
 }
 
-void min() {
+float min(float arg_0, int arg_1) {
 }
 
-void min() {
+float min(float arg_0, float arg_1) {
 }
 
-void min() {
+float min(float arg_0, float arg_1) {
 }
 
-void pow() {
+int pow(int arg_0, int arg_1) {
 }
 
-void pow() {
+int pow(int arg_0, float arg_1) {
 }
 
-void pow() {
+int pow(int arg_0, float arg_1) {
 }
 
-void pow() {
+float pow(float arg_0, int arg_1) {
 }
 
-void pow() {
+float pow(float arg_0, float arg_1) {
 }
 
-void pow() {
+float pow(float arg_0, float arg_1) {
 }
 
-void pow() {
+float pow(float arg_0, int arg_1) {
 }
 
-void pow() {
+float pow(float arg_0, float arg_1) {
 }
 
-void pow() {
+float pow(float arg_0, float arg_1) {
 }
 
 void main() {

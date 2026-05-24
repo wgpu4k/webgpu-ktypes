@@ -25,6 +25,7 @@ void const_in_fn() {
 }
 
 void wgsl_main() {
+    const_in_fn();
 }
 
 void main() {

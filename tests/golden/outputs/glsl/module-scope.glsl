@@ -17,15 +17,19 @@ Struct_1 returns() {
 }
 
 void call() {
+    statement();
     Struct_1 x = returns();
     float vf = float(global_0);
     texture2D s = textureSample(global_1, global_2, vec2(vf));
 }
 
-void textureSample() {
+texture2D textureSample(texture2D arg_0, sampler arg_1, vec2 arg_2) {
 }
 
 void wgsl_main() {
+    call();
+    statement();
+    returns();
 }
 
 void main() {

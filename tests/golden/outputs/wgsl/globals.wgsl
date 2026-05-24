@@ -4,7 +4,7 @@ struct Struct_2 {
     v1: f32,
 }
 var<private> Foo: bool = true;
-var<workgroup> wg: array<f32, 0>;
+var<workgroup> wg: array<f32, 10>;
 var<workgroup> at: u32;
 @group(0) @binding(2)
 var<storage> dummy: array<vec2<f32>>;
@@ -33,17 +33,22 @@ fn test_msl_packed_vec3() {
     var data: Struct_2 = alignment;
     var l0: vec3<f32> = data.v3;
     var l1: vec2<f32> = data.v3.zx;
+    test_msl_packed_vec3_as_arg(data.v3);
     var mvm0: vec3<f32> = (data.v3 * mat3x3<f32>());
     var mvm1: vec3<f32> = (mat3x3<f32>() * data.v3);
     var svm0: vec3<f32> = (data.v3 * 2.0f);
     var svm1: vec3<f32> = (2.0f * data.v3);
 }
 
-fn atomicStore() {
+fn arrayLength(arg_0: ptr<function, array<vec2<f32>>>) -> ptr<function, array<vec2<f32>>> {
+}
+
+fn atomicStore(arg_0: ptr<function, u32>, arg_1: u32) -> ptr<function, u32> {
 }
 
 @compute
 fn main() {
+    test_msl_packed_vec3();
     wg[7] = (global_nested_arrays_of_matrices_4x2[0][0] * global_nested_arrays_of_matrices_2x4[0][0][0])[0];
     wg[6] = (global_mat * global_vec)[0];
     wg[5] = dummy[1][1];
@@ -51,7 +56,8 @@ fn main() {
     wg[3] = alignment.v1;
     wg[2] = alignment.v3[0];
     alignment.v1 = 4.0f;
-    wg[1] = f32(f32(&dummy));
+    wg[1] = f32(arrayLength(&dummy));
+    atomicStore(&at, 2u);
     var Foo: f32 = 1.0f;
     var at: bool = true;
 }

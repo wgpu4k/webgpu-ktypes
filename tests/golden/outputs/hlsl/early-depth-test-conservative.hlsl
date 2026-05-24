@@ -11,5 +11,6 @@ struct main_Output {
 main_Output main(main_Input stage_in) {
     main_Output stage_out;
     float4 pos = stage_in.pos;
+    return (pos[2] - 0.1f);
     return stage_out;
 }

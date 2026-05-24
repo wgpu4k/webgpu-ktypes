@@ -10,4 +10,6 @@ void with_diagnostic() {
 
 [numthreads(1, 1, 1)]
 void main() {
+    thing();
+    with_diagnostic();
 }

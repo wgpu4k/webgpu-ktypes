@@ -176,6 +176,10 @@ void access_sasm() {
 }
 
 void wgsl_main() {
+    access_m();
+    access_sm();
+    access_am();
+    access_sasm();
 }
 
 void main() {

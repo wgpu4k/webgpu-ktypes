@@ -131,7 +131,13 @@
             },
             {
                 "name": "any",
-                "parameters": [],
+                "parameters": [
+                    {
+                        "name": "arg_0",
+                        "type": 0
+                    }
+                ],
+                "returnType": 0,
                 "localVariables": {},
                 "expressions": {},
                 "blocks": {
@@ -145,7 +151,13 @@
             },
             {
                 "name": "all",
-                "parameters": [],
+                "parameters": [
+                    {
+                        "name": "arg_0",
+                        "type": 0
+                    }
+                ],
+                "returnType": 0,
                 "localVariables": {},
                 "expressions": {},
                 "blocks": {
@@ -475,7 +487,13 @@
             },
             {
                 "name": "dpdxCoarse",
-                "parameters": [],
+                "parameters": [
+                    {
+                        "name": "arg_0",
+                        "type": 2
+                    }
+                ],
+                "returnType": 2,
                 "localVariables": {},
                 "expressions": {},
                 "blocks": {
@@ -489,7 +507,13 @@
             },
             {
                 "name": "dpdyCoarse",
-                "parameters": [],
+                "parameters": [
+                    {
+                        "name": "arg_0",
+                        "type": 2
+                    }
+                ],
+                "returnType": 2,
                 "localVariables": {},
                 "expressions": {},
                 "blocks": {
@@ -503,7 +527,13 @@
             },
             {
                 "name": "fwidthCoarse",
-                "parameters": [],
+                "parameters": [
+                    {
+                        "name": "arg_0",
+                        "type": 2
+                    }
+                ],
+                "returnType": 2,
                 "localVariables": {},
                 "expressions": {},
                 "blocks": {
@@ -517,7 +547,13 @@
             },
             {
                 "name": "dpdxFine",
-                "parameters": [],
+                "parameters": [
+                    {
+                        "name": "arg_0",
+                        "type": 2
+                    }
+                ],
+                "returnType": 2,
                 "localVariables": {},
                 "expressions": {},
                 "blocks": {
@@ -531,7 +567,13 @@
             },
             {
                 "name": "dpdyFine",
-                "parameters": [],
+                "parameters": [
+                    {
+                        "name": "arg_0",
+                        "type": 2
+                    }
+                ],
+                "returnType": 2,
                 "localVariables": {},
                 "expressions": {},
                 "blocks": {
@@ -545,7 +587,13 @@
             },
             {
                 "name": "fwidthFine",
-                "parameters": [],
+                "parameters": [
+                    {
+                        "name": "arg_0",
+                        "type": 2
+                    }
+                ],
+                "returnType": 2,
                 "localVariables": {},
                 "expressions": {},
                 "blocks": {
@@ -559,7 +607,13 @@
             },
             {
                 "name": "dpdx",
-                "parameters": [],
+                "parameters": [
+                    {
+                        "name": "arg_0",
+                        "type": 2
+                    }
+                ],
+                "returnType": 2,
                 "localVariables": {},
                 "expressions": {},
                 "blocks": {
@@ -573,7 +627,13 @@
             },
             {
                 "name": "dpdy",
-                "parameters": [],
+                "parameters": [
+                    {
+                        "name": "arg_0",
+                        "type": 2
+                    }
+                ],
+                "returnType": 2,
                 "localVariables": {},
                 "expressions": {},
                 "blocks": {
@@ -587,7 +647,13 @@
             },
             {
                 "name": "fwidth",
-                "parameters": [],
+                "parameters": [
+                    {
+                        "name": "arg_0",
+                        "type": 2
+                    }
+                ],
+                "returnType": 2,
                 "localVariables": {},
                 "expressions": {},
                 "blocks": {

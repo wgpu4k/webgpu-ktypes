@@ -22,75 +22,91 @@ fn test_textureLoad_1d(coords: i32, level: i32) -> vec4<f32> {
     return textureLoad(image_1d, coords, level);
 }
 
-fn textureLoad() {
+fn textureLoad(arg_0: texture_1d<f32>, arg_1: i32, arg_2: i32) -> texture_1d<f32> {
 }
 
 fn test_textureLoad_2d(coords: vec2<i32>, level: i32) -> vec4<f32> {
     return textureLoad(image_2d, coords, level);
 }
 
-fn textureLoad() {
+fn textureLoad(arg_0: texture_2d<f32>, arg_1: vec2<i32>, arg_2: i32) -> texture_2d<f32> {
 }
 
 fn test_textureLoad_2d_array_u(coords: vec2<i32>, index: u32, level: i32) -> vec4<f32> {
     return textureLoad(image_2d_array, coords, index, level);
 }
 
-fn textureLoad() {
+fn textureLoad(arg_0: texture_2d_array<f32>, arg_1: vec2<i32>, arg_2: u32, arg_3: i32) -> texture_2d_array<f32> {
 }
 
 fn test_textureLoad_2d_array_s(coords: vec2<i32>, index: i32, level: i32) -> vec4<f32> {
     return textureLoad(image_2d_array, coords, index, level);
 }
 
-fn textureLoad() {
+fn textureLoad(arg_0: texture_2d_array<f32>, arg_1: vec2<i32>, arg_2: i32, arg_3: i32) -> texture_2d_array<f32> {
 }
 
 fn test_textureLoad_3d(coords: vec3<i32>, level: i32) -> vec4<f32> {
     return textureLoad(image_3d, coords, level);
 }
 
-fn textureLoad() {
+fn textureLoad(arg_0: texture_3d<f32>, arg_1: vec3<i32>, arg_2: i32) -> texture_3d<f32> {
 }
 
 fn test_textureLoad_multisampled_2d(coords: vec2<i32>, _sample: i32) -> vec4<f32> {
     return textureLoad(image_multisampled_2d, coords, _sample);
 }
 
-fn textureLoad() {
+fn textureLoad(arg_0: texture_multisampled_2d<f32>, arg_1: vec2<i32>, arg_2: i32) -> texture_multisampled_2d<f32> {
 }
 
 fn test_textureStore_1d(coords: i32, value: vec4<f32>) {
+    textureStore(image_storage_1d, coords, value);
 }
 
-fn textureStore() {
+fn textureStore(arg_0: texture_storage_1d<rgba8unorm, write>, arg_1: i32, arg_2: vec4<f32>) -> texture_storage_1d<rgba8unorm, write> {
 }
 
 fn test_textureStore_2d(coords: vec2<i32>, value: vec4<f32>) {
+    textureStore(image_storage_2d, coords, value);
 }
 
-fn textureStore() {
+fn textureStore(arg_0: texture_storage_2d<rgba8unorm, write>, arg_1: vec2<i32>, arg_2: vec4<f32>) -> texture_storage_2d<rgba8unorm, write> {
 }
 
 fn test_textureStore_2d_array_u(coords: vec2<i32>, array_index: u32, value: vec4<f32>) {
+    textureStore(image_storage_2d_array, coords, array_index, value);
 }
 
-fn textureStore() {
+fn textureStore(arg_0: texture_storage_2d_array<rgba8unorm, write>, arg_1: vec2<i32>, arg_2: u32, arg_3: vec4<f32>) -> texture_storage_2d_array<rgba8unorm, write> {
 }
 
 fn test_textureStore_2d_array_s(coords: vec2<i32>, array_index: i32, value: vec4<f32>) {
+    textureStore(image_storage_2d_array, coords, array_index, value);
 }
 
-fn textureStore() {
+fn textureStore(arg_0: texture_storage_2d_array<rgba8unorm, write>, arg_1: vec2<i32>, arg_2: i32, arg_3: vec4<f32>) -> texture_storage_2d_array<rgba8unorm, write> {
 }
 
 fn test_textureStore_3d(coords: vec3<i32>, value: vec4<f32>) {
+    textureStore(image_storage_3d, coords, value);
 }
 
-fn textureStore() {
+fn textureStore(arg_0: texture_storage_3d<rgba8unorm, write>, arg_1: vec3<i32>, arg_2: vec4<f32>) -> texture_storage_3d<rgba8unorm, write> {
 }
 
 @fragment
 fn fragment_shader() -> vec4<f32> {
+    test_textureLoad_1d(0, 0);
+    test_textureLoad_2d(vec2<i32>(), 0);
+    test_textureLoad_2d_array_u(vec2<i32>(), 0u, 0);
+    test_textureLoad_2d_array_s(vec2<i32>(), 0, 0);
+    test_textureLoad_3d(vec3<i32>(), 0);
+    test_textureLoad_multisampled_2d(vec2<i32>(), 0);
+    test_textureStore_1d(0, vec4<f32>());
+    test_textureStore_2d(vec2<i32>(), vec4<f32>());
+    test_textureStore_2d_array_u(vec2<i32>(), 0u, vec4<f32>());
+    test_textureStore_2d_array_s(vec2<i32>(), 0, vec4<f32>());
+    test_textureStore_3d(vec3<i32>(), vec4<f32>());
     return vec4<f32>(0.0f, 0.0f, 0.0f, 0.0f);
 }

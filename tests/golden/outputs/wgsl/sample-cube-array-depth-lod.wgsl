@@ -4,7 +4,7 @@ var<private> texture: texture_depth_cube_array;
 @group(0) @binding(1)
 var<private> texture_sampler: sampler_comparison;
 
-fn textureSampleCompareLevel() {
+fn textureSampleCompareLevel(arg_0: texture_depth_cube_array, arg_1: sampler_comparison, arg_2: vec3<f32>, arg_3: i32, arg_4: f32) -> texture_depth_cube_array {
 }
 
 @fragment

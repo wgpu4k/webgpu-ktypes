@@ -24,5 +24,10 @@ struct render_vertex_Output {
 };
 render_vertex_Output render_vertex() {
     render_vertex_Output stage_out;
+    Struct_3 local_0;
+    local_0.position = (v_in.position * global_0);
+    local_0.color = do_lighting(v_in.position, v_in.normal);
+    local_0.texcoord = v_in.texcoord;
+    return local_0;
     return stage_out;
 }

@@ -6,78 +6,102 @@ layout(set = 0, binding = 0) buffer int global_0;
 layout(set = 0, binding = 1) buffer uint global_1;
 
 void test_atomic_i32() {
+    atomicStore(global_0, 1);
+    atomicCompareExchangeWeak(global_0, 1, 1);
+    atomicCompareExchangeWeak(global_0, 1, 1);
+    atomicAdd(global_0, 1);
+    atomicSub(global_0, 1);
+    atomicAnd(global_0, 1);
+    atomicXor(global_0, 1);
+    atomicOr(global_0, 1);
+    atomicMin(global_0, 1);
+    atomicMax(global_0, 1);
+    atomicExchange(global_0, 1);
 }
 
-void atomicStore() {
+int atomicStore(int arg_0, int arg_1) {
 }
 
-void atomicCompareExchangeWeak() {
+int atomicCompareExchangeWeak(int arg_0, int arg_1, int arg_2) {
 }
 
-void atomicCompareExchangeWeak() {
+int atomicCompareExchangeWeak(int arg_0, int arg_1, int arg_2) {
 }
 
-void atomicAdd() {
+int atomicAdd(int arg_0, int arg_1) {
 }
 
-void atomicSub() {
+int atomicSub(int arg_0, int arg_1) {
 }
 
-void atomicAnd() {
+int atomicAnd(int arg_0, int arg_1) {
 }
 
-void atomicXor() {
+int atomicXor(int arg_0, int arg_1) {
 }
 
-void atomicOr() {
+int atomicOr(int arg_0, int arg_1) {
 }
 
-void atomicMin() {
+int atomicMin(int arg_0, int arg_1) {
 }
 
-void atomicMax() {
+int atomicMax(int arg_0, int arg_1) {
 }
 
-void atomicExchange() {
+int atomicExchange(int arg_0, int arg_1) {
 }
 
 void test_atomic_u32() {
+    atomicStore(global_1, 1);
+    atomicCompareExchangeWeak(global_1, 1, 1u);
+    atomicCompareExchangeWeak(global_1, 1u, 1);
+    atomicAdd(global_1, 1);
+    atomicSub(global_1, 1);
+    atomicAnd(global_1, 1);
+    atomicXor(global_1, 1);
+    atomicOr(global_1, 1);
+    atomicMin(global_1, 1);
+    atomicMax(global_1, 1);
+    atomicExchange(global_1, 1);
 }
 
-void atomicStore() {
+uint atomicStore(uint arg_0, int arg_1) {
 }
 
-void atomicCompareExchangeWeak() {
+uint atomicCompareExchangeWeak(uint arg_0, int arg_1, uint arg_2) {
 }
 
-void atomicCompareExchangeWeak() {
+uint atomicCompareExchangeWeak(uint arg_0, uint arg_1, int arg_2) {
 }
 
-void atomicAdd() {
+uint atomicAdd(uint arg_0, int arg_1) {
 }
 
-void atomicSub() {
+uint atomicSub(uint arg_0, int arg_1) {
 }
 
-void atomicAnd() {
+uint atomicAnd(uint arg_0, int arg_1) {
 }
 
-void atomicXor() {
+uint atomicXor(uint arg_0, int arg_1) {
 }
 
-void atomicOr() {
+uint atomicOr(uint arg_0, int arg_1) {
 }
 
-void atomicMin() {
+uint atomicMin(uint arg_0, int arg_1) {
 }
 
-void atomicMax() {
+uint atomicMax(uint arg_0, int arg_1) {
 }
 
-void atomicExchange() {
+uint atomicExchange(uint arg_0, int arg_1) {
 }
 
 void wgsl_main() {
+    test_atomic_i32();
+    test_atomic_u32();
 }
 
 void main() {

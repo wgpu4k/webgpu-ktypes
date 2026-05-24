@@ -3,69 +3,88 @@
 
 struct Struct_2 {
     float atomic_scalar;
-    void atomic_arr;
+    float atomic_arr[2];
 };
 float global_0 : register(u0);
-void global_1 : register(u1);
+float global_1[2] : register(u1);
 Struct_2 global_2 : register(u2);
 
 [numthreads(1, 1, 1)]
 void cs_main() {
+    atomicStore(&global_0, 1.5f);
+    atomicStore(&global_1[1], 1.5f);
+    atomicStore(&global_2.atomic_scalar, 1.5f);
+    atomicStore(&global_2.atomic_arr[1], 1.5f);
+    workgroupBarrier();
+    void local_0 = atomicLoad(&global_0);
+    void local_1 = atomicLoad(&global_1[1]);
+    void local_2 = atomicLoad(&global_2.atomic_scalar);
+    void local_3 = atomicLoad(&global_2.atomic_arr[1]);
+    workgroupBarrier();
+    atomicAdd(&global_0, 1.5f);
+    atomicAdd(&global_1[1], 1.5f);
+    atomicAdd(&global_2.atomic_scalar, 1.5f);
+    atomicAdd(&global_2.atomic_arr[1], 1.5f);
+    workgroupBarrier();
+    atomicExchange(&global_0, 1.5f);
+    atomicExchange(&global_1[1], 1.5f);
+    atomicExchange(&global_2.atomic_scalar, 1.5f);
+    atomicExchange(&global_2.atomic_arr[1], 1.5f);
 }
 
-void atomicStore() {
+void atomicStore(void arg_0, float arg_1) {
 }
 
-void atomicStore() {
+void atomicStore(void arg_0, float arg_1) {
 }
 
-void atomicStore() {
+void atomicStore(void arg_0, float arg_1) {
 }
 
-void atomicStore() {
-}
-
-void workgroupBarrier() {
-}
-
-void atomicLoad() {
-}
-
-void atomicLoad() {
-}
-
-void atomicLoad() {
-}
-
-void atomicLoad() {
-}
-
-void workgroupBarrier() {
-}
-
-void atomicAdd() {
-}
-
-void atomicAdd() {
-}
-
-void atomicAdd() {
-}
-
-void atomicAdd() {
+void atomicStore(void arg_0, float arg_1) {
 }
 
 void workgroupBarrier() {
 }
 
-void atomicExchange() {
+void atomicLoad(void arg_0) {
 }
 
-void atomicExchange() {
+void atomicLoad(void arg_0) {
 }
 
-void atomicExchange() {
+void atomicLoad(void arg_0) {
 }
 
-void atomicExchange() {
+void atomicLoad(void arg_0) {
+}
+
+void workgroupBarrier() {
+}
+
+void atomicAdd(void arg_0, float arg_1) {
+}
+
+void atomicAdd(void arg_0, float arg_1) {
+}
+
+void atomicAdd(void arg_0, float arg_1) {
+}
+
+void atomicAdd(void arg_0, float arg_1) {
+}
+
+void workgroupBarrier() {
+}
+
+void atomicExchange(void arg_0, float arg_1) {
+}
+
+void atomicExchange(void arg_0, float arg_1) {
+}
+
+void atomicExchange(void arg_0, float arg_1) {
+}
+
+void atomicExchange(void arg_0, float arg_1) {
 }

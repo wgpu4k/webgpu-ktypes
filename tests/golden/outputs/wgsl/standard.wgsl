@@ -5,37 +5,37 @@ fn test_any_and_all_for_bool() -> bool {
     return all(a);
 }
 
-fn any() {
+fn any(arg_0: bool) -> bool {
 }
 
-fn all() {
+fn all(arg_0: bool) -> bool {
 }
 
-fn dpdxCoarse() {
+fn dpdxCoarse(arg_0: vec4<f32>) -> vec4<f32> {
 }
 
-fn dpdyCoarse() {
+fn dpdyCoarse(arg_0: vec4<f32>) -> vec4<f32> {
 }
 
-fn fwidthCoarse() {
+fn fwidthCoarse(arg_0: vec4<f32>) -> vec4<f32> {
 }
 
-fn dpdxFine() {
+fn dpdxFine(arg_0: vec4<f32>) -> vec4<f32> {
 }
 
-fn dpdyFine() {
+fn dpdyFine(arg_0: vec4<f32>) -> vec4<f32> {
 }
 
-fn fwidthFine() {
+fn fwidthFine(arg_0: vec4<f32>) -> vec4<f32> {
 }
 
-fn dpdx() {
+fn dpdx(arg_0: vec4<f32>) -> vec4<f32> {
 }
 
-fn dpdy() {
+fn dpdy(arg_0: vec4<f32>) -> vec4<f32> {
 }
 
-fn fwidth() {
+fn fwidth(arg_0: vec4<f32>) -> vec4<f32> {
 }
 
 @fragment

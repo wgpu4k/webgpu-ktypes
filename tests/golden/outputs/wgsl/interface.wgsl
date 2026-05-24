@@ -13,8 +13,29 @@ struct Struct_5 {
 }
 var<workgroup> output: array<u32, 1>;
 
+fn select(arg_0: f32, arg_1: f32, arg_2: bool) -> f32 {
+}
+
+@vertex
+fn vertex(vertex_index: u32, instance_index: u32, @location(10) color: u32) -> Struct_2 {
+    var tmp: u32 = ((vertex_index + instance_index) + color);
+    return Struct_2(vec4<f32>(1.0f), f32(tmp));
+}
+
+@fragment
+fn fragment(in: Struct_2, front_facing: bool, sample_index: u32, sample_mask: u32) -> Struct_4 {
+    var mask: u32 = (sample_mask & (1u << sample_index));
+    var color: f32 = select(0.0f, 1.0f, front_facing);
+    return Struct_4(in._varying, mask, color);
+}
+
+@compute
+fn compute(global_id: vec3<u32>, local_id: vec3<u32>, local_index: u32, wg_id: vec3<u32>, num_wgs: vec3<u32>) {
+    output[0] = ((((global_id[0] + local_id[0]) + local_index) + wg_id[0]) + num_wgs[0]);
+}
+
 @vertex
 fn vertex_two_structs(in1: Struct_5, in2: Struct_5) -> vec4<f32> {
-    var index: u32 = 0u;
+    var index: u32 = 2u;
     return vec4<f32>(f32(in1.index), f32(in2.index), f32(index), 0.0f);
 }

@@ -17,8 +17,10 @@ struct vert_main_Output {
 [[vertex]]
 vert_main_Output vert_main(vert_main_Input in [[stage_in]]) {
     float2 pos = in.pos;
+    return float4((((float(ii) * float(vi)) * global_0.multiplier) * pos), 0.0f, 1.0f);
 }
 
 [[fragment]]
 float4 main() {
+    return (in.color * global_0.multiplier);
 }

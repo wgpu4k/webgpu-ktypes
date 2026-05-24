@@ -3,67 +3,75 @@
 
 struct Struct_3 {
     uint a;
-    void b;
-    void c;
+    uint b[10];
+    uint c[];
 };
 Struct_3 global_0 : register(u0);
 
 uint fetch_add_atomic() {
-    return atomicAdd(&global_0.a, 0u);
+    return atomicAdd(&global_0.a, 1u);
 }
 
-void atomicAdd() {
+void atomicAdd(void arg_0, uint arg_1) {
 }
 
 uint fetch_add_atomic_static_sized_array(int i) {
-    return atomicAdd(&global_0.b[i], 0u);
+    return atomicAdd(&global_0.b[i], 1u);
 }
 
-void atomicAdd() {
+void atomicAdd(void arg_0, uint arg_1) {
 }
 
 uint fetch_add_atomic_dynamic_sized_array(int i) {
-    return atomicAdd(&global_0.c[i], 0u);
+    return atomicAdd(&global_0.c[i], 1u);
 }
 
-void atomicAdd() {
+void atomicAdd(void arg_0, uint arg_1) {
 }
 
 uint exchange_atomic() {
-    return atomicExchange(&global_0.a, 0u);
+    return atomicExchange(&global_0.a, 1u);
 }
 
-void atomicExchange() {
+void atomicExchange(void arg_0, uint arg_1) {
 }
 
 uint exchange_atomic_static_sized_array(int i) {
-    return atomicExchange(&global_0.b[i], 0u);
+    return atomicExchange(&global_0.b[i], 1u);
 }
 
-void atomicExchange() {
+void atomicExchange(void arg_0, uint arg_1) {
 }
 
 uint exchange_atomic_dynamic_sized_array(int i) {
-    return atomicExchange(&global_0.c[i], 0u);
+    return atomicExchange(&global_0.c[i], 1u);
 }
 
-void atomicExchange() {
+void atomicExchange(void arg_0, uint arg_1) {
 }
 
 uint fetch_add_atomic_dynamic_sized_array_static_index() {
-    return atomicAdd(&global_0.c[1000], 0u);
+    return atomicAdd(&global_0.c[1000], 1u);
 }
 
-void atomicAdd() {
+void atomicAdd(void arg_0, uint arg_1) {
 }
 
 uint exchange_atomic_dynamic_sized_array_static_index() {
-    return atomicExchange(&global_0.c[1000], 0u);
+    return atomicExchange(&global_0.c[1000], 1u);
 }
 
-void atomicExchange() {
+void atomicExchange(void arg_0, uint arg_1) {
 }
 
 [numthreads(1, 1, 1)]
 void main() {
+    fetch_add_atomic();
+    fetch_add_atomic_static_sized_array(1);
+    fetch_add_atomic_dynamic_sized_array(1);
+    exchange_atomic();
+    exchange_atomic_static_sized_array(1);
+    exchange_atomic_dynamic_sized_array(1);
+    fetch_add_atomic_dynamic_sized_array_static_index();
+    exchange_atomic_dynamic_sized_array_static_index();
 }

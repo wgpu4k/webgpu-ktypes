@@ -2,7 +2,7 @@
 struct Struct_2 {
     position: vec4<f32>,
 }
-struct Struct_8 {
+struct Struct_10 {
     v_uint8: vec3<u32>,
     v_uint8x2: vec3<u32>,
     v_uint8x4: vec3<u32>,
@@ -44,12 +44,12 @@ struct Struct_8 {
     v_sint32x4: vec3<i32>,
     v_unorm10_10_10_2: vec3<f32>,
     v_unorm8x4_bgra: vec3<f32>,
-    v_float16_as_f16: vec3<f32>,
-    v_float16x2_as_f16: vec3<f32>,
-    v_float16x4_as_f16: vec3<f32>,
+    v_float16_as_f16: vec3<f16>,
+    v_float16x2_as_f16: vec3<f16>,
+    v_float16x4_as_f16: vec3<f16>,
 }
 
 @vertex
-fn render_vertex(v_in: Struct_8) -> Struct_2 {
+fn render_vertex(v_in: Struct_10) -> Struct_2 {
     return Struct_2(vec4<f32>(v_in.v_float32[0]));
 }

@@ -8,61 +8,69 @@ struct Struct_3 {
 var<storage, read_write> globals: Struct_3;
 
 fn fetch_add_atomic() -> u32 {
-    return atomicAdd(&globals.a, 0u);
+    return atomicAdd(&globals.a, 1u);
 }
 
-fn atomicAdd() {
+fn atomicAdd(arg_0: ptr<function, u32>, arg_1: u32) -> ptr<function, u32> {
 }
 
 fn fetch_add_atomic_static_sized_array(i: i32) -> u32 {
-    return atomicAdd(&globals.b[i], 0u);
+    return atomicAdd(&globals.b[i], 1u);
 }
 
-fn atomicAdd() {
+fn atomicAdd(arg_0: ptr<function, u32>, arg_1: u32) -> ptr<function, u32> {
 }
 
 fn fetch_add_atomic_dynamic_sized_array(i: i32) -> u32 {
-    return atomicAdd(&globals.c[i], 0u);
+    return atomicAdd(&globals.c[i], 1u);
 }
 
-fn atomicAdd() {
+fn atomicAdd(arg_0: ptr<function, u32>, arg_1: u32) -> ptr<function, u32> {
 }
 
 fn exchange_atomic() -> u32 {
-    return atomicExchange(&globals.a, 0u);
+    return atomicExchange(&globals.a, 1u);
 }
 
-fn atomicExchange() {
+fn atomicExchange(arg_0: ptr<function, u32>, arg_1: u32) -> ptr<function, u32> {
 }
 
 fn exchange_atomic_static_sized_array(i: i32) -> u32 {
-    return atomicExchange(&globals.b[i], 0u);
+    return atomicExchange(&globals.b[i], 1u);
 }
 
-fn atomicExchange() {
+fn atomicExchange(arg_0: ptr<function, u32>, arg_1: u32) -> ptr<function, u32> {
 }
 
 fn exchange_atomic_dynamic_sized_array(i: i32) -> u32 {
-    return atomicExchange(&globals.c[i], 0u);
+    return atomicExchange(&globals.c[i], 1u);
 }
 
-fn atomicExchange() {
+fn atomicExchange(arg_0: ptr<function, u32>, arg_1: u32) -> ptr<function, u32> {
 }
 
 fn fetch_add_atomic_dynamic_sized_array_static_index() -> u32 {
-    return atomicAdd(&globals.c[1000], 0u);
+    return atomicAdd(&globals.c[1000], 1u);
 }
 
-fn atomicAdd() {
+fn atomicAdd(arg_0: ptr<function, u32>, arg_1: u32) -> ptr<function, u32> {
 }
 
 fn exchange_atomic_dynamic_sized_array_static_index() -> u32 {
-    return atomicExchange(&globals.c[1000], 0u);
+    return atomicExchange(&globals.c[1000], 1u);
 }
 
-fn atomicExchange() {
+fn atomicExchange(arg_0: ptr<function, u32>, arg_1: u32) -> ptr<function, u32> {
 }
 
 @compute
 fn main() {
+    fetch_add_atomic();
+    fetch_add_atomic_static_sized_array(1);
+    fetch_add_atomic_dynamic_sized_array(1);
+    exchange_atomic();
+    exchange_atomic_static_sized_array(1);
+    exchange_atomic_dynamic_sized_array(1);
+    fetch_add_atomic_dynamic_sized_array_static_index();
+    exchange_atomic_dynamic_sized_array_static_index();
 }

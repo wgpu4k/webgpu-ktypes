@@ -38,6 +38,14 @@ float return_const_f32_const_ai() {
 }
 
 void wgsl_main() {
+    return_i32_ai();
+    return_u32_ai();
+    return_f32_ai();
+    return_f32_af();
+    return_vec2f32_ai();
+    return_arrf32_ai();
+    return_const_f32_const_ai();
+    return_vec2f32_const_ai();
 }
 
 void main() {

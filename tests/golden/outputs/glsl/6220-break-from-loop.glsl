@@ -20,6 +20,7 @@ void break_from_loop() {
 }
 
 void wgsl_main() {
+    break_from_loop();
 }
 
 void main() {

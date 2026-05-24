@@ -24,6 +24,9 @@ vec4 index_let_array_1d(uint vi) {
 }
 
 vec4 wgsl_main(uint vi) {
+    index_arg_array(int[5](1, 2, 3, 4, 5), 6);
+    index_let_array(1, 2);
+    index_let_matrix(1, 2);
     return index_let_array_1d(vi);
 }
 
