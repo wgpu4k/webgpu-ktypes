@@ -420,6 +420,14 @@ class MslWriter(
                 }
                 "$spaceName $baseName*"
             }
+            is TypeInner.Array -> {
+                val elementTypeName = getTypeName(inner.element)
+                val sizeStr = when (val size = inner.size) {
+                    is ArraySize.Constant -> size.value.toString()
+                    is ArraySize.Dynamic -> ""
+                }
+                if (sizeStr.isNotEmpty()) "array<$elementTypeName, $sizeStr>" else "array<$elementTypeName>"
+            }
             is TypeInner.Opaque -> {
                 when {
                     inner.name == "sampler" -> "sampler"

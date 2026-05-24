@@ -2,9 +2,13 @@ package io.ygdrasil.wgsl.parser
 
 import io.kotest.core.spec.style.FunSpec
 import io.kotest.matchers.shouldBe
+import io.kotest.assertions.throwables.shouldThrow
+import io.kotest.matchers.string.shouldContain
 import io.kotest.matchers.types.shouldBeInstanceOf
 import io.ygdrasil.wgsl.ast.*
+import io.ygdrasil.wgsl.ir.ExpressionKind
 import io.ygdrasil.wgsl.ir.ScalarKind
+import io.ygdrasil.wgsl.ir.Statement
 import io.ygdrasil.wgsl.ir.TypeInner
 import io.ygdrasil.wgsl.lexer.Lexer
 import io.ygdrasil.wgsl.parser.Lowerer
@@ -106,6 +110,37 @@ class AbstractTypeLoweringTest : FunSpec({
             
             val scalarKinds = abstractTypes.map { it.scalar }
             scalarKinds shouldBe listOf(ScalarKind.AbstractInt, ScalarKind.AbstractFloat)
+        }
+
+        test("array constructor in return uses function return element type") {
+            val source = """
+                fn values() -> array<f32, 4> {
+                    return array(1, 1, 1, 1);
+                }
+            """.trimIndent()
+
+            val module = Lowerer().lower(parseWgsl(source))
+            val function = module.functions.toList().single()
+            val statement = function.blocks[function.body].statements.single()
+                .shouldBeInstanceOf<Statement.Return>()
+            val constructor = function.expressions[statement.value!!].kind
+                .shouldBeInstanceOf<ExpressionKind.TypeConstructor>()
+            val arrayType = module.types[constructor.type].inner.shouldBeInstanceOf<TypeInner.Array>()
+            val elementType = module.types[arrayType.element].inner.shouldBeInstanceOf<TypeInner.Scalar>()
+
+            elementType.kind shouldBe ScalarKind.F32
+        }
+
+        test("array constructor in return rejects mismatched expected array size") {
+            val error = shouldThrow<LoweringError> {
+                Lowerer().lower(parseWgsl("""
+                    fn values() -> array<f32, 4> {
+                        return array(1, 1, 1);
+                    }
+                """.trimIndent()))
+            }
+
+            error.message shouldContain "does not match expected array size 4"
         }
     }
 })

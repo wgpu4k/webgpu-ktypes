@@ -5,12 +5,12 @@ struct Struct_2 {
     float3x3 m;
 };
 struct Struct_4 {
-    void a;
+    Struct_2 a[4];
 };
 float3x3 global_0 : register(u0);
 float3x3 global_1 : register(b1);
-void global_2 : register(u0);
-void global_3 : register(b1);
+float3x3 global_2[4] : register(u0);
+float3x3 global_3[4] : register(b1);
 Struct_2 global_4 : register(u0);
 Struct_2 global_5 : register(b1);
 Struct_4 global_6 : register(u0);
@@ -45,7 +45,7 @@ void access_m() {
 void access_am() {
     int local_0 = 1;
     local_0 = (local_0 - 1);
-    void local_1 = global_2;
+    float3x3 local_1[4] = global_2;
     float3x3 local_2 = global_2[0];
     float3x3 local_3 = global_2[local_0];
     float3 local_4 = global_2[0][0];
@@ -60,7 +60,7 @@ void access_am() {
     float local_13 = global_2[local_0][0][local_0];
     float local_14 = global_2[local_0][local_0][0];
     float local_15 = global_2[local_0][local_0][local_0];
-    void local_16 = global_3;
+    float3x3 local_16[4] = global_3;
     float3x3 local_17 = global_3[0];
     float3x3 local_18 = global_3[local_0];
     float3 local_19 = global_3[0][0];
@@ -125,7 +125,7 @@ void access_sasm() {
     int local_0 = 1;
     local_0 = (local_0 - 1);
     Struct_4 local_1 = global_6;
-    void local_2 = global_6.a;
+    Struct_2 local_2[4] = global_6.a;
     float3x3 local_3 = global_6.a[0].m;
     float3x3 local_4 = global_6.a[local_0].m;
     float3 local_5 = global_6.a[0].m[0];
@@ -141,7 +141,7 @@ void access_sasm() {
     float local_15 = global_6.a[local_0].m[local_0][0];
     float local_16 = global_6.a[local_0].m[local_0][local_0];
     Struct_4 local_17 = global_7;
-    void local_18 = global_7.a;
+    Struct_2 local_18[4] = global_7.a;
     float3x3 local_19 = global_7.a[0].m;
     float3x3 local_20 = global_7.a[local_0].m;
     float3 local_21 = global_7.a[0].m[0];

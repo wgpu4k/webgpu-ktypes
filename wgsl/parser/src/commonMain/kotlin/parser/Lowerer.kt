@@ -437,7 +437,7 @@ class Lowerer {
             val savedExpressions = currentExpressions
             try {
                 currentExpressions = module.globalExpressions
-                lowerExpression(initializerExpr)
+                lowerExpression(initializerExpr, decl.type?.let { lowerType(it) })
             } finally {
                 currentExpressions = savedExpressions
             }
@@ -615,7 +615,10 @@ class Lowerer {
 
     private fun lowerStatement(astStmt: Statement): IrStatement {
         return when (astStmt) {
-            is ReturnStatement -> IrStatement.Return(astStmt.value?.let { lowerExpression(it) })
+            is ReturnStatement -> {
+                val expectedReturnType = currentFunction?.let { module.functions[it].returnType }
+                IrStatement.Return(astStmt.value?.let { lowerExpression(it, expectedReturnType) })
+            }
             is AssignmentStatement -> {
                 val lhs = astStmt.lhs
                 if (lhs is UnaryExpr && lhs.op == io.ygdrasil.wgsl.ast.UnaryOperator.DEREF) {
@@ -645,8 +648,9 @@ class Lowerer {
                 IrStatement.Nop
             }
             is VariableDeclStatement -> {
-                val initHandle = astStmt.initializer?.let { lowerExpression(it) }
-                    val type = astStmt.type?.let { lowerType(it) }
+                val explicitType = astStmt.type?.let { lowerType(it) }
+                val initHandle = astStmt.initializer?.let { lowerExpression(it, explicitType) }
+                    val type = explicitType
                         ?: initHandle?.let { resolveExpressionType(it) }
                     ?: lowerInferredType()
                 val localVar = IrLocalVariable(
@@ -852,7 +856,7 @@ class Lowerer {
         }
     }
 
-    private fun lowerExpression(astExpr: Expression): Handle<IrExpression> {
+    private fun lowerExpression(astExpr: Expression, expectedType: Handle<IrType>? = null): Handle<IrExpression> {
         // Code existant commence ici...
         val kind = when (astExpr) {
             is IntLiteral -> {
@@ -921,14 +925,25 @@ class Lowerer {
                     IrExpressionKind.Call(functionMap[calleeName]!!, astExpr.args.map { lowerExpression(it) })
                 } else if (calleeName == "array" && astExpr.templateArgs == null) {
                     val loweredArgs = astExpr.args.map { lowerExpression(it) }
-                    val elemType = if (loweredArgs.isNotEmpty()) {
+                    val expectedArray = expectedType?.let { module.types[it].inner as? IrTypeInner.Array }
+                    if (expectedArray != null) {
+                        val expectedSize = expectedArray.size
+                        if (expectedSize is IrArraySize.Constant && expectedSize.value != loweredArgs.size) {
+                            throw LoweringError(
+                                "Array constructor argument count ${loweredArgs.size} does not match expected array size ${expectedSize.value}"
+                            )
+                        }
+                    }
+                    val elemType = expectedArray?.element ?: if (loweredArgs.isNotEmpty()) {
                         resolveExpressionType(loweredArgs[0])
                     } else {
                         throw LoweringError("Cannot infer element type for empty array constructor")
                     }
-                    val arraySize = IrArraySize.Constant(loweredArgs.size)
-                    val arrayTypeInner = IrTypeInner.Array(elemType, arraySize)
-                    val type = module.types.append(IrType(arrayTypeInner))
+                    val type = expectedType?.takeIf { expectedArray != null } ?: run {
+                        val arraySize = IrArraySize.Constant(loweredArgs.size)
+                        val arrayTypeInner = IrTypeInner.Array(elemType, arraySize)
+                        module.types.append(IrType(arrayTypeInner))
+                    }
                     IrExpressionKind.TypeConstructor(type, loweredArgs)
                 } else if (isBuiltinType || isStructType || isAliasType) {
                     val typeDecl = if (astExpr.templateArgs != null) {

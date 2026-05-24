@@ -5,6 +5,9 @@ import io.kotest.matchers.string.shouldContain
 import io.ygdrasil.wgsl.arena.Arena
 import io.ygdrasil.wgsl.ir.*
 import io.ygdrasil.wgsl.ir.Function
+import io.ygdrasil.wgsl.parser.Lowerer
+import io.ygdrasil.wgsl.parser.TypeResolver
+import io.ygdrasil.wgsl.parser.parseWgsl
 
 class MslWriterTest : FunSpec({
 
@@ -49,6 +52,19 @@ class MslWriterTest : FunSpec({
         code shouldContain "struct Struct_1" // Struct is index 1 because f32 is index 0
         code shouldContain "float a;"
         code shouldContain "void my_func()"
+    }
+
+    test("array_return_type_writes_array_instead_of_unknown_void") {
+        val module = lowerWgsl("""
+            fn values() -> array<f32, 4> {
+                return array(1, 1, 1, 1);
+            }
+        """.trimIndent())
+
+        val code = MslModule.writeString(module)
+
+        code shouldContain "array<float, 4> values()"
+        code shouldContain "return array<float, 4>(1, 1, 1, 1);"
     }
 
     test("testIntrinsicFunctions") {
@@ -360,3 +376,10 @@ class MslWriterTest : FunSpec({
         code shouldContain "float3 b;"
     }
 })
+
+private fun lowerWgsl(source: String): Module {
+    val unit = parseWgsl(source)
+    val result = TypeResolver().resolve(unit)
+    check(result.isSuccess) { "WGSL test fixture did not resolve: ${result.unresolvedReferences}" }
+    return Lowerer().lower(result.resolvedUnit)
+}

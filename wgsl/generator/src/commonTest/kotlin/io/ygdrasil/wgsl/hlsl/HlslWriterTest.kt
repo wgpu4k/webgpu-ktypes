@@ -5,7 +5,9 @@ import io.kotest.matchers.string.shouldContain
 import io.ygdrasil.wgsl.arena.Arena
 import io.ygdrasil.wgsl.ir.*
 import io.ygdrasil.wgsl.ir.Function
-import io.ygdrasil.wgsl.valid.ModuleInfo
+import io.ygdrasil.wgsl.parser.Lowerer
+import io.ygdrasil.wgsl.parser.TypeResolver
+import io.ygdrasil.wgsl.parser.parseWgsl
 
 class HlslWriterTest : FunSpec({
 
@@ -50,4 +52,23 @@ class HlslWriterTest : FunSpec({
         code shouldContain "float a;"
         code shouldContain "void my_func()"
     }
+
+    test("array_declaration_writes_suffix_on_declarator_instead_of_void") {
+        val module = lowerWgsl("""
+            fn values() {
+                var values: array<f32, 4>;
+            }
+        """.trimIndent())
+
+        val code = HlslModule.writeString(module)
+
+        code shouldContain "float local_0[4];"
+    }
 })
+
+private fun lowerWgsl(source: String): Module {
+    val unit = parseWgsl(source)
+    val result = TypeResolver().resolve(unit)
+    check(result.isSuccess) { "WGSL test fixture did not resolve: ${result.unresolvedReferences}" }
+    return Lowerer().lower(result.resolvedUnit)
+}
