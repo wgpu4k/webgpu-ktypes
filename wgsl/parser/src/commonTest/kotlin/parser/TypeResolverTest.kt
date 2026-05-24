@@ -146,4 +146,28 @@ class TypeResolverTest : FunSpec({
         result.isSuccess shouldBe true
         result.unresolvedReferences shouldHaveSize 0
     }
+
+    test("resolve loop body locals from continuing break-if condition") {
+        val source = """
+            fn main(a: bool) {
+                loop {
+                    var d = a;
+                    var e = a != d;
+
+                    continuing {
+                        break if a == e;
+                    }
+                }
+            }
+        """.trimIndent()
+
+        val parseResult = parseWgslResult(source)
+        parseResult.isSuccess shouldBe true
+
+        val resolver = TypeResolver()
+        val result = resolver.resolve(parseResult.translationUnit)
+
+        result.isSuccess shouldBe true
+        result.unresolvedReferences shouldHaveSize 0
+    }
 })
