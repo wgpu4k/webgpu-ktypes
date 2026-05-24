@@ -132,7 +132,7 @@ class Parser(
     private var isInsideTemplate: Boolean
         get() = templateDepth > 0
         set(value) {
-            if (value) templateDepth++ else if (templateDepth > 0) templateDepth--
+            templateDepth = if (value) 1 else 0
         }
 
     /** The list of errors encountered during parsing. */

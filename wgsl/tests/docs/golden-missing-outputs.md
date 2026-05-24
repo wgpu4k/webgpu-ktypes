@@ -48,4 +48,4 @@ Current status: 43 inputs are missing expected outputs for `wgsl`, `glsl`, `hlsl
 - `ray-query.wgsl` - pending parser/resolver/lowering support.
 - `ray-query-no-init-tracking.wgsl` - pending parser/resolver/lowering support.
 - `type-inference.wgsl` - pending parser/resolver/lowering support.
-- `workgroup-uniform-load-atomic.wgsl` - pending parser/resolver/lowering support.
+- `workgroup-uniform-load-atomic.wgsl` - parser/resolver/lowering support now passes; golden output needs review and generation.
