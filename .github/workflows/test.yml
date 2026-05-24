@@ -12,6 +12,7 @@ concurrency:
 
 jobs:
   tests:
+    if: github.event_name != 'pull_request' || github.base_ref == 'master'
     strategy:
       fail-fast: false
       matrix:
@@ -41,3 +42,34 @@ jobs:
       - name: Build & Test
         run: ./gradlew check
 
+  jvm-fast-path:
+    if: github.event_name == 'pull_request' && github.base_ref != 'master'
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Set up JDK
+        uses: actions/setup-java@v4
+        with:
+          distribution: 'temurin'
+          java-version: 25
+          cache: 'gradle'
+      - name: Setup Gradle
+        uses: gradle/actions/setup-gradle@v6
+      - name: Cache Gradle packages
+        uses: actions/cache@v4
+        with:
+          path: ~/.gradle/caches
+          key: ${{ runner.os }}-gradle-${{ hashFiles('**/*.gradle.kts') }}
+          restore-keys: ${{ runner.os }}-gradle
+      - name: JVM Tests
+        run: >
+          ./gradlew
+          :webgpu-ktypes:jvmTest
+          :webgpu-ktypes-descriptors:jvmTest
+          :webgpu-ktypes-specifications:jvmTest
+          :wgsl:cli:jvmTest
+          :wgsl:core:jvmTest
+          :wgsl:generator:jvmTest
+          :wgsl:parser:jvmTest
+          :wgsl:parser:koverVerifyJvm
+          :wgsl:tests:jvmTest
