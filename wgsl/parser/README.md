@@ -16,6 +16,7 @@
 8. [Examples](#-examples)
 9. [Module Dependencies](#-module-dependencies)
 10. [Coverage](docs/WGSL_PARSER_COVERAGE.md)
+11. [Unit Test Matrix](docs/WGSL_PARSER_TEST_MATRIX.md)
 
 ---
 
@@ -40,7 +41,7 @@ The **WGSL Parser Module** is responsible for reading, analyzing, and transformi
 | **Declarations** | `fn`, `let`, `const`, `var`, `type`, `struct`, `const_assert` | ✅ |
 | **Types** | Scalars (`i32`, `u32`, `f32`, etc.), Vectors, Matrices, Arrays, Pointers, Structs, **Abstract Types (`abstract int`, `abstract float`)** | ✅ |
 | **Expressions** | Literals, Identifiers, Binary/Unary ops, Function calls, Member access, Indexing | ✅ |
-| **Attributes** | `@location`, `@builtin`, `@binding`, `@group`, `@invariant`, `@must_use`, `@override` | ✅ |
+| **Attributes** | `@location`, `@builtin`, `@binding`, `@group`, `@invariant`, `@must_use`, `@id`, shader stage and workgroup attributes | ✅ |
 | **Storage Classes** | `uniform`, `storage`, `workgroup`, `private`, `function` | ✅ |
 | **Access Modes** | `read`, `write`, `read_write` | ✅ |
 | **Built-ins** | All WGSL built-in functions and values | ✅ |
@@ -126,15 +127,16 @@ val tokens = lexer.tokenizeSignificant()
 │    - Type Constructors: array, mat, vec, ptr                     │
 │    - Storage Classes: uniform, storage, workgroup, private,    │
 │      function                                                    │
-│    - Attributes: @location, @builtin, @binding, @group,         │
-│      @enable, @requires, @interpolate, @invariant, @must_use,   │
-│      @override, @compute, @fragment, @vertex                  │
+│    - Directives: enable, requires, diagnostic                   │
+│    - Dedicated Attribute Tokens: @location, @builtin, @binding, │
+│      @group, @interpolate, @invariant, @must_use, @compute,     │
+│      @fragment, @vertex                                         │
+│    - Other attribute names are parsed after @ as identifiers    │
 │    - Built-in Types: bool, i8, u8, i16, u16, i32, u32, i64,   │
 │      u64, f16, f32, f64                                          │
 │    - Texture Types: texture_1d, texture_2d, texture_2d_array,   │
 │      texture_3d, sampler, etc.                                   │
 │    - Access Modes: read, write, read_write                       │
-│    - Layout: packed, aligned                                      │
 │    - Template: where                                             │
 │                                                                    │
 │  Operators: +, -, *, /, %, &, |, ^, ~, <<, >>, &&, ||, !       │

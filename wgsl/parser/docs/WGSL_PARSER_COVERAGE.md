@@ -6,6 +6,8 @@ Le module `:wgsl:parser` dispose maintenant d'une baseline de couverture JVM mes
 
 L'objectif produit reste une couverture metier exhaustive du parseur WGSL. Le seuil actuel n'est donc pas une definition de "done" a 100%, mais le point de depart mesure pour les tranches suivantes.
 
+La matrice metier des capacites testees est suivie dans `WGSL_PARSER_TEST_MATRIX.md`.
+
 ## Baseline actuelle
 
 | Scope | Commande | Resultat verifie |
