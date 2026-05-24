@@ -31,9 +31,29 @@ class GlslWriter(
     override fun canHandle(module: Module, moduleInfo: ModuleInfo): Boolean = true
 
     override fun writeHeader() {
-        writeLine("#version 450 core")
-        // Only enable extensions if not in a simple context
-        // writeLine("#extension GL_ARB_separate_shader_objects : enable")
+        var hasRayQuery = false
+        module.globalVariables.forEachWithHandle { _, variable ->
+            val type = module.types[variable.type]
+            val inner = type.inner
+            if (inner is TypeInner.Opaque && (inner.name == "acceleration_structure" || inner.name == "ray_query")) {
+                hasRayQuery = true
+            }
+        }
+        module.functions.forEachWithHandle { _, func ->
+            func.localVariables.forEachWithHandle { _, localVar ->
+                val type = module.types[localVar.type]
+                val inner = type.inner
+                if (inner is TypeInner.Opaque && (inner.name == "acceleration_structure" || inner.name == "ray_query")) {
+                    hasRayQuery = true
+                }
+            }
+        }
+        if (hasRayQuery) {
+            writeLine("#version 460 core")
+            writeLine("#extension GL_EXT_ray_query : enable")
+        } else {
+            writeLine("#version 450 core")
+        }
     }
 
     override fun writePreamble() {
@@ -110,6 +130,9 @@ class GlslWriter(
             val left = writeExpression(kind.left)
             val right = writeExpression(kind.right)
             return "mod($left, $right)"
+        }
+        if (kind is ExpressionKind.ValuePointer) {
+            return writeExpression(kind.base)
         }
 
         return super.writeExpression(handle)
@@ -295,10 +318,23 @@ class GlslWriter(
                 // In many cases, it's just the type
                 baseName
             }
+            is TypeInner.ValuePointer -> {
+                getTypeName(inner.base)
+            }
+            is TypeInner.Array -> {
+                val elementTypeName = getTypeName(inner.element)
+                val sizeStr = when (val size = inner.size) {
+                    is ArraySize.Constant -> size.value.toString()
+                    is ArraySize.Dynamic -> ""
+                }
+                "$elementTypeName[$sizeStr]"
+            }
             is TypeInner.Opaque -> {
                 when {
                     inner.name == "sampler" -> "sampler"
                     inner.name == "comparison_sampler" -> "samplerShadow"
+                    inner.name == "acceleration_structure" -> "accelerationStructureEXT"
+                    inner.name == "ray_query" -> "rayQueryEXT"
                     inner.name == "texture_1d<f32>" -> "texture1D"
                     inner.name == "texture_2d<f32>" -> "texture2D"
                     inner.name == "texture_2d_array<f32>" -> "texture2DArray"
@@ -314,15 +350,52 @@ class GlslWriter(
         }
     }
 
-    override fun writeBitcast(expr: String, targetType: Type): String {
-        val inner = targetType.inner
-        val func = when {
-            inner is TypeInner.Scalar && inner.kind == ScalarKind.Uint -> "floatBitsToUint"
-            inner is TypeInner.Scalar && inner.kind == ScalarKind.F32 -> "intBitsToFloat" // simplified
-            inner is TypeInner.Scalar && inner.kind == ScalarKind.Sint -> "floatBitsToInt"
-            else -> "bitfieldExtract" // fallback/error
+    override fun writeBitcast(expr: String, targetType: Type, sourceType: Type): String {
+        val targetInner = targetType.inner
+        val sourceInner = sourceType.inner
+
+        val targetScalar = when (targetInner) {
+            is TypeInner.Scalar -> targetInner.kind
+            is TypeInner.Vector -> (module.types[targetInner.scalar].inner as TypeInner.Scalar).kind
+            else -> null
         }
-        return "$func($expr)"
+
+        val sourceScalar = when (sourceInner) {
+            is TypeInner.Scalar -> sourceInner.kind
+            is TypeInner.Vector -> (module.types[sourceInner.scalar].inner as TypeInner.Scalar).kind
+            else -> null
+        }
+
+        if (targetScalar == null || sourceScalar == null) {
+            return "/* unsupported bitcast */ $expr"
+        }
+
+        return when (targetScalar) {
+            ScalarKind.F32 -> {
+                if (sourceScalar == ScalarKind.Uint) {
+                    "uintBitsToFloat($expr)"
+                } else {
+                    "intBitsToFloat($expr)"
+                }
+            }
+            ScalarKind.Uint -> {
+                if (sourceScalar == ScalarKind.F32) {
+                    "floatBitsToUint($expr)"
+                } else {
+                    val targetTypeName = getTypeName(module.types.append(targetType))
+                    "$targetTypeName($expr)"
+                }
+            }
+            ScalarKind.Sint -> {
+                if (sourceScalar == ScalarKind.F32) {
+                    "floatBitsToInt($expr)"
+                } else {
+                    val targetTypeName = getTypeName(module.types.append(targetType))
+                    "$targetTypeName($expr)"
+                }
+            }
+            else -> "/* unsupported scalar bitcast */ $expr"
+        }
     }
 
     override fun writeRelational(function: RelationalFunction, arguments: List<String>): String {

@@ -6,7 +6,7 @@ int index_arg_array(/* unknown type */ void a, int i) {
 }
 
 int index_let_array(int i, int j) {
-    /* unknown type */ void local_0 = /* unknown type */ void(float(1, 2), float(3, 4));
+    /* unknown type */ void local_0 = /* unknown type */ void(/* unknown type */ void(1, 2), /* unknown type */ void(3, 4));
     return local_0[i][j];
 }
 

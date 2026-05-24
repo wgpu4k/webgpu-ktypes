@@ -2,7 +2,7 @@
 var<private> o: i32;
 var<workgroup> a: u32;
 
-fn atomicCompareExchangeWeak() {
+fn atomicCompareExchangeWeak(arg_0: ptr<function, u32>, arg_1: u32, arg_2: u32) -> ptr<function, u32> {
 }
 
 @compute

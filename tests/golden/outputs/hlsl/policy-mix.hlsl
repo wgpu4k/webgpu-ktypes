@@ -7,7 +7,7 @@ struct Struct_3 {
 struct Struct_5 {
     void a;
 };
-float global_0 : register(t2);
+Texture2DArray<float4> global_0 : register(t2);
 void global_1;
 void global_2;
 Struct_3 global_3 : register(u0);

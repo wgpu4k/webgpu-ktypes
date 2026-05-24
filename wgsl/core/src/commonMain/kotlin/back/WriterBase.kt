@@ -164,14 +164,15 @@ abstract class WriterBase<T : BackendOptions>(
                     stmt.cases.forEach { case ->
                         case.selector.let { sel ->
                             when (sel) {
-                                is CaseSelector.Value -> writeLine("case ${writeScalarValue(sel.value)}:")
-                                is CaseSelector.Default -> writeLine("default:")
+                                is CaseSelector.Value -> writeLine("case ${writeScalarValue(sel.value)}: {")
+                                is CaseSelector.Default -> writeLine("default: {")
                             }
                         }
                         indent {
                             writeBlock(case.body)
                             writeLine("break;")
                         }
+                        writeLine("}")
                     }
                 }
                 writeLine("}")
@@ -265,6 +266,7 @@ abstract class WriterBase<T : BackendOptions>(
                 "$vectorName($e)"
             }
             is ExpressionKind.Load -> writeExpression(kind.pointer)
+            is ExpressionKind.ValuePointer -> "&" + writeExpression(kind.base)
             is ExpressionKind.Store -> {
                 val p = writeExpression(kind.pointer)
                 val v = writeExpression(kind.value)
@@ -306,7 +308,8 @@ abstract class WriterBase<T : BackendOptions>(
             is ExpressionKind.Bitcast -> {
                 val e = writeExpression(kind.expr)
                 val targetType = getExpressionType(handle)
-                writeBitcast(e, targetType)
+                val sourceType = getExpressionType(kind.expr)
+                writeBitcast(e, targetType, sourceType)
             }
             else -> "/* unsupported expression: ${kind::class.simpleName} */"
         }
@@ -320,7 +323,7 @@ abstract class WriterBase<T : BackendOptions>(
         return "${function.name.lowercase()}(${arguments.joinToString()})"
     }
 
-    protected open fun writeBitcast(expr: String, targetType: Type): String {
+    protected open fun writeBitcast(expr: String, targetType: Type, sourceType: Type): String {
         return "bitcast<${getTypeName(module.types.append(targetType))}>($expr)"
     }
 
@@ -419,7 +422,13 @@ abstract class WriterBase<T : BackendOptions>(
                 Type(TypeInner.Vector(kind.size, scalarHandle))
             }
             is ExpressionKind.As -> module.types[kind.target]
+            is ExpressionKind.Bitcast -> module.types[kind.target]
             is ExpressionKind.TypeConstructor -> module.types[kind.type]
+            is ExpressionKind.ValuePointer -> {
+                val baseType = getExpressionType(kind.base)
+                val baseHandle = module.types.append(baseType)
+                Type(TypeInner.ValuePointer(baseHandle))
+            }
             else -> Type(TypeInner.Error)
         }
     }

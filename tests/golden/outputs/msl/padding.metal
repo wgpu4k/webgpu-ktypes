@@ -15,3 +15,10 @@ struct Struct_7 {
     Struct_2 a;
     float b;
 };
+
+struct vertex_Output {
+    float4 position [[position]];
+};
+[[vertex]]
+vertex_Output vertex(Struct_4 global_0 [[buffer(1)]], Struct_6 global_1 [[buffer(2)]], Struct_7 global_2 [[buffer(0)]]) {
+}

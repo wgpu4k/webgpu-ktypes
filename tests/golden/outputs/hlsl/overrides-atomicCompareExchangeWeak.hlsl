@@ -8,5 +8,5 @@ uint global_1;
 void f() {
 }
 
-void atomicCompareExchangeWeak() {
+void atomicCompareExchangeWeak(void arg_0, uint arg_1, uint arg_2) {
 }

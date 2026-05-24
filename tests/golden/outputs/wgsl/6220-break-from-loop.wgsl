@@ -2,21 +2,18 @@
 
 fn break_from_loop() {
     {
-        f32 local_0 = 0;
+        var i: i32 = 0;
         while (true) {
-            if ((local_0 < 4)) {
+            if ((i < 4)) {
                 {
                     break;
                 }
-                local_0 = 1;
+                i = 1;
             } else {
                 break;
             }
         }
     }
-}
-
-fn main() {
 }
 
 @compute

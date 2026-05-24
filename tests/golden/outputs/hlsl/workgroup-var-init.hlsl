@@ -3,10 +3,10 @@
 
 struct Struct_5 {
     void arr;
-    float atom;
+    int atom;
     void atom_arr;
 };
-void global_0;
+void global_0 : register(u0);
 Struct_5 global_1;
 
 [numthreads(1, 1, 1)]

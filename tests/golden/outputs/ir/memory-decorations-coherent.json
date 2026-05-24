@@ -72,13 +72,21 @@
                 "name": "coherent_buf",
                 "storageClass": "Storage",
                 "accessMode": "ReadWrite",
-                "type": 2
+                "type": 2,
+                "binding": {
+                    "group": 0,
+                    "index": 0
+                }
             },
             {
                 "name": "plain_buf",
                 "storageClass": "Storage",
                 "accessMode": "ReadWrite",
-                "type": 2
+                "type": 2,
+                "binding": {
+                    "group": 0,
+                    "index": 1
+                }
             }
         ]
     },

@@ -4,7 +4,7 @@
 
 void break_from_loop() {
     {
-        float local_0 = 0;
+        int local_0 = 0;
         while (true) {
             if ((local_0 < 4)) {
                 {

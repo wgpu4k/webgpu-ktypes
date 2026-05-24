@@ -12,21 +12,21 @@ int use_return() {
 }
 
 int use_assign_var() {
-    float q = use_me();
+    int q = use_me();
     return q;
 }
 
 int use_assign_let() {
-    float q = use_me();
+    int q = use_me();
     return q;
 }
 
 void use_phony_assign() {
 }
 
-void main() {
+void wgsl_main() {
 }
 
 void main() {
-    main();
+    wgsl_main();
 }

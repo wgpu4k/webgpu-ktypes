@@ -7,18 +7,18 @@ var<storage, read_write> dynamic_array: Struct_2;
 
 fn f() {
     var v: mat2x2<f32>;
-    var px: ptr<function, vec2<f32>> = /* unsupported expression: ValuePointer */;
+    var px: ptr<function, vec2<f32>> = &v[0];
     px = vec2<f32>(10.0f);
 }
 
 fn index_unsized(i: i32, v: u32) {
-    var p: ptr<storage, Struct_2, read_write> = /* unsupported expression: ValuePointer */;
+    var p: ptr<storage, Struct_2, read_write> = &dynamic_array;
     var val: u32 = p.arr[i];
     p.arr[i] = (val + v);
 }
 
 fn index_dynamic_array(i: i32, v: u32) {
-    var p: ptr<storage, array<u32>, read_write> = /* unsupported expression: ValuePointer */;
+    var p: ptr<storage, array<u32>, read_write> = &dynamic_array.arr;
     var val: u32 = p[i];
     p[i] = (val + v);
 }

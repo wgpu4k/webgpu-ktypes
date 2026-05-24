@@ -30,5 +30,5 @@ void textureLoad() {
 }
 
 [[fragment]]
-float4 fragment_shader(float global_0 [[buffer(0)]], float global_1 [[buffer(1)]], float global_2 [[buffer(2)]]) {
+float4 fragment_shader(depth2d<float> global_0 [[texture(0)]], depth2d<float> global_1 [[texture(1)]], depth2d<float> global_2 [[texture(2)]]) {
 }

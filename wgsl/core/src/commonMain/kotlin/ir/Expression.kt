@@ -131,7 +131,7 @@ sealed class ExpressionKind {
     @Serializable
     data class As(val expr: Handle<Expression>, val target: Handle<Type>) : ExpressionKind()
     @Serializable
-    data class Bitcast(val expr: Handle<Expression>) : ExpressionKind()
+    data class Bitcast(val expr: Handle<Expression>, val target: Handle<Type>) : ExpressionKind()
 
     // Relational operations
     @Serializable

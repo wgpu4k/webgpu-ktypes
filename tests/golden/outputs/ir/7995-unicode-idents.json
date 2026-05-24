@@ -27,7 +27,11 @@
             {
                 "name": "asdf",
                 "storageClass": "Storage",
-                "type": 0
+                "type": 0,
+                "binding": {
+                    "group": 0,
+                    "index": 0
+                }
             }
         ]
     },
@@ -41,8 +45,8 @@
                     "data": [
                         {
                             "kind": {
-                                "__type": "io.ygdrasil.wgsl.ir.ExpressionKind.TypeConstructor",
-                                "type": 0,
+                                "__type": "io.ygdrasil.wgsl.ir.ExpressionKind.Call",
+                                "function": 1,
                                 "arguments": []
                             }
                         }
@@ -63,6 +67,20 @@
                     ]
                 },
                 "body": 1
+            },
+            {
+                "name": "",
+                "parameters": [],
+                "localVariables": {},
+                "expressions": {},
+                "blocks": {
+                    "data": [
+                        {
+                            "statements": []
+                        }
+                    ]
+                },
+                "body": 0
             }
         ]
     },

@@ -33,8 +33,20 @@ class GlslValidator : BackendValidator {
                 add(executable)
 
                 // Version
-                when (target?.uppercase()) {
-                    "460", "V460" -> add("-V460")
+                val resolvedTarget = if (target != null) {
+                    target
+                } else if (code.contains("rayQueryEXT") || code.contains("GL_EXT_ray_query")) {
+                    "460"
+                } else {
+                    null
+                }
+
+                when (resolvedTarget?.uppercase()) {
+                    "460", "V460" -> {
+                        add("--target-env")
+                        add("vulkan1.3")
+                        add("-V")
+                    }
                     "450", "V" -> add("-V")
                     "320", "E" -> add("-e")
                     "400", "G" -> add("-G")

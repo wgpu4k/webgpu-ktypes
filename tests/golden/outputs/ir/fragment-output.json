@@ -488,7 +488,7 @@
                         {
                             "kind": {
                                 "__type": "io.ygdrasil.wgsl.ir.ExpressionKind.TypeConstructor",
-                                "type": 1,
+                                "type": 3,
                                 "arguments": [
                                     6
                                 ]
@@ -522,7 +522,7 @@
                         {
                             "kind": {
                                 "__type": "io.ygdrasil.wgsl.ir.ExpressionKind.TypeConstructor",
-                                "type": 1,
+                                "type": 5,
                                 "arguments": [
                                     10
                                 ]
@@ -590,7 +590,7 @@
                         {
                             "kind": {
                                 "__type": "io.ygdrasil.wgsl.ir.ExpressionKind.TypeConstructor",
-                                "type": 6,
+                                "type": 7,
                                 "arguments": [
                                     18
                                 ]
@@ -624,7 +624,7 @@
                         {
                             "kind": {
                                 "__type": "io.ygdrasil.wgsl.ir.ExpressionKind.TypeConstructor",
-                                "type": 6,
+                                "type": 8,
                                 "arguments": [
                                     22
                                 ]
@@ -765,7 +765,7 @@
                         {
                             "kind": {
                                 "__type": "io.ygdrasil.wgsl.ir.ExpressionKind.TypeConstructor",
-                                "type": 10,
+                                "type": 11,
                                 "arguments": [
                                     6
                                 ]
@@ -799,7 +799,7 @@
                         {
                             "kind": {
                                 "__type": "io.ygdrasil.wgsl.ir.ExpressionKind.TypeConstructor",
-                                "type": 10,
+                                "type": 12,
                                 "arguments": [
                                     10
                                 ]

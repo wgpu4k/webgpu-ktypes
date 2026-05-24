@@ -57,6 +57,9 @@ abstract class GoldenTestBase(val backendName: String) : FunSpec({
             .filter {
                 if (goldenFilter == "starter") {
                     Files.size(it) < 200
+                } else if (goldenFilter == "medium") {
+                    val size = Files.size(it)
+                    size in 200..2000
                 } else {
                     goldenFilter == null || (if (goldenFilter.endsWith(".wgsl")) it.fileName.toString() == goldenFilter else it.fileName.toString().contains(goldenFilter))
                 }

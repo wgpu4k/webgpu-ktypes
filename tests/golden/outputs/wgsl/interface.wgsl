@@ -11,7 +11,7 @@ struct Struct_4 {
 struct Struct_5 {
     index: u32,
 }
-var<workgroup> output: array<u32>;
+var<workgroup> output: array<u32, 1>;
 
 @vertex
 fn vertex_two_structs(in1: Struct_5, in2: Struct_5) -> vec4<f32> {

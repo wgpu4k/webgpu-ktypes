@@ -41,6 +41,7 @@ class Lowerer {
     private lateinit var module: IrModule
     private val typeMap = mutableMapOf<TypeDecl, Handle<IrType>>()
     private val structNameMap = mutableMapOf<String, Handle<IrType>>()
+    private val typeAliasMap = mutableMapOf<String, Handle<IrType>>()
     private val globalVarMap = mutableMapOf<String, Handle<IrGlobalVariable>>()
     private val functionMap = mutableMapOf<String, Handle<IrFunction>>()
 
@@ -60,6 +61,7 @@ class Lowerer {
         // Reset all state for a new lowering pass
         typeMap.clear()
         structNameMap.clear()
+        typeAliasMap.clear()
         globalVarMap.clear()
         functionMap.clear()
         localVariablesMap.clear()
@@ -125,7 +127,7 @@ class Lowerer {
             else -> null
         }
         if (name != null) {
-            val handle = structNameMap[name]
+            val handle = structNameMap[name] ?: typeAliasMap[name]
             if (handle != null) {
                 return handle
             }
@@ -175,6 +177,9 @@ class Lowerer {
                         name == "i32" -> IrTypeInner.Scalar(IrScalarKind.Sint, 4)
                         name == "u32" -> IrTypeInner.Scalar(IrScalarKind.Uint, 4)
                         name == "bool" -> IrTypeInner.Scalar(IrScalarKind.Bool, 1)
+                        name == "acceleration_structure" || name == "ray_query" || name == "RayDesc" || name == "RayIntersection" -> {
+                            IrTypeInner.Opaque(name)
+                        }
                         name.startsWith("vec") -> {
                             val size = name.substring(3, 4).toIntOrNull() ?: 4
                             IrTypeInner.Vector(lowerVectorSize(size), module.types.append(IrType(IrTypeInner.Scalar(IrScalarKind.F32, 4))))
@@ -243,9 +248,84 @@ class Lowerer {
                     val elemType = lowerType(typeDecl.elementType)
                     module.types[elemType].inner
                 }
+                is SamplerType -> {
+                    val name = if (typeDecl.isComparison) "sampler_comparison" else "sampler"
+                    IrTypeInner.Opaque(name)
+                }
+                is TextureType -> {
+                    val kindName = when (typeDecl.kind) {
+                        TextureKind.TEXTURE_1D -> "texture_1d"
+                        TextureKind.TEXTURE_1D_ARRAY -> "texture_1d_array"
+                        TextureKind.TEXTURE_2D -> "texture_2d"
+                        TextureKind.TEXTURE_2D_ARRAY -> "texture_2d_array"
+                        TextureKind.TEXTURE_3D -> "texture_3d"
+                        TextureKind.TEXTURE_CUBE -> "texture_cube"
+                        TextureKind.TEXTURE_CUBE_ARRAY -> "texture_cube_array"
+                        TextureKind.TEXTURE_MULTISAMPLED_2D -> "texture_multisampled_2d"
+                        TextureKind.TEXTURE_DEPTH_2D -> "texture_depth_2d"
+                        TextureKind.TEXTURE_DEPTH_2D_ARRAY -> "texture_depth_2d_array"
+                        TextureKind.TEXTURE_DEPTH_CUBE -> "texture_depth_cube"
+                        TextureKind.TEXTURE_DEPTH_CUBE_ARRAY -> "texture_depth_cube_array"
+                        TextureKind.TEXTURE_DEPTH_MULTISAMPLED_2D -> "texture_depth_multisampled_2d"
+                        TextureKind.TEXTURE_EXTERNAL -> "texture_external"
+                        TextureKind.TEXTURE_STORAGE_1D -> "texture_storage_1d"
+                        TextureKind.TEXTURE_STORAGE_2D -> "texture_storage_2d"
+                        TextureKind.TEXTURE_STORAGE_2D_ARRAY -> "texture_storage_2d_array"
+                        TextureKind.TEXTURE_STORAGE_3D -> "texture_storage_3d"
+                    }
+                    val fullTextureName = buildString {
+                        append(kindName)
+                        if (typeDecl.elementType != null || typeDecl.accessMode != null) {
+                            append("<")
+                            val parts = mutableListOf<String>()
+                            typeDecl.elementType?.let { parts.add(getTypeDeclName(it)) }
+                            typeDecl.accessMode?.let { parts.add(it) }
+                            append(parts.joinToString(", "))
+                            append(">")
+                        }
+                    }
+                    IrTypeInner.Opaque(fullTextureName)
+                }
+                is RayQueryType -> {
+                    IrTypeInner.Opaque("ray_query")
+                }
                 else -> IrTypeInner.Scalar(IrScalarKind.F32, 4)
             }
             module.types.append(IrType(inner))
+        }
+    }
+
+    private fun getTypeDeclName(typeDecl: TypeDecl): String {
+        return when (typeDecl) {
+            is ScalarType -> typeDecl.kind.name.lowercase()
+            is VectorType -> "vec${typeDecl.size}<${getTypeDeclName(typeDecl.elementType)}>"
+            is MatrixType -> "mat${typeDecl.columns}x${typeDecl.rows}<${getTypeDeclName(typeDecl.elementType)}>"
+            is ArrayType -> "array<${getTypeDeclName(typeDecl.elementType)}${typeDecl.length?.let { ", $it" } ?: ""}>"
+            is NamedType -> typeDecl.name
+            is PointerType -> "ptr<${typeDecl.storageClass.name.lowercase()}, ${getTypeDeclName(typeDecl.elementType)}>"
+            is TemplateType -> "${typeDecl.name}<${typeDecl.args.joinToString(", ") { getTypeDeclName(it) }}>"
+            is AtomicType -> "atomic<${getTypeDeclName(typeDecl.elementType)}>"
+            is SamplerType -> if (typeDecl.isComparison) "sampler_comparison" else "sampler"
+            is TextureType -> {
+                val kindName = typeDecl.kind.name.lowercase()
+                buildString {
+                    append(kindName)
+                    if (typeDecl.elementType != null || typeDecl.accessMode != null) {
+                        append("<")
+                        val parts = mutableListOf<String>()
+                        typeDecl.elementType?.let { parts.add(getTypeDeclName(it)) }
+                        typeDecl.accessMode?.let { parts.add(it) }
+                        append(parts.joinToString(", "))
+                        append(">")
+                    }
+                }
+            }
+            is RayQueryType -> "ray_query"
+            is AbstractIntType -> "abstract_int"
+            is AbstractFloatType -> "abstract_float"
+            is StructType -> typeDecl.name
+            is EnumType -> typeDecl.name
+            else -> "f32"
         }
     }
 
@@ -319,6 +399,7 @@ class Lowerer {
 
     private fun lowerTypeAlias(decl: TypeAliasDecl) {
         val handle = lowerType(decl.type)
+        typeAliasMap[decl.name] = handle
         typeMap[NamedType(decl.name, decl.span)] = handle
     }
 
@@ -372,22 +453,30 @@ class Lowerer {
     }
 
     private fun lowerOverride(decl: OverrideDecl) {
-        val type = decl.type?.let { lowerType(it) } ?: return
+        val savedExpressions = currentExpressions
+        val initHandle = try {
+            currentExpressions = module.globalExpressions
+            decl.initializer?.let { lowerExpression(it) }
+        } catch (e: Exception) {
+            throw e
+        } finally {
+            currentExpressions = savedExpressions
+        }
+
+        val type = decl.type?.let { lowerType(it) }
+            ?: initHandle?.let { handle ->
+                val saved = currentExpressions
+                try {
+                    currentExpressions = module.globalExpressions
+                    resolveExpressionType(handle)
+                } finally {
+                    currentExpressions = saved
+                }
+            }
+            ?: return
+
         val storageClass = IrStorageClass.Private
         val accessMode = IrAccessMode.Read
-
-        val initHandle = decl.initializer?.let { initializerExpr ->
-            val savedExpressions = currentExpressions
-            try {
-                currentExpressions = module.globalExpressions
-                val result = lowerExpression(initializerExpr)
-                currentExpressions = savedExpressions
-                result
-            } catch (e: Exception) {
-                currentExpressions = savedExpressions
-                throw e
-            }
-        }
 
         val variable = IrGlobalVariable(
             name = decl.name,
@@ -510,6 +599,11 @@ class Lowerer {
                 IrStatement.If(cond, accept, reject)
             }
             is BlockStatement -> IrStatement.Block(lowerBlock(astStmt))
+            is LoopStatement -> {
+                val bodyBlock = lowerBlock(astStmt.body)
+                val continuingBlock = astStmt.continuing?.let { lowerBlock(it) }
+                IrStatement.Loop(bodyBlock, continuingBlock)
+            }
             is ConstAssertStatement -> {
                 // Const assertions are evaluated at compile time and produce no runtime code.
                 // We still lower the expression to ensure it's valid, but we don't emit any statement.
@@ -741,6 +835,26 @@ class Lowerer {
                     IrExpressionKind.FunctionArgument(functionParamsMap[name]!!)
                 } else if (globalVarMap.containsKey(name)) {
                     IrExpressionKind.GlobalVar(globalVarMap[name]!!)
+                } else if (name == "RAY_FLAG_NONE") {
+                    IrExpressionKind.Literal(IrLiteralValue.Scalar(IrScalarValue.U32(0L)))
+                } else if (name == "RAY_FLAG_FORCE_OPAQUE") {
+                    IrExpressionKind.Literal(IrLiteralValue.Scalar(IrScalarValue.U32(1L)))
+                } else if (name == "RAY_FLAG_FORCE_NO_OPAQUE") {
+                    IrExpressionKind.Literal(IrLiteralValue.Scalar(IrScalarValue.U32(2L)))
+                } else if (name == "RAY_FLAG_ACCEPT_FIRST_HIT") {
+                    IrExpressionKind.Literal(IrLiteralValue.Scalar(IrScalarValue.U32(4L)))
+                } else if (name == "RAY_FLAG_SKIP_CLOSEST_HIT") {
+                    IrExpressionKind.Literal(IrLiteralValue.Scalar(IrScalarValue.U32(8L)))
+                } else if (name == "RAY_FLAG_CULL_BACK_FACING") {
+                    IrExpressionKind.Literal(IrLiteralValue.Scalar(IrScalarValue.U32(16L)))
+                } else if (name == "RAY_FLAG_CULL_FRONT_FACING") {
+                    IrExpressionKind.Literal(IrLiteralValue.Scalar(IrScalarValue.U32(32L)))
+                } else if (name == "RAY_FLAG_CULL_OPAQUE") {
+                    IrExpressionKind.Literal(IrLiteralValue.Scalar(IrScalarValue.U32(64L)))
+                } else if (name == "RAY_FLAG_CULL_NO_OPAQUE") {
+                    IrExpressionKind.Literal(IrLiteralValue.Scalar(IrScalarValue.U32(128L)))
+                } else if (name == "RAY_FLAG_TERMINATE_ON_FIRST_HIT") {
+                    IrExpressionKind.Literal(IrLiteralValue.Scalar(IrScalarValue.U32(256L)))
                 } else {
                     // P004 fix: Throw error instead of silent fallback
                     throw LoweringError("Undefined variable: '$name'")
@@ -767,10 +881,22 @@ class Lowerer {
                 val calleeName = (astExpr.callee as? IdentExpr)?.name
                 val isBuiltinType = calleeName == "f32" || calleeName == "i32" || calleeName == "u32" || calleeName == "bool" || calleeName?.startsWith("vec") == true || calleeName?.startsWith("mat") == true || calleeName?.startsWith("array") == true
                 val isStructType = calleeName != null && structNameMap.containsKey(calleeName)
+                val isAliasType = calleeName != null && typeAliasMap.containsKey(calleeName)
                 
                 if (calleeName != null && functionMap.containsKey(calleeName)) {
                     IrExpressionKind.Call(functionMap[calleeName]!!, astExpr.args.map { lowerExpression(it) })
-                } else if (isBuiltinType || isStructType) {
+                } else if (calleeName == "array" && astExpr.templateArgs == null) {
+                    val loweredArgs = astExpr.args.map { lowerExpression(it) }
+                    val elemType = if (loweredArgs.isNotEmpty()) {
+                        resolveExpressionType(loweredArgs[0])
+                    } else {
+                        module.types.append(IrType(IrTypeInner.Scalar(IrScalarKind.F32, 4)))
+                    }
+                    val arraySize = IrArraySize.Constant(loweredArgs.size)
+                    val arrayTypeInner = IrTypeInner.Array(elemType, arraySize)
+                    val type = module.types.append(IrType(arrayTypeInner))
+                    IrExpressionKind.TypeConstructor(type, loweredArgs)
+                } else if (isBuiltinType || isStructType || isAliasType) {
                     val typeDecl = if (astExpr.templateArgs != null) {
                         TemplateType(calleeName, astExpr.templateArgs, astExpr.span)
                     } else {
@@ -781,21 +907,31 @@ class Lowerer {
                 } else {
                     // It's a builtin function or unresolved function, emit Call instead of TypeConstructor
                     val funcName = calleeName ?: "unknown_func"
+                    val loweredArgs = astExpr.args.map { lowerExpression(it) }
                     val stubExpressions = Arena<IrExpression>()
                     val stubBlocks = Arena<IrBlock>()
                     val stubLocalVars = Arena<IrLocalVariable>()
+                    
+                    val returnType = if (loweredArgs.isNotEmpty()) {
+                        resolveExpressionType(loweredArgs[0])
+                    } else {
+                        null
+                    }
+                    
                     val dummyFunc = module.functions.append(
                         IrFunction(
                             name = funcName,
-                            parameters = emptyList(),
-                            returnType = null,
+                            parameters = loweredArgs.mapIndexed { idx, argHandle ->
+                                IrFunctionParameter(name = "arg_$idx", type = resolveExpressionType(argHandle), binding = null)
+                            },
+                            returnType = returnType,
                             expressions = stubExpressions,
                             localVariables = stubLocalVars,
                             blocks = stubBlocks,
                             body = stubBlocks.append(IrBlock(emptyList()))
                         )
                     )
-                    IrExpressionKind.Call(dummyFunc, astExpr.args.map { lowerExpression(it) })
+                    IrExpressionKind.Call(dummyFunc, loweredArgs)
                 }
             }
             is MemberAccessExpr -> {
@@ -878,6 +1014,11 @@ class Lowerer {
                         lowerExpression(index)
                     )
                 }
+            }
+            is BitcastExpr -> {
+                val exprHandle = lowerExpression(astExpr.expr)
+                val targetTypeHandle = lowerType(astExpr.type)
+                IrExpressionKind.Bitcast(exprHandle, targetTypeHandle)
             }
             else -> throw LoweringError("Unsupported expression type: ${astExpr::class.simpleName}")
         }
@@ -1078,6 +1219,43 @@ class Lowerer {
                 } else {
                     throw LoweringError("Builtin call to ${kind.function} has no arguments to infer type from")
                 }
+            }
+            is IrExpressionKind.Bitcast -> {
+                kind.target
+            }
+            is IrExpressionKind.Binary -> {
+                val leftType = resolveExpressionType(kind.left)
+                val rightType = resolveExpressionType(kind.right)
+                val leftInner = module.types[leftType].inner
+                val rightInner = module.types[rightType].inner
+                if (leftInner is IrTypeInner.Scalar && rightInner is IrTypeInner.Scalar) {
+                    if (leftInner.kind == IrScalarKind.F32 || rightInner.kind == IrScalarKind.F32) {
+                        if (leftInner.kind == IrScalarKind.F32) leftType else rightType
+                    } else if (leftInner.kind == IrScalarKind.F16 || rightInner.kind == IrScalarKind.F16) {
+                        if (leftInner.kind == IrScalarKind.F16) leftType else rightType
+                    } else if (leftInner.kind == IrScalarKind.F64 || rightInner.kind == IrScalarKind.F64) {
+                        if (leftInner.kind == IrScalarKind.F64) leftType else rightType
+                    } else if (leftInner.kind == IrScalarKind.AbstractFloat || rightInner.kind == IrScalarKind.AbstractFloat) {
+                        if (leftInner.kind == IrScalarKind.AbstractFloat) leftType else rightType
+                    } else {
+                        leftType
+                    }
+                } else if (leftInner is IrTypeInner.Vector || rightInner is IrTypeInner.Vector) {
+                    if (leftInner is IrTypeInner.Vector) leftType else rightType
+                } else if (leftInner is IrTypeInner.Matrix || rightInner is IrTypeInner.Matrix) {
+                    if (leftInner is IrTypeInner.Matrix) leftType else rightType
+                } else {
+                    leftType
+                }
+            }
+            is IrExpressionKind.Unary -> {
+                resolveExpressionType(kind.expr)
+            }
+            is IrExpressionKind.Select -> {
+                resolveExpressionType(kind.accept)
+            }
+            is IrExpressionKind.ConstantExpr -> {
+                module.constants[kind.handle].type
             }
             else -> throw LoweringError("Cannot resolve member access object type for expression kind: ${kind::class.simpleName}")
         }

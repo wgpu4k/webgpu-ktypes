@@ -4,7 +4,7 @@
             {
                 "inner": {
                     "__type": "io.ygdrasil.wgsl.ir.TypeInner.Scalar",
-                    "kind": "F32",
+                    "kind": "Sint",
                     "width": 4
                 }
             }
@@ -13,7 +13,7 @@
             {
                 "inner": {
                     "__type": "io.ygdrasil.wgsl.ir.TypeInner.Scalar",
-                    "kind": "F32",
+                    "kind": "Sint",
                     "width": 4
                 }
             },

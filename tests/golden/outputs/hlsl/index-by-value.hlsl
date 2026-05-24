@@ -7,7 +7,7 @@ int index_arg_array(void a, int i) {
 }
 
 int index_let_array(int i, int j) {
-    void local_0 = void(float(1, 2), float(3, 4));
+    void local_0 = void(void(1, 2), void(3, 4));
     return local_0[i][j];
 }
 

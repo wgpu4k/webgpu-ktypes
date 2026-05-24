@@ -5,7 +5,7 @@ precision highp int;
 
 void break_from_loop() {
     {
-        float i = 0;
+        int i = 0;
         while (true) {
             if ((i < 4)) {
                 {
@@ -19,9 +19,9 @@ void break_from_loop() {
     }
 }
 
-void main() {
+void wgsl_main() {
 }
 
 void main() {
-    main();
+    wgsl_main();
 }

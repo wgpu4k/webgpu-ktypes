@@ -3,7 +3,7 @@ struct Struct_2 {
     a: vec3<f32>,
 }
 struct Struct_4 {
-    a: array<vec3<f32>>,
+    a: array<vec3<f32>, 2>,
     b: f32,
 }
 struct Struct_6 {
@@ -20,3 +20,8 @@ var<uniform> input2: Struct_4;
 var<uniform> input3: Struct_6;
 @group(0) @binding(0)
 var<uniform> input1: Struct_7;
+
+@vertex
+fn vertex() -> vec4<f32> {
+    return (((vec4<f32>(1.0f) * input1.b) * input2.b) * input3.b);
+}

@@ -4,8 +4,8 @@
 struct Struct_2 {
     void values;
 };
-Struct_2 global_0;
-Struct_2 global_1;
+Struct_2 global_0 : register(u0);
+Struct_2 global_1 : register(u1);
 
 [numthreads(1, 1, 1)]
 void main() {

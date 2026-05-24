@@ -128,7 +128,12 @@ class Parser(
     private var hasError: Boolean = false
 
     /** true if we are currently parsing inside a template (angle brackets). */
-    private var isInsideTemplate: Boolean = false
+    private var templateDepth: Int = 0
+    private var isInsideTemplate: Boolean
+        get() = templateDepth > 0
+        set(value) {
+            if (value) templateDepth++ else if (templateDepth > 0) templateDepth--
+        }
 
     /** The list of errors encountered during parsing. */
     val errors: MutableList<ParseError> = mutableListOf()
@@ -137,13 +142,26 @@ class Parser(
     private fun isAtEnd(): Boolean = currentToken.isEof
 
     /** Returns the kind of the current token. */
-    private fun currentKind(): TokenKind = currentToken.kind
+    private fun currentKind(): TokenKind {
+        val kind = currentToken.kind
+        if (kind == TokenKind.RIGHT_SHIFT && templateDepth > 0) {
+            return TokenKind.RIGHT_ANGLE
+        }
+        return kind
+    }
 
     /**
      * Advances to the next token.
      */
     private fun advance(): Token {
         previousToken = currentToken
+        if (currentToken.kind == TokenKind.RIGHT_SHIFT && templateDepth > 0) {
+            val span1 = Span(currentToken.span.start, currentToken.span.start + 1u)
+            val span2 = Span(currentToken.span.start + 1u, currentToken.span.end)
+            previousToken = Token(TokenKind.RIGHT_ANGLE, span1)
+            currentToken = Token(TokenKind.RIGHT_ANGLE, span2)
+            return previousToken!!
+        }
         currentToken = nextNonCommentToken()
         return previousToken!!
     }
@@ -305,7 +323,7 @@ class Parser(
         expectOrError(TokenKind.FN, "Expected 'fn'")
 
         // Parse name
-        val name = if (currentKind() == TokenKind.IDENTIFIER || currentKind().isBuiltinValue) {
+        val name = if (currentKind() == TokenKind.IDENTIFIER || currentKind().isBuiltinValue || currentKind().isKeyword) {
             val nameToken = advance()
             nameToken.literal ?: nameToken.kind.toString().lowercase()
         } else {
@@ -413,7 +431,7 @@ class Parser(
         }
 
         // Parse name
-        var name = if (currentKind() == TokenKind.IDENTIFIER || currentKind().isBuiltinValue) {
+        var name = if (currentKind() == TokenKind.IDENTIFIER || currentKind().isBuiltinValue || currentKind().isKeyword) {
             val nameToken = advance()
             nameToken.literal ?: nameToken.kind.toString().lowercase()
         } else {
@@ -567,7 +585,7 @@ class Parser(
         }
 
         // Parse name
-        val name = if (currentKind() == TokenKind.IDENTIFIER || currentKind().isBuiltinValue) {
+        val name = if (currentKind() == TokenKind.IDENTIFIER || currentKind().isBuiltinValue || currentKind().isKeyword) {
             val nameToken = advance()
             nameToken.literal ?: nameToken.kind.toString().lowercase()
         } else {
@@ -840,6 +858,8 @@ class Parser(
         val params = mutableListOf<TemplateParam>()
 
         expectOrError(TokenKind.LEFT_ANGLE, "Expected '<'")
+        val oldInsideTemplate = isInsideTemplate
+        isInsideTemplate = true
 
         while (currentKind() != TokenKind.RIGHT_ANGLE && !isAtEnd()) {
             params.add(parseTemplateParam())
@@ -850,6 +870,7 @@ class Parser(
             }
         }
 
+        isInsideTemplate = oldInsideTemplate
         expectOrError(TokenKind.RIGHT_ANGLE, "Expected '>'")
 
         return params
@@ -915,7 +936,7 @@ class Parser(
         }
 
         // Parse name
-        val name = if (currentKind() == TokenKind.IDENTIFIER || currentKind().isBuiltinValue) {
+        val name = if (currentKind() == TokenKind.IDENTIFIER || currentKind().isBuiltinValue || currentKind().isKeyword) {
             val nameToken = advance()
             nameToken.literal ?: nameToken.kind.toString().lowercase()
         } else {
@@ -1233,8 +1254,11 @@ class Parser(
         }
 
         expectOrError(TokenKind.LEFT_ANGLE, "Expected '<'")
+        val oldInsideTemplate = isInsideTemplate
+        isInsideTemplate = true
         val elementType = parseTypeDecl()
         if (currentKind() == TokenKind.COMMA) advance()
+        isInsideTemplate = oldInsideTemplate
         expectOrError(TokenKind.RIGHT_ANGLE, "Expected '>'")
 
         val end = previousToken?.span?.end ?: currentToken.span.end
@@ -1261,8 +1285,11 @@ class Parser(
         }
 
         expectOrError(TokenKind.LEFT_ANGLE, "Expected '<'")
+        val oldInsideTemplate = isInsideTemplate
+        isInsideTemplate = true
         val elementType = parseTypeDecl()
         if (currentKind() == TokenKind.COMMA) advance()
+        isInsideTemplate = oldInsideTemplate
         expectOrError(TokenKind.RIGHT_ANGLE, "Expected '>'")
 
         val end = previousToken?.span?.end ?: currentToken.span.end
@@ -1274,6 +1301,8 @@ class Parser(
      */
     private fun parseArrayType(start: Span): ArrayType {
         expectOrError(TokenKind.LEFT_ANGLE, "Expected '<'")
+        val oldInsideTemplate = isInsideTemplate
+        isInsideTemplate = true
 
         val elementType = parseTypeDecl()
 
@@ -1283,24 +1312,21 @@ class Parser(
 
         if (currentKind() == TokenKind.COMMA) {
             advance()
-            val oldInsideTemplate = isInsideTemplate
-            isInsideTemplate = true
-            try {
+            if (currentKind() != TokenKind.RIGHT_ANGLE) {
                 length = parseExpression()
-            } finally {
-                isInsideTemplate = oldInsideTemplate
-            }
 
-            if (currentKind() == TokenKind.COMMA) {
-                advance()
-                if (currentKind() == TokenKind.INT_LITERAL) {
-                    val strideToken = advance()
-                    stride = strideToken.literal?.toIntOrNull()
+                if (currentKind() == TokenKind.COMMA) {
+                    advance()
+                    if (currentKind() == TokenKind.INT_LITERAL) {
+                        val strideToken = advance()
+                        stride = strideToken.literal?.toIntOrNull()
+                    }
                 }
+                if (currentKind() == TokenKind.COMMA) advance()
             }
-            if (currentKind() == TokenKind.COMMA) advance()
         }
 
+        isInsideTemplate = oldInsideTemplate
         expectOrError(TokenKind.RIGHT_ANGLE, "Expected '>'")
 
         val end = previousToken?.span?.end ?: currentToken.span.end
@@ -1312,6 +1338,8 @@ class Parser(
      */
     private fun parsePointerType(start: Span): PointerType {
         expectOrError(TokenKind.LEFT_ANGLE, "Expected '<'")
+        val oldInsideTemplate = isInsideTemplate
+        isInsideTemplate = true
 
         // Storage class
         val storageClassToken = advance()
@@ -1342,6 +1370,7 @@ class Parser(
             accessMode = accessModeToken.literal ?: accessModeToken.kind.name.lowercase()
         }
 
+        isInsideTemplate = oldInsideTemplate
         expectOrError(TokenKind.RIGHT_ANGLE, "Expected '>'")
 
         val end = previousToken?.span?.end ?: currentToken.span.end
@@ -1353,10 +1382,13 @@ class Parser(
      */
     private fun parseAtomicType(start: Span): AtomicType {
         expectOrError(TokenKind.LEFT_ANGLE, "Expected '<'")
+        val oldInsideTemplate = isInsideTemplate
+        isInsideTemplate = true
         val elementType = parseTypeDecl()
         if (currentKind() == TokenKind.COMMA) {
             advance()
         }
+        isInsideTemplate = oldInsideTemplate
         expectOrError(TokenKind.RIGHT_ANGLE, "Expected '>'")
         val end = previousToken?.span?.end ?: currentToken.span.end
         return AtomicType(elementType, Span(start.start, end))
@@ -1371,6 +1403,8 @@ class Parser(
 
         if (currentKind() == TokenKind.LEFT_ANGLE) {
             advance()
+            val oldInsideTemplate = isInsideTemplate
+            isInsideTemplate = true
             elementType = parseTypeDecl()
 
             if (currentKind() == TokenKind.COMMA) {
@@ -1382,6 +1416,7 @@ class Parser(
                 }
             }
 
+            isInsideTemplate = oldInsideTemplate
             expectOrError(TokenKind.RIGHT_ANGLE, "Expected '>'")
         }
         val end = previousToken?.span?.end ?: currentToken.span.end
@@ -1904,8 +1939,8 @@ class Parser(
 
                 TokenKind.DOT -> {
                     advance()
-                    // ✅ ACCEPTER : IDENTIFIER + builtin keywords
-                    if (currentKind() == TokenKind.IDENTIFIER || currentKind().isBuiltinValue) {
+                    // ✅ ACCEPTER : IDENTIFIER + builtin keywords + standard keywords
+                    if (currentKind() == TokenKind.IDENTIFIER || currentKind().isBuiltinValue || currentKind().isKeyword) {
                         val memberToken = advance()
                         // Pour les builtins, literal est null → utiliser le nom du TokenKind
                         val member = memberToken.literal ?: memberToken.kind.toString().lowercase()
@@ -1971,17 +2006,22 @@ class Parser(
         return when (currentKind()) {
             TokenKind.INT_LITERAL -> {
                 val token = advance()
-                IntLiteral(token.literal?.toLongOrNull() ?: 0, null, token.span)
+                val cleanLiteral = token.literal?.dropLastWhile { it.lowercaseChar() in setOf('u', 'i', 'f', 'h') }
+                val suffix = token.literal?.takeLastWhile { it.lowercaseChar() in setOf('u', 'i', 'f', 'h') }?.takeIf { it.isNotEmpty() }
+                IntLiteral(cleanLiteral?.toLongOrNull() ?: 0, suffix, token.span)
             }
 
             TokenKind.UINT_LITERAL -> {
                 val token = advance()
-                IntLiteral(token.literal?.toLongOrNull() ?: 0, "u", token.span)
+                val cleanLiteral = token.literal?.dropLastWhile { it.lowercaseChar() in setOf('u', 'i', 'f', 'h') }
+                IntLiteral(cleanLiteral?.toLongOrNull() ?: 0, "u", token.span)
             }
 
             TokenKind.FLOAT_LITERAL -> {
                 val token = advance()
-                FloatLiteral(token.literal?.toDoubleOrNull() ?: 0.0, null, token.span)
+                val cleanLiteral = token.literal?.dropLastWhile { it.lowercaseChar() in setOf('u', 'i', 'f', 'h') }
+                val suffix = token.literal?.takeLastWhile { it.lowercaseChar() in setOf('u', 'i', 'f', 'h') }?.takeIf { it.isNotEmpty() }
+                FloatLiteral(cleanLiteral?.toDoubleOrNull() ?: 0.0, suffix, token.span)
             }
 
             TokenKind.TRUE -> {
@@ -2033,7 +2073,10 @@ class Parser(
             TokenKind.BITCAST -> {
                 advance()
                 expectOrError(TokenKind.LEFT_ANGLE, "Expected '<' after 'bitcast'")
+                val oldInsideTemplate = isInsideTemplate
+                isInsideTemplate = true
                 val type = parseTypeDecl()
+                isInsideTemplate = oldInsideTemplate
                 expectOrError(TokenKind.RIGHT_ANGLE, "Expected '>' after 'bitcast' type")
                 expectOrError(TokenKind.LEFT_PAREN, "Expected '(' after 'bitcast'")
                 val expr = parseExpression()
@@ -2456,7 +2499,7 @@ class Parser(
         advance()
 
         // Parse name
-        val name = if (currentKind() == TokenKind.IDENTIFIER || currentKind().isBuiltinValue) {
+        val name = if (currentKind() == TokenKind.IDENTIFIER || currentKind().isBuiltinValue || currentKind().isKeyword) {
             val nameToken = advance()
             nameToken.literal ?: nameToken.kind.toString().lowercase()
         } else {

@@ -5,20 +5,14 @@ struct Struct_1 {
 struct Struct_3 {
     color: vec4<f32>,
 }
-var<private> global_0: Struct_1;
-
-fn vert_main(pos: vec2<f32>, ii: u32, vi: u32) -> vec4<f32> {
-    return vec4<f32>((((f32(ii) * f32(vi)) * global_0.multiplier) * pos), 0.0f, 1.0f);
-}
-
-fn main(in: Struct_3) -> vec4<f32> {
-    return (in.color * global_0.multiplier);
-}
+var<private> im: Struct_1;
 
 @vertex
-fn vert_main() -> vec4<f32> {
+fn vert_main(@location(0) pos: vec2<f32>, ii: u32, vi: u32) -> vec4<f32> {
+    return vec4<f32>((((f32(ii) * f32(vi)) * im.multiplier) * pos), 0.0f, 1.0f);
 }
 
 @fragment
-fn main() -> vec4<f32> {
+fn main(in: Struct_3) -> vec4<f32> {
+    return (in.color * im.multiplier);
 }

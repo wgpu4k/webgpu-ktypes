@@ -13,15 +13,15 @@
                     "__type": "io.ygdrasil.wgsl.ir.TypeInner.Array",
                     "element": 0,
                     "size": {
-                        "__type": "io.ygdrasil.wgsl.ir.ArraySize.Dynamic",
-                        "expression": 0
+                        "__type": "io.ygdrasil.wgsl.ir.ArraySize.Constant",
+                        "value": 512
                     }
                 }
             },
             {
                 "inner": {
                     "__type": "io.ygdrasil.wgsl.ir.TypeInner.Scalar",
-                    "kind": "F32",
+                    "kind": "Sint",
                     "width": 4
                 }
             },
@@ -30,8 +30,8 @@
                     "__type": "io.ygdrasil.wgsl.ir.TypeInner.Array",
                     "element": 2,
                     "size": {
-                        "__type": "io.ygdrasil.wgsl.ir.ArraySize.Dynamic",
-                        "expression": 0
+                        "__type": "io.ygdrasil.wgsl.ir.ArraySize.Constant",
+                        "value": 8
                     }
                 }
             },
@@ -40,8 +40,8 @@
                     "__type": "io.ygdrasil.wgsl.ir.TypeInner.Array",
                     "element": 3,
                     "size": {
-                        "__type": "io.ygdrasil.wgsl.ir.ArraySize.Dynamic",
-                        "expression": 0
+                        "__type": "io.ygdrasil.wgsl.ir.ArraySize.Constant",
+                        "value": 8
                     }
                 }
             },
@@ -69,8 +69,8 @@
                     "__type": "io.ygdrasil.wgsl.ir.TypeInner.Array",
                     "element": 0,
                     "size": {
-                        "__type": "io.ygdrasil.wgsl.ir.ArraySize.Dynamic",
-                        "expression": 0
+                        "__type": "io.ygdrasil.wgsl.ir.ArraySize.Constant",
+                        "value": 512
                     }
                 }
             }
@@ -89,8 +89,8 @@
                     "__type": "io.ygdrasil.wgsl.ir.TypeInner.Array",
                     "element": 0,
                     "size": {
-                        "__type": "io.ygdrasil.wgsl.ir.ArraySize.Dynamic",
-                        "expression": 0
+                        "__type": "io.ygdrasil.wgsl.ir.ArraySize.Constant",
+                        "value": 512
                     }
                 }
             },
@@ -98,7 +98,7 @@
             {
                 "inner": {
                     "__type": "io.ygdrasil.wgsl.ir.TypeInner.Scalar",
-                    "kind": "F32",
+                    "kind": "Sint",
                     "width": 4
                 }
             },
@@ -108,8 +108,8 @@
                     "__type": "io.ygdrasil.wgsl.ir.TypeInner.Array",
                     "element": 2,
                     "size": {
-                        "__type": "io.ygdrasil.wgsl.ir.ArraySize.Dynamic",
-                        "expression": 0
+                        "__type": "io.ygdrasil.wgsl.ir.ArraySize.Constant",
+                        "value": 8
                     }
                 }
             },
@@ -119,8 +119,8 @@
                     "__type": "io.ygdrasil.wgsl.ir.TypeInner.Array",
                     "element": 3,
                     "size": {
-                        "__type": "io.ygdrasil.wgsl.ir.ArraySize.Dynamic",
-                        "expression": 0
+                        "__type": "io.ygdrasil.wgsl.ir.ArraySize.Constant",
+                        "value": 8
                     }
                 }
             },
@@ -150,8 +150,8 @@
                     "__type": "io.ygdrasil.wgsl.ir.TypeInner.Array",
                     "element": 0,
                     "size": {
-                        "__type": "io.ygdrasil.wgsl.ir.ArraySize.Dynamic",
-                        "expression": 0
+                        "__type": "io.ygdrasil.wgsl.ir.ArraySize.Constant",
+                        "value": 512
                     }
                 }
             },
@@ -166,7 +166,11 @@
                 "name": "output",
                 "storageClass": "Storage",
                 "accessMode": "ReadWrite",
-                "type": 6
+                "type": 6,
+                "binding": {
+                    "group": 0,
+                    "index": 0
+                }
             },
             {
                 "name": "w_mem",

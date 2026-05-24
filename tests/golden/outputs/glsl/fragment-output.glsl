@@ -19,22 +19,22 @@ struct Struct_13 {
     uint scalaru;
 };
 
-Struct_9 main_vec4vec3() {
+Struct_9 wgsl_main_vec4vec3() {
     Struct_9 output;
     output.vec4f = vec4(0.0f);
-    output.vec4i = vec4(0);
-    output.vec4u = vec4(0u);
+    output.vec4i = ivec4(0);
+    output.vec4u = uvec4(0u);
     output.vec3f = vec3(0.0f);
-    output.vec3i = vec3(0);
-    output.vec3u = vec3(0u);
+    output.vec3i = ivec3(0);
+    output.vec3u = uvec3(0u);
     return output;
 }
 
-Struct_13 main_vec2scalar() {
+Struct_13 wgsl_main_vec2scalar() {
     Struct_13 output;
     output.vec2f = vec2(0.0f);
-    output.vec2i = vec2(0);
-    output.vec2u = vec2(0u);
+    output.vec2i = ivec2(0);
+    output.vec2u = uvec2(0u);
     output.scalarf = 0.0f;
     output.scalari = 0;
     output.scalaru = 0u;
@@ -43,10 +43,10 @@ Struct_13 main_vec2scalar() {
 
 layout(location = 0) out Struct_9 outColor;
 void main() {
-    outColor = main_vec4vec3();
+    outColor = wgsl_main_vec4vec3();
 }
 
 layout(location = 0) out Struct_13 outColor;
 void main() {
-    outColor = main_vec2scalar();
+    outColor = wgsl_main_vec2scalar();
 }

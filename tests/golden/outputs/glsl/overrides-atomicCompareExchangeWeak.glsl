@@ -8,7 +8,7 @@ shared uint global_1;
 void wgsl_f() {
 }
 
-void atomicCompareExchangeWeak() {
+uint atomicCompareExchangeWeak(uint arg_0, uint arg_1, uint arg_2) {
 }
 
 void main() {

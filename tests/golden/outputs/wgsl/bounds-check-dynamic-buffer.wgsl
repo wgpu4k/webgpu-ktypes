@@ -7,13 +7,13 @@ var<storage, read_write> in: u32;
 @group(0) @binding(1)
 var<storage, read_write> out: array<u32>;
 @group(0) @binding(2)
-var<uniform> in_data_uniform: array<Struct_1>;
+var<uniform> in_data_uniform: array<Struct_1, 1>;
 @group(0) @binding(3)
-var<storage, read_write> in_data_storage_g0_b3: array<Struct_1>;
+var<storage, read_write> in_data_storage_g0_b3: array<Struct_1, 1>;
 @group(0) @binding(4)
-var<storage, read_write> in_data_storage_g0_b4: array<Struct_1>;
+var<storage, read_write> in_data_storage_g0_b4: array<Struct_1, 1>;
 @group(1) @binding(0)
-var<storage, read_write> in_data_storage_g1_b0: array<Struct_1>;
+var<storage, read_write> in_data_storage_g1_b0: array<Struct_1, 1>;
 
 @compute
 fn main() {

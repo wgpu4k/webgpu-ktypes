@@ -409,6 +409,29 @@ class TypeResolver(
     ): TypeDecl {
         val name = type.name
 
+        // Check if it's a built-in texture format
+        val textureFormats = setOf(
+            "r8unorm", "r8snorm", "r8uint", "r8sint",
+            "r16uint", "r16sint", "r16float",
+            "rg8unorm", "rg8snorm", "rg8uint", "rg8sint",
+            "r32uint", "r32sint", "r32float",
+            "rg16uint", "rg16sint", "rg16float",
+            "rgba8unorm", "rgba8unorm-srgb", "rgba8snorm", "rgba8uint", "rgba8sint",
+            "bgra8unorm", "bgra8unorm-srgb",
+            "rgb9e5ufloat", "rg11b10ufloat",
+            "rg32uint", "rg32sint", "rg32float",
+            "rgba16uint", "rgba16sint", "rgba16float",
+            "rgba32uint", "rgba32sint", "rgba32float",
+            "r64uint", "r64sint"
+        )
+        if (name in textureFormats) {
+            return type
+        }
+
+        if (name == "acceleration_structure" || name == "ray_query" || name == "RayDesc" || name == "RayIntersection") {
+            return type
+        }
+
         // Check if it's a built-in scalar type
         if (typeIndex.isBuiltinScalarType(name)) {
             return typeIndex.getBuiltinScalarType(name) ?: type
@@ -611,6 +634,18 @@ class TypeResolver(
         // Check if it's a function
         val function = typeIndex.findFunction(name)
         if (function != null) {
+            return expr // Keep as IdentExpr but it's resolved
+        }
+
+        // Check if it's a user-defined struct
+        val struct = typeIndex.findStruct(name)
+        if (struct != null) {
+            return expr // Keep as IdentExpr but it's resolved
+        }
+
+        // Check if it's a user-defined type alias
+        val typeAlias = typeIndex.findTypeAlias(name)
+        if (typeAlias != null) {
             return expr // Keep as IdentExpr but it's resolved
         }
 

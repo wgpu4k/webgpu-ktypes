@@ -112,6 +112,7 @@ class HlslWriter(
         }
 
         val func = module.functions[ep.function]
+        currentFunction = func
         val returnType = outputStructName ?: (func.returnType?.let { getTypeName(it) } ?: "void")
         
         write("$returnType ${ep.name}(")
@@ -161,6 +162,7 @@ class HlslWriter(
             }
         }
         writeLine("}")
+        currentFunction = null
     }
 
     protected fun writeInputStruct(ep: EntryPoint): String? {
@@ -347,6 +349,8 @@ class HlslWriter(
                 when {
                     inner.name == "sampler" -> "SamplerState"
                     inner.name == "comparison_sampler" -> "SamplerComparisonState"
+                    inner.name == "acceleration_structure" -> "RaytracingAccelerationStructure"
+                    inner.name == "ray_query" -> "RayQuery"
                     inner.name == "texture_1d<f32>" -> "Texture1D<float4>"
                     inner.name == "texture_2d<f32>" -> "Texture2D<float4>"
                     inner.name == "texture_2d_array<f32>" -> "Texture2DArray<float4>"
@@ -362,7 +366,7 @@ class HlslWriter(
         }
     }
 
-    override fun writeBitcast(expr: String, targetType: Type): String {
+    override fun writeBitcast(expr: String, targetType: Type, sourceType: Type): String {
         val inner = targetType.inner
         val prefix = when {
             inner is TypeInner.Scalar && inner.kind == ScalarKind.Uint -> "asuint"

@@ -19,3 +19,11 @@ struct Struct_7 {
 Struct_4 global_0 : register(b1);
 Struct_6 global_1 : register(b2);
 Struct_7 global_2 : register(b0);
+
+struct vertex_Output {
+    float4 position : SV_Position;
+};
+vertex_Output vertex() {
+    vertex_Output stage_out;
+    return stage_out;
+}

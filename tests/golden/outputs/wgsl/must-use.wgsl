@@ -9,19 +9,16 @@ fn use_return() -> i32 {
 }
 
 fn use_assign_var() -> i32 {
-    f32 local_0 = use_me();
-    return local_0;
+    var q: i32 = use_me();
+    return q;
 }
 
 fn use_assign_let() -> i32 {
-    f32 local_0 = use_me();
-    return local_0;
+    var q: i32 = use_me();
+    return q;
 }
 
 fn use_phony_assign() {
-}
-
-fn main() {
 }
 
 @compute

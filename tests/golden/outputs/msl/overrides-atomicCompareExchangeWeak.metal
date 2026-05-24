@@ -7,5 +7,5 @@ uint global_1;
 void f() {
 }
 
-void atomicCompareExchangeWeak() {
+/* unknown type */ void atomicCompareExchangeWeak(/* unknown type */ void arg_0, uint arg_1, uint arg_2) {
 }

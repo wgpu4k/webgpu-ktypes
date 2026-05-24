@@ -1,4 +1,9 @@
 #include <metal_stdlib>
 using namespace metal;
-float global_0;
-float global_1;
+
+[[fragment]]
+float4 fragment(depth2d<float> global_0 [[texture(4)]], sampler_comparison global_1 [[sampler(5)]]) {
+}
+
+void textureSampleCompare() {
+}

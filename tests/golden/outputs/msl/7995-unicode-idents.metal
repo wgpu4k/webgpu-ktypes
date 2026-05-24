@@ -1,7 +1,9 @@
 #include <metal_stdlib>
 using namespace metal;
-float global_0;
 
 [[kernel]]
-void main() {
+void main(float global_0 [[buffer(0)]]) {
+}
+
+void () {
 }

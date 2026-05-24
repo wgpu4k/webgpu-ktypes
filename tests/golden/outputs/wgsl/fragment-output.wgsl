@@ -16,32 +16,26 @@ struct Struct_13 {
     scalaru: u32,
 }
 
-fn main_vec4vec3() -> Struct_9 {
-    Struct_9 local_0;
-    local_0.vec4f = vec4<f32>(0.0f);
-    local_0.vec4i = vec4<f32>(0);
-    local_0.vec4u = vec4<f32>(0u);
-    local_0.vec3f = vec3<f32>(0.0f);
-    local_0.vec3i = vec3<f32>(0);
-    local_0.vec3u = vec3<f32>(0u);
-    return local_0;
-}
-
-fn main_vec2scalar() -> Struct_13 {
-    Struct_13 local_0;
-    local_0.vec2f = vec2<f32>(0.0f);
-    local_0.vec2i = vec2<f32>(0);
-    local_0.vec2u = vec2<f32>(0u);
-    local_0.scalarf = 0.0f;
-    local_0.scalari = 0;
-    local_0.scalaru = 0u;
-    return local_0;
-}
-
 @fragment
 fn main_vec4vec3() -> Struct_9 {
+    var output: Struct_9;
+    output.vec4f = vec4<f32>(0.0f);
+    output.vec4i = vec4<i32>(0);
+    output.vec4u = vec4<u32>(0u);
+    output.vec3f = vec3<f32>(0.0f);
+    output.vec3i = vec3<i32>(0);
+    output.vec3u = vec3<u32>(0u);
+    return output;
 }
 
 @fragment
 fn main_vec2scalar() -> Struct_13 {
+    var output: Struct_13;
+    output.vec2f = vec2<f32>(0.0f);
+    output.vec2i = vec2<i32>(0);
+    output.vec2u = vec2<u32>(0u);
+    output.scalarf = 0.0f;
+    output.scalari = 0;
+    output.scalaru = 0u;
+    return output;
 }

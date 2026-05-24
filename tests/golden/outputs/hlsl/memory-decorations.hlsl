@@ -4,10 +4,10 @@
 struct Struct_2 {
     void values;
 };
-Struct_2 global_0;
-Struct_2 global_1;
-Struct_2 global_2;
-Struct_2 global_3;
+Struct_2 global_0 : register(u0);
+Struct_2 global_1 : register(u1);
+Struct_2 global_2 : register(u2);
+Struct_2 global_3 : register(u3);
 
 [numthreads(1, 1, 1)]
 void main() {

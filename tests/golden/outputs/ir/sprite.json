@@ -3,6 +3,18 @@
         "data": [
             {
                 "inner": {
+                    "__type": "io.ygdrasil.wgsl.ir.TypeInner.Opaque",
+                    "name": "texture_2d<f32>"
+                }
+            },
+            {
+                "inner": {
+                    "__type": "io.ygdrasil.wgsl.ir.TypeInner.Opaque",
+                    "name": "sampler"
+                }
+            },
+            {
+                "inner": {
                     "__type": "io.ygdrasil.wgsl.ir.TypeInner.Scalar",
                     "kind": "F32",
                     "width": 4
@@ -12,42 +24,56 @@
                 "inner": {
                     "__type": "io.ygdrasil.wgsl.ir.TypeInner.Vector",
                     "size": "Bi",
-                    "scalar": 0
+                    "scalar": 2
                 }
             },
             {
                 "inner": {
                     "__type": "io.ygdrasil.wgsl.ir.TypeInner.Vector",
                     "size": "Quad",
-                    "scalar": 0
+                    "scalar": 2
                 }
             }
         ],
         "indexMap": [
             {
                 "inner": {
-                    "__type": "io.ygdrasil.wgsl.ir.TypeInner.Scalar",
-                    "kind": "F32",
-                    "width": 4
+                    "__type": "io.ygdrasil.wgsl.ir.TypeInner.Opaque",
+                    "name": "texture_2d<f32>"
                 }
             },
             0,
             {
                 "inner": {
-                    "__type": "io.ygdrasil.wgsl.ir.TypeInner.Vector",
-                    "size": "Bi",
-                    "scalar": 0
+                    "__type": "io.ygdrasil.wgsl.ir.TypeInner.Opaque",
+                    "name": "sampler"
                 }
             },
             1,
             {
                 "inner": {
-                    "__type": "io.ygdrasil.wgsl.ir.TypeInner.Vector",
-                    "size": "Quad",
-                    "scalar": 0
+                    "__type": "io.ygdrasil.wgsl.ir.TypeInner.Scalar",
+                    "kind": "F32",
+                    "width": 4
                 }
             },
-            2
+            2,
+            {
+                "inner": {
+                    "__type": "io.ygdrasil.wgsl.ir.TypeInner.Vector",
+                    "size": "Bi",
+                    "scalar": 2
+                }
+            },
+            3,
+            {
+                "inner": {
+                    "__type": "io.ygdrasil.wgsl.ir.TypeInner.Vector",
+                    "size": "Quad",
+                    "scalar": 2
+                }
+            },
+            4
         ]
     },
     "constants": {},
@@ -66,7 +92,7 @@
             {
                 "name": "u_sampler",
                 "storageClass": "Private",
-                "type": 0,
+                "type": 1,
                 "binding": {
                     "group": 0,
                     "index": 1
@@ -81,14 +107,14 @@
                 "parameters": [
                     {
                         "name": "uv",
-                        "type": 1,
+                        "type": 3,
                         "binding": {
                             "__type": "io.ygdrasil.wgsl.ir.BindingAttribute.Location",
                             "location": 0
                         }
                     }
                 ],
-                "returnType": 2,
+                "returnType": 4,
                 "localVariables": {},
                 "expressions": {
                     "data": [

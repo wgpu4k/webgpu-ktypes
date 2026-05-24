@@ -18,5 +18,5 @@ void textureLoad() {
 }
 
 [[kernel]]
-void main(float global_0 [[buffer(2)]], Struct_3 global_3 [[buffer(0)]], Struct_5 global_4 [[buffer(1)]]) {
+void main(texture2d_array<float> global_0 [[texture(2)]], Struct_3 global_3 [[buffer(0)]], Struct_5 global_4 [[buffer(1)]]) {
 }

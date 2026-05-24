@@ -114,7 +114,11 @@ class TypeIndex {
         return builtinScalarTypes.containsKey(name) ||
                 structs.containsKey(name) ||
                 enums.containsKey(name) ||
-                typeAliases.containsKey(name)
+                typeAliases.containsKey(name) ||
+                name == "acceleration_structure" ||
+                name == "RayDesc" ||
+                name == "ray_query" ||
+                name == "RayIntersection"
     }
 
     /**
@@ -151,6 +155,32 @@ class TypeIndex {
             // Attributes and options
             "less_equal", "greater_equal", "any", "unchanged", "force",
             "per_vertex", "error_type",
+            
+            // Diagnostics
+            "warning", "info", "error", "off", "derivative_uniformity",
+
+            // Barycentrics
+            "barycentric", "barycentric_no_perspective",
+
+            // Interpolation constants
+            "flat", "perspective", "linear", "centroid", "sample",
+
+            // Generic type constructors
+            "vec", "mat",
+
+            // Ray-Tracing constants & types
+            "RayDesc", "RayIntersection", "acceleration_structure", "ray_query",
+            "RAY_FLAG_NONE", "RAY_FLAG_FORCE_OPAQUE", "RAY_FLAG_FORCE_NO_OPAQUE",
+            "RAY_FLAG_ACCEPT_FIRST_HIT", "RAY_FLAG_SKIP_CLOSEST_HIT", "RAY_FLAG_CULL_BACK_FACING",
+            "RAY_FLAG_CULL_FRONT_FACING", "RAY_FLAG_CULL_OPAQUE", "RAY_FLAG_CULL_NO_OPAQUE", "RAY_FLAG_TERMINATE_ON_FIRST_HIT",
+
+            // Ray-Tracing built-in functions
+            "traceRay", "rayQueryInitialize", "rayQueryProceed", "rayQueryGetIntersection", "rayQueryGetCandidateIntersection",
+
+            // Ray-Tracing built-in values
+            "ray_invocation_id", "num_ray_invocations", "world_ray_origin", "world_ray_direction",
+            "ray_t_min", "instance_custom_data", "geometry_index", "ray_t_current_max", "hit_kind",
+            "object_ray_origin", "object_ray_direction", "object_to_world", "world_to_object",
 
             // Suffixes/built-ins
             "vec2f", "vec3f", "vec4f", "vec2i", "vec3i", "vec4i",
@@ -173,11 +203,19 @@ class TypeIndex {
             "textureSampleLevel", "textureSampleBaseClampToEdge", "textureStore",
             "atomicLoad", "atomicStore", "atomicAdd", "atomicSub", "atomicMax", "atomicMin",
             "atomicAnd", "atomicOr", "atomicXor", "atomicExchange", "atomicCompareExchangeWeak",
-            "workgroupBarrier", "storageBarrier", "subgroupBarrier",
+            "workgroupBarrier", "storageBarrier", "subgroupBarrier", "textureBarrier",
             "pack4xI8", "pack4xU8", "unpack4xI8", "unpack4xU8",
+            "pack4xI8Clamp", "pack4xU8Clamp", "insertBits", "extractBits", "firstTrailingBit", "countOneBits", "reverseBits",
             "pack2x16float", "unpack2x16float", "pack2x16snorm", "unpack2x16snorm",
             "pack2x16unorm", "unpack2x16unorm", "pack4x8snorm", "unpack4x8snorm",
             "pack4x8unorm", "unpack4x8unorm",
+            "select", "workgroupUniformLoad",
+            "num_subgroups", "subgroup_id",
+            "subgroupBallot", "subgroupAll", "subgroupAny", "subgroupAdd", "subgroupMul",
+            "subgroupMin", "subgroupMax", "subgroupAnd", "subgroupOr", "subgroupXor",
+            "subgroupExclusiveAdd", "subgroupExclusiveMul", "subgroupInclusiveAdd", "subgroupInclusiveMul",
+            "subgroupBroadcastFirst", "subgroupBroadcast", "subgroupShuffle", "subgroupShuffleDown",
+            "subgroupShuffleUp", "subgroupShuffleXor", "quadBroadcast", "quadSwapX", "quadSwapY", "quadSwapDiagonal",
 
             // Array constructors/aliases
             "array"

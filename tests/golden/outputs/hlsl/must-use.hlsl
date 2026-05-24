@@ -11,12 +11,12 @@ int use_return() {
 }
 
 int use_assign_var() {
-    float local_0 = use_me();
+    int local_0 = use_me();
     return local_0;
 }
 
 int use_assign_let() {
-    float local_0 = use_me();
+    int local_0 = use_me();
     return local_0;
 }
 

@@ -2,11 +2,14 @@
 precision highp float;
 precision highp int;
 
- float global_0;
+layout(set = 0, binding = 0) buffer float global_0;
 
-void main() {
+void wgsl_main() {
+}
+
+void () {
 }
 
 void main() {
-    main();
+    wgsl_main();
 }

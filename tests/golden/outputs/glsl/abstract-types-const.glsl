@@ -1,0 +1,44 @@
+#version 450 core
+precision highp float;
+precision highp int;
+
+struct Struct_3 {
+    float f;
+    int i;
+    uint u;
+};
+ ivec2 global_0 = vec2(42, 43);
+ uvec2 global_1 = vec2(44, 45);
+ vec2 global_2 = vec2(46, 47);
+ vec2 global_3 = vec2(48.0f, 49.0f);
+ vec2 global_4 = vec2(48, 49.0f);
+ uvec2 global_5 = vec2(0u, 43);
+ uvec2 global_6 = vec2(42, 0u);
+ uvec2 global_7 = uvec2(0u, 43);
+ uvec2 global_8 = uvec2(42, 0u);
+ ivec2 global_9 = vec2();
+ uvec2 global_10 = vec2();
+ vec2 global_11 = vec2();
+ mat2x2 global_12 = mat2x2(vec2(), vec2());
+ mat2x2 global_13 = mat2x2(1, 2, 3, 4);
+ mat2x2 global_14 = mat2x2(1.0f, 2, 3, 4);
+ mat2x2 global_15 = mat2x2(1, 2.0f, 3, 4);
+ mat2x2 global_16 = mat2x2(1, 2, 3.0f, 4);
+ mat2x2 global_17 = mat2x2(1, 2, 3, 4.0f);
+ int[2] global_18 = int[2](1, 2);
+ uint[2] global_19 = int[2](1, 2);
+ float[2] global_20 = int[2](1, 2.0f);
+ float[2] global_21 = float[2](1.0f, 2);
+ float[2] global_22 = float[2](1.0f, 2.0f);
+ ivec2 global_23 = vec2(1);
+ uvec2 global_24 = vec2(1);
+ vec2 global_25 = vec2(1);
+ vec2 global_26 = vec2(1.0f);
+ Struct_3 global_27 = Struct_3(1.0f, 0, 0u);
+ Struct_3 global_28 = Struct_3(1.0f, 0, 1);
+ Struct_3 global_29 = Struct_3(1.0f, 1, 0u);
+ Struct_3 global_30 = Struct_3(1.0f, 1, 1);
+ Struct_3 global_31 = Struct_3(1.0f, 0, 0u);
+ Struct_3 global_32 = Struct_3(1.0f, 0, 1);
+ Struct_3 global_33 = Struct_3(1.0f, 1, 0u);
+ Struct_3 global_34 = Struct_3(1.0f, 1, 1);

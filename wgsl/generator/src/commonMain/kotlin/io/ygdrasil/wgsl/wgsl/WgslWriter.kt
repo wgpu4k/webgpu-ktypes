@@ -270,6 +270,21 @@ class WgslWriter(
                 val init = variable.init?.let { writeExpression(it) } ?: "/* error: no init */"
                 writeLine("var $name: $typeName = $init;")
             }
+            is Statement.Loop -> {
+                writeLine("loop {")
+                indent {
+                    writeBlock(stmt.body)
+                    val continuing = stmt.continuing
+                    if (continuing != null) {
+                        writeLine("continuing {")
+                        indent {
+                            writeBlock(continuing)
+                        }
+                        writeLine("}")
+                    }
+                }
+                writeLine("}")
+            }
             else -> super.writeStatement(stmt)
         }
     }

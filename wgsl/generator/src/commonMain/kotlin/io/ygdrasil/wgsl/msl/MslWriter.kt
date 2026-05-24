@@ -105,6 +105,7 @@ class MslWriter(
         
         writeLine("$stageAttr")
         val func = module.functions[ep.function]
+        currentFunction = func
         val returnType = outputStructName ?: (func.returnType?.let { getTypeName(it) } ?: "void")
         
         write("$returnType ${ep.name}(")
@@ -162,6 +163,7 @@ class MslWriter(
             writeBlock(func.body)
         }
         writeLine("}")
+        currentFunction = null
     }
 
     protected fun writeInputStruct(ep: EntryPoint): String? {
@@ -297,7 +299,7 @@ class MslWriter(
         }
     }
 
-    override fun writeBitcast(expr: String, targetType: Type): String {
+    override fun writeBitcast(expr: String, targetType: Type, sourceType: Type): String {
         val typeName = getTypeName(module.types.append(targetType))
         return "as_type<$typeName>($expr)"
     }
@@ -422,6 +424,8 @@ class MslWriter(
                 when {
                     inner.name == "sampler" -> "sampler"
                     inner.name == "comparison_sampler" -> "sampler"
+                    inner.name == "acceleration_structure" -> "raytracing::acceleration_structure"
+                    inner.name == "ray_query" -> "raytracing::ray_query"
                     inner.name == "external_texture" -> "/* expanded external_texture */ void"
                     inner.name == "texture_1d<f32>" -> "texture1d<float>"
                     inner.name == "texture_2d<f32>" -> "texture2d<float>"
