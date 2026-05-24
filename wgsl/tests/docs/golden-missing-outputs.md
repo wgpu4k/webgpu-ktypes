@@ -4,10 +4,9 @@ This file documents WGSL golden inputs that do not yet have expected outputs in 
 The list is intentionally consumed by `GoldenCompletenessTest` so missing outputs stay explicit until they
 are either generated and reviewed or moved to a narrower unsupported-feature manifest.
 
-Current status: 31 inputs are missing expected outputs for `wgsl`, `glsl`, `hlsl`, `msl`, and `ir`.
+Current status: 30 inputs are missing expected outputs for `wgsl`, `glsl`, `hlsl`, `msl`, and `ir`.
 
 - `aliased-ray-query.wgsl` - pending parser/resolver/lowering support.
-- `atomicCompareExchange.wgsl` - pending parser/resolver/lowering support.
 - `atomicCompareExchange-int64.wgsl` - pending parser/resolver/lowering support.
 - `atomicOps-int64.wgsl` - pending parser/resolver/lowering support.
 - `atomicOps-int64-min-max.wgsl` - pending parser/resolver/lowering support.

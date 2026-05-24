@@ -4,6 +4,16 @@ struct Struct_3 {
     uint atomic_scalar;
     array<int, 2> atomic_arr;
 };
+struct Struct_10 {
+    uint old_value;
+    char _pad0[4];
+    bool exchanged;
+};
+struct Struct_11 {
+    int old_value;
+    char _pad0[4];
+    bool exchanged;
+};
 uint global_2;
 array<int, 2> global_3;
 Struct_3 global_5;
@@ -98,14 +108,14 @@ void cs_main(uint global_0 [[buffer(0)]], array<int, 2> global_1 [[buffer(1)]], 
     atomicExchange(&global_3[1], 1);
     atomicExchange(&global_5.atomic_scalar, 1u);
     atomicExchange(&global_5.atomic_arr[1], 1);
-    /* unknown type */ void local_8 = atomicCompareExchangeWeak(&global_0, 1u, 2u);
-    /* unknown type */ void local_9 = atomicCompareExchangeWeak(&global_1[1], 1, 2);
-    /* unknown type */ void local_10 = atomicCompareExchangeWeak(&global_4.atomic_scalar, 1u, 2u);
-    /* unknown type */ void local_11 = atomicCompareExchangeWeak(&global_4.atomic_arr[1], 1, 2);
-    /* unknown type */ void local_12 = atomicCompareExchangeWeak(&global_2, 1u, 2u);
-    /* unknown type */ void local_13 = atomicCompareExchangeWeak(&global_3[1], 1, 2);
-    /* unknown type */ void local_14 = atomicCompareExchangeWeak(&global_5.atomic_scalar, 1u, 2u);
-    /* unknown type */ void local_15 = atomicCompareExchangeWeak(&global_5.atomic_arr[1], 1, 2);
+    Struct_10 local_8 = atomicCompareExchangeWeak(&global_0, 1u, 2u);
+    Struct_11 local_9 = atomicCompareExchangeWeak(&global_1[1], 1, 2);
+    Struct_10 local_10 = atomicCompareExchangeWeak(&global_4.atomic_scalar, 1u, 2u);
+    Struct_11 local_11 = atomicCompareExchangeWeak(&global_4.atomic_arr[1], 1, 2);
+    Struct_10 local_12 = atomicCompareExchangeWeak(&global_2, 1u, 2u);
+    Struct_11 local_13 = atomicCompareExchangeWeak(&global_3[1], 1, 2);
+    Struct_10 local_14 = atomicCompareExchangeWeak(&global_5.atomic_scalar, 1u, 2u);
+    Struct_11 local_15 = atomicCompareExchangeWeak(&global_5.atomic_arr[1], 1, 2);
 }
 
 /* unknown type */ void atomicStore(/* unknown type */ void arg_0, uint arg_1) {
@@ -372,26 +382,26 @@ void workgroupBarrier() {
 /* unknown type */ void atomicExchange(/* unknown type */ void arg_0, int arg_1) {
 }
 
-/* unknown type */ void atomicCompareExchangeWeak(/* unknown type */ void arg_0, uint arg_1, uint arg_2) {
+Struct_10 atomicCompareExchangeWeak(/* unknown type */ void arg_0, uint arg_1, uint arg_2) {
 }
 
-/* unknown type */ void atomicCompareExchangeWeak(/* unknown type */ void arg_0, int arg_1, int arg_2) {
+Struct_11 atomicCompareExchangeWeak(/* unknown type */ void arg_0, int arg_1, int arg_2) {
 }
 
-/* unknown type */ void atomicCompareExchangeWeak(/* unknown type */ void arg_0, uint arg_1, uint arg_2) {
+Struct_10 atomicCompareExchangeWeak(/* unknown type */ void arg_0, uint arg_1, uint arg_2) {
 }
 
-/* unknown type */ void atomicCompareExchangeWeak(/* unknown type */ void arg_0, int arg_1, int arg_2) {
+Struct_11 atomicCompareExchangeWeak(/* unknown type */ void arg_0, int arg_1, int arg_2) {
 }
 
-/* unknown type */ void atomicCompareExchangeWeak(/* unknown type */ void arg_0, uint arg_1, uint arg_2) {
+Struct_10 atomicCompareExchangeWeak(/* unknown type */ void arg_0, uint arg_1, uint arg_2) {
 }
 
-/* unknown type */ void atomicCompareExchangeWeak(/* unknown type */ void arg_0, int arg_1, int arg_2) {
+Struct_11 atomicCompareExchangeWeak(/* unknown type */ void arg_0, int arg_1, int arg_2) {
 }
 
-/* unknown type */ void atomicCompareExchangeWeak(/* unknown type */ void arg_0, uint arg_1, uint arg_2) {
+Struct_10 atomicCompareExchangeWeak(/* unknown type */ void arg_0, uint arg_1, uint arg_2) {
 }
 
-/* unknown type */ void atomicCompareExchangeWeak(/* unknown type */ void arg_0, int arg_1, int arg_2) {
+Struct_11 atomicCompareExchangeWeak(/* unknown type */ void arg_0, int arg_1, int arg_2) {
 }

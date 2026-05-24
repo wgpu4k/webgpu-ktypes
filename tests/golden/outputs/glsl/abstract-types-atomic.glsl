@@ -2,6 +2,14 @@
 precision highp float;
 precision highp int;
 
+struct Struct_4 {
+    int old_value;
+    bool exchanged;
+};
+struct Struct_6 {
+    uint old_value;
+    bool exchanged;
+};
 layout(set = 0, binding = 0) buffer int global_0;
 layout(set = 0, binding = 1) buffer uint global_1;
 
@@ -22,10 +30,10 @@ void test_atomic_i32() {
 int atomicStore(int arg_0, int arg_1) {
 }
 
-int atomicCompareExchangeWeak(int arg_0, int arg_1, int arg_2) {
+Struct_4 atomicCompareExchangeWeak(int arg_0, int arg_1, int arg_2) {
 }
 
-int atomicCompareExchangeWeak(int arg_0, int arg_1, int arg_2) {
+Struct_4 atomicCompareExchangeWeak(int arg_0, int arg_1, int arg_2) {
 }
 
 int atomicAdd(int arg_0, int arg_1) {
@@ -69,10 +77,10 @@ void test_atomic_u32() {
 uint atomicStore(uint arg_0, int arg_1) {
 }
 
-uint atomicCompareExchangeWeak(uint arg_0, int arg_1, uint arg_2) {
+Struct_6 atomicCompareExchangeWeak(uint arg_0, int arg_1, uint arg_2) {
 }
 
-uint atomicCompareExchangeWeak(uint arg_0, uint arg_1, int arg_2) {
+Struct_6 atomicCompareExchangeWeak(uint arg_0, uint arg_1, int arg_2) {
 }
 
 uint atomicAdd(uint arg_0, int arg_1) {

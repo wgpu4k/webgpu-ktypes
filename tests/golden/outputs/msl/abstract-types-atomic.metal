@@ -1,5 +1,15 @@
 #include <metal_stdlib>
 using namespace metal;
+struct Struct_4 {
+    int old_value;
+    char _pad0[4];
+    bool exchanged;
+};
+struct Struct_6 {
+    uint old_value;
+    char _pad0[4];
+    bool exchanged;
+};
 
 void test_atomic_i32() {
     atomicStore(&global_0, 1);
@@ -18,10 +28,10 @@ void test_atomic_i32() {
 /* unknown type */ void atomicStore(/* unknown type */ void arg_0, int arg_1) {
 }
 
-/* unknown type */ void atomicCompareExchangeWeak(/* unknown type */ void arg_0, int arg_1, int arg_2) {
+Struct_4 atomicCompareExchangeWeak(/* unknown type */ void arg_0, int arg_1, int arg_2) {
 }
 
-/* unknown type */ void atomicCompareExchangeWeak(/* unknown type */ void arg_0, int arg_1, int arg_2) {
+Struct_4 atomicCompareExchangeWeak(/* unknown type */ void arg_0, int arg_1, int arg_2) {
 }
 
 /* unknown type */ void atomicAdd(/* unknown type */ void arg_0, int arg_1) {
@@ -65,10 +75,10 @@ void test_atomic_u32() {
 /* unknown type */ void atomicStore(/* unknown type */ void arg_0, int arg_1) {
 }
 
-/* unknown type */ void atomicCompareExchangeWeak(/* unknown type */ void arg_0, int arg_1, uint arg_2) {
+Struct_6 atomicCompareExchangeWeak(/* unknown type */ void arg_0, int arg_1, uint arg_2) {
 }
 
-/* unknown type */ void atomicCompareExchangeWeak(/* unknown type */ void arg_0, uint arg_1, int arg_2) {
+Struct_6 atomicCompareExchangeWeak(/* unknown type */ void arg_0, uint arg_1, int arg_2) {
 }
 
 /* unknown type */ void atomicAdd(/* unknown type */ void arg_0, int arg_1) {

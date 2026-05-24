@@ -1335,7 +1335,61 @@ class Lowerer {
             "textureSampleBaseClampToEdge" -> arguments.firstOrNull()?.let { inferSampledTextureReturnType(it) }
             "textureSampleCompare",
             "textureSampleCompareLevel" -> scalarType("f32")
+            "atomicCompareExchangeWeak" -> inferAtomicCompareExchangeResultType(arguments)
             else -> arguments.firstOrNull()?.let { resolveExpressionType(it) }
+        }
+    }
+
+    private fun inferAtomicCompareExchangeResultType(arguments: List<Handle<IrExpression>>): Handle<IrType> {
+        val valueType = arguments.firstOrNull()
+            ?.let { resolveAtomicPointerValueType(it) }
+            ?: arguments.getOrNull(1)?.let { resolveExpressionType(it) }
+            ?: throw LoweringError("atomicCompareExchangeWeak requires an atomic pointer argument")
+        val boolType = scalarType("bool")
+        val resultType = module.types.append(
+            IrType(
+                IrTypeInner.Struct(
+                    listOf(
+                        IrStructMember("old_value", valueType, null, 0),
+                        IrStructMember("exchanged", boolType, null, 4)
+                    )
+                )
+            )
+        )
+        val valueTypeName = atomicCompareExchangeValueTypeName(valueType)
+        val resultName = "__AtomicCompareExchangeResult_$valueTypeName"
+        structHandleToNameMap[resultType] = resultName
+        structMemberIndexMap[resultName] = mapOf(
+            "old_value" to 0u,
+            "exchanged" to 1u
+        )
+        return resultType
+    }
+
+    private fun resolveAtomicPointerValueType(pointer: Handle<IrExpression>): Handle<IrType> {
+        var typeHandle = resolveExpressionType(pointer)
+        while (true) {
+            val inner = module.types[typeHandle].inner
+            typeHandle = when (inner) {
+                is IrTypeInner.Pointer -> inner.base
+                is IrTypeInner.ValuePointer -> inner.base
+                else -> return typeHandle
+            }
+        }
+    }
+
+    private fun atomicCompareExchangeValueTypeName(type: Handle<IrType>): String {
+        return when (val inner = module.types[type].inner) {
+            is IrTypeInner.Scalar -> when (inner.kind) {
+                IrScalarKind.Sint -> "i${inner.width * 8}"
+                IrScalarKind.Uint -> "u${inner.width * 8}"
+                IrScalarKind.Bool -> "bool"
+                IrScalarKind.F32 -> "f32"
+                IrScalarKind.F16 -> "f16"
+                IrScalarKind.F64 -> "f64"
+                else -> "scalar_${inner.width}"
+            }
+            else -> "value_${type.index}"
         }
     }
 
