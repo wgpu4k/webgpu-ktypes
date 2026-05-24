@@ -4,7 +4,7 @@ struct Struct_2 {
     float3x3 m;
 };
 struct Struct_4 {
-    /* unknown type */ void a;
+    array<Struct_2, 4> a;
 };
 
 void access_m() {
@@ -36,7 +36,7 @@ void access_m() {
 void access_am() {
     int local_0 = 1;
     local_0 = (local_0 - 1);
-    /* unknown type */ void local_1 = global_2;
+    array<float3x3, 4> local_1 = global_2;
     float3x3 local_2 = global_2[0];
     float3x3 local_3 = global_2[local_0];
     float3 local_4 = global_2[0][0];
@@ -51,7 +51,7 @@ void access_am() {
     float local_13 = global_2[local_0][0][local_0];
     float local_14 = global_2[local_0][local_0][0];
     float local_15 = global_2[local_0][local_0][local_0];
-    /* unknown type */ void local_16 = global_3;
+    array<float3x3, 4> local_16 = global_3;
     float3x3 local_17 = global_3[0];
     float3x3 local_18 = global_3[local_0];
     float3 local_19 = global_3[0][0];
@@ -116,7 +116,7 @@ void access_sasm() {
     int local_0 = 1;
     local_0 = (local_0 - 1);
     Struct_4 local_1 = global_6;
-    /* unknown type */ void local_2 = global_6.a;
+    array<Struct_2, 4> local_2 = global_6.a;
     float3x3 local_3 = global_6.a[0].m;
     float3x3 local_4 = global_6.a[local_0].m;
     float3 local_5 = global_6.a[0].m[0];
@@ -132,7 +132,7 @@ void access_sasm() {
     float local_15 = global_6.a[local_0].m[local_0][0];
     float local_16 = global_6.a[local_0].m[local_0][local_0];
     Struct_4 local_17 = global_7;
-    /* unknown type */ void local_18 = global_7.a;
+    array<Struct_2, 4> local_18 = global_7.a;
     float3x3 local_19 = global_7.a[0].m;
     float3x3 local_20 = global_7.a[local_0].m;
     float3 local_21 = global_7.a[0].m[0];
@@ -166,5 +166,5 @@ void access_sasm() {
 }
 
 [[kernel]]
-void main(float3x3 global_0 [[buffer(0)]], float3x3 global_1 [[buffer(1)]], /* unknown type */ void global_2 [[buffer(0)]], /* unknown type */ void global_3 [[buffer(1)]], Struct_2 global_4 [[buffer(0)]], Struct_2 global_5 [[buffer(1)]], Struct_4 global_6 [[buffer(0)]], Struct_4 global_7 [[buffer(1)]]) {
+void main(float3x3 global_0 [[buffer(0)]], float3x3 global_1 [[buffer(1)]], array<float3x3, 4> global_2 [[buffer(0)]], array<float3x3, 4> global_3 [[buffer(1)]], Struct_2 global_4 [[buffer(0)]], Struct_2 global_5 [[buffer(1)]], Struct_4 global_6 [[buffer(0)]], Struct_4 global_7 [[buffer(1)]]) {
 }

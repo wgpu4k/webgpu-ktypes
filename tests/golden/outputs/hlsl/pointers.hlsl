@@ -2,7 +2,7 @@
 #pragma pack_matrix(column_major)
 
 struct Struct_2 {
-    void arr;
+    uint arr[];
 };
 Struct_2 global_0 : register(u0);
 
@@ -19,7 +19,7 @@ void index_unsized(int i, uint v) {
 }
 
 void index_dynamic_array(int i, uint v) {
-    void* local_0 = &global_0.arr;
+    uint[]* local_0 = &global_0.arr;
     uint local_1 = local_0[i];
     local_0[i] = (local_1 + v);
 }

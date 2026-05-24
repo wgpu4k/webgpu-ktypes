@@ -17,7 +17,6 @@ Each listed case is still executed. The test fails if the case starts passing un
 | `glsl` | `abstract-types-function-calls.wgsl` | `missing-golden` | Parser/resolver/lowering now pass after inferred global const lowering fix; golden output still needs review and generation. | `#16` |
 | `glsl` | `abstract-types-let.wgsl` | `comparison` | Baseline debt from issue 16 golden stabilization. | `#16` |
 | `glsl` | `abstract-types-operators.wgsl` | `comparison` | Baseline debt from issue 16 golden stabilization. | `#16` |
-| `glsl` | `abstract-types-return.wgsl` | `missing-golden` | Parser/resolver/lowering now pass after inferred global const lowering fix; golden output still needs review and generation. | `#16` |
 | `glsl` | `abstract-types-texture.wgsl` | `type-resolution` | Baseline debt from issue 16 golden stabilization. | `#16` |
 | `glsl` | `abstract-types-var.wgsl` | `missing-golden` | Parser/resolver/lowering now pass after inferred global const lowering fix; golden output still needs review and generation. | `#16` |
 | `glsl` | `access.wgsl` | `comparison` | Baseline debt from issue 16 golden stabilization. | `#16` |
@@ -157,9 +156,9 @@ Each listed case is still executed. The test fails if the case starts passing un
 | `hlsl` | `abstract-types-builtins.wgsl` | `comparison` | Baseline debt from issue 16 golden stabilization. | `#16` |
 | `hlsl` | `abstract-types-const.wgsl` | `comparison` | Baseline debt from issue 16 golden stabilization. | `#16` |
 | `hlsl` | `abstract-types-function-calls.wgsl` | `missing-golden` | Parser/resolver/lowering now pass after inferred global const lowering fix; golden output still needs review and generation. | `#16` |
+| `hlsl` | `abstract-types-return.wgsl` | `native-validation` | HLSL does not support returning arrays with the current writer shape; golden is reviewed but native validation still fails. | `#16` |
 | `hlsl` | `abstract-types-let.wgsl` | `comparison` | Baseline debt from issue 16 golden stabilization. | `#16` |
 | `hlsl` | `abstract-types-operators.wgsl` | `comparison` | Baseline debt from issue 16 golden stabilization. | `#16` |
-| `hlsl` | `abstract-types-return.wgsl` | `missing-golden` | Parser/resolver/lowering now pass after inferred global const lowering fix; golden output still needs review and generation. | `#16` |
 | `hlsl` | `abstract-types-texture.wgsl` | `type-resolution` | Baseline debt from issue 16 golden stabilization. | `#16` |
 | `hlsl` | `abstract-types-var.wgsl` | `missing-golden` | Parser/resolver/lowering now pass after inferred global const lowering fix; golden output still needs review and generation. | `#16` |
 | `hlsl` | `access.wgsl` | `comparison` | Baseline debt from issue 16 golden stabilization. | `#16` |
@@ -235,7 +234,6 @@ Each listed case is still executed. The test fails if the case starts passing un
 | `hlsl` | `interpolate_compat.wgsl` | `type-resolution` | Baseline debt from issue 16 golden stabilization. | `#16` |
 | `hlsl` | `invariant.wgsl` | `comparison` | Baseline debt from issue 16 golden stabilization. | `#16` |
 | `hlsl` | `mat2-uniform-alignment.wgsl` | `comparison` | Baseline debt from issue 16 golden stabilization. | `#16` |
-| `hlsl` | `mat_cx2_f16.wgsl` | `comparison` | Baseline debt from issue 16 golden stabilization. | `#16` |
 | `hlsl` | `math-functions.wgsl` | `type-resolution` | Baseline debt from issue 16 golden stabilization. | `#16` |
 | `hlsl` | `memory-decorations-coherent.wgsl` | `comparison` | Baseline debt from issue 16 golden stabilization. | `#16` |
 | `hlsl` | `memory-decorations.wgsl` | `comparison` | Baseline debt from issue 16 golden stabilization. | `#16` |
@@ -295,7 +293,6 @@ Each listed case is still executed. The test fails if the case starts passing un
 | `ir` | `abstract-types-function-calls.wgsl` | `missing-golden` | Parser/resolver/lowering now pass after inferred global const lowering fix; golden output still needs review and generation. | `#16` |
 | `ir` | `abstract-types-let.wgsl` | `comparison` | Baseline debt from issue 16 golden stabilization. | `#16` |
 | `ir` | `abstract-types-operators.wgsl` | `comparison` | Baseline debt from issue 16 golden stabilization. | `#16` |
-| `ir` | `abstract-types-return.wgsl` | `missing-golden` | Parser/resolver/lowering now pass after inferred global const lowering fix; golden output still needs review and generation. | `#16` |
 | `ir` | `abstract-types-texture.wgsl` | `type-resolution` | Baseline debt from issue 16 golden stabilization. | `#16` |
 | `ir` | `abstract-types-var.wgsl` | `missing-golden` | Parser/resolver/lowering now pass after inferred global const lowering fix; golden output still needs review and generation. | `#16` |
 | `ir` | `access.wgsl` | `comparison` | Baseline debt from issue 16 golden stabilization. | `#16` |
@@ -401,7 +398,6 @@ Each listed case is still executed. The test fails if the case starts passing un
 | `msl` | `abstract-types-function-calls.wgsl` | `missing-golden` | Parser/resolver/lowering now pass after inferred global const lowering fix; golden output still needs review and generation. | `#16` |
 | `msl` | `abstract-types-let.wgsl` | `comparison` | Baseline debt from issue 16 golden stabilization. | `#16` |
 | `msl` | `abstract-types-operators.wgsl` | `comparison` | Baseline debt from issue 16 golden stabilization. | `#16` |
-| `msl` | `abstract-types-return.wgsl` | `missing-golden` | Parser/resolver/lowering now pass after inferred global const lowering fix; golden output still needs review and generation. | `#16` |
 | `msl` | `abstract-types-texture.wgsl` | `type-resolution` | Baseline debt from issue 16 golden stabilization. | `#16` |
 | `msl` | `abstract-types-var.wgsl` | `missing-golden` | Parser/resolver/lowering now pass after inferred global const lowering fix; golden output still needs review and generation. | `#16` |
 | `msl` | `access.wgsl` | `comparison` | Baseline debt from issue 16 golden stabilization. | `#16` |
@@ -477,7 +473,6 @@ Each listed case is still executed. The test fails if the case starts passing un
 | `msl` | `interpolate_compat.wgsl` | `type-resolution` | Baseline debt from issue 16 golden stabilization. | `#16` |
 | `msl` | `invariant.wgsl` | `comparison` | Baseline debt from issue 16 golden stabilization. | `#16` |
 | `msl` | `mat2-uniform-alignment.wgsl` | `comparison` | Baseline debt from issue 16 golden stabilization. | `#16` |
-| `msl` | `mat_cx2_f16.wgsl` | `comparison` | Baseline debt from issue 16 golden stabilization. | `#16` |
 | `msl` | `math-functions.wgsl` | `type-resolution` | Baseline debt from issue 16 golden stabilization. | `#16` |
 | `msl` | `memory-decorations-coherent.wgsl` | `comparison` | Baseline debt from issue 16 golden stabilization. | `#16` |
 | `msl` | `memory-decorations.wgsl` | `comparison` | Baseline debt from issue 16 golden stabilization. | `#16` |
@@ -532,7 +527,6 @@ Each listed case is still executed. The test fails if the case starts passing un
 | `roundtrip` | `6438-conflicting-idents.wgsl` | `roundtrip-semantic-isomorphism` | Baseline debt from issue 16 golden stabilization. | `#16` |
 | `roundtrip` | `abstract-types-atomic.wgsl` | `roundtrip-semantic-isomorphism` | Baseline debt from issue 16 golden stabilization. | `#16` |
 | `roundtrip` | `abstract-types-function-calls.wgsl` | `missing-golden` | Parser/resolver/lowering now pass after inferred global const lowering fix; golden output still needs review and generation. | `#16` |
-| `roundtrip` | `abstract-types-return.wgsl` | `missing-golden` | Parser/resolver/lowering now pass after inferred global const lowering fix; golden output still needs review and generation. | `#16` |
 | `roundtrip` | `abstract-types-texture.wgsl` | `type-resolution` | Baseline debt from issue 16 golden stabilization. | `#16` |
 | `roundtrip` | `abstract-types-var.wgsl` | `missing-golden` | Parser/resolver/lowering now pass after inferred global const lowering fix; golden output still needs review and generation. | `#16` |
 | `roundtrip` | `access.wgsl` | `roundtrip-semantic-isomorphism` | Baseline debt from issue 16 golden stabilization. | `#16` |
@@ -613,7 +607,6 @@ Each listed case is still executed. The test fails if the case starts passing un
 | `wgsl` | `6438-conflicting-idents.wgsl` | `roundtrip-semantic-isomorphism` | Baseline debt from issue 16 golden stabilization. | `#16` |
 | `wgsl` | `abstract-types-atomic.wgsl` | `roundtrip-semantic-isomorphism` | Baseline debt from issue 16 golden stabilization. | `#16` |
 | `wgsl` | `abstract-types-function-calls.wgsl` | `missing-golden` | Parser/resolver/lowering now pass after inferred global const lowering fix; golden output still needs review and generation. | `#16` |
-| `wgsl` | `abstract-types-return.wgsl` | `missing-golden` | Parser/resolver/lowering now pass after inferred global const lowering fix; golden output still needs review and generation. | `#16` |
 | `wgsl` | `abstract-types-texture.wgsl` | `type-resolution` | Baseline debt from issue 16 golden stabilization. | `#16` |
 | `wgsl` | `abstract-types-var.wgsl` | `missing-golden` | Parser/resolver/lowering now pass after inferred global const lowering fix; golden output still needs review and generation. | `#16` |
 | `wgsl` | `access.wgsl` | `roundtrip-semantic-isomorphism` | Baseline debt from issue 16 golden stabilization. | `#16` |

@@ -40,29 +40,58 @@ class HlslWriter(
         writeLine("struct $name {")
         indent {
             for (member in structInner.members) {
-                val memberName = member.name
-                val typeName = getTypeName(member.type)
-                writeLine("$typeName $memberName;")
+                writeLine("${getTypeDeclarator(member.type, member.name)};")
             }
         }
         writeLine("};")
     }
 
     override fun writeFunctionSignature(func: Function, name: String) {
-        val returnType = func.returnType?.let { getTypeName(it) } ?: "void"
-        write("$returnType $name(")
-        func.parameters.forEachIndexed { i, param ->
-            if (i > 0) write(", ")
-            val typeName = getTypeName(param.type)
-            write("$typeName ${param.name}")
+        val arguments = buildString {
+            func.parameters.forEachIndexed { i, param ->
+                if (i > 0) append(", ")
+                append(getTypeDeclarator(param.type, param.name))
+            }
         }
-        write(")")
+        val signature = func.returnType
+            ?.let { getTypeDeclarator(it, "$name($arguments)") }
+            ?: "void $name($arguments)"
+        write(signature)
+    }
+
+    private fun getTypeDeclarator(type: Handle<Type>, name: String): String {
+        return when (val inner = module.types[type].inner) {
+            is TypeInner.Array -> {
+                val size = when (val arraySize = inner.size) {
+                    is ArraySize.Constant -> arraySize.value.toString()
+                    is ArraySize.Dynamic -> ""
+                }
+                getTypeDeclarator(inner.element, "$name[$size]")
+            }
+            else -> "${getTypeName(type)} $name"
+        }
+    }
+
+    override fun writeStatement(stmt: Statement) {
+        when (stmt) {
+            is Statement.Declare -> {
+                val variable = currentFunction!!.localVariables[stmt.variable]
+                val name = getLocalVariableName(stmt.variable)
+                writeLine("${getTypeDeclarator(variable.type, name)};")
+            }
+            is Statement.Init -> {
+                val variable = currentFunction!!.localVariables[stmt.variable]
+                val name = getLocalVariableName(stmt.variable)
+                val init = variable.init?.let { writeExpression(it) } ?: "/* error: no init */"
+                writeLine("${getTypeDeclarator(variable.type, name)} = $init;")
+            }
+            else -> super.writeStatement(stmt)
+        }
     }
 
     override fun writeGlobalVariables() {
         module.globalVariables.forEachWithHandle { handle, variable ->
             val name = getGlobalVariableName(handle)
-            val typeName = getTypeName(variable.type)
             val binding = variable.binding
             if (binding != null) {
                 val target = options.bindingMap[binding]
@@ -72,10 +101,10 @@ class HlslWriter(
                     // TODO: handle textures and samplers properly
                     else -> "register(t${target?.texture ?: binding.index})"
                 }
-                writeLine("$typeName $name : $register;")
+                writeLine("${getTypeDeclarator(variable.type, name)} : $register;")
             } else {
                 val init = variable.init?.let { " = ${writeExpression(it)}" } ?: ""
-                writeLine("$typeName $name$init;")
+                writeLine("${getTypeDeclarator(variable.type, name)}$init;")
             }
         }
     }
@@ -172,8 +201,7 @@ class HlslWriter(
         func.parameters.forEach { param ->
             val binding = param.binding
             if (binding is BindingAttribute.Location) {
-                val typeName = getTypeName(param.type)
-                members.add("$typeName ${param.name} : TEXCOORD${binding.location};")
+                members.add("${getTypeDeclarator(param.type, param.name)} : TEXCOORD${binding.location};")
             } else if (binding is BindingAttribute.Builtin && ep.stage != ShaderStage.Compute) {
                 val hlslSemantic = getHlslSemantic(binding.builtin)
                 val typeName = getHlslBuiltinType(binding.builtin)
@@ -203,13 +231,12 @@ class HlslWriter(
             writeLine("struct $structName {")
             indent {
                 inner.members.forEach { member ->
-                    val typeName = getTypeName(member.type)
                     val semantic = when (val binding = member.binding) {
                         is BindingAttribute.Builtin -> if (binding.builtin == BuiltinValue.Position) "SV_Position" else "SV_Target"
                         is BindingAttribute.Location -> "TEXCOORD${binding.location}"
                         else -> if (ep.stage == ShaderStage.Fragment) "SV_Target" else "COLOR"
                     }
-                    writeLine("$typeName ${member.name} : $semantic;")
+                    writeLine("${getTypeDeclarator(member.type, member.name)} : $semantic;")
                 }
             }
             writeLine("};")
@@ -344,6 +371,14 @@ class HlslWriter(
                 val baseName = getTypeName(inner.base)
                 // Simplified HLSL pointer mapping
                 "$baseName*"
+            }
+            is TypeInner.Array -> {
+                val elementTypeName = getTypeName(inner.element)
+                val sizeStr = when (val size = inner.size) {
+                    is ArraySize.Constant -> size.value.toString()
+                    is ArraySize.Dynamic -> ""
+                }
+                "$elementTypeName[$sizeStr]"
             }
             is TypeInner.Opaque -> {
                 when {

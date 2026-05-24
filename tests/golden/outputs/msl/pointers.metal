@@ -1,7 +1,7 @@
 #include <metal_stdlib>
 using namespace metal;
 struct Struct_2 {
-    /* unknown type */ void arr;
+    array<uint> arr;
 };
 
 void f() {
@@ -17,7 +17,7 @@ void index_unsized(int i, uint v) {
 }
 
 void index_dynamic_array(int i, uint v) {
-    device /* unknown type */ void* local_0 = &global_0.arr;
+    device array<uint>* local_0 = &global_0.arr;
     uint local_1 = local_0[i];
     local_0[i] = (local_1 + v);
 }
