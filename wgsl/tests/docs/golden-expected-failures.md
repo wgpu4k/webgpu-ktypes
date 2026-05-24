@@ -106,7 +106,7 @@ Each listed case is still executed. The test fails if the case starts passing un
 | `glsl` | `msl-vpt.wgsl` | `native-validation` | Baseline debt from issue 16 golden stabilization. | `#16` |
 | `glsl` | `multiview.wgsl` | `native-validation` | Baseline debt from issue 16 golden stabilization. | `#16` |
 | `glsl` | `multiview_webgl.wgsl` | `native-validation` | Baseline debt from issue 16 golden stabilization. | `#16` |
-| `glsl` | `operators.wgsl` | `missing-golden` | Parser/resolver/lowering now pass after inferred global const lowering fix; golden output still needs review and generation. | `#16` |
+| `glsl` | `operators.wgsl` | `native-validation` | Golden output is reviewed after comparison type lowering fix, but GLSL native validation still rejects current logical builtin output. | `#16` |
 | `glsl` | `overrides-atomicCompareExchangeWeak.wgsl` | `native-validation` | Baseline debt from issue 16 golden stabilization. | `#16` |
 | `glsl` | `overrides-ray-query.wgsl` | `native-validation` | Baseline debt from issue 16 golden stabilization. | `#16` |
 | `glsl` | `packed-vec3-bitcast.wgsl` | `native-validation` | Baseline debt from issue 16 golden stabilization. | `#16` |
@@ -179,7 +179,6 @@ Each listed case is still executed. The test fails if the case starts passing un
 | `hlsl` | `mesh-shader-lines.wgsl` | `type-resolution` | Baseline debt from issue 16 golden stabilization. | `#16` |
 | `hlsl` | `mesh-shader-points.wgsl` | `type-resolution` | Baseline debt from issue 16 golden stabilization. | `#16` |
 | `hlsl` | `mesh-shader.wgsl` | `type-resolution` | Baseline debt from issue 16 golden stabilization. | `#16` |
-| `hlsl` | `operators.wgsl` | `missing-golden` | Parser/resolver/lowering now pass after inferred global const lowering fix; golden output still needs review and generation. | `#16` |
 | `hlsl` | `quad.wgsl` | `lowering` | Baseline debt from issue 16 golden stabilization. | `#16` |
 | `hlsl` | `ray-query-no-init-tracking.wgsl` | `type-resolution` | Baseline debt from issue 16 golden stabilization. | `#16` |
 | `hlsl` | `ray-query.wgsl` | `type-resolution` | Baseline debt from issue 16 golden stabilization. | `#16` |
@@ -218,7 +217,6 @@ Each listed case is still executed. The test fails if the case starts passing un
 | `ir` | `mesh-shader-lines.wgsl` | `type-resolution` | Baseline debt from issue 16 golden stabilization. | `#16` |
 | `ir` | `mesh-shader-points.wgsl` | `type-resolution` | Baseline debt from issue 16 golden stabilization. | `#16` |
 | `ir` | `mesh-shader.wgsl` | `type-resolution` | Baseline debt from issue 16 golden stabilization. | `#16` |
-| `ir` | `operators.wgsl` | `missing-golden` | Parser/resolver/lowering now pass after inferred global const lowering fix; golden output still needs review and generation. | `#16` |
 | `ir` | `quad.wgsl` | `lowering` | Baseline debt from issue 16 golden stabilization. | `#16` |
 | `ir` | `ray-query-no-init-tracking.wgsl` | `type-resolution` | Baseline debt from issue 16 golden stabilization. | `#16` |
 | `ir` | `ray-query.wgsl` | `type-resolution` | Baseline debt from issue 16 golden stabilization. | `#16` |
@@ -257,7 +255,6 @@ Each listed case is still executed. The test fails if the case starts passing un
 | `msl` | `mesh-shader-lines.wgsl` | `type-resolution` | Baseline debt from issue 16 golden stabilization. | `#16` |
 | `msl` | `mesh-shader-points.wgsl` | `type-resolution` | Baseline debt from issue 16 golden stabilization. | `#16` |
 | `msl` | `mesh-shader.wgsl` | `type-resolution` | Baseline debt from issue 16 golden stabilization. | `#16` |
-| `msl` | `operators.wgsl` | `missing-golden` | Parser/resolver/lowering now pass after inferred global const lowering fix; golden output still needs review and generation. | `#16` |
 | `msl` | `quad.wgsl` | `lowering` | Baseline debt from issue 16 golden stabilization. | `#16` |
 | `msl` | `ray-query-no-init-tracking.wgsl` | `type-resolution` | Baseline debt from issue 16 golden stabilization. | `#16` |
 | `msl` | `ray-query.wgsl` | `type-resolution` | Baseline debt from issue 16 golden stabilization. | `#16` |
@@ -319,8 +316,8 @@ Each listed case is still executed. The test fails if the case starts passing un
 | `roundtrip` | `msl-vpt-formats-x3.wgsl` | `roundtrip-semantic-isomorphism` | Baseline debt from issue 16 golden stabilization. | `#16` |
 | `roundtrip` | `msl-vpt-formats-x4.wgsl` | `roundtrip-semantic-isomorphism` | Baseline debt from issue 16 golden stabilization. | `#16` |
 | `roundtrip` | `msl-vpt.wgsl` | `roundtrip-semantic-isomorphism` | Baseline debt from issue 16 golden stabilization. | `#16` |
-| `roundtrip` | `operators.wgsl` | `missing-golden` | Parser/resolver/lowering now pass after inferred global const lowering fix; golden output still needs review and generation. | `#16` |
 | `roundtrip` | `overrides-atomicCompareExchangeWeak.wgsl` | `roundtrip-semantic-isomorphism` | Baseline debt from issue 16 golden stabilization. | `#16` |
+| `roundtrip` | `operators.wgsl` | `roundtrip-semantic-isomorphism` | Reviewed output compares after comparison type lowering fix, but WGSL roundtrip currently rewrites a unary expression as a literal. | `#16` |
 | `roundtrip` | `overrides-ray-query.wgsl` | `roundtrip-semantic-isomorphism` | Baseline debt from issue 16 golden stabilization. | `#16` |
 | `roundtrip` | `packed-vec3-bitcast.wgsl` | `roundtrip-semantic-isomorphism` | Baseline debt from issue 16 golden stabilization. | `#16` |
 | `roundtrip` | `pointer-function-arg-restrict.wgsl` | `roundtrip-semantic-isomorphism` | Baseline debt from issue 16 golden stabilization. | `#16` |
@@ -397,8 +394,8 @@ Each listed case is still executed. The test fails if the case starts passing un
 | `wgsl` | `msl-vpt-formats-x3.wgsl` | `roundtrip-semantic-isomorphism` | Baseline debt from issue 16 golden stabilization. | `#16` |
 | `wgsl` | `msl-vpt-formats-x4.wgsl` | `roundtrip-semantic-isomorphism` | Baseline debt from issue 16 golden stabilization. | `#16` |
 | `wgsl` | `msl-vpt.wgsl` | `roundtrip-semantic-isomorphism` | Baseline debt from issue 16 golden stabilization. | `#16` |
-| `wgsl` | `operators.wgsl` | `missing-golden` | Parser/resolver/lowering now pass after inferred global const lowering fix; golden output still needs review and generation. | `#16` |
 | `wgsl` | `overrides-atomicCompareExchangeWeak.wgsl` | `roundtrip-semantic-isomorphism` | Baseline debt from issue 16 golden stabilization. | `#16` |
+| `wgsl` | `operators.wgsl` | `roundtrip-semantic-isomorphism` | Reviewed output compares after comparison type lowering fix, but WGSL roundtrip currently rewrites a unary expression as a literal. | `#16` |
 | `wgsl` | `overrides-ray-query.wgsl` | `roundtrip-semantic-isomorphism` | Baseline debt from issue 16 golden stabilization. | `#16` |
 | `wgsl` | `packed-vec3-bitcast.wgsl` | `roundtrip-semantic-isomorphism` | Baseline debt from issue 16 golden stabilization. | `#16` |
 | `wgsl` | `pointer-function-arg-restrict.wgsl` | `roundtrip-semantic-isomorphism` | Baseline debt from issue 16 golden stabilization. | `#16` |

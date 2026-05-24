@@ -28,6 +28,7 @@ import io.ygdrasil.wgsl.ir.ExpressionKind as IrExpressionKind
 import io.ygdrasil.wgsl.ir.LiteralValue as IrLiteralValue
 import io.ygdrasil.wgsl.ir.BinaryOperator as IrBinaryOperator
 import io.ygdrasil.wgsl.ir.UnaryOperator as IrUnaryOperator
+import io.ygdrasil.wgsl.ir.isComparison
 
 /**
  * Error thrown during lowering when something cannot be resolved.
@@ -1273,7 +1274,16 @@ class Lowerer {
                 val rightType = resolveExpressionType(kind.right)
                 val leftInner = module.types[leftType].inner
                 val rightInner = module.types[rightType].inner
-                if (leftInner is IrTypeInner.Scalar && rightInner is IrTypeInner.Scalar) {
+                if (kind.operator.isComparison) {
+                    val boolType = module.types.append(IrType(IrTypeInner.Scalar(IrScalarKind.Bool, 1)))
+                    if (leftInner is IrTypeInner.Vector) {
+                        module.types.append(IrType(IrTypeInner.Vector(leftInner.size, boolType)))
+                    } else if (rightInner is IrTypeInner.Vector) {
+                        module.types.append(IrType(IrTypeInner.Vector(rightInner.size, boolType)))
+                    } else {
+                        boolType
+                    }
+                } else if (leftInner is IrTypeInner.Scalar && rightInner is IrTypeInner.Scalar) {
                     if (leftInner.kind == IrScalarKind.F32 || rightInner.kind == IrScalarKind.F32) {
                         if (leftInner.kind == IrScalarKind.F32) leftType else rightType
                     } else if (leftInner.kind == IrScalarKind.F16 || rightInner.kind == IrScalarKind.F16) {

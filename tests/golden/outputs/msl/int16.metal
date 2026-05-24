@@ -50,12 +50,12 @@ short int16_function(short x) {
     local_0 = (local_0 << 2u);
     local_0 = (local_0 >> 1u);
     local_0 = -(local_0);
-    short local_1 = (local_0 < short(0));
-    short local_2 = (local_0 <= short(0));
-    short local_3 = (local_0 > short(0));
-    short local_4 = (local_0 >= short(0));
-    short local_5 = (local_0 == short(0));
-    short local_6 = (local_0 != short(0));
+    bool local_1 = (local_0 < short(0));
+    bool local_2 = (local_0 <= short(0));
+    bool local_3 = (local_0 > short(0));
+    bool local_4 = (local_0 >= short(0));
+    bool local_5 = (local_0 == short(0));
+    bool local_6 = (local_0 != short(0));
     local_0 = select(short(1), short(2), local_1);
     array<short, 4> local_7 = array<short, 4>(short(1), short(2), short(3), short(4));
     local_7[0] = local_0;
@@ -89,7 +89,7 @@ short clamp(short arg_0, short arg_1, short arg_2) {
 short sign(short arg_0) {
 }
 
-short select(short arg_0, short arg_1, short arg_2) {
+short select(short arg_0, short arg_1, bool arg_2) {
 }
 
 ushort uint16_function(ushort x) {

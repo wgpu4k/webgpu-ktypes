@@ -63,4 +63,32 @@ class ExpressionLoweringTest : FunSpec({
         val binary = binaryExpr!!.kind as ExpressionKind.Binary
         binary.operator shouldBe BinaryOperator.Add
     }
+
+    test("comparison expressions lower to bool for scalar operands") {
+        val module = lowerWgsl("fn main() { let is_equal = 1i == 2i; }")
+        val function = module.functions.toList().single { it.name == "main" }
+        val local = function.localVariables.toList().single { it.name == "is_equal" }
+
+        module.types[local.type].inner shouldBe TypeInner.Scalar(ScalarKind.Bool, 1)
+    }
+
+    test("comparison expressions lower to bool vector for vector operands") {
+        val module = lowerWgsl("fn main() { let mask = vec3<f32>(1.0) < vec3<f32>(2.0); }")
+        val function = module.functions.toList().single { it.name == "main" }
+        val local = function.localVariables.toList().single { it.name == "mask" }
+        val inner = module.types[local.type].inner.shouldBeInstanceOf<TypeInner.Vector>()
+
+        inner.size shouldBe VectorSize.Tri
+        module.types[inner.scalar].inner shouldBe TypeInner.Scalar(ScalarKind.Bool, 1)
+    }
+
+    test("comparison expressions lower to bool vector for scalar-vector operands") {
+        val module = lowerWgsl("fn main() { let mask = 1.0 < vec3<f32>(2.0); }")
+        val function = module.functions.toList().single { it.name == "main" }
+        val local = function.localVariables.toList().single { it.name == "mask" }
+        val inner = module.types[local.type].inner.shouldBeInstanceOf<TypeInner.Vector>()
+
+        inner.size shouldBe VectorSize.Tri
+        module.types[inner.scalar].inner shouldBe TypeInner.Scalar(ScalarKind.Bool, 1)
+    }
 })

@@ -35,16 +35,16 @@ void wgsl_main(Struct_1 sizes, uint subgroup_id, uint subgroup_invocation_id) {
     quadSwapDiagonal(subgroup_invocation_id);
 }
 
-uint subgroupBallot(uint arg_0) {
+bool subgroupBallot(bool arg_0) {
 }
 
 void subgroupBallot() {
 }
 
-uint subgroupAll(uint arg_0) {
+bool subgroupAll(bool arg_0) {
 }
 
-uint subgroupAny(uint arg_0) {
+bool subgroupAny(bool arg_0) {
 }
 
 uint subgroupAdd(uint arg_0) {

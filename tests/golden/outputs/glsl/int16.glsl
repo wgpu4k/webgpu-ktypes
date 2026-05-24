@@ -57,12 +57,12 @@ int int16_function(int x) {
     val = (val << 2u);
     val = (val >> 1u);
     val = -(val);
-    int cmp_lt = (val < int(0));
-    int cmp_le = (val <= int(0));
-    int cmp_gt = (val > int(0));
-    int cmp_ge = (val >= int(0));
-    int cmp_eq = (val == int(0));
-    int cmp_ne = (val != int(0));
+    bool cmp_lt = (val < int(0));
+    bool cmp_le = (val <= int(0));
+    bool cmp_gt = (val > int(0));
+    bool cmp_ge = (val >= int(0));
+    bool cmp_eq = (val == int(0));
+    bool cmp_ne = (val != int(0));
     val = select(int(1), int(2), cmp_lt);
     int[4] arr = int[4](int(1), int(2), int(3), int(4));
     arr[0] = val;
@@ -96,7 +96,7 @@ int clamp(int arg_0, int arg_1, int arg_2) {
 int sign(int arg_0) {
 }
 
-int select(int arg_0, int arg_1, int arg_2) {
+int select(int arg_0, int arg_1, bool arg_2) {
 }
 
 uint uint16_function(uint x) {

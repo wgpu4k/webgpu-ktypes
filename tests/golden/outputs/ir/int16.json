@@ -177,6 +177,13 @@
             },
             {
                 "inner": {
+                    "__type": "io.ygdrasil.wgsl.ir.TypeInner.Scalar",
+                    "kind": "Bool",
+                    "width": 1
+                }
+            },
+            {
+                "inner": {
                     "__type": "io.ygdrasil.wgsl.ir.TypeInner.Array",
                     "element": 7,
                     "size": {
@@ -389,12 +396,9 @@
             15,
             {
                 "inner": {
-                    "__type": "io.ygdrasil.wgsl.ir.TypeInner.Array",
-                    "element": 7,
-                    "size": {
-                        "__type": "io.ygdrasil.wgsl.ir.ArraySize.Constant",
-                        "value": 4
-                    }
+                    "__type": "io.ygdrasil.wgsl.ir.TypeInner.Scalar",
+                    "kind": "Bool",
+                    "width": 1
                 }
             },
             16,
@@ -408,7 +412,18 @@
                     }
                 }
             },
-            17
+            17,
+            {
+                "inner": {
+                    "__type": "io.ygdrasil.wgsl.ir.TypeInner.Array",
+                    "element": 7,
+                    "size": {
+                        "__type": "io.ygdrasil.wgsl.ir.ArraySize.Constant",
+                        "value": 4
+                    }
+                }
+            },
+            18
         ]
     },
     "constants": {},
@@ -582,37 +597,37 @@
                         },
                         {
                             "name": "cmp_lt",
-                            "type": 7,
+                            "type": 16,
                             "init": 127
                         },
                         {
                             "name": "cmp_le",
-                            "type": 7,
+                            "type": 16,
                             "init": 131
                         },
                         {
                             "name": "cmp_gt",
-                            "type": 7,
+                            "type": 16,
                             "init": 135
                         },
                         {
                             "name": "cmp_ge",
-                            "type": 7,
+                            "type": 16,
                             "init": 139
                         },
                         {
                             "name": "cmp_eq",
-                            "type": 7,
+                            "type": 16,
                             "init": 143
                         },
                         {
                             "name": "cmp_ne",
-                            "type": 7,
+                            "type": 16,
                             "init": 147
                         },
                         {
                             "name": "arr",
-                            "type": 16,
+                            "type": 17,
                             "init": 163
                         },
                         {
@@ -1913,7 +1928,7 @@
                         {
                             "kind": {
                                 "__type": "io.ygdrasil.wgsl.ir.ExpressionKind.TypeConstructor",
-                                "type": 17,
+                                "type": 18,
                                 "arguments": [
                                     156,
                                     158,
@@ -2623,7 +2638,7 @@
                     },
                     {
                         "name": "arg_2",
-                        "type": 7
+                        "type": 16
                     }
                 ],
                 "returnType": 7,

@@ -4,16 +4,16 @@ struct Struct_1 {
     subgroup_size: u32,
 }
 
-fn subgroupBallot(arg_0: u32) -> u32 {
+fn subgroupBallot(arg_0: bool) -> bool {
 }
 
 fn subgroupBallot() {
 }
 
-fn subgroupAll(arg_0: u32) -> u32 {
+fn subgroupAll(arg_0: bool) -> bool {
 }
 
-fn subgroupAny(arg_0: u32) -> u32 {
+fn subgroupAny(arg_0: bool) -> bool {
 }
 
 fn subgroupAdd(arg_0: u32) -> u32 {
