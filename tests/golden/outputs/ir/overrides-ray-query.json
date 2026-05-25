@@ -36,6 +36,13 @@
             },
             {
                 "inner": {
+                    "__type": "io.ygdrasil.wgsl.ir.TypeInner.Scalar",
+                    "kind": "Sint",
+                    "width": 4
+                }
+            },
+            {
+                "inner": {
                     "__type": "io.ygdrasil.wgsl.ir.TypeInner.ValuePointer",
                     "base": 2
                 }
@@ -82,11 +89,19 @@
             4,
             {
                 "inner": {
+                    "__type": "io.ygdrasil.wgsl.ir.TypeInner.Scalar",
+                    "kind": "Sint",
+                    "width": 4
+                }
+            },
+            5,
+            {
+                "inner": {
                     "__type": "io.ygdrasil.wgsl.ir.TypeInner.ValuePointer",
                     "base": 2
                 }
             },
-            5
+            6
         ]
     },
     "constants": {},
@@ -148,7 +163,7 @@
                                 "value": {
                                     "__type": "io.ygdrasil.wgsl.ir.LiteralValue.Scalar",
                                     "value": {
-                                        "__type": "io.ygdrasil.wgsl.ir.ScalarValue.U32",
+                                        "__type": "io.ygdrasil.wgsl.ir.ScalarValue.I32",
                                         "value": 0
                                     }
                                 }
@@ -460,7 +475,7 @@
                     },
                     {
                         "name": "arg_1",
-                        "type": 4
+                        "type": 5
                     },
                     {
                         "name": "arg_2",
@@ -496,7 +511,7 @@
                 "parameters": [
                     {
                         "name": "arg_0",
-                        "type": 5
+                        "type": 6
                     },
                     {
                         "name": "arg_1",
@@ -507,7 +522,7 @@
                         "type": 4
                     }
                 ],
-                "returnType": 5,
+                "returnType": 6,
                 "localVariables": {},
                 "expressions": {},
                 "blocks": {
@@ -524,10 +539,10 @@
                 "parameters": [
                     {
                         "name": "arg_0",
-                        "type": 5
+                        "type": 6
                     }
                 ],
-                "returnType": 5,
+                "returnType": 6,
                 "localVariables": {},
                 "expressions": {},
                 "blocks": {

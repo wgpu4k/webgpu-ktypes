@@ -8,11 +8,11 @@ import io.ygdrasil.wgsl.parser.Parser
 /**
  * Tests for literal suffix support.
  * 
- * This test suite verifies that only standard WGSL suffixes are accepted:
- * - Integer: i, I, u, U (or no suffix for signed int)
+ * This test suite verifies supported suffixes:
+ * - Integer: i, I, u, U, li, lu (or no suffix for signed int)
  * - Float: f, F, h, H
- * 
- * Non-standard suffixes (lf, li, lu) should NOT be accepted.
+ *
+ * Naga int64 fixtures use li/lu suffixes.
  */
 class LiteralSuffixTest : FunSpec({
     
@@ -111,33 +111,35 @@ class LiteralSuffixTest : FunSpec({
         }
     }
     
-    context("Non-standard suffixes (should not be accepted)") {
-        test("li suffix is NOT accepted") {
-            // With current implementation, "42li" will be lexed as "42" + "l" + "i"
-            // or as "42" followed by identifier "li"
+    context("Naga int64 suffixes") {
+        test("li suffix is accepted") {
             val tokens = tokenizeSignificant("42li")
-            
-            // Should not be a single UINT_LITERAL token
-            tokens shouldHaveSize 2
-            // First token is the integer 42
+
+            tokens shouldHaveSize 1
             tokens[0].kind shouldBe TokenKind.INT_LITERAL
-            tokens[0].literal shouldBe "42"
-            // Second token is identifier "li"
-            tokens[1].kind shouldBe TokenKind.IDENTIFIER
-            tokens[1].literal shouldBe "li"
+            tokens[0].literal shouldBe "42li"
         }
-        
-        test("lu suffix is NOT accepted") {
+
+        test("lu suffix is accepted") {
             val tokens = tokenizeSignificant("42lu")
-            
-            // Should not be a single UINT_LITERAL token
+
+            tokens shouldHaveSize 1
+            tokens[0].kind shouldBe TokenKind.UINT_LITERAL
+            tokens[0].literal shouldBe "42lu"
+        }
+
+        test("hexadecimal li and lu suffixes are accepted") {
+            val tokens = tokenizeSignificant("0x2ali 0x2alu")
+
             tokens shouldHaveSize 2
             tokens[0].kind shouldBe TokenKind.INT_LITERAL
-            tokens[0].literal shouldBe "42"
-            tokens[1].kind shouldBe TokenKind.IDENTIFIER
-            tokens[1].literal shouldBe "lu"
+            tokens[0].literal shouldBe "0x2ali"
+            tokens[1].kind shouldBe TokenKind.UINT_LITERAL
+            tokens[1].literal shouldBe "0x2alu"
         }
-        
+    }
+
+    context("Non-standard suffixes (should not be accepted)") {
         test("lf suffix is NOT accepted") {
             val tokens = tokenizeSignificant("3.14lf")
             
@@ -148,27 +150,7 @@ class LiteralSuffixTest : FunSpec({
             tokens[1].kind shouldBe TokenKind.IDENTIFIER
             tokens[1].literal shouldBe "lf"
         }
-        
-        test("Li suffix (capital) is NOT accepted") {
-            val tokens = tokenizeSignificant("42Li")
-            
-            tokens shouldHaveSize 2
-            tokens[0].kind shouldBe TokenKind.INT_LITERAL
-            tokens[0].literal shouldBe "42"
-            tokens[1].kind shouldBe TokenKind.IDENTIFIER
-            tokens[1].literal shouldBe "Li"
-        }
-        
-        test("LU suffix (capital) is NOT accepted") {
-            val tokens = tokenizeSignificant("42LU")
-            
-            tokens shouldHaveSize 2
-            tokens[0].kind shouldBe TokenKind.INT_LITERAL
-            tokens[0].literal shouldBe "42"
-            tokens[1].kind shouldBe TokenKind.IDENTIFIER
-            tokens[1].literal shouldBe "LU"
-        }
-        
+
         test("LF suffix (capital) is NOT accepted") {
             val tokens = tokenizeSignificant("3.14LF")
             
@@ -209,22 +191,18 @@ class LiteralSuffixTest : FunSpec({
             parser.errors.isEmpty() shouldBe true
         }
         
-        test("parse integer with li suffix creates error or separate tokens") {
-            // "42li" will be lexed as "42" + "li" (identifier)
-            // This will likely create a parsing error
+        test("parse integer with li suffix") {
             val parser = Parser(Lexer("let x = 42li;"))
             val unit = parser.parse()
-            
-            // Should have parsing errors because "li" is not a valid expression
-            parser.errors.isNotEmpty() shouldBe true
+
+            parser.errors.isEmpty() shouldBe true
         }
-        
-        test("parse integer with lu suffix creates error or separate tokens") {
+
+        test("parse integer with lu suffix") {
             val parser = Parser(Lexer("let x = 42lu;"))
             val unit = parser.parse()
-            
-            // Should have parsing errors because "lu" is not a valid expression
-            parser.errors.isNotEmpty() shouldBe true
+
+            parser.errors.isEmpty() shouldBe true
         }
         
         test("parse float with lf suffix creates error or separate tokens") {

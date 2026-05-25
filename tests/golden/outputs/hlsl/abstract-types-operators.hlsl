@@ -18,7 +18,7 @@ uint global_13 = (1 + 2);
 uint global_14 = (1 + 2u);
 uint global_15 = (1u + 2);
 uint global_16 = (1u + 2u);
-uint global_17 = ~(0u);
+uint global_17 = ~(0);
 uint global_18 = (~(0) & (0 - 1));
 int global_19 = -(-2147483648);
 float global_20 = -(3.4028235E38f);
@@ -34,7 +34,7 @@ uint global_29 = (1 >> 2);
 uint global_30 = (1 >> 2u);
 int global_31 = (1 >> 2);
 int global_32 = (1 >> 2u);
-int global_33 = int(-(0));
+int global_33 = int(-(-2147483648));
 int global_34 = -(-2147483648);
 uint global_35[64];
 

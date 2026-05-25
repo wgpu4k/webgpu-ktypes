@@ -196,8 +196,8 @@ class WgslWriter(
     override fun getScalarTypeName(scalar: TypeInner.Scalar): String {
         return when (scalar.kind) {
             ScalarKind.Bool -> "bool"
-            ScalarKind.Sint -> "i32"
-            ScalarKind.Uint -> "u32"
+            ScalarKind.Sint -> "i${scalar.width * 8}"
+            ScalarKind.Uint -> "u${scalar.width * 8}"
             ScalarKind.F32 -> "f32"
             ScalarKind.F16 -> "f16"
             ScalarKind.F64 -> "f64"

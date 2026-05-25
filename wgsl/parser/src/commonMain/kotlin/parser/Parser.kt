@@ -2010,15 +2010,16 @@ class Parser(
         return when (currentKind()) {
             TokenKind.INT_LITERAL -> {
                 val token = advance()
-                val cleanLiteral = token.literal?.dropLastWhile { it.lowercaseChar() in setOf('u', 'i', 'f', 'h') }
-                val suffix = token.literal?.takeLastWhile { it.lowercaseChar() in setOf('u', 'i', 'f', 'h') }?.takeIf { it.isNotEmpty() }
-                IntLiteral(cleanLiteral?.toLongOrNull() ?: 0, suffix, token.span)
+                val suffix = token.literal?.takeLastWhile { it.isLetter() }?.takeIf { it.isNotEmpty() }
+                val cleanLiteral = token.literal?.dropLast(suffix?.length ?: 0)
+                IntLiteral(parseIntegerLiteralValue(cleanLiteral), suffix, token.span)
             }
 
             TokenKind.UINT_LITERAL -> {
                 val token = advance()
-                val cleanLiteral = token.literal?.dropLastWhile { it.lowercaseChar() in setOf('u', 'i', 'f', 'h') }
-                IntLiteral(cleanLiteral?.toLongOrNull() ?: 0, "u", token.span)
+                val suffix = token.literal?.takeLastWhile { it.isLetter() }?.takeIf { it.isNotEmpty() } ?: "u"
+                val cleanLiteral = token.literal?.dropLast(suffix.length)
+                IntLiteral(parseIntegerLiteralValue(cleanLiteral), suffix, token.span)
             }
 
             TokenKind.FLOAT_LITERAL -> {
@@ -2096,6 +2097,15 @@ class Parser(
                 advance()
                 dummy
             }
+        }
+    }
+
+    private fun parseIntegerLiteralValue(literal: String?): Long {
+        val cleaned = literal?.replace("_", "") ?: return 0
+        return if (cleaned.startsWith("0x", ignoreCase = true)) {
+            cleaned.drop(2).toLongOrNull(16) ?: 0
+        } else {
+            cleaned.toLongOrNull() ?: 0
         }
     }
 
