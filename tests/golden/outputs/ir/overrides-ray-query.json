@@ -46,6 +46,13 @@
                     "__type": "io.ygdrasil.wgsl.ir.TypeInner.ValuePointer",
                     "base": 2
                 }
+            },
+            {
+                "inner": {
+                    "__type": "io.ygdrasil.wgsl.ir.TypeInner.Scalar",
+                    "kind": "Bool",
+                    "width": 1
+                }
             }
         ],
         "indexMap": [
@@ -101,7 +108,15 @@
                     "base": 2
                 }
             },
-            6
+            6,
+            {
+                "inner": {
+                    "__type": "io.ygdrasil.wgsl.ir.TypeInner.Scalar",
+                    "kind": "Bool",
+                    "width": 1
+                }
+            },
+            7
         ]
     },
     "constants": {},
@@ -152,7 +167,7 @@
                                     "__type": "io.ygdrasil.wgsl.ir.LiteralValue.Scalar",
                                     "value": {
                                         "__type": "io.ygdrasil.wgsl.ir.ScalarValue.U32",
-                                        "value": 256
+                                        "value": 4
                                     }
                                 }
                             }
@@ -542,7 +557,7 @@
                         "type": 6
                     }
                 ],
-                "returnType": 6,
+                "returnType": 7,
                 "localVariables": {},
                 "expressions": {},
                 "blocks": {
