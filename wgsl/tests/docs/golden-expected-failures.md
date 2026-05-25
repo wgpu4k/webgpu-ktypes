@@ -54,7 +54,7 @@ Each listed case is still executed. The test fails if the case starts passing un
 | `glsl` | `control-flow.wgsl` | `native-validation` | Golden output is reviewed after switch trailing-comma parsing and scalar const selector lowering, but GLSL native validation rejects generated storageBarrier output. | `#16` |
 | `glsl` | `conversion-float-to-int-no-f64.wgsl` | `native-validation` | Golden output is reviewed, but GLSL native validation rejects generated non-finite float constants as Infinity. | `#16` |
 | `glsl` | `conversion-float-to-int.wgsl` | `native-validation` | Golden output is reviewed, but GLSL native validation rejects generated non-finite float constants as Infinity. | `#16` |
-| `glsl` | `cooperative-matrix.wgsl` | `type-resolution` | Baseline debt from issue 16 golden stabilization. | `#16` |
+| `glsl` | `cooperative-matrix.wgsl` | `native-validation` | Golden output is reviewed after cooperative matrix builtin registration, but GLSL native validation does not accept the generated cooperative matrix output. | `#16` |
 | `glsl` | `cross.wgsl` | `native-validation` | Generated output now matches the golden; native validation still rejects the backend output after Emit preservation. | `#16` |
 | `glsl` | `cubeArrayShadow.wgsl` | `native-validation` | Generated output now matches the golden; native validation still rejects the backend output after Emit preservation. | `#16` |
 | `glsl` | `debug-symbol-large-source.wgsl` | `native-validation` | Golden output is reviewed after stage keyword identifier resolution, but GLSL native validation rejects the generated array declaration. | `#16` |
@@ -144,13 +144,10 @@ Each listed case is still executed. The test fails if the case starts passing un
 | `glsl` | `workgroup-var-init.wgsl` | `native-validation` | Baseline debt from issue 16 golden stabilization. | `#16` |
 | `hlsl` | `abstract-types-return.wgsl` | `native-validation` | HLSL does not support returning arrays with the current writer shape; golden is reviewed but native validation still fails. | `#16` |
 | `hlsl` | `abstract-types-texture.wgsl` | `type-resolution` | Baseline debt from issue 16 golden stabilization. | `#16` |
-| `hlsl` | `cooperative-matrix.wgsl` | `type-resolution` | Baseline debt from issue 16 golden stabilization. | `#16` |
 | `hlsl` | `f64.wgsl` | `type-resolution` | Baseline debt from issue 16 golden stabilization. | `#16` |
 | `ir` | `abstract-types-texture.wgsl` | `type-resolution` | Baseline debt from issue 16 golden stabilization. | `#16` |
-| `ir` | `cooperative-matrix.wgsl` | `type-resolution` | Baseline debt from issue 16 golden stabilization. | `#16` |
 | `ir` | `f64.wgsl` | `type-resolution` | Baseline debt from issue 16 golden stabilization. | `#16` |
 | `msl` | `abstract-types-texture.wgsl` | `type-resolution` | Baseline debt from issue 16 golden stabilization. | `#16` |
-| `msl` | `cooperative-matrix.wgsl` | `type-resolution` | Baseline debt from issue 16 golden stabilization. | `#16` |
 | `msl` | `f64.wgsl` | `type-resolution` | Baseline debt from issue 16 golden stabilization. | `#16` |
 | `roundtrip` | `6438-conflicting-idents.wgsl` | `roundtrip-semantic-isomorphism` | Baseline debt from issue 16 golden stabilization. | `#16` |
 | `roundtrip` | `abstract-types-atomic.wgsl` | `roundtrip-semantic-isomorphism` | Baseline debt from issue 16 golden stabilization. | `#16` |
@@ -167,11 +164,11 @@ Each listed case is still executed. The test fails if the case starts passing un
 | `roundtrip` | `binding-buffer-arrays.wgsl` | `roundtrip-semantic-isomorphism` | Golden output is reviewed after binding-array lowering support, but roundtrip currently changes location binding shape. | `#16` |
 | `roundtrip` | `bounds-check-zero-atomic.wgsl` | `roundtrip-semantic-isomorphism` | Baseline debt from issue 16 golden stabilization. | `#16` |
 | `roundtrip` | `clip-distances.wgsl` | `roundtrip-semantic-isomorphism` | Baseline debt from issue 16 golden stabilization. | `#16` |
+| `roundtrip` | `cooperative-matrix.wgsl` | `roundtrip-semantic-isomorphism` | Golden output is reviewed after cooperative matrix builtin registration, but roundtrip currently changes pointer binding shape. | `#16` |
 | `roundtrip` | `const-exprs.wgsl` | `roundtrip-semantic-isomorphism` | Golden output is reviewed after packed dot-product builtin and const switch selector support, but roundtrip currently changes the semantic shape of the lowered module. | `#16` |
 | `roundtrip` | `control-flow.wgsl` | `roundtrip-semantic-isomorphism` | Golden output is reviewed after switch trailing-comma parsing and scalar const selector lowering, but roundtrip currently changes the semantic shape of lowered switch cases. | `#16` |
 | `roundtrip` | `conversion-float-to-int-no-f64.wgsl` | `roundtrip-semantic-isomorphism` | Generated WGSL contains non-finite float constants as Infinity, which the roundtrip parser resolves as an unknown identifier. | `#16` |
 | `roundtrip` | `conversion-float-to-int.wgsl` | `roundtrip-semantic-isomorphism` | Generated WGSL contains non-finite float constants as Infinity, which the roundtrip parser resolves as an unknown identifier. | `#16` |
-| `roundtrip` | `cooperative-matrix.wgsl` | `type-resolution` | Baseline debt from issue 16 golden stabilization. | `#16` |
 | `roundtrip` | `debug-symbol-large-source.wgsl` | `roundtrip-semantic-isomorphism` | Golden output is reviewed after stage keyword identifier resolution, but roundtrip currently changes location binding shape. | `#16` |
 | `roundtrip` | `debug-symbol-simple.wgsl` | `roundtrip-semantic-isomorphism` | Baseline debt from issue 16 golden stabilization. | `#16` |
 | `roundtrip` | `debug-symbol-terrain.wgsl` | `roundtrip-semantic-isomorphism` | Golden output is reviewed after stage keyword identifier resolution, but roundtrip currently changes location binding shape. | `#16` |
@@ -231,11 +228,11 @@ Each listed case is still executed. The test fails if the case starts passing un
 | `wgsl` | `binding-buffer-arrays.wgsl` | `roundtrip-semantic-isomorphism` | Golden output is reviewed after binding-array lowering support, but roundtrip currently changes location binding shape. | `#16` |
 | `wgsl` | `bounds-check-zero-atomic.wgsl` | `roundtrip-semantic-isomorphism` | Baseline debt from issue 16 golden stabilization. | `#16` |
 | `wgsl` | `clip-distances.wgsl` | `roundtrip-semantic-isomorphism` | Baseline debt from issue 16 golden stabilization. | `#16` |
+| `wgsl` | `cooperative-matrix.wgsl` | `roundtrip-semantic-isomorphism` | Golden output is reviewed after cooperative matrix builtin registration, but WGSL comparison currently changes pointer binding shape. | `#16` |
 | `wgsl` | `const-exprs.wgsl` | `roundtrip-semantic-isomorphism` | Golden output is reviewed after packed dot-product builtin and const switch selector support, but roundtrip currently changes the semantic shape of the lowered module. | `#16` |
 | `wgsl` | `control-flow.wgsl` | `roundtrip-semantic-isomorphism` | Golden output is reviewed after switch trailing-comma parsing and scalar const selector lowering, but roundtrip currently changes the semantic shape of lowered switch cases. | `#16` |
 | `wgsl` | `conversion-float-to-int-no-f64.wgsl` | `roundtrip-semantic-isomorphism` | Generated WGSL contains non-finite float constants as Infinity, which the roundtrip parser resolves as an unknown identifier. | `#16` |
 | `wgsl` | `conversion-float-to-int.wgsl` | `roundtrip-semantic-isomorphism` | Generated WGSL contains non-finite float constants as Infinity, which the roundtrip parser resolves as an unknown identifier. | `#16` |
-| `wgsl` | `cooperative-matrix.wgsl` | `type-resolution` | Baseline debt from issue 16 golden stabilization. | `#16` |
 | `wgsl` | `debug-symbol-large-source.wgsl` | `roundtrip-semantic-isomorphism` | Golden output is reviewed after stage keyword identifier resolution, but roundtrip currently changes location binding shape. | `#16` |
 | `wgsl` | `debug-symbol-simple.wgsl` | `roundtrip-semantic-isomorphism` | Baseline debt from issue 16 golden stabilization. | `#16` |
 | `wgsl` | `debug-symbol-terrain.wgsl` | `roundtrip-semantic-isomorphism` | Golden output is reviewed after stage keyword identifier resolution, but roundtrip currently changes location binding shape. | `#16` |

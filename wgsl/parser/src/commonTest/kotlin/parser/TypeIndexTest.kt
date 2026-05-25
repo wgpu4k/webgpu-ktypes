@@ -111,6 +111,16 @@ class TypeIndexTest : FunSpec({
         }
     }
 
+    test("cooperative matrix roles and functions are known values") {
+        val index = TypeIndex()
+        listOf("coop_mat8x8", "A", "B", "C", "coopLoad", "coopStore", "coopMultiplyAdd").forEach { name ->
+            index.isBuiltinValue(name).shouldBeTrue()
+        }
+        listOf("coop_mat8x8", "A", "B", "C").forEach { name ->
+            index.isKnownType(name).shouldBeTrue()
+        }
+    }
+
     test("builtin vector type names") {
         val index = TypeIndex()
         index.isBuiltinVectorType("vec2").shouldBeTrue()

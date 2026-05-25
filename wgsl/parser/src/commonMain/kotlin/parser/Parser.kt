@@ -1892,7 +1892,8 @@ class Parser(
                         name == "vec" || name == "vec2" || name == "vec3" || name == "vec4" ||
                         name == "mat" || name.startsWith("mat") ||
                         name == "array" || name == "atomic" || name == "ptr" ||
-                        name.startsWith("texture_")
+                        name.startsWith("texture_") ||
+                        name.startsWith("coop")
                     } else {
                         false
                     }
