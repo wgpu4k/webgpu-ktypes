@@ -147,6 +147,28 @@ class TypeResolverTest : FunSpec({
         result.unresolvedReferences shouldHaveSize 0
     }
 
+    test("resolve stage keyword parameter names when referenced in expressions") {
+        val source = """
+            struct Vertex {
+                position: vec3<f32>,
+            }
+
+            @vertex
+            fn vs_main(vertex: Vertex) -> vec4<f32> {
+                return vec4<f32>(vertex.position, 1.0);
+            }
+        """.trimIndent()
+
+        val parseResult = parseWgslResult(source)
+        parseResult.isSuccess shouldBe true
+
+        val resolver = TypeResolver()
+        val result = resolver.resolve(parseResult.translationUnit)
+
+        result.isSuccess shouldBe true
+        result.unresolvedReferences shouldHaveSize 0
+    }
+
     test("resolve loop body locals from continuing break-if condition") {
         val source = """
             fn main(a: bool) {
