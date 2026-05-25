@@ -111,13 +111,16 @@ class TypeIndexTest : FunSpec({
         }
     }
 
-    test("cooperative matrix roles and functions are known values") {
+    test("cooperative matrix types and functions are registered without exposing roles as values") {
         val index = TypeIndex()
-        listOf("coop_mat8x8", "A", "B", "C", "coopLoad", "coopStore", "coopMultiplyAdd").forEach { name ->
+        listOf("coop_mat8x8", "coopLoad", "coopStore", "coopMultiplyAdd").forEach { name ->
             index.isBuiltinValue(name).shouldBeTrue()
         }
         listOf("coop_mat8x8", "A", "B", "C").forEach { name ->
             index.isKnownType(name).shouldBeTrue()
+        }
+        listOf("A", "B", "C").forEach { name ->
+            index.isBuiltinValue(name).shouldBeFalse()
         }
     }
 

@@ -175,8 +175,8 @@ class TypeIndex {
             // Generic type constructors
             "vec", "mat",
 
-            // Cooperative matrix roles and built-ins
-            "coop_mat8x8", "A", "B", "C", "coopLoad", "coopStore", "coopMultiplyAdd",
+            // Cooperative matrix type constructors and built-ins
+            "coop_mat8x8", "coopLoad", "coopStore", "coopMultiplyAdd",
 
             // Ray-Tracing constants & types
             "RayDesc", "RayIntersection", "acceleration_structure", "ray_query",
