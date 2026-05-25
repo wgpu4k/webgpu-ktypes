@@ -174,7 +174,8 @@ class Lowerer {
                         name == "i64" -> IrTypeInner.Scalar(IrScalarKind.Sint, 8)
                         name == "u64" -> IrTypeInner.Scalar(IrScalarKind.Uint, 8)
                         name == "bool" -> IrTypeInner.Scalar(IrScalarKind.Bool, 1)
-                        name == "acceleration_structure" || name == "ray_query" || name == "RayDesc" -> {
+                        name == "acceleration_structure" || name == "ray_query" || name == "RayDesc" ||
+                                name == "A" || name == "B" || name == "C" -> {
                             IrTypeInner.Opaque(name)
                         }
                         else -> lowerBuiltinShorthandType(name)
@@ -210,6 +211,11 @@ class Lowerer {
                             val elemType = typeDecl.args.getOrNull(0)?.let { lowerType(it) }
                                 ?: throw LoweringError("$name template requires an element type")
                             IrTypeInner.Matrix(lowerVectorSize(cols), lowerVectorSize(rows), elemType)
+                        }
+                        "coop_mat8x8" -> {
+                            val elemName = typeDecl.args.getOrNull(0)?.let { getTypeDeclName(it) } ?: "unknown"
+                            val roleName = typeDecl.args.getOrNull(1)?.let { getTypeDeclName(it) } ?: "unknown"
+                            IrTypeInner.Opaque("coop_mat8x8<$elemName, $roleName>")
                         }
                         "atomic" -> {
                             val elemType = typeDecl.args.getOrNull(0)?.let { lowerType(it) }
@@ -1091,7 +1097,7 @@ class Lowerer {
                     val stubBlocks = Arena<IrBlock>()
                     val stubLocalVars = Arena<IrLocalVariable>()
                     
-                    val returnType = inferBuiltinLikeReturnType(funcName, loweredArgs)
+                    val returnType = inferBuiltinLikeReturnType(funcName, loweredArgs, astExpr.templateArgs)
                     
                     val dummyFunc = module.functions.append(
                         IrFunction(
@@ -1446,7 +1452,8 @@ class Lowerer {
 
     private fun inferBuiltinLikeReturnType(
         functionName: String,
-        arguments: List<Handle<IrExpression>>
+        arguments: List<Handle<IrExpression>>,
+        templateArgs: List<TypeDecl>? = null
     ): Handle<IrType>? {
         return when (functionName) {
             "textureSample",
@@ -1473,6 +1480,9 @@ class Lowerer {
             "rayQueryGenerateIntersection",
             "rayQueryConfirmIntersection",
             "rayQueryTerminate" -> null
+            "coopLoad" -> templateArgs?.firstOrNull()?.let { lowerType(it) }
+            "coopMultiplyAdd" -> arguments.getOrNull(2)?.let { resolveExpressionType(it) }
+            "coopStore" -> null
             else -> arguments.firstOrNull()?.let { resolveExpressionType(it) }
         }
     }

@@ -428,7 +428,8 @@ class TypeResolver(
             return type
         }
 
-        if (name == "acceleration_structure" || name == "ray_query" || name == "RayDesc" || name == "RayIntersection") {
+        if (name == "acceleration_structure" || name == "ray_query" || name == "RayDesc" || name == "RayIntersection" ||
+            name == "coop_mat8x8" || name == "A" || name == "B" || name == "C") {
             return type
         }
 

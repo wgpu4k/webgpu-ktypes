@@ -118,7 +118,11 @@ class TypeIndex {
                 name == "acceleration_structure" ||
                 name == "RayDesc" ||
                 name == "ray_query" ||
-                name == "RayIntersection"
+                name == "RayIntersection" ||
+                name == "coop_mat8x8" ||
+                name == "A" ||
+                name == "B" ||
+                name == "C"
     }
 
     /**
@@ -170,6 +174,9 @@ class TypeIndex {
 
             // Generic type constructors
             "vec", "mat",
+
+            // Cooperative matrix type constructors and built-ins
+            "coop_mat8x8", "coopLoad", "coopStore", "coopMultiplyAdd",
 
             // Ray-Tracing constants & types
             "RayDesc", "RayIntersection", "acceleration_structure", "ray_query",

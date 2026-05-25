@@ -1892,7 +1892,9 @@ class Parser(
                         name == "vec" || name == "vec2" || name == "vec3" || name == "vec4" ||
                         name == "mat" || name.startsWith("mat") ||
                         name == "array" || name == "atomic" || name == "ptr" ||
-                        name.startsWith("texture_")
+                        name.startsWith("texture_") ||
+                        name == "coop_mat8x8" || name == "coopLoad" ||
+                        name == "coopStore" || name == "coopMultiplyAdd"
                     } else {
                         false
                     }
