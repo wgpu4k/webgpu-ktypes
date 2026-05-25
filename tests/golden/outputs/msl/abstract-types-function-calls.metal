@@ -63,9 +63,9 @@ void main() {
     func_mf(float2x2(float2(0), float2(0)));
     func_mf(global_4);
     func_af(array<float, 2>(0.0f, 0.0f));
-    func_af(array<int, 2>(0, 0));
+    func_af(array<float, 2>(0, 0));
     func_ai(array<int, 2>(0, 0));
-    func_au(array<int, 2>(0, 0));
+    func_au(array<uint, 2>(0, 0));
     func_af(global_5);
     func_af(global_6);
     func_ai(global_6);

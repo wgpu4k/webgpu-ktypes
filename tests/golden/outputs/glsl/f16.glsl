@@ -32,7 +32,7 @@ struct Struct_19 {
     float16_t scalar4;
     uint larger;
 };
- float16_t global_0 = 1.0f;
+ float16_t global_0 = 1.0h;
  float16_t global_1 = float16_t(15.2f);
 layout(set = 0, binding = 0) uniform Struct_16 global_2;
 layout(set = 0, binding = 1) buffer Struct_16 global_3;
@@ -44,16 +44,16 @@ float16_t f16_function(float16_t x) {
     global_0;
     Struct_19 l;
     float16_t val = float16_t(global_1);
-    val = (1.0f - 33333.0f);
+    val = (1.0h - 33333.0h);
     val = (val + float16_t(5.0f));
     val = float16_t((global_2.val_f32 + float(val)));
     val = vec3(global_2.val_f16)[2];
-    global_4.val_i32 = int(65504.0f);
-    global_4.val_i32 = int(-(65504.0f));
-    global_4.val_u32 = uint(65504.0f);
-    global_4.val_u32 = uint(-(65504.0f));
-    global_4.val_f32 = float(65504.0f);
-    global_4.val_f32 = float(-(65504.0f));
+    global_4.val_i32 = int(65504.0h);
+    global_4.val_i32 = int(-(65504.0h));
+    global_4.val_u32 = uint(65504.0h);
+    global_4.val_u32 = uint(-(65504.0h));
+    global_4.val_f32 = float(65504.0h);
+    global_4.val_f32 = float(-(65504.0h));
     global_4.val_f16 = (global_2.val_f16 + global_3.val_f16);
     global_4.val_f16_2 = (global_2.val_f16_2 + global_3.val_f16_2);
     global_4.val_f16_3 = (global_2.val_f16_3 + global_3.val_f16_3);
@@ -112,7 +112,7 @@ float16_t sign(float16_t arg_0) {
 }
 
 void wgsl_main() {
-    global_4.final_value = f16_function(2.0f);
+    global_4.final_value = f16_function(2.0h);
 }
 
 void main() {

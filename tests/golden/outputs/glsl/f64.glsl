@@ -2,19 +2,21 @@
 precision highp float;
 precision highp int;
 
- float global_0 = 1;
- float global_1 = 0.0f;
+ double global_0 = 1.0;
+ double global_1 = 2.0;
 
-float f(float x) {
-    float y = (0.0f + 0.0f);
-    float z = (y + float(5));
-    float w = -(0.0f);
-    return (((x + y) + global_1) + 0.0f);
+double f(double x) {
+    global_0;
+    double y = (30.0 + 400.0);
+    double z = (y + double(5));
+    double w = -(1.0);
+    return (((x + y) + global_1) + 5.0);
+}
+
+void wgsl_main() {
+    f(6.0);
 }
 
 void main() {
-}
-
-void main() {
-    main();
+    wgsl_main();
 }

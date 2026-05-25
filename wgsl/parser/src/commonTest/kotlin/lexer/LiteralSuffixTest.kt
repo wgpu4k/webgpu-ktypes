@@ -10,7 +10,7 @@ import io.ygdrasil.wgsl.parser.Parser
  * 
  * This test suite verifies supported suffixes:
  * - Integer: i, I, u, U, li, lu (or no suffix for signed int)
- * - Float: f, F, h, H
+ * - Float: f, F, h, H, lf, LF
  *
  * Naga int64 fixtures use li/lu suffixes.
  */
@@ -139,26 +139,37 @@ class LiteralSuffixTest : FunSpec({
         }
     }
 
-    context("Non-standard suffixes (should not be accepted)") {
-        test("lf suffix is NOT accepted") {
+    context("Naga f64 suffixes") {
+        test("lf suffix is accepted") {
             val tokens = tokenizeSignificant("3.14lf")
-            
-            // Should not be a single FLOAT_LITERAL token
-            tokens shouldHaveSize 2
+
+            tokens shouldHaveSize 1
             tokens[0].kind shouldBe TokenKind.FLOAT_LITERAL
-            tokens[0].literal shouldBe "3.14"
-            tokens[1].kind shouldBe TokenKind.IDENTIFIER
-            tokens[1].literal shouldBe "lf"
+            tokens[0].literal shouldBe "3.14lf"
         }
 
-        test("LF suffix (capital) is NOT accepted") {
+        test("LF suffix is accepted") {
             val tokens = tokenizeSignificant("3.14LF")
-            
-            tokens shouldHaveSize 2
+
+            tokens shouldHaveSize 1
             tokens[0].kind shouldBe TokenKind.FLOAT_LITERAL
-            tokens[0].literal shouldBe "3.14"
-            tokens[1].kind shouldBe TokenKind.IDENTIFIER
-            tokens[1].literal shouldBe "LF"
+            tokens[0].literal shouldBe "3.14LF"
+        }
+
+        test("integer-looking lf suffix is accepted as f64 literal") {
+            val tokens = tokenizeSignificant("1lf")
+
+            tokens shouldHaveSize 1
+            tokens[0].kind shouldBe TokenKind.FLOAT_LITERAL
+            tokens[0].literal shouldBe "1lf"
+        }
+
+        test("exponent lf suffix is accepted") {
+            val tokens = tokenizeSignificant("3e1lf")
+
+            tokens shouldHaveSize 1
+            tokens[0].kind shouldBe TokenKind.FLOAT_LITERAL
+            tokens[0].literal shouldBe "3e1lf"
         }
     }
     
@@ -205,12 +216,12 @@ class LiteralSuffixTest : FunSpec({
             parser.errors.isEmpty() shouldBe true
         }
         
-        test("parse float with lf suffix creates error or separate tokens") {
+        test("parse float with lf suffix") {
             val parser = Parser(Lexer("let x = 3.14lf;"))
-            val unit = parser.parse()
-            
-            // Should have parsing errors because "lf" is not a valid expression
-            parser.errors.isNotEmpty() shouldBe true
+
+            parser.parse()
+
+            parser.errors.isEmpty() shouldBe true
         }
     }
     

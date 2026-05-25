@@ -103,16 +103,6 @@
                     "size": "Quad",
                     "scalar": 0
                 }
-            },
-            {
-                "inner": {
-                    "__type": "io.ygdrasil.wgsl.ir.TypeInner.Array",
-                    "element": 0,
-                    "size": {
-                        "__type": "io.ygdrasil.wgsl.ir.ArraySize.Constant",
-                        "value": 5
-                    }
-                }
             }
         ],
         "indexMap": [
@@ -230,18 +220,7 @@
                     "scalar": 0
                 }
             },
-            11,
-            {
-                "inner": {
-                    "__type": "io.ygdrasil.wgsl.ir.TypeInner.Array",
-                    "element": 0,
-                    "size": {
-                        "__type": "io.ygdrasil.wgsl.ir.ArraySize.Constant",
-                        "value": 5
-                    }
-                }
-            },
-            12
+            11
         ]
     },
     "constants": {},
@@ -842,7 +821,7 @@
                         {
                             "kind": {
                                 "__type": "io.ygdrasil.wgsl.ir.ExpressionKind.TypeConstructor",
-                                "type": 12,
+                                "type": 1,
                                 "arguments": [
                                     0,
                                     1,

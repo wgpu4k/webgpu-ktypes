@@ -64,9 +64,9 @@ void wgsl_main() {
     func_mf(mat2x2(vec2(0), vec2(0)));
     func_mf(global_4);
     func_af(float[2](0.0f, 0.0f));
-    func_af(int[2](0, 0));
+    func_af(float[2](0, 0));
     func_ai(int[2](0, 0));
-    func_au(int[2](0, 0));
+    func_au(uint[2](0, 0));
     func_af(global_5);
     func_af(global_6);
     func_ai(global_6);

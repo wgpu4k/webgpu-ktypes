@@ -29,7 +29,7 @@ struct Struct_19 {
     scalar4: f16,
     larger: u32,
 }
-var<private> private_variable: f16 = 1.0f;
+var<private> private_variable: f16 = 1.0h;
 var<private> constant_variable: f16 = f16(15.2f);
 @group(0) @binding(0)
 var<uniform> input_uniform: Struct_16;
@@ -46,16 +46,16 @@ fn f16_function(x: f16) -> f16 {
     _ = private_variable;
     var l: Struct_19;
     var val: f16 = f16(constant_variable);
-    val = (1.0f - 33333.0f);
+    val = (1.0h - 33333.0h);
     val = (val + f16(5.0f));
     val = f16((input_uniform.val_f32 + f32(val)));
     val = vec3<f16>(input_uniform.val_f16)[2];
-    output.val_i32 = i32(65504.0f);
-    output.val_i32 = i32(-(65504.0f));
-    output.val_u32 = u32(65504.0f);
-    output.val_u32 = u32(-(65504.0f));
-    output.val_f32 = f32(65504.0f);
-    output.val_f32 = f32(-(65504.0f));
+    output.val_i32 = i32(65504.0h);
+    output.val_i32 = i32(-(65504.0h));
+    output.val_u32 = u32(65504.0h);
+    output.val_u32 = u32(-(65504.0h));
+    output.val_f32 = f32(65504.0h);
+    output.val_f32 = f32(-(65504.0h));
     output.val_f16 = (input_uniform.val_f16 + input_storage.val_f16);
     output.val_f16_2 = (input_uniform.val_f16_2 + input_storage.val_f16_2);
     output.val_f16_3 = (input_uniform.val_f16_3 + input_storage.val_f16_3);
@@ -115,5 +115,5 @@ fn sign(arg_0: f16) -> f16 {
 
 @compute
 fn main() {
-    output.final_value = f16_function(2.0f);
+    output.final_value = f16_function(2.0h);
 }

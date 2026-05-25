@@ -2026,8 +2026,8 @@ class Parser(
 
             TokenKind.FLOAT_LITERAL -> {
                 val token = advance()
-                val cleanLiteral = token.literal?.dropLastWhile { it.lowercaseChar() in setOf('u', 'i', 'f', 'h') }
-                val suffix = token.literal?.takeLastWhile { it.lowercaseChar() in setOf('u', 'i', 'f', 'h') }?.takeIf { it.isNotEmpty() }
+                val cleanLiteral = token.literal?.dropLastWhile { it.lowercaseChar() in setOf('u', 'i', 'f', 'h', 'l') }
+                val suffix = token.literal?.takeLastWhile { it.lowercaseChar() in setOf('u', 'i', 'f', 'h', 'l') }?.takeIf { it.isNotEmpty() }
                 FloatLiteral(cleanLiteral?.toDoubleOrNull() ?: 0.0, suffix, token.span)
             }
 
@@ -2057,6 +2057,7 @@ class Parser(
             TokenKind.F16, TokenKind.F32, TokenKind.F64,
             TokenKind.VEC, TokenKind.MAT, TokenKind.ARRAY,
             TokenKind.SAMPLER, TokenKind.SAMPLER_COMPARISON, TokenKind.RAY_QUERY,
+            TokenKind.STORAGE,
             TokenKind.TEXTURE_1D, TokenKind.TEXTURE_2D, TokenKind.TEXTURE_3D,
             TokenKind.TEXTURE_CUBE, TokenKind.TEXTURE_EXTERNAL,
             TokenKind.BUILTIN, TokenKind.COMPUTE, TokenKind.FRAGMENT, TokenKind.VERTEX,

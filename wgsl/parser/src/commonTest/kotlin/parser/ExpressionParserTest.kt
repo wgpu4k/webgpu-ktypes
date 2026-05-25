@@ -44,4 +44,20 @@ class ExpressionParserTest : FunSpec({
         val variable = unit.declarations[0] as VariableDecl
         variable.storageClass shouldBe "push_constant"
     }
+
+    test("parse storage keyword reused as function call identifier") {
+        val source = """
+            fn storage() {}
+            fn main() { storage(); }
+        """.trimIndent()
+        val parser = Parser(Lexer(source))
+        val unit = parser.parse()
+
+        parser.errors shouldHaveSize 0
+        unit.declarations shouldHaveSize 2
+        val main = unit.declarations[1] as FunctionDecl
+        val statement = main.body!!.statements.single() as ExpressionStatement
+        val call = statement.expr as CallExpr
+        (call.callee as IdentExpr).name shouldBe "storage"
+    }
 })
