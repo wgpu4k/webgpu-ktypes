@@ -163,7 +163,7 @@ class TypeIndex {
             "barycentric", "barycentric_no_perspective",
 
             // Interpolation constants
-            "flat", "perspective", "linear", "centroid", "sample",
+            "flat", "perspective", "linear", "first", "either", "center", "centroid", "sample",
 
             // Generic type constructors
             "vec", "mat",

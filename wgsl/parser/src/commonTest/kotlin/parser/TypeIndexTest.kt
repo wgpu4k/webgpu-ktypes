@@ -54,6 +54,13 @@ class TypeIndexTest : FunSpec({
         }
     }
 
+    test("interpolation attribute enumerants are known values") {
+        val index = TypeIndex()
+        listOf("flat", "perspective", "linear", "first", "either", "center", "centroid", "sample").forEach { name ->
+            index.isBuiltinValue(name).shouldBeTrue()
+        }
+    }
+
     test("builtin vector type names") {
         val index = TypeIndex()
         index.isBuiltinVectorType("vec2").shouldBeTrue()
