@@ -1,4 +1,5 @@
 #version 450 core
+#extension GL_EXT_shader_explicit_arithmetic_types_int64 : require
 precision highp float;
 precision highp int;
 

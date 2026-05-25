@@ -103,6 +103,39 @@ class GlslWriterTest : FunSpec({
         code shouldNotContain "\nvec2 fma("
         code shouldNotContain "\nbool any("
     }
+
+    test("non-finite float literals are valid GLSL constant expressions") {
+        val f32 = Type(TypeInner.Scalar(ScalarKind.F32, 4))
+        val f16 = Type(TypeInner.Scalar(ScalarKind.F16, 2))
+        val f64 = Type(TypeInner.Scalar(ScalarKind.F64, 8))
+        val module = Module()
+
+        val posInf = module.globalExpressions.append(Expression(ExpressionKind.Literal(LiteralValue.Scalar(ScalarValue.F32(Float.POSITIVE_INFINITY)))))
+        val negInf = module.globalExpressions.append(Expression(ExpressionKind.Literal(LiteralValue.Scalar(ScalarValue.F32(Float.NEGATIVE_INFINITY)))))
+        val nan = module.globalExpressions.append(Expression(ExpressionKind.Literal(LiteralValue.Scalar(ScalarValue.F32(Float.NaN)))))
+        val posInf64 = module.globalExpressions.append(Expression(ExpressionKind.Literal(LiteralValue.Scalar(ScalarValue.F64(Double.POSITIVE_INFINITY)))))
+        val posInf16 = module.globalExpressions.append(Expression(ExpressionKind.Literal(LiteralValue.Scalar(ScalarValue.F16(Float.POSITIVE_INFINITY)))))
+
+        val f32Handle = module.types.append(f32)
+        val f16Handle = module.types.append(f16)
+        val f64Handle = module.types.append(f64)
+        module.globalVariables.append(GlobalVariable(name = "pos_inf", storageClass = StorageClass.Private, type = f32Handle, init = posInf))
+        module.globalVariables.append(GlobalVariable(name = "neg_inf", storageClass = StorageClass.Private, type = f32Handle, init = negInf))
+        module.globalVariables.append(GlobalVariable(name = "nan", storageClass = StorageClass.Private, type = f32Handle, init = nan))
+        module.globalVariables.append(GlobalVariable(name = "pos_inf64", storageClass = StorageClass.Private, type = f64Handle, init = posInf64))
+        module.globalVariables.append(GlobalVariable(name = "pos_inf16", storageClass = StorageClass.Private, type = f16Handle, init = posInf16))
+
+        val code = GlslModule.writeString(module)
+
+        code shouldContain "#extension GL_EXT_shader_explicit_arithmetic_types_float16 : require"
+        code shouldContain "float global_0 = (1.0 / 0.0);"
+        code shouldContain "float global_1 = (-1.0 / 0.0);"
+        code shouldContain "float global_2 = (0.0 / 0.0);"
+        code shouldContain "double global_3 = (1.0 / 0.0);"
+        code shouldContain "float16_t global_4 = (1.0hf / 0.0hf);"
+        code shouldNotContain "Infinity.0f"
+        code shouldNotContain "NaN.0f"
+    }
 })
 
 private fun lowerWgsl(source: String): Module {

@@ -32,6 +32,29 @@ class GlslWriter(
 
     override fun writeHeader() {
         var hasRayQuery = false
+        var hasFloat16 = false
+        var hasInt8 = false
+        var hasInt16 = false
+        var hasInt64 = false
+        module.types.forEachWithHandle { _, type ->
+            fun checkScalar(scalar: TypeInner.Scalar) {
+                when (scalar.kind) {
+                    ScalarKind.F16 -> hasFloat16 = true
+                    ScalarKind.Sint, ScalarKind.Uint -> when (scalar.width) {
+                        1 -> hasInt8 = true
+                        2 -> hasInt16 = true
+                        8 -> hasInt64 = true
+                    }
+                    else -> Unit
+                }
+            }
+            when (val inner = type.inner) {
+                is TypeInner.Scalar -> checkScalar(inner)
+                is TypeInner.Vector -> (module.types[inner.scalar].inner as? TypeInner.Scalar)?.let(::checkScalar)
+                is TypeInner.Matrix -> (module.types[inner.scalar].inner as? TypeInner.Scalar)?.let(::checkScalar)
+                else -> Unit
+            }
+        }
         module.globalVariables.forEachWithHandle { _, variable ->
             val type = module.types[variable.type]
             val inner = type.inner
@@ -53,6 +76,18 @@ class GlslWriter(
             writeLine("#extension GL_EXT_ray_query : enable")
         } else {
             writeLine("#version 450 core")
+        }
+        if (hasFloat16) {
+            writeLine("#extension GL_EXT_shader_explicit_arithmetic_types_float16 : require")
+        }
+        if (hasInt8) {
+            writeLine("#extension GL_EXT_shader_explicit_arithmetic_types_int8 : require")
+        }
+        if (hasInt16) {
+            writeLine("#extension GL_EXT_shader_explicit_arithmetic_types_int16 : require")
+        }
+        if (hasInt64) {
+            writeLine("#extension GL_EXT_shader_explicit_arithmetic_types_int64 : require")
         }
     }
 
@@ -284,6 +319,39 @@ class GlslWriter(
                 "$prefix${value.components.size}(${value.components.joinToString { writeScalarValue(it) }})"
             }
             is LiteralValue.Matrix -> "mat(...)"
+        }
+    }
+
+    override fun writeScalarValue(value: ScalarValue): String {
+        return when (value) {
+            is ScalarValue.F16 -> writeNonFiniteFloat(value.value, "hf") ?: writeFiniteFloat16(value.value)
+            is ScalarValue.F32 -> writeNonFiniteFloat(value.value) ?: super.writeScalarValue(value)
+            is ScalarValue.F64 -> writeNonFiniteFloat(value.value) ?: super.writeScalarValue(value)
+            is ScalarValue.AbstractFloat -> writeNonFiniteFloat(value.value) ?: super.writeScalarValue(value)
+            else -> super.writeScalarValue(value)
+        }
+    }
+
+    private fun writeFiniteFloat16(value: Float): String {
+        val s = value.toString()
+        return if ("." in s) "${s}hf" else "${s}.0hf"
+    }
+
+    private fun writeNonFiniteFloat(value: Float, suffix: String = ""): String? {
+        return when {
+            value.isNaN() -> "(0.0$suffix / 0.0$suffix)"
+            value == Float.POSITIVE_INFINITY -> "(1.0$suffix / 0.0$suffix)"
+            value == Float.NEGATIVE_INFINITY -> "(-1.0$suffix / 0.0$suffix)"
+            else -> null
+        }
+    }
+
+    private fun writeNonFiniteFloat(value: Double): String? {
+        return when {
+            value.isNaN() -> "(0.0 / 0.0)"
+            value == Double.POSITIVE_INFINITY -> "(1.0 / 0.0)"
+            value == Double.NEGATIVE_INFINITY -> "(-1.0 / 0.0)"
+            else -> null
         }
     }
 

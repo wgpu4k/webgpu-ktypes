@@ -1,15 +1,17 @@
 #version 450 core
+#extension GL_EXT_shader_explicit_arithmetic_types_float16 : require
+#extension GL_EXT_shader_explicit_arithmetic_types_int64 : require
 precision highp float;
 precision highp int;
 
- float16_t global_0 = -(65504.0h);
- float16_t global_1 = 65504.0h;
+ float16_t global_0 = -(65504.0hf);
+ float16_t global_1 = 65504.0hf;
  float global_2 = -(3.4028235E38f);
  float global_3 = 3.4028235E38f;
  double global_4 = -(1.7976931348623157E308);
  double global_5 = 1.7976931348623157E308;
- float global_6 = -(Infinity.0f);
- float global_7 = Infinity.0f;
+ float global_6 = -((1.0 / 0.0));
+ float global_7 = (1.0 / 0.0);
 
 int test_f16_to_i32(float16_t f) {
     return int(f);
@@ -140,10 +142,10 @@ void test_const_eval() {
 
 void wgsl_main() {
     test_const_eval();
-    test_f16_to_i32(1.0h);
-    test_f16_to_u32(1.0h);
-    test_f16_to_i64(1.0h);
-    test_f16_to_u64(1.0h);
+    test_f16_to_i32(1.0hf);
+    test_f16_to_u32(1.0hf);
+    test_f16_to_i64(1.0hf);
+    test_f16_to_u64(1.0hf);
     test_f32_to_i32(1.0f);
     test_f32_to_u32(1.0f);
     test_f32_to_i64(1.0f);
