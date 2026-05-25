@@ -90,6 +90,26 @@ class MemberAccessTest : FunSpec({
         module.types[samples.type].inner shouldBe TypeInner.Scalar(ScalarKind.Uint, 4)
     }
 
+    test("binding_array_elements_are_indexable") {
+        val module = lowerWgsl("""
+            enable wgpu_binding_array;
+
+            @group(0) @binding(0)
+            var textures : binding_array<texture_2d<f32>, 5>;
+
+            fn main() {
+                let dim_y = textureDimensions(textures[0]).y;
+            }
+        """)
+
+        val mainFunc = module.functions.toList().first { it.name == "main" }
+        val dimY = mainFunc.localVariables.toList().first { it.name == "dim_y" }
+        module.types[dimY.type].inner shouldBe TypeInner.Scalar(ScalarKind.Uint, 4)
+
+        val dimYAccess = mainFunc.expressions[dimY.init!!].kind as ExpressionKind.AccessIndex
+        dimYAccess.index shouldBe 1u
+    }
+
     test("atomic_compare_exchange_result_exposes_old_value_and_exchanged_members") {
         val module = lowerWgsl("""
             @group(0) @binding(0)

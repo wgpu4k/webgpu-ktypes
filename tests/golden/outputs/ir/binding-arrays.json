@@ -1,0 +1,4591 @@
+{
+    "types": {
+        "data": [
+            {
+                "inner": {
+                    "__type": "io.ygdrasil.wgsl.ir.TypeInner.Scalar",
+                    "kind": "Uint",
+                    "width": 4
+                }
+            },
+            {
+                "inner": {
+                    "__type": "io.ygdrasil.wgsl.ir.TypeInner.Struct",
+                    "members": [
+                        {
+                            "name": "index",
+                            "type": 0
+                        }
+                    ]
+                }
+            },
+            {
+                "inner": {
+                    "__type": "io.ygdrasil.wgsl.ir.TypeInner.Struct",
+                    "members": [
+                        {
+                            "name": "index",
+                            "type": 0,
+                            "binding": {
+                                "__type": "io.ygdrasil.wgsl.ir.BindingAttribute.Location",
+                                "location": 0
+                            }
+                        }
+                    ]
+                }
+            },
+            {
+                "inner": {
+                    "__type": "io.ygdrasil.wgsl.ir.TypeInner.Opaque",
+                    "name": "texture_2d<f32>"
+                }
+            },
+            {
+                "inner": {
+                    "__type": "io.ygdrasil.wgsl.ir.TypeInner.Array",
+                    "element": 3,
+                    "size": {
+                        "__type": "io.ygdrasil.wgsl.ir.ArraySize.Dynamic",
+                        "expression": 0
+                    }
+                }
+            },
+            {
+                "inner": {
+                    "__type": "io.ygdrasil.wgsl.ir.TypeInner.Array",
+                    "element": 3,
+                    "size": {
+                        "__type": "io.ygdrasil.wgsl.ir.ArraySize.Constant",
+                        "value": 5
+                    }
+                }
+            },
+            {
+                "inner": {
+                    "__type": "io.ygdrasil.wgsl.ir.TypeInner.Opaque",
+                    "name": "texture_2d_array<f32>"
+                }
+            },
+            {
+                "inner": {
+                    "__type": "io.ygdrasil.wgsl.ir.TypeInner.Array",
+                    "element": 6,
+                    "size": {
+                        "__type": "io.ygdrasil.wgsl.ir.ArraySize.Constant",
+                        "value": 5
+                    }
+                }
+            },
+            {
+                "inner": {
+                    "__type": "io.ygdrasil.wgsl.ir.TypeInner.Opaque",
+                    "name": "texture_multisampled_2d<f32>"
+                }
+            },
+            {
+                "inner": {
+                    "__type": "io.ygdrasil.wgsl.ir.TypeInner.Array",
+                    "element": 8,
+                    "size": {
+                        "__type": "io.ygdrasil.wgsl.ir.ArraySize.Constant",
+                        "value": 5
+                    }
+                }
+            },
+            {
+                "inner": {
+                    "__type": "io.ygdrasil.wgsl.ir.TypeInner.Opaque",
+                    "name": "texture_depth_2d"
+                }
+            },
+            {
+                "inner": {
+                    "__type": "io.ygdrasil.wgsl.ir.TypeInner.Array",
+                    "element": 10,
+                    "size": {
+                        "__type": "io.ygdrasil.wgsl.ir.ArraySize.Constant",
+                        "value": 5
+                    }
+                }
+            },
+            {
+                "inner": {
+                    "__type": "io.ygdrasil.wgsl.ir.TypeInner.Opaque",
+                    "name": "texture_storage_2d<rgba32float, write>"
+                }
+            },
+            {
+                "inner": {
+                    "__type": "io.ygdrasil.wgsl.ir.TypeInner.Array",
+                    "element": 12,
+                    "size": {
+                        "__type": "io.ygdrasil.wgsl.ir.ArraySize.Constant",
+                        "value": 5
+                    }
+                }
+            },
+            {
+                "inner": {
+                    "__type": "io.ygdrasil.wgsl.ir.TypeInner.Opaque",
+                    "name": "sampler"
+                }
+            },
+            {
+                "inner": {
+                    "__type": "io.ygdrasil.wgsl.ir.TypeInner.Array",
+                    "element": 14,
+                    "size": {
+                        "__type": "io.ygdrasil.wgsl.ir.ArraySize.Constant",
+                        "value": 5
+                    }
+                }
+            },
+            {
+                "inner": {
+                    "__type": "io.ygdrasil.wgsl.ir.TypeInner.Opaque",
+                    "name": "sampler_comparison"
+                }
+            },
+            {
+                "inner": {
+                    "__type": "io.ygdrasil.wgsl.ir.TypeInner.Array",
+                    "element": 16,
+                    "size": {
+                        "__type": "io.ygdrasil.wgsl.ir.ArraySize.Constant",
+                        "value": 5
+                    }
+                }
+            },
+            {
+                "inner": {
+                    "__type": "io.ygdrasil.wgsl.ir.TypeInner.Scalar",
+                    "kind": "F32",
+                    "width": 4
+                }
+            },
+            {
+                "inner": {
+                    "__type": "io.ygdrasil.wgsl.ir.TypeInner.Vector",
+                    "size": "Quad",
+                    "scalar": 18
+                }
+            },
+            {
+                "inner": {
+                    "__type": "io.ygdrasil.wgsl.ir.TypeInner.Vector",
+                    "size": "Bi",
+                    "scalar": 0
+                }
+            },
+            {
+                "inner": {
+                    "__type": "io.ygdrasil.wgsl.ir.TypeInner.Vector",
+                    "size": "Bi",
+                    "scalar": 18
+                }
+            },
+            {
+                "inner": {
+                    "__type": "io.ygdrasil.wgsl.ir.TypeInner.Scalar",
+                    "kind": "Sint",
+                    "width": 4
+                }
+            },
+            {
+                "inner": {
+                    "__type": "io.ygdrasil.wgsl.ir.TypeInner.Vector",
+                    "size": "Bi",
+                    "scalar": 22
+                }
+            }
+        ],
+        "indexMap": [
+            {
+                "inner": {
+                    "__type": "io.ygdrasil.wgsl.ir.TypeInner.Scalar",
+                    "kind": "Uint",
+                    "width": 4
+                }
+            },
+            0,
+            {
+                "inner": {
+                    "__type": "io.ygdrasil.wgsl.ir.TypeInner.Struct",
+                    "members": [
+                        {
+                            "name": "index",
+                            "type": 0
+                        }
+                    ]
+                }
+            },
+            1,
+            {
+                "inner": {
+                    "__type": "io.ygdrasil.wgsl.ir.TypeInner.Struct",
+                    "members": [
+                        {
+                            "name": "index",
+                            "type": 0,
+                            "binding": {
+                                "__type": "io.ygdrasil.wgsl.ir.BindingAttribute.Location",
+                                "location": 0
+                            }
+                        }
+                    ]
+                }
+            },
+            2,
+            {
+                "inner": {
+                    "__type": "io.ygdrasil.wgsl.ir.TypeInner.Opaque",
+                    "name": "texture_2d<f32>"
+                }
+            },
+            3,
+            {
+                "inner": {
+                    "__type": "io.ygdrasil.wgsl.ir.TypeInner.Array",
+                    "element": 3,
+                    "size": {
+                        "__type": "io.ygdrasil.wgsl.ir.ArraySize.Dynamic",
+                        "expression": 0
+                    }
+                }
+            },
+            4,
+            {
+                "inner": {
+                    "__type": "io.ygdrasil.wgsl.ir.TypeInner.Array",
+                    "element": 3,
+                    "size": {
+                        "__type": "io.ygdrasil.wgsl.ir.ArraySize.Constant",
+                        "value": 5
+                    }
+                }
+            },
+            5,
+            {
+                "inner": {
+                    "__type": "io.ygdrasil.wgsl.ir.TypeInner.Opaque",
+                    "name": "texture_2d_array<f32>"
+                }
+            },
+            6,
+            {
+                "inner": {
+                    "__type": "io.ygdrasil.wgsl.ir.TypeInner.Array",
+                    "element": 6,
+                    "size": {
+                        "__type": "io.ygdrasil.wgsl.ir.ArraySize.Constant",
+                        "value": 5
+                    }
+                }
+            },
+            7,
+            {
+                "inner": {
+                    "__type": "io.ygdrasil.wgsl.ir.TypeInner.Opaque",
+                    "name": "texture_multisampled_2d<f32>"
+                }
+            },
+            8,
+            {
+                "inner": {
+                    "__type": "io.ygdrasil.wgsl.ir.TypeInner.Array",
+                    "element": 8,
+                    "size": {
+                        "__type": "io.ygdrasil.wgsl.ir.ArraySize.Constant",
+                        "value": 5
+                    }
+                }
+            },
+            9,
+            {
+                "inner": {
+                    "__type": "io.ygdrasil.wgsl.ir.TypeInner.Opaque",
+                    "name": "texture_depth_2d"
+                }
+            },
+            10,
+            {
+                "inner": {
+                    "__type": "io.ygdrasil.wgsl.ir.TypeInner.Array",
+                    "element": 10,
+                    "size": {
+                        "__type": "io.ygdrasil.wgsl.ir.ArraySize.Constant",
+                        "value": 5
+                    }
+                }
+            },
+            11,
+            {
+                "inner": {
+                    "__type": "io.ygdrasil.wgsl.ir.TypeInner.Opaque",
+                    "name": "texture_storage_2d<rgba32float, write>"
+                }
+            },
+            12,
+            {
+                "inner": {
+                    "__type": "io.ygdrasil.wgsl.ir.TypeInner.Array",
+                    "element": 12,
+                    "size": {
+                        "__type": "io.ygdrasil.wgsl.ir.ArraySize.Constant",
+                        "value": 5
+                    }
+                }
+            },
+            13,
+            {
+                "inner": {
+                    "__type": "io.ygdrasil.wgsl.ir.TypeInner.Opaque",
+                    "name": "sampler"
+                }
+            },
+            14,
+            {
+                "inner": {
+                    "__type": "io.ygdrasil.wgsl.ir.TypeInner.Array",
+                    "element": 14,
+                    "size": {
+                        "__type": "io.ygdrasil.wgsl.ir.ArraySize.Constant",
+                        "value": 5
+                    }
+                }
+            },
+            15,
+            {
+                "inner": {
+                    "__type": "io.ygdrasil.wgsl.ir.TypeInner.Opaque",
+                    "name": "sampler_comparison"
+                }
+            },
+            16,
+            {
+                "inner": {
+                    "__type": "io.ygdrasil.wgsl.ir.TypeInner.Array",
+                    "element": 16,
+                    "size": {
+                        "__type": "io.ygdrasil.wgsl.ir.ArraySize.Constant",
+                        "value": 5
+                    }
+                }
+            },
+            17,
+            {
+                "inner": {
+                    "__type": "io.ygdrasil.wgsl.ir.TypeInner.Scalar",
+                    "kind": "F32",
+                    "width": 4
+                }
+            },
+            18,
+            {
+                "inner": {
+                    "__type": "io.ygdrasil.wgsl.ir.TypeInner.Vector",
+                    "size": "Quad",
+                    "scalar": 18
+                }
+            },
+            19,
+            {
+                "inner": {
+                    "__type": "io.ygdrasil.wgsl.ir.TypeInner.Vector",
+                    "size": "Bi",
+                    "scalar": 0
+                }
+            },
+            20,
+            {
+                "inner": {
+                    "__type": "io.ygdrasil.wgsl.ir.TypeInner.Vector",
+                    "size": "Bi",
+                    "scalar": 18
+                }
+            },
+            21,
+            {
+                "inner": {
+                    "__type": "io.ygdrasil.wgsl.ir.TypeInner.Scalar",
+                    "kind": "Sint",
+                    "width": 4
+                }
+            },
+            22,
+            {
+                "inner": {
+                    "__type": "io.ygdrasil.wgsl.ir.TypeInner.Vector",
+                    "size": "Bi",
+                    "scalar": 22
+                }
+            },
+            23
+        ]
+    },
+    "constants": {},
+    "globalExpressions": {},
+    "globalVariables": {
+        "data": [
+            {
+                "name": "texture_array_unbounded",
+                "storageClass": "Private",
+                "type": 4,
+                "binding": {
+                    "group": 0,
+                    "index": 0
+                }
+            },
+            {
+                "name": "texture_array_bounded",
+                "storageClass": "Private",
+                "type": 5,
+                "binding": {
+                    "group": 0,
+                    "index": 1
+                }
+            },
+            {
+                "name": "texture_array_2darray",
+                "storageClass": "Private",
+                "type": 7,
+                "binding": {
+                    "group": 0,
+                    "index": 2
+                }
+            },
+            {
+                "name": "texture_array_multisampled",
+                "storageClass": "Private",
+                "type": 9,
+                "binding": {
+                    "group": 0,
+                    "index": 3
+                }
+            },
+            {
+                "name": "texture_array_depth",
+                "storageClass": "Private",
+                "type": 11,
+                "binding": {
+                    "group": 0,
+                    "index": 4
+                }
+            },
+            {
+                "name": "texture_array_storage",
+                "storageClass": "Private",
+                "type": 13,
+                "binding": {
+                    "group": 0,
+                    "index": 5
+                }
+            },
+            {
+                "name": "samp",
+                "storageClass": "Private",
+                "type": 15,
+                "binding": {
+                    "group": 0,
+                    "index": 6
+                }
+            },
+            {
+                "name": "samp_comp",
+                "storageClass": "Private",
+                "type": 17,
+                "binding": {
+                    "group": 0,
+                    "index": 7
+                }
+            },
+            {
+                "name": "uni",
+                "storageClass": "Uniform",
+                "type": 1,
+                "binding": {
+                    "group": 0,
+                    "index": 8
+                }
+            }
+        ]
+    },
+    "functions": {
+        "data": [
+            {
+                "name": "main",
+                "parameters": [
+                    {
+                        "name": "fragment_in",
+                        "type": 2
+                    }
+                ],
+                "returnType": 19,
+                "localVariables": {
+                    "data": [
+                        {
+                            "name": "uniform_index",
+                            "type": 0,
+                            "init": 1
+                        },
+                        {
+                            "name": "non_uniform_index",
+                            "type": 0,
+                            "init": 3
+                        },
+                        {
+                            "name": "u1",
+                            "type": 0,
+                            "init": 4
+                        },
+                        {
+                            "name": "u2",
+                            "type": 20,
+                            "init": 6
+                        },
+                        {
+                            "name": "v1",
+                            "type": 18,
+                            "init": 7
+                        },
+                        {
+                            "name": "v4",
+                            "type": 19,
+                            "init": 9
+                        },
+                        {
+                            "name": "uv",
+                            "type": 21,
+                            "init": 11
+                        },
+                        {
+                            "name": "pix",
+                            "type": 23,
+                            "init": 13
+                        },
+                        {
+                            "name": "v2",
+                            "type": 21,
+                            "init": 335
+                        }
+                    ]
+                },
+                "expressions": {
+                    "data": [
+                        {
+                            "kind": {
+                                "__type": "io.ygdrasil.wgsl.ir.ExpressionKind.GlobalVar",
+                                "handle": 8
+                            }
+                        },
+                        {
+                            "kind": {
+                                "__type": "io.ygdrasil.wgsl.ir.ExpressionKind.AccessIndex",
+                                "expr": 0,
+                                "index": 0
+                            }
+                        },
+                        {
+                            "kind": {
+                                "__type": "io.ygdrasil.wgsl.ir.ExpressionKind.FunctionArgument",
+                                "index": 0
+                            }
+                        },
+                        {
+                            "kind": {
+                                "__type": "io.ygdrasil.wgsl.ir.ExpressionKind.AccessIndex",
+                                "expr": 2,
+                                "index": 0
+                            }
+                        },
+                        {
+                            "kind": {
+                                "__type": "io.ygdrasil.wgsl.ir.ExpressionKind.Literal",
+                                "value": {
+                                    "__type": "io.ygdrasil.wgsl.ir.LiteralValue.Scalar",
+                                    "value": {
+                                        "__type": "io.ygdrasil.wgsl.ir.ScalarValue.U32",
+                                        "value": 0
+                                    }
+                                }
+                            }
+                        },
+                        {
+                            "kind": {
+                                "__type": "io.ygdrasil.wgsl.ir.ExpressionKind.Literal",
+                                "value": {
+                                    "__type": "io.ygdrasil.wgsl.ir.LiteralValue.Scalar",
+                                    "value": {
+                                        "__type": "io.ygdrasil.wgsl.ir.ScalarValue.U32",
+                                        "value": 0
+                                    }
+                                }
+                            }
+                        },
+                        {
+                            "kind": {
+                                "__type": "io.ygdrasil.wgsl.ir.ExpressionKind.TypeConstructor",
+                                "type": 20,
+                                "arguments": [
+                                    5
+                                ]
+                            }
+                        },
+                        {
+                            "kind": {
+                                "__type": "io.ygdrasil.wgsl.ir.ExpressionKind.Literal",
+                                "value": {
+                                    "__type": "io.ygdrasil.wgsl.ir.LiteralValue.Scalar",
+                                    "value": {
+                                        "__type": "io.ygdrasil.wgsl.ir.ScalarValue.F32",
+                                        "value": 0.0
+                                    }
+                                }
+                            }
+                        },
+                        {
+                            "kind": {
+                                "__type": "io.ygdrasil.wgsl.ir.ExpressionKind.Literal",
+                                "value": {
+                                    "__type": "io.ygdrasil.wgsl.ir.LiteralValue.Scalar",
+                                    "value": {
+                                        "__type": "io.ygdrasil.wgsl.ir.ScalarValue.F32",
+                                        "value": 0.0
+                                    }
+                                }
+                            }
+                        },
+                        {
+                            "kind": {
+                                "__type": "io.ygdrasil.wgsl.ir.ExpressionKind.TypeConstructor",
+                                "type": 19,
+                                "arguments": [
+                                    8
+                                ]
+                            }
+                        },
+                        {
+                            "kind": {
+                                "__type": "io.ygdrasil.wgsl.ir.ExpressionKind.Literal",
+                                "value": {
+                                    "__type": "io.ygdrasil.wgsl.ir.LiteralValue.Scalar",
+                                    "value": {
+                                        "__type": "io.ygdrasil.wgsl.ir.ScalarValue.F32",
+                                        "value": 0.0
+                                    }
+                                }
+                            }
+                        },
+                        {
+                            "kind": {
+                                "__type": "io.ygdrasil.wgsl.ir.ExpressionKind.TypeConstructor",
+                                "type": 21,
+                                "arguments": [
+                                    10
+                                ]
+                            }
+                        },
+                        {
+                            "kind": {
+                                "__type": "io.ygdrasil.wgsl.ir.ExpressionKind.Literal",
+                                "value": {
+                                    "__type": "io.ygdrasil.wgsl.ir.LiteralValue.Scalar",
+                                    "value": {
+                                        "__type": "io.ygdrasil.wgsl.ir.ScalarValue.I32",
+                                        "value": 0
+                                    }
+                                }
+                            }
+                        },
+                        {
+                            "kind": {
+                                "__type": "io.ygdrasil.wgsl.ir.ExpressionKind.TypeConstructor",
+                                "type": 23,
+                                "arguments": [
+                                    12
+                                ]
+                            }
+                        },
+                        {
+                            "kind": {
+                                "__type": "io.ygdrasil.wgsl.ir.ExpressionKind.LocalVar",
+                                "handle": 3
+                            }
+                        },
+                        {
+                            "kind": {
+                                "__type": "io.ygdrasil.wgsl.ir.ExpressionKind.GlobalVar",
+                                "handle": 0
+                            }
+                        },
+                        {
+                            "kind": {
+                                "__type": "io.ygdrasil.wgsl.ir.ExpressionKind.AccessIndex",
+                                "expr": 15,
+                                "index": 0
+                            }
+                        },
+                        {
+                            "kind": {
+                                "__type": "io.ygdrasil.wgsl.ir.ExpressionKind.Call",
+                                "function": 1,
+                                "arguments": [
+                                    16
+                                ]
+                            }
+                        },
+                        {
+                            "kind": {
+                                "__type": "io.ygdrasil.wgsl.ir.ExpressionKind.LocalVar",
+                                "handle": 3
+                            }
+                        },
+                        {
+                            "kind": {
+                                "__type": "io.ygdrasil.wgsl.ir.ExpressionKind.GlobalVar",
+                                "handle": 0
+                            }
+                        },
+                        {
+                            "kind": {
+                                "__type": "io.ygdrasil.wgsl.ir.ExpressionKind.LocalVar",
+                                "handle": 0
+                            }
+                        },
+                        {
+                            "kind": {
+                                "__type": "io.ygdrasil.wgsl.ir.ExpressionKind.Access",
+                                "expr": 19,
+                                "index": 20
+                            }
+                        },
+                        {
+                            "kind": {
+                                "__type": "io.ygdrasil.wgsl.ir.ExpressionKind.Call",
+                                "function": 2,
+                                "arguments": [
+                                    21
+                                ]
+                            }
+                        },
+                        {
+                            "kind": {
+                                "__type": "io.ygdrasil.wgsl.ir.ExpressionKind.LocalVar",
+                                "handle": 3
+                            }
+                        },
+                        {
+                            "kind": {
+                                "__type": "io.ygdrasil.wgsl.ir.ExpressionKind.GlobalVar",
+                                "handle": 0
+                            }
+                        },
+                        {
+                            "kind": {
+                                "__type": "io.ygdrasil.wgsl.ir.ExpressionKind.LocalVar",
+                                "handle": 1
+                            }
+                        },
+                        {
+                            "kind": {
+                                "__type": "io.ygdrasil.wgsl.ir.ExpressionKind.Access",
+                                "expr": 24,
+                                "index": 25
+                            }
+                        },
+                        {
+                            "kind": {
+                                "__type": "io.ygdrasil.wgsl.ir.ExpressionKind.Call",
+                                "function": 3,
+                                "arguments": [
+                                    26
+                                ]
+                            }
+                        },
+                        {
+                            "kind": {
+                                "__type": "io.ygdrasil.wgsl.ir.ExpressionKind.LocalVar",
+                                "handle": 5
+                            }
+                        },
+                        {
+                            "kind": {
+                                "__type": "io.ygdrasil.wgsl.ir.ExpressionKind.Literal",
+                                "value": {
+                                    "__type": "io.ygdrasil.wgsl.ir.LiteralValue.Scalar",
+                                    "value": {
+                                        "__type": "io.ygdrasil.wgsl.ir.ScalarValue.I32",
+                                        "value": 0
+                                    }
+                                }
+                            }
+                        },
+                        {
+                            "kind": {
+                                "__type": "io.ygdrasil.wgsl.ir.ExpressionKind.GlobalVar",
+                                "handle": 1
+                            }
+                        },
+                        {
+                            "kind": {
+                                "__type": "io.ygdrasil.wgsl.ir.ExpressionKind.AccessIndex",
+                                "expr": 30,
+                                "index": 0
+                            }
+                        },
+                        {
+                            "kind": {
+                                "__type": "io.ygdrasil.wgsl.ir.ExpressionKind.GlobalVar",
+                                "handle": 6
+                            }
+                        },
+                        {
+                            "kind": {
+                                "__type": "io.ygdrasil.wgsl.ir.ExpressionKind.AccessIndex",
+                                "expr": 32,
+                                "index": 0
+                            }
+                        },
+                        {
+                            "kind": {
+                                "__type": "io.ygdrasil.wgsl.ir.ExpressionKind.LocalVar",
+                                "handle": 6
+                            }
+                        },
+                        {
+                            "kind": {
+                                "__type": "io.ygdrasil.wgsl.ir.ExpressionKind.Call",
+                                "function": 4,
+                                "arguments": [
+                                    29,
+                                    31,
+                                    33,
+                                    34
+                                ]
+                            }
+                        },
+                        {
+                            "kind": {
+                                "__type": "io.ygdrasil.wgsl.ir.ExpressionKind.LocalVar",
+                                "handle": 5
+                            }
+                        },
+                        {
+                            "kind": {
+                                "__type": "io.ygdrasil.wgsl.ir.ExpressionKind.Literal",
+                                "value": {
+                                    "__type": "io.ygdrasil.wgsl.ir.LiteralValue.Scalar",
+                                    "value": {
+                                        "__type": "io.ygdrasil.wgsl.ir.ScalarValue.I32",
+                                        "value": 0
+                                    }
+                                }
+                            }
+                        },
+                        {
+                            "kind": {
+                                "__type": "io.ygdrasil.wgsl.ir.ExpressionKind.GlobalVar",
+                                "handle": 1
+                            }
+                        },
+                        {
+                            "kind": {
+                                "__type": "io.ygdrasil.wgsl.ir.ExpressionKind.LocalVar",
+                                "handle": 0
+                            }
+                        },
+                        {
+                            "kind": {
+                                "__type": "io.ygdrasil.wgsl.ir.ExpressionKind.Access",
+                                "expr": 38,
+                                "index": 39
+                            }
+                        },
+                        {
+                            "kind": {
+                                "__type": "io.ygdrasil.wgsl.ir.ExpressionKind.GlobalVar",
+                                "handle": 6
+                            }
+                        },
+                        {
+                            "kind": {
+                                "__type": "io.ygdrasil.wgsl.ir.ExpressionKind.LocalVar",
+                                "handle": 0
+                            }
+                        },
+                        {
+                            "kind": {
+                                "__type": "io.ygdrasil.wgsl.ir.ExpressionKind.Access",
+                                "expr": 41,
+                                "index": 42
+                            }
+                        },
+                        {
+                            "kind": {
+                                "__type": "io.ygdrasil.wgsl.ir.ExpressionKind.LocalVar",
+                                "handle": 6
+                            }
+                        },
+                        {
+                            "kind": {
+                                "__type": "io.ygdrasil.wgsl.ir.ExpressionKind.Call",
+                                "function": 5,
+                                "arguments": [
+                                    37,
+                                    40,
+                                    43,
+                                    44
+                                ]
+                            }
+                        },
+                        {
+                            "kind": {
+                                "__type": "io.ygdrasil.wgsl.ir.ExpressionKind.LocalVar",
+                                "handle": 5
+                            }
+                        },
+                        {
+                            "kind": {
+                                "__type": "io.ygdrasil.wgsl.ir.ExpressionKind.Literal",
+                                "value": {
+                                    "__type": "io.ygdrasil.wgsl.ir.LiteralValue.Scalar",
+                                    "value": {
+                                        "__type": "io.ygdrasil.wgsl.ir.ScalarValue.I32",
+                                        "value": 0
+                                    }
+                                }
+                            }
+                        },
+                        {
+                            "kind": {
+                                "__type": "io.ygdrasil.wgsl.ir.ExpressionKind.GlobalVar",
+                                "handle": 1
+                            }
+                        },
+                        {
+                            "kind": {
+                                "__type": "io.ygdrasil.wgsl.ir.ExpressionKind.LocalVar",
+                                "handle": 1
+                            }
+                        },
+                        {
+                            "kind": {
+                                "__type": "io.ygdrasil.wgsl.ir.ExpressionKind.Access",
+                                "expr": 48,
+                                "index": 49
+                            }
+                        },
+                        {
+                            "kind": {
+                                "__type": "io.ygdrasil.wgsl.ir.ExpressionKind.GlobalVar",
+                                "handle": 6
+                            }
+                        },
+                        {
+                            "kind": {
+                                "__type": "io.ygdrasil.wgsl.ir.ExpressionKind.LocalVar",
+                                "handle": 1
+                            }
+                        },
+                        {
+                            "kind": {
+                                "__type": "io.ygdrasil.wgsl.ir.ExpressionKind.Access",
+                                "expr": 51,
+                                "index": 52
+                            }
+                        },
+                        {
+                            "kind": {
+                                "__type": "io.ygdrasil.wgsl.ir.ExpressionKind.LocalVar",
+                                "handle": 6
+                            }
+                        },
+                        {
+                            "kind": {
+                                "__type": "io.ygdrasil.wgsl.ir.ExpressionKind.Call",
+                                "function": 6,
+                                "arguments": [
+                                    47,
+                                    50,
+                                    53,
+                                    54
+                                ]
+                            }
+                        },
+                        {
+                            "kind": {
+                                "__type": "io.ygdrasil.wgsl.ir.ExpressionKind.LocalVar",
+                                "handle": 5
+                            }
+                        },
+                        {
+                            "kind": {
+                                "__type": "io.ygdrasil.wgsl.ir.ExpressionKind.GlobalVar",
+                                "handle": 4
+                            }
+                        },
+                        {
+                            "kind": {
+                                "__type": "io.ygdrasil.wgsl.ir.ExpressionKind.AccessIndex",
+                                "expr": 57,
+                                "index": 0
+                            }
+                        },
+                        {
+                            "kind": {
+                                "__type": "io.ygdrasil.wgsl.ir.ExpressionKind.GlobalVar",
+                                "handle": 7
+                            }
+                        },
+                        {
+                            "kind": {
+                                "__type": "io.ygdrasil.wgsl.ir.ExpressionKind.AccessIndex",
+                                "expr": 59,
+                                "index": 0
+                            }
+                        },
+                        {
+                            "kind": {
+                                "__type": "io.ygdrasil.wgsl.ir.ExpressionKind.LocalVar",
+                                "handle": 6
+                            }
+                        },
+                        {
+                            "kind": {
+                                "__type": "io.ygdrasil.wgsl.ir.ExpressionKind.Literal",
+                                "value": {
+                                    "__type": "io.ygdrasil.wgsl.ir.LiteralValue.Scalar",
+                                    "value": {
+                                        "__type": "io.ygdrasil.wgsl.ir.ScalarValue.F32",
+                                        "value": 0.0
+                                    }
+                                }
+                            }
+                        },
+                        {
+                            "kind": {
+                                "__type": "io.ygdrasil.wgsl.ir.ExpressionKind.Call",
+                                "function": 7,
+                                "arguments": [
+                                    58,
+                                    60,
+                                    61,
+                                    62
+                                ]
+                            }
+                        },
+                        {
+                            "kind": {
+                                "__type": "io.ygdrasil.wgsl.ir.ExpressionKind.LocalVar",
+                                "handle": 5
+                            }
+                        },
+                        {
+                            "kind": {
+                                "__type": "io.ygdrasil.wgsl.ir.ExpressionKind.GlobalVar",
+                                "handle": 4
+                            }
+                        },
+                        {
+                            "kind": {
+                                "__type": "io.ygdrasil.wgsl.ir.ExpressionKind.LocalVar",
+                                "handle": 0
+                            }
+                        },
+                        {
+                            "kind": {
+                                "__type": "io.ygdrasil.wgsl.ir.ExpressionKind.Access",
+                                "expr": 65,
+                                "index": 66
+                            }
+                        },
+                        {
+                            "kind": {
+                                "__type": "io.ygdrasil.wgsl.ir.ExpressionKind.GlobalVar",
+                                "handle": 7
+                            }
+                        },
+                        {
+                            "kind": {
+                                "__type": "io.ygdrasil.wgsl.ir.ExpressionKind.LocalVar",
+                                "handle": 0
+                            }
+                        },
+                        {
+                            "kind": {
+                                "__type": "io.ygdrasil.wgsl.ir.ExpressionKind.Access",
+                                "expr": 68,
+                                "index": 69
+                            }
+                        },
+                        {
+                            "kind": {
+                                "__type": "io.ygdrasil.wgsl.ir.ExpressionKind.LocalVar",
+                                "handle": 6
+                            }
+                        },
+                        {
+                            "kind": {
+                                "__type": "io.ygdrasil.wgsl.ir.ExpressionKind.Literal",
+                                "value": {
+                                    "__type": "io.ygdrasil.wgsl.ir.LiteralValue.Scalar",
+                                    "value": {
+                                        "__type": "io.ygdrasil.wgsl.ir.ScalarValue.F32",
+                                        "value": 0.0
+                                    }
+                                }
+                            }
+                        },
+                        {
+                            "kind": {
+                                "__type": "io.ygdrasil.wgsl.ir.ExpressionKind.Call",
+                                "function": 8,
+                                "arguments": [
+                                    67,
+                                    70,
+                                    71,
+                                    72
+                                ]
+                            }
+                        },
+                        {
+                            "kind": {
+                                "__type": "io.ygdrasil.wgsl.ir.ExpressionKind.LocalVar",
+                                "handle": 5
+                            }
+                        },
+                        {
+                            "kind": {
+                                "__type": "io.ygdrasil.wgsl.ir.ExpressionKind.GlobalVar",
+                                "handle": 4
+                            }
+                        },
+                        {
+                            "kind": {
+                                "__type": "io.ygdrasil.wgsl.ir.ExpressionKind.LocalVar",
+                                "handle": 1
+                            }
+                        },
+                        {
+                            "kind": {
+                                "__type": "io.ygdrasil.wgsl.ir.ExpressionKind.Access",
+                                "expr": 75,
+                                "index": 76
+                            }
+                        },
+                        {
+                            "kind": {
+                                "__type": "io.ygdrasil.wgsl.ir.ExpressionKind.GlobalVar",
+                                "handle": 7
+                            }
+                        },
+                        {
+                            "kind": {
+                                "__type": "io.ygdrasil.wgsl.ir.ExpressionKind.LocalVar",
+                                "handle": 1
+                            }
+                        },
+                        {
+                            "kind": {
+                                "__type": "io.ygdrasil.wgsl.ir.ExpressionKind.Access",
+                                "expr": 78,
+                                "index": 79
+                            }
+                        },
+                        {
+                            "kind": {
+                                "__type": "io.ygdrasil.wgsl.ir.ExpressionKind.LocalVar",
+                                "handle": 6
+                            }
+                        },
+                        {
+                            "kind": {
+                                "__type": "io.ygdrasil.wgsl.ir.ExpressionKind.Literal",
+                                "value": {
+                                    "__type": "io.ygdrasil.wgsl.ir.LiteralValue.Scalar",
+                                    "value": {
+                                        "__type": "io.ygdrasil.wgsl.ir.ScalarValue.F32",
+                                        "value": 0.0
+                                    }
+                                }
+                            }
+                        },
+                        {
+                            "kind": {
+                                "__type": "io.ygdrasil.wgsl.ir.ExpressionKind.Call",
+                                "function": 9,
+                                "arguments": [
+                                    77,
+                                    80,
+                                    81,
+                                    82
+                                ]
+                            }
+                        },
+                        {
+                            "kind": {
+                                "__type": "io.ygdrasil.wgsl.ir.ExpressionKind.LocalVar",
+                                "handle": 5
+                            }
+                        },
+                        {
+                            "kind": {
+                                "__type": "io.ygdrasil.wgsl.ir.ExpressionKind.GlobalVar",
+                                "handle": 0
+                            }
+                        },
+                        {
+                            "kind": {
+                                "__type": "io.ygdrasil.wgsl.ir.ExpressionKind.AccessIndex",
+                                "expr": 85,
+                                "index": 0
+                            }
+                        },
+                        {
+                            "kind": {
+                                "__type": "io.ygdrasil.wgsl.ir.ExpressionKind.LocalVar",
+                                "handle": 7
+                            }
+                        },
+                        {
+                            "kind": {
+                                "__type": "io.ygdrasil.wgsl.ir.ExpressionKind.Literal",
+                                "value": {
+                                    "__type": "io.ygdrasil.wgsl.ir.LiteralValue.Scalar",
+                                    "value": {
+                                        "__type": "io.ygdrasil.wgsl.ir.ScalarValue.I32",
+                                        "value": 0
+                                    }
+                                }
+                            }
+                        },
+                        {
+                            "kind": {
+                                "__type": "io.ygdrasil.wgsl.ir.ExpressionKind.Call",
+                                "function": 10,
+                                "arguments": [
+                                    86,
+                                    87,
+                                    88
+                                ]
+                            }
+                        },
+                        {
+                            "kind": {
+                                "__type": "io.ygdrasil.wgsl.ir.ExpressionKind.LocalVar",
+                                "handle": 5
+                            }
+                        },
+                        {
+                            "kind": {
+                                "__type": "io.ygdrasil.wgsl.ir.ExpressionKind.GlobalVar",
+                                "handle": 0
+                            }
+                        },
+                        {
+                            "kind": {
+                                "__type": "io.ygdrasil.wgsl.ir.ExpressionKind.LocalVar",
+                                "handle": 0
+                            }
+                        },
+                        {
+                            "kind": {
+                                "__type": "io.ygdrasil.wgsl.ir.ExpressionKind.Access",
+                                "expr": 91,
+                                "index": 92
+                            }
+                        },
+                        {
+                            "kind": {
+                                "__type": "io.ygdrasil.wgsl.ir.ExpressionKind.LocalVar",
+                                "handle": 7
+                            }
+                        },
+                        {
+                            "kind": {
+                                "__type": "io.ygdrasil.wgsl.ir.ExpressionKind.Literal",
+                                "value": {
+                                    "__type": "io.ygdrasil.wgsl.ir.LiteralValue.Scalar",
+                                    "value": {
+                                        "__type": "io.ygdrasil.wgsl.ir.ScalarValue.I32",
+                                        "value": 0
+                                    }
+                                }
+                            }
+                        },
+                        {
+                            "kind": {
+                                "__type": "io.ygdrasil.wgsl.ir.ExpressionKind.Call",
+                                "function": 11,
+                                "arguments": [
+                                    93,
+                                    94,
+                                    95
+                                ]
+                            }
+                        },
+                        {
+                            "kind": {
+                                "__type": "io.ygdrasil.wgsl.ir.ExpressionKind.LocalVar",
+                                "handle": 5
+                            }
+                        },
+                        {
+                            "kind": {
+                                "__type": "io.ygdrasil.wgsl.ir.ExpressionKind.GlobalVar",
+                                "handle": 0
+                            }
+                        },
+                        {
+                            "kind": {
+                                "__type": "io.ygdrasil.wgsl.ir.ExpressionKind.LocalVar",
+                                "handle": 1
+                            }
+                        },
+                        {
+                            "kind": {
+                                "__type": "io.ygdrasil.wgsl.ir.ExpressionKind.Access",
+                                "expr": 98,
+                                "index": 99
+                            }
+                        },
+                        {
+                            "kind": {
+                                "__type": "io.ygdrasil.wgsl.ir.ExpressionKind.LocalVar",
+                                "handle": 7
+                            }
+                        },
+                        {
+                            "kind": {
+                                "__type": "io.ygdrasil.wgsl.ir.ExpressionKind.Literal",
+                                "value": {
+                                    "__type": "io.ygdrasil.wgsl.ir.LiteralValue.Scalar",
+                                    "value": {
+                                        "__type": "io.ygdrasil.wgsl.ir.ScalarValue.I32",
+                                        "value": 0
+                                    }
+                                }
+                            }
+                        },
+                        {
+                            "kind": {
+                                "__type": "io.ygdrasil.wgsl.ir.ExpressionKind.Call",
+                                "function": 12,
+                                "arguments": [
+                                    100,
+                                    101,
+                                    102
+                                ]
+                            }
+                        },
+                        {
+                            "kind": {
+                                "__type": "io.ygdrasil.wgsl.ir.ExpressionKind.LocalVar",
+                                "handle": 2
+                            }
+                        },
+                        {
+                            "kind": {
+                                "__type": "io.ygdrasil.wgsl.ir.ExpressionKind.GlobalVar",
+                                "handle": 2
+                            }
+                        },
+                        {
+                            "kind": {
+                                "__type": "io.ygdrasil.wgsl.ir.ExpressionKind.AccessIndex",
+                                "expr": 105,
+                                "index": 0
+                            }
+                        },
+                        {
+                            "kind": {
+                                "__type": "io.ygdrasil.wgsl.ir.ExpressionKind.Call",
+                                "function": 13,
+                                "arguments": [
+                                    106
+                                ]
+                            }
+                        },
+                        {
+                            "kind": {
+                                "__type": "io.ygdrasil.wgsl.ir.ExpressionKind.LocalVar",
+                                "handle": 2
+                            }
+                        },
+                        {
+                            "kind": {
+                                "__type": "io.ygdrasil.wgsl.ir.ExpressionKind.GlobalVar",
+                                "handle": 2
+                            }
+                        },
+                        {
+                            "kind": {
+                                "__type": "io.ygdrasil.wgsl.ir.ExpressionKind.LocalVar",
+                                "handle": 0
+                            }
+                        },
+                        {
+                            "kind": {
+                                "__type": "io.ygdrasil.wgsl.ir.ExpressionKind.Access",
+                                "expr": 109,
+                                "index": 110
+                            }
+                        },
+                        {
+                            "kind": {
+                                "__type": "io.ygdrasil.wgsl.ir.ExpressionKind.Call",
+                                "function": 14,
+                                "arguments": [
+                                    111
+                                ]
+                            }
+                        },
+                        {
+                            "kind": {
+                                "__type": "io.ygdrasil.wgsl.ir.ExpressionKind.LocalVar",
+                                "handle": 2
+                            }
+                        },
+                        {
+                            "kind": {
+                                "__type": "io.ygdrasil.wgsl.ir.ExpressionKind.GlobalVar",
+                                "handle": 2
+                            }
+                        },
+                        {
+                            "kind": {
+                                "__type": "io.ygdrasil.wgsl.ir.ExpressionKind.LocalVar",
+                                "handle": 1
+                            }
+                        },
+                        {
+                            "kind": {
+                                "__type": "io.ygdrasil.wgsl.ir.ExpressionKind.Access",
+                                "expr": 114,
+                                "index": 115
+                            }
+                        },
+                        {
+                            "kind": {
+                                "__type": "io.ygdrasil.wgsl.ir.ExpressionKind.Call",
+                                "function": 15,
+                                "arguments": [
+                                    116
+                                ]
+                            }
+                        },
+                        {
+                            "kind": {
+                                "__type": "io.ygdrasil.wgsl.ir.ExpressionKind.LocalVar",
+                                "handle": 2
+                            }
+                        },
+                        {
+                            "kind": {
+                                "__type": "io.ygdrasil.wgsl.ir.ExpressionKind.GlobalVar",
+                                "handle": 1
+                            }
+                        },
+                        {
+                            "kind": {
+                                "__type": "io.ygdrasil.wgsl.ir.ExpressionKind.AccessIndex",
+                                "expr": 119,
+                                "index": 0
+                            }
+                        },
+                        {
+                            "kind": {
+                                "__type": "io.ygdrasil.wgsl.ir.ExpressionKind.Call",
+                                "function": 16,
+                                "arguments": [
+                                    120
+                                ]
+                            }
+                        },
+                        {
+                            "kind": {
+                                "__type": "io.ygdrasil.wgsl.ir.ExpressionKind.LocalVar",
+                                "handle": 2
+                            }
+                        },
+                        {
+                            "kind": {
+                                "__type": "io.ygdrasil.wgsl.ir.ExpressionKind.GlobalVar",
+                                "handle": 1
+                            }
+                        },
+                        {
+                            "kind": {
+                                "__type": "io.ygdrasil.wgsl.ir.ExpressionKind.LocalVar",
+                                "handle": 0
+                            }
+                        },
+                        {
+                            "kind": {
+                                "__type": "io.ygdrasil.wgsl.ir.ExpressionKind.Access",
+                                "expr": 123,
+                                "index": 124
+                            }
+                        },
+                        {
+                            "kind": {
+                                "__type": "io.ygdrasil.wgsl.ir.ExpressionKind.Call",
+                                "function": 17,
+                                "arguments": [
+                                    125
+                                ]
+                            }
+                        },
+                        {
+                            "kind": {
+                                "__type": "io.ygdrasil.wgsl.ir.ExpressionKind.LocalVar",
+                                "handle": 2
+                            }
+                        },
+                        {
+                            "kind": {
+                                "__type": "io.ygdrasil.wgsl.ir.ExpressionKind.GlobalVar",
+                                "handle": 1
+                            }
+                        },
+                        {
+                            "kind": {
+                                "__type": "io.ygdrasil.wgsl.ir.ExpressionKind.LocalVar",
+                                "handle": 1
+                            }
+                        },
+                        {
+                            "kind": {
+                                "__type": "io.ygdrasil.wgsl.ir.ExpressionKind.Access",
+                                "expr": 128,
+                                "index": 129
+                            }
+                        },
+                        {
+                            "kind": {
+                                "__type": "io.ygdrasil.wgsl.ir.ExpressionKind.Call",
+                                "function": 18,
+                                "arguments": [
+                                    130
+                                ]
+                            }
+                        },
+                        {
+                            "kind": {
+                                "__type": "io.ygdrasil.wgsl.ir.ExpressionKind.LocalVar",
+                                "handle": 2
+                            }
+                        },
+                        {
+                            "kind": {
+                                "__type": "io.ygdrasil.wgsl.ir.ExpressionKind.GlobalVar",
+                                "handle": 3
+                            }
+                        },
+                        {
+                            "kind": {
+                                "__type": "io.ygdrasil.wgsl.ir.ExpressionKind.AccessIndex",
+                                "expr": 133,
+                                "index": 0
+                            }
+                        },
+                        {
+                            "kind": {
+                                "__type": "io.ygdrasil.wgsl.ir.ExpressionKind.Call",
+                                "function": 19,
+                                "arguments": [
+                                    134
+                                ]
+                            }
+                        },
+                        {
+                            "kind": {
+                                "__type": "io.ygdrasil.wgsl.ir.ExpressionKind.LocalVar",
+                                "handle": 2
+                            }
+                        },
+                        {
+                            "kind": {
+                                "__type": "io.ygdrasil.wgsl.ir.ExpressionKind.GlobalVar",
+                                "handle": 3
+                            }
+                        },
+                        {
+                            "kind": {
+                                "__type": "io.ygdrasil.wgsl.ir.ExpressionKind.LocalVar",
+                                "handle": 0
+                            }
+                        },
+                        {
+                            "kind": {
+                                "__type": "io.ygdrasil.wgsl.ir.ExpressionKind.Access",
+                                "expr": 137,
+                                "index": 138
+                            }
+                        },
+                        {
+                            "kind": {
+                                "__type": "io.ygdrasil.wgsl.ir.ExpressionKind.Call",
+                                "function": 20,
+                                "arguments": [
+                                    139
+                                ]
+                            }
+                        },
+                        {
+                            "kind": {
+                                "__type": "io.ygdrasil.wgsl.ir.ExpressionKind.LocalVar",
+                                "handle": 2
+                            }
+                        },
+                        {
+                            "kind": {
+                                "__type": "io.ygdrasil.wgsl.ir.ExpressionKind.GlobalVar",
+                                "handle": 3
+                            }
+                        },
+                        {
+                            "kind": {
+                                "__type": "io.ygdrasil.wgsl.ir.ExpressionKind.LocalVar",
+                                "handle": 1
+                            }
+                        },
+                        {
+                            "kind": {
+                                "__type": "io.ygdrasil.wgsl.ir.ExpressionKind.Access",
+                                "expr": 142,
+                                "index": 143
+                            }
+                        },
+                        {
+                            "kind": {
+                                "__type": "io.ygdrasil.wgsl.ir.ExpressionKind.Call",
+                                "function": 21,
+                                "arguments": [
+                                    144
+                                ]
+                            }
+                        },
+                        {
+                            "kind": {
+                                "__type": "io.ygdrasil.wgsl.ir.ExpressionKind.LocalVar",
+                                "handle": 5
+                            }
+                        },
+                        {
+                            "kind": {
+                                "__type": "io.ygdrasil.wgsl.ir.ExpressionKind.GlobalVar",
+                                "handle": 1
+                            }
+                        },
+                        {
+                            "kind": {
+                                "__type": "io.ygdrasil.wgsl.ir.ExpressionKind.AccessIndex",
+                                "expr": 147,
+                                "index": 0
+                            }
+                        },
+                        {
+                            "kind": {
+                                "__type": "io.ygdrasil.wgsl.ir.ExpressionKind.GlobalVar",
+                                "handle": 6
+                            }
+                        },
+                        {
+                            "kind": {
+                                "__type": "io.ygdrasil.wgsl.ir.ExpressionKind.AccessIndex",
+                                "expr": 149,
+                                "index": 0
+                            }
+                        },
+                        {
+                            "kind": {
+                                "__type": "io.ygdrasil.wgsl.ir.ExpressionKind.LocalVar",
+                                "handle": 6
+                            }
+                        },
+                        {
+                            "kind": {
+                                "__type": "io.ygdrasil.wgsl.ir.ExpressionKind.Call",
+                                "function": 22,
+                                "arguments": [
+                                    148,
+                                    150,
+                                    151
+                                ]
+                            }
+                        },
+                        {
+                            "kind": {
+                                "__type": "io.ygdrasil.wgsl.ir.ExpressionKind.LocalVar",
+                                "handle": 5
+                            }
+                        },
+                        {
+                            "kind": {
+                                "__type": "io.ygdrasil.wgsl.ir.ExpressionKind.GlobalVar",
+                                "handle": 1
+                            }
+                        },
+                        {
+                            "kind": {
+                                "__type": "io.ygdrasil.wgsl.ir.ExpressionKind.LocalVar",
+                                "handle": 0
+                            }
+                        },
+                        {
+                            "kind": {
+                                "__type": "io.ygdrasil.wgsl.ir.ExpressionKind.Access",
+                                "expr": 154,
+                                "index": 155
+                            }
+                        },
+                        {
+                            "kind": {
+                                "__type": "io.ygdrasil.wgsl.ir.ExpressionKind.GlobalVar",
+                                "handle": 6
+                            }
+                        },
+                        {
+                            "kind": {
+                                "__type": "io.ygdrasil.wgsl.ir.ExpressionKind.LocalVar",
+                                "handle": 0
+                            }
+                        },
+                        {
+                            "kind": {
+                                "__type": "io.ygdrasil.wgsl.ir.ExpressionKind.Access",
+                                "expr": 157,
+                                "index": 158
+                            }
+                        },
+                        {
+                            "kind": {
+                                "__type": "io.ygdrasil.wgsl.ir.ExpressionKind.LocalVar",
+                                "handle": 6
+                            }
+                        },
+                        {
+                            "kind": {
+                                "__type": "io.ygdrasil.wgsl.ir.ExpressionKind.Call",
+                                "function": 23,
+                                "arguments": [
+                                    156,
+                                    159,
+                                    160
+                                ]
+                            }
+                        },
+                        {
+                            "kind": {
+                                "__type": "io.ygdrasil.wgsl.ir.ExpressionKind.LocalVar",
+                                "handle": 5
+                            }
+                        },
+                        {
+                            "kind": {
+                                "__type": "io.ygdrasil.wgsl.ir.ExpressionKind.GlobalVar",
+                                "handle": 1
+                            }
+                        },
+                        {
+                            "kind": {
+                                "__type": "io.ygdrasil.wgsl.ir.ExpressionKind.LocalVar",
+                                "handle": 1
+                            }
+                        },
+                        {
+                            "kind": {
+                                "__type": "io.ygdrasil.wgsl.ir.ExpressionKind.Access",
+                                "expr": 163,
+                                "index": 164
+                            }
+                        },
+                        {
+                            "kind": {
+                                "__type": "io.ygdrasil.wgsl.ir.ExpressionKind.GlobalVar",
+                                "handle": 6
+                            }
+                        },
+                        {
+                            "kind": {
+                                "__type": "io.ygdrasil.wgsl.ir.ExpressionKind.LocalVar",
+                                "handle": 1
+                            }
+                        },
+                        {
+                            "kind": {
+                                "__type": "io.ygdrasil.wgsl.ir.ExpressionKind.Access",
+                                "expr": 166,
+                                "index": 167
+                            }
+                        },
+                        {
+                            "kind": {
+                                "__type": "io.ygdrasil.wgsl.ir.ExpressionKind.LocalVar",
+                                "handle": 6
+                            }
+                        },
+                        {
+                            "kind": {
+                                "__type": "io.ygdrasil.wgsl.ir.ExpressionKind.Call",
+                                "function": 24,
+                                "arguments": [
+                                    165,
+                                    168,
+                                    169
+                                ]
+                            }
+                        },
+                        {
+                            "kind": {
+                                "__type": "io.ygdrasil.wgsl.ir.ExpressionKind.LocalVar",
+                                "handle": 5
+                            }
+                        },
+                        {
+                            "kind": {
+                                "__type": "io.ygdrasil.wgsl.ir.ExpressionKind.GlobalVar",
+                                "handle": 1
+                            }
+                        },
+                        {
+                            "kind": {
+                                "__type": "io.ygdrasil.wgsl.ir.ExpressionKind.AccessIndex",
+                                "expr": 172,
+                                "index": 0
+                            }
+                        },
+                        {
+                            "kind": {
+                                "__type": "io.ygdrasil.wgsl.ir.ExpressionKind.GlobalVar",
+                                "handle": 6
+                            }
+                        },
+                        {
+                            "kind": {
+                                "__type": "io.ygdrasil.wgsl.ir.ExpressionKind.AccessIndex",
+                                "expr": 174,
+                                "index": 0
+                            }
+                        },
+                        {
+                            "kind": {
+                                "__type": "io.ygdrasil.wgsl.ir.ExpressionKind.LocalVar",
+                                "handle": 6
+                            }
+                        },
+                        {
+                            "kind": {
+                                "__type": "io.ygdrasil.wgsl.ir.ExpressionKind.Literal",
+                                "value": {
+                                    "__type": "io.ygdrasil.wgsl.ir.LiteralValue.Scalar",
+                                    "value": {
+                                        "__type": "io.ygdrasil.wgsl.ir.ScalarValue.F32",
+                                        "value": 0.0
+                                    }
+                                }
+                            }
+                        },
+                        {
+                            "kind": {
+                                "__type": "io.ygdrasil.wgsl.ir.ExpressionKind.Call",
+                                "function": 25,
+                                "arguments": [
+                                    173,
+                                    175,
+                                    176,
+                                    177
+                                ]
+                            }
+                        },
+                        {
+                            "kind": {
+                                "__type": "io.ygdrasil.wgsl.ir.ExpressionKind.LocalVar",
+                                "handle": 5
+                            }
+                        },
+                        {
+                            "kind": {
+                                "__type": "io.ygdrasil.wgsl.ir.ExpressionKind.GlobalVar",
+                                "handle": 1
+                            }
+                        },
+                        {
+                            "kind": {
+                                "__type": "io.ygdrasil.wgsl.ir.ExpressionKind.LocalVar",
+                                "handle": 0
+                            }
+                        },
+                        {
+                            "kind": {
+                                "__type": "io.ygdrasil.wgsl.ir.ExpressionKind.Access",
+                                "expr": 180,
+                                "index": 181
+                            }
+                        },
+                        {
+                            "kind": {
+                                "__type": "io.ygdrasil.wgsl.ir.ExpressionKind.GlobalVar",
+                                "handle": 6
+                            }
+                        },
+                        {
+                            "kind": {
+                                "__type": "io.ygdrasil.wgsl.ir.ExpressionKind.LocalVar",
+                                "handle": 0
+                            }
+                        },
+                        {
+                            "kind": {
+                                "__type": "io.ygdrasil.wgsl.ir.ExpressionKind.Access",
+                                "expr": 183,
+                                "index": 184
+                            }
+                        },
+                        {
+                            "kind": {
+                                "__type": "io.ygdrasil.wgsl.ir.ExpressionKind.LocalVar",
+                                "handle": 6
+                            }
+                        },
+                        {
+                            "kind": {
+                                "__type": "io.ygdrasil.wgsl.ir.ExpressionKind.Literal",
+                                "value": {
+                                    "__type": "io.ygdrasil.wgsl.ir.LiteralValue.Scalar",
+                                    "value": {
+                                        "__type": "io.ygdrasil.wgsl.ir.ScalarValue.F32",
+                                        "value": 0.0
+                                    }
+                                }
+                            }
+                        },
+                        {
+                            "kind": {
+                                "__type": "io.ygdrasil.wgsl.ir.ExpressionKind.Call",
+                                "function": 26,
+                                "arguments": [
+                                    182,
+                                    185,
+                                    186,
+                                    187
+                                ]
+                            }
+                        },
+                        {
+                            "kind": {
+                                "__type": "io.ygdrasil.wgsl.ir.ExpressionKind.LocalVar",
+                                "handle": 5
+                            }
+                        },
+                        {
+                            "kind": {
+                                "__type": "io.ygdrasil.wgsl.ir.ExpressionKind.GlobalVar",
+                                "handle": 1
+                            }
+                        },
+                        {
+                            "kind": {
+                                "__type": "io.ygdrasil.wgsl.ir.ExpressionKind.LocalVar",
+                                "handle": 1
+                            }
+                        },
+                        {
+                            "kind": {
+                                "__type": "io.ygdrasil.wgsl.ir.ExpressionKind.Access",
+                                "expr": 190,
+                                "index": 191
+                            }
+                        },
+                        {
+                            "kind": {
+                                "__type": "io.ygdrasil.wgsl.ir.ExpressionKind.GlobalVar",
+                                "handle": 6
+                            }
+                        },
+                        {
+                            "kind": {
+                                "__type": "io.ygdrasil.wgsl.ir.ExpressionKind.LocalVar",
+                                "handle": 1
+                            }
+                        },
+                        {
+                            "kind": {
+                                "__type": "io.ygdrasil.wgsl.ir.ExpressionKind.Access",
+                                "expr": 193,
+                                "index": 194
+                            }
+                        },
+                        {
+                            "kind": {
+                                "__type": "io.ygdrasil.wgsl.ir.ExpressionKind.LocalVar",
+                                "handle": 6
+                            }
+                        },
+                        {
+                            "kind": {
+                                "__type": "io.ygdrasil.wgsl.ir.ExpressionKind.Literal",
+                                "value": {
+                                    "__type": "io.ygdrasil.wgsl.ir.LiteralValue.Scalar",
+                                    "value": {
+                                        "__type": "io.ygdrasil.wgsl.ir.ScalarValue.F32",
+                                        "value": 0.0
+                                    }
+                                }
+                            }
+                        },
+                        {
+                            "kind": {
+                                "__type": "io.ygdrasil.wgsl.ir.ExpressionKind.Call",
+                                "function": 27,
+                                "arguments": [
+                                    192,
+                                    195,
+                                    196,
+                                    197
+                                ]
+                            }
+                        },
+                        {
+                            "kind": {
+                                "__type": "io.ygdrasil.wgsl.ir.ExpressionKind.LocalVar",
+                                "handle": 4
+                            }
+                        },
+                        {
+                            "kind": {
+                                "__type": "io.ygdrasil.wgsl.ir.ExpressionKind.GlobalVar",
+                                "handle": 4
+                            }
+                        },
+                        {
+                            "kind": {
+                                "__type": "io.ygdrasil.wgsl.ir.ExpressionKind.AccessIndex",
+                                "expr": 200,
+                                "index": 0
+                            }
+                        },
+                        {
+                            "kind": {
+                                "__type": "io.ygdrasil.wgsl.ir.ExpressionKind.GlobalVar",
+                                "handle": 7
+                            }
+                        },
+                        {
+                            "kind": {
+                                "__type": "io.ygdrasil.wgsl.ir.ExpressionKind.AccessIndex",
+                                "expr": 202,
+                                "index": 0
+                            }
+                        },
+                        {
+                            "kind": {
+                                "__type": "io.ygdrasil.wgsl.ir.ExpressionKind.LocalVar",
+                                "handle": 6
+                            }
+                        },
+                        {
+                            "kind": {
+                                "__type": "io.ygdrasil.wgsl.ir.ExpressionKind.Literal",
+                                "value": {
+                                    "__type": "io.ygdrasil.wgsl.ir.LiteralValue.Scalar",
+                                    "value": {
+                                        "__type": "io.ygdrasil.wgsl.ir.ScalarValue.F32",
+                                        "value": 0.0
+                                    }
+                                }
+                            }
+                        },
+                        {
+                            "kind": {
+                                "__type": "io.ygdrasil.wgsl.ir.ExpressionKind.Call",
+                                "function": 28,
+                                "arguments": [
+                                    201,
+                                    203,
+                                    204,
+                                    205
+                                ]
+                            }
+                        },
+                        {
+                            "kind": {
+                                "__type": "io.ygdrasil.wgsl.ir.ExpressionKind.LocalVar",
+                                "handle": 4
+                            }
+                        },
+                        {
+                            "kind": {
+                                "__type": "io.ygdrasil.wgsl.ir.ExpressionKind.GlobalVar",
+                                "handle": 4
+                            }
+                        },
+                        {
+                            "kind": {
+                                "__type": "io.ygdrasil.wgsl.ir.ExpressionKind.LocalVar",
+                                "handle": 0
+                            }
+                        },
+                        {
+                            "kind": {
+                                "__type": "io.ygdrasil.wgsl.ir.ExpressionKind.Access",
+                                "expr": 208,
+                                "index": 209
+                            }
+                        },
+                        {
+                            "kind": {
+                                "__type": "io.ygdrasil.wgsl.ir.ExpressionKind.GlobalVar",
+                                "handle": 7
+                            }
+                        },
+                        {
+                            "kind": {
+                                "__type": "io.ygdrasil.wgsl.ir.ExpressionKind.LocalVar",
+                                "handle": 0
+                            }
+                        },
+                        {
+                            "kind": {
+                                "__type": "io.ygdrasil.wgsl.ir.ExpressionKind.Access",
+                                "expr": 211,
+                                "index": 212
+                            }
+                        },
+                        {
+                            "kind": {
+                                "__type": "io.ygdrasil.wgsl.ir.ExpressionKind.LocalVar",
+                                "handle": 6
+                            }
+                        },
+                        {
+                            "kind": {
+                                "__type": "io.ygdrasil.wgsl.ir.ExpressionKind.Literal",
+                                "value": {
+                                    "__type": "io.ygdrasil.wgsl.ir.LiteralValue.Scalar",
+                                    "value": {
+                                        "__type": "io.ygdrasil.wgsl.ir.ScalarValue.F32",
+                                        "value": 0.0
+                                    }
+                                }
+                            }
+                        },
+                        {
+                            "kind": {
+                                "__type": "io.ygdrasil.wgsl.ir.ExpressionKind.Call",
+                                "function": 29,
+                                "arguments": [
+                                    210,
+                                    213,
+                                    214,
+                                    215
+                                ]
+                            }
+                        },
+                        {
+                            "kind": {
+                                "__type": "io.ygdrasil.wgsl.ir.ExpressionKind.LocalVar",
+                                "handle": 4
+                            }
+                        },
+                        {
+                            "kind": {
+                                "__type": "io.ygdrasil.wgsl.ir.ExpressionKind.GlobalVar",
+                                "handle": 4
+                            }
+                        },
+                        {
+                            "kind": {
+                                "__type": "io.ygdrasil.wgsl.ir.ExpressionKind.LocalVar",
+                                "handle": 1
+                            }
+                        },
+                        {
+                            "kind": {
+                                "__type": "io.ygdrasil.wgsl.ir.ExpressionKind.Access",
+                                "expr": 218,
+                                "index": 219
+                            }
+                        },
+                        {
+                            "kind": {
+                                "__type": "io.ygdrasil.wgsl.ir.ExpressionKind.GlobalVar",
+                                "handle": 7
+                            }
+                        },
+                        {
+                            "kind": {
+                                "__type": "io.ygdrasil.wgsl.ir.ExpressionKind.LocalVar",
+                                "handle": 1
+                            }
+                        },
+                        {
+                            "kind": {
+                                "__type": "io.ygdrasil.wgsl.ir.ExpressionKind.Access",
+                                "expr": 221,
+                                "index": 222
+                            }
+                        },
+                        {
+                            "kind": {
+                                "__type": "io.ygdrasil.wgsl.ir.ExpressionKind.LocalVar",
+                                "handle": 6
+                            }
+                        },
+                        {
+                            "kind": {
+                                "__type": "io.ygdrasil.wgsl.ir.ExpressionKind.Literal",
+                                "value": {
+                                    "__type": "io.ygdrasil.wgsl.ir.LiteralValue.Scalar",
+                                    "value": {
+                                        "__type": "io.ygdrasil.wgsl.ir.ScalarValue.F32",
+                                        "value": 0.0
+                                    }
+                                }
+                            }
+                        },
+                        {
+                            "kind": {
+                                "__type": "io.ygdrasil.wgsl.ir.ExpressionKind.Call",
+                                "function": 30,
+                                "arguments": [
+                                    220,
+                                    223,
+                                    224,
+                                    225
+                                ]
+                            }
+                        },
+                        {
+                            "kind": {
+                                "__type": "io.ygdrasil.wgsl.ir.ExpressionKind.LocalVar",
+                                "handle": 4
+                            }
+                        },
+                        {
+                            "kind": {
+                                "__type": "io.ygdrasil.wgsl.ir.ExpressionKind.GlobalVar",
+                                "handle": 4
+                            }
+                        },
+                        {
+                            "kind": {
+                                "__type": "io.ygdrasil.wgsl.ir.ExpressionKind.AccessIndex",
+                                "expr": 228,
+                                "index": 0
+                            }
+                        },
+                        {
+                            "kind": {
+                                "__type": "io.ygdrasil.wgsl.ir.ExpressionKind.GlobalVar",
+                                "handle": 7
+                            }
+                        },
+                        {
+                            "kind": {
+                                "__type": "io.ygdrasil.wgsl.ir.ExpressionKind.AccessIndex",
+                                "expr": 230,
+                                "index": 0
+                            }
+                        },
+                        {
+                            "kind": {
+                                "__type": "io.ygdrasil.wgsl.ir.ExpressionKind.LocalVar",
+                                "handle": 6
+                            }
+                        },
+                        {
+                            "kind": {
+                                "__type": "io.ygdrasil.wgsl.ir.ExpressionKind.Literal",
+                                "value": {
+                                    "__type": "io.ygdrasil.wgsl.ir.LiteralValue.Scalar",
+                                    "value": {
+                                        "__type": "io.ygdrasil.wgsl.ir.ScalarValue.F32",
+                                        "value": 0.0
+                                    }
+                                }
+                            }
+                        },
+                        {
+                            "kind": {
+                                "__type": "io.ygdrasil.wgsl.ir.ExpressionKind.Call",
+                                "function": 31,
+                                "arguments": [
+                                    229,
+                                    231,
+                                    232,
+                                    233
+                                ]
+                            }
+                        },
+                        {
+                            "kind": {
+                                "__type": "io.ygdrasil.wgsl.ir.ExpressionKind.LocalVar",
+                                "handle": 4
+                            }
+                        },
+                        {
+                            "kind": {
+                                "__type": "io.ygdrasil.wgsl.ir.ExpressionKind.GlobalVar",
+                                "handle": 4
+                            }
+                        },
+                        {
+                            "kind": {
+                                "__type": "io.ygdrasil.wgsl.ir.ExpressionKind.LocalVar",
+                                "handle": 0
+                            }
+                        },
+                        {
+                            "kind": {
+                                "__type": "io.ygdrasil.wgsl.ir.ExpressionKind.Access",
+                                "expr": 236,
+                                "index": 237
+                            }
+                        },
+                        {
+                            "kind": {
+                                "__type": "io.ygdrasil.wgsl.ir.ExpressionKind.GlobalVar",
+                                "handle": 7
+                            }
+                        },
+                        {
+                            "kind": {
+                                "__type": "io.ygdrasil.wgsl.ir.ExpressionKind.LocalVar",
+                                "handle": 0
+                            }
+                        },
+                        {
+                            "kind": {
+                                "__type": "io.ygdrasil.wgsl.ir.ExpressionKind.Access",
+                                "expr": 239,
+                                "index": 240
+                            }
+                        },
+                        {
+                            "kind": {
+                                "__type": "io.ygdrasil.wgsl.ir.ExpressionKind.LocalVar",
+                                "handle": 6
+                            }
+                        },
+                        {
+                            "kind": {
+                                "__type": "io.ygdrasil.wgsl.ir.ExpressionKind.Literal",
+                                "value": {
+                                    "__type": "io.ygdrasil.wgsl.ir.LiteralValue.Scalar",
+                                    "value": {
+                                        "__type": "io.ygdrasil.wgsl.ir.ScalarValue.F32",
+                                        "value": 0.0
+                                    }
+                                }
+                            }
+                        },
+                        {
+                            "kind": {
+                                "__type": "io.ygdrasil.wgsl.ir.ExpressionKind.Call",
+                                "function": 32,
+                                "arguments": [
+                                    238,
+                                    241,
+                                    242,
+                                    243
+                                ]
+                            }
+                        },
+                        {
+                            "kind": {
+                                "__type": "io.ygdrasil.wgsl.ir.ExpressionKind.LocalVar",
+                                "handle": 4
+                            }
+                        },
+                        {
+                            "kind": {
+                                "__type": "io.ygdrasil.wgsl.ir.ExpressionKind.GlobalVar",
+                                "handle": 4
+                            }
+                        },
+                        {
+                            "kind": {
+                                "__type": "io.ygdrasil.wgsl.ir.ExpressionKind.LocalVar",
+                                "handle": 1
+                            }
+                        },
+                        {
+                            "kind": {
+                                "__type": "io.ygdrasil.wgsl.ir.ExpressionKind.Access",
+                                "expr": 246,
+                                "index": 247
+                            }
+                        },
+                        {
+                            "kind": {
+                                "__type": "io.ygdrasil.wgsl.ir.ExpressionKind.GlobalVar",
+                                "handle": 7
+                            }
+                        },
+                        {
+                            "kind": {
+                                "__type": "io.ygdrasil.wgsl.ir.ExpressionKind.LocalVar",
+                                "handle": 1
+                            }
+                        },
+                        {
+                            "kind": {
+                                "__type": "io.ygdrasil.wgsl.ir.ExpressionKind.Access",
+                                "expr": 249,
+                                "index": 250
+                            }
+                        },
+                        {
+                            "kind": {
+                                "__type": "io.ygdrasil.wgsl.ir.ExpressionKind.LocalVar",
+                                "handle": 6
+                            }
+                        },
+                        {
+                            "kind": {
+                                "__type": "io.ygdrasil.wgsl.ir.ExpressionKind.Literal",
+                                "value": {
+                                    "__type": "io.ygdrasil.wgsl.ir.LiteralValue.Scalar",
+                                    "value": {
+                                        "__type": "io.ygdrasil.wgsl.ir.ScalarValue.F32",
+                                        "value": 0.0
+                                    }
+                                }
+                            }
+                        },
+                        {
+                            "kind": {
+                                "__type": "io.ygdrasil.wgsl.ir.ExpressionKind.Call",
+                                "function": 33,
+                                "arguments": [
+                                    248,
+                                    251,
+                                    252,
+                                    253
+                                ]
+                            }
+                        },
+                        {
+                            "kind": {
+                                "__type": "io.ygdrasil.wgsl.ir.ExpressionKind.LocalVar",
+                                "handle": 5
+                            }
+                        },
+                        {
+                            "kind": {
+                                "__type": "io.ygdrasil.wgsl.ir.ExpressionKind.GlobalVar",
+                                "handle": 1
+                            }
+                        },
+                        {
+                            "kind": {
+                                "__type": "io.ygdrasil.wgsl.ir.ExpressionKind.AccessIndex",
+                                "expr": 256,
+                                "index": 0
+                            }
+                        },
+                        {
+                            "kind": {
+                                "__type": "io.ygdrasil.wgsl.ir.ExpressionKind.GlobalVar",
+                                "handle": 6
+                            }
+                        },
+                        {
+                            "kind": {
+                                "__type": "io.ygdrasil.wgsl.ir.ExpressionKind.AccessIndex",
+                                "expr": 258,
+                                "index": 0
+                            }
+                        },
+                        {
+                            "kind": {
+                                "__type": "io.ygdrasil.wgsl.ir.ExpressionKind.LocalVar",
+                                "handle": 6
+                            }
+                        },
+                        {
+                            "kind": {
+                                "__type": "io.ygdrasil.wgsl.ir.ExpressionKind.LocalVar",
+                                "handle": 6
+                            }
+                        },
+                        {
+                            "kind": {
+                                "__type": "io.ygdrasil.wgsl.ir.ExpressionKind.LocalVar",
+                                "handle": 6
+                            }
+                        },
+                        {
+                            "kind": {
+                                "__type": "io.ygdrasil.wgsl.ir.ExpressionKind.Call",
+                                "function": 34,
+                                "arguments": [
+                                    257,
+                                    259,
+                                    260,
+                                    261,
+                                    262
+                                ]
+                            }
+                        },
+                        {
+                            "kind": {
+                                "__type": "io.ygdrasil.wgsl.ir.ExpressionKind.LocalVar",
+                                "handle": 5
+                            }
+                        },
+                        {
+                            "kind": {
+                                "__type": "io.ygdrasil.wgsl.ir.ExpressionKind.GlobalVar",
+                                "handle": 1
+                            }
+                        },
+                        {
+                            "kind": {
+                                "__type": "io.ygdrasil.wgsl.ir.ExpressionKind.LocalVar",
+                                "handle": 0
+                            }
+                        },
+                        {
+                            "kind": {
+                                "__type": "io.ygdrasil.wgsl.ir.ExpressionKind.Access",
+                                "expr": 265,
+                                "index": 266
+                            }
+                        },
+                        {
+                            "kind": {
+                                "__type": "io.ygdrasil.wgsl.ir.ExpressionKind.GlobalVar",
+                                "handle": 6
+                            }
+                        },
+                        {
+                            "kind": {
+                                "__type": "io.ygdrasil.wgsl.ir.ExpressionKind.LocalVar",
+                                "handle": 0
+                            }
+                        },
+                        {
+                            "kind": {
+                                "__type": "io.ygdrasil.wgsl.ir.ExpressionKind.Access",
+                                "expr": 268,
+                                "index": 269
+                            }
+                        },
+                        {
+                            "kind": {
+                                "__type": "io.ygdrasil.wgsl.ir.ExpressionKind.LocalVar",
+                                "handle": 6
+                            }
+                        },
+                        {
+                            "kind": {
+                                "__type": "io.ygdrasil.wgsl.ir.ExpressionKind.LocalVar",
+                                "handle": 6
+                            }
+                        },
+                        {
+                            "kind": {
+                                "__type": "io.ygdrasil.wgsl.ir.ExpressionKind.LocalVar",
+                                "handle": 6
+                            }
+                        },
+                        {
+                            "kind": {
+                                "__type": "io.ygdrasil.wgsl.ir.ExpressionKind.Call",
+                                "function": 35,
+                                "arguments": [
+                                    267,
+                                    270,
+                                    271,
+                                    272,
+                                    273
+                                ]
+                            }
+                        },
+                        {
+                            "kind": {
+                                "__type": "io.ygdrasil.wgsl.ir.ExpressionKind.LocalVar",
+                                "handle": 5
+                            }
+                        },
+                        {
+                            "kind": {
+                                "__type": "io.ygdrasil.wgsl.ir.ExpressionKind.GlobalVar",
+                                "handle": 1
+                            }
+                        },
+                        {
+                            "kind": {
+                                "__type": "io.ygdrasil.wgsl.ir.ExpressionKind.LocalVar",
+                                "handle": 1
+                            }
+                        },
+                        {
+                            "kind": {
+                                "__type": "io.ygdrasil.wgsl.ir.ExpressionKind.Access",
+                                "expr": 276,
+                                "index": 277
+                            }
+                        },
+                        {
+                            "kind": {
+                                "__type": "io.ygdrasil.wgsl.ir.ExpressionKind.GlobalVar",
+                                "handle": 6
+                            }
+                        },
+                        {
+                            "kind": {
+                                "__type": "io.ygdrasil.wgsl.ir.ExpressionKind.LocalVar",
+                                "handle": 1
+                            }
+                        },
+                        {
+                            "kind": {
+                                "__type": "io.ygdrasil.wgsl.ir.ExpressionKind.Access",
+                                "expr": 279,
+                                "index": 280
+                            }
+                        },
+                        {
+                            "kind": {
+                                "__type": "io.ygdrasil.wgsl.ir.ExpressionKind.LocalVar",
+                                "handle": 6
+                            }
+                        },
+                        {
+                            "kind": {
+                                "__type": "io.ygdrasil.wgsl.ir.ExpressionKind.LocalVar",
+                                "handle": 6
+                            }
+                        },
+                        {
+                            "kind": {
+                                "__type": "io.ygdrasil.wgsl.ir.ExpressionKind.LocalVar",
+                                "handle": 6
+                            }
+                        },
+                        {
+                            "kind": {
+                                "__type": "io.ygdrasil.wgsl.ir.ExpressionKind.Call",
+                                "function": 36,
+                                "arguments": [
+                                    278,
+                                    281,
+                                    282,
+                                    283,
+                                    284
+                                ]
+                            }
+                        },
+                        {
+                            "kind": {
+                                "__type": "io.ygdrasil.wgsl.ir.ExpressionKind.LocalVar",
+                                "handle": 5
+                            }
+                        },
+                        {
+                            "kind": {
+                                "__type": "io.ygdrasil.wgsl.ir.ExpressionKind.GlobalVar",
+                                "handle": 1
+                            }
+                        },
+                        {
+                            "kind": {
+                                "__type": "io.ygdrasil.wgsl.ir.ExpressionKind.AccessIndex",
+                                "expr": 287,
+                                "index": 0
+                            }
+                        },
+                        {
+                            "kind": {
+                                "__type": "io.ygdrasil.wgsl.ir.ExpressionKind.GlobalVar",
+                                "handle": 6
+                            }
+                        },
+                        {
+                            "kind": {
+                                "__type": "io.ygdrasil.wgsl.ir.ExpressionKind.AccessIndex",
+                                "expr": 289,
+                                "index": 0
+                            }
+                        },
+                        {
+                            "kind": {
+                                "__type": "io.ygdrasil.wgsl.ir.ExpressionKind.LocalVar",
+                                "handle": 6
+                            }
+                        },
+                        {
+                            "kind": {
+                                "__type": "io.ygdrasil.wgsl.ir.ExpressionKind.Literal",
+                                "value": {
+                                    "__type": "io.ygdrasil.wgsl.ir.LiteralValue.Scalar",
+                                    "value": {
+                                        "__type": "io.ygdrasil.wgsl.ir.ScalarValue.F32",
+                                        "value": 0.0
+                                    }
+                                }
+                            }
+                        },
+                        {
+                            "kind": {
+                                "__type": "io.ygdrasil.wgsl.ir.ExpressionKind.Call",
+                                "function": 37,
+                                "arguments": [
+                                    288,
+                                    290,
+                                    291,
+                                    292
+                                ]
+                            }
+                        },
+                        {
+                            "kind": {
+                                "__type": "io.ygdrasil.wgsl.ir.ExpressionKind.LocalVar",
+                                "handle": 5
+                            }
+                        },
+                        {
+                            "kind": {
+                                "__type": "io.ygdrasil.wgsl.ir.ExpressionKind.GlobalVar",
+                                "handle": 1
+                            }
+                        },
+                        {
+                            "kind": {
+                                "__type": "io.ygdrasil.wgsl.ir.ExpressionKind.LocalVar",
+                                "handle": 0
+                            }
+                        },
+                        {
+                            "kind": {
+                                "__type": "io.ygdrasil.wgsl.ir.ExpressionKind.Access",
+                                "expr": 295,
+                                "index": 296
+                            }
+                        },
+                        {
+                            "kind": {
+                                "__type": "io.ygdrasil.wgsl.ir.ExpressionKind.GlobalVar",
+                                "handle": 6
+                            }
+                        },
+                        {
+                            "kind": {
+                                "__type": "io.ygdrasil.wgsl.ir.ExpressionKind.LocalVar",
+                                "handle": 0
+                            }
+                        },
+                        {
+                            "kind": {
+                                "__type": "io.ygdrasil.wgsl.ir.ExpressionKind.Access",
+                                "expr": 298,
+                                "index": 299
+                            }
+                        },
+                        {
+                            "kind": {
+                                "__type": "io.ygdrasil.wgsl.ir.ExpressionKind.LocalVar",
+                                "handle": 6
+                            }
+                        },
+                        {
+                            "kind": {
+                                "__type": "io.ygdrasil.wgsl.ir.ExpressionKind.Literal",
+                                "value": {
+                                    "__type": "io.ygdrasil.wgsl.ir.LiteralValue.Scalar",
+                                    "value": {
+                                        "__type": "io.ygdrasil.wgsl.ir.ScalarValue.F32",
+                                        "value": 0.0
+                                    }
+                                }
+                            }
+                        },
+                        {
+                            "kind": {
+                                "__type": "io.ygdrasil.wgsl.ir.ExpressionKind.Call",
+                                "function": 38,
+                                "arguments": [
+                                    297,
+                                    300,
+                                    301,
+                                    302
+                                ]
+                            }
+                        },
+                        {
+                            "kind": {
+                                "__type": "io.ygdrasil.wgsl.ir.ExpressionKind.LocalVar",
+                                "handle": 5
+                            }
+                        },
+                        {
+                            "kind": {
+                                "__type": "io.ygdrasil.wgsl.ir.ExpressionKind.GlobalVar",
+                                "handle": 1
+                            }
+                        },
+                        {
+                            "kind": {
+                                "__type": "io.ygdrasil.wgsl.ir.ExpressionKind.LocalVar",
+                                "handle": 1
+                            }
+                        },
+                        {
+                            "kind": {
+                                "__type": "io.ygdrasil.wgsl.ir.ExpressionKind.Access",
+                                "expr": 305,
+                                "index": 306
+                            }
+                        },
+                        {
+                            "kind": {
+                                "__type": "io.ygdrasil.wgsl.ir.ExpressionKind.GlobalVar",
+                                "handle": 6
+                            }
+                        },
+                        {
+                            "kind": {
+                                "__type": "io.ygdrasil.wgsl.ir.ExpressionKind.LocalVar",
+                                "handle": 1
+                            }
+                        },
+                        {
+                            "kind": {
+                                "__type": "io.ygdrasil.wgsl.ir.ExpressionKind.Access",
+                                "expr": 308,
+                                "index": 309
+                            }
+                        },
+                        {
+                            "kind": {
+                                "__type": "io.ygdrasil.wgsl.ir.ExpressionKind.LocalVar",
+                                "handle": 6
+                            }
+                        },
+                        {
+                            "kind": {
+                                "__type": "io.ygdrasil.wgsl.ir.ExpressionKind.Literal",
+                                "value": {
+                                    "__type": "io.ygdrasil.wgsl.ir.LiteralValue.Scalar",
+                                    "value": {
+                                        "__type": "io.ygdrasil.wgsl.ir.ScalarValue.F32",
+                                        "value": 0.0
+                                    }
+                                }
+                            }
+                        },
+                        {
+                            "kind": {
+                                "__type": "io.ygdrasil.wgsl.ir.ExpressionKind.Call",
+                                "function": 39,
+                                "arguments": [
+                                    307,
+                                    310,
+                                    311,
+                                    312
+                                ]
+                            }
+                        },
+                        {
+                            "kind": {
+                                "__type": "io.ygdrasil.wgsl.ir.ExpressionKind.GlobalVar",
+                                "handle": 5
+                            }
+                        },
+                        {
+                            "kind": {
+                                "__type": "io.ygdrasil.wgsl.ir.ExpressionKind.AccessIndex",
+                                "expr": 314,
+                                "index": 0
+                            }
+                        },
+                        {
+                            "kind": {
+                                "__type": "io.ygdrasil.wgsl.ir.ExpressionKind.LocalVar",
+                                "handle": 7
+                            }
+                        },
+                        {
+                            "kind": {
+                                "__type": "io.ygdrasil.wgsl.ir.ExpressionKind.LocalVar",
+                                "handle": 5
+                            }
+                        },
+                        {
+                            "kind": {
+                                "__type": "io.ygdrasil.wgsl.ir.ExpressionKind.Call",
+                                "function": 40,
+                                "arguments": [
+                                    315,
+                                    316,
+                                    317
+                                ]
+                            }
+                        },
+                        {
+                            "kind": {
+                                "__type": "io.ygdrasil.wgsl.ir.ExpressionKind.GlobalVar",
+                                "handle": 5
+                            }
+                        },
+                        {
+                            "kind": {
+                                "__type": "io.ygdrasil.wgsl.ir.ExpressionKind.LocalVar",
+                                "handle": 0
+                            }
+                        },
+                        {
+                            "kind": {
+                                "__type": "io.ygdrasil.wgsl.ir.ExpressionKind.Access",
+                                "expr": 319,
+                                "index": 320
+                            }
+                        },
+                        {
+                            "kind": {
+                                "__type": "io.ygdrasil.wgsl.ir.ExpressionKind.LocalVar",
+                                "handle": 7
+                            }
+                        },
+                        {
+                            "kind": {
+                                "__type": "io.ygdrasil.wgsl.ir.ExpressionKind.LocalVar",
+                                "handle": 5
+                            }
+                        },
+                        {
+                            "kind": {
+                                "__type": "io.ygdrasil.wgsl.ir.ExpressionKind.Call",
+                                "function": 41,
+                                "arguments": [
+                                    321,
+                                    322,
+                                    323
+                                ]
+                            }
+                        },
+                        {
+                            "kind": {
+                                "__type": "io.ygdrasil.wgsl.ir.ExpressionKind.GlobalVar",
+                                "handle": 5
+                            }
+                        },
+                        {
+                            "kind": {
+                                "__type": "io.ygdrasil.wgsl.ir.ExpressionKind.LocalVar",
+                                "handle": 1
+                            }
+                        },
+                        {
+                            "kind": {
+                                "__type": "io.ygdrasil.wgsl.ir.ExpressionKind.Access",
+                                "expr": 325,
+                                "index": 326
+                            }
+                        },
+                        {
+                            "kind": {
+                                "__type": "io.ygdrasil.wgsl.ir.ExpressionKind.LocalVar",
+                                "handle": 7
+                            }
+                        },
+                        {
+                            "kind": {
+                                "__type": "io.ygdrasil.wgsl.ir.ExpressionKind.LocalVar",
+                                "handle": 5
+                            }
+                        },
+                        {
+                            "kind": {
+                                "__type": "io.ygdrasil.wgsl.ir.ExpressionKind.Call",
+                                "function": 42,
+                                "arguments": [
+                                    327,
+                                    328,
+                                    329
+                                ]
+                            }
+                        },
+                        {
+                            "kind": {
+                                "__type": "io.ygdrasil.wgsl.ir.ExpressionKind.LocalVar",
+                                "handle": 3
+                            }
+                        },
+                        {
+                            "kind": {
+                                "__type": "io.ygdrasil.wgsl.ir.ExpressionKind.LocalVar",
+                                "handle": 2
+                            }
+                        },
+                        {
+                            "kind": {
+                                "__type": "io.ygdrasil.wgsl.ir.ExpressionKind.TypeConstructor",
+                                "type": 20,
+                                "arguments": [
+                                    332
+                                ]
+                            }
+                        },
+                        {
+                            "kind": {
+                                "__type": "io.ygdrasil.wgsl.ir.ExpressionKind.Binary",
+                                "operator": "Add",
+                                "left": 331,
+                                "right": 333
+                            }
+                        },
+                        {
+                            "kind": {
+                                "__type": "io.ygdrasil.wgsl.ir.ExpressionKind.TypeConstructor",
+                                "type": 21,
+                                "arguments": [
+                                    334
+                                ]
+                            }
+                        },
+                        {
+                            "kind": {
+                                "__type": "io.ygdrasil.wgsl.ir.ExpressionKind.LocalVar",
+                                "handle": 5
+                            }
+                        },
+                        {
+                            "kind": {
+                                "__type": "io.ygdrasil.wgsl.ir.ExpressionKind.LocalVar",
+                                "handle": 8
+                            }
+                        },
+                        {
+                            "kind": {
+                                "__type": "io.ygdrasil.wgsl.ir.ExpressionKind.AccessIndex",
+                                "expr": 337,
+                                "index": 0
+                            }
+                        },
+                        {
+                            "kind": {
+                                "__type": "io.ygdrasil.wgsl.ir.ExpressionKind.LocalVar",
+                                "handle": 8
+                            }
+                        },
+                        {
+                            "kind": {
+                                "__type": "io.ygdrasil.wgsl.ir.ExpressionKind.AccessIndex",
+                                "expr": 339,
+                                "index": 1
+                            }
+                        },
+                        {
+                            "kind": {
+                                "__type": "io.ygdrasil.wgsl.ir.ExpressionKind.LocalVar",
+                                "handle": 8
+                            }
+                        },
+                        {
+                            "kind": {
+                                "__type": "io.ygdrasil.wgsl.ir.ExpressionKind.AccessIndex",
+                                "expr": 341,
+                                "index": 0
+                            }
+                        },
+                        {
+                            "kind": {
+                                "__type": "io.ygdrasil.wgsl.ir.ExpressionKind.LocalVar",
+                                "handle": 8
+                            }
+                        },
+                        {
+                            "kind": {
+                                "__type": "io.ygdrasil.wgsl.ir.ExpressionKind.AccessIndex",
+                                "expr": 343,
+                                "index": 1
+                            }
+                        },
+                        {
+                            "kind": {
+                                "__type": "io.ygdrasil.wgsl.ir.ExpressionKind.TypeConstructor",
+                                "type": 19,
+                                "arguments": [
+                                    338,
+                                    340,
+                                    342,
+                                    344
+                                ]
+                            }
+                        },
+                        {
+                            "kind": {
+                                "__type": "io.ygdrasil.wgsl.ir.ExpressionKind.Binary",
+                                "operator": "Add",
+                                "left": 336,
+                                "right": 345
+                            }
+                        },
+                        {
+                            "kind": {
+                                "__type": "io.ygdrasil.wgsl.ir.ExpressionKind.LocalVar",
+                                "handle": 4
+                            }
+                        },
+                        {
+                            "kind": {
+                                "__type": "io.ygdrasil.wgsl.ir.ExpressionKind.Binary",
+                                "operator": "Add",
+                                "left": 346,
+                                "right": 347
+                            }
+                        }
+                    ]
+                },
+                "blocks": {
+                    "data": [
+                        {
+                            "statements": []
+                        },
+                        {
+                            "statements": [
+                                {
+                                    "__type": "io.ygdrasil.wgsl.ir.Statement.Init",
+                                    "variable": 0
+                                },
+                                {
+                                    "__type": "io.ygdrasil.wgsl.ir.Statement.Init",
+                                    "variable": 1
+                                },
+                                {
+                                    "__type": "io.ygdrasil.wgsl.ir.Statement.Init",
+                                    "variable": 2
+                                },
+                                {
+                                    "__type": "io.ygdrasil.wgsl.ir.Statement.Init",
+                                    "variable": 3
+                                },
+                                {
+                                    "__type": "io.ygdrasil.wgsl.ir.Statement.Init",
+                                    "variable": 4
+                                },
+                                {
+                                    "__type": "io.ygdrasil.wgsl.ir.Statement.Init",
+                                    "variable": 5
+                                },
+                                {
+                                    "__type": "io.ygdrasil.wgsl.ir.Statement.Init",
+                                    "variable": 6
+                                },
+                                {
+                                    "__type": "io.ygdrasil.wgsl.ir.Statement.Init",
+                                    "variable": 7
+                                },
+                                {
+                                    "__type": "io.ygdrasil.wgsl.ir.Statement.Assign",
+                                    "pointer": 14,
+                                    "value": 17
+                                },
+                                {
+                                    "__type": "io.ygdrasil.wgsl.ir.Statement.Assign",
+                                    "pointer": 18,
+                                    "value": 22
+                                },
+                                {
+                                    "__type": "io.ygdrasil.wgsl.ir.Statement.Assign",
+                                    "pointer": 23,
+                                    "value": 27
+                                },
+                                {
+                                    "__type": "io.ygdrasil.wgsl.ir.Statement.Assign",
+                                    "pointer": 28,
+                                    "value": 35
+                                },
+                                {
+                                    "__type": "io.ygdrasil.wgsl.ir.Statement.Assign",
+                                    "pointer": 36,
+                                    "value": 45
+                                },
+                                {
+                                    "__type": "io.ygdrasil.wgsl.ir.Statement.Assign",
+                                    "pointer": 46,
+                                    "value": 55
+                                },
+                                {
+                                    "__type": "io.ygdrasil.wgsl.ir.Statement.Assign",
+                                    "pointer": 56,
+                                    "value": 63
+                                },
+                                {
+                                    "__type": "io.ygdrasil.wgsl.ir.Statement.Assign",
+                                    "pointer": 64,
+                                    "value": 73
+                                },
+                                {
+                                    "__type": "io.ygdrasil.wgsl.ir.Statement.Assign",
+                                    "pointer": 74,
+                                    "value": 83
+                                },
+                                {
+                                    "__type": "io.ygdrasil.wgsl.ir.Statement.Assign",
+                                    "pointer": 84,
+                                    "value": 89
+                                },
+                                {
+                                    "__type": "io.ygdrasil.wgsl.ir.Statement.Assign",
+                                    "pointer": 90,
+                                    "value": 96
+                                },
+                                {
+                                    "__type": "io.ygdrasil.wgsl.ir.Statement.Assign",
+                                    "pointer": 97,
+                                    "value": 103
+                                },
+                                {
+                                    "__type": "io.ygdrasil.wgsl.ir.Statement.Assign",
+                                    "pointer": 104,
+                                    "value": 107
+                                },
+                                {
+                                    "__type": "io.ygdrasil.wgsl.ir.Statement.Assign",
+                                    "pointer": 108,
+                                    "value": 112
+                                },
+                                {
+                                    "__type": "io.ygdrasil.wgsl.ir.Statement.Assign",
+                                    "pointer": 113,
+                                    "value": 117
+                                },
+                                {
+                                    "__type": "io.ygdrasil.wgsl.ir.Statement.Assign",
+                                    "pointer": 118,
+                                    "value": 121
+                                },
+                                {
+                                    "__type": "io.ygdrasil.wgsl.ir.Statement.Assign",
+                                    "pointer": 122,
+                                    "value": 126
+                                },
+                                {
+                                    "__type": "io.ygdrasil.wgsl.ir.Statement.Assign",
+                                    "pointer": 127,
+                                    "value": 131
+                                },
+                                {
+                                    "__type": "io.ygdrasil.wgsl.ir.Statement.Assign",
+                                    "pointer": 132,
+                                    "value": 135
+                                },
+                                {
+                                    "__type": "io.ygdrasil.wgsl.ir.Statement.Assign",
+                                    "pointer": 136,
+                                    "value": 140
+                                },
+                                {
+                                    "__type": "io.ygdrasil.wgsl.ir.Statement.Assign",
+                                    "pointer": 141,
+                                    "value": 145
+                                },
+                                {
+                                    "__type": "io.ygdrasil.wgsl.ir.Statement.Assign",
+                                    "pointer": 146,
+                                    "value": 152
+                                },
+                                {
+                                    "__type": "io.ygdrasil.wgsl.ir.Statement.Assign",
+                                    "pointer": 153,
+                                    "value": 161
+                                },
+                                {
+                                    "__type": "io.ygdrasil.wgsl.ir.Statement.Assign",
+                                    "pointer": 162,
+                                    "value": 170
+                                },
+                                {
+                                    "__type": "io.ygdrasil.wgsl.ir.Statement.Assign",
+                                    "pointer": 171,
+                                    "value": 178
+                                },
+                                {
+                                    "__type": "io.ygdrasil.wgsl.ir.Statement.Assign",
+                                    "pointer": 179,
+                                    "value": 188
+                                },
+                                {
+                                    "__type": "io.ygdrasil.wgsl.ir.Statement.Assign",
+                                    "pointer": 189,
+                                    "value": 198
+                                },
+                                {
+                                    "__type": "io.ygdrasil.wgsl.ir.Statement.Assign",
+                                    "pointer": 199,
+                                    "value": 206
+                                },
+                                {
+                                    "__type": "io.ygdrasil.wgsl.ir.Statement.Assign",
+                                    "pointer": 207,
+                                    "value": 216
+                                },
+                                {
+                                    "__type": "io.ygdrasil.wgsl.ir.Statement.Assign",
+                                    "pointer": 217,
+                                    "value": 226
+                                },
+                                {
+                                    "__type": "io.ygdrasil.wgsl.ir.Statement.Assign",
+                                    "pointer": 227,
+                                    "value": 234
+                                },
+                                {
+                                    "__type": "io.ygdrasil.wgsl.ir.Statement.Assign",
+                                    "pointer": 235,
+                                    "value": 244
+                                },
+                                {
+                                    "__type": "io.ygdrasil.wgsl.ir.Statement.Assign",
+                                    "pointer": 245,
+                                    "value": 254
+                                },
+                                {
+                                    "__type": "io.ygdrasil.wgsl.ir.Statement.Assign",
+                                    "pointer": 255,
+                                    "value": 263
+                                },
+                                {
+                                    "__type": "io.ygdrasil.wgsl.ir.Statement.Assign",
+                                    "pointer": 264,
+                                    "value": 274
+                                },
+                                {
+                                    "__type": "io.ygdrasil.wgsl.ir.Statement.Assign",
+                                    "pointer": 275,
+                                    "value": 285
+                                },
+                                {
+                                    "__type": "io.ygdrasil.wgsl.ir.Statement.Assign",
+                                    "pointer": 286,
+                                    "value": 293
+                                },
+                                {
+                                    "__type": "io.ygdrasil.wgsl.ir.Statement.Assign",
+                                    "pointer": 294,
+                                    "value": 303
+                                },
+                                {
+                                    "__type": "io.ygdrasil.wgsl.ir.Statement.Assign",
+                                    "pointer": 304,
+                                    "value": 313
+                                },
+                                {
+                                    "__type": "io.ygdrasil.wgsl.ir.Statement.Emit",
+                                    "range": 318318
+                                },
+                                {
+                                    "__type": "io.ygdrasil.wgsl.ir.Statement.Emit",
+                                    "range": 324324
+                                },
+                                {
+                                    "__type": "io.ygdrasil.wgsl.ir.Statement.Emit",
+                                    "range": 330330
+                                },
+                                {
+                                    "__type": "io.ygdrasil.wgsl.ir.Statement.Init",
+                                    "variable": 8
+                                },
+                                {
+                                    "__type": "io.ygdrasil.wgsl.ir.Statement.Return",
+                                    "value": 348
+                                }
+                            ]
+                        }
+                    ]
+                },
+                "body": 1
+            },
+            {
+                "name": "textureDimensions",
+                "parameters": [
+                    {
+                        "name": "arg_0",
+                        "type": 3
+                    }
+                ],
+                "returnType": 20,
+                "localVariables": {},
+                "expressions": {},
+                "blocks": {
+                    "data": [
+                        {
+                            "statements": []
+                        }
+                    ]
+                },
+                "body": 0
+            },
+            {
+                "name": "textureDimensions",
+                "parameters": [
+                    {
+                        "name": "arg_0",
+                        "type": 3
+                    }
+                ],
+                "returnType": 20,
+                "localVariables": {},
+                "expressions": {},
+                "blocks": {
+                    "data": [
+                        {
+                            "statements": []
+                        }
+                    ]
+                },
+                "body": 0
+            },
+            {
+                "name": "textureDimensions",
+                "parameters": [
+                    {
+                        "name": "arg_0",
+                        "type": 3
+                    }
+                ],
+                "returnType": 20,
+                "localVariables": {},
+                "expressions": {},
+                "blocks": {
+                    "data": [
+                        {
+                            "statements": []
+                        }
+                    ]
+                },
+                "body": 0
+            },
+            {
+                "name": "textureGather",
+                "parameters": [
+                    {
+                        "name": "arg_0",
+                        "type": 22
+                    },
+                    {
+                        "name": "arg_1",
+                        "type": 3
+                    },
+                    {
+                        "name": "arg_2",
+                        "type": 14
+                    },
+                    {
+                        "name": "arg_3",
+                        "type": 21
+                    }
+                ],
+                "returnType": 22,
+                "localVariables": {},
+                "expressions": {},
+                "blocks": {
+                    "data": [
+                        {
+                            "statements": []
+                        }
+                    ]
+                },
+                "body": 0
+            },
+            {
+                "name": "textureGather",
+                "parameters": [
+                    {
+                        "name": "arg_0",
+                        "type": 22
+                    },
+                    {
+                        "name": "arg_1",
+                        "type": 3
+                    },
+                    {
+                        "name": "arg_2",
+                        "type": 14
+                    },
+                    {
+                        "name": "arg_3",
+                        "type": 21
+                    }
+                ],
+                "returnType": 22,
+                "localVariables": {},
+                "expressions": {},
+                "blocks": {
+                    "data": [
+                        {
+                            "statements": []
+                        }
+                    ]
+                },
+                "body": 0
+            },
+            {
+                "name": "textureGather",
+                "parameters": [
+                    {
+                        "name": "arg_0",
+                        "type": 22
+                    },
+                    {
+                        "name": "arg_1",
+                        "type": 3
+                    },
+                    {
+                        "name": "arg_2",
+                        "type": 14
+                    },
+                    {
+                        "name": "arg_3",
+                        "type": 21
+                    }
+                ],
+                "returnType": 22,
+                "localVariables": {},
+                "expressions": {},
+                "blocks": {
+                    "data": [
+                        {
+                            "statements": []
+                        }
+                    ]
+                },
+                "body": 0
+            },
+            {
+                "name": "textureGatherCompare",
+                "parameters": [
+                    {
+                        "name": "arg_0",
+                        "type": 10
+                    },
+                    {
+                        "name": "arg_1",
+                        "type": 16
+                    },
+                    {
+                        "name": "arg_2",
+                        "type": 21
+                    },
+                    {
+                        "name": "arg_3",
+                        "type": 18
+                    }
+                ],
+                "returnType": 10,
+                "localVariables": {},
+                "expressions": {},
+                "blocks": {
+                    "data": [
+                        {
+                            "statements": []
+                        }
+                    ]
+                },
+                "body": 0
+            },
+            {
+                "name": "textureGatherCompare",
+                "parameters": [
+                    {
+                        "name": "arg_0",
+                        "type": 10
+                    },
+                    {
+                        "name": "arg_1",
+                        "type": 16
+                    },
+                    {
+                        "name": "arg_2",
+                        "type": 21
+                    },
+                    {
+                        "name": "arg_3",
+                        "type": 18
+                    }
+                ],
+                "returnType": 10,
+                "localVariables": {},
+                "expressions": {},
+                "blocks": {
+                    "data": [
+                        {
+                            "statements": []
+                        }
+                    ]
+                },
+                "body": 0
+            },
+            {
+                "name": "textureGatherCompare",
+                "parameters": [
+                    {
+                        "name": "arg_0",
+                        "type": 10
+                    },
+                    {
+                        "name": "arg_1",
+                        "type": 16
+                    },
+                    {
+                        "name": "arg_2",
+                        "type": 21
+                    },
+                    {
+                        "name": "arg_3",
+                        "type": 18
+                    }
+                ],
+                "returnType": 10,
+                "localVariables": {},
+                "expressions": {},
+                "blocks": {
+                    "data": [
+                        {
+                            "statements": []
+                        }
+                    ]
+                },
+                "body": 0
+            },
+            {
+                "name": "textureLoad",
+                "parameters": [
+                    {
+                        "name": "arg_0",
+                        "type": 3
+                    },
+                    {
+                        "name": "arg_1",
+                        "type": 23
+                    },
+                    {
+                        "name": "arg_2",
+                        "type": 22
+                    }
+                ],
+                "returnType": 3,
+                "localVariables": {},
+                "expressions": {},
+                "blocks": {
+                    "data": [
+                        {
+                            "statements": []
+                        }
+                    ]
+                },
+                "body": 0
+            },
+            {
+                "name": "textureLoad",
+                "parameters": [
+                    {
+                        "name": "arg_0",
+                        "type": 3
+                    },
+                    {
+                        "name": "arg_1",
+                        "type": 23
+                    },
+                    {
+                        "name": "arg_2",
+                        "type": 22
+                    }
+                ],
+                "returnType": 3,
+                "localVariables": {},
+                "expressions": {},
+                "blocks": {
+                    "data": [
+                        {
+                            "statements": []
+                        }
+                    ]
+                },
+                "body": 0
+            },
+            {
+                "name": "textureLoad",
+                "parameters": [
+                    {
+                        "name": "arg_0",
+                        "type": 3
+                    },
+                    {
+                        "name": "arg_1",
+                        "type": 23
+                    },
+                    {
+                        "name": "arg_2",
+                        "type": 22
+                    }
+                ],
+                "returnType": 3,
+                "localVariables": {},
+                "expressions": {},
+                "blocks": {
+                    "data": [
+                        {
+                            "statements": []
+                        }
+                    ]
+                },
+                "body": 0
+            },
+            {
+                "name": "textureNumLayers",
+                "parameters": [
+                    {
+                        "name": "arg_0",
+                        "type": 6
+                    }
+                ],
+                "returnType": 0,
+                "localVariables": {},
+                "expressions": {},
+                "blocks": {
+                    "data": [
+                        {
+                            "statements": []
+                        }
+                    ]
+                },
+                "body": 0
+            },
+            {
+                "name": "textureNumLayers",
+                "parameters": [
+                    {
+                        "name": "arg_0",
+                        "type": 6
+                    }
+                ],
+                "returnType": 0,
+                "localVariables": {},
+                "expressions": {},
+                "blocks": {
+                    "data": [
+                        {
+                            "statements": []
+                        }
+                    ]
+                },
+                "body": 0
+            },
+            {
+                "name": "textureNumLayers",
+                "parameters": [
+                    {
+                        "name": "arg_0",
+                        "type": 6
+                    }
+                ],
+                "returnType": 0,
+                "localVariables": {},
+                "expressions": {},
+                "blocks": {
+                    "data": [
+                        {
+                            "statements": []
+                        }
+                    ]
+                },
+                "body": 0
+            },
+            {
+                "name": "textureNumLevels",
+                "parameters": [
+                    {
+                        "name": "arg_0",
+                        "type": 3
+                    }
+                ],
+                "returnType": 0,
+                "localVariables": {},
+                "expressions": {},
+                "blocks": {
+                    "data": [
+                        {
+                            "statements": []
+                        }
+                    ]
+                },
+                "body": 0
+            },
+            {
+                "name": "textureNumLevels",
+                "parameters": [
+                    {
+                        "name": "arg_0",
+                        "type": 3
+                    }
+                ],
+                "returnType": 0,
+                "localVariables": {},
+                "expressions": {},
+                "blocks": {
+                    "data": [
+                        {
+                            "statements": []
+                        }
+                    ]
+                },
+                "body": 0
+            },
+            {
+                "name": "textureNumLevels",
+                "parameters": [
+                    {
+                        "name": "arg_0",
+                        "type": 3
+                    }
+                ],
+                "returnType": 0,
+                "localVariables": {},
+                "expressions": {},
+                "blocks": {
+                    "data": [
+                        {
+                            "statements": []
+                        }
+                    ]
+                },
+                "body": 0
+            },
+            {
+                "name": "textureNumSamples",
+                "parameters": [
+                    {
+                        "name": "arg_0",
+                        "type": 8
+                    }
+                ],
+                "returnType": 0,
+                "localVariables": {},
+                "expressions": {},
+                "blocks": {
+                    "data": [
+                        {
+                            "statements": []
+                        }
+                    ]
+                },
+                "body": 0
+            },
+            {
+                "name": "textureNumSamples",
+                "parameters": [
+                    {
+                        "name": "arg_0",
+                        "type": 8
+                    }
+                ],
+                "returnType": 0,
+                "localVariables": {},
+                "expressions": {},
+                "blocks": {
+                    "data": [
+                        {
+                            "statements": []
+                        }
+                    ]
+                },
+                "body": 0
+            },
+            {
+                "name": "textureNumSamples",
+                "parameters": [
+                    {
+                        "name": "arg_0",
+                        "type": 8
+                    }
+                ],
+                "returnType": 0,
+                "localVariables": {},
+                "expressions": {},
+                "blocks": {
+                    "data": [
+                        {
+                            "statements": []
+                        }
+                    ]
+                },
+                "body": 0
+            },
+            {
+                "name": "textureSample",
+                "parameters": [
+                    {
+                        "name": "arg_0",
+                        "type": 3
+                    },
+                    {
+                        "name": "arg_1",
+                        "type": 14
+                    },
+                    {
+                        "name": "arg_2",
+                        "type": 21
+                    }
+                ],
+                "returnType": 19,
+                "localVariables": {},
+                "expressions": {},
+                "blocks": {
+                    "data": [
+                        {
+                            "statements": []
+                        }
+                    ]
+                },
+                "body": 0
+            },
+            {
+                "name": "textureSample",
+                "parameters": [
+                    {
+                        "name": "arg_0",
+                        "type": 3
+                    },
+                    {
+                        "name": "arg_1",
+                        "type": 14
+                    },
+                    {
+                        "name": "arg_2",
+                        "type": 21
+                    }
+                ],
+                "returnType": 19,
+                "localVariables": {},
+                "expressions": {},
+                "blocks": {
+                    "data": [
+                        {
+                            "statements": []
+                        }
+                    ]
+                },
+                "body": 0
+            },
+            {
+                "name": "textureSample",
+                "parameters": [
+                    {
+                        "name": "arg_0",
+                        "type": 3
+                    },
+                    {
+                        "name": "arg_1",
+                        "type": 14
+                    },
+                    {
+                        "name": "arg_2",
+                        "type": 21
+                    }
+                ],
+                "returnType": 19,
+                "localVariables": {},
+                "expressions": {},
+                "blocks": {
+                    "data": [
+                        {
+                            "statements": []
+                        }
+                    ]
+                },
+                "body": 0
+            },
+            {
+                "name": "textureSampleBias",
+                "parameters": [
+                    {
+                        "name": "arg_0",
+                        "type": 3
+                    },
+                    {
+                        "name": "arg_1",
+                        "type": 14
+                    },
+                    {
+                        "name": "arg_2",
+                        "type": 21
+                    },
+                    {
+                        "name": "arg_3",
+                        "type": 18
+                    }
+                ],
+                "returnType": 19,
+                "localVariables": {},
+                "expressions": {},
+                "blocks": {
+                    "data": [
+                        {
+                            "statements": []
+                        }
+                    ]
+                },
+                "body": 0
+            },
+            {
+                "name": "textureSampleBias",
+                "parameters": [
+                    {
+                        "name": "arg_0",
+                        "type": 3
+                    },
+                    {
+                        "name": "arg_1",
+                        "type": 14
+                    },
+                    {
+                        "name": "arg_2",
+                        "type": 21
+                    },
+                    {
+                        "name": "arg_3",
+                        "type": 18
+                    }
+                ],
+                "returnType": 19,
+                "localVariables": {},
+                "expressions": {},
+                "blocks": {
+                    "data": [
+                        {
+                            "statements": []
+                        }
+                    ]
+                },
+                "body": 0
+            },
+            {
+                "name": "textureSampleBias",
+                "parameters": [
+                    {
+                        "name": "arg_0",
+                        "type": 3
+                    },
+                    {
+                        "name": "arg_1",
+                        "type": 14
+                    },
+                    {
+                        "name": "arg_2",
+                        "type": 21
+                    },
+                    {
+                        "name": "arg_3",
+                        "type": 18
+                    }
+                ],
+                "returnType": 19,
+                "localVariables": {},
+                "expressions": {},
+                "blocks": {
+                    "data": [
+                        {
+                            "statements": []
+                        }
+                    ]
+                },
+                "body": 0
+            },
+            {
+                "name": "textureSampleCompare",
+                "parameters": [
+                    {
+                        "name": "arg_0",
+                        "type": 10
+                    },
+                    {
+                        "name": "arg_1",
+                        "type": 16
+                    },
+                    {
+                        "name": "arg_2",
+                        "type": 21
+                    },
+                    {
+                        "name": "arg_3",
+                        "type": 18
+                    }
+                ],
+                "returnType": 18,
+                "localVariables": {},
+                "expressions": {},
+                "blocks": {
+                    "data": [
+                        {
+                            "statements": []
+                        }
+                    ]
+                },
+                "body": 0
+            },
+            {
+                "name": "textureSampleCompare",
+                "parameters": [
+                    {
+                        "name": "arg_0",
+                        "type": 10
+                    },
+                    {
+                        "name": "arg_1",
+                        "type": 16
+                    },
+                    {
+                        "name": "arg_2",
+                        "type": 21
+                    },
+                    {
+                        "name": "arg_3",
+                        "type": 18
+                    }
+                ],
+                "returnType": 18,
+                "localVariables": {},
+                "expressions": {},
+                "blocks": {
+                    "data": [
+                        {
+                            "statements": []
+                        }
+                    ]
+                },
+                "body": 0
+            },
+            {
+                "name": "textureSampleCompare",
+                "parameters": [
+                    {
+                        "name": "arg_0",
+                        "type": 10
+                    },
+                    {
+                        "name": "arg_1",
+                        "type": 16
+                    },
+                    {
+                        "name": "arg_2",
+                        "type": 21
+                    },
+                    {
+                        "name": "arg_3",
+                        "type": 18
+                    }
+                ],
+                "returnType": 18,
+                "localVariables": {},
+                "expressions": {},
+                "blocks": {
+                    "data": [
+                        {
+                            "statements": []
+                        }
+                    ]
+                },
+                "body": 0
+            },
+            {
+                "name": "textureSampleCompareLevel",
+                "parameters": [
+                    {
+                        "name": "arg_0",
+                        "type": 10
+                    },
+                    {
+                        "name": "arg_1",
+                        "type": 16
+                    },
+                    {
+                        "name": "arg_2",
+                        "type": 21
+                    },
+                    {
+                        "name": "arg_3",
+                        "type": 18
+                    }
+                ],
+                "returnType": 18,
+                "localVariables": {},
+                "expressions": {},
+                "blocks": {
+                    "data": [
+                        {
+                            "statements": []
+                        }
+                    ]
+                },
+                "body": 0
+            },
+            {
+                "name": "textureSampleCompareLevel",
+                "parameters": [
+                    {
+                        "name": "arg_0",
+                        "type": 10
+                    },
+                    {
+                        "name": "arg_1",
+                        "type": 16
+                    },
+                    {
+                        "name": "arg_2",
+                        "type": 21
+                    },
+                    {
+                        "name": "arg_3",
+                        "type": 18
+                    }
+                ],
+                "returnType": 18,
+                "localVariables": {},
+                "expressions": {},
+                "blocks": {
+                    "data": [
+                        {
+                            "statements": []
+                        }
+                    ]
+                },
+                "body": 0
+            },
+            {
+                "name": "textureSampleCompareLevel",
+                "parameters": [
+                    {
+                        "name": "arg_0",
+                        "type": 10
+                    },
+                    {
+                        "name": "arg_1",
+                        "type": 16
+                    },
+                    {
+                        "name": "arg_2",
+                        "type": 21
+                    },
+                    {
+                        "name": "arg_3",
+                        "type": 18
+                    }
+                ],
+                "returnType": 18,
+                "localVariables": {},
+                "expressions": {},
+                "blocks": {
+                    "data": [
+                        {
+                            "statements": []
+                        }
+                    ]
+                },
+                "body": 0
+            },
+            {
+                "name": "textureSampleGrad",
+                "parameters": [
+                    {
+                        "name": "arg_0",
+                        "type": 3
+                    },
+                    {
+                        "name": "arg_1",
+                        "type": 14
+                    },
+                    {
+                        "name": "arg_2",
+                        "type": 21
+                    },
+                    {
+                        "name": "arg_3",
+                        "type": 21
+                    },
+                    {
+                        "name": "arg_4",
+                        "type": 21
+                    }
+                ],
+                "returnType": 19,
+                "localVariables": {},
+                "expressions": {},
+                "blocks": {
+                    "data": [
+                        {
+                            "statements": []
+                        }
+                    ]
+                },
+                "body": 0
+            },
+            {
+                "name": "textureSampleGrad",
+                "parameters": [
+                    {
+                        "name": "arg_0",
+                        "type": 3
+                    },
+                    {
+                        "name": "arg_1",
+                        "type": 14
+                    },
+                    {
+                        "name": "arg_2",
+                        "type": 21
+                    },
+                    {
+                        "name": "arg_3",
+                        "type": 21
+                    },
+                    {
+                        "name": "arg_4",
+                        "type": 21
+                    }
+                ],
+                "returnType": 19,
+                "localVariables": {},
+                "expressions": {},
+                "blocks": {
+                    "data": [
+                        {
+                            "statements": []
+                        }
+                    ]
+                },
+                "body": 0
+            },
+            {
+                "name": "textureSampleGrad",
+                "parameters": [
+                    {
+                        "name": "arg_0",
+                        "type": 3
+                    },
+                    {
+                        "name": "arg_1",
+                        "type": 14
+                    },
+                    {
+                        "name": "arg_2",
+                        "type": 21
+                    },
+                    {
+                        "name": "arg_3",
+                        "type": 21
+                    },
+                    {
+                        "name": "arg_4",
+                        "type": 21
+                    }
+                ],
+                "returnType": 19,
+                "localVariables": {},
+                "expressions": {},
+                "blocks": {
+                    "data": [
+                        {
+                            "statements": []
+                        }
+                    ]
+                },
+                "body": 0
+            },
+            {
+                "name": "textureSampleLevel",
+                "parameters": [
+                    {
+                        "name": "arg_0",
+                        "type": 3
+                    },
+                    {
+                        "name": "arg_1",
+                        "type": 14
+                    },
+                    {
+                        "name": "arg_2",
+                        "type": 21
+                    },
+                    {
+                        "name": "arg_3",
+                        "type": 18
+                    }
+                ],
+                "returnType": 19,
+                "localVariables": {},
+                "expressions": {},
+                "blocks": {
+                    "data": [
+                        {
+                            "statements": []
+                        }
+                    ]
+                },
+                "body": 0
+            },
+            {
+                "name": "textureSampleLevel",
+                "parameters": [
+                    {
+                        "name": "arg_0",
+                        "type": 3
+                    },
+                    {
+                        "name": "arg_1",
+                        "type": 14
+                    },
+                    {
+                        "name": "arg_2",
+                        "type": 21
+                    },
+                    {
+                        "name": "arg_3",
+                        "type": 18
+                    }
+                ],
+                "returnType": 19,
+                "localVariables": {},
+                "expressions": {},
+                "blocks": {
+                    "data": [
+                        {
+                            "statements": []
+                        }
+                    ]
+                },
+                "body": 0
+            },
+            {
+                "name": "textureSampleLevel",
+                "parameters": [
+                    {
+                        "name": "arg_0",
+                        "type": 3
+                    },
+                    {
+                        "name": "arg_1",
+                        "type": 14
+                    },
+                    {
+                        "name": "arg_2",
+                        "type": 21
+                    },
+                    {
+                        "name": "arg_3",
+                        "type": 18
+                    }
+                ],
+                "returnType": 19,
+                "localVariables": {},
+                "expressions": {},
+                "blocks": {
+                    "data": [
+                        {
+                            "statements": []
+                        }
+                    ]
+                },
+                "body": 0
+            },
+            {
+                "name": "textureStore",
+                "parameters": [
+                    {
+                        "name": "arg_0",
+                        "type": 12
+                    },
+                    {
+                        "name": "arg_1",
+                        "type": 23
+                    },
+                    {
+                        "name": "arg_2",
+                        "type": 19
+                    }
+                ],
+                "returnType": 12,
+                "localVariables": {},
+                "expressions": {},
+                "blocks": {
+                    "data": [
+                        {
+                            "statements": []
+                        }
+                    ]
+                },
+                "body": 0
+            },
+            {
+                "name": "textureStore",
+                "parameters": [
+                    {
+                        "name": "arg_0",
+                        "type": 12
+                    },
+                    {
+                        "name": "arg_1",
+                        "type": 23
+                    },
+                    {
+                        "name": "arg_2",
+                        "type": 19
+                    }
+                ],
+                "returnType": 12,
+                "localVariables": {},
+                "expressions": {},
+                "blocks": {
+                    "data": [
+                        {
+                            "statements": []
+                        }
+                    ]
+                },
+                "body": 0
+            },
+            {
+                "name": "textureStore",
+                "parameters": [
+                    {
+                        "name": "arg_0",
+                        "type": 12
+                    },
+                    {
+                        "name": "arg_1",
+                        "type": 23
+                    },
+                    {
+                        "name": "arg_2",
+                        "type": 19
+                    }
+                ],
+                "returnType": 12,
+                "localVariables": {},
+                "expressions": {},
+                "blocks": {
+                    "data": [
+                        {
+                            "statements": []
+                        }
+                    ]
+                },
+                "body": 0
+            }
+        ]
+    },
+    "entryPoints": [
+        {
+            "name": "main",
+            "function": 0,
+            "stage": "Fragment"
+        }
+    ],
+    "diagnosticFilters": {}
+}
