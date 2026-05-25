@@ -29,6 +29,6 @@ class GoldenCompletenessTest : FunSpec({
     }
 
     test("expected golden failures are validated and versioned") {
-        GoldenExpectedFailures.load(rootDir).size shouldBe 250
+        GoldenExpectedFailures.load(rootDir).size shouldBe 248
     }
 })

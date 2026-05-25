@@ -39,7 +39,8 @@ class WgslWriter(
             for (member in structInner.members) {
                 val memberName = member.name
                 val typeName = getTypeName(member.type)
-                writeLine("$memberName: $typeName,")
+                val attribute = member.binding?.let { writeStructMemberBindingAttribute(it)?.let { attr -> "$attr " } } ?: ""
+                writeLine("$attribute$memberName: $typeName,")
             }
         }
         writeLine("}")
@@ -188,6 +189,7 @@ class WgslWriter(
         BuiltinValue.GlobalInvocationId -> "global_invocation_id"
         BuiltinValue.WorkgroupId -> "workgroup_id"
         BuiltinValue.NumWorkgroups -> "num_workgroups"
+        BuiltinValue.DrawIndex -> "draw_index"
         else -> builtin.name.lowercase()
     }
 
@@ -199,6 +201,15 @@ class WgslWriter(
         BuiltinValue.WorkgroupId, BuiltinValue.NumWorkgroups -> "vec3<u32>"
         BuiltinValue.LocalInvocationIndex, BuiltinValue.SampleMask -> "u32"
         else -> "u32"
+    }
+
+    private fun writeStructMemberBindingAttribute(binding: BindingAttribute): String? = when (binding) {
+        is BindingAttribute.Builtin -> when (binding.builtin) {
+            BuiltinValue.DrawIndex -> "@builtin(${getWgslBuiltinName(binding.builtin)})"
+            else -> null
+        }
+        is BindingAttribute.Location -> null
+        is BindingAttribute.Interpolate -> null
     }
 
     override fun getScalarTypeName(scalar: TypeInner.Scalar): String {

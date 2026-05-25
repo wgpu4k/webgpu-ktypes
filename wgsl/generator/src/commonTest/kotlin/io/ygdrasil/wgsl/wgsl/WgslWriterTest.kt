@@ -4,7 +4,9 @@ import io.kotest.core.spec.style.FunSpec
 import io.kotest.matchers.string.shouldContain
 import io.ygdrasil.wgsl.arena.rangeOf
 import io.ygdrasil.wgsl.arena.Arena
+import io.ygdrasil.wgsl.ir.BindingAttribute
 import io.ygdrasil.wgsl.ir.Block
+import io.ygdrasil.wgsl.ir.BuiltinValue
 import io.ygdrasil.wgsl.ir.Expression
 import io.ygdrasil.wgsl.ir.ExpressionKind
 import io.ygdrasil.wgsl.ir.Function
@@ -64,6 +66,24 @@ class WgslWriterTest : FunSpec({
         code shouldContain "struct Struct_1"
         code shouldContain "a: f32"
         code shouldContain "fn my_func()"
+    }
+
+    test("struct member builtin bindings are written") {
+        val module = Module()
+        val u32Handle = module.types.append(Type(TypeInner.Scalar(ScalarKind.Uint, 4)))
+
+        module.types.append(
+            Type(
+                TypeInner.Struct(
+                    listOf(
+                        StructMember("draw_index", u32Handle, BindingAttribute.Builtin(BuiltinValue.DrawIndex), 0)
+                    )
+                )
+            )
+        )
+
+        val code = WgslModule.writeString(module)
+        code shouldContain "@builtin(draw_index) draw_index: u32"
     }
 
     test("emit non call expression writes phony assignment") {

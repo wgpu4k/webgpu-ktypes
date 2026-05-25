@@ -157,7 +157,6 @@ Each listed case is still executed. The test fails if the case starts passing un
 | `roundtrip` | `debug-symbol-large-source.wgsl` | `roundtrip-semantic-isomorphism` | Golden output is reviewed after stage keyword identifier resolution, but roundtrip currently changes location binding shape. | `#16` |
 | `roundtrip` | `debug-symbol-simple.wgsl` | `roundtrip-semantic-isomorphism` | Baseline debt from issue 16 golden stabilization. | `#16` |
 | `roundtrip` | `debug-symbol-terrain.wgsl` | `roundtrip-semantic-isomorphism` | Golden output is reviewed after stage keyword identifier resolution, but roundtrip currently changes location binding shape. | `#16` |
-| `roundtrip` | `draw-index.wgsl` | `roundtrip-semantic-isomorphism` | Golden output is reviewed, but WGSL writer currently drops the draw_index builtin binding on struct-member input. | `#16` |
 | `roundtrip` | `dualsource.wgsl` | `roundtrip-semantic-isomorphism` | Baseline debt from issue 16 golden stabilization. | `#16` |
 | `roundtrip` | `extra.wgsl` | `roundtrip-semantic-isomorphism` | Baseline debt from issue 16 golden stabilization. | `#16` |
 | `roundtrip` | `f16-native.wgsl` | `roundtrip-semantic-isomorphism` | Baseline debt from issue 16 golden stabilization. | `#16` |
@@ -216,7 +215,6 @@ Each listed case is still executed. The test fails if the case starts passing un
 | `wgsl` | `debug-symbol-large-source.wgsl` | `roundtrip-semantic-isomorphism` | Golden output is reviewed after stage keyword identifier resolution, but roundtrip currently changes location binding shape. | `#16` |
 | `wgsl` | `debug-symbol-simple.wgsl` | `roundtrip-semantic-isomorphism` | Baseline debt from issue 16 golden stabilization. | `#16` |
 | `wgsl` | `debug-symbol-terrain.wgsl` | `roundtrip-semantic-isomorphism` | Golden output is reviewed after stage keyword identifier resolution, but roundtrip currently changes location binding shape. | `#16` |
-| `wgsl` | `draw-index.wgsl` | `roundtrip-semantic-isomorphism` | Golden output is reviewed, but WGSL writer currently drops the draw_index builtin binding on struct-member input. | `#16` |
 | `wgsl` | `dualsource.wgsl` | `roundtrip-semantic-isomorphism` | Baseline debt from issue 16 golden stabilization. | `#16` |
 | `wgsl` | `extra.wgsl` | `roundtrip-semantic-isomorphism` | Baseline debt from issue 16 golden stabilization. | `#16` |
 | `wgsl` | `f16-native.wgsl` | `roundtrip-semantic-isomorphism` | Baseline debt from issue 16 golden stabilization. | `#16` |
