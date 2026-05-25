@@ -193,6 +193,7 @@ class TypeIndex {
             // Built-in functions
             "abs", "acos", "acosh", "all", "any", "arrayLength", "asin", "asinh", "atan", "atanh", "atan2",
             "ceil", "clamp", "cos", "cosh", "cross", "degrees", "determinant", "distance", "dot",
+            "dot4I8Packed", "dot4U8Packed",
             "exp", "exp2", "faceForward", "floor", "fma", "fract", "frexp",
             "inverseSqrt", "ldexp", "length", "log", "log2", "max", "min", "mix", "modf",
             "normalize", "pow", "quantizeToF16", "radians", "reflect", "refract", "round",
