@@ -201,6 +201,8 @@ class TypeIndex {
             "textureDimensions", "textureGather", "textureGatherCompare", "textureLoad", "textureSample",
             "textureSampleBias", "textureSampleCompare", "textureSampleCompareLevel", "textureSampleGrad",
             "textureSampleLevel", "textureSampleBaseClampToEdge", "textureStore",
+            "textureAtomicAdd", "textureAtomicAnd", "textureAtomicMax", "textureAtomicMin",
+            "textureAtomicOr", "textureAtomicXor",
             "atomicLoad", "atomicStore", "atomicAdd", "atomicSub", "atomicMax", "atomicMin",
             "atomicAnd", "atomicOr", "atomicXor", "atomicExchange", "atomicCompareExchangeWeak",
             "workgroupBarrier", "storageBarrier", "subgroupBarrier", "textureBarrier",

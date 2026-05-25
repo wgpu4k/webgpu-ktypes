@@ -26,6 +26,20 @@ class TypeIndexTest : FunSpec({
         index.isKnownType("MyCustomType").shouldBeFalse()
     }
 
+    test("texture atomic builtins are known values") {
+        val index = TypeIndex()
+        listOf(
+            "textureAtomicAdd",
+            "textureAtomicAnd",
+            "textureAtomicMax",
+            "textureAtomicMin",
+            "textureAtomicOr",
+            "textureAtomicXor"
+        ).forEach { name ->
+            index.isBuiltinValue(name).shouldBeTrue()
+        }
+    }
+
     test("builtin vector type names") {
         val index = TypeIndex()
         index.isBuiltinVectorType("vec2").shouldBeTrue()
