@@ -410,13 +410,16 @@ class Lexer(
             return Token.simple(TokenKind.UNKNOWN, spanFrom(start))
         }
 
-        // Suffixes (standard WGSL only: f, F, h, H for floats; i, I, u, U for integers)
+        // Suffixes (standard WGSL plus Naga int64 fixtures: li, lu).
         if (isFloat) {
             if (peekChar()?.let { it in "fFhH" } == true) {
                 consume()
             }
         } else {
-            if (peekChar()?.let { it in "iIuU" } == true) {
+            if (peekChar()?.let { it in "lL" } == true && peekChar(1)?.let { it in "iIuU" } == true) {
+                consume()
+                consume()
+            } else if (peekChar()?.let { it in "iIuU" } == true) {
                 consume()
             }
         }
@@ -471,8 +474,19 @@ class Lexer(
             return lexFloatLiteral(start, startIndex)
         }
 
-        // Check for integer suffixes (standard WGSL: i, u)
+        // Check for integer suffixes (standard WGSL i/u plus Naga int64 li/lu).
         val nextChar = peekChar()?.lowercaseChar()
+        if (nextChar == 'l' && peekChar(1)?.lowercaseChar()?.let { it == 'i' || it == 'u' } == true) {
+            consume()
+            val signedness = peekChar()?.lowercaseChar()
+            consume()
+            val text = source.substring(startIndex, index)
+            return if (signedness == 'u') Token.uintLiteral(text, spanFrom(start)) else Token.intLiteral(
+                text,
+                spanFrom(start)
+            )
+        }
+
         if (nextChar == 'u' || nextChar == 'i') {
             consume()
             val text = source.substring(startIndex, index)

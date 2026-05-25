@@ -869,7 +869,12 @@ class Lowerer {
         // Code existant commence ici...
         val kind = when (astExpr) {
             is IntLiteral -> {
-                val scalar = if (astExpr.suffix == "u") IrScalarValue.U32(astExpr.value) else IrScalarValue.I32(astExpr.value.toInt())
+                val scalar = when (astExpr.suffix?.lowercase()) {
+                    "u" -> IrScalarValue.U32(astExpr.value)
+                    "li" -> IrScalarValue.I64(astExpr.value)
+                    "lu" -> IrScalarValue.U64(astExpr.value.toULong())
+                    else -> IrScalarValue.I32(astExpr.value.toInt())
+                }
                 IrExpressionKind.Literal(IrLiteralValue.Scalar(scalar))
             }
             is FloatLiteral -> IrExpressionKind.Literal(IrLiteralValue.Scalar(IrScalarValue.F32(astExpr.value.toFloat())))

@@ -45,8 +45,8 @@ short int16_function(short x) {
     local_0 = (local_0 / short(3));
     local_0 = (local_0 % short(4));
     local_0 = (local_0 & short(0));
-    local_0 = (local_0 | short(0));
-    local_0 = (local_0 ^ short(0));
+    local_0 = (local_0 | short(16));
+    local_0 = (local_0 ^ short(1));
     local_0 = (local_0 << 2u);
     local_0 = (local_0 >> 1u);
     local_0 = -(local_0);
@@ -112,8 +112,8 @@ ushort uint16_function(ushort x) {
     local_0 = (local_0 / ushort(3));
     local_0 = (local_0 % ushort(4));
     local_0 = (local_0 & ushort(0));
-    local_0 = (local_0 | ushort(0));
-    local_0 = (local_0 ^ ushort(0));
+    local_0 = (local_0 | ushort(16));
+    local_0 = (local_0 ^ ushort(1));
     global_6.val_u32 = uint(local_0);
     global_6.val_i32 = int(local_0);
     global_6.val_f32 = float(local_0);

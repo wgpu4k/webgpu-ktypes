@@ -5,37 +5,37 @@ struct Struct_11 {
     uint val_u32;
     int val_i32;
     float val_f32;
-    uint val_u16;
-    uint2 val_u16_2;
-    uint3 val_u16_3;
-    uint4 val_u16_4;
-    int val_i16;
-    int2 val_i16_2;
-    int3 val_i16_3;
-    int4 val_i16_4;
-    uint final_value;
+    uint16_t val_u16;
+    uint16_t2 val_u16_2;
+    uint16_t3 val_u16_3;
+    uint16_t4 val_u16_4;
+    int16_t val_i16;
+    int16_t2 val_i16_2;
+    int16_t3 val_i16_3;
+    int16_t4 val_i16_4;
+    uint16_t final_value;
 };
 struct Struct_14 {
-    uint val_u16_array_2[2];
-    int val_i16_array_2[2];
+    uint16_t val_u16_array_2[2];
+    int16_t val_i16_array_2[2];
 };
-int global_0 = int(1);
-uint global_1 = uint(20);
-int global_2 = int(half(33000.0f));
-uint global_3;
+int16_t global_0 = int16_t(1);
+uint16_t global_1 = uint16_t(20);
+int16_t global_2 = int16_t(half(33000.0f));
+uint16_t global_3;
 Struct_11 global_4 : register(b0);
 Struct_11 global_5 : register(u1);
 Struct_11 global_6 : register(u3);
 Struct_14 global_7 : register(u2);
 Struct_14 global_8 : register(u4);
 
-int int16_function(int x) {
+int16_t int16_function(int16_t x) {
     global_0;
-    int local_0 = int(global_1);
-    local_0 = (local_0 + int(5));
-    local_0 = (local_0 + int(global_4.val_u32));
-    local_0 = (local_0 + int(global_4.val_i32));
-    local_0 = (local_0 + int3(global_4.val_i16)[2]);
+    int16_t local_0 = int16_t(global_1);
+    local_0 = (local_0 + int16_t(5));
+    local_0 = (local_0 + int16_t(global_4.val_u32));
+    local_0 = (local_0 + int16_t(global_4.val_i32));
+    local_0 = (local_0 + int16_t3(global_4.val_i16)[2]);
     global_6.val_i16 = (global_4.val_i16 + global_5.val_i16);
     global_6.val_i16_2 = (global_4.val_i16_2 + global_5.val_i16_2);
     global_6.val_i16_3 = (global_4.val_i16_3 + global_5.val_i16_3);
@@ -46,64 +46,64 @@ int int16_function(int x) {
     local_0 = min(local_0, local_0);
     local_0 = clamp(local_0, local_0, local_0);
     local_0 = sign(local_0);
-    local_0 = (local_0 - int(1));
-    local_0 = (local_0 * int(2));
-    local_0 = (local_0 / int(3));
-    local_0 = (local_0 % int(4));
-    local_0 = (local_0 & int(0));
-    local_0 = (local_0 | int(0));
-    local_0 = (local_0 ^ int(0));
+    local_0 = (local_0 - int16_t(1));
+    local_0 = (local_0 * int16_t(2));
+    local_0 = (local_0 / int16_t(3));
+    local_0 = (local_0 % int16_t(4));
+    local_0 = (local_0 & int16_t(0));
+    local_0 = (local_0 | int16_t(16));
+    local_0 = (local_0 ^ int16_t(1));
     local_0 = (local_0 << 2u);
     local_0 = (local_0 >> 1u);
     local_0 = -(local_0);
-    bool local_1 = (local_0 < int(0));
-    bool local_2 = (local_0 <= int(0));
-    bool local_3 = (local_0 > int(0));
-    bool local_4 = (local_0 >= int(0));
-    bool local_5 = (local_0 == int(0));
-    bool local_6 = (local_0 != int(0));
-    local_0 = select(int(1), int(2), local_1);
-    int local_7[4] = int[4](int(1), int(2), int(3), int(4));
+    bool local_1 = (local_0 < int16_t(0));
+    bool local_2 = (local_0 <= int16_t(0));
+    bool local_3 = (local_0 > int16_t(0));
+    bool local_4 = (local_0 >= int16_t(0));
+    bool local_5 = (local_0 == int16_t(0));
+    bool local_6 = (local_0 != int16_t(0));
+    local_0 = select(int16_t(1), int16_t(2), local_1);
+    int16_t local_7[4] = int16_t[4](int16_t(1), int16_t(2), int16_t(3), int16_t(4));
     local_7[0] = local_0;
     local_0 = local_7[1];
-    uint local_8 = uint(1);
+    uint16_t local_8 = uint16_t(1);
     local_0 = local_7[local_8];
     global_6.val_u32 = uint(local_0);
     global_6.val_i32 = int(local_0);
     global_6.val_f32 = float(local_0);
-    local_0 = int(global_6.val_u32);
-    uint local_9 = asuint(local_0);
+    local_0 = int16_t(global_6.val_u32);
+    uint16_t local_9 = asuint(local_0);
     local_0 = asint(local_9);
-    int2 local_10 = (global_4.val_i16_2 + global_4.val_i16_2);
-    int2 local_11 = (local_10 * int2(int(2)));
+    int16_t2 local_10 = (global_4.val_i16_2 + global_4.val_i16_2);
+    int16_t2 local_11 = (local_10 * int16_t2(int16_t(2)));
     global_6.val_i16_2 = local_11;
     return local_0;
 }
 
-int abs(int arg_0) {
+int16_t abs(int16_t arg_0) {
 }
 
-int max(int arg_0, int arg_1) {
+int16_t max(int16_t arg_0, int16_t arg_1) {
 }
 
-int min(int arg_0, int arg_1) {
+int16_t min(int16_t arg_0, int16_t arg_1) {
 }
 
-int clamp(int arg_0, int arg_1, int arg_2) {
+int16_t clamp(int16_t arg_0, int16_t arg_1, int16_t arg_2) {
 }
 
-int sign(int arg_0) {
+int16_t sign(int16_t arg_0) {
 }
 
-int select(int arg_0, int arg_1, bool arg_2) {
+int16_t select(int16_t arg_0, int16_t arg_1, bool arg_2) {
 }
 
-uint uint16_function(uint x) {
-    uint local_0 = uint(global_1);
-    local_0 = (local_0 + uint(5));
-    local_0 = (local_0 + uint(global_4.val_u32));
-    local_0 = (local_0 + uint(global_4.val_i32));
-    local_0 = (local_0 + uint3(global_4.val_u16)[2]);
+uint16_t uint16_function(uint16_t x) {
+    uint16_t local_0 = uint16_t(global_1);
+    local_0 = (local_0 + uint16_t(5));
+    local_0 = (local_0 + uint16_t(global_4.val_u32));
+    local_0 = (local_0 + uint16_t(global_4.val_i32));
+    local_0 = (local_0 + uint16_t3(global_4.val_u16)[2]);
     global_6.val_u16 = (global_4.val_u16 + global_5.val_u16);
     global_6.val_u16_2 = (global_4.val_u16_2 + global_5.val_u16_2);
     global_6.val_u16_3 = (global_4.val_u16_3 + global_5.val_u16_3);
@@ -113,37 +113,37 @@ uint uint16_function(uint x) {
     local_0 = max(local_0, local_0);
     local_0 = min(local_0, local_0);
     local_0 = clamp(local_0, local_0, local_0);
-    local_0 = (local_0 - uint(1));
-    local_0 = (local_0 * uint(2));
-    local_0 = (local_0 / uint(3));
-    local_0 = (local_0 % uint(4));
-    local_0 = (local_0 & uint(0));
-    local_0 = (local_0 | uint(0));
-    local_0 = (local_0 ^ uint(0));
+    local_0 = (local_0 - uint16_t(1));
+    local_0 = (local_0 * uint16_t(2));
+    local_0 = (local_0 / uint16_t(3));
+    local_0 = (local_0 % uint16_t(4));
+    local_0 = (local_0 & uint16_t(0));
+    local_0 = (local_0 | uint16_t(16));
+    local_0 = (local_0 ^ uint16_t(1));
     global_6.val_u32 = uint(local_0);
     global_6.val_i32 = int(local_0);
     global_6.val_f32 = float(local_0);
-    local_0 = uint(global_6.val_u32);
+    local_0 = uint16_t(global_6.val_u32);
     return local_0;
 }
 
-uint abs(uint arg_0) {
+uint16_t abs(uint16_t arg_0) {
 }
 
-uint max(uint arg_0, uint arg_1) {
+uint16_t max(uint16_t arg_0, uint16_t arg_1) {
 }
 
-uint min(uint arg_0, uint arg_1) {
+uint16_t min(uint16_t arg_0, uint16_t arg_1) {
 }
 
-uint clamp(uint arg_0, uint arg_1, uint arg_2) {
+uint16_t clamp(uint16_t arg_0, uint16_t arg_1, uint16_t arg_2) {
 }
 
 [numthreads(1, 1, 1)]
 void main() {
-    global_3 = uint(0);
-    global_6.final_value = (uint16_function(uint(67)) + uint(int16_function(int(60))));
-    int local_0 = int(subgroup_invocation_id);
+    global_3 = uint16_t(0);
+    global_6.final_value = (uint16_function(uint16_t(67)) + uint16_t(int16_function(int16_t(60))));
+    int16_t local_0 = int16_t(subgroup_invocation_id);
     local_0 = subgroupAdd(local_0);
     local_0 = subgroupMul(local_0);
     local_0 = subgroupMin(local_0);
@@ -152,7 +152,7 @@ void main() {
     local_0 = subgroupInclusiveAdd(local_0);
     local_0 = subgroupBroadcastFirst(local_0);
     local_0 = subgroupBroadcast(local_0, 4u);
-    uint local_1 = uint(subgroup_invocation_id);
+    uint16_t local_1 = uint16_t(subgroup_invocation_id);
     local_1 = subgroupAdd(local_1);
     local_1 = subgroupMin(local_1);
     local_1 = subgroupMax(local_1);
@@ -160,35 +160,35 @@ void main() {
     global_6.val_u16 = local_1;
 }
 
-int subgroupAdd(int arg_0) {
+int16_t subgroupAdd(int16_t arg_0) {
 }
 
-int subgroupMul(int arg_0) {
+int16_t subgroupMul(int16_t arg_0) {
 }
 
-int subgroupMin(int arg_0) {
+int16_t subgroupMin(int16_t arg_0) {
 }
 
-int subgroupMax(int arg_0) {
+int16_t subgroupMax(int16_t arg_0) {
 }
 
-int subgroupExclusiveAdd(int arg_0) {
+int16_t subgroupExclusiveAdd(int16_t arg_0) {
 }
 
-int subgroupInclusiveAdd(int arg_0) {
+int16_t subgroupInclusiveAdd(int16_t arg_0) {
 }
 
-int subgroupBroadcastFirst(int arg_0) {
+int16_t subgroupBroadcastFirst(int16_t arg_0) {
 }
 
-int subgroupBroadcast(int arg_0, uint arg_1) {
+int16_t subgroupBroadcast(int16_t arg_0, uint arg_1) {
 }
 
-uint subgroupAdd(uint arg_0) {
+uint16_t subgroupAdd(uint16_t arg_0) {
 }
 
-uint subgroupMin(uint arg_0) {
+uint16_t subgroupMin(uint16_t arg_0) {
 }
 
-uint subgroupMax(uint arg_0) {
+uint16_t subgroupMax(uint16_t arg_0) {
 }

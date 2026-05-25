@@ -343,8 +343,20 @@ class HlslWriter(
     override fun getScalarTypeName(scalar: TypeInner.Scalar): String {
         return when (scalar.kind) {
             ScalarKind.Bool -> "bool"
-            ScalarKind.Sint -> "int"
-            ScalarKind.Uint -> "uint"
+            ScalarKind.Sint -> when (scalar.width) {
+                1 -> "int8_t"
+                2 -> "int16_t"
+                4 -> "int"
+                8 -> "int64_t"
+                else -> "int"
+            }
+            ScalarKind.Uint -> when (scalar.width) {
+                1 -> "uint8_t"
+                2 -> "uint16_t"
+                4 -> "uint"
+                8 -> "uint64_t"
+                else -> "uint"
+            }
             ScalarKind.F32 -> "float"
             ScalarKind.F16 -> "half"
             ScalarKind.F64 -> "double"

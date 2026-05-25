@@ -3,24 +3,24 @@ struct Struct_11 {
     val_u32: u32,
     val_i32: i32,
     val_f32: f32,
-    val_u16: u32,
-    val_u16_2: vec2<u32>,
-    val_u16_3: vec3<u32>,
-    val_u16_4: vec4<u32>,
-    val_i16: i32,
-    val_i16_2: vec2<i32>,
-    val_i16_3: vec3<i32>,
-    val_i16_4: vec4<i32>,
-    final_value: u32,
+    val_u16: u16,
+    val_u16_2: vec2<u16>,
+    val_u16_3: vec3<u16>,
+    val_u16_4: vec4<u16>,
+    val_i16: i16,
+    val_i16_2: vec2<i16>,
+    val_i16_3: vec3<i16>,
+    val_i16_4: vec4<i16>,
+    final_value: u16,
 }
 struct Struct_14 {
-    val_u16_array_2: array<u32, 2>,
-    val_i16_array_2: array<i32, 2>,
+    val_u16_array_2: array<u16, 2>,
+    val_i16_array_2: array<i16, 2>,
 }
-var<private> private_variable: i32 = i32(1);
-var<private> constant_variable: u32 = u32(20);
-var<private> f16_to_i16_clamped: i32 = i32(f16(33000.0f));
-var<workgroup> shared_val: u32;
+var<private> private_variable: i16 = i16(1);
+var<private> constant_variable: u16 = u16(20);
+var<private> f16_to_i16_clamped: i16 = i16(f16(33000.0f));
+var<workgroup> shared_val: u16;
 @group(0) @binding(0)
 var<uniform> input_uniform: Struct_11;
 @group(0) @binding(1)
@@ -32,13 +32,13 @@ var<storage> input_arrays: Struct_14;
 @group(0) @binding(4)
 var<storage, read_write> output_arrays: Struct_14;
 
-fn int16_function(x: i32) -> i32 {
+fn int16_function(x: i16) -> i16 {
     _ = private_variable;
-    var val: i32 = i32(constant_variable);
-    val = (val + i32(5));
-    val = (val + i32(input_uniform.val_u32));
-    val = (val + i32(input_uniform.val_i32));
-    val = (val + vec3<i32>(input_uniform.val_i16)[2]);
+    var val: i16 = i16(constant_variable);
+    val = (val + i16(5));
+    val = (val + i16(input_uniform.val_u32));
+    val = (val + i16(input_uniform.val_i32));
+    val = (val + vec3<i16>(input_uniform.val_i16)[2]);
     output.val_i16 = (input_uniform.val_i16 + input_storage.val_i16);
     output.val_i16_2 = (input_uniform.val_i16_2 + input_storage.val_i16_2);
     output.val_i16_3 = (input_uniform.val_i16_3 + input_storage.val_i16_3);
@@ -49,64 +49,64 @@ fn int16_function(x: i32) -> i32 {
     val = min(val, val);
     val = clamp(val, val, val);
     val = sign(val);
-    val = (val - i32(1));
-    val = (val * i32(2));
-    val = (val / i32(3));
-    val = (val % i32(4));
-    val = (val & i32(0));
-    val = (val | i32(0));
-    val = (val ^ i32(0));
+    val = (val - i16(1));
+    val = (val * i16(2));
+    val = (val / i16(3));
+    val = (val % i16(4));
+    val = (val & i16(0));
+    val = (val | i16(16));
+    val = (val ^ i16(1));
     val = (val << 2u);
     val = (val >> 1u);
     val = -(val);
-    var cmp_lt: bool = (val < i32(0));
-    var cmp_le: bool = (val <= i32(0));
-    var cmp_gt: bool = (val > i32(0));
-    var cmp_ge: bool = (val >= i32(0));
-    var cmp_eq: bool = (val == i32(0));
-    var cmp_ne: bool = (val != i32(0));
-    val = select(i32(1), i32(2), cmp_lt);
-    var arr: array<i32, 4> = array<i32, 4>(i32(1), i32(2), i32(3), i32(4));
+    var cmp_lt: bool = (val < i16(0));
+    var cmp_le: bool = (val <= i16(0));
+    var cmp_gt: bool = (val > i16(0));
+    var cmp_ge: bool = (val >= i16(0));
+    var cmp_eq: bool = (val == i16(0));
+    var cmp_ne: bool = (val != i16(0));
+    val = select(i16(1), i16(2), cmp_lt);
+    var arr: array<i16, 4> = array<i16, 4>(i16(1), i16(2), i16(3), i16(4));
     arr[0] = val;
     val = arr[1];
-    var u16_idx: u32 = u32(1);
+    var u16_idx: u16 = u16(1);
     val = arr[u16_idx];
     output.val_u32 = u32(val);
     output.val_i32 = i32(val);
     output.val_f32 = f32(val);
-    val = i32(output.val_u32);
-    var as_unsigned: u32 = bitcast<u32>(val);
-    val = bitcast<i32>(as_unsigned);
-    var v: vec2<i32> = (input_uniform.val_i16_2 + input_uniform.val_i16_2);
-    var v2: vec2<i32> = (v * vec2<i32>(i32(2)));
+    val = i16(output.val_u32);
+    var as_unsigned: u16 = bitcast<u16>(val);
+    val = bitcast<i16>(as_unsigned);
+    var v: vec2<i16> = (input_uniform.val_i16_2 + input_uniform.val_i16_2);
+    var v2: vec2<i16> = (v * vec2<i16>(i16(2)));
     output.val_i16_2 = v2;
     return val;
 }
 
-fn abs(arg_0: i32) -> i32 {
+fn abs(arg_0: i16) -> i16 {
 }
 
-fn max(arg_0: i32, arg_1: i32) -> i32 {
+fn max(arg_0: i16, arg_1: i16) -> i16 {
 }
 
-fn min(arg_0: i32, arg_1: i32) -> i32 {
+fn min(arg_0: i16, arg_1: i16) -> i16 {
 }
 
-fn clamp(arg_0: i32, arg_1: i32, arg_2: i32) -> i32 {
+fn clamp(arg_0: i16, arg_1: i16, arg_2: i16) -> i16 {
 }
 
-fn sign(arg_0: i32) -> i32 {
+fn sign(arg_0: i16) -> i16 {
 }
 
-fn select(arg_0: i32, arg_1: i32, arg_2: bool) -> i32 {
+fn select(arg_0: i16, arg_1: i16, arg_2: bool) -> i16 {
 }
 
-fn uint16_function(x: u32) -> u32 {
-    var val: u32 = u32(constant_variable);
-    val = (val + u32(5));
-    val = (val + u32(input_uniform.val_u32));
-    val = (val + u32(input_uniform.val_i32));
-    val = (val + vec3<u32>(input_uniform.val_u16)[2]);
+fn uint16_function(x: u16) -> u16 {
+    var val: u16 = u16(constant_variable);
+    val = (val + u16(5));
+    val = (val + u16(input_uniform.val_u32));
+    val = (val + u16(input_uniform.val_i32));
+    val = (val + vec3<u16>(input_uniform.val_u16)[2]);
     output.val_u16 = (input_uniform.val_u16 + input_storage.val_u16);
     output.val_u16_2 = (input_uniform.val_u16_2 + input_storage.val_u16_2);
     output.val_u16_3 = (input_uniform.val_u16_3 + input_storage.val_u16_3);
@@ -116,70 +116,70 @@ fn uint16_function(x: u32) -> u32 {
     val = max(val, val);
     val = min(val, val);
     val = clamp(val, val, val);
-    val = (val - u32(1));
-    val = (val * u32(2));
-    val = (val / u32(3));
-    val = (val % u32(4));
-    val = (val & u32(0));
-    val = (val | u32(0));
-    val = (val ^ u32(0));
+    val = (val - u16(1));
+    val = (val * u16(2));
+    val = (val / u16(3));
+    val = (val % u16(4));
+    val = (val & u16(0));
+    val = (val | u16(16));
+    val = (val ^ u16(1));
     output.val_u32 = u32(val);
     output.val_i32 = i32(val);
     output.val_f32 = f32(val);
-    val = u32(output.val_u32);
+    val = u16(output.val_u32);
     return val;
 }
 
-fn abs(arg_0: u32) -> u32 {
+fn abs(arg_0: u16) -> u16 {
 }
 
-fn max(arg_0: u32, arg_1: u32) -> u32 {
+fn max(arg_0: u16, arg_1: u16) -> u16 {
 }
 
-fn min(arg_0: u32, arg_1: u32) -> u32 {
+fn min(arg_0: u16, arg_1: u16) -> u16 {
 }
 
-fn clamp(arg_0: u32, arg_1: u32, arg_2: u32) -> u32 {
+fn clamp(arg_0: u16, arg_1: u16, arg_2: u16) -> u16 {
 }
 
-fn subgroupAdd(arg_0: i32) -> i32 {
+fn subgroupAdd(arg_0: i16) -> i16 {
 }
 
-fn subgroupMul(arg_0: i32) -> i32 {
+fn subgroupMul(arg_0: i16) -> i16 {
 }
 
-fn subgroupMin(arg_0: i32) -> i32 {
+fn subgroupMin(arg_0: i16) -> i16 {
 }
 
-fn subgroupMax(arg_0: i32) -> i32 {
+fn subgroupMax(arg_0: i16) -> i16 {
 }
 
-fn subgroupExclusiveAdd(arg_0: i32) -> i32 {
+fn subgroupExclusiveAdd(arg_0: i16) -> i16 {
 }
 
-fn subgroupInclusiveAdd(arg_0: i32) -> i32 {
+fn subgroupInclusiveAdd(arg_0: i16) -> i16 {
 }
 
-fn subgroupBroadcastFirst(arg_0: i32) -> i32 {
+fn subgroupBroadcastFirst(arg_0: i16) -> i16 {
 }
 
-fn subgroupBroadcast(arg_0: i32, arg_1: u32) -> i32 {
+fn subgroupBroadcast(arg_0: i16, arg_1: u32) -> i16 {
 }
 
-fn subgroupAdd(arg_0: u32) -> u32 {
+fn subgroupAdd(arg_0: u16) -> u16 {
 }
 
-fn subgroupMin(arg_0: u32) -> u32 {
+fn subgroupMin(arg_0: u16) -> u16 {
 }
 
-fn subgroupMax(arg_0: u32) -> u32 {
+fn subgroupMax(arg_0: u16) -> u16 {
 }
 
 @compute
 fn main(subgroup_invocation_id: u32) {
-    shared_val = u32(0);
-    output.final_value = (uint16_function(u32(67)) + u32(int16_function(i32(60))));
-    var sg_val: i32 = i32(subgroup_invocation_id);
+    shared_val = u16(0);
+    output.final_value = (uint16_function(u16(67)) + u16(int16_function(i16(60))));
+    var sg_val: i16 = i16(subgroup_invocation_id);
     sg_val = subgroupAdd(sg_val);
     sg_val = subgroupMul(sg_val);
     sg_val = subgroupMin(sg_val);
@@ -188,7 +188,7 @@ fn main(subgroup_invocation_id: u32) {
     sg_val = subgroupInclusiveAdd(sg_val);
     sg_val = subgroupBroadcastFirst(sg_val);
     sg_val = subgroupBroadcast(sg_val, 4u);
-    var sg_uval: u32 = u32(subgroup_invocation_id);
+    var sg_uval: u16 = u16(subgroup_invocation_id);
     sg_uval = subgroupAdd(sg_uval);
     sg_uval = subgroupMin(sg_uval);
     sg_uval = subgroupMax(sg_uval);

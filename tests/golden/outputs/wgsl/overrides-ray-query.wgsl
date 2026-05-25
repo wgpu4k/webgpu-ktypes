@@ -3,7 +3,7 @@ var<private> o: f32;
 @group(0) @binding(0)
 var<private> acc_struct: acceleration_structure;
 
-fn RayDesc(arg_0: u32, arg_1: u32, arg_2: f32, arg_3: f32, arg_4: vec3<f32>, arg_5: vec3<f32>) -> u32 {
+fn RayDesc(arg_0: u32, arg_1: i32, arg_2: f32, arg_3: f32, arg_4: vec3<f32>, arg_5: vec3<f32>) -> u32 {
 }
 
 fn rayQueryInitialize(arg_0: ptr<function, ray_query>, arg_1: acceleration_structure, arg_2: u32) -> ptr<function, ray_query> {
@@ -15,7 +15,7 @@ fn rayQueryProceed(arg_0: ptr<function, ray_query>) -> ptr<function, ray_query> 
 @compute
 fn main() {
     var rq: ray_query;
-    var desc: u32 = RayDesc(256u, 0u, (o * 17.0f), (o * 19.0f), vec3<f32>((o * 23.0f)), vec3<f32>((o * 29.0f), (o * 31.0f), (o * 37.0f)));
+    var desc: u32 = RayDesc(256u, 0, (o * 17.0f), (o * 19.0f), vec3<f32>((o * 23.0f)), vec3<f32>((o * 29.0f), (o * 31.0f), (o * 37.0f)));
     rayQueryInitialize(&rq, acc_struct, desc);
     loop {
         if (rayQueryProceed(&rq)) {

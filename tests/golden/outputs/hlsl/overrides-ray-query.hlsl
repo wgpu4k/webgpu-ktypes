@@ -7,7 +7,7 @@ RaytracingAccelerationStructure global_1 : register(t0);
 [numthreads(1, 1, 1)]
 void main() {
     RayQuery local_0;
-    uint local_1 = RayDesc(256u, 0u, (global_0 * 17.0f), (global_0 * 19.0f), float3((global_0 * 23.0f)), float3((global_0 * 29.0f), (global_0 * 31.0f), (global_0 * 37.0f)));
+    uint local_1 = RayDesc(256u, 0, (global_0 * 17.0f), (global_0 * 19.0f), float3((global_0 * 23.0f)), float3((global_0 * 29.0f), (global_0 * 31.0f), (global_0 * 37.0f)));
     rayQueryInitialize(&local_0, global_1, local_1);
     while (true) {
         if (rayQueryProceed(&local_0)) {
@@ -17,7 +17,7 @@ void main() {
     }
 }
 
-uint RayDesc(uint arg_0, uint arg_1, float arg_2, float arg_3, float3 arg_4, float3 arg_5) {
+uint RayDesc(uint arg_0, int arg_1, float arg_2, float arg_3, float3 arg_4, float3 arg_5) {
 }
 
 void rayQueryInitialize(void arg_0, RaytracingAccelerationStructure arg_1, uint arg_2) {

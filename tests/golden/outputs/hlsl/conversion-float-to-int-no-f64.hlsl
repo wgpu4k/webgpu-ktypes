@@ -16,12 +16,12 @@ uint test_f16_to_u32(half f) {
     return uint(f);
 }
 
-int test_f16_to_i64(half f) {
-    return int(f);
+int64_t test_f16_to_i64(half f) {
+    return int64_t(f);
 }
 
-uint test_f16_to_u64(half f) {
-    return uint(f);
+uint64_t test_f16_to_u64(half f) {
+    return uint64_t(f);
 }
 
 int test_f32_to_i32(float f) {
@@ -32,12 +32,12 @@ uint test_f32_to_u32(float f) {
     return uint(f);
 }
 
-int test_f32_to_i64(float f) {
-    return int(f);
+int64_t test_f32_to_i64(float f) {
+    return int64_t(f);
 }
 
-uint test_f32_to_u64(float f) {
-    return uint(f);
+uint64_t test_f32_to_u64(float f) {
+    return uint64_t(f);
 }
 
 int2 test_f16_to_i32_vec(half2 f) {
@@ -48,12 +48,12 @@ uint2 test_f16_to_u32_vec(half2 f) {
     return uint2(f);
 }
 
-int2 test_f16_to_i64_vec(half2 f) {
-    return int2(f);
+int64_t2 test_f16_to_i64_vec(half2 f) {
+    return int64_t2(f);
 }
 
-uint2 test_f16_to_u64_vec(half2 f) {
-    return uint2(f);
+uint64_t2 test_f16_to_u64_vec(half2 f) {
+    return uint64_t2(f);
 }
 
 int2 test_f32_to_i32_vec(float2 f) {
@@ -64,12 +64,12 @@ uint2 test_f32_to_u32_vec(float2 f) {
     return uint2(f);
 }
 
-int2 test_f32_to_i64_vec(float2 f) {
-    return int2(f);
+int64_t2 test_f32_to_i64_vec(float2 f) {
+    return int64_t2(f);
 }
 
-uint2 test_f32_to_u64_vec(float2 f) {
-    return uint2(f);
+uint64_t2 test_f32_to_u64_vec(float2 f) {
+    return uint64_t2(f);
 }
 
 void test_const_eval() {
@@ -77,26 +77,26 @@ void test_const_eval() {
     int local_1 = int(global_1);
     uint local_2 = uint(global_0);
     uint local_3 = uint(global_1);
-    int local_4 = int(global_0);
-    int local_5 = int(global_1);
-    uint local_6 = uint(global_0);
-    uint local_7 = uint(global_1);
+    int64_t local_4 = int64_t(global_0);
+    int64_t local_5 = int64_t(global_1);
+    uint64_t local_6 = uint64_t(global_0);
+    uint64_t local_7 = uint64_t(global_1);
     int local_8 = int(global_2);
     int local_9 = int(global_3);
     uint local_10 = uint(global_2);
     uint local_11 = uint(global_3);
-    int local_12 = int(global_2);
-    int local_13 = int(global_3);
-    uint local_14 = uint(global_2);
-    uint local_15 = uint(global_3);
+    int64_t local_12 = int64_t(global_2);
+    int64_t local_13 = int64_t(global_3);
+    uint64_t local_14 = uint64_t(global_2);
+    uint64_t local_15 = uint64_t(global_3);
     int local_16 = int(global_4);
     int local_17 = int(global_5);
     uint local_18 = uint(global_4);
     uint local_19 = uint(global_5);
-    int local_20 = int(global_4);
-    int local_21 = int(global_5);
-    uint local_22 = uint(global_4);
-    uint local_23 = uint(global_5);
+    int64_t local_20 = int64_t(global_4);
+    int64_t local_21 = int64_t(global_5);
+    uint64_t local_22 = uint64_t(global_4);
+    uint64_t local_23 = uint64_t(global_5);
 }
 
 [numthreads(1, 1, 1)]
