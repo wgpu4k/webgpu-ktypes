@@ -151,6 +151,9 @@ class TypeIndex {
             "view_index", "workgroup_id", "num_workgroups", "global_invocation_id",
             "local_invocation_id", "local_invocation_index", "subgroup_size",
             "subgroup_invocation_id", "frag_depth",
+            "triangle_indices", "mesh_task_size", "vertices", "primitives",
+            "vertex_count", "primitive_count", "point_index", "line_indices",
+            "cull_primitive",
 
             // Attributes and options
             "less_equal", "greater_equal", "any", "unchanged", "force",

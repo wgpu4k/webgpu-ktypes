@@ -1,0 +1,107 @@
+#include <metal_stdlib>
+using namespace metal;
+struct Struct_3 {
+    float4 colorMask;
+    bool visible;
+};
+struct Struct_4 {
+    float4 position;
+    float4 color;
+};
+struct Struct_7 {
+    uint3 indices;
+    bool cull;
+    float4 colorMask;
+};
+struct Struct_8 {
+    float4 colorMask;
+};
+struct Struct_11 {
+    array<Struct_4, 3> vertices;
+    array<Struct_7, 1> primitives;
+    uint vertex_count;
+    uint primitive_count;
+};
+array<float4, 3> global_0 = array<float4, 3>(float4(0.0f, 1.0f, 0.0f, 1.0f), float4(-(1.0f), -(1.0f), 0.0f, 1.0f), float4(1.0f, -(1.0f), 0.0f, 1.0f));
+array<float4, 3> global_1 = array<float4, 3>(float4(0.0f, 1.0f, 0.0f, 1.0f), float4(0.0f, 0.0f, 1.0f, 1.0f), float4(1.0f, 0.0f, 0.0f, 1.0f));
+float global_2;
+Struct_3 global_3;
+Struct_11 global_4;
+
+[[fragment]]
+float4 fs_main() {
+    return (vertex.color * primitive.colorMask);
+}
+
+bool helper_reader() {
+    return global_3.visible;
+}
+
+void helper_writer(bool value) {
+    global_3.visible = value;
+}
+
+uint3 ts_divergent(uint3 thread_id) {
+    if ((thread_id[0] == 0)) {
+        global_3.colorMask = float4(1.0f, 1.0f, 0.0f, 1.0f);
+        global_3.visible = true;
+        return float3(1, 1, 1);
+    }
+    return float3(2, 2, 2);
+}
+
+uint3 ts_main() {
+    global_2 = 1.0f;
+    global_3.colorMask = float4(1.0f, 1.0f, 0.0f, 1.0f);
+    helper_writer(true);
+    global_3.visible = helper_reader();
+    return float3(1, 1, 1);
+}
+
+void ms_main() {
+    global_4.vertex_count = 3;
+    global_4.primitive_count = 1;
+    global_2 = 2.0f;
+    global_4.vertices[0].position = global_0[0];
+    global_4.vertices[0].color = (global_1[0] * global_3.colorMask);
+    global_4.vertices[1].position = global_0[1];
+    global_4.vertices[1].color = (global_1[1] * global_3.colorMask);
+    global_4.vertices[2].position = global_0[2];
+    global_4.vertices[2].color = (global_1[2] * global_3.colorMask);
+    global_4.primitives[0].indices = uint3(0, 1, 2);
+    global_4.primitives[0].cull = !(helper_reader());
+    global_4.primitives[0].colorMask = float4(1.0f, 0.0f, 1.0f, 1.0f);
+}
+
+void ms_no_ts() {
+    global_4.vertex_count = 3;
+    global_4.primitive_count = 1;
+    global_2 = 2.0f;
+    global_4.vertices[0].position = global_0[0];
+    global_4.vertices[0].color = global_1[0];
+    global_4.vertices[1].position = global_0[1];
+    global_4.vertices[1].color = global_1[1];
+    global_4.vertices[2].position = global_0[2];
+    global_4.vertices[2].color = global_1[2];
+    global_4.primitives[0].indices = uint3(0, 1, 2);
+    global_4.primitives[0].cull = false;
+    global_4.primitives[0].colorMask = float4(1.0f, 0.0f, 1.0f, 1.0f);
+}
+
+void ms_divergent(uint3 thread_id) {
+    if ((thread_id[0] == 0)) {
+        global_4.vertex_count = 3;
+        global_4.primitive_count = 1;
+        global_2 = 2.0f;
+        global_4.vertices[0].position = global_0[0];
+        global_4.vertices[0].color = global_1[0];
+        global_4.vertices[1].position = global_0[1];
+        global_4.vertices[1].color = global_1[1];
+        global_4.vertices[2].position = global_0[2];
+        global_4.vertices[2].color = global_1[2];
+        global_4.primitives[0].indices = uint3(0, 1, 2);
+        global_4.primitives[0].cull = false;
+        global_4.primitives[0].colorMask = float4(1.0f, 0.0f, 1.0f, 1.0f);
+        return;
+    }
+}

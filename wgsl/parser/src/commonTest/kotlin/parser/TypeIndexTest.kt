@@ -75,6 +75,23 @@ class TypeIndexTest : FunSpec({
         }
     }
 
+    test("mesh shader builtin enumerants are known values") {
+        val index = TypeIndex()
+        listOf(
+            "triangle_indices",
+            "mesh_task_size",
+            "vertices",
+            "primitives",
+            "vertex_count",
+            "primitive_count",
+            "point_index",
+            "line_indices",
+            "cull_primitive"
+        ).forEach { name ->
+            index.isBuiltinValue(name).shouldBeTrue()
+        }
+    }
+
     test("builtin vector type names") {
         val index = TypeIndex()
         index.isBuiltinVectorType("vec2").shouldBeTrue()
