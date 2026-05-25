@@ -136,119 +136,119 @@ Each listed case is still executed. The test fails if the case starts passing un
 | `glsl` | `workgroup-uniform-load-atomic.wgsl` | `native-validation` | Golden output is reviewed, but GLSL native validation rejects the current atomic storage output. | `#16` |
 | `glsl` | `workgroup-uniform-load.wgsl` | `native-validation` | Generated output now matches the golden; native validation still rejects the backend output after Emit preservation. | `#16` |
 | `glsl` | `workgroup-var-init.wgsl` | `native-validation` | Baseline debt from issue 16 golden stabilization. | `#16` |
-| `roundtrip` | `6438-conflicting-idents.wgsl` | `roundtrip-semantic-isomorphism` | Baseline debt from issue 16 golden stabilization. | `#16` |
-| `roundtrip` | `abstract-types-atomic.wgsl` | `roundtrip-semantic-isomorphism` | Baseline debt from issue 16 golden stabilization. | `#16` |
-| `roundtrip` | `access.wgsl` | `roundtrip-semantic-isomorphism` | Baseline debt from issue 16 golden stabilization. | `#16` |
+| `roundtrip` | `6438-conflicting-idents.wgsl` | `roundtrip-semantic-isomorphism` | Roundtrip normalization still reports a semantic mismatch after parse/lower/write; finer root-cause classification remains pending in DifferenceAnalyzer. | `#16` |
+| `roundtrip` | `abstract-types-atomic.wgsl` | `roundtrip-semantic-isomorphism` | Roundtrip normalization still reports a semantic mismatch after parse/lower/write; finer root-cause classification remains pending in DifferenceAnalyzer. | `#16` |
+| `roundtrip` | `access.wgsl` | `roundtrip-semantic-isomorphism` | Roundtrip normalization still reports a semantic mismatch after parse/lower/write; finer root-cause classification remains pending in DifferenceAnalyzer. | `#16` |
 | `roundtrip` | `atomicCompareExchange-int64.wgsl` | `roundtrip-semantic-isomorphism` | Golden output is reviewed, but roundtrip currently drops `li`/`lu` literal suffix width information. | `#16` |
 | `roundtrip` | `atomicCompareExchange.wgsl` | `roundtrip-semantic-isomorphism` | Golden output is reviewed, but roundtrip still differs on pointer/value-pointer representation. | `#16` |
-| `roundtrip` | `atomicOps-float32.wgsl` | `roundtrip-semantic-isomorphism` | Baseline debt from issue 16 golden stabilization. | `#16` |
+| `roundtrip` | `atomicOps-float32.wgsl` | `roundtrip-semantic-isomorphism` | Roundtrip normalization still reports a semantic mismatch after parse/lower/write; finer root-cause classification remains pending in DifferenceAnalyzer. | `#16` |
 | `roundtrip` | `atomicOps-int64-min-max.wgsl` | `roundtrip-semantic-isomorphism` | Golden output is reviewed, but roundtrip currently rewrites an untyped integer scalar to `u64`. | `#16` |
 | `roundtrip` | `atomicOps-int64.wgsl` | `roundtrip-semantic-isomorphism` | Golden output is reviewed, but roundtrip still changes atomic pointer expressions from `Pointer` to `ValuePointer`. | `#16` |
-| `roundtrip` | `atomicOps.wgsl` | `roundtrip-semantic-isomorphism` | Baseline debt from issue 16 golden stabilization. | `#16` |
+| `roundtrip` | `atomicOps.wgsl` | `roundtrip-semantic-isomorphism` | Roundtrip normalization still reports a semantic mismatch after parse/lower/write; finer root-cause classification remains pending in DifferenceAnalyzer. | `#16` |
 | `roundtrip` | `atomicTexture-int64.wgsl` | `roundtrip-semantic-isomorphism` | Golden output is reviewed, but roundtrip currently rewrites an untyped integer scalar to `u64`. | `#16` |
 | `roundtrip` | `binding-arrays.wgsl` | `roundtrip-semantic-isomorphism` | Golden output is reviewed after binding-array lowering support, but roundtrip currently changes location binding shape. | `#16` |
 | `roundtrip` | `binding-buffer-arrays.wgsl` | `roundtrip-semantic-isomorphism` | Golden output is reviewed after binding-array lowering support, but roundtrip currently changes location binding shape. | `#16` |
-| `roundtrip` | `bounds-check-zero-atomic.wgsl` | `roundtrip-semantic-isomorphism` | Baseline debt from issue 16 golden stabilization. | `#16` |
-| `roundtrip` | `clip-distances.wgsl` | `roundtrip-semantic-isomorphism` | Baseline debt from issue 16 golden stabilization. | `#16` |
+| `roundtrip` | `bounds-check-zero-atomic.wgsl` | `roundtrip-semantic-isomorphism` | Roundtrip normalization still reports a semantic mismatch after parse/lower/write; finer root-cause classification remains pending in DifferenceAnalyzer. | `#16` |
+| `roundtrip` | `clip-distances.wgsl` | `roundtrip-semantic-isomorphism` | Roundtrip normalization still reports a semantic mismatch after parse/lower/write; finer root-cause classification remains pending in DifferenceAnalyzer. | `#16` |
 | `roundtrip` | `cooperative-matrix.wgsl` | `roundtrip-semantic-isomorphism` | Golden output is reviewed after cooperative matrix builtin registration, but roundtrip currently changes pointer binding shape. | `#16` |
 | `roundtrip` | `const-exprs.wgsl` | `roundtrip-semantic-isomorphism` | Golden output is reviewed after packed dot-product builtin and const switch selector support, but roundtrip currently changes the semantic shape of the lowered module. | `#16` |
 | `roundtrip` | `control-flow.wgsl` | `roundtrip-semantic-isomorphism` | Golden output is reviewed after switch trailing-comma parsing and scalar const selector lowering, but roundtrip currently changes the semantic shape of lowered switch cases. | `#16` |
 | `roundtrip` | `debug-symbol-large-source.wgsl` | `roundtrip-semantic-isomorphism` | Golden output is reviewed after stage keyword identifier resolution, but roundtrip currently changes location binding shape. | `#16` |
-| `roundtrip` | `debug-symbol-simple.wgsl` | `roundtrip-semantic-isomorphism` | Baseline debt from issue 16 golden stabilization. | `#16` |
+| `roundtrip` | `debug-symbol-simple.wgsl` | `roundtrip-semantic-isomorphism` | Roundtrip normalization still reports a semantic mismatch after parse/lower/write; finer root-cause classification remains pending in DifferenceAnalyzer. | `#16` |
 | `roundtrip` | `debug-symbol-terrain.wgsl` | `roundtrip-semantic-isomorphism` | Golden output is reviewed after stage keyword identifier resolution, but roundtrip currently changes location binding shape. | `#16` |
-| `roundtrip` | `dualsource.wgsl` | `roundtrip-semantic-isomorphism` | Baseline debt from issue 16 golden stabilization. | `#16` |
-| `roundtrip` | `extra.wgsl` | `roundtrip-semantic-isomorphism` | Baseline debt from issue 16 golden stabilization. | `#16` |
-| `roundtrip` | `f16-native.wgsl` | `roundtrip-semantic-isomorphism` | Baseline debt from issue 16 golden stabilization. | `#16` |
-| `roundtrip` | `f16-polyfill.wgsl` | `roundtrip-semantic-isomorphism` | Baseline debt from issue 16 golden stabilization. | `#16` |
-| `roundtrip` | `fragment-output.wgsl` | `roundtrip-semantic-isomorphism` | Baseline debt from issue 16 golden stabilization. | `#16` |
-| `roundtrip` | `globals.wgsl` | `roundtrip-semantic-isomorphism` | Baseline debt from issue 16 golden stabilization. | `#16` |
+| `roundtrip` | `dualsource.wgsl` | `roundtrip-semantic-isomorphism` | Roundtrip normalization still reports a semantic mismatch after parse/lower/write; finer root-cause classification remains pending in DifferenceAnalyzer. | `#16` |
+| `roundtrip` | `extra.wgsl` | `roundtrip-semantic-isomorphism` | Roundtrip normalization still reports a semantic mismatch after parse/lower/write; finer root-cause classification remains pending in DifferenceAnalyzer. | `#16` |
+| `roundtrip` | `f16-native.wgsl` | `roundtrip-semantic-isomorphism` | Roundtrip normalization still reports a semantic mismatch after parse/lower/write; finer root-cause classification remains pending in DifferenceAnalyzer. | `#16` |
+| `roundtrip` | `f16-polyfill.wgsl` | `roundtrip-semantic-isomorphism` | Roundtrip normalization still reports a semantic mismatch after parse/lower/write; finer root-cause classification remains pending in DifferenceAnalyzer. | `#16` |
+| `roundtrip` | `fragment-output.wgsl` | `roundtrip-semantic-isomorphism` | Roundtrip normalization still reports a semantic mismatch after parse/lower/write; finer root-cause classification remains pending in DifferenceAnalyzer. | `#16` |
+| `roundtrip` | `globals.wgsl` | `roundtrip-semantic-isomorphism` | Roundtrip normalization still reports a semantic mismatch after parse/lower/write; finer root-cause classification remains pending in DifferenceAnalyzer. | `#16` |
 | `roundtrip` | `int64.wgsl` | `roundtrip-semantic-isomorphism` | Golden output is reviewed, but roundtrip currently rewrites an untyped integer scalar to `i64`. | `#16` |
-| `roundtrip` | `interface.wgsl` | `roundtrip-semantic-isomorphism` | Baseline debt from issue 16 golden stabilization. | `#16` |
+| `roundtrip` | `interface.wgsl` | `roundtrip-semantic-isomorphism` | Roundtrip normalization still reports a semantic mismatch after parse/lower/write; finer root-cause classification remains pending in DifferenceAnalyzer. | `#16` |
 | `roundtrip` | `interpolate.wgsl` | `roundtrip-semantic-isomorphism` | Golden output is reviewed after interpolation enumerant resolution, but roundtrip currently changes builtin binding shape. | `#16` |
 | `roundtrip` | `interpolate_compat.wgsl` | `roundtrip-semantic-isomorphism` | Golden output is reviewed after interpolation enumerant resolution, but roundtrip currently changes builtin binding shape. | `#16` |
-| `roundtrip` | `lexical-scopes.wgsl` | `roundtrip-semantic-isomorphism` | Baseline debt from issue 16 golden stabilization. | `#16` |
+| `roundtrip` | `lexical-scopes.wgsl` | `roundtrip-semantic-isomorphism` | Roundtrip normalization still reports a semantic mismatch after parse/lower/write; finer root-cause classification remains pending in DifferenceAnalyzer. | `#16` |
 | `roundtrip` | `mesh-shader.wgsl` | `roundtrip-semantic-isomorphism` | Golden output is reviewed after mesh builtin enumerant registration, but roundtrip currently changes builtin binding shape. | `#16` |
-| `roundtrip` | `msl-varyings.wgsl` | `roundtrip-semantic-isomorphism` | Baseline debt from issue 16 golden stabilization. | `#16` |
-| `roundtrip` | `msl-vpt-formats-x1.wgsl` | `roundtrip-semantic-isomorphism` | Baseline debt from issue 16 golden stabilization. | `#16` |
-| `roundtrip` | `msl-vpt-formats-x2.wgsl` | `roundtrip-semantic-isomorphism` | Baseline debt from issue 16 golden stabilization. | `#16` |
-| `roundtrip` | `msl-vpt-formats-x3.wgsl` | `roundtrip-semantic-isomorphism` | Baseline debt from issue 16 golden stabilization. | `#16` |
-| `roundtrip` | `msl-vpt-formats-x4.wgsl` | `roundtrip-semantic-isomorphism` | Baseline debt from issue 16 golden stabilization. | `#16` |
-| `roundtrip` | `msl-vpt.wgsl` | `roundtrip-semantic-isomorphism` | Baseline debt from issue 16 golden stabilization. | `#16` |
-| `roundtrip` | `overrides-atomicCompareExchangeWeak.wgsl` | `roundtrip-semantic-isomorphism` | Baseline debt from issue 16 golden stabilization. | `#16` |
-| `roundtrip` | `overrides-ray-query.wgsl` | `roundtrip-semantic-isomorphism` | Baseline debt from issue 16 golden stabilization. | `#16` |
+| `roundtrip` | `msl-varyings.wgsl` | `roundtrip-semantic-isomorphism` | Roundtrip normalization still reports a semantic mismatch after parse/lower/write; finer root-cause classification remains pending in DifferenceAnalyzer. | `#16` |
+| `roundtrip` | `msl-vpt-formats-x1.wgsl` | `roundtrip-semantic-isomorphism` | Roundtrip normalization still reports a semantic mismatch after parse/lower/write; finer root-cause classification remains pending in DifferenceAnalyzer. | `#16` |
+| `roundtrip` | `msl-vpt-formats-x2.wgsl` | `roundtrip-semantic-isomorphism` | Roundtrip normalization still reports a semantic mismatch after parse/lower/write; finer root-cause classification remains pending in DifferenceAnalyzer. | `#16` |
+| `roundtrip` | `msl-vpt-formats-x3.wgsl` | `roundtrip-semantic-isomorphism` | Roundtrip normalization still reports a semantic mismatch after parse/lower/write; finer root-cause classification remains pending in DifferenceAnalyzer. | `#16` |
+| `roundtrip` | `msl-vpt-formats-x4.wgsl` | `roundtrip-semantic-isomorphism` | Roundtrip normalization still reports a semantic mismatch after parse/lower/write; finer root-cause classification remains pending in DifferenceAnalyzer. | `#16` |
+| `roundtrip` | `msl-vpt.wgsl` | `roundtrip-semantic-isomorphism` | Roundtrip normalization still reports a semantic mismatch after parse/lower/write; finer root-cause classification remains pending in DifferenceAnalyzer. | `#16` |
+| `roundtrip` | `overrides-atomicCompareExchangeWeak.wgsl` | `roundtrip-semantic-isomorphism` | Roundtrip normalization still reports a semantic mismatch after parse/lower/write; finer root-cause classification remains pending in DifferenceAnalyzer. | `#16` |
+| `roundtrip` | `overrides-ray-query.wgsl` | `roundtrip-semantic-isomorphism` | Roundtrip normalization still reports a semantic mismatch after parse/lower/write; finer root-cause classification remains pending in DifferenceAnalyzer. | `#16` |
 | `roundtrip` | `aliased-ray-query.wgsl` | `roundtrip-semantic-isomorphism` | Golden output is reviewed after ray-query builtin registration, but roundtrip currently changes pointer binding shape. | `#16` |
 | `roundtrip` | `ray-query-no-init-tracking.wgsl` | `roundtrip-semantic-isomorphism` | Golden output is reviewed after ray-query builtin registration, but roundtrip currently changes pointer binding shape. | `#16` |
 | `roundtrip` | `ray-query.wgsl` | `roundtrip-semantic-isomorphism` | Golden output is reviewed after ray-query builtin registration, but roundtrip currently changes pointer binding shape. | `#16` |
-| `roundtrip` | `packed-vec3-bitcast.wgsl` | `roundtrip-semantic-isomorphism` | Baseline debt from issue 16 golden stabilization. | `#16` |
-| `roundtrip` | `pointer-function-arg-restrict.wgsl` | `roundtrip-semantic-isomorphism` | Baseline debt from issue 16 golden stabilization. | `#16` |
-| `roundtrip` | `pointer-function-arg-rzsw.wgsl` | `roundtrip-semantic-isomorphism` | Baseline debt from issue 16 golden stabilization. | `#16` |
-| `roundtrip` | `pointer-function-arg.wgsl` | `roundtrip-semantic-isomorphism` | Baseline debt from issue 16 golden stabilization. | `#16` |
-| `roundtrip` | `pointers.wgsl` | `roundtrip-semantic-isomorphism` | Baseline debt from issue 16 golden stabilization. | `#16` |
-| `roundtrip` | `push-constants.wgsl` | `roundtrip-semantic-isomorphism` | Baseline debt from issue 16 golden stabilization. | `#16` |
+| `roundtrip` | `packed-vec3-bitcast.wgsl` | `roundtrip-semantic-isomorphism` | Roundtrip normalization still reports a semantic mismatch after parse/lower/write; finer root-cause classification remains pending in DifferenceAnalyzer. | `#16` |
+| `roundtrip` | `pointer-function-arg-restrict.wgsl` | `roundtrip-semantic-isomorphism` | Roundtrip normalization still reports a semantic mismatch after parse/lower/write; finer root-cause classification remains pending in DifferenceAnalyzer. | `#16` |
+| `roundtrip` | `pointer-function-arg-rzsw.wgsl` | `roundtrip-semantic-isomorphism` | Roundtrip normalization still reports a semantic mismatch after parse/lower/write; finer root-cause classification remains pending in DifferenceAnalyzer. | `#16` |
+| `roundtrip` | `pointer-function-arg.wgsl` | `roundtrip-semantic-isomorphism` | Roundtrip normalization still reports a semantic mismatch after parse/lower/write; finer root-cause classification remains pending in DifferenceAnalyzer. | `#16` |
+| `roundtrip` | `pointers.wgsl` | `roundtrip-semantic-isomorphism` | Roundtrip normalization still reports a semantic mismatch after parse/lower/write; finer root-cause classification remains pending in DifferenceAnalyzer. | `#16` |
+| `roundtrip` | `push-constants.wgsl` | `roundtrip-semantic-isomorphism` | Roundtrip normalization still reports a semantic mismatch after parse/lower/write; finer root-cause classification remains pending in DifferenceAnalyzer. | `#16` |
 | `roundtrip` | `quad.wgsl` | `roundtrip-semantic-isomorphism` | Golden output is reviewed after texture sampling lowering fix, but roundtrip comparison still differs on return location binding placement. | `#16` |
-| `roundtrip` | `ray-tracing-pipeline.wgsl` | `roundtrip-semantic-isomorphism` | Baseline debt from issue 16 golden stabilization. | `#16` |
-| `roundtrip` | `shadow.wgsl` | `roundtrip-semantic-isomorphism` | Baseline debt from issue 16 golden stabilization. | `#16` |
-| `roundtrip` | `skybox.wgsl` | `roundtrip-semantic-isomorphism` | Baseline debt from issue 16 golden stabilization. | `#16` |
-| `roundtrip` | `struct-layout.wgsl` | `roundtrip-semantic-isomorphism` | Baseline debt from issue 16 golden stabilization. | `#16` |
-| `roundtrip` | `unconsumed_vertex_outputs_frag.wgsl` | `roundtrip-semantic-isomorphism` | Baseline debt from issue 16 golden stabilization. | `#16` |
-| `roundtrip` | `unconsumed_vertex_outputs_vert.wgsl` | `roundtrip-semantic-isomorphism` | Baseline debt from issue 16 golden stabilization. | `#16` |
+| `roundtrip` | `ray-tracing-pipeline.wgsl` | `roundtrip-semantic-isomorphism` | Roundtrip normalization still reports a semantic mismatch after parse/lower/write; finer root-cause classification remains pending in DifferenceAnalyzer. | `#16` |
+| `roundtrip` | `shadow.wgsl` | `roundtrip-semantic-isomorphism` | Roundtrip normalization still reports a semantic mismatch after parse/lower/write; finer root-cause classification remains pending in DifferenceAnalyzer. | `#16` |
+| `roundtrip` | `skybox.wgsl` | `roundtrip-semantic-isomorphism` | Roundtrip normalization still reports a semantic mismatch after parse/lower/write; finer root-cause classification remains pending in DifferenceAnalyzer. | `#16` |
+| `roundtrip` | `struct-layout.wgsl` | `roundtrip-semantic-isomorphism` | Roundtrip normalization still reports a semantic mismatch after parse/lower/write; finer root-cause classification remains pending in DifferenceAnalyzer. | `#16` |
+| `roundtrip` | `unconsumed_vertex_outputs_frag.wgsl` | `roundtrip-semantic-isomorphism` | Roundtrip normalization still reports a semantic mismatch after parse/lower/write; finer root-cause classification remains pending in DifferenceAnalyzer. | `#16` |
+| `roundtrip` | `unconsumed_vertex_outputs_vert.wgsl` | `roundtrip-semantic-isomorphism` | Roundtrip normalization still reports a semantic mismatch after parse/lower/write; finer root-cause classification remains pending in DifferenceAnalyzer. | `#16` |
 | `roundtrip` | `workgroup-uniform-load-atomic.wgsl` | `roundtrip-semantic-isomorphism` | Reviewed output compares, but WGSL roundtrip currently changes atomic pointer expressions from `Pointer` to `ValuePointer`. | `#16` |
-| `roundtrip` | `workgroup-uniform-load.wgsl` | `roundtrip-semantic-isomorphism` | Baseline debt from issue 16 golden stabilization. | `#16` |
-| `wgsl` | `6438-conflicting-idents.wgsl` | `roundtrip-semantic-isomorphism` | Baseline debt from issue 16 golden stabilization. | `#16` |
-| `wgsl` | `abstract-types-atomic.wgsl` | `roundtrip-semantic-isomorphism` | Baseline debt from issue 16 golden stabilization. | `#16` |
-| `wgsl` | `access.wgsl` | `roundtrip-semantic-isomorphism` | Baseline debt from issue 16 golden stabilization. | `#16` |
+| `roundtrip` | `workgroup-uniform-load.wgsl` | `roundtrip-semantic-isomorphism` | Roundtrip normalization still reports a semantic mismatch after parse/lower/write; finer root-cause classification remains pending in DifferenceAnalyzer. | `#16` |
+| `wgsl` | `6438-conflicting-idents.wgsl` | `roundtrip-semantic-isomorphism` | Roundtrip normalization still reports a semantic mismatch after parse/lower/write; finer root-cause classification remains pending in DifferenceAnalyzer. | `#16` |
+| `wgsl` | `abstract-types-atomic.wgsl` | `roundtrip-semantic-isomorphism` | Roundtrip normalization still reports a semantic mismatch after parse/lower/write; finer root-cause classification remains pending in DifferenceAnalyzer. | `#16` |
+| `wgsl` | `access.wgsl` | `roundtrip-semantic-isomorphism` | Roundtrip normalization still reports a semantic mismatch after parse/lower/write; finer root-cause classification remains pending in DifferenceAnalyzer. | `#16` |
 | `wgsl` | `atomicCompareExchange-int64.wgsl` | `roundtrip-semantic-isomorphism` | Golden output is reviewed, but roundtrip currently drops `li`/`lu` literal suffix width information. | `#16` |
 | `wgsl` | `atomicCompareExchange.wgsl` | `roundtrip-semantic-isomorphism` | Golden output is reviewed, but roundtrip still differs on pointer/value-pointer representation. | `#16` |
-| `wgsl` | `atomicOps-float32.wgsl` | `roundtrip-semantic-isomorphism` | Baseline debt from issue 16 golden stabilization. | `#16` |
+| `wgsl` | `atomicOps-float32.wgsl` | `roundtrip-semantic-isomorphism` | Roundtrip normalization still reports a semantic mismatch after parse/lower/write; finer root-cause classification remains pending in DifferenceAnalyzer. | `#16` |
 | `wgsl` | `atomicOps-int64-min-max.wgsl` | `roundtrip-semantic-isomorphism` | Golden output is reviewed, but roundtrip currently rewrites an untyped integer scalar to `u64`. | `#16` |
 | `wgsl` | `atomicOps-int64.wgsl` | `roundtrip-semantic-isomorphism` | Golden output is reviewed, but roundtrip still changes atomic pointer expressions from `Pointer` to `ValuePointer`. | `#16` |
-| `wgsl` | `atomicOps.wgsl` | `roundtrip-semantic-isomorphism` | Baseline debt from issue 16 golden stabilization. | `#16` |
+| `wgsl` | `atomicOps.wgsl` | `roundtrip-semantic-isomorphism` | Roundtrip normalization still reports a semantic mismatch after parse/lower/write; finer root-cause classification remains pending in DifferenceAnalyzer. | `#16` |
 | `wgsl` | `atomicTexture-int64.wgsl` | `roundtrip-semantic-isomorphism` | Golden output is reviewed, but roundtrip currently rewrites an untyped integer scalar to `u64`. | `#16` |
 | `wgsl` | `binding-arrays.wgsl` | `roundtrip-semantic-isomorphism` | Golden output is reviewed after binding-array lowering support, but roundtrip currently changes location binding shape. | `#16` |
 | `wgsl` | `binding-buffer-arrays.wgsl` | `roundtrip-semantic-isomorphism` | Golden output is reviewed after binding-array lowering support, but roundtrip currently changes location binding shape. | `#16` |
-| `wgsl` | `bounds-check-zero-atomic.wgsl` | `roundtrip-semantic-isomorphism` | Baseline debt from issue 16 golden stabilization. | `#16` |
-| `wgsl` | `clip-distances.wgsl` | `roundtrip-semantic-isomorphism` | Baseline debt from issue 16 golden stabilization. | `#16` |
+| `wgsl` | `bounds-check-zero-atomic.wgsl` | `roundtrip-semantic-isomorphism` | Roundtrip normalization still reports a semantic mismatch after parse/lower/write; finer root-cause classification remains pending in DifferenceAnalyzer. | `#16` |
+| `wgsl` | `clip-distances.wgsl` | `roundtrip-semantic-isomorphism` | Roundtrip normalization still reports a semantic mismatch after parse/lower/write; finer root-cause classification remains pending in DifferenceAnalyzer. | `#16` |
 | `wgsl` | `cooperative-matrix.wgsl` | `roundtrip-semantic-isomorphism` | Golden output is reviewed after cooperative matrix builtin registration, but WGSL comparison currently changes pointer binding shape. | `#16` |
 | `wgsl` | `const-exprs.wgsl` | `roundtrip-semantic-isomorphism` | Golden output is reviewed after packed dot-product builtin and const switch selector support, but roundtrip currently changes the semantic shape of the lowered module. | `#16` |
 | `wgsl` | `control-flow.wgsl` | `roundtrip-semantic-isomorphism` | Golden output is reviewed after switch trailing-comma parsing and scalar const selector lowering, but roundtrip currently changes the semantic shape of lowered switch cases. | `#16` |
 | `wgsl` | `debug-symbol-large-source.wgsl` | `roundtrip-semantic-isomorphism` | Golden output is reviewed after stage keyword identifier resolution, but roundtrip currently changes location binding shape. | `#16` |
-| `wgsl` | `debug-symbol-simple.wgsl` | `roundtrip-semantic-isomorphism` | Baseline debt from issue 16 golden stabilization. | `#16` |
+| `wgsl` | `debug-symbol-simple.wgsl` | `roundtrip-semantic-isomorphism` | Roundtrip normalization still reports a semantic mismatch after parse/lower/write; finer root-cause classification remains pending in DifferenceAnalyzer. | `#16` |
 | `wgsl` | `debug-symbol-terrain.wgsl` | `roundtrip-semantic-isomorphism` | Golden output is reviewed after stage keyword identifier resolution, but roundtrip currently changes location binding shape. | `#16` |
-| `wgsl` | `dualsource.wgsl` | `roundtrip-semantic-isomorphism` | Baseline debt from issue 16 golden stabilization. | `#16` |
-| `wgsl` | `extra.wgsl` | `roundtrip-semantic-isomorphism` | Baseline debt from issue 16 golden stabilization. | `#16` |
-| `wgsl` | `f16-native.wgsl` | `roundtrip-semantic-isomorphism` | Baseline debt from issue 16 golden stabilization. | `#16` |
-| `wgsl` | `f16-polyfill.wgsl` | `roundtrip-semantic-isomorphism` | Baseline debt from issue 16 golden stabilization. | `#16` |
-| `wgsl` | `fragment-output.wgsl` | `roundtrip-semantic-isomorphism` | Baseline debt from issue 16 golden stabilization. | `#16` |
-| `wgsl` | `globals.wgsl` | `roundtrip-semantic-isomorphism` | Baseline debt from issue 16 golden stabilization. | `#16` |
+| `wgsl` | `dualsource.wgsl` | `roundtrip-semantic-isomorphism` | Roundtrip normalization still reports a semantic mismatch after parse/lower/write; finer root-cause classification remains pending in DifferenceAnalyzer. | `#16` |
+| `wgsl` | `extra.wgsl` | `roundtrip-semantic-isomorphism` | Roundtrip normalization still reports a semantic mismatch after parse/lower/write; finer root-cause classification remains pending in DifferenceAnalyzer. | `#16` |
+| `wgsl` | `f16-native.wgsl` | `roundtrip-semantic-isomorphism` | Roundtrip normalization still reports a semantic mismatch after parse/lower/write; finer root-cause classification remains pending in DifferenceAnalyzer. | `#16` |
+| `wgsl` | `f16-polyfill.wgsl` | `roundtrip-semantic-isomorphism` | Roundtrip normalization still reports a semantic mismatch after parse/lower/write; finer root-cause classification remains pending in DifferenceAnalyzer. | `#16` |
+| `wgsl` | `fragment-output.wgsl` | `roundtrip-semantic-isomorphism` | Roundtrip normalization still reports a semantic mismatch after parse/lower/write; finer root-cause classification remains pending in DifferenceAnalyzer. | `#16` |
+| `wgsl` | `globals.wgsl` | `roundtrip-semantic-isomorphism` | Roundtrip normalization still reports a semantic mismatch after parse/lower/write; finer root-cause classification remains pending in DifferenceAnalyzer. | `#16` |
 | `wgsl` | `int64.wgsl` | `roundtrip-semantic-isomorphism` | Golden output is reviewed, but roundtrip currently rewrites an untyped integer scalar to `i64`. | `#16` |
-| `wgsl` | `interface.wgsl` | `roundtrip-semantic-isomorphism` | Baseline debt from issue 16 golden stabilization. | `#16` |
+| `wgsl` | `interface.wgsl` | `roundtrip-semantic-isomorphism` | Roundtrip normalization still reports a semantic mismatch after parse/lower/write; finer root-cause classification remains pending in DifferenceAnalyzer. | `#16` |
 | `wgsl` | `interpolate.wgsl` | `roundtrip-semantic-isomorphism` | Golden output is reviewed after interpolation enumerant resolution, but roundtrip currently changes builtin binding shape. | `#16` |
 | `wgsl` | `interpolate_compat.wgsl` | `roundtrip-semantic-isomorphism` | Golden output is reviewed after interpolation enumerant resolution, but roundtrip currently changes builtin binding shape. | `#16` |
-| `wgsl` | `lexical-scopes.wgsl` | `roundtrip-semantic-isomorphism` | Baseline debt from issue 16 golden stabilization. | `#16` |
+| `wgsl` | `lexical-scopes.wgsl` | `roundtrip-semantic-isomorphism` | Roundtrip normalization still reports a semantic mismatch after parse/lower/write; finer root-cause classification remains pending in DifferenceAnalyzer. | `#16` |
 | `wgsl` | `mesh-shader.wgsl` | `roundtrip-semantic-isomorphism` | Golden output is reviewed after mesh builtin enumerant registration, but roundtrip currently changes builtin binding shape. | `#16` |
-| `wgsl` | `msl-varyings.wgsl` | `roundtrip-semantic-isomorphism` | Baseline debt from issue 16 golden stabilization. | `#16` |
-| `wgsl` | `msl-vpt-formats-x1.wgsl` | `roundtrip-semantic-isomorphism` | Baseline debt from issue 16 golden stabilization. | `#16` |
-| `wgsl` | `msl-vpt-formats-x2.wgsl` | `roundtrip-semantic-isomorphism` | Baseline debt from issue 16 golden stabilization. | `#16` |
-| `wgsl` | `msl-vpt-formats-x3.wgsl` | `roundtrip-semantic-isomorphism` | Baseline debt from issue 16 golden stabilization. | `#16` |
-| `wgsl` | `msl-vpt-formats-x4.wgsl` | `roundtrip-semantic-isomorphism` | Baseline debt from issue 16 golden stabilization. | `#16` |
-| `wgsl` | `msl-vpt.wgsl` | `roundtrip-semantic-isomorphism` | Baseline debt from issue 16 golden stabilization. | `#16` |
-| `wgsl` | `overrides-atomicCompareExchangeWeak.wgsl` | `roundtrip-semantic-isomorphism` | Baseline debt from issue 16 golden stabilization. | `#16` |
-| `wgsl` | `overrides-ray-query.wgsl` | `roundtrip-semantic-isomorphism` | Baseline debt from issue 16 golden stabilization. | `#16` |
+| `wgsl` | `msl-varyings.wgsl` | `roundtrip-semantic-isomorphism` | Roundtrip normalization still reports a semantic mismatch after parse/lower/write; finer root-cause classification remains pending in DifferenceAnalyzer. | `#16` |
+| `wgsl` | `msl-vpt-formats-x1.wgsl` | `roundtrip-semantic-isomorphism` | Roundtrip normalization still reports a semantic mismatch after parse/lower/write; finer root-cause classification remains pending in DifferenceAnalyzer. | `#16` |
+| `wgsl` | `msl-vpt-formats-x2.wgsl` | `roundtrip-semantic-isomorphism` | Roundtrip normalization still reports a semantic mismatch after parse/lower/write; finer root-cause classification remains pending in DifferenceAnalyzer. | `#16` |
+| `wgsl` | `msl-vpt-formats-x3.wgsl` | `roundtrip-semantic-isomorphism` | Roundtrip normalization still reports a semantic mismatch after parse/lower/write; finer root-cause classification remains pending in DifferenceAnalyzer. | `#16` |
+| `wgsl` | `msl-vpt-formats-x4.wgsl` | `roundtrip-semantic-isomorphism` | Roundtrip normalization still reports a semantic mismatch after parse/lower/write; finer root-cause classification remains pending in DifferenceAnalyzer. | `#16` |
+| `wgsl` | `msl-vpt.wgsl` | `roundtrip-semantic-isomorphism` | Roundtrip normalization still reports a semantic mismatch after parse/lower/write; finer root-cause classification remains pending in DifferenceAnalyzer. | `#16` |
+| `wgsl` | `overrides-atomicCompareExchangeWeak.wgsl` | `roundtrip-semantic-isomorphism` | Roundtrip normalization still reports a semantic mismatch after parse/lower/write; finer root-cause classification remains pending in DifferenceAnalyzer. | `#16` |
+| `wgsl` | `overrides-ray-query.wgsl` | `roundtrip-semantic-isomorphism` | Roundtrip normalization still reports a semantic mismatch after parse/lower/write; finer root-cause classification remains pending in DifferenceAnalyzer. | `#16` |
 | `wgsl` | `aliased-ray-query.wgsl` | `roundtrip-semantic-isomorphism` | Golden output is reviewed after ray-query builtin registration, but WGSL comparison currently changes pointer binding shape. | `#16` |
 | `wgsl` | `ray-query-no-init-tracking.wgsl` | `roundtrip-semantic-isomorphism` | Golden output is reviewed after ray-query builtin registration, but WGSL comparison currently changes pointer binding shape. | `#16` |
 | `wgsl` | `ray-query.wgsl` | `roundtrip-semantic-isomorphism` | Golden output is reviewed after ray-query builtin registration, but WGSL comparison currently changes pointer binding shape. | `#16` |
-| `wgsl` | `packed-vec3-bitcast.wgsl` | `roundtrip-semantic-isomorphism` | Baseline debt from issue 16 golden stabilization. | `#16` |
-| `wgsl` | `pointer-function-arg-restrict.wgsl` | `roundtrip-semantic-isomorphism` | Baseline debt from issue 16 golden stabilization. | `#16` |
-| `wgsl` | `pointer-function-arg-rzsw.wgsl` | `roundtrip-semantic-isomorphism` | Baseline debt from issue 16 golden stabilization. | `#16` |
-| `wgsl` | `pointer-function-arg.wgsl` | `roundtrip-semantic-isomorphism` | Baseline debt from issue 16 golden stabilization. | `#16` |
-| `wgsl` | `pointers.wgsl` | `roundtrip-semantic-isomorphism` | Baseline debt from issue 16 golden stabilization. | `#16` |
-| `wgsl` | `push-constants.wgsl` | `roundtrip-semantic-isomorphism` | Baseline debt from issue 16 golden stabilization. | `#16` |
+| `wgsl` | `packed-vec3-bitcast.wgsl` | `roundtrip-semantic-isomorphism` | Roundtrip normalization still reports a semantic mismatch after parse/lower/write; finer root-cause classification remains pending in DifferenceAnalyzer. | `#16` |
+| `wgsl` | `pointer-function-arg-restrict.wgsl` | `roundtrip-semantic-isomorphism` | Roundtrip normalization still reports a semantic mismatch after parse/lower/write; finer root-cause classification remains pending in DifferenceAnalyzer. | `#16` |
+| `wgsl` | `pointer-function-arg-rzsw.wgsl` | `roundtrip-semantic-isomorphism` | Roundtrip normalization still reports a semantic mismatch after parse/lower/write; finer root-cause classification remains pending in DifferenceAnalyzer. | `#16` |
+| `wgsl` | `pointer-function-arg.wgsl` | `roundtrip-semantic-isomorphism` | Roundtrip normalization still reports a semantic mismatch after parse/lower/write; finer root-cause classification remains pending in DifferenceAnalyzer. | `#16` |
+| `wgsl` | `pointers.wgsl` | `roundtrip-semantic-isomorphism` | Roundtrip normalization still reports a semantic mismatch after parse/lower/write; finer root-cause classification remains pending in DifferenceAnalyzer. | `#16` |
+| `wgsl` | `push-constants.wgsl` | `roundtrip-semantic-isomorphism` | Roundtrip normalization still reports a semantic mismatch after parse/lower/write; finer root-cause classification remains pending in DifferenceAnalyzer. | `#16` |
 | `wgsl` | `quad.wgsl` | `roundtrip-semantic-isomorphism` | Golden output is reviewed after texture sampling lowering fix, but WGSL comparison still differs on return location binding placement. | `#16` |
-| `wgsl` | `ray-tracing-pipeline.wgsl` | `roundtrip-semantic-isomorphism` | Baseline debt from issue 16 golden stabilization. | `#16` |
-| `wgsl` | `shadow.wgsl` | `roundtrip-semantic-isomorphism` | Baseline debt from issue 16 golden stabilization. | `#16` |
-| `wgsl` | `skybox.wgsl` | `roundtrip-semantic-isomorphism` | Baseline debt from issue 16 golden stabilization. | `#16` |
-| `wgsl` | `struct-layout.wgsl` | `roundtrip-semantic-isomorphism` | Baseline debt from issue 16 golden stabilization. | `#16` |
-| `wgsl` | `unconsumed_vertex_outputs_frag.wgsl` | `roundtrip-semantic-isomorphism` | Baseline debt from issue 16 golden stabilization. | `#16` |
-| `wgsl` | `unconsumed_vertex_outputs_vert.wgsl` | `roundtrip-semantic-isomorphism` | Baseline debt from issue 16 golden stabilization. | `#16` |
+| `wgsl` | `ray-tracing-pipeline.wgsl` | `roundtrip-semantic-isomorphism` | Roundtrip normalization still reports a semantic mismatch after parse/lower/write; finer root-cause classification remains pending in DifferenceAnalyzer. | `#16` |
+| `wgsl` | `shadow.wgsl` | `roundtrip-semantic-isomorphism` | Roundtrip normalization still reports a semantic mismatch after parse/lower/write; finer root-cause classification remains pending in DifferenceAnalyzer. | `#16` |
+| `wgsl` | `skybox.wgsl` | `roundtrip-semantic-isomorphism` | Roundtrip normalization still reports a semantic mismatch after parse/lower/write; finer root-cause classification remains pending in DifferenceAnalyzer. | `#16` |
+| `wgsl` | `struct-layout.wgsl` | `roundtrip-semantic-isomorphism` | Roundtrip normalization still reports a semantic mismatch after parse/lower/write; finer root-cause classification remains pending in DifferenceAnalyzer. | `#16` |
+| `wgsl` | `unconsumed_vertex_outputs_frag.wgsl` | `roundtrip-semantic-isomorphism` | Roundtrip normalization still reports a semantic mismatch after parse/lower/write; finer root-cause classification remains pending in DifferenceAnalyzer. | `#16` |
+| `wgsl` | `unconsumed_vertex_outputs_vert.wgsl` | `roundtrip-semantic-isomorphism` | Roundtrip normalization still reports a semantic mismatch after parse/lower/write; finer root-cause classification remains pending in DifferenceAnalyzer. | `#16` |
 | `wgsl` | `workgroup-uniform-load-atomic.wgsl` | `roundtrip-semantic-isomorphism` | Reviewed output compares, but WGSL roundtrip currently changes atomic pointer expressions from `Pointer` to `ValuePointer`. | `#16` |
-| `wgsl` | `workgroup-uniform-load.wgsl` | `roundtrip-semantic-isomorphism` | Baseline debt from issue 16 golden stabilization. | `#16` |
+| `wgsl` | `workgroup-uniform-load.wgsl` | `roundtrip-semantic-isomorphism` | Roundtrip normalization still reports a semantic mismatch after parse/lower/write; finer root-cause classification remains pending in DifferenceAnalyzer. | `#16` |
