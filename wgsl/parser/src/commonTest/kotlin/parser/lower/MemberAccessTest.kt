@@ -88,4 +88,20 @@ class MemberAccessTest : FunSpec({
         val exchangedInit = mainFunc.expressions[exchanged.init!!].kind as ExpressionKind.AccessIndex
         exchangedInit.index shouldBe 1u
     }
+
+    test("packed_dot_product_builtins_expose_specified_result_types") {
+        val module = lowerWgsl("""
+            fn main() {
+                let signed = dot4I8Packed(1u, 2u);
+                let unsigned = dot4U8Packed(1u, 2u);
+            }
+        """)
+
+        val mainFunc = module.functions.toList().first { it.name == "main" }
+        val signed = mainFunc.localVariables.toList().first { it.name == "signed" }
+        module.types[signed.type].inner shouldBe TypeInner.Scalar(ScalarKind.Sint, 4)
+
+        val unsigned = mainFunc.localVariables.toList().first { it.name == "unsigned" }
+        module.types[unsigned.type].inner shouldBe TypeInner.Scalar(ScalarKind.Uint, 4)
+    }
 })

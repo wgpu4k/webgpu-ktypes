@@ -40,6 +40,13 @@ class TypeIndexTest : FunSpec({
         }
     }
 
+    test("packed dot-product builtins are known values") {
+        val index = TypeIndex()
+        listOf("dot4I8Packed", "dot4U8Packed").forEach { name ->
+            index.isBuiltinValue(name).shouldBeTrue()
+        }
+    }
+
     test("builtin vector type names") {
         val index = TypeIndex()
         index.isBuiltinVectorType("vec2").shouldBeTrue()

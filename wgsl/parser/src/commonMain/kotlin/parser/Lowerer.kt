@@ -45,6 +45,7 @@ class Lowerer {
     private val structNameMap = mutableMapOf<String, Handle<IrType>>()
     private val typeAliasMap = mutableMapOf<String, Handle<IrType>>()
     private val globalVarMap = mutableMapOf<String, Handle<IrGlobalVariable>>()
+    private val globalConstScalarMap = mutableMapOf<String, IrScalarValue>()
     private val functionMap = mutableMapOf<String, Handle<IrFunction>>()
 
     private var currentExpressions: Arena<IrExpression>? = null
@@ -65,6 +66,7 @@ class Lowerer {
         structNameMap.clear()
         typeAliasMap.clear()
         globalVarMap.clear()
+        globalConstScalarMap.clear()
         functionMap.clear()
         localVariablesMap.clear()
         functionParamsMap.clear()
@@ -493,6 +495,19 @@ class Lowerer {
             `init` = initHandle
         )
         globalVarMap[decl.name] = module.globalVariables.append(variable)
+        if (decl.kind == VariableDeclKind.CONST && initHandle != null) {
+            scalarValueFromGlobalExpression(initHandle)?.let { value ->
+                globalConstScalarMap[decl.name] = value
+            }
+        }
+    }
+
+    private fun scalarValueFromGlobalExpression(handle: Handle<IrExpression>): IrScalarValue? {
+        return when (val kind = module.globalExpressions[handle].kind) {
+            is IrExpressionKind.Literal -> (kind.value as? IrLiteralValue.Scalar)?.value
+            is IrExpressionKind.ConstantExpr -> (module.constants[kind.handle].inner as? io.ygdrasil.wgsl.ir.ConstantInner.Scalar)?.value
+            else -> null
+        }
     }
 
     private fun lowerOverride(decl: OverrideDecl) {
@@ -801,10 +816,10 @@ class Lowerer {
                                         io.ygdrasil.wgsl.ir.CaseSelector.Value(IrScalarValue.Bool(selectorExpr.value))
                                     }
                                     is IdentExpr -> {
-                                        if (selectorExpr.name == "default") {
-                                            io.ygdrasil.wgsl.ir.CaseSelector.Default()
-                                        } else {
-                                            throw LoweringError("Unsupported case selector identifier: '${selectorExpr.name}'")
+                                        when (selectorExpr.name) {
+                                            "default" -> io.ygdrasil.wgsl.ir.CaseSelector.Default()
+                                            in globalConstScalarMap -> io.ygdrasil.wgsl.ir.CaseSelector.Value(globalConstScalarMap.getValue(selectorExpr.name))
+                                            else -> throw LoweringError("Unsupported case selector identifier: '${selectorExpr.name}'")
                                         }
                                     }
                                     else -> throw LoweringError("Unsupported case selector expression type: ${selectorExpr::class.simpleName}")
@@ -1340,6 +1355,8 @@ class Lowerer {
             "textureSampleBaseClampToEdge" -> arguments.firstOrNull()?.let { inferSampledTextureReturnType(it) }
             "textureSampleCompare",
             "textureSampleCompareLevel" -> scalarType("f32")
+            "dot4I8Packed" -> scalarType("i32")
+            "dot4U8Packed" -> scalarType("u32")
             "atomicCompareExchangeWeak" -> inferAtomicCompareExchangeResultType(arguments)
             else -> arguments.firstOrNull()?.let { resolveExpressionType(it) }
         }

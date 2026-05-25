@@ -4,22 +4,17 @@ This file documents WGSL golden inputs that do not yet have expected outputs in 
 The list is intentionally consumed by `GoldenCompletenessTest` so missing outputs stay explicit until they
 are either generated and reviewed or moved to a narrower unsupported-feature manifest.
 
-Current status: 24 inputs are missing expected outputs for `wgsl`, `glsl`, `hlsl`, `msl`, and `ir`.
+Current status: 19 inputs are missing expected outputs for `wgsl`, `glsl`, `hlsl`, `msl`, and `ir`.
 
 - `aliased-ray-query.wgsl` - pending parser/resolver/lowering support.
 - `binding-arrays.wgsl` - pending parser/resolver/lowering support.
 - `binding-buffer-arrays.wgsl` - pending parser/resolver/lowering support.
 - `bits.wgsl` - pending parser/resolver/lowering support.
 - `bits-optimized-msl.wgsl` - pending parser/resolver/lowering support.
-- `const-exprs.wgsl` - pending parser/resolver/lowering support.
 - `control-flow.wgsl` - pending parser/resolver/lowering support.
 - `cooperative-matrix.wgsl` - pending parser/resolver/lowering support.
 - `debug-symbol-large-source.wgsl` - pending parser/resolver/lowering support.
 - `debug-symbol-terrain.wgsl` - pending parser/resolver/lowering support.
-- `functions.wgsl` - pending parser/resolver/lowering support.
-- `functions-optimized-by-capability.wgsl` - pending parser/resolver/lowering support.
-- `functions-optimized-by-version.wgsl` - pending parser/resolver/lowering support.
-- `functions-unoptimized.wgsl` - pending parser/resolver/lowering support.
 - `image.wgsl` - pending parser/resolver/lowering support.
 - `interpolate.wgsl` - pending parser/resolver/lowering support.
 - `interpolate_compat.wgsl` - pending parser/resolver/lowering support.

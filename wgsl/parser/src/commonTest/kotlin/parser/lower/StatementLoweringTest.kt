@@ -247,6 +247,31 @@ class StatementLoweringTest : FunSpec({
         switchStmt.default shouldNotBe null
     }
 
+    test("switch case selectors may use global const scalar identifiers") {
+        val module = lowerWgsl("""
+            const regular: i32 = 0;
+            const warp: i32 = 1;
+
+            fn main(kind: i32) -> i32 {
+                switch (kind) {
+                    case regular: { return 10; }
+                    case warp: { return 20; }
+                    default: { return 0; }
+                }
+            }
+        """)
+
+        val mainFunc = module.functions.toList().first { func -> func.name == "main" }
+        val bodyBlock = mainFunc.blocks[mainFunc.body]
+        val switchStmt = bodyBlock.statements.first() as io.ygdrasil.wgsl.ir.Statement.Switch
+
+        val regular = switchStmt.cases[0].selector as io.ygdrasil.wgsl.ir.CaseSelector.Value
+        (regular.value as io.ygdrasil.wgsl.ir.ScalarValue.I32).value shouldBe 0
+
+        val warp = switchStmt.cases[1].selector as io.ygdrasil.wgsl.ir.CaseSelector.Value
+        (warp.value as io.ygdrasil.wgsl.ir.ScalarValue.I32).value shouldBe 1
+    }
+
     test("function call expression statement is preserved as emit") {
         val module = lowerWgsl("""
             fn callee() {
