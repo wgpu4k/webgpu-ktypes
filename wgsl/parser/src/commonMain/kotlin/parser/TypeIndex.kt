@@ -200,6 +200,7 @@ class TypeIndex {
             "saturate", "sign", "sin", "sinh", "smoothstep", "sqrt", "step", "tan", "tanh", "transpose", "trunc",
             "dpdx", "dpdxCoarse", "dpdxFine", "dpdy", "dpdyCoarse", "dpdyFine", "fwidth", "fwidthCoarse", "fwidthFine",
             "textureDimensions", "textureGather", "textureGatherCompare", "textureLoad", "textureSample",
+            "textureNumLayers", "textureNumLevels", "textureNumSamples",
             "textureSampleBias", "textureSampleCompare", "textureSampleCompareLevel", "textureSampleGrad",
             "textureSampleLevel", "textureSampleBaseClampToEdge", "textureStore",
             "textureAtomicAdd", "textureAtomicAnd", "textureAtomicMax", "textureAtomicMin",

@@ -1433,12 +1433,31 @@ class Lowerer {
             "textureSampleBaseClampToEdge" -> arguments.firstOrNull()?.let { inferSampledTextureReturnType(it) }
             "textureSampleCompare",
             "textureSampleCompareLevel" -> scalarType("f32")
+            "textureDimensions" -> arguments.firstOrNull()?.let { inferTextureDimensionsReturnType(it) }
+            "textureNumLayers",
+            "textureNumLevels",
+            "textureNumSamples" -> scalarType("u32")
             "dot4I8Packed" -> scalarType("i32")
             "dot4U8Packed" -> scalarType("u32")
             "atomicCompareExchangeWeak" -> inferAtomicCompareExchangeResultType(arguments)
             "modf" -> inferModfResultType(arguments)
             "frexp" -> inferFrexpResultType(arguments)
             else -> arguments.firstOrNull()?.let { resolveExpressionType(it) }
+        }
+    }
+
+    private fun inferTextureDimensionsReturnType(textureExpression: Handle<IrExpression>): Handle<IrType> {
+        val textureName = (module.types[resolveExpressionType(textureExpression)].inner as? IrTypeInner.Opaque)
+            ?.name
+            ?.substringBefore("<")
+            ?: return scalarType("u32")
+        val u32 = scalarType("u32")
+        return when (textureName) {
+            "texture_1d",
+            "texture_storage_1d" -> u32
+            "texture_3d",
+            "texture_storage_3d" -> module.types.append(IrType(IrTypeInner.Vector(IrVectorSize.Tri, u32)))
+            else -> module.types.append(IrType(IrTypeInner.Vector(IrVectorSize.Bi, u32)))
         }
     }
 

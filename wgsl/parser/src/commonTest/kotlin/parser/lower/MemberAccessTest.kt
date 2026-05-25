@@ -54,6 +54,42 @@ class MemberAccessTest : FunSpec({
         alphaInit.index shouldBe 3u
     }
 
+    test("texture_dimension_queries_expose_coordinate_components") {
+        val module = lowerWgsl("""
+            @group(0) @binding(0) var tex1d : texture_1d<f32>;
+            @group(0) @binding(1) var tex2d : texture_2d<f32>;
+            @group(0) @binding(2) var tex3d : texture_3d<f32>;
+
+            fn main() {
+                let dim1 = textureDimensions(tex1d);
+                let dim2y = textureDimensions(tex2d).y;
+                let dim3z = textureDimensions(tex3d).z;
+                let levels = textureNumLevels(tex2d);
+                let samples = textureNumSamples(tex2d);
+            }
+        """)
+
+        val mainFunc = module.functions.toList().first { it.name == "main" }
+        val dim1 = mainFunc.localVariables.toList().first { it.name == "dim1" }
+        module.types[dim1.type].inner shouldBe TypeInner.Scalar(ScalarKind.Uint, 4)
+
+        val dim2y = mainFunc.localVariables.toList().first { it.name == "dim2y" }
+        module.types[dim2y.type].inner shouldBe TypeInner.Scalar(ScalarKind.Uint, 4)
+        val dim2Access = mainFunc.expressions[dim2y.init!!].kind as ExpressionKind.AccessIndex
+        dim2Access.index shouldBe 1u
+
+        val dim3z = mainFunc.localVariables.toList().first { it.name == "dim3z" }
+        module.types[dim3z.type].inner shouldBe TypeInner.Scalar(ScalarKind.Uint, 4)
+        val dim3Access = mainFunc.expressions[dim3z.init!!].kind as ExpressionKind.AccessIndex
+        dim3Access.index shouldBe 2u
+
+        val levels = mainFunc.localVariables.toList().first { it.name == "levels" }
+        module.types[levels.type].inner shouldBe TypeInner.Scalar(ScalarKind.Uint, 4)
+
+        val samples = mainFunc.localVariables.toList().first { it.name == "samples" }
+        module.types[samples.type].inner shouldBe TypeInner.Scalar(ScalarKind.Uint, 4)
+    }
+
     test("atomic_compare_exchange_result_exposes_old_value_and_exchanged_members") {
         val module = lowerWgsl("""
             @group(0) @binding(0)

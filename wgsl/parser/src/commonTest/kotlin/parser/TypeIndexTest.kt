@@ -40,6 +40,13 @@ class TypeIndexTest : FunSpec({
         }
     }
 
+    test("texture query builtins are known values") {
+        val index = TypeIndex()
+        listOf("textureNumLayers", "textureNumLevels", "textureNumSamples").forEach { name ->
+            index.isBuiltinValue(name).shouldBeTrue()
+        }
+    }
+
     test("packed dot-product builtins are known values") {
         val index = TypeIndex()
         listOf("dot4I8Packed", "dot4U8Packed").forEach { name ->

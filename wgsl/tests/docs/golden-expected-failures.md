@@ -31,7 +31,7 @@ Each listed case is still executed. The test fails if the case starts passing un
 | `glsl` | `atomicTexture-int64.wgsl` | `native-validation` | Golden output is reviewed after texture atomic builtin registration, but GLSL native validation still rejects the generated storage texture output shape. | `#16` |
 | `glsl` | `atomicTexture.wgsl` | `native-validation` | Golden output is reviewed after texture atomic builtin registration, but GLSL native validation still rejects the generated storage texture output shape. | `#16` |
 | `glsl` | `barycentrics.wgsl` | `native-validation` | Baseline debt from issue 16 golden stabilization. | `#16` |
-| `glsl` | `binding-arrays.wgsl` | `type-resolution` | Baseline debt from issue 16 golden stabilization. | `#16` |
+| `glsl` | `binding-arrays.wgsl` | `lowering` | Texture query builtins now resolve, but lowering still does not support `binding_array`. | `#16` |
 | `glsl` | `binding-buffer-arrays.wgsl` | `lowering` | Baseline debt from issue 16 golden stabilization. | `#16` |
 | `glsl` | `bits-optimized-msl.wgsl` | `native-validation` | Golden output is reviewed after firstLeadingBit builtin registration, but GLSL native validation rejects generated pack4x8snorm output. | `#16` |
 | `glsl` | `bits.wgsl` | `native-validation` | Golden output is reviewed after firstLeadingBit builtin registration, but GLSL native validation rejects generated bit-packing output. | `#16` |
@@ -77,7 +77,7 @@ Each listed case is still executed. The test fails if the case starts passing un
 | `glsl` | `functions-webgl.wgsl` | `native-validation` | Generated output now matches the golden; native validation still rejects the backend output after Emit preservation. | `#16` |
 | `glsl` | `functions.wgsl` | `native-validation` | Golden output is reviewed after packed dot-product builtin support, but GLSL native validation rejects the generated packed dot-product output. | `#16` |
 | `glsl` | `globals.wgsl` | `native-validation` | Generated output now matches the golden; native validation still rejects the backend output after Emit preservation. | `#16` |
-| `glsl` | `image.wgsl` | `type-resolution` | Baseline debt from issue 16 golden stabilization. | `#16` |
+| `glsl` | `image.wgsl` | `native-validation` | Golden output is reviewed after texture query builtin support, but GLSL native validation still rejects the generated image output. | `#16` |
 | `glsl` | `index-by-value.wgsl` | `native-validation` | Baseline debt from issue 16 golden stabilization. | `#16` |
 | `glsl` | `int16.wgsl` | `native-validation` | Generated output now matches the golden; native validation still rejects the backend output after Emit preservation. | `#16` |
 | `glsl` | `int64.wgsl` | `native-validation` | Golden output is reviewed after int64 suffix and scalar-width support, but GLSL native validation still rejects the generated int64 output shape. | `#16` |
@@ -145,13 +145,12 @@ Each listed case is still executed. The test fails if the case starts passing un
 | `hlsl` | `abstract-types-return.wgsl` | `native-validation` | HLSL does not support returning arrays with the current writer shape; golden is reviewed but native validation still fails. | `#16` |
 | `hlsl` | `abstract-types-texture.wgsl` | `type-resolution` | Baseline debt from issue 16 golden stabilization. | `#16` |
 | `hlsl` | `aliased-ray-query.wgsl` | `type-resolution` | Baseline debt from issue 16 golden stabilization. | `#16` |
-| `hlsl` | `binding-arrays.wgsl` | `type-resolution` | Baseline debt from issue 16 golden stabilization. | `#16` |
+| `hlsl` | `binding-arrays.wgsl` | `lowering` | Texture query builtins now resolve, but lowering still does not support `binding_array`. | `#16` |
 | `hlsl` | `binding-buffer-arrays.wgsl` | `lowering` | Baseline debt from issue 16 golden stabilization. | `#16` |
 | `hlsl` | `cooperative-matrix.wgsl` | `type-resolution` | Baseline debt from issue 16 golden stabilization. | `#16` |
 | `hlsl` | `debug-symbol-large-source.wgsl` | `type-resolution` | Baseline debt from issue 16 golden stabilization. | `#16` |
 | `hlsl` | `debug-symbol-terrain.wgsl` | `type-resolution` | Baseline debt from issue 16 golden stabilization. | `#16` |
 | `hlsl` | `f64.wgsl` | `type-resolution` | Baseline debt from issue 16 golden stabilization. | `#16` |
-| `hlsl` | `image.wgsl` | `type-resolution` | Baseline debt from issue 16 golden stabilization. | `#16` |
 | `hlsl` | `mesh-shader-empty.wgsl` | `type-resolution` | Baseline debt from issue 16 golden stabilization. | `#16` |
 | `hlsl` | `mesh-shader-lines.wgsl` | `type-resolution` | Baseline debt from issue 16 golden stabilization. | `#16` |
 | `hlsl` | `mesh-shader-points.wgsl` | `type-resolution` | Baseline debt from issue 16 golden stabilization. | `#16` |
@@ -160,13 +159,12 @@ Each listed case is still executed. The test fails if the case starts passing un
 | `hlsl` | `ray-query.wgsl` | `type-resolution` | Baseline debt from issue 16 golden stabilization. | `#16` |
 | `ir` | `abstract-types-texture.wgsl` | `type-resolution` | Baseline debt from issue 16 golden stabilization. | `#16` |
 | `ir` | `aliased-ray-query.wgsl` | `type-resolution` | Baseline debt from issue 16 golden stabilization. | `#16` |
-| `ir` | `binding-arrays.wgsl` | `type-resolution` | Baseline debt from issue 16 golden stabilization. | `#16` |
+| `ir` | `binding-arrays.wgsl` | `lowering` | Texture query builtins now resolve, but lowering still does not support `binding_array`. | `#16` |
 | `ir` | `binding-buffer-arrays.wgsl` | `lowering` | Baseline debt from issue 16 golden stabilization. | `#16` |
 | `ir` | `cooperative-matrix.wgsl` | `type-resolution` | Baseline debt from issue 16 golden stabilization. | `#16` |
 | `ir` | `debug-symbol-large-source.wgsl` | `type-resolution` | Baseline debt from issue 16 golden stabilization. | `#16` |
 | `ir` | `debug-symbol-terrain.wgsl` | `type-resolution` | Baseline debt from issue 16 golden stabilization. | `#16` |
 | `ir` | `f64.wgsl` | `type-resolution` | Baseline debt from issue 16 golden stabilization. | `#16` |
-| `ir` | `image.wgsl` | `type-resolution` | Baseline debt from issue 16 golden stabilization. | `#16` |
 | `ir` | `mesh-shader-empty.wgsl` | `type-resolution` | Baseline debt from issue 16 golden stabilization. | `#16` |
 | `ir` | `mesh-shader-lines.wgsl` | `type-resolution` | Baseline debt from issue 16 golden stabilization. | `#16` |
 | `ir` | `mesh-shader-points.wgsl` | `type-resolution` | Baseline debt from issue 16 golden stabilization. | `#16` |
@@ -175,13 +173,12 @@ Each listed case is still executed. The test fails if the case starts passing un
 | `ir` | `ray-query.wgsl` | `type-resolution` | Baseline debt from issue 16 golden stabilization. | `#16` |
 | `msl` | `abstract-types-texture.wgsl` | `type-resolution` | Baseline debt from issue 16 golden stabilization. | `#16` |
 | `msl` | `aliased-ray-query.wgsl` | `type-resolution` | Baseline debt from issue 16 golden stabilization. | `#16` |
-| `msl` | `binding-arrays.wgsl` | `type-resolution` | Baseline debt from issue 16 golden stabilization. | `#16` |
+| `msl` | `binding-arrays.wgsl` | `lowering` | Texture query builtins now resolve, but lowering still does not support `binding_array`. | `#16` |
 | `msl` | `binding-buffer-arrays.wgsl` | `lowering` | Baseline debt from issue 16 golden stabilization. | `#16` |
 | `msl` | `cooperative-matrix.wgsl` | `type-resolution` | Baseline debt from issue 16 golden stabilization. | `#16` |
 | `msl` | `debug-symbol-large-source.wgsl` | `type-resolution` | Baseline debt from issue 16 golden stabilization. | `#16` |
 | `msl` | `debug-symbol-terrain.wgsl` | `type-resolution` | Baseline debt from issue 16 golden stabilization. | `#16` |
 | `msl` | `f64.wgsl` | `type-resolution` | Baseline debt from issue 16 golden stabilization. | `#16` |
-| `msl` | `image.wgsl` | `type-resolution` | Baseline debt from issue 16 golden stabilization. | `#16` |
 | `msl` | `mesh-shader-empty.wgsl` | `type-resolution` | Baseline debt from issue 16 golden stabilization. | `#16` |
 | `msl` | `mesh-shader-lines.wgsl` | `type-resolution` | Baseline debt from issue 16 golden stabilization. | `#16` |
 | `msl` | `mesh-shader-points.wgsl` | `type-resolution` | Baseline debt from issue 16 golden stabilization. | `#16` |
@@ -200,7 +197,7 @@ Each listed case is still executed. The test fails if the case starts passing un
 | `roundtrip` | `atomicOps-int64.wgsl` | `roundtrip-semantic-isomorphism` | Golden output is reviewed, but roundtrip still changes atomic pointer expressions from `Pointer` to `ValuePointer`. | `#16` |
 | `roundtrip` | `atomicOps.wgsl` | `roundtrip-semantic-isomorphism` | Baseline debt from issue 16 golden stabilization. | `#16` |
 | `roundtrip` | `atomicTexture-int64.wgsl` | `roundtrip-semantic-isomorphism` | Golden output is reviewed, but roundtrip currently rewrites an untyped integer scalar to `u64`. | `#16` |
-| `roundtrip` | `binding-arrays.wgsl` | `type-resolution` | Baseline debt from issue 16 golden stabilization. | `#16` |
+| `roundtrip` | `binding-arrays.wgsl` | `lowering` | Texture query builtins now resolve, but lowering still does not support `binding_array`. | `#16` |
 | `roundtrip` | `binding-buffer-arrays.wgsl` | `lowering` | Baseline debt from issue 16 golden stabilization. | `#16` |
 | `roundtrip` | `bounds-check-zero-atomic.wgsl` | `roundtrip-semantic-isomorphism` | Baseline debt from issue 16 golden stabilization. | `#16` |
 | `roundtrip` | `clip-distances.wgsl` | `roundtrip-semantic-isomorphism` | Baseline debt from issue 16 golden stabilization. | `#16` |
@@ -220,7 +217,6 @@ Each listed case is still executed. The test fails if the case starts passing un
 | `roundtrip` | `f64.wgsl` | `type-resolution` | Baseline debt from issue 16 golden stabilization. | `#16` |
 | `roundtrip` | `fragment-output.wgsl` | `roundtrip-semantic-isomorphism` | Baseline debt from issue 16 golden stabilization. | `#16` |
 | `roundtrip` | `globals.wgsl` | `roundtrip-semantic-isomorphism` | Baseline debt from issue 16 golden stabilization. | `#16` |
-| `roundtrip` | `image.wgsl` | `type-resolution` | Baseline debt from issue 16 golden stabilization. | `#16` |
 | `roundtrip` | `int64.wgsl` | `roundtrip-semantic-isomorphism` | Golden output is reviewed, but roundtrip currently rewrites an untyped integer scalar to `i64`. | `#16` |
 | `roundtrip` | `interface.wgsl` | `roundtrip-semantic-isomorphism` | Baseline debt from issue 16 golden stabilization. | `#16` |
 | `roundtrip` | `interpolate.wgsl` | `roundtrip-semantic-isomorphism` | Golden output is reviewed after interpolation enumerant resolution, but roundtrip currently changes builtin binding shape. | `#16` |
@@ -268,7 +264,7 @@ Each listed case is still executed. The test fails if the case starts passing un
 | `wgsl` | `atomicOps-int64.wgsl` | `roundtrip-semantic-isomorphism` | Golden output is reviewed, but roundtrip still changes atomic pointer expressions from `Pointer` to `ValuePointer`. | `#16` |
 | `wgsl` | `atomicOps.wgsl` | `roundtrip-semantic-isomorphism` | Baseline debt from issue 16 golden stabilization. | `#16` |
 | `wgsl` | `atomicTexture-int64.wgsl` | `roundtrip-semantic-isomorphism` | Golden output is reviewed, but roundtrip currently rewrites an untyped integer scalar to `u64`. | `#16` |
-| `wgsl` | `binding-arrays.wgsl` | `type-resolution` | Baseline debt from issue 16 golden stabilization. | `#16` |
+| `wgsl` | `binding-arrays.wgsl` | `lowering` | Texture query builtins now resolve, but lowering still does not support `binding_array`. | `#16` |
 | `wgsl` | `binding-buffer-arrays.wgsl` | `lowering` | Baseline debt from issue 16 golden stabilization. | `#16` |
 | `wgsl` | `bounds-check-zero-atomic.wgsl` | `roundtrip-semantic-isomorphism` | Baseline debt from issue 16 golden stabilization. | `#16` |
 | `wgsl` | `clip-distances.wgsl` | `roundtrip-semantic-isomorphism` | Baseline debt from issue 16 golden stabilization. | `#16` |
@@ -288,7 +284,6 @@ Each listed case is still executed. The test fails if the case starts passing un
 | `wgsl` | `f64.wgsl` | `type-resolution` | Baseline debt from issue 16 golden stabilization. | `#16` |
 | `wgsl` | `fragment-output.wgsl` | `roundtrip-semantic-isomorphism` | Baseline debt from issue 16 golden stabilization. | `#16` |
 | `wgsl` | `globals.wgsl` | `roundtrip-semantic-isomorphism` | Baseline debt from issue 16 golden stabilization. | `#16` |
-| `wgsl` | `image.wgsl` | `type-resolution` | Baseline debt from issue 16 golden stabilization. | `#16` |
 | `wgsl` | `int64.wgsl` | `roundtrip-semantic-isomorphism` | Golden output is reviewed, but roundtrip currently rewrites an untyped integer scalar to `i64`. | `#16` |
 | `wgsl` | `interface.wgsl` | `roundtrip-semantic-isomorphism` | Baseline debt from issue 16 golden stabilization. | `#16` |
 | `wgsl` | `interpolate.wgsl` | `roundtrip-semantic-isomorphism` | Golden output is reviewed after interpolation enumerant resolution, but roundtrip currently changes builtin binding shape. | `#16` |
