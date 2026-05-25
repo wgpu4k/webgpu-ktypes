@@ -176,9 +176,13 @@ class TypeIndex {
             "RAY_FLAG_NONE", "RAY_FLAG_FORCE_OPAQUE", "RAY_FLAG_FORCE_NO_OPAQUE",
             "RAY_FLAG_ACCEPT_FIRST_HIT", "RAY_FLAG_SKIP_CLOSEST_HIT", "RAY_FLAG_CULL_BACK_FACING",
             "RAY_FLAG_CULL_FRONT_FACING", "RAY_FLAG_CULL_OPAQUE", "RAY_FLAG_CULL_NO_OPAQUE", "RAY_FLAG_TERMINATE_ON_FIRST_HIT",
+            "RAY_FLAG_SKIP_CLOSEST_HIT_SHADER", "RAY_FLAG_SKIP_TRIANGLES", "RAY_FLAG_SKIP_AABBS",
+            "RAY_QUERY_INTERSECTION_NONE", "RAY_QUERY_INTERSECTION_TRIANGLE",
+            "RAY_QUERY_INTERSECTION_GENERATED", "RAY_QUERY_INTERSECTION_AABB",
 
             // Ray-Tracing built-in functions
             "traceRay", "rayQueryInitialize", "rayQueryProceed", "rayQueryGetIntersection", "rayQueryGetCandidateIntersection",
+            "rayQueryGetCommittedIntersection", "rayQueryGenerateIntersection", "rayQueryConfirmIntersection", "rayQueryTerminate",
 
             // Ray-Tracing built-in values
             "ray_invocation_id", "num_ray_invocations", "world_ray_origin", "world_ray_direction",

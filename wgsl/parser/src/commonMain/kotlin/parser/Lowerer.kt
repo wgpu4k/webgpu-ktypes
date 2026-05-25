@@ -138,6 +138,9 @@ class Lowerer {
             if (handle != null) {
                 return handle
             }
+            if (name == "RayIntersection") {
+                return rayIntersectionResultType()
+            }
         }
         
         return typeMap.getOrPut(typeDecl) {
@@ -171,7 +174,7 @@ class Lowerer {
                         name == "i64" -> IrTypeInner.Scalar(IrScalarKind.Sint, 8)
                         name == "u64" -> IrTypeInner.Scalar(IrScalarKind.Uint, 8)
                         name == "bool" -> IrTypeInner.Scalar(IrScalarKind.Bool, 1)
-                        name == "acceleration_structure" || name == "ray_query" || name == "RayDesc" || name == "RayIntersection" -> {
+                        name == "acceleration_structure" || name == "ray_query" || name == "RayDesc" -> {
                             IrTypeInner.Opaque(name)
                         }
                         else -> lowerBuiltinShorthandType(name)
@@ -994,7 +997,11 @@ class Lowerer {
                     IrExpressionKind.Literal(IrLiteralValue.Scalar(IrScalarValue.U32(2L)))
                 } else if (name == "RAY_FLAG_ACCEPT_FIRST_HIT") {
                     IrExpressionKind.Literal(IrLiteralValue.Scalar(IrScalarValue.U32(4L)))
+                } else if (name == "RAY_FLAG_TERMINATE_ON_FIRST_HIT") {
+                    IrExpressionKind.Literal(IrLiteralValue.Scalar(IrScalarValue.U32(4L)))
                 } else if (name == "RAY_FLAG_SKIP_CLOSEST_HIT") {
+                    IrExpressionKind.Literal(IrLiteralValue.Scalar(IrScalarValue.U32(8L)))
+                } else if (name == "RAY_FLAG_SKIP_CLOSEST_HIT_SHADER") {
                     IrExpressionKind.Literal(IrLiteralValue.Scalar(IrScalarValue.U32(8L)))
                 } else if (name == "RAY_FLAG_CULL_BACK_FACING") {
                     IrExpressionKind.Literal(IrLiteralValue.Scalar(IrScalarValue.U32(16L)))
@@ -1004,8 +1011,18 @@ class Lowerer {
                     IrExpressionKind.Literal(IrLiteralValue.Scalar(IrScalarValue.U32(64L)))
                 } else if (name == "RAY_FLAG_CULL_NO_OPAQUE") {
                     IrExpressionKind.Literal(IrLiteralValue.Scalar(IrScalarValue.U32(128L)))
-                } else if (name == "RAY_FLAG_TERMINATE_ON_FIRST_HIT") {
+                } else if (name == "RAY_FLAG_SKIP_TRIANGLES") {
                     IrExpressionKind.Literal(IrLiteralValue.Scalar(IrScalarValue.U32(256L)))
+                } else if (name == "RAY_FLAG_SKIP_AABBS") {
+                    IrExpressionKind.Literal(IrLiteralValue.Scalar(IrScalarValue.U32(512L)))
+                } else if (name == "RAY_QUERY_INTERSECTION_NONE") {
+                    IrExpressionKind.Literal(IrLiteralValue.Scalar(IrScalarValue.U32(0L)))
+                } else if (name == "RAY_QUERY_INTERSECTION_TRIANGLE") {
+                    IrExpressionKind.Literal(IrLiteralValue.Scalar(IrScalarValue.U32(1L)))
+                } else if (name == "RAY_QUERY_INTERSECTION_GENERATED") {
+                    IrExpressionKind.Literal(IrLiteralValue.Scalar(IrScalarValue.U32(2L)))
+                } else if (name == "RAY_QUERY_INTERSECTION_AABB") {
+                    IrExpressionKind.Literal(IrLiteralValue.Scalar(IrScalarValue.U32(3L)))
                 } else {
                     // P004 fix: Throw error instead of silent fallback
                     throw LoweringError("Undefined variable: '$name'")
@@ -1448,8 +1465,41 @@ class Lowerer {
             "atomicCompareExchangeWeak" -> inferAtomicCompareExchangeResultType(arguments)
             "modf" -> inferModfResultType(arguments)
             "frexp" -> inferFrexpResultType(arguments)
+            "rayQueryGetCandidateIntersection",
+            "rayQueryGetCommittedIntersection",
+            "rayQueryGetIntersection" -> rayIntersectionResultType()
+            "rayQueryInitialize" -> arguments.firstOrNull()?.let { resolveExpressionType(it) }
+            "rayQueryProceed" -> scalarType("bool")
+            "rayQueryGenerateIntersection",
+            "rayQueryConfirmIntersection",
+            "rayQueryTerminate" -> null
             else -> arguments.firstOrNull()?.let { resolveExpressionType(it) }
         }
+    }
+
+    private fun rayIntersectionResultType(): Handle<IrType> {
+        val u32 = scalarType("u32")
+        val f32 = scalarType("f32")
+        val bool = scalarType("bool")
+        val vec2f = module.types.append(IrType(IrTypeInner.Vector(IrVectorSize.Bi, f32)))
+        val mat4x3f = module.types.append(IrType(IrTypeInner.Matrix(IrVectorSize.Quad, IrVectorSize.Tri, f32)))
+        return structuredBuiltinResultType(
+            functionName = "RayIntersection",
+            valueTypeName = "builtin",
+            members = listOf(
+                IrStructMember("kind", u32, null, 0),
+                IrStructMember("t", f32, null, 4),
+                IrStructMember("instance_custom_data", u32, null, 8),
+                IrStructMember("instance_index", u32, null, 12),
+                IrStructMember("sbt_record_offset", u32, null, 16),
+                IrStructMember("geometry_index", u32, null, 20),
+                IrStructMember("primitive_index", u32, null, 24),
+                IrStructMember("barycentrics", vec2f, null, 28),
+                IrStructMember("front_face", bool, null, 36),
+                IrStructMember("object_to_world", mat4x3f, null, 40),
+                IrStructMember("world_to_object", mat4x3f, null, 88)
+            )
+        )
     }
 
     private fun inferTextureDimensionsReturnType(textureExpression: Handle<IrExpression>): Handle<IrType> {

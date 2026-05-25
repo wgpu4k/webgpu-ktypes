@@ -4,9 +4,6 @@ This file documents WGSL golden inputs that do not yet have expected outputs in 
 The list is intentionally consumed by `GoldenCompletenessTest` so missing outputs stay explicit until they
 are either generated and reviewed or moved to a narrower unsupported-feature manifest.
 
-Current status: 4 inputs are missing expected outputs for `wgsl`, `glsl`, `hlsl`, `msl`, and `ir`.
+Current status: 1 input is missing expected outputs for `wgsl`, `glsl`, `hlsl`, `msl`, and `ir`.
 
-- `aliased-ray-query.wgsl` - pending parser/resolver/lowering support.
 - `cooperative-matrix.wgsl` - pending parser/resolver/lowering support.
-- `ray-query.wgsl` - pending parser/resolver/lowering support.
-- `ray-query-no-init-tracking.wgsl` - pending parser/resolver/lowering support.

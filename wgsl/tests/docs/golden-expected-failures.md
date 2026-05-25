@@ -19,7 +19,7 @@ Each listed case is still executed. The test fails if the case starts passing un
 | `glsl` | `abstract-types-texture.wgsl` | `type-resolution` | Baseline debt from issue 16 golden stabilization. | `#16` |
 | `glsl` | `abstract-types-var.wgsl` | `native-validation` | Golden output is reviewed, but GLSL native validation rejects current abstract composite initializer conversions. | `#16` |
 | `glsl` | `access.wgsl` | `native-validation` | Generated output now matches the golden; native validation still rejects the backend output after Emit preservation. | `#16` |
-| `glsl` | `aliased-ray-query.wgsl` | `type-resolution` | Baseline debt from issue 16 golden stabilization. | `#16` |
+| `glsl` | `aliased-ray-query.wgsl` | `native-validation` | Golden output is reviewed after ray-query builtin registration, but GLSL native validation does not accept the generated ray-query output. | `#16` |
 | `glsl` | `array-in-ctor.wgsl` | `native-validation` | Generated output now matches the golden; native validation still rejects the backend output after Emit preservation. | `#16` |
 | `glsl` | `array-in-function-return-type.wgsl` | `native-validation` | Baseline debt from issue 16 golden stabilization. | `#16` |
 | `glsl` | `atomicCompareExchange-int64.wgsl` | `native-validation` | Golden output is reviewed after int64 suffix and scalar-width support, but GLSL native validation still rejects the generated int64 output shape. | `#16` |
@@ -117,8 +117,8 @@ Each listed case is still executed. The test fails if the case starts passing un
 | `glsl` | `primitive-index.wgsl` | `native-validation` | Baseline debt from issue 16 golden stabilization. | `#16` |
 | `glsl` | `push-constants.wgsl` | `native-validation` | Baseline debt from issue 16 golden stabilization. | `#16` |
 | `glsl` | `quad.wgsl` | `native-validation` | Golden output is reviewed after texture sampling lowering fix, but GLSL native validation still rejects the current multi-entry-point output due overlapping locations. | `#16` |
-| `glsl` | `ray-query-no-init-tracking.wgsl` | `type-resolution` | Baseline debt from issue 16 golden stabilization. | `#16` |
-| `glsl` | `ray-query.wgsl` | `type-resolution` | Baseline debt from issue 16 golden stabilization. | `#16` |
+| `glsl` | `ray-query-no-init-tracking.wgsl` | `native-validation` | Golden output is reviewed after ray-query builtin registration, but GLSL native validation does not accept the generated ray-query output. | `#16` |
+| `glsl` | `ray-query.wgsl` | `native-validation` | Golden output is reviewed after ray-query builtin registration, but GLSL native validation does not accept the generated ray-query output. | `#16` |
 | `glsl` | `ray-tracing-pipeline.wgsl` | `native-validation` | Generated output now matches the golden; native validation still rejects the backend output after Emit preservation. | `#16` |
 | `glsl` | `resource-binding-map.wgsl` | `native-validation` | Generated output now matches the golden; native validation still rejects the backend output after Emit preservation. | `#16` |
 | `glsl` | `sample-cube-array-depth-lod.wgsl` | `native-validation` | Generated output now matches the golden; native validation still rejects the backend output after Emit preservation. | `#16` |
@@ -144,28 +144,18 @@ Each listed case is still executed. The test fails if the case starts passing un
 | `glsl` | `workgroup-var-init.wgsl` | `native-validation` | Baseline debt from issue 16 golden stabilization. | `#16` |
 | `hlsl` | `abstract-types-return.wgsl` | `native-validation` | HLSL does not support returning arrays with the current writer shape; golden is reviewed but native validation still fails. | `#16` |
 | `hlsl` | `abstract-types-texture.wgsl` | `type-resolution` | Baseline debt from issue 16 golden stabilization. | `#16` |
-| `hlsl` | `aliased-ray-query.wgsl` | `type-resolution` | Baseline debt from issue 16 golden stabilization. | `#16` |
 | `hlsl` | `cooperative-matrix.wgsl` | `type-resolution` | Baseline debt from issue 16 golden stabilization. | `#16` |
 | `hlsl` | `f64.wgsl` | `type-resolution` | Baseline debt from issue 16 golden stabilization. | `#16` |
-| `hlsl` | `ray-query-no-init-tracking.wgsl` | `type-resolution` | Baseline debt from issue 16 golden stabilization. | `#16` |
-| `hlsl` | `ray-query.wgsl` | `type-resolution` | Baseline debt from issue 16 golden stabilization. | `#16` |
 | `ir` | `abstract-types-texture.wgsl` | `type-resolution` | Baseline debt from issue 16 golden stabilization. | `#16` |
-| `ir` | `aliased-ray-query.wgsl` | `type-resolution` | Baseline debt from issue 16 golden stabilization. | `#16` |
 | `ir` | `cooperative-matrix.wgsl` | `type-resolution` | Baseline debt from issue 16 golden stabilization. | `#16` |
 | `ir` | `f64.wgsl` | `type-resolution` | Baseline debt from issue 16 golden stabilization. | `#16` |
-| `ir` | `ray-query-no-init-tracking.wgsl` | `type-resolution` | Baseline debt from issue 16 golden stabilization. | `#16` |
-| `ir` | `ray-query.wgsl` | `type-resolution` | Baseline debt from issue 16 golden stabilization. | `#16` |
 | `msl` | `abstract-types-texture.wgsl` | `type-resolution` | Baseline debt from issue 16 golden stabilization. | `#16` |
-| `msl` | `aliased-ray-query.wgsl` | `type-resolution` | Baseline debt from issue 16 golden stabilization. | `#16` |
 | `msl` | `cooperative-matrix.wgsl` | `type-resolution` | Baseline debt from issue 16 golden stabilization. | `#16` |
 | `msl` | `f64.wgsl` | `type-resolution` | Baseline debt from issue 16 golden stabilization. | `#16` |
-| `msl` | `ray-query-no-init-tracking.wgsl` | `type-resolution` | Baseline debt from issue 16 golden stabilization. | `#16` |
-| `msl` | `ray-query.wgsl` | `type-resolution` | Baseline debt from issue 16 golden stabilization. | `#16` |
 | `roundtrip` | `6438-conflicting-idents.wgsl` | `roundtrip-semantic-isomorphism` | Baseline debt from issue 16 golden stabilization. | `#16` |
 | `roundtrip` | `abstract-types-atomic.wgsl` | `roundtrip-semantic-isomorphism` | Baseline debt from issue 16 golden stabilization. | `#16` |
 | `roundtrip` | `abstract-types-texture.wgsl` | `type-resolution` | Baseline debt from issue 16 golden stabilization. | `#16` |
 | `roundtrip` | `access.wgsl` | `roundtrip-semantic-isomorphism` | Baseline debt from issue 16 golden stabilization. | `#16` |
-| `roundtrip` | `aliased-ray-query.wgsl` | `type-resolution` | Baseline debt from issue 16 golden stabilization. | `#16` |
 | `roundtrip` | `atomicCompareExchange-int64.wgsl` | `roundtrip-semantic-isomorphism` | Golden output is reviewed, but roundtrip currently drops `li`/`lu` literal suffix width information. | `#16` |
 | `roundtrip` | `atomicCompareExchange.wgsl` | `roundtrip-semantic-isomorphism` | Golden output is reviewed, but roundtrip still differs on pointer/value-pointer representation. | `#16` |
 | `roundtrip` | `atomicOps-float32.wgsl` | `roundtrip-semantic-isomorphism` | Baseline debt from issue 16 golden stabilization. | `#16` |
@@ -208,6 +198,9 @@ Each listed case is still executed. The test fails if the case starts passing un
 | `roundtrip` | `overrides-atomicCompareExchangeWeak.wgsl` | `roundtrip-semantic-isomorphism` | Baseline debt from issue 16 golden stabilization. | `#16` |
 | `roundtrip` | `operators.wgsl` | `roundtrip-semantic-isomorphism` | Reviewed output compares after comparison type lowering fix, but WGSL roundtrip currently rewrites a unary expression as a literal. | `#16` |
 | `roundtrip` | `overrides-ray-query.wgsl` | `roundtrip-semantic-isomorphism` | Baseline debt from issue 16 golden stabilization. | `#16` |
+| `roundtrip` | `aliased-ray-query.wgsl` | `roundtrip-semantic-isomorphism` | Golden output is reviewed after ray-query builtin registration, but roundtrip currently changes pointer binding shape. | `#16` |
+| `roundtrip` | `ray-query-no-init-tracking.wgsl` | `roundtrip-semantic-isomorphism` | Golden output is reviewed after ray-query builtin registration, but roundtrip currently changes pointer binding shape. | `#16` |
+| `roundtrip` | `ray-query.wgsl` | `roundtrip-semantic-isomorphism` | Golden output is reviewed after ray-query builtin registration, but roundtrip currently changes pointer binding shape. | `#16` |
 | `roundtrip` | `packed-vec3-bitcast.wgsl` | `roundtrip-semantic-isomorphism` | Baseline debt from issue 16 golden stabilization. | `#16` |
 | `roundtrip` | `pointer-function-arg-restrict.wgsl` | `roundtrip-semantic-isomorphism` | Baseline debt from issue 16 golden stabilization. | `#16` |
 | `roundtrip` | `pointer-function-arg-rzsw.wgsl` | `roundtrip-semantic-isomorphism` | Baseline debt from issue 16 golden stabilization. | `#16` |
@@ -215,8 +208,6 @@ Each listed case is still executed. The test fails if the case starts passing un
 | `roundtrip` | `pointers.wgsl` | `roundtrip-semantic-isomorphism` | Baseline debt from issue 16 golden stabilization. | `#16` |
 | `roundtrip` | `push-constants.wgsl` | `roundtrip-semantic-isomorphism` | Baseline debt from issue 16 golden stabilization. | `#16` |
 | `roundtrip` | `quad.wgsl` | `roundtrip-semantic-isomorphism` | Golden output is reviewed after texture sampling lowering fix, but roundtrip comparison still differs on return location binding placement. | `#16` |
-| `roundtrip` | `ray-query-no-init-tracking.wgsl` | `type-resolution` | Baseline debt from issue 16 golden stabilization. | `#16` |
-| `roundtrip` | `ray-query.wgsl` | `type-resolution` | Baseline debt from issue 16 golden stabilization. | `#16` |
 | `roundtrip` | `ray-tracing-pipeline.wgsl` | `roundtrip-semantic-isomorphism` | Baseline debt from issue 16 golden stabilization. | `#16` |
 | `roundtrip` | `shadow.wgsl` | `roundtrip-semantic-isomorphism` | Baseline debt from issue 16 golden stabilization. | `#16` |
 | `roundtrip` | `skybox.wgsl` | `roundtrip-semantic-isomorphism` | Baseline debt from issue 16 golden stabilization. | `#16` |
@@ -229,7 +220,6 @@ Each listed case is still executed. The test fails if the case starts passing un
 | `wgsl` | `abstract-types-atomic.wgsl` | `roundtrip-semantic-isomorphism` | Baseline debt from issue 16 golden stabilization. | `#16` |
 | `wgsl` | `abstract-types-texture.wgsl` | `type-resolution` | Baseline debt from issue 16 golden stabilization. | `#16` |
 | `wgsl` | `access.wgsl` | `roundtrip-semantic-isomorphism` | Baseline debt from issue 16 golden stabilization. | `#16` |
-| `wgsl` | `aliased-ray-query.wgsl` | `type-resolution` | Baseline debt from issue 16 golden stabilization. | `#16` |
 | `wgsl` | `atomicCompareExchange-int64.wgsl` | `roundtrip-semantic-isomorphism` | Golden output is reviewed, but roundtrip currently drops `li`/`lu` literal suffix width information. | `#16` |
 | `wgsl` | `atomicCompareExchange.wgsl` | `roundtrip-semantic-isomorphism` | Golden output is reviewed, but roundtrip still differs on pointer/value-pointer representation. | `#16` |
 | `wgsl` | `atomicOps-float32.wgsl` | `roundtrip-semantic-isomorphism` | Baseline debt from issue 16 golden stabilization. | `#16` |
@@ -272,6 +262,9 @@ Each listed case is still executed. The test fails if the case starts passing un
 | `wgsl` | `overrides-atomicCompareExchangeWeak.wgsl` | `roundtrip-semantic-isomorphism` | Baseline debt from issue 16 golden stabilization. | `#16` |
 | `wgsl` | `operators.wgsl` | `roundtrip-semantic-isomorphism` | Reviewed output compares after comparison type lowering fix, but WGSL roundtrip currently rewrites a unary expression as a literal. | `#16` |
 | `wgsl` | `overrides-ray-query.wgsl` | `roundtrip-semantic-isomorphism` | Baseline debt from issue 16 golden stabilization. | `#16` |
+| `wgsl` | `aliased-ray-query.wgsl` | `roundtrip-semantic-isomorphism` | Golden output is reviewed after ray-query builtin registration, but WGSL comparison currently changes pointer binding shape. | `#16` |
+| `wgsl` | `ray-query-no-init-tracking.wgsl` | `roundtrip-semantic-isomorphism` | Golden output is reviewed after ray-query builtin registration, but WGSL comparison currently changes pointer binding shape. | `#16` |
+| `wgsl` | `ray-query.wgsl` | `roundtrip-semantic-isomorphism` | Golden output is reviewed after ray-query builtin registration, but WGSL comparison currently changes pointer binding shape. | `#16` |
 | `wgsl` | `packed-vec3-bitcast.wgsl` | `roundtrip-semantic-isomorphism` | Baseline debt from issue 16 golden stabilization. | `#16` |
 | `wgsl` | `pointer-function-arg-restrict.wgsl` | `roundtrip-semantic-isomorphism` | Baseline debt from issue 16 golden stabilization. | `#16` |
 | `wgsl` | `pointer-function-arg-rzsw.wgsl` | `roundtrip-semantic-isomorphism` | Baseline debt from issue 16 golden stabilization. | `#16` |
@@ -279,8 +272,6 @@ Each listed case is still executed. The test fails if the case starts passing un
 | `wgsl` | `pointers.wgsl` | `roundtrip-semantic-isomorphism` | Baseline debt from issue 16 golden stabilization. | `#16` |
 | `wgsl` | `push-constants.wgsl` | `roundtrip-semantic-isomorphism` | Baseline debt from issue 16 golden stabilization. | `#16` |
 | `wgsl` | `quad.wgsl` | `roundtrip-semantic-isomorphism` | Golden output is reviewed after texture sampling lowering fix, but WGSL comparison still differs on return location binding placement. | `#16` |
-| `wgsl` | `ray-query-no-init-tracking.wgsl` | `type-resolution` | Baseline debt from issue 16 golden stabilization. | `#16` |
-| `wgsl` | `ray-query.wgsl` | `type-resolution` | Baseline debt from issue 16 golden stabilization. | `#16` |
 | `wgsl` | `ray-tracing-pipeline.wgsl` | `roundtrip-semantic-isomorphism` | Baseline debt from issue 16 golden stabilization. | `#16` |
 | `wgsl` | `shadow.wgsl` | `roundtrip-semantic-isomorphism` | Baseline debt from issue 16 golden stabilization. | `#16` |
 | `wgsl` | `skybox.wgsl` | `roundtrip-semantic-isomorphism` | Baseline debt from issue 16 golden stabilization. | `#16` |

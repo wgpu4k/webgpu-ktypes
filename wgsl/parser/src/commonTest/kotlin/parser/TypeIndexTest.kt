@@ -92,6 +92,25 @@ class TypeIndexTest : FunSpec({
         }
     }
 
+    test("ray query constants and functions are known values") {
+        val index = TypeIndex()
+        listOf(
+            "RAY_FLAG_SKIP_CLOSEST_HIT_SHADER",
+            "RAY_FLAG_SKIP_TRIANGLES",
+            "RAY_FLAG_SKIP_AABBS",
+            "RAY_QUERY_INTERSECTION_NONE",
+            "RAY_QUERY_INTERSECTION_TRIANGLE",
+            "RAY_QUERY_INTERSECTION_GENERATED",
+            "RAY_QUERY_INTERSECTION_AABB",
+            "rayQueryGetCommittedIntersection",
+            "rayQueryGenerateIntersection",
+            "rayQueryConfirmIntersection",
+            "rayQueryTerminate"
+        ).forEach { name ->
+            index.isBuiltinValue(name).shouldBeTrue()
+        }
+    }
+
     test("builtin vector type names") {
         val index = TypeIndex()
         index.isBuiltinVectorType("vec2").shouldBeTrue()
