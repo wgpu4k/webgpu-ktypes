@@ -272,6 +272,32 @@ class StatementLoweringTest : FunSpec({
         (warp.value as io.ygdrasil.wgsl.ir.ScalarValue.I32).value shouldBe 1
     }
 
+    test("switch case selectors may use scalar const expressions") {
+        val module = lowerWgsl("""
+            const one: i32 = 1;
+
+            fn main(kind: i32) {
+                const two: i32 = 2;
+                switch (kind) {
+                    case i32(): {}
+                    case one: {}
+                    case two: {}
+                    case 1 + 2: {}
+                    case vec4(4).x: {}
+                    default: {}
+                }
+            }
+        """)
+
+        val mainFunc = module.functions.toList().first { func -> func.name == "main" }
+        val bodyBlock = mainFunc.blocks[mainFunc.body]
+        val switchStmt = bodyBlock.statements[1] as io.ygdrasil.wgsl.ir.Statement.Switch
+        val values = switchStmt.cases.take(5).map { case ->
+            ((case.selector as io.ygdrasil.wgsl.ir.CaseSelector.Value).value as io.ygdrasil.wgsl.ir.ScalarValue.I32).value
+        }
+        values shouldBe listOf(0, 1, 2, 3, 4)
+    }
+
     test("function call expression statement is preserved as emit") {
         val module = lowerWgsl("""
             fn callee() {

@@ -46,6 +46,7 @@ class Lowerer {
     private val typeAliasMap = mutableMapOf<String, Handle<IrType>>()
     private val globalVarMap = mutableMapOf<String, Handle<IrGlobalVariable>>()
     private val globalConstScalarMap = mutableMapOf<String, IrScalarValue>()
+    private val localConstScalarMap = mutableMapOf<String, IrScalarValue>()
     private val functionMap = mutableMapOf<String, Handle<IrFunction>>()
 
     private var currentExpressions: Arena<IrExpression>? = null
@@ -67,8 +68,10 @@ class Lowerer {
         typeAliasMap.clear()
         globalVarMap.clear()
         globalConstScalarMap.clear()
+        localConstScalarMap.clear()
         functionMap.clear()
         localVariablesMap.clear()
+        localConstScalarMap.clear()
         functionParamsMap.clear()
         structMemberIndexMap.clear()
         structHandleToNameMap.clear()
@@ -496,14 +499,14 @@ class Lowerer {
         )
         globalVarMap[decl.name] = module.globalVariables.append(variable)
         if (decl.kind == VariableDeclKind.CONST && initHandle != null) {
-            scalarValueFromGlobalExpression(initHandle)?.let { value ->
+            scalarValueFromExpression(initHandle, module.globalExpressions)?.let { value ->
                 globalConstScalarMap[decl.name] = value
             }
         }
     }
 
-    private fun scalarValueFromGlobalExpression(handle: Handle<IrExpression>): IrScalarValue? {
-        return when (val kind = module.globalExpressions[handle].kind) {
+    private fun scalarValueFromExpression(handle: Handle<IrExpression>, expressions: Arena<IrExpression>): IrScalarValue? {
+        return when (val kind = expressions[handle].kind) {
             is IrExpressionKind.Literal -> (kind.value as? IrLiteralValue.Scalar)?.value
             is IrExpressionKind.ConstantExpr -> (module.constants[kind.handle].inner as? io.ygdrasil.wgsl.ir.ConstantInner.Scalar)?.value
             else -> null
@@ -688,6 +691,11 @@ class Lowerer {
                 )
                 val handle = currentLocalVars!!.append(localVar)
                 localVariablesMap[astStmt.name] = handle
+                if (astStmt.kind == VariableDeclKind.CONST && initHandle != null) {
+                    scalarValueFromExpression(initHandle, currentExpressions!!)?.let { value ->
+                        localConstScalarMap[astStmt.name] = value
+                    }
+                }
                 if (astStmt.initializer != null) {
                     IrStatement.Init(handle)
                 } else {
@@ -803,28 +811,7 @@ class Lowerer {
                             }
                             
                             for (selectorExpr in case.selectors) {
-                                val irSelector = when (selectorExpr) {
-                                    is IntLiteral -> {
-                                        val scalar = if (selectorExpr.suffix == "u") {
-                                            IrScalarValue.U32(selectorExpr.value)
-                                        } else {
-                                            IrScalarValue.I32(selectorExpr.value.toInt())
-                                        }
-                                        io.ygdrasil.wgsl.ir.CaseSelector.Value(scalar)
-                                    }
-                                    is BoolLiteral -> {
-                                        io.ygdrasil.wgsl.ir.CaseSelector.Value(IrScalarValue.Bool(selectorExpr.value))
-                                    }
-                                    is IdentExpr -> {
-                                        when (selectorExpr.name) {
-                                            "default" -> io.ygdrasil.wgsl.ir.CaseSelector.Default()
-                                            in globalConstScalarMap -> io.ygdrasil.wgsl.ir.CaseSelector.Value(globalConstScalarMap.getValue(selectorExpr.name))
-                                            else -> throw LoweringError("Unsupported case selector identifier: '${selectorExpr.name}'")
-                                        }
-                                    }
-                                    else -> throw LoweringError("Unsupported case selector expression type: ${selectorExpr::class.simpleName}")
-                                }
-                                
+                                val irSelector = lowerCaseSelector(selectorExpr)
                                 irCases.add(io.ygdrasil.wgsl.ir.Case(irSelector, bodyHandle))
                             }
                             
@@ -877,6 +864,97 @@ class Lowerer {
                 IrStatement.Assign(pointer, binaryExpr)
             }
             else -> throw LoweringError("Unsupported statement type: ${astStmt::class.simpleName}")
+        }
+    }
+
+    private fun lowerCaseSelector(selectorExpr: Expression): io.ygdrasil.wgsl.ir.CaseSelector {
+        if (selectorExpr is IdentExpr && selectorExpr.name == "default") {
+            return io.ygdrasil.wgsl.ir.CaseSelector.Default()
+        }
+        val scalar = scalarValueFromCaseSelector(selectorExpr)
+            ?: throw LoweringError("Unsupported case selector expression type: ${selectorExpr::class.simpleName}")
+        return io.ygdrasil.wgsl.ir.CaseSelector.Value(scalar)
+    }
+
+    private fun scalarValueFromCaseSelector(expr: Expression): IrScalarValue? {
+        return when (expr) {
+            is IntLiteral -> {
+                if (expr.suffix == "u") IrScalarValue.U32(expr.value) else IrScalarValue.I32(expr.value.toInt())
+            }
+            is BoolLiteral -> IrScalarValue.Bool(expr.value)
+            is IdentExpr -> localConstScalarMap[expr.name] ?: globalConstScalarMap[expr.name]
+            is BinaryExpr -> {
+                val left = scalarValueFromCaseSelector(expr.left) ?: return null
+                val right = scalarValueFromCaseSelector(expr.right) ?: return null
+                when (expr.op) {
+                    BinaryOperator.ADD -> addScalarValues(left, right)
+                    else -> null
+                }
+            }
+            is CallExpr -> {
+                val calleeName = (expr.callee as? IdentExpr)?.name ?: return null
+                if (expr.args.isEmpty()) {
+                    when (calleeName) {
+                        "i32" -> IrScalarValue.I32(0)
+                        "u32" -> IrScalarValue.U32(0L)
+                        else -> null
+                    }
+                } else if (expr.args.size == 1) {
+                    scalarValueFromCaseSelector(expr.args.single())?.let { value ->
+                        when (calleeName) {
+                            "i32" -> IrScalarValue.I32(scalarValueToInt(value))
+                            "u32" -> IrScalarValue.U32(scalarValueToU32(value))
+                            "vec2", "vec3", "vec4" -> value
+                            else -> null
+                        }
+                    }
+                } else {
+                    null
+                }
+            }
+            is MemberAccessExpr -> {
+                val index = when (expr.member) {
+                    "x", "r" -> 0
+                    "y", "g" -> 1
+                    "z", "b" -> 2
+                    "w", "a" -> 3
+                    else -> return null
+                }
+                val vector = expr.objectExpr as? CallExpr ?: return null
+                val calleeName = (vector.callee as? IdentExpr)?.name ?: return null
+                if (!calleeName.startsWith("vec")) return null
+                val args = vector.args
+                if (args.size == 1) {
+                    scalarValueFromCaseSelector(args.single())
+                } else {
+                    args.getOrNull(index)?.let { scalarValueFromCaseSelector(it) }
+                }
+            }
+            else -> null
+        }
+    }
+
+    private fun addScalarValues(left: IrScalarValue, right: IrScalarValue): IrScalarValue? {
+        return when {
+            left is IrScalarValue.I32 && right is IrScalarValue.I32 -> IrScalarValue.I32(left.value + right.value)
+            left is IrScalarValue.U32 && right is IrScalarValue.U32 -> IrScalarValue.U32(left.value + right.value)
+            else -> null
+        }
+    }
+
+    private fun scalarValueToInt(value: IrScalarValue): Int {
+        return when (value) {
+            is IrScalarValue.I32 -> value.value
+            is IrScalarValue.U32 -> value.value.toInt()
+            else -> throw LoweringError("Unsupported scalar conversion to i32 for switch case selector")
+        }
+    }
+
+    private fun scalarValueToU32(value: IrScalarValue): Long {
+        return when (value) {
+            is IrScalarValue.I32 -> value.value.toLong()
+            is IrScalarValue.U32 -> value.value
+            else -> throw LoweringError("Unsupported scalar conversion to u32 for switch case selector")
         }
     }
 

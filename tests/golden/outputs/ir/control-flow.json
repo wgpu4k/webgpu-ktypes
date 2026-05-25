@@ -1,0 +1,2163 @@
+{
+    "types": {
+        "data": [
+            {
+                "inner": {
+                    "__type": "io.ygdrasil.wgsl.ir.TypeInner.Scalar",
+                    "kind": "Sint",
+                    "width": 4
+                }
+            }
+        ],
+        "indexMap": [
+            {
+                "inner": {
+                    "__type": "io.ygdrasil.wgsl.ir.TypeInner.Scalar",
+                    "kind": "Sint",
+                    "width": 4
+                }
+            },
+            0
+        ]
+    },
+    "constants": {},
+    "globalExpressions": {
+        "data": [
+            {
+                "kind": {
+                    "__type": "io.ygdrasil.wgsl.ir.ExpressionKind.Literal",
+                    "value": {
+                        "__type": "io.ygdrasil.wgsl.ir.LiteralValue.Scalar",
+                        "value": {
+                            "__type": "io.ygdrasil.wgsl.ir.ScalarValue.I32",
+                            "value": 1
+                        }
+                    }
+                }
+            }
+        ]
+    },
+    "globalVariables": {
+        "data": [
+            {
+                "name": "ONE",
+                "storageClass": "Private",
+                "type": 0,
+                "init": 0
+            }
+        ]
+    },
+    "functions": {
+        "data": [
+            {
+                "name": "control_flow",
+                "parameters": [],
+                "localVariables": {
+                    "data": [
+                        {
+                            "name": "pos",
+                            "type": 0
+                        }
+                    ]
+                },
+                "expressions": {
+                    "data": [
+                        {
+                            "kind": {
+                                "__type": "io.ygdrasil.wgsl.ir.ExpressionKind.Call",
+                                "function": 1,
+                                "arguments": []
+                            }
+                        },
+                        {
+                            "kind": {
+                                "__type": "io.ygdrasil.wgsl.ir.ExpressionKind.Call",
+                                "function": 2,
+                                "arguments": []
+                            }
+                        },
+                        {
+                            "kind": {
+                                "__type": "io.ygdrasil.wgsl.ir.ExpressionKind.Call",
+                                "function": 3,
+                                "arguments": []
+                            }
+                        },
+                        {
+                            "kind": {
+                                "__type": "io.ygdrasil.wgsl.ir.ExpressionKind.Literal",
+                                "value": {
+                                    "__type": "io.ygdrasil.wgsl.ir.LiteralValue.Scalar",
+                                    "value": {
+                                        "__type": "io.ygdrasil.wgsl.ir.ScalarValue.I32",
+                                        "value": 1
+                                    }
+                                }
+                            }
+                        },
+                        {
+                            "kind": {
+                                "__type": "io.ygdrasil.wgsl.ir.ExpressionKind.LocalVar",
+                                "handle": 0
+                            }
+                        },
+                        {
+                            "kind": {
+                                "__type": "io.ygdrasil.wgsl.ir.ExpressionKind.Literal",
+                                "value": {
+                                    "__type": "io.ygdrasil.wgsl.ir.LiteralValue.Scalar",
+                                    "value": {
+                                        "__type": "io.ygdrasil.wgsl.ir.ScalarValue.I32",
+                                        "value": 1
+                                    }
+                                }
+                            }
+                        },
+                        {
+                            "kind": {
+                                "__type": "io.ygdrasil.wgsl.ir.ExpressionKind.LocalVar",
+                                "handle": 0
+                            }
+                        },
+                        {
+                            "kind": {
+                                "__type": "io.ygdrasil.wgsl.ir.ExpressionKind.LocalVar",
+                                "handle": 0
+                            }
+                        },
+                        {
+                            "kind": {
+                                "__type": "io.ygdrasil.wgsl.ir.ExpressionKind.Literal",
+                                "value": {
+                                    "__type": "io.ygdrasil.wgsl.ir.LiteralValue.Scalar",
+                                    "value": {
+                                        "__type": "io.ygdrasil.wgsl.ir.ScalarValue.I32",
+                                        "value": 0
+                                    }
+                                }
+                            }
+                        },
+                        {
+                            "kind": {
+                                "__type": "io.ygdrasil.wgsl.ir.ExpressionKind.LocalVar",
+                                "handle": 0
+                            }
+                        },
+                        {
+                            "kind": {
+                                "__type": "io.ygdrasil.wgsl.ir.ExpressionKind.Literal",
+                                "value": {
+                                    "__type": "io.ygdrasil.wgsl.ir.LiteralValue.Scalar",
+                                    "value": {
+                                        "__type": "io.ygdrasil.wgsl.ir.ScalarValue.I32",
+                                        "value": 1
+                                    }
+                                }
+                            }
+                        },
+                        {
+                            "kind": {
+                                "__type": "io.ygdrasil.wgsl.ir.ExpressionKind.LocalVar",
+                                "handle": 0
+                            }
+                        },
+                        {
+                            "kind": {
+                                "__type": "io.ygdrasil.wgsl.ir.ExpressionKind.Literal",
+                                "value": {
+                                    "__type": "io.ygdrasil.wgsl.ir.LiteralValue.Scalar",
+                                    "value": {
+                                        "__type": "io.ygdrasil.wgsl.ir.ScalarValue.I32",
+                                        "value": 2
+                                    }
+                                }
+                            }
+                        },
+                        {
+                            "kind": {
+                                "__type": "io.ygdrasil.wgsl.ir.ExpressionKind.LocalVar",
+                                "handle": 0
+                            }
+                        },
+                        {
+                            "kind": {
+                                "__type": "io.ygdrasil.wgsl.ir.ExpressionKind.Literal",
+                                "value": {
+                                    "__type": "io.ygdrasil.wgsl.ir.LiteralValue.Scalar",
+                                    "value": {
+                                        "__type": "io.ygdrasil.wgsl.ir.ScalarValue.I32",
+                                        "value": 3
+                                    }
+                                }
+                            }
+                        },
+                        {
+                            "kind": {
+                                "__type": "io.ygdrasil.wgsl.ir.ExpressionKind.LocalVar",
+                                "handle": 0
+                            }
+                        },
+                        {
+                            "kind": {
+                                "__type": "io.ygdrasil.wgsl.ir.ExpressionKind.Literal",
+                                "value": {
+                                    "__type": "io.ygdrasil.wgsl.ir.LiteralValue.Scalar",
+                                    "value": {
+                                        "__type": "io.ygdrasil.wgsl.ir.ScalarValue.I32",
+                                        "value": 4
+                                    }
+                                }
+                            }
+                        },
+                        {
+                            "kind": {
+                                "__type": "io.ygdrasil.wgsl.ir.ExpressionKind.Literal",
+                                "value": {
+                                    "__type": "io.ygdrasil.wgsl.ir.LiteralValue.Scalar",
+                                    "value": {
+                                        "__type": "io.ygdrasil.wgsl.ir.ScalarValue.U32",
+                                        "value": 0
+                                    }
+                                }
+                            }
+                        },
+                        {
+                            "kind": {
+                                "__type": "io.ygdrasil.wgsl.ir.ExpressionKind.LocalVar",
+                                "handle": 0
+                            }
+                        },
+                        {
+                            "kind": {
+                                "__type": "io.ygdrasil.wgsl.ir.ExpressionKind.LocalVar",
+                                "handle": 0
+                            }
+                        },
+                        {
+                            "kind": {
+                                "__type": "io.ygdrasil.wgsl.ir.ExpressionKind.Literal",
+                                "value": {
+                                    "__type": "io.ygdrasil.wgsl.ir.LiteralValue.Scalar",
+                                    "value": {
+                                        "__type": "io.ygdrasil.wgsl.ir.ScalarValue.I32",
+                                        "value": 0
+                                    }
+                                }
+                            }
+                        },
+                        {
+                            "kind": {
+                                "__type": "io.ygdrasil.wgsl.ir.ExpressionKind.LocalVar",
+                                "handle": 0
+                            }
+                        },
+                        {
+                            "kind": {
+                                "__type": "io.ygdrasil.wgsl.ir.ExpressionKind.Literal",
+                                "value": {
+                                    "__type": "io.ygdrasil.wgsl.ir.LiteralValue.Scalar",
+                                    "value": {
+                                        "__type": "io.ygdrasil.wgsl.ir.ScalarValue.I32",
+                                        "value": 1
+                                    }
+                                }
+                            }
+                        },
+                        {
+                            "kind": {
+                                "__type": "io.ygdrasil.wgsl.ir.ExpressionKind.LocalVar",
+                                "handle": 0
+                            }
+                        },
+                        {
+                            "kind": {
+                                "__type": "io.ygdrasil.wgsl.ir.ExpressionKind.Literal",
+                                "value": {
+                                    "__type": "io.ygdrasil.wgsl.ir.LiteralValue.Scalar",
+                                    "value": {
+                                        "__type": "io.ygdrasil.wgsl.ir.ScalarValue.I32",
+                                        "value": 2
+                                    }
+                                }
+                            }
+                        },
+                        {
+                            "kind": {
+                                "__type": "io.ygdrasil.wgsl.ir.ExpressionKind.LocalVar",
+                                "handle": 0
+                            }
+                        },
+                        {
+                            "kind": {
+                                "__type": "io.ygdrasil.wgsl.ir.ExpressionKind.Literal",
+                                "value": {
+                                    "__type": "io.ygdrasil.wgsl.ir.LiteralValue.Scalar",
+                                    "value": {
+                                        "__type": "io.ygdrasil.wgsl.ir.ScalarValue.I32",
+                                        "value": 3
+                                    }
+                                }
+                            }
+                        },
+                        {
+                            "kind": {
+                                "__type": "io.ygdrasil.wgsl.ir.ExpressionKind.LocalVar",
+                                "handle": 0
+                            }
+                        },
+                        {
+                            "kind": {
+                                "__type": "io.ygdrasil.wgsl.ir.ExpressionKind.LocalVar",
+                                "handle": 0
+                            }
+                        },
+                        {
+                            "kind": {
+                                "__type": "io.ygdrasil.wgsl.ir.ExpressionKind.Literal",
+                                "value": {
+                                    "__type": "io.ygdrasil.wgsl.ir.LiteralValue.Scalar",
+                                    "value": {
+                                        "__type": "io.ygdrasil.wgsl.ir.ScalarValue.I32",
+                                        "value": 0
+                                    }
+                                }
+                            }
+                        },
+                        {
+                            "kind": {
+                                "__type": "io.ygdrasil.wgsl.ir.ExpressionKind.LocalVar",
+                                "handle": 0
+                            }
+                        },
+                        {
+                            "kind": {
+                                "__type": "io.ygdrasil.wgsl.ir.ExpressionKind.Literal",
+                                "value": {
+                                    "__type": "io.ygdrasil.wgsl.ir.LiteralValue.Scalar",
+                                    "value": {
+                                        "__type": "io.ygdrasil.wgsl.ir.ScalarValue.I32",
+                                        "value": 1
+                                    }
+                                }
+                            }
+                        },
+                        {
+                            "kind": {
+                                "__type": "io.ygdrasil.wgsl.ir.ExpressionKind.LocalVar",
+                                "handle": 0
+                            }
+                        },
+                        {
+                            "kind": {
+                                "__type": "io.ygdrasil.wgsl.ir.ExpressionKind.Literal",
+                                "value": {
+                                    "__type": "io.ygdrasil.wgsl.ir.LiteralValue.Scalar",
+                                    "value": {
+                                        "__type": "io.ygdrasil.wgsl.ir.ScalarValue.I32",
+                                        "value": 2
+                                    }
+                                }
+                            }
+                        },
+                        {
+                            "kind": {
+                                "__type": "io.ygdrasil.wgsl.ir.ExpressionKind.LocalVar",
+                                "handle": 0
+                            }
+                        },
+                        {
+                            "kind": {
+                                "__type": "io.ygdrasil.wgsl.ir.ExpressionKind.Literal",
+                                "value": {
+                                    "__type": "io.ygdrasil.wgsl.ir.LiteralValue.Scalar",
+                                    "value": {
+                                        "__type": "io.ygdrasil.wgsl.ir.ScalarValue.I32",
+                                        "value": 3
+                                    }
+                                }
+                            }
+                        },
+                        {
+                            "kind": {
+                                "__type": "io.ygdrasil.wgsl.ir.ExpressionKind.LocalVar",
+                                "handle": 0
+                            }
+                        },
+                        {
+                            "kind": {
+                                "__type": "io.ygdrasil.wgsl.ir.ExpressionKind.Literal",
+                                "value": {
+                                    "__type": "io.ygdrasil.wgsl.ir.LiteralValue.Scalar",
+                                    "value": {
+                                        "__type": "io.ygdrasil.wgsl.ir.ScalarValue.I32",
+                                        "value": 4
+                                    }
+                                }
+                            }
+                        }
+                    ]
+                },
+                "blocks": {
+                    "data": [
+                        {
+                            "statements": []
+                        },
+                        {
+                            "statements": [
+                                {
+                                    "__type": "io.ygdrasil.wgsl.ir.Statement.Assign",
+                                    "pointer": 4,
+                                    "value": 5
+                                }
+                            ]
+                        },
+                        {
+                            "statements": []
+                        },
+                        {
+                            "statements": [
+                                {
+                                    "__type": "io.ygdrasil.wgsl.ir.Statement.Assign",
+                                    "pointer": 7,
+                                    "value": 8
+                                },
+                                {
+                                    "__type": "io.ygdrasil.wgsl.ir.Statement.Break"
+                                }
+                            ]
+                        },
+                        {
+                            "statements": [
+                                {
+                                    "__type": "io.ygdrasil.wgsl.ir.Statement.Assign",
+                                    "pointer": 9,
+                                    "value": 10
+                                }
+                            ]
+                        },
+                        {
+                            "statements": [
+                                {
+                                    "__type": "io.ygdrasil.wgsl.ir.Statement.Assign",
+                                    "pointer": 11,
+                                    "value": 12
+                                }
+                            ]
+                        },
+                        {
+                            "statements": [
+                                {
+                                    "__type": "io.ygdrasil.wgsl.ir.Statement.Assign",
+                                    "pointer": 13,
+                                    "value": 14
+                                }
+                            ]
+                        },
+                        {
+                            "statements": [
+                                {
+                                    "__type": "io.ygdrasil.wgsl.ir.Statement.Assign",
+                                    "pointer": 15,
+                                    "value": 16
+                                }
+                            ]
+                        },
+                        {
+                            "statements": []
+                        },
+                        {
+                            "statements": []
+                        },
+                        {
+                            "statements": []
+                        },
+                        {
+                            "statements": []
+                        },
+                        {
+                            "statements": [
+                                {
+                                    "__type": "io.ygdrasil.wgsl.ir.Statement.Assign",
+                                    "pointer": 19,
+                                    "value": 20
+                                },
+                                {
+                                    "__type": "io.ygdrasil.wgsl.ir.Statement.Break"
+                                }
+                            ]
+                        },
+                        {
+                            "statements": [
+                                {
+                                    "__type": "io.ygdrasil.wgsl.ir.Statement.Assign",
+                                    "pointer": 21,
+                                    "value": 22
+                                }
+                            ]
+                        },
+                        {
+                            "statements": [
+                                {
+                                    "__type": "io.ygdrasil.wgsl.ir.Statement.Assign",
+                                    "pointer": 23,
+                                    "value": 24
+                                }
+                            ]
+                        },
+                        {
+                            "statements": []
+                        },
+                        {
+                            "statements": [
+                                {
+                                    "__type": "io.ygdrasil.wgsl.ir.Statement.Assign",
+                                    "pointer": 25,
+                                    "value": 26
+                                }
+                            ]
+                        },
+                        {
+                            "statements": []
+                        },
+                        {
+                            "statements": [
+                                {
+                                    "__type": "io.ygdrasil.wgsl.ir.Statement.Assign",
+                                    "pointer": 28,
+                                    "value": 29
+                                }
+                            ]
+                        },
+                        {
+                            "statements": [
+                                {
+                                    "__type": "io.ygdrasil.wgsl.ir.Statement.Assign",
+                                    "pointer": 30,
+                                    "value": 31
+                                }
+                            ]
+                        },
+                        {
+                            "statements": [
+                                {
+                                    "__type": "io.ygdrasil.wgsl.ir.Statement.Assign",
+                                    "pointer": 32,
+                                    "value": 33
+                                }
+                            ]
+                        },
+                        {
+                            "statements": [
+                                {
+                                    "__type": "io.ygdrasil.wgsl.ir.Statement.Assign",
+                                    "pointer": 34,
+                                    "value": 35
+                                }
+                            ]
+                        },
+                        {
+                            "statements": [
+                                {
+                                    "__type": "io.ygdrasil.wgsl.ir.Statement.Assign",
+                                    "pointer": 36,
+                                    "value": 37
+                                }
+                            ]
+                        },
+                        {
+                            "statements": []
+                        },
+                        {
+                            "statements": [
+                                {
+                                    "__type": "io.ygdrasil.wgsl.ir.Statement.Emit",
+                                    "range": 00
+                                },
+                                {
+                                    "__type": "io.ygdrasil.wgsl.ir.Statement.Emit",
+                                    "range": 11
+                                },
+                                {
+                                    "__type": "io.ygdrasil.wgsl.ir.Statement.Emit",
+                                    "range": 22
+                                },
+                                {
+                                    "__type": "io.ygdrasil.wgsl.ir.Statement.Declare",
+                                    "variable": 0
+                                },
+                                {
+                                    "__type": "io.ygdrasil.wgsl.ir.Statement.Switch",
+                                    "selector": 3,
+                                    "body": 2,
+                                    "default": 1,
+                                    "cases": [
+                                        {
+                                            "selector": {
+                                                "__type": "io.ygdrasil.wgsl.ir.CaseSelector.Default"
+                                            },
+                                            "body": 1
+                                        }
+                                    ]
+                                },
+                                {
+                                    "__type": "io.ygdrasil.wgsl.ir.Statement.Switch",
+                                    "selector": 6,
+                                    "body": 8,
+                                    "default": 7,
+                                    "cases": [
+                                        {
+                                            "selector": {
+                                                "__type": "io.ygdrasil.wgsl.ir.CaseSelector.Value",
+                                                "value": {
+                                                    "__type": "io.ygdrasil.wgsl.ir.ScalarValue.I32",
+                                                    "value": 1
+                                                }
+                                            },
+                                            "body": 3
+                                        },
+                                        {
+                                            "selector": {
+                                                "__type": "io.ygdrasil.wgsl.ir.CaseSelector.Value",
+                                                "value": {
+                                                    "__type": "io.ygdrasil.wgsl.ir.ScalarValue.I32",
+                                                    "value": 2
+                                                }
+                                            },
+                                            "body": 4
+                                        },
+                                        {
+                                            "selector": {
+                                                "__type": "io.ygdrasil.wgsl.ir.CaseSelector.Value",
+                                                "value": {
+                                                    "__type": "io.ygdrasil.wgsl.ir.ScalarValue.I32",
+                                                    "value": 3
+                                                }
+                                            },
+                                            "body": 5
+                                        },
+                                        {
+                                            "selector": {
+                                                "__type": "io.ygdrasil.wgsl.ir.CaseSelector.Value",
+                                                "value": {
+                                                    "__type": "io.ygdrasil.wgsl.ir.ScalarValue.I32",
+                                                    "value": 4
+                                                }
+                                            },
+                                            "body": 5
+                                        },
+                                        {
+                                            "selector": {
+                                                "__type": "io.ygdrasil.wgsl.ir.CaseSelector.Value",
+                                                "value": {
+                                                    "__type": "io.ygdrasil.wgsl.ir.ScalarValue.I32",
+                                                    "value": 5
+                                                }
+                                            },
+                                            "body": 6
+                                        },
+                                        {
+                                            "selector": {
+                                                "__type": "io.ygdrasil.wgsl.ir.CaseSelector.Value",
+                                                "value": {
+                                                    "__type": "io.ygdrasil.wgsl.ir.ScalarValue.I32",
+                                                    "value": 6
+                                                }
+                                            },
+                                            "body": 7
+                                        }
+                                    ]
+                                },
+                                {
+                                    "__type": "io.ygdrasil.wgsl.ir.Statement.Switch",
+                                    "selector": 17,
+                                    "body": 11,
+                                    "default": 10,
+                                    "cases": [
+                                        {
+                                            "selector": {
+                                                "__type": "io.ygdrasil.wgsl.ir.CaseSelector.Value",
+                                                "value": {
+                                                    "__type": "io.ygdrasil.wgsl.ir.ScalarValue.U32",
+                                                    "value": 0
+                                                }
+                                            },
+                                            "body": 9
+                                        },
+                                        {
+                                            "selector": {
+                                                "__type": "io.ygdrasil.wgsl.ir.CaseSelector.Default"
+                                            },
+                                            "body": 10
+                                        }
+                                    ]
+                                },
+                                {
+                                    "__type": "io.ygdrasil.wgsl.ir.Statement.Switch",
+                                    "selector": 18,
+                                    "body": 17,
+                                    "default": 16,
+                                    "cases": [
+                                        {
+                                            "selector": {
+                                                "__type": "io.ygdrasil.wgsl.ir.CaseSelector.Value",
+                                                "value": {
+                                                    "__type": "io.ygdrasil.wgsl.ir.ScalarValue.I32",
+                                                    "value": 1
+                                                }
+                                            },
+                                            "body": 12
+                                        },
+                                        {
+                                            "selector": {
+                                                "__type": "io.ygdrasil.wgsl.ir.CaseSelector.Value",
+                                                "value": {
+                                                    "__type": "io.ygdrasil.wgsl.ir.ScalarValue.I32",
+                                                    "value": 2
+                                                }
+                                            },
+                                            "body": 13
+                                        },
+                                        {
+                                            "selector": {
+                                                "__type": "io.ygdrasil.wgsl.ir.CaseSelector.Value",
+                                                "value": {
+                                                    "__type": "io.ygdrasil.wgsl.ir.ScalarValue.I32",
+                                                    "value": 3
+                                                }
+                                            },
+                                            "body": 14
+                                        },
+                                        {
+                                            "selector": {
+                                                "__type": "io.ygdrasil.wgsl.ir.CaseSelector.Value",
+                                                "value": {
+                                                    "__type": "io.ygdrasil.wgsl.ir.ScalarValue.I32",
+                                                    "value": 4
+                                                }
+                                            },
+                                            "body": 15
+                                        },
+                                        {
+                                            "selector": {
+                                                "__type": "io.ygdrasil.wgsl.ir.CaseSelector.Default"
+                                            },
+                                            "body": 16
+                                        }
+                                    ]
+                                },
+                                {
+                                    "__type": "io.ygdrasil.wgsl.ir.Statement.Switch",
+                                    "selector": 27,
+                                    "body": 23,
+                                    "default": 22,
+                                    "cases": [
+                                        {
+                                            "selector": {
+                                                "__type": "io.ygdrasil.wgsl.ir.CaseSelector.Value",
+                                                "value": {
+                                                    "__type": "io.ygdrasil.wgsl.ir.ScalarValue.I32",
+                                                    "value": 1
+                                                }
+                                            },
+                                            "body": 18
+                                        },
+                                        {
+                                            "selector": {
+                                                "__type": "io.ygdrasil.wgsl.ir.CaseSelector.Value",
+                                                "value": {
+                                                    "__type": "io.ygdrasil.wgsl.ir.ScalarValue.I32",
+                                                    "value": 2
+                                                }
+                                            },
+                                            "body": 19
+                                        },
+                                        {
+                                            "selector": {
+                                                "__type": "io.ygdrasil.wgsl.ir.CaseSelector.Value",
+                                                "value": {
+                                                    "__type": "io.ygdrasil.wgsl.ir.ScalarValue.I32",
+                                                    "value": 3
+                                                }
+                                            },
+                                            "body": 20
+                                        },
+                                        {
+                                            "selector": {
+                                                "__type": "io.ygdrasil.wgsl.ir.CaseSelector.Value",
+                                                "value": {
+                                                    "__type": "io.ygdrasil.wgsl.ir.ScalarValue.I32",
+                                                    "value": 4
+                                                }
+                                            },
+                                            "body": 20
+                                        },
+                                        {
+                                            "selector": {
+                                                "__type": "io.ygdrasil.wgsl.ir.CaseSelector.Value",
+                                                "value": {
+                                                    "__type": "io.ygdrasil.wgsl.ir.ScalarValue.I32",
+                                                    "value": 5
+                                                }
+                                            },
+                                            "body": 21
+                                        },
+                                        {
+                                            "selector": {
+                                                "__type": "io.ygdrasil.wgsl.ir.CaseSelector.Value",
+                                                "value": {
+                                                    "__type": "io.ygdrasil.wgsl.ir.ScalarValue.I32",
+                                                    "value": 6
+                                                }
+                                            },
+                                            "body": 21
+                                        },
+                                        {
+                                            "selector": {
+                                                "__type": "io.ygdrasil.wgsl.ir.CaseSelector.Default"
+                                            },
+                                            "body": 22
+                                        }
+                                    ]
+                                }
+                            ]
+                        }
+                    ]
+                },
+                "body": 24
+            },
+            {
+                "name": "storageBarrier",
+                "parameters": [],
+                "localVariables": {},
+                "expressions": {},
+                "blocks": {
+                    "data": [
+                        {
+                            "statements": []
+                        }
+                    ]
+                },
+                "body": 0
+            },
+            {
+                "name": "workgroupBarrier",
+                "parameters": [],
+                "localVariables": {},
+                "expressions": {},
+                "blocks": {
+                    "data": [
+                        {
+                            "statements": []
+                        }
+                    ]
+                },
+                "body": 0
+            },
+            {
+                "name": "textureBarrier",
+                "parameters": [],
+                "localVariables": {},
+                "expressions": {},
+                "blocks": {
+                    "data": [
+                        {
+                            "statements": []
+                        }
+                    ]
+                },
+                "body": 0
+            },
+            {
+                "name": "switch_default_break",
+                "parameters": [
+                    {
+                        "name": "i",
+                        "type": 0
+                    }
+                ],
+                "localVariables": {},
+                "expressions": {
+                    "data": [
+                        {
+                            "kind": {
+                                "__type": "io.ygdrasil.wgsl.ir.ExpressionKind.FunctionArgument",
+                                "index": 0
+                            }
+                        }
+                    ]
+                },
+                "blocks": {
+                    "data": [
+                        {
+                            "statements": []
+                        },
+                        {
+                            "statements": [
+                                {
+                                    "__type": "io.ygdrasil.wgsl.ir.Statement.Break"
+                                }
+                            ]
+                        },
+                        {
+                            "statements": []
+                        },
+                        {
+                            "statements": [
+                                {
+                                    "__type": "io.ygdrasil.wgsl.ir.Statement.Switch",
+                                    "selector": 0,
+                                    "body": 2,
+                                    "default": 1,
+                                    "cases": [
+                                        {
+                                            "selector": {
+                                                "__type": "io.ygdrasil.wgsl.ir.CaseSelector.Default"
+                                            },
+                                            "body": 1
+                                        }
+                                    ]
+                                }
+                            ]
+                        }
+                    ]
+                },
+                "body": 3
+            },
+            {
+                "name": "switch_case_break",
+                "parameters": [],
+                "localVariables": {},
+                "expressions": {
+                    "data": [
+                        {
+                            "kind": {
+                                "__type": "io.ygdrasil.wgsl.ir.ExpressionKind.Literal",
+                                "value": {
+                                    "__type": "io.ygdrasil.wgsl.ir.LiteralValue.Scalar",
+                                    "value": {
+                                        "__type": "io.ygdrasil.wgsl.ir.ScalarValue.I32",
+                                        "value": 0
+                                    }
+                                }
+                            }
+                        }
+                    ]
+                },
+                "blocks": {
+                    "data": [
+                        {
+                            "statements": []
+                        },
+                        {
+                            "statements": [
+                                {
+                                    "__type": "io.ygdrasil.wgsl.ir.Statement.Break"
+                                }
+                            ]
+                        },
+                        {
+                            "statements": []
+                        },
+                        {
+                            "statements": []
+                        },
+                        {
+                            "statements": [
+                                {
+                                    "__type": "io.ygdrasil.wgsl.ir.Statement.Switch",
+                                    "selector": 0,
+                                    "body": 3,
+                                    "default": 2,
+                                    "cases": [
+                                        {
+                                            "selector": {
+                                                "__type": "io.ygdrasil.wgsl.ir.CaseSelector.Value",
+                                                "value": {
+                                                    "__type": "io.ygdrasil.wgsl.ir.ScalarValue.I32",
+                                                    "value": 0
+                                                }
+                                            },
+                                            "body": 1
+                                        },
+                                        {
+                                            "selector": {
+                                                "__type": "io.ygdrasil.wgsl.ir.CaseSelector.Default"
+                                            },
+                                            "body": 2
+                                        }
+                                    ]
+                                },
+                                {
+                                    "__type": "io.ygdrasil.wgsl.ir.Statement.Return"
+                                }
+                            ]
+                        }
+                    ]
+                },
+                "body": 4
+            },
+            {
+                "name": "switch_selector_type_conversion",
+                "parameters": [],
+                "localVariables": {},
+                "expressions": {
+                    "data": [
+                        {
+                            "kind": {
+                                "__type": "io.ygdrasil.wgsl.ir.ExpressionKind.Literal",
+                                "value": {
+                                    "__type": "io.ygdrasil.wgsl.ir.LiteralValue.Scalar",
+                                    "value": {
+                                        "__type": "io.ygdrasil.wgsl.ir.ScalarValue.U32",
+                                        "value": 0
+                                    }
+                                }
+                            }
+                        },
+                        {
+                            "kind": {
+                                "__type": "io.ygdrasil.wgsl.ir.ExpressionKind.Literal",
+                                "value": {
+                                    "__type": "io.ygdrasil.wgsl.ir.LiteralValue.Scalar",
+                                    "value": {
+                                        "__type": "io.ygdrasil.wgsl.ir.ScalarValue.I32",
+                                        "value": 0
+                                    }
+                                }
+                            }
+                        }
+                    ]
+                },
+                "blocks": {
+                    "data": [
+                        {
+                            "statements": []
+                        },
+                        {
+                            "statements": []
+                        },
+                        {
+                            "statements": []
+                        },
+                        {
+                            "statements": []
+                        },
+                        {
+                            "statements": []
+                        },
+                        {
+                            "statements": []
+                        },
+                        {
+                            "statements": []
+                        },
+                        {
+                            "statements": [
+                                {
+                                    "__type": "io.ygdrasil.wgsl.ir.Statement.Switch",
+                                    "selector": 0,
+                                    "body": 3,
+                                    "default": 2,
+                                    "cases": [
+                                        {
+                                            "selector": {
+                                                "__type": "io.ygdrasil.wgsl.ir.CaseSelector.Value",
+                                                "value": {
+                                                    "__type": "io.ygdrasil.wgsl.ir.ScalarValue.I32",
+                                                    "value": 0
+                                                }
+                                            },
+                                            "body": 1
+                                        },
+                                        {
+                                            "selector": {
+                                                "__type": "io.ygdrasil.wgsl.ir.CaseSelector.Default"
+                                            },
+                                            "body": 2
+                                        }
+                                    ]
+                                },
+                                {
+                                    "__type": "io.ygdrasil.wgsl.ir.Statement.Switch",
+                                    "selector": 1,
+                                    "body": 6,
+                                    "default": 5,
+                                    "cases": [
+                                        {
+                                            "selector": {
+                                                "__type": "io.ygdrasil.wgsl.ir.CaseSelector.Value",
+                                                "value": {
+                                                    "__type": "io.ygdrasil.wgsl.ir.ScalarValue.U32",
+                                                    "value": 0
+                                                }
+                                            },
+                                            "body": 4
+                                        },
+                                        {
+                                            "selector": {
+                                                "__type": "io.ygdrasil.wgsl.ir.CaseSelector.Default"
+                                            },
+                                            "body": 5
+                                        }
+                                    ]
+                                }
+                            ]
+                        }
+                    ]
+                },
+                "body": 7
+            },
+            {
+                "name": "loop_switch_continue",
+                "parameters": [
+                    {
+                        "name": "x",
+                        "type": 0
+                    }
+                ],
+                "localVariables": {},
+                "expressions": {
+                    "data": [
+                        {
+                            "kind": {
+                                "__type": "io.ygdrasil.wgsl.ir.ExpressionKind.FunctionArgument",
+                                "index": 0
+                            }
+                        }
+                    ]
+                },
+                "blocks": {
+                    "data": [
+                        {
+                            "statements": []
+                        },
+                        {
+                            "statements": [
+                                {
+                                    "__type": "io.ygdrasil.wgsl.ir.Statement.Continue"
+                                }
+                            ]
+                        },
+                        {
+                            "statements": []
+                        },
+                        {
+                            "statements": []
+                        },
+                        {
+                            "statements": [
+                                {
+                                    "__type": "io.ygdrasil.wgsl.ir.Statement.Switch",
+                                    "selector": 0,
+                                    "body": 3,
+                                    "default": 2,
+                                    "cases": [
+                                        {
+                                            "selector": {
+                                                "__type": "io.ygdrasil.wgsl.ir.CaseSelector.Value",
+                                                "value": {
+                                                    "__type": "io.ygdrasil.wgsl.ir.ScalarValue.I32",
+                                                    "value": 1
+                                                }
+                                            },
+                                            "body": 1
+                                        },
+                                        {
+                                            "selector": {
+                                                "__type": "io.ygdrasil.wgsl.ir.CaseSelector.Default"
+                                            },
+                                            "body": 2
+                                        }
+                                    ]
+                                }
+                            ]
+                        },
+                        {
+                            "statements": [
+                                {
+                                    "__type": "io.ygdrasil.wgsl.ir.Statement.Loop",
+                                    "body": 4
+                                }
+                            ]
+                        }
+                    ]
+                },
+                "body": 5
+            },
+            {
+                "name": "loop_switch_continue_nesting",
+                "parameters": [
+                    {
+                        "name": "x",
+                        "type": 0
+                    },
+                    {
+                        "name": "y",
+                        "type": 0
+                    },
+                    {
+                        "name": "z",
+                        "type": 0
+                    }
+                ],
+                "localVariables": {},
+                "expressions": {
+                    "data": [
+                        {
+                            "kind": {
+                                "__type": "io.ygdrasil.wgsl.ir.ExpressionKind.FunctionArgument",
+                                "index": 0
+                            }
+                        },
+                        {
+                            "kind": {
+                                "__type": "io.ygdrasil.wgsl.ir.ExpressionKind.FunctionArgument",
+                                "index": 1
+                            }
+                        },
+                        {
+                            "kind": {
+                                "__type": "io.ygdrasil.wgsl.ir.ExpressionKind.FunctionArgument",
+                                "index": 2
+                            }
+                        },
+                        {
+                            "kind": {
+                                "__type": "io.ygdrasil.wgsl.ir.ExpressionKind.FunctionArgument",
+                                "index": 1
+                            }
+                        },
+                        {
+                            "kind": {
+                                "__type": "io.ygdrasil.wgsl.ir.ExpressionKind.FunctionArgument",
+                                "index": 1
+                            }
+                        },
+                        {
+                            "kind": {
+                                "__type": "io.ygdrasil.wgsl.ir.ExpressionKind.FunctionArgument",
+                                "index": 2
+                            }
+                        }
+                    ]
+                },
+                "blocks": {
+                    "data": [
+                        {
+                            "statements": []
+                        },
+                        {
+                            "statements": [
+                                {
+                                    "__type": "io.ygdrasil.wgsl.ir.Statement.Continue"
+                                }
+                            ]
+                        },
+                        {
+                            "statements": [
+                                {
+                                    "__type": "io.ygdrasil.wgsl.ir.Statement.Continue"
+                                }
+                            ]
+                        },
+                        {
+                            "statements": [
+                                {
+                                    "__type": "io.ygdrasil.wgsl.ir.Statement.Continue"
+                                }
+                            ]
+                        },
+                        {
+                            "statements": []
+                        },
+                        {
+                            "statements": []
+                        },
+                        {
+                            "statements": [
+                                {
+                                    "__type": "io.ygdrasil.wgsl.ir.Statement.Switch",
+                                    "selector": 2,
+                                    "body": 5,
+                                    "default": 4,
+                                    "cases": [
+                                        {
+                                            "selector": {
+                                                "__type": "io.ygdrasil.wgsl.ir.CaseSelector.Value",
+                                                "value": {
+                                                    "__type": "io.ygdrasil.wgsl.ir.ScalarValue.I32",
+                                                    "value": 1
+                                                }
+                                            },
+                                            "body": 3
+                                        },
+                                        {
+                                            "selector": {
+                                                "__type": "io.ygdrasil.wgsl.ir.CaseSelector.Default"
+                                            },
+                                            "body": 4
+                                        }
+                                    ]
+                                }
+                            ]
+                        },
+                        {
+                            "statements": [
+                                {
+                                    "__type": "io.ygdrasil.wgsl.ir.Statement.Loop",
+                                    "body": 6
+                                }
+                            ]
+                        },
+                        {
+                            "statements": []
+                        },
+                        {
+                            "statements": [
+                                {
+                                    "__type": "io.ygdrasil.wgsl.ir.Statement.Switch",
+                                    "selector": 1,
+                                    "body": 8,
+                                    "default": 7,
+                                    "cases": [
+                                        {
+                                            "selector": {
+                                                "__type": "io.ygdrasil.wgsl.ir.CaseSelector.Value",
+                                                "value": {
+                                                    "__type": "io.ygdrasil.wgsl.ir.ScalarValue.I32",
+                                                    "value": 1
+                                                }
+                                            },
+                                            "body": 2
+                                        },
+                                        {
+                                            "selector": {
+                                                "__type": "io.ygdrasil.wgsl.ir.CaseSelector.Default"
+                                            },
+                                            "body": 7
+                                        }
+                                    ]
+                                }
+                            ]
+                        },
+                        {
+                            "statements": []
+                        },
+                        {
+                            "statements": []
+                        },
+                        {
+                            "statements": [
+                                {
+                                    "__type": "io.ygdrasil.wgsl.ir.Statement.Continue"
+                                }
+                            ]
+                        },
+                        {
+                            "statements": []
+                        },
+                        {
+                            "statements": [
+                                {
+                                    "__type": "io.ygdrasil.wgsl.ir.Statement.Switch",
+                                    "selector": 0,
+                                    "body": 11,
+                                    "default": 10,
+                                    "cases": [
+                                        {
+                                            "selector": {
+                                                "__type": "io.ygdrasil.wgsl.ir.CaseSelector.Value",
+                                                "value": {
+                                                    "__type": "io.ygdrasil.wgsl.ir.ScalarValue.I32",
+                                                    "value": 1
+                                                }
+                                            },
+                                            "body": 1
+                                        },
+                                        {
+                                            "selector": {
+                                                "__type": "io.ygdrasil.wgsl.ir.CaseSelector.Value",
+                                                "value": {
+                                                    "__type": "io.ygdrasil.wgsl.ir.ScalarValue.I32",
+                                                    "value": 2
+                                                }
+                                            },
+                                            "body": 9
+                                        },
+                                        {
+                                            "selector": {
+                                                "__type": "io.ygdrasil.wgsl.ir.CaseSelector.Default"
+                                            },
+                                            "body": 10
+                                        }
+                                    ]
+                                },
+                                {
+                                    "__type": "io.ygdrasil.wgsl.ir.Statement.Switch",
+                                    "selector": 3,
+                                    "body": 13,
+                                    "default": 12,
+                                    "cases": [
+                                        {
+                                            "selector": {
+                                                "__type": "io.ygdrasil.wgsl.ir.CaseSelector.Default"
+                                            },
+                                            "body": 12
+                                        }
+                                    ]
+                                }
+                            ]
+                        },
+                        {
+                            "statements": [
+                                {
+                                    "__type": "io.ygdrasil.wgsl.ir.Statement.Continue"
+                                }
+                            ]
+                        },
+                        {
+                            "statements": []
+                        },
+                        {
+                            "statements": [
+                                {
+                                    "__type": "io.ygdrasil.wgsl.ir.Statement.Switch",
+                                    "selector": 5,
+                                    "body": 16,
+                                    "default": 15,
+                                    "cases": [
+                                        {
+                                            "selector": {
+                                                "__type": "io.ygdrasil.wgsl.ir.CaseSelector.Default"
+                                            },
+                                            "body": 15
+                                        }
+                                    ]
+                                }
+                            ]
+                        },
+                        {
+                            "statements": []
+                        },
+                        {
+                            "statements": [
+                                {
+                                    "__type": "io.ygdrasil.wgsl.ir.Statement.Switch",
+                                    "selector": 4,
+                                    "body": 18,
+                                    "default": 17,
+                                    "cases": [
+                                        {
+                                            "selector": {
+                                                "__type": "io.ygdrasil.wgsl.ir.CaseSelector.Value",
+                                                "value": {
+                                                    "__type": "io.ygdrasil.wgsl.ir.ScalarValue.I32",
+                                                    "value": 1
+                                                }
+                                            },
+                                            "body": 17
+                                        }
+                                    ]
+                                }
+                            ]
+                        },
+                        {
+                            "statements": [
+                                {
+                                    "__type": "io.ygdrasil.wgsl.ir.Statement.Loop",
+                                    "body": 14
+                                },
+                                {
+                                    "__type": "io.ygdrasil.wgsl.ir.Statement.Loop",
+                                    "body": 19
+                                }
+                            ]
+                        }
+                    ]
+                },
+                "body": 20
+            },
+            {
+                "name": "loop_switch_omit_continue_variable_checks",
+                "parameters": [
+                    {
+                        "name": "x",
+                        "type": 0
+                    },
+                    {
+                        "name": "y",
+                        "type": 0
+                    },
+                    {
+                        "name": "z",
+                        "type": 0
+                    },
+                    {
+                        "name": "w",
+                        "type": 0
+                    }
+                ],
+                "localVariables": {
+                    "data": [
+                        {
+                            "name": "pos",
+                            "type": 0,
+                            "init": 0
+                        }
+                    ]
+                },
+                "expressions": {
+                    "data": [
+                        {
+                            "kind": {
+                                "__type": "io.ygdrasil.wgsl.ir.ExpressionKind.Literal",
+                                "value": {
+                                    "__type": "io.ygdrasil.wgsl.ir.LiteralValue.Scalar",
+                                    "value": {
+                                        "__type": "io.ygdrasil.wgsl.ir.ScalarValue.I32",
+                                        "value": 0
+                                    }
+                                }
+                            }
+                        },
+                        {
+                            "kind": {
+                                "__type": "io.ygdrasil.wgsl.ir.ExpressionKind.FunctionArgument",
+                                "index": 0
+                            }
+                        },
+                        {
+                            "kind": {
+                                "__type": "io.ygdrasil.wgsl.ir.ExpressionKind.LocalVar",
+                                "handle": 0
+                            }
+                        },
+                        {
+                            "kind": {
+                                "__type": "io.ygdrasil.wgsl.ir.ExpressionKind.Literal",
+                                "value": {
+                                    "__type": "io.ygdrasil.wgsl.ir.LiteralValue.Scalar",
+                                    "value": {
+                                        "__type": "io.ygdrasil.wgsl.ir.ScalarValue.I32",
+                                        "value": 1
+                                    }
+                                }
+                            }
+                        },
+                        {
+                            "kind": {
+                                "__type": "io.ygdrasil.wgsl.ir.ExpressionKind.FunctionArgument",
+                                "index": 0
+                            }
+                        },
+                        {
+                            "kind": {
+                                "__type": "io.ygdrasil.wgsl.ir.ExpressionKind.FunctionArgument",
+                                "index": 1
+                            }
+                        },
+                        {
+                            "kind": {
+                                "__type": "io.ygdrasil.wgsl.ir.ExpressionKind.FunctionArgument",
+                                "index": 2
+                            }
+                        },
+                        {
+                            "kind": {
+                                "__type": "io.ygdrasil.wgsl.ir.ExpressionKind.LocalVar",
+                                "handle": 0
+                            }
+                        },
+                        {
+                            "kind": {
+                                "__type": "io.ygdrasil.wgsl.ir.ExpressionKind.Literal",
+                                "value": {
+                                    "__type": "io.ygdrasil.wgsl.ir.LiteralValue.Scalar",
+                                    "value": {
+                                        "__type": "io.ygdrasil.wgsl.ir.ScalarValue.I32",
+                                        "value": 2
+                                    }
+                                }
+                            }
+                        }
+                    ]
+                },
+                "blocks": {
+                    "data": [
+                        {
+                            "statements": []
+                        },
+                        {
+                            "statements": [
+                                {
+                                    "__type": "io.ygdrasil.wgsl.ir.Statement.Assign",
+                                    "pointer": 2,
+                                    "value": 3
+                                }
+                            ]
+                        },
+                        {
+                            "statements": []
+                        },
+                        {
+                            "statements": []
+                        },
+                        {
+                            "statements": [
+                                {
+                                    "__type": "io.ygdrasil.wgsl.ir.Statement.Switch",
+                                    "selector": 1,
+                                    "body": 3,
+                                    "default": 2,
+                                    "cases": [
+                                        {
+                                            "selector": {
+                                                "__type": "io.ygdrasil.wgsl.ir.CaseSelector.Value",
+                                                "value": {
+                                                    "__type": "io.ygdrasil.wgsl.ir.ScalarValue.I32",
+                                                    "value": 1
+                                                }
+                                            },
+                                            "body": 1
+                                        },
+                                        {
+                                            "selector": {
+                                                "__type": "io.ygdrasil.wgsl.ir.CaseSelector.Default"
+                                            },
+                                            "body": 2
+                                        }
+                                    ]
+                                }
+                            ]
+                        },
+                        {
+                            "statements": []
+                        },
+                        {
+                            "statements": [
+                                {
+                                    "__type": "io.ygdrasil.wgsl.ir.Statement.Continue"
+                                }
+                            ]
+                        },
+                        {
+                            "statements": [
+                                {
+                                    "__type": "io.ygdrasil.wgsl.ir.Statement.Assign",
+                                    "pointer": 7,
+                                    "value": 8
+                                }
+                            ]
+                        },
+                        {
+                            "statements": []
+                        },
+                        {
+                            "statements": []
+                        },
+                        {
+                            "statements": [
+                                {
+                                    "__type": "io.ygdrasil.wgsl.ir.Statement.Switch",
+                                    "selector": 6,
+                                    "body": 9,
+                                    "default": 8,
+                                    "cases": [
+                                        {
+                                            "selector": {
+                                                "__type": "io.ygdrasil.wgsl.ir.CaseSelector.Value",
+                                                "value": {
+                                                    "__type": "io.ygdrasil.wgsl.ir.ScalarValue.I32",
+                                                    "value": 1
+                                                }
+                                            },
+                                            "body": 7
+                                        },
+                                        {
+                                            "selector": {
+                                                "__type": "io.ygdrasil.wgsl.ir.CaseSelector.Default"
+                                            },
+                                            "body": 8
+                                        }
+                                    ]
+                                }
+                            ]
+                        },
+                        {
+                            "statements": []
+                        },
+                        {
+                            "statements": [
+                                {
+                                    "__type": "io.ygdrasil.wgsl.ir.Statement.Switch",
+                                    "selector": 5,
+                                    "body": 11,
+                                    "default": 10,
+                                    "cases": [
+                                        {
+                                            "selector": {
+                                                "__type": "io.ygdrasil.wgsl.ir.CaseSelector.Value",
+                                                "value": {
+                                                    "__type": "io.ygdrasil.wgsl.ir.ScalarValue.I32",
+                                                    "value": 1
+                                                }
+                                            },
+                                            "body": 6
+                                        },
+                                        {
+                                            "selector": {
+                                                "__type": "io.ygdrasil.wgsl.ir.CaseSelector.Default"
+                                            },
+                                            "body": 10
+                                        }
+                                    ]
+                                }
+                            ]
+                        },
+                        {
+                            "statements": []
+                        },
+                        {
+                            "statements": []
+                        },
+                        {
+                            "statements": [
+                                {
+                                    "__type": "io.ygdrasil.wgsl.ir.Statement.Switch",
+                                    "selector": 4,
+                                    "body": 14,
+                                    "default": 13,
+                                    "cases": [
+                                        {
+                                            "selector": {
+                                                "__type": "io.ygdrasil.wgsl.ir.CaseSelector.Value",
+                                                "value": {
+                                                    "__type": "io.ygdrasil.wgsl.ir.ScalarValue.I32",
+                                                    "value": 1
+                                                }
+                                            },
+                                            "body": 5
+                                        },
+                                        {
+                                            "selector": {
+                                                "__type": "io.ygdrasil.wgsl.ir.CaseSelector.Value",
+                                                "value": {
+                                                    "__type": "io.ygdrasil.wgsl.ir.ScalarValue.I32",
+                                                    "value": 2
+                                                }
+                                            },
+                                            "body": 12
+                                        },
+                                        {
+                                            "selector": {
+                                                "__type": "io.ygdrasil.wgsl.ir.CaseSelector.Default"
+                                            },
+                                            "body": 13
+                                        }
+                                    ]
+                                }
+                            ]
+                        },
+                        {
+                            "statements": [
+                                {
+                                    "__type": "io.ygdrasil.wgsl.ir.Statement.Init",
+                                    "variable": 0
+                                },
+                                {
+                                    "__type": "io.ygdrasil.wgsl.ir.Statement.Loop",
+                                    "body": 4
+                                },
+                                {
+                                    "__type": "io.ygdrasil.wgsl.ir.Statement.Loop",
+                                    "body": 15
+                                }
+                            ]
+                        }
+                    ]
+                },
+                "body": 16
+            },
+            {
+                "name": "switch_const_expr_case_selectors",
+                "parameters": [],
+                "localVariables": {
+                    "data": [
+                        {
+                            "name": "TWO",
+                            "type": 0,
+                            "init": 0
+                        }
+                    ]
+                },
+                "expressions": {
+                    "data": [
+                        {
+                            "kind": {
+                                "__type": "io.ygdrasil.wgsl.ir.ExpressionKind.Literal",
+                                "value": {
+                                    "__type": "io.ygdrasil.wgsl.ir.LiteralValue.Scalar",
+                                    "value": {
+                                        "__type": "io.ygdrasil.wgsl.ir.ScalarValue.I32",
+                                        "value": 2
+                                    }
+                                }
+                            }
+                        },
+                        {
+                            "kind": {
+                                "__type": "io.ygdrasil.wgsl.ir.ExpressionKind.Literal",
+                                "value": {
+                                    "__type": "io.ygdrasil.wgsl.ir.LiteralValue.Scalar",
+                                    "value": {
+                                        "__type": "io.ygdrasil.wgsl.ir.ScalarValue.I32",
+                                        "value": 0
+                                    }
+                                }
+                            }
+                        }
+                    ]
+                },
+                "blocks": {
+                    "data": [
+                        {
+                            "statements": []
+                        },
+                        {
+                            "statements": []
+                        },
+                        {
+                            "statements": []
+                        },
+                        {
+                            "statements": []
+                        },
+                        {
+                            "statements": []
+                        },
+                        {
+                            "statements": []
+                        },
+                        {
+                            "statements": []
+                        },
+                        {
+                            "statements": []
+                        },
+                        {
+                            "statements": [
+                                {
+                                    "__type": "io.ygdrasil.wgsl.ir.Statement.Init",
+                                    "variable": 0
+                                },
+                                {
+                                    "__type": "io.ygdrasil.wgsl.ir.Statement.Switch",
+                                    "selector": 1,
+                                    "body": 7,
+                                    "default": 6,
+                                    "cases": [
+                                        {
+                                            "selector": {
+                                                "__type": "io.ygdrasil.wgsl.ir.CaseSelector.Value",
+                                                "value": {
+                                                    "__type": "io.ygdrasil.wgsl.ir.ScalarValue.I32",
+                                                    "value": 0
+                                                }
+                                            },
+                                            "body": 1
+                                        },
+                                        {
+                                            "selector": {
+                                                "__type": "io.ygdrasil.wgsl.ir.CaseSelector.Value",
+                                                "value": {
+                                                    "__type": "io.ygdrasil.wgsl.ir.ScalarValue.I32",
+                                                    "value": 1
+                                                }
+                                            },
+                                            "body": 2
+                                        },
+                                        {
+                                            "selector": {
+                                                "__type": "io.ygdrasil.wgsl.ir.CaseSelector.Value",
+                                                "value": {
+                                                    "__type": "io.ygdrasil.wgsl.ir.ScalarValue.I32",
+                                                    "value": 2
+                                                }
+                                            },
+                                            "body": 3
+                                        },
+                                        {
+                                            "selector": {
+                                                "__type": "io.ygdrasil.wgsl.ir.CaseSelector.Value",
+                                                "value": {
+                                                    "__type": "io.ygdrasil.wgsl.ir.ScalarValue.I32",
+                                                    "value": 3
+                                                }
+                                            },
+                                            "body": 4
+                                        },
+                                        {
+                                            "selector": {
+                                                "__type": "io.ygdrasil.wgsl.ir.CaseSelector.Value",
+                                                "value": {
+                                                    "__type": "io.ygdrasil.wgsl.ir.ScalarValue.I32",
+                                                    "value": 4
+                                                }
+                                            },
+                                            "body": 5
+                                        },
+                                        {
+                                            "selector": {
+                                                "__type": "io.ygdrasil.wgsl.ir.CaseSelector.Default"
+                                            },
+                                            "body": 6
+                                        }
+                                    ]
+                                }
+                            ]
+                        }
+                    ]
+                },
+                "body": 8
+            },
+            {
+                "name": "main",
+                "parameters": [],
+                "localVariables": {},
+                "expressions": {
+                    "data": [
+                        {
+                            "kind": {
+                                "__type": "io.ygdrasil.wgsl.ir.ExpressionKind.Call",
+                                "function": 0,
+                                "arguments": []
+                            }
+                        },
+                        {
+                            "kind": {
+                                "__type": "io.ygdrasil.wgsl.ir.ExpressionKind.Literal",
+                                "value": {
+                                    "__type": "io.ygdrasil.wgsl.ir.LiteralValue.Scalar",
+                                    "value": {
+                                        "__type": "io.ygdrasil.wgsl.ir.ScalarValue.I32",
+                                        "value": 1
+                                    }
+                                }
+                            }
+                        },
+                        {
+                            "kind": {
+                                "__type": "io.ygdrasil.wgsl.ir.ExpressionKind.Call",
+                                "function": 4,
+                                "arguments": [
+                                    1
+                                ]
+                            }
+                        },
+                        {
+                            "kind": {
+                                "__type": "io.ygdrasil.wgsl.ir.ExpressionKind.Call",
+                                "function": 5,
+                                "arguments": []
+                            }
+                        },
+                        {
+                            "kind": {
+                                "__type": "io.ygdrasil.wgsl.ir.ExpressionKind.Call",
+                                "function": 6,
+                                "arguments": []
+                            }
+                        },
+                        {
+                            "kind": {
+                                "__type": "io.ygdrasil.wgsl.ir.ExpressionKind.Call",
+                                "function": 10,
+                                "arguments": []
+                            }
+                        },
+                        {
+                            "kind": {
+                                "__type": "io.ygdrasil.wgsl.ir.ExpressionKind.Literal",
+                                "value": {
+                                    "__type": "io.ygdrasil.wgsl.ir.LiteralValue.Scalar",
+                                    "value": {
+                                        "__type": "io.ygdrasil.wgsl.ir.ScalarValue.I32",
+                                        "value": 1
+                                    }
+                                }
+                            }
+                        },
+                        {
+                            "kind": {
+                                "__type": "io.ygdrasil.wgsl.ir.ExpressionKind.Call",
+                                "function": 7,
+                                "arguments": [
+                                    6
+                                ]
+                            }
+                        },
+                        {
+                            "kind": {
+                                "__type": "io.ygdrasil.wgsl.ir.ExpressionKind.Literal",
+                                "value": {
+                                    "__type": "io.ygdrasil.wgsl.ir.LiteralValue.Scalar",
+                                    "value": {
+                                        "__type": "io.ygdrasil.wgsl.ir.ScalarValue.I32",
+                                        "value": 1
+                                    }
+                                }
+                            }
+                        },
+                        {
+                            "kind": {
+                                "__type": "io.ygdrasil.wgsl.ir.ExpressionKind.Literal",
+                                "value": {
+                                    "__type": "io.ygdrasil.wgsl.ir.LiteralValue.Scalar",
+                                    "value": {
+                                        "__type": "io.ygdrasil.wgsl.ir.ScalarValue.I32",
+                                        "value": 2
+                                    }
+                                }
+                            }
+                        },
+                        {
+                            "kind": {
+                                "__type": "io.ygdrasil.wgsl.ir.ExpressionKind.Literal",
+                                "value": {
+                                    "__type": "io.ygdrasil.wgsl.ir.LiteralValue.Scalar",
+                                    "value": {
+                                        "__type": "io.ygdrasil.wgsl.ir.ScalarValue.I32",
+                                        "value": 3
+                                    }
+                                }
+                            }
+                        },
+                        {
+                            "kind": {
+                                "__type": "io.ygdrasil.wgsl.ir.ExpressionKind.Call",
+                                "function": 8,
+                                "arguments": [
+                                    8,
+                                    9,
+                                    10
+                                ]
+                            }
+                        },
+                        {
+                            "kind": {
+                                "__type": "io.ygdrasil.wgsl.ir.ExpressionKind.Literal",
+                                "value": {
+                                    "__type": "io.ygdrasil.wgsl.ir.LiteralValue.Scalar",
+                                    "value": {
+                                        "__type": "io.ygdrasil.wgsl.ir.ScalarValue.I32",
+                                        "value": 1
+                                    }
+                                }
+                            }
+                        },
+                        {
+                            "kind": {
+                                "__type": "io.ygdrasil.wgsl.ir.ExpressionKind.Literal",
+                                "value": {
+                                    "__type": "io.ygdrasil.wgsl.ir.LiteralValue.Scalar",
+                                    "value": {
+                                        "__type": "io.ygdrasil.wgsl.ir.ScalarValue.I32",
+                                        "value": 2
+                                    }
+                                }
+                            }
+                        },
+                        {
+                            "kind": {
+                                "__type": "io.ygdrasil.wgsl.ir.ExpressionKind.Literal",
+                                "value": {
+                                    "__type": "io.ygdrasil.wgsl.ir.LiteralValue.Scalar",
+                                    "value": {
+                                        "__type": "io.ygdrasil.wgsl.ir.ScalarValue.I32",
+                                        "value": 3
+                                    }
+                                }
+                            }
+                        },
+                        {
+                            "kind": {
+                                "__type": "io.ygdrasil.wgsl.ir.ExpressionKind.Literal",
+                                "value": {
+                                    "__type": "io.ygdrasil.wgsl.ir.LiteralValue.Scalar",
+                                    "value": {
+                                        "__type": "io.ygdrasil.wgsl.ir.ScalarValue.I32",
+                                        "value": 4
+                                    }
+                                }
+                            }
+                        },
+                        {
+                            "kind": {
+                                "__type": "io.ygdrasil.wgsl.ir.ExpressionKind.Call",
+                                "function": 9,
+                                "arguments": [
+                                    12,
+                                    13,
+                                    14,
+                                    15
+                                ]
+                            }
+                        }
+                    ]
+                },
+                "blocks": {
+                    "data": [
+                        {
+                            "statements": []
+                        },
+                        {
+                            "statements": [
+                                {
+                                    "__type": "io.ygdrasil.wgsl.ir.Statement.Emit",
+                                    "range": 00
+                                },
+                                {
+                                    "__type": "io.ygdrasil.wgsl.ir.Statement.Emit",
+                                    "range": 22
+                                },
+                                {
+                                    "__type": "io.ygdrasil.wgsl.ir.Statement.Emit",
+                                    "range": 33
+                                },
+                                {
+                                    "__type": "io.ygdrasil.wgsl.ir.Statement.Emit",
+                                    "range": 44
+                                },
+                                {
+                                    "__type": "io.ygdrasil.wgsl.ir.Statement.Emit",
+                                    "range": 55
+                                },
+                                {
+                                    "__type": "io.ygdrasil.wgsl.ir.Statement.Emit",
+                                    "range": 77
+                                },
+                                {
+                                    "__type": "io.ygdrasil.wgsl.ir.Statement.Emit",
+                                    "range": 1111
+                                },
+                                {
+                                    "__type": "io.ygdrasil.wgsl.ir.Statement.Emit",
+                                    "range": 1616
+                                }
+                            ]
+                        }
+                    ]
+                },
+                "body": 1
+            }
+        ]
+    },
+    "entryPoints": [
+        {
+            "name": "main",
+            "function": 11,
+            "stage": "Compute"
+        }
+    ],
+    "diagnosticFilters": {}
+}
