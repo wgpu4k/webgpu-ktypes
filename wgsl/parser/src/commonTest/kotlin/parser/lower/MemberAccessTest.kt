@@ -89,6 +89,67 @@ class MemberAccessTest : FunSpec({
         exchangedInit.index shouldBe 1u
     }
 
+    test("modf_result_exposes_fract_and_whole_members") {
+        val module = lowerWgsl("""
+            fn main() {
+                let scalar = modf(1.5);
+                let fract = scalar.fract;
+                let whole = scalar.whole;
+                let vectorWhole = modf(vec2(1.5, 2.5)).whole;
+            }
+        """)
+
+        val mainFunc = module.functions.toList().first { it.name == "main" }
+        val scalar = mainFunc.localVariables.toList().first { it.name == "scalar" }
+        val resultType = module.types[scalar.type].inner as TypeInner.Struct
+        resultType.members.map { it.name } shouldBe listOf("fract", "whole")
+
+        val fract = mainFunc.localVariables.toList().first { it.name == "fract" }
+        module.types[fract.type].inner shouldBe TypeInner.Scalar(ScalarKind.F32, 4)
+        val fractInit = mainFunc.expressions[fract.init!!].kind as ExpressionKind.AccessIndex
+        fractInit.index shouldBe 0u
+
+        val whole = mainFunc.localVariables.toList().first { it.name == "whole" }
+        val wholeInit = mainFunc.expressions[whole.init!!].kind as ExpressionKind.AccessIndex
+        wholeInit.index shouldBe 1u
+
+        val vectorWhole = mainFunc.localVariables.toList().first { it.name == "vectorWhole" }
+        val vectorType = module.types[vectorWhole.type].inner as TypeInner.Vector
+        vectorType.size shouldBe VectorSize.Bi
+        module.types[vectorType.scalar].inner shouldBe TypeInner.Scalar(ScalarKind.F32, 4)
+    }
+
+    test("frexp_result_exposes_fract_and_exp_members") {
+        val module = lowerWgsl("""
+            fn main() {
+                let scalar = frexp(1.5);
+                let fract = scalar.fract;
+                let exp = scalar.exp;
+                let vectorExp = frexp(vec4(1.5, 2.5, 3.5, 4.5)).exp;
+            }
+        """)
+
+        val mainFunc = module.functions.toList().first { it.name == "main" }
+        val scalar = mainFunc.localVariables.toList().first { it.name == "scalar" }
+        val resultType = module.types[scalar.type].inner as TypeInner.Struct
+        resultType.members.map { it.name } shouldBe listOf("fract", "exp")
+
+        val fract = mainFunc.localVariables.toList().first { it.name == "fract" }
+        module.types[fract.type].inner shouldBe TypeInner.Scalar(ScalarKind.F32, 4)
+        val fractInit = mainFunc.expressions[fract.init!!].kind as ExpressionKind.AccessIndex
+        fractInit.index shouldBe 0u
+
+        val exp = mainFunc.localVariables.toList().first { it.name == "exp" }
+        module.types[exp.type].inner shouldBe TypeInner.Scalar(ScalarKind.Sint, 4)
+        val expInit = mainFunc.expressions[exp.init!!].kind as ExpressionKind.AccessIndex
+        expInit.index shouldBe 1u
+
+        val vectorExp = mainFunc.localVariables.toList().first { it.name == "vectorExp" }
+        val vectorType = module.types[vectorExp.type].inner as TypeInner.Vector
+        vectorType.size shouldBe VectorSize.Quad
+        module.types[vectorType.scalar].inner shouldBe TypeInner.Scalar(ScalarKind.Sint, 4)
+    }
+
     test("packed_dot_product_builtins_expose_specified_result_types") {
         val module = lowerWgsl("""
             fn main() {

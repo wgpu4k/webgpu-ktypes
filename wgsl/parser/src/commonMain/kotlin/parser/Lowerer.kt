@@ -1436,7 +1436,82 @@ class Lowerer {
             "dot4I8Packed" -> scalarType("i32")
             "dot4U8Packed" -> scalarType("u32")
             "atomicCompareExchangeWeak" -> inferAtomicCompareExchangeResultType(arguments)
+            "modf" -> inferModfResultType(arguments)
+            "frexp" -> inferFrexpResultType(arguments)
             else -> arguments.firstOrNull()?.let { resolveExpressionType(it) }
+        }
+    }
+
+    private fun inferModfResultType(arguments: List<Handle<IrExpression>>): Handle<IrType> {
+        val valueType = arguments.firstOrNull()?.let { resolveExpressionType(it) }
+            ?: throw LoweringError("modf requires an argument")
+        return structuredBuiltinResultType(
+            functionName = "Modf",
+            valueTypeName = builtinResultValueTypeName(valueType),
+            members = listOf(
+                IrStructMember("fract", valueType, null, 0),
+                IrStructMember("whole", valueType, null, 4)
+            )
+        )
+    }
+
+    private fun inferFrexpResultType(arguments: List<Handle<IrExpression>>): Handle<IrType> {
+        val valueType = arguments.firstOrNull()?.let { resolveExpressionType(it) }
+            ?: throw LoweringError("frexp requires an argument")
+        val expType = when (val inner = module.types[valueType].inner) {
+            is IrTypeInner.Vector -> module.types.append(
+                IrType(IrTypeInner.Vector(inner.size, scalarType("i32")))
+            )
+            else -> scalarType("i32")
+        }
+        return structuredBuiltinResultType(
+            functionName = "Frexp",
+            valueTypeName = builtinResultValueTypeName(valueType),
+            members = listOf(
+                IrStructMember("fract", valueType, null, 0),
+                IrStructMember("exp", expType, null, 4)
+            )
+        )
+    }
+
+    private fun structuredBuiltinResultType(
+        functionName: String,
+        valueTypeName: String,
+        members: List<IrStructMember>
+    ): Handle<IrType> {
+        val resultType = module.types.append(IrType(IrTypeInner.Struct(members)))
+        val resultName = "__${functionName}Result_$valueTypeName"
+        structHandleToNameMap[resultType] = resultName
+        structMemberIndexMap[resultName] = members.withIndex().associate { (index, member) ->
+            member.name to index.toUInt()
+        }
+        return resultType
+    }
+
+    private fun builtinResultValueTypeName(type: Handle<IrType>): String {
+        return when (val inner = module.types[type].inner) {
+            is IrTypeInner.Scalar -> when (inner.kind) {
+                IrScalarKind.Sint -> "i${inner.width * 8}"
+                IrScalarKind.Uint -> "u${inner.width * 8}"
+                IrScalarKind.Bool -> "bool"
+                IrScalarKind.F32 -> "f32"
+                IrScalarKind.F16 -> "f16"
+                IrScalarKind.F64 -> "f64"
+                else -> "scalar_${inner.width}"
+            }
+            is IrTypeInner.Vector -> {
+                val scalarName = builtinResultValueTypeName(inner.scalar)
+                "vec${vectorSizeValue(inner.size)}_$scalarName"
+            }
+            else -> "value_${type.index}"
+        }
+    }
+
+    private fun vectorSizeValue(size: IrVectorSize): Int {
+        return when (size) {
+            IrVectorSize.Bi -> 2
+            IrVectorSize.Tri -> 3
+            IrVectorSize.Quad -> 4
         }
     }
 
@@ -1456,7 +1531,7 @@ class Lowerer {
                 )
             )
         )
-        val valueTypeName = atomicCompareExchangeValueTypeName(valueType)
+        val valueTypeName = builtinResultValueTypeName(valueType)
         val resultName = "__AtomicCompareExchangeResult_$valueTypeName"
         structHandleToNameMap[resultType] = resultName
         structMemberIndexMap[resultName] = mapOf(
@@ -1475,21 +1550,6 @@ class Lowerer {
                 is IrTypeInner.ValuePointer -> inner.base
                 else -> return typeHandle
             }
-        }
-    }
-
-    private fun atomicCompareExchangeValueTypeName(type: Handle<IrType>): String {
-        return when (val inner = module.types[type].inner) {
-            is IrTypeInner.Scalar -> when (inner.kind) {
-                IrScalarKind.Sint -> "i${inner.width * 8}"
-                IrScalarKind.Uint -> "u${inner.width * 8}"
-                IrScalarKind.Bool -> "bool"
-                IrScalarKind.F32 -> "f32"
-                IrScalarKind.F16 -> "f16"
-                IrScalarKind.F64 -> "f64"
-                else -> "scalar_${inner.width}"
-            }
-            else -> "value_${type.index}"
         }
     }
 

@@ -49,7 +49,14 @@ class TypeIndexTest : FunSpec({
 
     test("bit manipulation builtins are known values") {
         val index = TypeIndex()
-        listOf("firstLeadingBit", "firstTrailingBit", "countOneBits", "reverseBits").forEach { name ->
+        listOf(
+            "firstLeadingBit",
+            "firstTrailingBit",
+            "countLeadingZeros",
+            "countTrailingZeros",
+            "countOneBits",
+            "reverseBits"
+        ).forEach { name ->
             index.isBuiltinValue(name).shouldBeTrue()
         }
     }
