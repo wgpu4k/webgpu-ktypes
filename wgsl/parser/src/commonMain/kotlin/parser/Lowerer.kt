@@ -189,6 +189,12 @@ class Lowerer {
                             val arraySize = typeDecl.args.getOrNull(1)?.let { lowerArraySizeArgument(it) } ?: IrArraySize.Dynamic(Handle(0))
                             IrTypeInner.Array(elemType, arraySize)
                         }
+                        "binding_array" -> {
+                            val elemType = typeDecl.args.getOrNull(0)?.let { lowerType(it) }
+                                ?: throw LoweringError("binding_array template requires an element type")
+                            val arraySize = typeDecl.args.getOrNull(1)?.let { lowerArraySizeArgument(it) } ?: IrArraySize.Dynamic(Handle(0))
+                            IrTypeInner.Array(elemType, arraySize)
+                        }
                         "vec2", "vec3", "vec4" -> {
                             val size = name.substring(3).toInt()
                             val elemType = typeDecl.args.getOrNull(0)?.let { lowerType(it) }

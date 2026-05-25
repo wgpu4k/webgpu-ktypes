@@ -31,8 +31,8 @@ Each listed case is still executed. The test fails if the case starts passing un
 | `glsl` | `atomicTexture-int64.wgsl` | `native-validation` | Golden output is reviewed after texture atomic builtin registration, but GLSL native validation still rejects the generated storage texture output shape. | `#16` |
 | `glsl` | `atomicTexture.wgsl` | `native-validation` | Golden output is reviewed after texture atomic builtin registration, but GLSL native validation still rejects the generated storage texture output shape. | `#16` |
 | `glsl` | `barycentrics.wgsl` | `native-validation` | Baseline debt from issue 16 golden stabilization. | `#16` |
-| `glsl` | `binding-arrays.wgsl` | `lowering` | Texture query builtins now resolve, but lowering still does not support `binding_array`. | `#16` |
-| `glsl` | `binding-buffer-arrays.wgsl` | `lowering` | Baseline debt from issue 16 golden stabilization. | `#16` |
+| `glsl` | `binding-arrays.wgsl` | `native-validation` | Golden output is reviewed after binding-array lowering support, but GLSL native validation still rejects the generated binding-array output. | `#16` |
+| `glsl` | `binding-buffer-arrays.wgsl` | `native-validation` | Golden output is reviewed after binding-array lowering support, but GLSL native validation still rejects the generated storage binding-array output. | `#16` |
 | `glsl` | `bits-optimized-msl.wgsl` | `native-validation` | Golden output is reviewed after firstLeadingBit builtin registration, but GLSL native validation rejects generated pack4x8snorm output. | `#16` |
 | `glsl` | `bits.wgsl` | `native-validation` | Golden output is reviewed after firstLeadingBit builtin registration, but GLSL native validation rejects generated bit-packing output. | `#16` |
 | `glsl` | `bits_downlevel.wgsl` | `native-validation` | Generated output now matches the golden; native validation still rejects the backend output after Emit preservation. | `#16` |
@@ -145,8 +145,6 @@ Each listed case is still executed. The test fails if the case starts passing un
 | `hlsl` | `abstract-types-return.wgsl` | `native-validation` | HLSL does not support returning arrays with the current writer shape; golden is reviewed but native validation still fails. | `#16` |
 | `hlsl` | `abstract-types-texture.wgsl` | `type-resolution` | Baseline debt from issue 16 golden stabilization. | `#16` |
 | `hlsl` | `aliased-ray-query.wgsl` | `type-resolution` | Baseline debt from issue 16 golden stabilization. | `#16` |
-| `hlsl` | `binding-arrays.wgsl` | `lowering` | Texture query builtins now resolve, but lowering still does not support `binding_array`. | `#16` |
-| `hlsl` | `binding-buffer-arrays.wgsl` | `lowering` | Baseline debt from issue 16 golden stabilization. | `#16` |
 | `hlsl` | `cooperative-matrix.wgsl` | `type-resolution` | Baseline debt from issue 16 golden stabilization. | `#16` |
 | `hlsl` | `debug-symbol-large-source.wgsl` | `type-resolution` | Baseline debt from issue 16 golden stabilization. | `#16` |
 | `hlsl` | `debug-symbol-terrain.wgsl` | `type-resolution` | Baseline debt from issue 16 golden stabilization. | `#16` |
@@ -159,8 +157,6 @@ Each listed case is still executed. The test fails if the case starts passing un
 | `hlsl` | `ray-query.wgsl` | `type-resolution` | Baseline debt from issue 16 golden stabilization. | `#16` |
 | `ir` | `abstract-types-texture.wgsl` | `type-resolution` | Baseline debt from issue 16 golden stabilization. | `#16` |
 | `ir` | `aliased-ray-query.wgsl` | `type-resolution` | Baseline debt from issue 16 golden stabilization. | `#16` |
-| `ir` | `binding-arrays.wgsl` | `lowering` | Texture query builtins now resolve, but lowering still does not support `binding_array`. | `#16` |
-| `ir` | `binding-buffer-arrays.wgsl` | `lowering` | Baseline debt from issue 16 golden stabilization. | `#16` |
 | `ir` | `cooperative-matrix.wgsl` | `type-resolution` | Baseline debt from issue 16 golden stabilization. | `#16` |
 | `ir` | `debug-symbol-large-source.wgsl` | `type-resolution` | Baseline debt from issue 16 golden stabilization. | `#16` |
 | `ir` | `debug-symbol-terrain.wgsl` | `type-resolution` | Baseline debt from issue 16 golden stabilization. | `#16` |
@@ -173,8 +169,6 @@ Each listed case is still executed. The test fails if the case starts passing un
 | `ir` | `ray-query.wgsl` | `type-resolution` | Baseline debt from issue 16 golden stabilization. | `#16` |
 | `msl` | `abstract-types-texture.wgsl` | `type-resolution` | Baseline debt from issue 16 golden stabilization. | `#16` |
 | `msl` | `aliased-ray-query.wgsl` | `type-resolution` | Baseline debt from issue 16 golden stabilization. | `#16` |
-| `msl` | `binding-arrays.wgsl` | `lowering` | Texture query builtins now resolve, but lowering still does not support `binding_array`. | `#16` |
-| `msl` | `binding-buffer-arrays.wgsl` | `lowering` | Baseline debt from issue 16 golden stabilization. | `#16` |
 | `msl` | `cooperative-matrix.wgsl` | `type-resolution` | Baseline debt from issue 16 golden stabilization. | `#16` |
 | `msl` | `debug-symbol-large-source.wgsl` | `type-resolution` | Baseline debt from issue 16 golden stabilization. | `#16` |
 | `msl` | `debug-symbol-terrain.wgsl` | `type-resolution` | Baseline debt from issue 16 golden stabilization. | `#16` |
@@ -197,8 +191,8 @@ Each listed case is still executed. The test fails if the case starts passing un
 | `roundtrip` | `atomicOps-int64.wgsl` | `roundtrip-semantic-isomorphism` | Golden output is reviewed, but roundtrip still changes atomic pointer expressions from `Pointer` to `ValuePointer`. | `#16` |
 | `roundtrip` | `atomicOps.wgsl` | `roundtrip-semantic-isomorphism` | Baseline debt from issue 16 golden stabilization. | `#16` |
 | `roundtrip` | `atomicTexture-int64.wgsl` | `roundtrip-semantic-isomorphism` | Golden output is reviewed, but roundtrip currently rewrites an untyped integer scalar to `u64`. | `#16` |
-| `roundtrip` | `binding-arrays.wgsl` | `lowering` | Texture query builtins now resolve, but lowering still does not support `binding_array`. | `#16` |
-| `roundtrip` | `binding-buffer-arrays.wgsl` | `lowering` | Baseline debt from issue 16 golden stabilization. | `#16` |
+| `roundtrip` | `binding-arrays.wgsl` | `roundtrip-semantic-isomorphism` | Golden output is reviewed after binding-array lowering support, but roundtrip currently changes location binding shape. | `#16` |
+| `roundtrip` | `binding-buffer-arrays.wgsl` | `roundtrip-semantic-isomorphism` | Golden output is reviewed after binding-array lowering support, but roundtrip currently changes location binding shape. | `#16` |
 | `roundtrip` | `bounds-check-zero-atomic.wgsl` | `roundtrip-semantic-isomorphism` | Baseline debt from issue 16 golden stabilization. | `#16` |
 | `roundtrip` | `clip-distances.wgsl` | `roundtrip-semantic-isomorphism` | Baseline debt from issue 16 golden stabilization. | `#16` |
 | `roundtrip` | `const-exprs.wgsl` | `roundtrip-semantic-isomorphism` | Golden output is reviewed after packed dot-product builtin and const switch selector support, but roundtrip currently changes the semantic shape of the lowered module. | `#16` |
@@ -264,8 +258,8 @@ Each listed case is still executed. The test fails if the case starts passing un
 | `wgsl` | `atomicOps-int64.wgsl` | `roundtrip-semantic-isomorphism` | Golden output is reviewed, but roundtrip still changes atomic pointer expressions from `Pointer` to `ValuePointer`. | `#16` |
 | `wgsl` | `atomicOps.wgsl` | `roundtrip-semantic-isomorphism` | Baseline debt from issue 16 golden stabilization. | `#16` |
 | `wgsl` | `atomicTexture-int64.wgsl` | `roundtrip-semantic-isomorphism` | Golden output is reviewed, but roundtrip currently rewrites an untyped integer scalar to `u64`. | `#16` |
-| `wgsl` | `binding-arrays.wgsl` | `lowering` | Texture query builtins now resolve, but lowering still does not support `binding_array`. | `#16` |
-| `wgsl` | `binding-buffer-arrays.wgsl` | `lowering` | Baseline debt from issue 16 golden stabilization. | `#16` |
+| `wgsl` | `binding-arrays.wgsl` | `roundtrip-semantic-isomorphism` | Golden output is reviewed after binding-array lowering support, but roundtrip currently changes location binding shape. | `#16` |
+| `wgsl` | `binding-buffer-arrays.wgsl` | `roundtrip-semantic-isomorphism` | Golden output is reviewed after binding-array lowering support, but roundtrip currently changes location binding shape. | `#16` |
 | `wgsl` | `bounds-check-zero-atomic.wgsl` | `roundtrip-semantic-isomorphism` | Baseline debt from issue 16 golden stabilization. | `#16` |
 | `wgsl` | `clip-distances.wgsl` | `roundtrip-semantic-isomorphism` | Baseline debt from issue 16 golden stabilization. | `#16` |
 | `wgsl` | `const-exprs.wgsl` | `roundtrip-semantic-isomorphism` | Golden output is reviewed after packed dot-product builtin and const switch selector support, but roundtrip currently changes the semantic shape of the lowered module. | `#16` |
