@@ -82,8 +82,8 @@ Each listed case is still executed. The test fails if the case starts passing un
 | `glsl` | `int16.wgsl` | `native-validation` | Generated output now matches the golden; native validation still rejects the backend output after Emit preservation. | `#16` |
 | `glsl` | `int64.wgsl` | `native-validation` | Golden output is reviewed after int64 suffix and scalar-width support, but GLSL native validation still rejects the generated int64 output shape. | `#16` |
 | `glsl` | `interface.wgsl` | `native-validation` | Generated output now matches the golden; native validation still rejects the backend output after Emit preservation. | `#16` |
-| `glsl` | `interpolate.wgsl` | `type-resolution` | Baseline debt from issue 16 golden stabilization. | `#16` |
-| `glsl` | `interpolate_compat.wgsl` | `type-resolution` | Baseline debt from issue 16 golden stabilization. | `#16` |
+| `glsl` | `interpolate.wgsl` | `native-validation` | Golden output is reviewed after interpolation enumerant resolution, but GLSL native validation rejects the generated vertex output declaration. | `#16` |
+| `glsl` | `interpolate_compat.wgsl` | `native-validation` | Golden output is reviewed after interpolation enumerant resolution, but GLSL native validation rejects the generated vertex output declaration. | `#16` |
 | `glsl` | `invariant.wgsl` | `native-validation` | Baseline debt from issue 16 golden stabilization. | `#16` |
 | `glsl` | `mat2-uniform-alignment.wgsl` | `native-validation` | Baseline debt from issue 16 golden stabilization. | `#16` |
 | `glsl` | `mat_cx2.wgsl` | `native-validation` | Baseline debt from issue 16 golden stabilization. | `#16` |
@@ -152,8 +152,6 @@ Each listed case is still executed. The test fails if the case starts passing un
 | `hlsl` | `debug-symbol-terrain.wgsl` | `type-resolution` | Baseline debt from issue 16 golden stabilization. | `#16` |
 | `hlsl` | `f64.wgsl` | `type-resolution` | Baseline debt from issue 16 golden stabilization. | `#16` |
 | `hlsl` | `image.wgsl` | `type-resolution` | Baseline debt from issue 16 golden stabilization. | `#16` |
-| `hlsl` | `interpolate.wgsl` | `type-resolution` | Baseline debt from issue 16 golden stabilization. | `#16` |
-| `hlsl` | `interpolate_compat.wgsl` | `type-resolution` | Baseline debt from issue 16 golden stabilization. | `#16` |
 | `hlsl` | `math-functions.wgsl` | `type-resolution` | Baseline debt from issue 16 golden stabilization. | `#16` |
 | `hlsl` | `mesh-shader-empty.wgsl` | `type-resolution` | Baseline debt from issue 16 golden stabilization. | `#16` |
 | `hlsl` | `mesh-shader-lines.wgsl` | `type-resolution` | Baseline debt from issue 16 golden stabilization. | `#16` |
@@ -170,8 +168,6 @@ Each listed case is still executed. The test fails if the case starts passing un
 | `ir` | `debug-symbol-terrain.wgsl` | `type-resolution` | Baseline debt from issue 16 golden stabilization. | `#16` |
 | `ir` | `f64.wgsl` | `type-resolution` | Baseline debt from issue 16 golden stabilization. | `#16` |
 | `ir` | `image.wgsl` | `type-resolution` | Baseline debt from issue 16 golden stabilization. | `#16` |
-| `ir` | `interpolate.wgsl` | `type-resolution` | Baseline debt from issue 16 golden stabilization. | `#16` |
-| `ir` | `interpolate_compat.wgsl` | `type-resolution` | Baseline debt from issue 16 golden stabilization. | `#16` |
 | `ir` | `math-functions.wgsl` | `type-resolution` | Baseline debt from issue 16 golden stabilization. | `#16` |
 | `ir` | `mesh-shader-empty.wgsl` | `type-resolution` | Baseline debt from issue 16 golden stabilization. | `#16` |
 | `ir` | `mesh-shader-lines.wgsl` | `type-resolution` | Baseline debt from issue 16 golden stabilization. | `#16` |
@@ -188,8 +184,6 @@ Each listed case is still executed. The test fails if the case starts passing un
 | `msl` | `debug-symbol-terrain.wgsl` | `type-resolution` | Baseline debt from issue 16 golden stabilization. | `#16` |
 | `msl` | `f64.wgsl` | `type-resolution` | Baseline debt from issue 16 golden stabilization. | `#16` |
 | `msl` | `image.wgsl` | `type-resolution` | Baseline debt from issue 16 golden stabilization. | `#16` |
-| `msl` | `interpolate.wgsl` | `type-resolution` | Baseline debt from issue 16 golden stabilization. | `#16` |
-| `msl` | `interpolate_compat.wgsl` | `type-resolution` | Baseline debt from issue 16 golden stabilization. | `#16` |
 | `msl` | `math-functions.wgsl` | `type-resolution` | Baseline debt from issue 16 golden stabilization. | `#16` |
 | `msl` | `mesh-shader-empty.wgsl` | `type-resolution` | Baseline debt from issue 16 golden stabilization. | `#16` |
 | `msl` | `mesh-shader-lines.wgsl` | `type-resolution` | Baseline debt from issue 16 golden stabilization. | `#16` |
@@ -232,8 +226,8 @@ Each listed case is still executed. The test fails if the case starts passing un
 | `roundtrip` | `image.wgsl` | `type-resolution` | Baseline debt from issue 16 golden stabilization. | `#16` |
 | `roundtrip` | `int64.wgsl` | `roundtrip-semantic-isomorphism` | Golden output is reviewed, but roundtrip currently rewrites an untyped integer scalar to `i64`. | `#16` |
 | `roundtrip` | `interface.wgsl` | `roundtrip-semantic-isomorphism` | Baseline debt from issue 16 golden stabilization. | `#16` |
-| `roundtrip` | `interpolate.wgsl` | `type-resolution` | Baseline debt from issue 16 golden stabilization. | `#16` |
-| `roundtrip` | `interpolate_compat.wgsl` | `type-resolution` | Baseline debt from issue 16 golden stabilization. | `#16` |
+| `roundtrip` | `interpolate.wgsl` | `roundtrip-semantic-isomorphism` | Golden output is reviewed after interpolation enumerant resolution, but roundtrip currently changes builtin binding shape. | `#16` |
+| `roundtrip` | `interpolate_compat.wgsl` | `roundtrip-semantic-isomorphism` | Golden output is reviewed after interpolation enumerant resolution, but roundtrip currently changes builtin binding shape. | `#16` |
 | `roundtrip` | `lexical-scopes.wgsl` | `roundtrip-semantic-isomorphism` | Baseline debt from issue 16 golden stabilization. | `#16` |
 | `roundtrip` | `math-functions.wgsl` | `type-resolution` | Baseline debt from issue 16 golden stabilization. | `#16` |
 | `roundtrip` | `mesh-shader-empty.wgsl` | `type-resolution` | Baseline debt from issue 16 golden stabilization. | `#16` |
@@ -301,8 +295,8 @@ Each listed case is still executed. The test fails if the case starts passing un
 | `wgsl` | `image.wgsl` | `type-resolution` | Baseline debt from issue 16 golden stabilization. | `#16` |
 | `wgsl` | `int64.wgsl` | `roundtrip-semantic-isomorphism` | Golden output is reviewed, but roundtrip currently rewrites an untyped integer scalar to `i64`. | `#16` |
 | `wgsl` | `interface.wgsl` | `roundtrip-semantic-isomorphism` | Baseline debt from issue 16 golden stabilization. | `#16` |
-| `wgsl` | `interpolate.wgsl` | `type-resolution` | Baseline debt from issue 16 golden stabilization. | `#16` |
-| `wgsl` | `interpolate_compat.wgsl` | `type-resolution` | Baseline debt from issue 16 golden stabilization. | `#16` |
+| `wgsl` | `interpolate.wgsl` | `roundtrip-semantic-isomorphism` | Golden output is reviewed after interpolation enumerant resolution, but roundtrip currently changes builtin binding shape. | `#16` |
+| `wgsl` | `interpolate_compat.wgsl` | `roundtrip-semantic-isomorphism` | Golden output is reviewed after interpolation enumerant resolution, but roundtrip currently changes builtin binding shape. | `#16` |
 | `wgsl` | `lexical-scopes.wgsl` | `roundtrip-semantic-isomorphism` | Baseline debt from issue 16 golden stabilization. | `#16` |
 | `wgsl` | `math-functions.wgsl` | `type-resolution` | Baseline debt from issue 16 golden stabilization. | `#16` |
 | `wgsl` | `mesh-shader-empty.wgsl` | `type-resolution` | Baseline debt from issue 16 golden stabilization. | `#16` |
