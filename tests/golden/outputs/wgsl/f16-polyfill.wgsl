@@ -13,13 +13,13 @@ struct Struct_8 {
 @fragment
 fn test_direct(@location(0) scalar_f16: f16, @location(1) scalar_f32: f32, @location(2) vec2_f16: vec2<f16>, @location(3) vec2_f32: vec2<f32>, @location(4) vec3_f16: vec3<f16>, @location(5) vec3_f32: vec3<f32>, @location(6) vec4_f16: vec4<f16>, @location(7) vec4_f32: vec4<f32>) -> Struct_8 {
     var output: Struct_8;
-    output.scalar_f16 = (scalar_f16 + 1.0f);
+    output.scalar_f16 = (scalar_f16 + 1.0h);
     output.scalar_f32 = (scalar_f32 + 1.0f);
-    output.vec2_f16 = (vec2_f16 + vec2<f32>(1.0f));
+    output.vec2_f16 = (vec2_f16 + vec2<f32>(1.0h));
     output.vec2_f32 = (vec2_f32 + vec2<f32>(1.0f));
-    output.vec3_f16 = (vec3_f16 + vec3<f32>(1.0f));
+    output.vec3_f16 = (vec3_f16 + vec3<f32>(1.0h));
     output.vec3_f32 = (vec3_f32 + vec3<f32>(1.0f));
-    output.vec4_f16 = (vec4_f16 + vec4<f32>(1.0f));
+    output.vec4_f16 = (vec4_f16 + vec4<f32>(1.0h));
     output.vec4_f32 = (vec4_f32 + vec4<f32>(1.0f));
     return output;
 }
@@ -27,13 +27,13 @@ fn test_direct(@location(0) scalar_f16: f16, @location(1) scalar_f32: f32, @loca
 @fragment
 fn test_struct(input: Struct_8) -> Struct_8 {
     var output: Struct_8;
-    output.scalar_f16 = (input.scalar_f16 + 1.0f);
+    output.scalar_f16 = (input.scalar_f16 + 1.0h);
     output.scalar_f32 = (input.scalar_f32 + 1.0f);
-    output.vec2_f16 = (input.vec2_f16 + vec2<f32>(1.0f));
+    output.vec2_f16 = (input.vec2_f16 + vec2<f32>(1.0h));
     output.vec2_f32 = (input.vec2_f32 + vec2<f32>(1.0f));
-    output.vec3_f16 = (input.vec3_f16 + vec3<f32>(1.0f));
+    output.vec3_f16 = (input.vec3_f16 + vec3<f32>(1.0h));
     output.vec3_f32 = (input.vec3_f32 + vec3<f32>(1.0f));
-    output.vec4_f16 = (input.vec4_f16 + vec4<f32>(1.0f));
+    output.vec4_f16 = (input.vec4_f16 + vec4<f32>(1.0h));
     output.vec4_f32 = (input.vec4_f32 + vec4<f32>(1.0f));
     return output;
 }
@@ -42,13 +42,13 @@ fn test_struct(input: Struct_8) -> Struct_8 {
 fn test_copy_input(input_original: Struct_8) -> Struct_8 {
     var input: Struct_8 = input_original;
     var output: Struct_8;
-    output.scalar_f16 = (input.scalar_f16 + 1.0f);
+    output.scalar_f16 = (input.scalar_f16 + 1.0h);
     output.scalar_f32 = (input.scalar_f32 + 1.0f);
-    output.vec2_f16 = (input.vec2_f16 + vec2<f32>(1.0f));
+    output.vec2_f16 = (input.vec2_f16 + vec2<f32>(1.0h));
     output.vec2_f32 = (input.vec2_f32 + vec2<f32>(1.0f));
-    output.vec3_f16 = (input.vec3_f16 + vec3<f32>(1.0f));
+    output.vec3_f16 = (input.vec3_f16 + vec3<f32>(1.0h));
     output.vec3_f32 = (input.vec3_f32 + vec3<f32>(1.0f));
-    output.vec4_f16 = (input.vec4_f16 + vec4<f32>(1.0f));
+    output.vec4_f16 = (input.vec4_f16 + vec4<f32>(1.0h));
     output.vec4_f32 = (input.vec4_f32 + vec4<f32>(1.0f));
     return output;
 }
@@ -56,7 +56,7 @@ fn test_copy_input(input_original: Struct_8) -> Struct_8 {
 @fragment
 fn test_return_partial(input_original: Struct_8) -> f16 {
     var input: Struct_8 = input_original;
-    input.scalar_f16 = 0.0f;
+    input.scalar_f16 = 0.0h;
     return input.scalar_f16;
 }
 

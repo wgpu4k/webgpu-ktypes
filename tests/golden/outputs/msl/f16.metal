@@ -30,23 +30,23 @@ struct Struct_19 {
     half scalar4;
     uint larger;
 };
-half global_0 = 1.0f;
+half global_0 = 1.0h;
 half global_1 = half(15.2f);
 
 half f16_function(half x) {
     global_0;
     Struct_19 local_0;
     half local_1 = half(global_1);
-    local_1 = (1.0f - 33333.0f);
+    local_1 = (1.0h - 33333.0h);
     local_1 = (local_1 + half(5.0f));
     local_1 = half((global_2.val_f32 + float(local_1)));
     local_1 = half3(global_2.val_f16)[2];
-    global_4.val_i32 = int(65504.0f);
-    global_4.val_i32 = int(-(65504.0f));
-    global_4.val_u32 = uint(65504.0f);
-    global_4.val_u32 = uint(-(65504.0f));
-    global_4.val_f32 = float(65504.0f);
-    global_4.val_f32 = float(-(65504.0f));
+    global_4.val_i32 = int(65504.0h);
+    global_4.val_i32 = int(-(65504.0h));
+    global_4.val_u32 = uint(65504.0h);
+    global_4.val_u32 = uint(-(65504.0h));
+    global_4.val_f32 = float(65504.0h);
+    global_4.val_f32 = float(-(65504.0h));
     global_4.val_f16 = (global_2.val_f16 + global_3.val_f16);
     global_4.val_f16_2 = (global_2.val_f16_2 + global_3.val_f16_2);
     global_4.val_f16_3 = (global_2.val_f16_3 + global_3.val_f16_3);
@@ -106,5 +106,5 @@ half sign(half arg_0) {
 
 [[kernel]]
 void main(Struct_16 global_2 [[buffer(0)]], Struct_16 global_3 [[buffer(1)]], Struct_16 global_4 [[buffer(3)]], Struct_18 global_5 [[buffer(2)]], Struct_18 global_6 [[buffer(4)]]) {
-    global_4.final_value = f16_function(2.0f);
+    global_4.final_value = f16_function(2.0h);
 }

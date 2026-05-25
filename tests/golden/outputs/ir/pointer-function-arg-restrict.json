@@ -329,16 +329,6 @@
                         "value": 4
                     }
                 }
-            },
-            {
-                "inner": {
-                    "__type": "io.ygdrasil.wgsl.ir.TypeInner.Array",
-                    "element": 0,
-                    "size": {
-                        "__type": "io.ygdrasil.wgsl.ir.ArraySize.Constant",
-                        "value": 4
-                    }
-                }
             }
         ],
         "indexMap": [
@@ -708,18 +698,7 @@
                     }
                 }
             },
-            37,
-            {
-                "inner": {
-                    "__type": "io.ygdrasil.wgsl.ir.TypeInner.Array",
-                    "element": 0,
-                    "size": {
-                        "__type": "io.ygdrasil.wgsl.ir.ArraySize.Constant",
-                        "value": 4
-                    }
-                }
-            },
-            38
+            37
         ]
     },
     "constants": {},
@@ -2185,7 +2164,7 @@
                         {
                             "kind": {
                                 "__type": "io.ygdrasil.wgsl.ir.ExpressionKind.TypeConstructor",
-                                "type": 38,
+                                "type": 18,
                                 "arguments": [
                                     26,
                                     27,

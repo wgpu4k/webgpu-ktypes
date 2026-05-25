@@ -62,9 +62,9 @@ fn main() {
     func_mf(mat2x2<f32>(vec2<f32>(0), vec2<f32>(0)));
     func_mf(const_mat_af);
     func_af(array<f32, 2>(0.0f, 0.0f));
-    func_af(array<i32, 2>(0, 0));
+    func_af(array<f32, 2>(0, 0));
     func_ai(array<i32, 2>(0, 0));
-    func_au(array<i32, 2>(0, 0));
+    func_au(array<u32, 2>(0, 0));
     func_af(const_arr_af);
     func_af(const_arr_ai);
     func_ai(const_arr_ai);

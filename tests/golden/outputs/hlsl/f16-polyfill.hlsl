@@ -43,13 +43,13 @@ test_direct_Output test_direct(test_direct_Input stage_in) {
     half4 vec4_f16 = stage_in.vec4_f16;
     float4 vec4_f32 = stage_in.vec4_f32;
     Struct_8 local_0;
-    local_0.scalar_f16 = (scalar_f16 + 1.0f);
+    local_0.scalar_f16 = (scalar_f16 + 1.0h);
     local_0.scalar_f32 = (scalar_f32 + 1.0f);
-    local_0.vec2_f16 = (vec2_f16 + float2(1.0f));
+    local_0.vec2_f16 = (vec2_f16 + float2(1.0h));
     local_0.vec2_f32 = (vec2_f32 + float2(1.0f));
-    local_0.vec3_f16 = (vec3_f16 + float3(1.0f));
+    local_0.vec3_f16 = (vec3_f16 + float3(1.0h));
     local_0.vec3_f32 = (vec3_f32 + float3(1.0f));
-    local_0.vec4_f16 = (vec4_f16 + float4(1.0f));
+    local_0.vec4_f16 = (vec4_f16 + float4(1.0h));
     local_0.vec4_f32 = (vec4_f32 + float4(1.0f));
     return local_0;
     return stage_out;
@@ -68,13 +68,13 @@ struct test_struct_Output {
 test_struct_Output test_struct() {
     test_struct_Output stage_out;
     Struct_8 local_0;
-    local_0.scalar_f16 = (input.scalar_f16 + 1.0f);
+    local_0.scalar_f16 = (input.scalar_f16 + 1.0h);
     local_0.scalar_f32 = (input.scalar_f32 + 1.0f);
-    local_0.vec2_f16 = (input.vec2_f16 + float2(1.0f));
+    local_0.vec2_f16 = (input.vec2_f16 + float2(1.0h));
     local_0.vec2_f32 = (input.vec2_f32 + float2(1.0f));
-    local_0.vec3_f16 = (input.vec3_f16 + float3(1.0f));
+    local_0.vec3_f16 = (input.vec3_f16 + float3(1.0h));
     local_0.vec3_f32 = (input.vec3_f32 + float3(1.0f));
-    local_0.vec4_f16 = (input.vec4_f16 + float4(1.0f));
+    local_0.vec4_f16 = (input.vec4_f16 + float4(1.0h));
     local_0.vec4_f32 = (input.vec4_f32 + float4(1.0f));
     return local_0;
     return stage_out;
@@ -94,13 +94,13 @@ test_copy_input_Output test_copy_input() {
     test_copy_input_Output stage_out;
     Struct_8 local_0 = input_original;
     Struct_8 local_1;
-    local_1.scalar_f16 = (local_0.scalar_f16 + 1.0f);
+    local_1.scalar_f16 = (local_0.scalar_f16 + 1.0h);
     local_1.scalar_f32 = (local_0.scalar_f32 + 1.0f);
-    local_1.vec2_f16 = (local_0.vec2_f16 + float2(1.0f));
+    local_1.vec2_f16 = (local_0.vec2_f16 + float2(1.0h));
     local_1.vec2_f32 = (local_0.vec2_f32 + float2(1.0f));
-    local_1.vec3_f16 = (local_0.vec3_f16 + float3(1.0f));
+    local_1.vec3_f16 = (local_0.vec3_f16 + float3(1.0h));
     local_1.vec3_f32 = (local_0.vec3_f32 + float3(1.0f));
-    local_1.vec4_f16 = (local_0.vec4_f16 + float4(1.0f));
+    local_1.vec4_f16 = (local_0.vec4_f16 + float4(1.0h));
     local_1.vec4_f32 = (local_0.vec4_f32 + float4(1.0f));
     return local_1;
     return stage_out;
@@ -112,7 +112,7 @@ struct test_return_partial_Output {
 test_return_partial_Output test_return_partial() {
     test_return_partial_Output stage_out;
     Struct_8 local_0 = input_original;
-    local_0.scalar_f16 = 0.0f;
+    local_0.scalar_f16 = 0.0h;
     return local_0.scalar_f16;
     return stage_out;
 }

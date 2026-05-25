@@ -2,12 +2,12 @@
 precision highp float;
 precision highp int;
 
- float global_0 = -(65504.0f);
- float global_1 = 65504.0f;
+ float16_t global_0 = -(65504.0h);
+ float16_t global_1 = 65504.0h;
  float global_2 = -(3.4028235E38f);
  float global_3 = 3.4028235E38f;
- float global_4 = -(Infinity.0f);
- float global_5 = Infinity.0f;
+ double global_4 = -(1.7976931348623157E308);
+ double global_5 = 1.7976931348623157E308;
  float global_6 = -(Infinity.0f);
  float global_7 = Infinity.0f;
 
@@ -140,18 +140,18 @@ void test_const_eval() {
 
 void wgsl_main() {
     test_const_eval();
-    test_f16_to_i32(1.0f);
-    test_f16_to_u32(1.0f);
-    test_f16_to_i64(1.0f);
-    test_f16_to_u64(1.0f);
+    test_f16_to_i32(1.0h);
+    test_f16_to_u32(1.0h);
+    test_f16_to_i64(1.0h);
+    test_f16_to_u64(1.0h);
     test_f32_to_i32(1.0f);
     test_f32_to_u32(1.0f);
     test_f32_to_i64(1.0f);
     test_f32_to_u64(1.0f);
-    test_f64_to_i32(1.0f);
-    test_f64_to_u32(1.0f);
-    test_f64_to_i64(1.0f);
-    test_f64_to_u64(1.0f);
+    test_f64_to_i32(1.0);
+    test_f64_to_u32(1.0);
+    test_f64_to_i64(1.0);
+    test_f64_to_u64(1.0);
     test_f16_to_i32_vec(vec2(1.0f, 2.0f));
     test_f16_to_u32_vec(vec2(1.0f, 2.0f));
     test_f16_to_i64_vec(vec2(1.0f, 2.0f));

@@ -973,6 +973,10 @@ class Lowerer {
         }
     }
 
+    private fun expectedScalarKind(expectedType: Handle<IrType>?): IrScalarKind? {
+        return expectedType?.let { module.types[it].inner as? IrTypeInner.Scalar }?.kind
+    }
+
     private fun lowerExpression(astExpr: Expression, expectedType: Handle<IrType>? = null): Handle<IrExpression> {
         // Code existant commence ici...
         val kind = when (astExpr) {
@@ -985,7 +989,19 @@ class Lowerer {
                 }
                 IrExpressionKind.Literal(IrLiteralValue.Scalar(scalar))
             }
-            is FloatLiteral -> IrExpressionKind.Literal(IrLiteralValue.Scalar(IrScalarValue.F32(astExpr.value.toFloat())))
+            is FloatLiteral -> {
+                val expectedScalarKind = expectedScalarKind(expectedType)
+                val scalar = when (astExpr.suffix?.lowercase()) {
+                    "lf" -> IrScalarValue.F64(astExpr.value)
+                    "h" -> IrScalarValue.F16(astExpr.value.toFloat())
+                    else -> when (expectedScalarKind) {
+                        IrScalarKind.F64 -> IrScalarValue.F64(astExpr.value)
+                        IrScalarKind.F16 -> IrScalarValue.F16(astExpr.value.toFloat())
+                        else -> IrScalarValue.F32(astExpr.value.toFloat())
+                    }
+                }
+                IrExpressionKind.Literal(IrLiteralValue.Scalar(scalar))
+            }
             is BoolLiteral -> IrExpressionKind.Literal(IrLiteralValue.Scalar(IrScalarValue.Bool(astExpr.value)))
             is IdentExpr -> {
                 val name = astExpr.name
@@ -1034,18 +1050,29 @@ class Lowerer {
                     throw LoweringError("Undefined variable: '$name'")
                 }
             }
-            is BinaryExpr -> IrExpressionKind.Binary(
-                lowerBinaryOperator(astExpr.op),
-                lowerExpression(astExpr.left),
-                lowerExpression(astExpr.right)
-            )
+            is BinaryExpr -> {
+                val operandExpectedType = expectedType.takeIf {
+                    astExpr.op in setOf(
+                        BinaryOperator.ADD,
+                        BinaryOperator.SUBTRACT,
+                        BinaryOperator.MULTIPLY,
+                        BinaryOperator.DIVIDE,
+                        BinaryOperator.MODULO
+                    )
+                }
+                IrExpressionKind.Binary(
+                    lowerBinaryOperator(astExpr.op),
+                    lowerExpression(astExpr.left, operandExpectedType),
+                    lowerExpression(astExpr.right, operandExpectedType)
+                )
+            }
             is UnaryExpr -> {
                 when (astExpr.op) {
                     io.ygdrasil.wgsl.ast.UnaryOperator.DEREF -> IrExpressionKind.Load(lowerExpression(astExpr.operand))
                     io.ygdrasil.wgsl.ast.UnaryOperator.ADDRESS_OF -> IrExpressionKind.ValuePointer(lowerExpression(astExpr.operand))
                     else -> IrExpressionKind.Unary(
                         lowerUnaryOperator(astExpr.op),
-                        lowerExpression(astExpr.operand)
+                        lowerExpression(astExpr.operand, expectedType)
                     )
                 }
             }
@@ -1058,7 +1085,11 @@ class Lowerer {
                 val isAliasType = calleeName != null && typeAliasMap.containsKey(calleeName)
                 
                 if (calleeName != null && functionMap.containsKey(calleeName)) {
-                    IrExpressionKind.Call(functionMap[calleeName]!!, astExpr.args.map { lowerExpression(it) })
+                    val function = module.functions[functionMap[calleeName]!!]
+                    val loweredArgs = astExpr.args.mapIndexed { index, arg ->
+                        lowerExpression(arg, function.parameters.getOrNull(index)?.type)
+                    }
+                    IrExpressionKind.Call(functionMap[calleeName]!!, loweredArgs)
                 } else if (calleeName == "array" && astExpr.templateArgs == null) {
                     val loweredArgs = astExpr.args.map { lowerExpression(it) }
                     val expectedArray = expectedType?.let { module.types[it].inner as? IrTypeInner.Array }

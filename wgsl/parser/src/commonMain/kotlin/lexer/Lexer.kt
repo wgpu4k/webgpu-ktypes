@@ -496,7 +496,14 @@ class Lexer(
             )
         }
 
-        // Check for float suffixes without dot/exp (standard WGSL: f, h)
+        // Check for float suffixes without dot/exp (standard WGSL: f, h; Naga: lf).
+        if (nextChar == 'l' && peekChar(1)?.lowercaseChar() == 'f') {
+            consume()
+            consume()
+            val text = source.substring(startIndex, index)
+            return Token.floatLiteral(text, spanFrom(start))
+        }
+
         if (nextChar == 'f' || nextChar == 'h') {
             consume()
             val text = source.substring(startIndex, index)
@@ -542,6 +549,9 @@ class Lexer(
             val nextChar = peekChar()?.lowercaseChar()
             if (nextChar == 'f' || nextChar == 'h') {
                 consume()
+            } else if (nextChar == 'l' && peekChar(1)?.lowercaseChar() == 'f') {
+                consume()
+                consume()
             }
             return Token.simple(TokenKind.UNKNOWN, spanFrom(start))
         }
@@ -549,6 +559,9 @@ class Lexer(
         // Check for float suffixes
         val nextChar = peekChar()?.lowercaseChar()
         if (nextChar == 'f' || nextChar == 'h') {
+            consume()
+        } else if (nextChar == 'l' && peekChar(1)?.lowercaseChar() == 'f') {
+            consume()
             consume()
         }
 
