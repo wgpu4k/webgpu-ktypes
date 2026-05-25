@@ -136,7 +136,6 @@ Each listed case is still executed. The test fails if the case starts passing un
 | `glsl` | `workgroup-uniform-load-atomic.wgsl` | `native-validation` | Golden output is reviewed, but GLSL native validation rejects the current atomic storage output. | `#16` |
 | `glsl` | `workgroup-uniform-load.wgsl` | `native-validation` | Generated output now matches the golden; native validation still rejects the backend output after Emit preservation. | `#16` |
 | `glsl` | `workgroup-var-init.wgsl` | `native-validation` | Baseline debt from issue 16 golden stabilization. | `#16` |
-| `hlsl` | `abstract-types-return.wgsl` | `native-validation` | HLSL does not support returning arrays with the current writer shape; golden is reviewed but native validation still fails. | `#16` |
 | `roundtrip` | `6438-conflicting-idents.wgsl` | `roundtrip-semantic-isomorphism` | Baseline debt from issue 16 golden stabilization. | `#16` |
 | `roundtrip` | `abstract-types-atomic.wgsl` | `roundtrip-semantic-isomorphism` | Baseline debt from issue 16 golden stabilization. | `#16` |
 | `roundtrip` | `access.wgsl` | `roundtrip-semantic-isomorphism` | Baseline debt from issue 16 golden stabilization. | `#16` |
