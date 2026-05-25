@@ -8,9 +8,6 @@ bool test_any_and_all_for_bool() {
     return all(a);
 }
 
-bool any(bool arg_0) {
-}
-
 bool all(bool arg_0) {
 }
 

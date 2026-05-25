@@ -98,22 +98,10 @@ void relational() {
     vec4 vec_all_true = all(vec4(true));
 }
 
-bool any(bool arg_0) {
-}
-
-bool any(bool arg_0) {
-}
-
 bool all(bool arg_0) {
 }
 
 bool all(bool arg_0) {
-}
-
-bvec4 any(bvec4 arg_0) {
-}
-
-vec4 any(vec4 arg_0) {
 }
 
 vec4 all(vec4 arg_0) {

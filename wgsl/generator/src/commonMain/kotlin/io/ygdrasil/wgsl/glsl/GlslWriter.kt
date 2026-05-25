@@ -178,6 +178,18 @@ class GlslWriter(
         return if (isEntryPoint) "wgsl_$name" else name
     }
 
+    override fun writeFunction(func: Function, handle: Handle<Function>) {
+        if (isEmptyNativeGlslBuiltinStub(func)) {
+            return
+        }
+        super.writeFunction(func, handle)
+    }
+
+    private fun isEmptyNativeGlslBuiltinStub(func: Function): Boolean {
+        val block = func.blocks.getOrNull(func.body) ?: return false
+        return func.returnType != null && block.statements.isEmpty() && func.name in nativeGlslBuiltins
+    }
+
     override fun writeEntryPoint(ep: EntryPoint, index: Int) {
         writeLine()
         val func = module.functions[ep.function]
@@ -484,5 +496,13 @@ class GlslWriter(
         BuiltinFunction.Determinant -> "determinant"
         // Most others are same as WGSL lowercase
         else -> super.getBuiltinFunctionName(function)
+    }
+
+    private companion object {
+        val nativeGlslBuiltins = setOf(
+            "cross",
+            "fma",
+            "any"
+        )
     }
 }

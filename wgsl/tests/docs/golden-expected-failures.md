@@ -49,13 +49,11 @@ Each listed case is still executed. The test fails if the case starts passing un
 | `glsl` | `clip-distances.wgsl` | `native-validation` | Baseline debt from issue 16 golden stabilization. | `#16` |
 | `glsl` | `collatz.wgsl` | `native-validation` | Generated output now matches the golden; native validation still rejects the backend output after Emit preservation. | `#16` |
 | `glsl` | `const-exprs.wgsl` | `native-validation` | Golden output is reviewed after packed dot-product builtin and const switch selector support, but GLSL native validation rejects a generated bool-to-vec2<bool> assignment. | `#16` |
-| `glsl` | `const_assert.wgsl` | `native-validation` | Generated output now matches the golden; native validation still rejects the backend output after Emit preservation. | `#16` |
 | `glsl` | `constructors.wgsl` | `native-validation` | Generated output now matches the golden; native validation still rejects the backend output after Emit preservation. | `#16` |
 | `glsl` | `control-flow.wgsl` | `native-validation` | Golden output is reviewed after switch trailing-comma parsing and scalar const selector lowering, but GLSL native validation rejects generated storageBarrier output. | `#16` |
 | `glsl` | `conversion-float-to-int-no-f64.wgsl` | `native-validation` | Golden output is reviewed, but GLSL native validation rejects generated non-finite float constants as Infinity. | `#16` |
 | `glsl` | `conversion-float-to-int.wgsl` | `native-validation` | Golden output is reviewed, but GLSL native validation rejects generated non-finite float constants as Infinity. | `#16` |
 | `glsl` | `cooperative-matrix.wgsl` | `native-validation` | Golden output is reviewed after cooperative matrix builtin registration, but GLSL native validation does not accept the generated cooperative matrix output. | `#16` |
-| `glsl` | `cross.wgsl` | `native-validation` | Generated output now matches the golden; native validation still rejects the backend output after Emit preservation. | `#16` |
 | `glsl` | `cubeArrayShadow.wgsl` | `native-validation` | Generated output now matches the golden; native validation still rejects the backend output after Emit preservation. | `#16` |
 | `glsl` | `debug-symbol-large-source.wgsl` | `native-validation` | Golden output is reviewed after stage keyword identifier resolution, but GLSL native validation rejects the generated array declaration. | `#16` |
 | `glsl` | `debug-symbol-simple.wgsl` | `native-validation` | Baseline debt from issue 16 golden stabilization. | `#16` |
@@ -73,7 +71,6 @@ Each listed case is still executed. The test fails if the case starts passing un
 | `glsl` | `functions-optimized-by-capability.wgsl` | `native-validation` | Golden output is reviewed after packed dot-product builtin support, but GLSL native validation rejects the generated packed dot-product output. | `#16` |
 | `glsl` | `functions-optimized-by-version.wgsl` | `native-validation` | Golden output is reviewed after packed dot-product builtin support, but GLSL native validation rejects the generated packed dot-product output. | `#16` |
 | `glsl` | `functions-unoptimized.wgsl` | `native-validation` | Golden output is reviewed after packed dot-product builtin support, but GLSL native validation rejects the generated packed dot-product output. | `#16` |
-| `glsl` | `functions-webgl.wgsl` | `native-validation` | Generated output now matches the golden; native validation still rejects the backend output after Emit preservation. | `#16` |
 | `glsl` | `functions.wgsl` | `native-validation` | Golden output is reviewed after packed dot-product builtin support, but GLSL native validation rejects the generated packed dot-product output. | `#16` |
 | `glsl` | `globals.wgsl` | `native-validation` | Generated output now matches the golden; native validation still rejects the backend output after Emit preservation. | `#16` |
 | `glsl` | `image.wgsl` | `native-validation` | Golden output is reviewed after texture query builtin support, but GLSL native validation still rejects the generated image output. | `#16` |
