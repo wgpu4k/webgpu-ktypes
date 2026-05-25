@@ -4,12 +4,11 @@ This file documents WGSL golden inputs that do not yet have expected outputs in 
 The list is intentionally consumed by `GoldenCompletenessTest` so missing outputs stay explicit until they
 are either generated and reviewed or moved to a narrower unsupported-feature manifest.
 
-Current status: 17 inputs are missing expected outputs for `wgsl`, `glsl`, `hlsl`, `msl`, and `ir`.
+Current status: 16 inputs are missing expected outputs for `wgsl`, `glsl`, `hlsl`, `msl`, and `ir`.
 
 - `aliased-ray-query.wgsl` - pending parser/resolver/lowering support.
 - `binding-arrays.wgsl` - pending parser/resolver/lowering support.
 - `binding-buffer-arrays.wgsl` - pending parser/resolver/lowering support.
-- `control-flow.wgsl` - pending parser/resolver/lowering support.
 - `cooperative-matrix.wgsl` - pending parser/resolver/lowering support.
 - `debug-symbol-large-source.wgsl` - pending parser/resolver/lowering support.
 - `debug-symbol-terrain.wgsl` - pending parser/resolver/lowering support.

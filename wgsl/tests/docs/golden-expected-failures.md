@@ -51,7 +51,7 @@ Each listed case is still executed. The test fails if the case starts passing un
 | `glsl` | `const-exprs.wgsl` | `native-validation` | Golden output is reviewed after packed dot-product builtin and const switch selector support, but GLSL native validation rejects a generated bool-to-vec2<bool> assignment. | `#16` |
 | `glsl` | `const_assert.wgsl` | `native-validation` | Generated output now matches the golden; native validation still rejects the backend output after Emit preservation. | `#16` |
 | `glsl` | `constructors.wgsl` | `native-validation` | Generated output now matches the golden; native validation still rejects the backend output after Emit preservation. | `#16` |
-| `glsl` | `control-flow.wgsl` | `type-resolution` | Baseline debt from issue 16 golden stabilization. | `#16` |
+| `glsl` | `control-flow.wgsl` | `native-validation` | Golden output is reviewed after switch trailing-comma parsing and scalar const selector lowering, but GLSL native validation rejects generated storageBarrier output. | `#16` |
 | `glsl` | `conversion-float-to-int-no-f64.wgsl` | `native-validation` | Golden output is reviewed, but GLSL native validation rejects generated non-finite float constants as Infinity. | `#16` |
 | `glsl` | `conversion-float-to-int.wgsl` | `native-validation` | Golden output is reviewed, but GLSL native validation rejects generated non-finite float constants as Infinity. | `#16` |
 | `glsl` | `cooperative-matrix.wgsl` | `type-resolution` | Baseline debt from issue 16 golden stabilization. | `#16` |
@@ -147,7 +147,6 @@ Each listed case is still executed. The test fails if the case starts passing un
 | `hlsl` | `aliased-ray-query.wgsl` | `type-resolution` | Baseline debt from issue 16 golden stabilization. | `#16` |
 | `hlsl` | `binding-arrays.wgsl` | `type-resolution` | Baseline debt from issue 16 golden stabilization. | `#16` |
 | `hlsl` | `binding-buffer-arrays.wgsl` | `lowering` | Baseline debt from issue 16 golden stabilization. | `#16` |
-| `hlsl` | `control-flow.wgsl` | `type-resolution` | Baseline debt from issue 16 golden stabilization. | `#16` |
 | `hlsl` | `cooperative-matrix.wgsl` | `type-resolution` | Baseline debt from issue 16 golden stabilization. | `#16` |
 | `hlsl` | `debug-symbol-large-source.wgsl` | `type-resolution` | Baseline debt from issue 16 golden stabilization. | `#16` |
 | `hlsl` | `debug-symbol-terrain.wgsl` | `type-resolution` | Baseline debt from issue 16 golden stabilization. | `#16` |
@@ -166,7 +165,6 @@ Each listed case is still executed. The test fails if the case starts passing un
 | `ir` | `aliased-ray-query.wgsl` | `type-resolution` | Baseline debt from issue 16 golden stabilization. | `#16` |
 | `ir` | `binding-arrays.wgsl` | `type-resolution` | Baseline debt from issue 16 golden stabilization. | `#16` |
 | `ir` | `binding-buffer-arrays.wgsl` | `lowering` | Baseline debt from issue 16 golden stabilization. | `#16` |
-| `ir` | `control-flow.wgsl` | `type-resolution` | Baseline debt from issue 16 golden stabilization. | `#16` |
 | `ir` | `cooperative-matrix.wgsl` | `type-resolution` | Baseline debt from issue 16 golden stabilization. | `#16` |
 | `ir` | `debug-symbol-large-source.wgsl` | `type-resolution` | Baseline debt from issue 16 golden stabilization. | `#16` |
 | `ir` | `debug-symbol-terrain.wgsl` | `type-resolution` | Baseline debt from issue 16 golden stabilization. | `#16` |
@@ -185,7 +183,6 @@ Each listed case is still executed. The test fails if the case starts passing un
 | `msl` | `aliased-ray-query.wgsl` | `type-resolution` | Baseline debt from issue 16 golden stabilization. | `#16` |
 | `msl` | `binding-arrays.wgsl` | `type-resolution` | Baseline debt from issue 16 golden stabilization. | `#16` |
 | `msl` | `binding-buffer-arrays.wgsl` | `lowering` | Baseline debt from issue 16 golden stabilization. | `#16` |
-| `msl` | `control-flow.wgsl` | `type-resolution` | Baseline debt from issue 16 golden stabilization. | `#16` |
 | `msl` | `cooperative-matrix.wgsl` | `type-resolution` | Baseline debt from issue 16 golden stabilization. | `#16` |
 | `msl` | `debug-symbol-large-source.wgsl` | `type-resolution` | Baseline debt from issue 16 golden stabilization. | `#16` |
 | `msl` | `debug-symbol-terrain.wgsl` | `type-resolution` | Baseline debt from issue 16 golden stabilization. | `#16` |
@@ -217,7 +214,7 @@ Each listed case is still executed. The test fails if the case starts passing un
 | `roundtrip` | `bounds-check-zero-atomic.wgsl` | `roundtrip-semantic-isomorphism` | Baseline debt from issue 16 golden stabilization. | `#16` |
 | `roundtrip` | `clip-distances.wgsl` | `roundtrip-semantic-isomorphism` | Baseline debt from issue 16 golden stabilization. | `#16` |
 | `roundtrip` | `const-exprs.wgsl` | `roundtrip-semantic-isomorphism` | Golden output is reviewed after packed dot-product builtin and const switch selector support, but roundtrip currently changes the semantic shape of the lowered module. | `#16` |
-| `roundtrip` | `control-flow.wgsl` | `type-resolution` | Baseline debt from issue 16 golden stabilization. | `#16` |
+| `roundtrip` | `control-flow.wgsl` | `roundtrip-semantic-isomorphism` | Golden output is reviewed after switch trailing-comma parsing and scalar const selector lowering, but roundtrip currently changes the semantic shape of lowered switch cases. | `#16` |
 | `roundtrip` | `conversion-float-to-int-no-f64.wgsl` | `roundtrip-semantic-isomorphism` | Generated WGSL contains non-finite float constants as Infinity, which the roundtrip parser resolves as an unknown identifier. | `#16` |
 | `roundtrip` | `conversion-float-to-int.wgsl` | `roundtrip-semantic-isomorphism` | Generated WGSL contains non-finite float constants as Infinity, which the roundtrip parser resolves as an unknown identifier. | `#16` |
 | `roundtrip` | `cooperative-matrix.wgsl` | `type-resolution` | Baseline debt from issue 16 golden stabilization. | `#16` |
@@ -286,7 +283,7 @@ Each listed case is still executed. The test fails if the case starts passing un
 | `wgsl` | `bounds-check-zero-atomic.wgsl` | `roundtrip-semantic-isomorphism` | Baseline debt from issue 16 golden stabilization. | `#16` |
 | `wgsl` | `clip-distances.wgsl` | `roundtrip-semantic-isomorphism` | Baseline debt from issue 16 golden stabilization. | `#16` |
 | `wgsl` | `const-exprs.wgsl` | `roundtrip-semantic-isomorphism` | Golden output is reviewed after packed dot-product builtin and const switch selector support, but roundtrip currently changes the semantic shape of the lowered module. | `#16` |
-| `wgsl` | `control-flow.wgsl` | `type-resolution` | Baseline debt from issue 16 golden stabilization. | `#16` |
+| `wgsl` | `control-flow.wgsl` | `roundtrip-semantic-isomorphism` | Golden output is reviewed after switch trailing-comma parsing and scalar const selector lowering, but roundtrip currently changes the semantic shape of lowered switch cases. | `#16` |
 | `wgsl` | `conversion-float-to-int-no-f64.wgsl` | `roundtrip-semantic-isomorphism` | Generated WGSL contains non-finite float constants as Infinity, which the roundtrip parser resolves as an unknown identifier. | `#16` |
 | `wgsl` | `conversion-float-to-int.wgsl` | `roundtrip-semantic-isomorphism` | Generated WGSL contains non-finite float constants as Infinity, which the roundtrip parser resolves as an unknown identifier. | `#16` |
 | `wgsl` | `cooperative-matrix.wgsl` | `type-resolution` | Baseline debt from issue 16 golden stabilization. | `#16` |

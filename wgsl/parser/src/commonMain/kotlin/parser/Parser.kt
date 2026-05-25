@@ -2347,7 +2347,7 @@ class Parser(
                 if (currentKind() == TokenKind.DEFAULT) {
                     advance()
                     isDefault = true
-                } else if (currentKind() == TokenKind.COLON) {
+                } else if (currentKind() == TokenKind.COLON || currentKind() == TokenKind.LEFT_BRACE) {
                     // Trailing comma
                     break
                 } else {

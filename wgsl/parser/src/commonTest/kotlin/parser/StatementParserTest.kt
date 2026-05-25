@@ -36,6 +36,20 @@ class StatementParserTest : FunSpec({
         case.selectors shouldHaveSize 3
     }
 
+    test("parse switch selectors with trailing comma before block") {
+        val source = "fn f() { switch 1 { case 1, { break; } case 2, 3, { break; } default {} } }"
+        val parser = Parser(Lexer(source))
+        val unit = parser.parse()
+
+        parser.errors shouldBe emptyList()
+        val func = unit.declarations[0] as FunctionDecl
+        val switchStmt = func.body!!.statements[0] as SwitchStatement
+        val firstCase = switchStmt.body.cases[0] as Case
+        val secondCase = switchStmt.body.cases[1] as Case
+        firstCase.selectors shouldHaveSize 1
+        secondCase.selectors shouldHaveSize 2
+    }
+
     test("parse phony assignment") {
         val source = "fn f() { _ = 1; }"
         val lexer = Lexer(source)
