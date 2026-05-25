@@ -16,9 +16,6 @@ precision highp int;
 int sqrt(int arg_0) {
 }
 
-vec3 any(vec3 arg_0) {
-}
-
 vec4 splat(float m, int n) {
     vec2 a = (((2.0f + vec2(m)) - 4.0f) / 8.0f);
     ivec4 b = mod(ivec4(n), 2);
@@ -306,12 +303,6 @@ void logical() {
 }
 
 int sqrt(int arg_0) {
-}
-
-vec3 any(vec3 arg_0) {
-}
-
-vec3 any(vec3 arg_0) {
 }
 
 void wgsl_main(uvec3 id) {

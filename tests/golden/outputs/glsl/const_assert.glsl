@@ -11,12 +11,6 @@ void wgsl_foo() {
     bool l_false = false;
 }
 
-vec3 any(vec3 arg_0) {
-}
-
-vec3 any(vec3 arg_0) {
-}
-
 void main() {
     wgsl_foo();
 }

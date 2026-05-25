@@ -10,9 +10,6 @@ vec2 test_fma() {
     return fma(a, b, c);
 }
 
-vec2 fma(vec2 arg_0, vec2 arg_1, vec2 arg_2) {
-}
-
 int test_integer_dot_product() {
     ivec2 a_2 = ivec2(1);
     ivec2 b_2 = ivec2(1);

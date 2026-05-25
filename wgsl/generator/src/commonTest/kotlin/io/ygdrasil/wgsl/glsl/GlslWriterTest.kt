@@ -2,6 +2,7 @@ package io.ygdrasil.wgsl.generator.glsl
 
 import io.kotest.core.spec.style.FunSpec
 import io.kotest.matchers.string.shouldContain
+import io.kotest.matchers.string.shouldNotContain
 import io.ygdrasil.wgsl.arena.Arena
 import io.ygdrasil.wgsl.ir.*
 import io.ygdrasil.wgsl.ir.Function
@@ -81,6 +82,26 @@ class GlslWriterTest : FunSpec({
 
         code shouldContain "mat2x2 m = mat2x2(vec2(0.0f), vec2(0.0f));"
         code shouldContain "mat2x2 n = mat2x2(vec2(0.0f), vec2(0.0f));"
+    }
+
+    test("empty native builtin stubs are not emitted") {
+        val module = lowerWgsl("""
+            @compute @workgroup_size(1)
+            fn main() {
+                let a = cross(vec3(1.0, 0.0, 0.0), vec3(0.0, 1.0, 0.0));
+                let b = fma(vec2(2.0), vec2(0.5), vec2(0.5));
+                let c = any(vec2(true, false));
+            }
+        """.trimIndent())
+
+        val code = GlslModule.writeString(module)
+
+        code shouldContain "cross("
+        code shouldContain "fma("
+        code shouldContain "any("
+        code shouldNotContain "\nvec3 cross("
+        code shouldNotContain "\nvec2 fma("
+        code shouldNotContain "\nbool any("
     }
 })
 

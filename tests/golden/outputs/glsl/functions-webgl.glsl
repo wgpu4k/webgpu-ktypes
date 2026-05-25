@@ -10,9 +10,6 @@ vec2 test_fma() {
     return fma(a, b, c);
 }
 
-vec2 fma(vec2 arg_0, vec2 arg_1, vec2 arg_2) {
-}
-
 void wgsl_main() {
     vec2 a = test_fma();
 }

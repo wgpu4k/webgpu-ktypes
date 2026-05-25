@@ -245,13 +245,7 @@ Struct_8 terrain_vertex(vec2 p, vec2 min_max_height) {
     return Struct_8(v, n);
 }
 
-vec3 cross(vec3 arg_0, vec3 arg_1) {
-}
-
 vec3 normalize(vec3 arg_0) {
-}
-
-vec3 cross(vec3 arg_0, vec3 arg_1) {
 }
 
 vec3 normalize(vec3 arg_0) {
