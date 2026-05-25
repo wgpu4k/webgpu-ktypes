@@ -47,6 +47,13 @@ class TypeIndexTest : FunSpec({
         }
     }
 
+    test("bit manipulation builtins are known values") {
+        val index = TypeIndex()
+        listOf("firstLeadingBit", "firstTrailingBit", "countOneBits", "reverseBits").forEach { name ->
+            index.isBuiltinValue(name).shouldBeTrue()
+        }
+    }
+
     test("builtin vector type names") {
         val index = TypeIndex()
         index.isBuiltinVectorType("vec2").shouldBeTrue()
