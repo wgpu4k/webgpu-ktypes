@@ -235,6 +235,8 @@ class WgslWriter(
 
     override fun writeScalarValue(value: ScalarValue): String {
         return when (value) {
+            is ScalarValue.I64 -> "${value.value}li"
+            is ScalarValue.U64 -> "${value.value}lu"
             is ScalarValue.F16 -> writeNonFiniteFloat(value.value, "h") ?: super.writeScalarValue(value)
             is ScalarValue.F32 -> writeNonFiniteFloat(value.value, "f") ?: super.writeScalarValue(value)
             is ScalarValue.F64 -> writeNonFiniteFloat(value.value, "lf") ?: super.writeScalarValue(value)
