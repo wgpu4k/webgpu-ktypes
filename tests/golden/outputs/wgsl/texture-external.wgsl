@@ -8,7 +8,7 @@ fn test(t: texture_external) -> vec4<f32> {
     var a: vec4<f32> = textureSampleBaseClampToEdge(t, samp, vec2<f32>(0.0f));
     var b: texture_external = textureLoad(t, vec2<f32>(0));
     var c: texture_external = textureLoad(t, vec2<f32>(0u));
-    var d: texture_external = textureDimensions(t);
+    var d: vec2<u32> = textureDimensions(t);
     return (((a + b) + c) + vec2<f32>(d).xyxy);
 }
 
@@ -21,7 +21,7 @@ fn textureLoad(arg_0: texture_external, arg_1: vec2<f32>) -> texture_external {
 fn textureLoad(arg_0: texture_external, arg_1: vec2<f32>) -> texture_external {
 }
 
-fn textureDimensions(arg_0: texture_external) -> texture_external {
+fn textureDimensions(arg_0: texture_external) -> vec2<u32> {
 }
 
 @fragment

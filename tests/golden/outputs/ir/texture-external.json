@@ -33,6 +33,20 @@
                     "size": "Bi",
                     "scalar": 2
                 }
+            },
+            {
+                "inner": {
+                    "__type": "io.ygdrasil.wgsl.ir.TypeInner.Scalar",
+                    "kind": "Uint",
+                    "width": 4
+                }
+            },
+            {
+                "inner": {
+                    "__type": "io.ygdrasil.wgsl.ir.TypeInner.Vector",
+                    "size": "Bi",
+                    "scalar": 5
+                }
             }
         ],
         "indexMap": [
@@ -73,7 +87,23 @@
                     "scalar": 2
                 }
             },
-            4
+            4,
+            {
+                "inner": {
+                    "__type": "io.ygdrasil.wgsl.ir.TypeInner.Scalar",
+                    "kind": "Uint",
+                    "width": 4
+                }
+            },
+            5,
+            {
+                "inner": {
+                    "__type": "io.ygdrasil.wgsl.ir.TypeInner.Vector",
+                    "size": "Bi",
+                    "scalar": 5
+                }
+            },
+            6
         ]
     },
     "constants": {},
@@ -130,7 +160,7 @@
                         },
                         {
                             "name": "d",
-                            "type": 0,
+                            "type": 6,
                             "init": 14
                         }
                     ]
@@ -459,7 +489,7 @@
                         "type": 0
                     }
                 ],
-                "returnType": 0,
+                "returnType": 6,
                 "localVariables": {},
                 "expressions": {},
                 "blocks": {
