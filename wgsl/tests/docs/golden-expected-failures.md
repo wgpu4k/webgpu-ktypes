@@ -57,9 +57,9 @@ Each listed case is still executed. The test fails if the case starts passing un
 | `glsl` | `cooperative-matrix.wgsl` | `type-resolution` | Baseline debt from issue 16 golden stabilization. | `#16` |
 | `glsl` | `cross.wgsl` | `native-validation` | Generated output now matches the golden; native validation still rejects the backend output after Emit preservation. | `#16` |
 | `glsl` | `cubeArrayShadow.wgsl` | `native-validation` | Generated output now matches the golden; native validation still rejects the backend output after Emit preservation. | `#16` |
-| `glsl` | `debug-symbol-large-source.wgsl` | `type-resolution` | Baseline debt from issue 16 golden stabilization. | `#16` |
+| `glsl` | `debug-symbol-large-source.wgsl` | `native-validation` | Golden output is reviewed after stage keyword identifier resolution, but GLSL native validation rejects the generated array declaration. | `#16` |
 | `glsl` | `debug-symbol-simple.wgsl` | `native-validation` | Baseline debt from issue 16 golden stabilization. | `#16` |
-| `glsl` | `debug-symbol-terrain.wgsl` | `type-resolution` | Baseline debt from issue 16 golden stabilization. | `#16` |
+| `glsl` | `debug-symbol-terrain.wgsl` | `native-validation` | Golden output is reviewed after stage keyword identifier resolution, but GLSL native validation rejects the generated array declaration. | `#16` |
 | `glsl` | `draw-index.wgsl` | `native-validation` | Golden output is reviewed, but GLSL native validation rejects the current struct builtin entry-point lowering for draw_index. | `#16` |
 | `glsl` | `dualsource.wgsl` | `native-validation` | Baseline debt from issue 16 golden stabilization. | `#16` |
 | `glsl` | `early-depth-test-conservative.wgsl` | `native-validation` | Baseline debt from issue 16 golden stabilization. | `#16` |
@@ -146,8 +146,6 @@ Each listed case is still executed. The test fails if the case starts passing un
 | `hlsl` | `abstract-types-texture.wgsl` | `type-resolution` | Baseline debt from issue 16 golden stabilization. | `#16` |
 | `hlsl` | `aliased-ray-query.wgsl` | `type-resolution` | Baseline debt from issue 16 golden stabilization. | `#16` |
 | `hlsl` | `cooperative-matrix.wgsl` | `type-resolution` | Baseline debt from issue 16 golden stabilization. | `#16` |
-| `hlsl` | `debug-symbol-large-source.wgsl` | `type-resolution` | Baseline debt from issue 16 golden stabilization. | `#16` |
-| `hlsl` | `debug-symbol-terrain.wgsl` | `type-resolution` | Baseline debt from issue 16 golden stabilization. | `#16` |
 | `hlsl` | `f64.wgsl` | `type-resolution` | Baseline debt from issue 16 golden stabilization. | `#16` |
 | `hlsl` | `mesh-shader-empty.wgsl` | `type-resolution` | Baseline debt from issue 16 golden stabilization. | `#16` |
 | `hlsl` | `mesh-shader-lines.wgsl` | `type-resolution` | Baseline debt from issue 16 golden stabilization. | `#16` |
@@ -158,8 +156,6 @@ Each listed case is still executed. The test fails if the case starts passing un
 | `ir` | `abstract-types-texture.wgsl` | `type-resolution` | Baseline debt from issue 16 golden stabilization. | `#16` |
 | `ir` | `aliased-ray-query.wgsl` | `type-resolution` | Baseline debt from issue 16 golden stabilization. | `#16` |
 | `ir` | `cooperative-matrix.wgsl` | `type-resolution` | Baseline debt from issue 16 golden stabilization. | `#16` |
-| `ir` | `debug-symbol-large-source.wgsl` | `type-resolution` | Baseline debt from issue 16 golden stabilization. | `#16` |
-| `ir` | `debug-symbol-terrain.wgsl` | `type-resolution` | Baseline debt from issue 16 golden stabilization. | `#16` |
 | `ir` | `f64.wgsl` | `type-resolution` | Baseline debt from issue 16 golden stabilization. | `#16` |
 | `ir` | `mesh-shader-empty.wgsl` | `type-resolution` | Baseline debt from issue 16 golden stabilization. | `#16` |
 | `ir` | `mesh-shader-lines.wgsl` | `type-resolution` | Baseline debt from issue 16 golden stabilization. | `#16` |
@@ -170,8 +166,6 @@ Each listed case is still executed. The test fails if the case starts passing un
 | `msl` | `abstract-types-texture.wgsl` | `type-resolution` | Baseline debt from issue 16 golden stabilization. | `#16` |
 | `msl` | `aliased-ray-query.wgsl` | `type-resolution` | Baseline debt from issue 16 golden stabilization. | `#16` |
 | `msl` | `cooperative-matrix.wgsl` | `type-resolution` | Baseline debt from issue 16 golden stabilization. | `#16` |
-| `msl` | `debug-symbol-large-source.wgsl` | `type-resolution` | Baseline debt from issue 16 golden stabilization. | `#16` |
-| `msl` | `debug-symbol-terrain.wgsl` | `type-resolution` | Baseline debt from issue 16 golden stabilization. | `#16` |
 | `msl` | `f64.wgsl` | `type-resolution` | Baseline debt from issue 16 golden stabilization. | `#16` |
 | `msl` | `mesh-shader-empty.wgsl` | `type-resolution` | Baseline debt from issue 16 golden stabilization. | `#16` |
 | `msl` | `mesh-shader-lines.wgsl` | `type-resolution` | Baseline debt from issue 16 golden stabilization. | `#16` |
@@ -200,9 +194,9 @@ Each listed case is still executed. The test fails if the case starts passing un
 | `roundtrip` | `conversion-float-to-int-no-f64.wgsl` | `roundtrip-semantic-isomorphism` | Generated WGSL contains non-finite float constants as Infinity, which the roundtrip parser resolves as an unknown identifier. | `#16` |
 | `roundtrip` | `conversion-float-to-int.wgsl` | `roundtrip-semantic-isomorphism` | Generated WGSL contains non-finite float constants as Infinity, which the roundtrip parser resolves as an unknown identifier. | `#16` |
 | `roundtrip` | `cooperative-matrix.wgsl` | `type-resolution` | Baseline debt from issue 16 golden stabilization. | `#16` |
-| `roundtrip` | `debug-symbol-large-source.wgsl` | `type-resolution` | Baseline debt from issue 16 golden stabilization. | `#16` |
+| `roundtrip` | `debug-symbol-large-source.wgsl` | `roundtrip-semantic-isomorphism` | Golden output is reviewed after stage keyword identifier resolution, but roundtrip currently changes location binding shape. | `#16` |
 | `roundtrip` | `debug-symbol-simple.wgsl` | `roundtrip-semantic-isomorphism` | Baseline debt from issue 16 golden stabilization. | `#16` |
-| `roundtrip` | `debug-symbol-terrain.wgsl` | `type-resolution` | Baseline debt from issue 16 golden stabilization. | `#16` |
+| `roundtrip` | `debug-symbol-terrain.wgsl` | `roundtrip-semantic-isomorphism` | Golden output is reviewed after stage keyword identifier resolution, but roundtrip currently changes location binding shape. | `#16` |
 | `roundtrip` | `draw-index.wgsl` | `roundtrip-semantic-isomorphism` | Golden output is reviewed, but WGSL writer currently drops the draw_index builtin binding on struct-member input. | `#16` |
 | `roundtrip` | `dualsource.wgsl` | `roundtrip-semantic-isomorphism` | Baseline debt from issue 16 golden stabilization. | `#16` |
 | `roundtrip` | `extra.wgsl` | `roundtrip-semantic-isomorphism` | Baseline debt from issue 16 golden stabilization. | `#16` |
@@ -267,9 +261,9 @@ Each listed case is still executed. The test fails if the case starts passing un
 | `wgsl` | `conversion-float-to-int-no-f64.wgsl` | `roundtrip-semantic-isomorphism` | Generated WGSL contains non-finite float constants as Infinity, which the roundtrip parser resolves as an unknown identifier. | `#16` |
 | `wgsl` | `conversion-float-to-int.wgsl` | `roundtrip-semantic-isomorphism` | Generated WGSL contains non-finite float constants as Infinity, which the roundtrip parser resolves as an unknown identifier. | `#16` |
 | `wgsl` | `cooperative-matrix.wgsl` | `type-resolution` | Baseline debt from issue 16 golden stabilization. | `#16` |
-| `wgsl` | `debug-symbol-large-source.wgsl` | `type-resolution` | Baseline debt from issue 16 golden stabilization. | `#16` |
+| `wgsl` | `debug-symbol-large-source.wgsl` | `roundtrip-semantic-isomorphism` | Golden output is reviewed after stage keyword identifier resolution, but roundtrip currently changes location binding shape. | `#16` |
 | `wgsl` | `debug-symbol-simple.wgsl` | `roundtrip-semantic-isomorphism` | Baseline debt from issue 16 golden stabilization. | `#16` |
-| `wgsl` | `debug-symbol-terrain.wgsl` | `type-resolution` | Baseline debt from issue 16 golden stabilization. | `#16` |
+| `wgsl` | `debug-symbol-terrain.wgsl` | `roundtrip-semantic-isomorphism` | Golden output is reviewed after stage keyword identifier resolution, but roundtrip currently changes location binding shape. | `#16` |
 | `wgsl` | `draw-index.wgsl` | `roundtrip-semantic-isomorphism` | Golden output is reviewed, but WGSL writer currently drops the draw_index builtin binding on struct-member input. | `#16` |
 | `wgsl` | `dualsource.wgsl` | `roundtrip-semantic-isomorphism` | Baseline debt from issue 16 golden stabilization. | `#16` |
 | `wgsl` | `extra.wgsl` | `roundtrip-semantic-isomorphism` | Baseline debt from issue 16 golden stabilization. | `#16` |
