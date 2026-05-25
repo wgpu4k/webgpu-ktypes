@@ -89,4 +89,45 @@ class WgslWriterTest : FunSpec({
         val code = WgslModule.writeString(module)
         code shouldContain "_ = 1;"
     }
+
+    test("non-finite float literals do not get numeric decimal suffixes") {
+        val module = Module()
+        val expressions = Arena<Expression>()
+        val infinity = expressions.append(
+            Expression(ExpressionKind.Literal(LiteralValue.Scalar(ScalarValue.F32(Float.POSITIVE_INFINITY))))
+        )
+        val negativeInfinity = expressions.append(
+            Expression(ExpressionKind.Literal(LiteralValue.Scalar(ScalarValue.F32(Float.NEGATIVE_INFINITY))))
+        )
+        val nan = expressions.append(
+            Expression(ExpressionKind.Literal(LiteralValue.Scalar(ScalarValue.F32(Float.NaN))))
+        )
+        val blocks = Arena<Block>()
+        val body = blocks.append(
+            Block(
+                listOf(
+                    Statement.Emit(rangeOf(infinity)),
+                    Statement.Emit(rangeOf(negativeInfinity)),
+                    Statement.Emit(rangeOf(nan))
+                )
+            )
+        )
+
+        module.functions.append(
+            Function(
+                name = "main",
+                parameters = emptyList(),
+                returnType = null,
+                localVariables = Arena(),
+                expressions = expressions,
+                blocks = blocks,
+                body = body
+            )
+        )
+
+        val code = WgslModule.writeString(module)
+        code shouldContain "_ = Infinityf;"
+        code shouldContain "_ = -Infinityf;"
+        code shouldContain "_ = NaNf;"
+    }
 })

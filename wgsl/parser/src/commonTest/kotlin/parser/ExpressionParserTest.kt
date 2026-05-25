@@ -60,4 +60,18 @@ class ExpressionParserTest : FunSpec({
         val call = statement.expr as CallExpr
         (call.callee as IdentExpr).name shouldBe "storage"
     }
+
+    test("parse generated non-finite float spellings as identifiers") {
+        val parser = Parser(Lexer("fn main() { _ = Infinityf; _ = NaNf; }"))
+        val unit = parser.parse()
+
+        parser.errors shouldHaveSize 0
+        val main = unit.declarations.single() as FunctionDecl
+        val body = main.body ?: error("main body should be present")
+        val infinity = (body.statements[0] as PhonyAssignmentStatement).expression as IdentExpr
+        val nan = (body.statements[1] as PhonyAssignmentStatement).expression as IdentExpr
+
+        infinity.name shouldBe "Infinityf"
+        nan.name shouldBe "NaNf"
+    }
 })

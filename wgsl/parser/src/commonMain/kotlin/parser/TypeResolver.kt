@@ -650,6 +650,10 @@ class TypeResolver(
             return expr // Keep as IdentExpr but it's resolved
         }
 
+        if (isGeneratedNonFiniteFloatName(name)) {
+            return expr
+        }
+
         // Unknown identifier
         unresolved.add(
             UnresolvedReferenceError(
@@ -660,6 +664,15 @@ class TypeResolver(
             )
         )
         return expr
+    }
+
+    private fun isGeneratedNonFiniteFloatName(name: String): Boolean {
+        val suffix = when {
+            name.endsWith("lf") -> "lf"
+            name.endsWith("f") || name.endsWith("h") -> name.takeLast(1)
+            else -> return false
+        }
+        return name.dropLast(suffix.length) in setOf("Infinity", "NaN")
     }
 
     /**

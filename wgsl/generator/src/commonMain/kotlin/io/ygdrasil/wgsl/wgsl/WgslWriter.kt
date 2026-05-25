@@ -205,6 +205,34 @@ class WgslWriter(
         }
     }
 
+    override fun writeScalarValue(value: ScalarValue): String {
+        return when (value) {
+            is ScalarValue.F16 -> writeNonFiniteFloat(value.value, "h") ?: super.writeScalarValue(value)
+            is ScalarValue.F32 -> writeNonFiniteFloat(value.value, "f") ?: super.writeScalarValue(value)
+            is ScalarValue.F64 -> writeNonFiniteFloat(value.value, "lf") ?: super.writeScalarValue(value)
+            is ScalarValue.AbstractFloat -> writeNonFiniteFloat(value.value, "f") ?: super.writeScalarValue(value)
+            else -> super.writeScalarValue(value)
+        }
+    }
+
+    private fun writeNonFiniteFloat(value: Float, suffix: String): String? {
+        return when {
+            value.isNaN() -> "NaN$suffix"
+            value == Float.POSITIVE_INFINITY -> "Infinity$suffix"
+            value == Float.NEGATIVE_INFINITY -> "-Infinity$suffix"
+            else -> null
+        }
+    }
+
+    private fun writeNonFiniteFloat(value: Double, suffix: String): String? {
+        return when {
+            value.isNaN() -> "NaN$suffix"
+            value == Double.POSITIVE_INFINITY -> "Infinity$suffix"
+            value == Double.NEGATIVE_INFINITY -> "-Infinity$suffix"
+            else -> null
+        }
+    }
+
     override fun getTypeName(handle: Handle<Type>): String {
         val type = module.types[handle]
         return when (val inner = type.inner) {

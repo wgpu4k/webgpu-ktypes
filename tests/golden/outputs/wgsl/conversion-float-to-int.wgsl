@@ -5,8 +5,8 @@ var<private> MIN_F32: f32 = -(3.4028235E38f);
 var<private> MAX_F32: f32 = 3.4028235E38f;
 var<private> MIN_F64: f64 = -(1.7976931348623157E308);
 var<private> MAX_F64: f64 = 1.7976931348623157E308;
-var<private> MIN_ABSTRACT_FLOAT: f32 = -(Infinity.0f);
-var<private> MAX_ABSTRACT_FLOAT: f32 = Infinity.0f;
+var<private> MIN_ABSTRACT_FLOAT: f32 = -(Infinityf);
+var<private> MAX_ABSTRACT_FLOAT: f32 = Infinityf;
 
 fn test_f16_to_i32(f: f16) -> i32 {
     return i32(f);

@@ -91,4 +91,27 @@ class ExpressionLoweringTest : FunSpec({
         inner.size shouldBe VectorSize.Tri
         module.types[inner.scalar].inner shouldBe TypeInner.Scalar(ScalarKind.Bool, 1)
     }
+
+    test("generated non-finite float identifiers lower to literals when unresolved") {
+        val module = lowerWgsl("fn main() { _ = Infinityf; _ = NaNf; _ = -Infinityf; }")
+        val function = module.functions.toList().single { it.name == "main" }
+        val literals = function.expressions.toList()
+            .mapNotNull { (it.kind as? ExpressionKind.Literal)?.value as? LiteralValue.Scalar }
+            .map { it.value }
+
+        literals[0] shouldBe ScalarValue.F32(Float.POSITIVE_INFINITY)
+        (literals[1] as ScalarValue.F32).value.isNaN() shouldBe true
+        literals[2] shouldBe ScalarValue.F32(Float.NEGATIVE_INFINITY)
+    }
+
+    test("generated non-finite float names do not shadow resolved identifiers") {
+        val module = lowerWgsl("fn main() { let Infinityf = 1.0; _ = Infinityf; }")
+        val function = module.functions.toList().single { it.name == "main" }
+        val emits = function.blocks[function.body].statements
+            .filterIsInstance<IrStatement.Emit>()
+            .flatMap { it.range.toList() }
+            .map { function.expressions[it].kind }
+
+        emits.single().shouldBeInstanceOf<ExpressionKind.LocalVar>()
+    }
 })

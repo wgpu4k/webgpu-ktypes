@@ -1046,8 +1046,13 @@ class Lowerer {
                 } else if (name == "RAY_QUERY_INTERSECTION_AABB") {
                     IrExpressionKind.Literal(IrLiteralValue.Scalar(IrScalarValue.U32(3L)))
                 } else {
-                    // P004 fix: Throw error instead of silent fallback
-                    throw LoweringError("Undefined variable: '$name'")
+                    val scalar = nonFiniteGeneratedScalar(name)
+                    if (scalar != null) {
+                        IrExpressionKind.Literal(IrLiteralValue.Scalar(scalar))
+                    } else {
+                        // P004 fix: Throw error instead of silent fallback
+                        throw LoweringError("Undefined variable: '$name'")
+                    }
                 }
             }
             is BinaryExpr -> {
@@ -1070,6 +1075,16 @@ class Lowerer {
                 when (astExpr.op) {
                     io.ygdrasil.wgsl.ast.UnaryOperator.DEREF -> IrExpressionKind.Load(lowerExpression(astExpr.operand))
                     io.ygdrasil.wgsl.ast.UnaryOperator.ADDRESS_OF -> IrExpressionKind.ValuePointer(lowerExpression(astExpr.operand))
+                    io.ygdrasil.wgsl.ast.UnaryOperator.MINUS -> {
+                        val scalar = (astExpr.operand as? IdentExpr)
+                            ?.name
+                            ?.let { nonFiniteGeneratedScalar(it, negate = true) }
+                        scalar?.let { IrExpressionKind.Literal(IrLiteralValue.Scalar(it)) }
+                            ?: IrExpressionKind.Unary(
+                                lowerUnaryOperator(astExpr.op),
+                                lowerExpression(astExpr.operand, expectedType)
+                            )
+                    }
                     else -> IrExpressionKind.Unary(
                         lowerUnaryOperator(astExpr.op),
                         lowerExpression(astExpr.operand, expectedType)
@@ -1235,6 +1250,26 @@ class Lowerer {
             else -> throw LoweringError("Unsupported expression type: ${astExpr::class.simpleName}")
         }
         return currentExpressions!!.append(IrExpression(kind))
+    }
+
+    private fun nonFiniteGeneratedScalar(name: String, negate: Boolean = false): IrScalarValue? {
+        val suffix = when {
+            name.endsWith("lf") -> "lf"
+            name.endsWith("f") || name.endsWith("h") -> name.takeLast(1)
+            else -> return null
+        }
+        val valueText = name.dropLast(suffix.length)
+        val value = when (valueText) {
+            "Infinity" -> Double.POSITIVE_INFINITY
+            "NaN" -> Double.NaN
+            else -> return null
+        }.let { if (negate) -it else it }
+
+        return when (suffix) {
+            "lf" -> IrScalarValue.F64(value)
+            "h" -> IrScalarValue.F16(value.toFloat())
+            else -> IrScalarValue.F32(value.toFloat())
+        }
     }
 
     private fun lowerBinaryOperator(op: BinaryOperator): IrBinaryOperator = when (op) {

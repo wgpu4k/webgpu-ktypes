@@ -192,4 +192,27 @@ class TypeResolverTest : FunSpec({
         result.isSuccess shouldBe true
         result.unresolvedReferences shouldHaveSize 0
     }
+
+    test("resolve generated non-finite float spellings without shadowing locals") {
+        val source = """
+            fn generated() {
+                _ = Infinityf;
+                _ = -Infinityf;
+                _ = NaNf;
+            }
+
+            fn user_defined() {
+                let Infinityf = 1.0;
+                _ = Infinityf;
+            }
+        """.trimIndent()
+
+        val parseResult = parseWgslResult(source)
+        parseResult.isSuccess shouldBe true
+
+        val result = TypeResolver().resolve(parseResult.translationUnit)
+
+        result.isSuccess shouldBe true
+        result.unresolvedReferences shouldHaveSize 0
+    }
 })
