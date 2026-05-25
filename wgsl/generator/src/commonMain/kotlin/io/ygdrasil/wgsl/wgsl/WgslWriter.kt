@@ -137,15 +137,23 @@ class WgslWriter(
     }
 
     override fun writeExpression(handle: Handle<Expression>): String {
-        val expr = if (currentFunction != null) {
-            currentFunction!!.expressions[handle]
-        } else {
-            module.globalExpressions[handle]
-        }
+        val expressions = currentFunction?.expressions ?: module.globalExpressions
+        val expr = expressions[handle]
 
         if (expr.kind is ExpressionKind.ArrayLength) {
             val e = writeExpression((expr.kind as ExpressionKind.ArrayLength).expr)
             return "arrayLength(&$e)"
+        }
+
+        val kind = expr.kind
+        if (kind is ExpressionKind.Unary && kind.operator == UnaryOperator.Negate) {
+            val operand = expressions[kind.expr]
+            val magnitude = ((operand.kind as? ExpressionKind.Literal)?.value as? LiteralValue.Scalar)
+                ?.value
+                ?.minimumIntegerMagnitude()
+            if (magnitude != null) {
+                return "-($magnitude)"
+            }
         }
         
         return super.writeExpression(handle)
@@ -202,6 +210,15 @@ class WgslWriter(
             ScalarKind.F16 -> "f16"
             ScalarKind.F64 -> "f64"
             else -> "/* unknown scalar */"
+        }
+    }
+
+    private fun ScalarValue.minimumIntegerMagnitude(): String? {
+        return when (this) {
+            is ScalarValue.I32 -> value.takeIf { it == Int.MIN_VALUE }?.let { -(it.toLong()) }?.toString()
+            is ScalarValue.I64 -> if (value == Long.MIN_VALUE) "9223372036854775808" else null
+            is ScalarValue.AbstractInt -> if (value == Long.MIN_VALUE) "9223372036854775808" else null
+            else -> null
         }
     }
 

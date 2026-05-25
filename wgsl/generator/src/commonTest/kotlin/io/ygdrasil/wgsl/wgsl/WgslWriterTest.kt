@@ -16,6 +16,7 @@ import io.ygdrasil.wgsl.ir.Statement
 import io.ygdrasil.wgsl.ir.StructMember
 import io.ygdrasil.wgsl.ir.Type
 import io.ygdrasil.wgsl.ir.TypeInner
+import io.ygdrasil.wgsl.ir.UnaryOperator
 
 class WgslWriterTest : FunSpec({
 
@@ -129,5 +130,36 @@ class WgslWriterTest : FunSpec({
         code shouldContain "_ = Infinityf;"
         code shouldContain "_ = -Infinityf;"
         code shouldContain "_ = NaNf;"
+    }
+
+    test("negated negative integer literals are written with stable roundtrip shape") {
+        val module = Module()
+        val expressions = Arena<Expression>()
+        val minI32 = expressions.append(
+            Expression(ExpressionKind.Literal(LiteralValue.Scalar(ScalarValue.I32(Int.MIN_VALUE))))
+        )
+        val negativeI32 = expressions.append(
+            Expression(ExpressionKind.Literal(LiteralValue.Scalar(ScalarValue.I32(-5))))
+        )
+        val negated = expressions.append(Expression(ExpressionKind.Unary(UnaryOperator.Negate, minI32)))
+        val negatedNegative = expressions.append(Expression(ExpressionKind.Unary(UnaryOperator.Negate, negativeI32)))
+        val blocks = Arena<Block>()
+        val body = blocks.append(Block(listOf(Statement.Emit(rangeOf(negated)), Statement.Emit(rangeOf(negatedNegative)))))
+
+        module.functions.append(
+            Function(
+                name = "main",
+                parameters = emptyList(),
+                returnType = null,
+                localVariables = Arena(),
+                expressions = expressions,
+                blocks = blocks,
+                body = body
+            )
+        )
+
+        val code = WgslModule.writeString(module)
+        code shouldContain "_ = -(2147483648);"
+        code shouldContain "_ = -(-5);"
     }
 })

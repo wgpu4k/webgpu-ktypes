@@ -177,7 +177,6 @@ Each listed case is still executed. The test fails if the case starts passing un
 | `roundtrip` | `msl-vpt-formats-x4.wgsl` | `roundtrip-semantic-isomorphism` | Baseline debt from issue 16 golden stabilization. | `#16` |
 | `roundtrip` | `msl-vpt.wgsl` | `roundtrip-semantic-isomorphism` | Baseline debt from issue 16 golden stabilization. | `#16` |
 | `roundtrip` | `overrides-atomicCompareExchangeWeak.wgsl` | `roundtrip-semantic-isomorphism` | Baseline debt from issue 16 golden stabilization. | `#16` |
-| `roundtrip` | `operators.wgsl` | `roundtrip-semantic-isomorphism` | Reviewed output compares after comparison type lowering fix, but WGSL roundtrip currently rewrites a unary expression as a literal. | `#16` |
 | `roundtrip` | `overrides-ray-query.wgsl` | `roundtrip-semantic-isomorphism` | Baseline debt from issue 16 golden stabilization. | `#16` |
 | `roundtrip` | `aliased-ray-query.wgsl` | `roundtrip-semantic-isomorphism` | Golden output is reviewed after ray-query builtin registration, but roundtrip currently changes pointer binding shape. | `#16` |
 | `roundtrip` | `ray-query-no-init-tracking.wgsl` | `roundtrip-semantic-isomorphism` | Golden output is reviewed after ray-query builtin registration, but roundtrip currently changes pointer binding shape. | `#16` |
@@ -237,7 +236,6 @@ Each listed case is still executed. The test fails if the case starts passing un
 | `wgsl` | `msl-vpt-formats-x4.wgsl` | `roundtrip-semantic-isomorphism` | Baseline debt from issue 16 golden stabilization. | `#16` |
 | `wgsl` | `msl-vpt.wgsl` | `roundtrip-semantic-isomorphism` | Baseline debt from issue 16 golden stabilization. | `#16` |
 | `wgsl` | `overrides-atomicCompareExchangeWeak.wgsl` | `roundtrip-semantic-isomorphism` | Baseline debt from issue 16 golden stabilization. | `#16` |
-| `wgsl` | `operators.wgsl` | `roundtrip-semantic-isomorphism` | Reviewed output compares after comparison type lowering fix, but WGSL roundtrip currently rewrites a unary expression as a literal. | `#16` |
 | `wgsl` | `overrides-ray-query.wgsl` | `roundtrip-semantic-isomorphism` | Baseline debt from issue 16 golden stabilization. | `#16` |
 | `wgsl` | `aliased-ray-query.wgsl` | `roundtrip-semantic-isomorphism` | Golden output is reviewed after ray-query builtin registration, but WGSL comparison currently changes pointer binding shape. | `#16` |
 | `wgsl` | `ray-query-no-init-tracking.wgsl` | `roundtrip-semantic-isomorphism` | Golden output is reviewed after ray-query builtin registration, but WGSL comparison currently changes pointer binding shape. | `#16` |

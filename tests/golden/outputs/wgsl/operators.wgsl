@@ -131,7 +131,7 @@ fn arithmetic() {
     var mul_vector1: vec3<f32> = (vec3<f32>(two_f) * mat4x3<f32>());
     var mul: mat4x3<f32> = (mat4x3<f32>() * mat3x4<f32>());
     var prevent_const_eval: i32;
-    var wgpu_7437: i32 = (prevent_const_eval + -(-2147483648));
+    var wgpu_7437: i32 = (prevent_const_eval + -(2147483648));
 }
 
 fn bit() {
