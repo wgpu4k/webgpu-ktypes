@@ -11,7 +11,7 @@ coroutines = "1.11.0"
 kotlinpoet = "2.3.0"
 
 # Tests
-kotest = "6.1.11"
+kotest = "6.2.1"
 ksp = "2.3.4"
 
 [libraries]
