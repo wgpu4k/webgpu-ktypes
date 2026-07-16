@@ -4,7 +4,7 @@
 
 **Goal:** Resolve `wgpu4k-native-specs-jvm:v29.0.0-SNAPSHOT`, regenerate every WebGPU Kotlin binding from its `webgpu.yml`, verify the generated code, and report the API delta from `v25.0.2`.
 
-**Architecture:** Keep the existing classpath-based generator unchanged. Add a narrowly filtered Sonatype snapshot repository to `buildSrc`, update the shared version catalog, then run the existing `generate-binding` task and validate its output across common, JVM, JS, and Wasm source sets.
+**Architecture:** Keep the existing classpath-based generation flow. Add a narrowly filtered Sonatype snapshot repository to `buildSrc`, update the shared version catalog, make nullability emission idempotent where the v29 regeneration exposes a pre-existing `??` defect, then run `generate-binding` and validate its output across common, JVM, JS, and Wasm source sets.
 
 **Tech Stack:** Gradle Kotlin DSL, Kotlin Multiplatform, KotlinPoet-generated sources, Maven Central Portal snapshots, Git.
 
@@ -15,6 +15,8 @@
 - The snapshot observed during design is Maven build `v29.0.0-20260716.085936-2`.
 - Continue loading `webgpu.yml` from the `wgpu4k-native-specs-jvm` classpath dependency.
 - Do not edit generated Kotlin sources manually.
+- Fix the generator at `IdlDictionary.kt` so an already-nullable union type never receives a second `?`.
+- Preserve the historical generated KDoc format; the six new blank KDoc lines with trailing spaces are accepted to avoid repository-wide cosmetic churn.
 - Preserve generator warnings for YAML/IDL mismatches and include them in the final report.
 - Do not publish, push, or open a pull request.
 - Prefix every shell command with `rtk`.
@@ -101,6 +103,7 @@ Expected: the diff contains only the filtered repository and version update, and
 ### Task 2: Regenerate and Compile the Bindings
 
 **Files:**
+- Modify generator: `buildSrc/src/main/kotlin/generator/mapper/IdlDictionary.kt:34-38`
 - Modify generated: `webgpu-ktypes/src/commonMain/kotlin/bitflags.kt`
 - Modify generated: `webgpu-ktypes/src/commonMain/kotlin/enumerations.kt`
 - Modify generated: `webgpu-ktypes/src/commonMain/kotlin/typealiases.kt`
@@ -109,11 +112,11 @@ Expected: the diff contains only the filtered repository and version update, and
 - Modify generated: `webgpu-ktypes/src/commonNativeMain/kotlin/enumerations.kt`
 - Modify generated: `webgpu-ktypes-descriptors/src/commonMain/kotlin/descriptor.kt`
 - Modify generated: `webgpu-ktypes-web/src/commonMain/kotlin/types.kt`
-- Test: Gradle generation and Kotlin compilation tasks; no new test source file
+- Test: RED/GREEN Gradle generation and Kotlin compilation integration; no new test source file
 
 **Interfaces:**
 - Consumes: `libs.wgpu.specs` resolved by Task 1 and the existing `generate-binding` task
-- Produces: regenerated Kotlin declarations for common, Web, Native, descriptor, and Web interop source sets
+- Produces: an idempotent nullable-type mapping plus regenerated Kotlin declarations for common, Web, Native, descriptor, and Web interop source sets
 
 - [ ] **Step 1: Run the existing generator with refreshed dependencies**
 
@@ -125,19 +128,54 @@ rtk ./gradlew --refresh-dependencies generate-binding --console=plain
 
 Expected: exit code `0` and `BUILD SUCCESSFUL`. Preserve the complete list of `Skipping native enumeration` and `Enum from Idl not found` messages for the final report.
 
-- [ ] **Step 2: Confirm that changes are limited to generated outputs**
+- [ ] **Step 2: Preserve the observed RED evidence for double nullability**
+
+The first v29 generation produced `val layout: GPUPipelineLayout??`. The exact compilation command from Step 4 failed consistently in JVM, JS, and WasmJS with:
+
+```text
+warnings found and -Werror specified
+Redundant '?'.
+```
+
+This is the required RED evidence: `IdlDictionary.kt` adds one `?` for the union type and a second `?` for the optional member.
+
+- [ ] **Step 3: Make nullable marker emission idempotent at its source**
+
+Change only the optional-member condition in `buildSrc/src/main/kotlin/generator/mapper/IdlDictionary.kt`:
+
+```kotlin
+if (it.defaultValue == null && it.isRequired.not() && type.endsWith("?").not()) {
+    type += "?"
+}
+```
+
+Do not change KDoc rendering or any generated Kotlin manually.
+
+- [ ] **Step 4: Regenerate and verify the GREEN output**
+
+Run:
+
+```bash
+rtk ./gradlew generate-binding --console=plain
+rtk rg -n -F 'GPUPipelineLayout??' webgpu-ktypes/src/commonMain/kotlin/interfaces.kt
+rtk rg -n -F 'val layout: GPUPipelineLayout?' webgpu-ktypes/src/commonMain/kotlin/interfaces.kt
+```
+
+Expected: generation exits `0`; the first `rg` exits `1` with no match; the second `rg` exits `0` and finds exactly the single-nullable declaration.
+
+- [ ] **Step 5: Confirm that changes are limited to the generator and generated outputs**
 
 Run:
 
 ```bash
 rtk git status --short
 rtk git diff --stat
-rtk git diff --check
+rtk git diff --check -- buildSrc/src/main/kotlin/generator/mapper/IdlDictionary.kt
 ```
 
-Expected: only the eight generated files listed for this task are changed, with no whitespace errors.
+Expected: only `IdlDictionary.kt` and a subset of the eight generated files listed for this task are changed. The generator source has no whitespace errors. Six new blank KDoc lines may retain the generator's historical trailing-space format.
 
-- [ ] **Step 3: Compile every source-set family affected by generation**
+- [ ] **Step 6: Compile every source-set family affected by generation**
 
 Run:
 
@@ -147,18 +185,18 @@ rtk ./gradlew :webgpu-ktypes:compileKotlinMetadata :webgpu-ktypes:compileKotlinJ
 
 Expected: exit code `0` and `BUILD SUCCESSFUL`, with warnings treated according to each module's existing compiler configuration.
 
-- [ ] **Step 4: Review and commit the generated sources**
+- [ ] **Step 7: Review and commit the generator fix with regenerated sources**
 
 Run:
 
 ```bash
-rtk git diff --check
+rtk git diff --check -- buildSrc/src/main/kotlin/generator/mapper/IdlDictionary.kt
 rtk git diff --stat
-rtk git add webgpu-ktypes/src/commonMain/kotlin/bitflags.kt webgpu-ktypes/src/commonMain/kotlin/enumerations.kt webgpu-ktypes/src/commonMain/kotlin/typealiases.kt webgpu-ktypes/src/commonMain/kotlin/interfaces.kt webgpu-ktypes/src/webMain/kotlin/enumerations.kt webgpu-ktypes/src/commonNativeMain/kotlin/enumerations.kt webgpu-ktypes-descriptors/src/commonMain/kotlin/descriptor.kt webgpu-ktypes-web/src/commonMain/kotlin/types.kt
-rtk git commit -m "chore: regenerate bindings from wgpu4k v29 snapshot"
+rtk git add buildSrc/src/main/kotlin/generator/mapper/IdlDictionary.kt webgpu-ktypes/src/commonMain/kotlin/bitflags.kt webgpu-ktypes/src/commonMain/kotlin/enumerations.kt webgpu-ktypes/src/commonMain/kotlin/typealiases.kt webgpu-ktypes/src/commonMain/kotlin/interfaces.kt webgpu-ktypes/src/webMain/kotlin/enumerations.kt webgpu-ktypes/src/commonNativeMain/kotlin/enumerations.kt webgpu-ktypes-descriptors/src/commonMain/kotlin/descriptor.kt webgpu-ktypes-web/src/commonMain/kotlin/types.kt
+rtk git commit -m "fix: regenerate bindings from wgpu4k v29 snapshot"
 ```
 
-Expected: the commit contains generated files only and succeeds after the compilation evidence from Step 3.
+Expected: the commit contains only the one-line generator fix and regenerated outputs, and succeeds after the GREEN compilation evidence from Step 6.
 
 ### Task 3: Verify Idempotence, Run Checks, and Classify the API Delta
 
@@ -224,7 +262,7 @@ Run:
 
 ```bash
 rtk git status --short
-rtk git log -4 --oneline
+rtk git log -5 --oneline
 ```
 
-Expected: an empty status and the plan, design, dependency configuration, and generated-binding commits visible in the recent history.
+Expected: an empty status and the design, original plan, approved plan amendment, dependency configuration, and regenerated-binding commits visible in the recent history.
