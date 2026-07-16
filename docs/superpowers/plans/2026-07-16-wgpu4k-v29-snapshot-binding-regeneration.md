@@ -19,7 +19,7 @@
 - Preserve the historical generated KDoc format; the six new blank KDoc lines with trailing spaces are accepted to avoid repository-wide cosmetic churn.
 - Preserve generator warnings for YAML/IDL mismatches and include them in the final report.
 - Update the JVM, Android, and KLIB ABI baselines to match the verified v29 public declarations.
-- After every task and review passes, create a `codex/wgpu4k-v29-snapshot-bindings` branch, push it, and open a draft pull request against the default branch.
+- After every task and review passes, create a `feat/wgpu4k-v29-snapshot-bindings` branch, push it, and open a draft pull request against the default branch.
 - Prefix every shell command with `rtk`.
 
 ---
