@@ -440,11 +440,7 @@ actual enum class GPUDeviceLostReason(val value: String) {
 	 * 
 	 */
 	Destroyed("destroyed"),
-	/**
-	 * Indicates that the GPU device was lost because the instance (e.g., the browser tab or worker) was dropped. This can happen if the user navigates away from a page or closes a tab.
-	 * 
-	 */
-	InstanceDropped("unsupported"),
+	CallbackCancelled("unsupported"),
 	/**
 	 * Indicates that the GPU device failed to be created. This can occur due to hardware limitations, driver issues, or other initialization problems.
 	 * 
@@ -517,6 +513,7 @@ actual enum class GPUErrorFilter(val value: String) {
  * 
  */
 actual enum class GPUFeatureName(val value: String) {
+	CoreFeaturesAndLimits("unsupported"),
 	/**
 	 * The `DepthClipControl` feature allows the use of depth clip control in WebGPU. This feature enables more precise control over depth clipping, which can be useful for advanced rendering techniques.
 	 * 
@@ -531,13 +528,6 @@ actual enum class GPUFeatureName(val value: String) {
 	 * 
 	 */
 	Depth32FloatStencil8("depth32float-stencil8"),
-	/**
-	 * The `TimestampQuery` feature allows the use of timestamp queries in WebGPU. This can be used to measure the time taken by specific GPU operations, which is useful for performance profiling and optimization.
-	 * 
-	 * [See W3C specification: Timestamp Query](https://www.w3.org/TR/webgpu/#timestamp-query)
-	 * 
-	 */
-	TimestampQuery("timestamp-query"),
 	/**
 	 * The `TextureCompressionBC` feature indicates support for BC (Block Compression) texture formats. This can significantly reduce the memory footprint of textures, which is beneficial for performance and storage.
 	 * 
@@ -573,6 +563,13 @@ actual enum class GPUFeatureName(val value: String) {
 	 * 
 	 */
 	TextureCompressionASTCSliced3D("texture-compression-astc-sliced-3d"),
+	/**
+	 * The `TimestampQuery` feature allows the use of timestamp queries in WebGPU. This can be used to measure the time taken by specific GPU operations, which is useful for performance profiling and optimization.
+	 * 
+	 * [See W3C specification: Timestamp Query](https://www.w3.org/TR/webgpu/#timestamp-query)
+	 * 
+	 */
+	TimestampQuery("timestamp-query"),
 	/**
 	 * The `IndirectFirstInstance` feature allows the use of indirect drawing commands with the first instance parameter. This can be used to draw multiple instances of a mesh with different starting points, which is useful for complex scenes.
 	 * 
@@ -628,7 +625,12 @@ actual enum class GPUFeatureName(val value: String) {
 	 * [See W3C specification: Dual Source Blending](https://www.w3.org/TR/webgpu/#dual-source-blending)
 	 * 
 	 */
-	DualSourceBlending("dual-source-blending");
+	DualSourceBlending("dual-source-blending"),
+	Subgroups("subgroups"),
+	TextureFormatsTier1("unsupported"),
+	TextureFormatsTier2("unsupported"),
+	PrimitiveIndex("unsupported"),
+	TextureComponentSwizzle("unsupported");
 
 
 	companion object {
@@ -1263,6 +1265,8 @@ actual enum class GPUTextureFormat(val value: String) {
 	 * 
 	 */
 	R8Sint("r8sint"),
+	R16Unorm("unsupported"),
+	R16Snorm("unsupported"),
 	/**
 	 * Represents a 16-bit unsigned integer format. Each pixel component is stored as a 16-bit unsigned integer.
 	 * 
@@ -1313,6 +1317,8 @@ actual enum class GPUTextureFormat(val value: String) {
 	 * 
 	 */
 	R32Sint("r32sint"),
+	RG16Unorm("unsupported"),
+	RG16Snorm("unsupported"),
 	/**
 	 * Represents a 16-bit unsigned integer format for two channels (red and green). Each channel is stored as a 16-bit unsigned integer.
 	 * 
@@ -1398,6 +1404,8 @@ actual enum class GPUTextureFormat(val value: String) {
 	 * 
 	 */
 	RG32Sint("rg32sint"),
+	RGBA16Unorm("unsupported"),
+	RGBA16Snorm("unsupported"),
 	/**
 	 * Represents a 64-bit unsigned integer format for four channels (red, green, blue, alpha). Each channel is stored as a 16-bit unsigned integer.
 	 * 
@@ -2365,11 +2373,6 @@ actual enum class GPUVertexFormat(val value: String) {
  * 
  */
 actual enum class GPUVertexStepMode(val value: String) {
-	/**
-	 * Indicates that the vertex buffer is not used. This mode is typically used when no vertex data needs to be fetched from a buffer.
-	 * 
-	 */
-	VertexBufferNotUsed("unsupported"),
 	/**
 	 * The address is advanced by `arrayStride` for each vertex, and reset between instances.
 	 * 

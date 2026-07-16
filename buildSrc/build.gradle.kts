@@ -7,6 +7,16 @@ repositories {
     gradlePluginPortal()
     google()
     mavenCentral()
+    maven {
+        name = "sonatypeSnapshots"
+        url = uri("https://central.sonatype.com/repository/maven-snapshots/")
+        mavenContent {
+            snapshotsOnly()
+        }
+        content {
+            includeGroup("io.ygdrasil")
+        }
+    }
 }
 
 dependencies {
