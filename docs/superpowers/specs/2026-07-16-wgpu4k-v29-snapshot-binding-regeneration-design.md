@@ -78,4 +78,5 @@ Verification consists of:
 6. confirming that only the approved dependency configuration, any strictly
    necessary generator compatibility change, and regenerated outputs changed.
 
-No publication, push, or pull request is part of this work.
+After verification and review, publish the complete change set on a `codex/`
+branch and open a draft pull request against the repository's default branch.

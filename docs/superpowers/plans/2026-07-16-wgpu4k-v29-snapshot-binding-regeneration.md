@@ -18,7 +18,8 @@
 - Fix the generator at `IdlDictionary.kt` so an already-nullable union type never receives a second `?`.
 - Preserve the historical generated KDoc format; the six new blank KDoc lines with trailing spaces are accepted to avoid repository-wide cosmetic churn.
 - Preserve generator warnings for YAML/IDL mismatches and include them in the final report.
-- Do not publish, push, or open a pull request.
+- Update the JVM, Android, and KLIB ABI baselines to match the verified v29 public declarations.
+- After every task and review passes, create a `codex/wgpu4k-v29-snapshot-bindings` branch, push it, and open a draft pull request against the default branch.
 - Prefix every shell command with `rtk`.
 
 ---
@@ -202,11 +203,14 @@ Expected: the commit contains only the one-line generator fix and regenerated ou
 
 **Files:**
 - Inspect: all files committed by Tasks 1 and 2
-- Test: second generation, full Gradle build, Git diff and status
+- Modify ABI baseline: `webgpu-ktypes/api/jvm/webgpu-ktypes.api`
+- Modify ABI baseline: `webgpu-ktypes/api/android/webgpu-ktypes.api`
+- Modify ABI baseline: `webgpu-ktypes/api/webgpu-ktypes.klib.api`
+- Test: second generation, ABI update, full Gradle build, Git diff and status
 
 **Interfaces:**
 - Consumes: committed v29 dependency configuration and generated declarations
-- Produces: a clean, repeatable working tree plus a user-facing categorized change report
+- Produces: updated ABI references, a clean repeatable working tree, and a user-facing categorized change report
 
 - [ ] **Step 1: Prove generation is idempotent**
 
@@ -219,7 +223,36 @@ rtk git diff --exit-code
 
 Expected: `BUILD SUCCESSFUL`, followed by exit code `0` from `git diff`, proving the second generation made no change.
 
-- [ ] **Step 2: Run the full repository build**
+- [ ] **Step 2: Preserve the observed ABI-check RED evidence**
+
+The first complete build after v29 regeneration failed only at `:webgpu-ktypes:checkKotlinAbi`. Gradle reported stale JVM, Android, and KLIB reference dumps for exactly the added, removed, and replaced public declarations. This is the required RED evidence for the ABI-baseline update.
+
+- [ ] **Step 3: Regenerate the ABI baselines from the verified v29 API**
+
+Run:
+
+```bash
+rtk ./gradlew :webgpu-ktypes:updateKotlinAbi --console=plain
+rtk git status --short
+```
+
+Expected: `BUILD SUCCESSFUL`; exactly the three ABI baseline files listed for this task are modified.
+
+- [ ] **Step 4: Verify and commit the ABI delta**
+
+Run:
+
+```bash
+rtk git diff --check -- webgpu-ktypes/api/jvm/webgpu-ktypes.api webgpu-ktypes/api/android/webgpu-ktypes.api webgpu-ktypes/api/webgpu-ktypes.klib.api
+rtk git diff --stat -- webgpu-ktypes/api/jvm/webgpu-ktypes.api webgpu-ktypes/api/android/webgpu-ktypes.api webgpu-ktypes/api/webgpu-ktypes.klib.api
+rtk git diff -- webgpu-ktypes/api/jvm/webgpu-ktypes.api webgpu-ktypes/api/android/webgpu-ktypes.api webgpu-ktypes/api/webgpu-ktypes.klib.api
+rtk git add webgpu-ktypes/api/jvm/webgpu-ktypes.api webgpu-ktypes/api/android/webgpu-ktypes.api webgpu-ktypes/api/webgpu-ktypes.klib.api
+rtk git commit -m "chore: update v29 ABI baselines"
+```
+
+Expected: the diff contains only the v29 public symbol additions, removals, and replacements already classified from generated sources; the commit succeeds.
+
+- [ ] **Step 5: Run the full repository build**
 
 Run:
 
@@ -229,20 +262,20 @@ rtk ./gradlew build --console=plain
 
 Expected: exit code `0` and `BUILD SUCCESSFUL`, with all configured module checks and tests completed.
 
-- [ ] **Step 3: Extract the complete change surface since the approved design**
+- [ ] **Step 6: Extract the complete change surface since the approved design**
 
 Run:
 
 ```bash
 rtk git diff --stat e2385dd..HEAD
-rtk git diff --unified=0 e2385dd..HEAD -- buildSrc/build.gradle.kts gradle/libs.versions.toml webgpu-ktypes/src/commonMain/kotlin/bitflags.kt webgpu-ktypes/src/commonMain/kotlin/enumerations.kt webgpu-ktypes/src/commonMain/kotlin/typealiases.kt webgpu-ktypes/src/commonMain/kotlin/interfaces.kt webgpu-ktypes/src/webMain/kotlin/enumerations.kt webgpu-ktypes/src/commonNativeMain/kotlin/enumerations.kt webgpu-ktypes-descriptors/src/commonMain/kotlin/descriptor.kt webgpu-ktypes-web/src/commonMain/kotlin/types.kt
+rtk git diff --unified=0 e2385dd..HEAD -- buildSrc/build.gradle.kts buildSrc/src/main/kotlin/generator/mapper/IdlDictionary.kt gradle/libs.versions.toml webgpu-ktypes/api/jvm/webgpu-ktypes.api webgpu-ktypes/api/android/webgpu-ktypes.api webgpu-ktypes/api/webgpu-ktypes.klib.api webgpu-ktypes/src/commonMain/kotlin/bitflags.kt webgpu-ktypes/src/commonMain/kotlin/enumerations.kt webgpu-ktypes/src/commonMain/kotlin/typealiases.kt webgpu-ktypes/src/commonMain/kotlin/interfaces.kt webgpu-ktypes/src/webMain/kotlin/enumerations.kt webgpu-ktypes/src/commonNativeMain/kotlin/enumerations.kt webgpu-ktypes-descriptors/src/commonMain/kotlin/descriptor.kt webgpu-ktypes-web/src/commonMain/kotlin/types.kt
 ```
 
 Expected: a complete diff containing the dependency update and all generated API changes relative to the design commit.
 
-- [ ] **Step 4: Classify the changes for the final response**
+- [ ] **Step 7: Classify the changes for the final response**
 
-From the Step 3 diff, enumerate exact declarations under these headings:
+From the Step 6 diff, enumerate exact declarations under these headings:
 
 ```text
 Source-breaking changes
@@ -256,13 +289,13 @@ YAML/IDL mismatch warnings
 
 For every source-breaking change, name the affected Kotlin declaration and show its old and new signature or value. Do not count ordering or KDoc-only churn as source-breaking.
 
-- [ ] **Step 5: Confirm final repository state**
+- [ ] **Step 8: Confirm final repository state**
 
 Run:
 
 ```bash
 rtk git status --short
-rtk git log -5 --oneline
+rtk git log -7 --oneline
 ```
 
-Expected: an empty status and the design, original plan, approved plan amendment, dependency configuration, and regenerated-binding commits visible in the recent history.
+Expected: an empty status and the design, original plan, two approved plan amendments, dependency configuration, regenerated-binding, and ABI-baseline commits visible in the recent history.
