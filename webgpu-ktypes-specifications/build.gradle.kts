@@ -1,6 +1,5 @@
 plugins {
-    publish
-    kotlin("multiplatform")
+    kmp
 }
 
 kotlin {

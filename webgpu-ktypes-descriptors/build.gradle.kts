@@ -5,9 +5,9 @@ import org.jetbrains.kotlin.gradle.ExperimentalKotlinGradlePluginApi
 import org.jetbrains.kotlin.gradle.dsl.JvmTarget
 
 plugins {
+    kmp
+    id("kmp.android")
     publish
-    kotlin("multiplatform")
-    alias(libs.plugins.android.library)
 }
 
 kotlin {
