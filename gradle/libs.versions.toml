@@ -6,9 +6,10 @@ webidl-util = "0.10.5"
 wgpu4k-native = "v25.0.2"
 kaml = "0.104.0"
 kotlin = "2.3.21"
-agp = "8.12.3"
+agp = "8.13.2"
 coroutines = "1.11.0"
 kotlinpoet = "2.3.0"
+maven-publish = "0.36.0"
 
 # Tests
 kotest = "6.1.11"
@@ -30,10 +31,7 @@ ktor-serialization-kotlinx-json = { module = "io.ktor:ktor-serialization-kotlinx
 ktor-client-content-negotiation = { module = "io.ktor:ktor-client-content-negotiation", version.ref = "ktor" }
 
 # Release
-zip4j = { module = "net.lingala.zip4j:zip4j", version = "2.11.6" }
-okhttp = { module = "com.squareup.okhttp3:okhttp", version = "5.3.2" }
 dokka = { module = "org.jetbrains.dokka:dokka-gradle-plugin", version = "2.2.0" }
-commons-io = { module = "commons-io:commons-io", version = "2.22.0" }
 
 # Tests
 kotest-core = { module = "io.kotest:kotest-framework-engine", version.ref = "kotest" }
@@ -42,13 +40,7 @@ kotest-runner-junit5 = { module = "io.kotest:kotest-runner-junit5", version.ref 
 kotlin-reflect = { module = "org.jetbrains.kotlin:kotlin-reflect" }
 
 [plugins]
-kotlin-multiplatform = { id = "org.jetbrains.kotlin.multiplatform", version.ref = "kotlin" }
-android-library = { id = "com.android.kotlin.multiplatform.library", version.ref = "agp" }
 kotlin-serialization = { id = "org.jetbrains.kotlin.plugin.serialization", version.ref = "kotlin" }
-
-# Tests
-kotest = { id = "io.kotest", version.ref = "kotest" }
-ksp = { id = "com.google.devtools.ksp", version.ref = "ksp" }
 
 [bundles]
 kotest = ["kotest-core", "kotest-assertions"]
