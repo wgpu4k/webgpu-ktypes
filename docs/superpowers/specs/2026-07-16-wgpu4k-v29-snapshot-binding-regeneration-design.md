@@ -78,5 +78,6 @@ Verification consists of:
 6. confirming that only the approved dependency configuration, any strictly
    necessary generator compatibility change, and regenerated outputs changed.
 
-After verification and review, publish the complete change set on a `codex/`
-branch and open a draft pull request against the repository's default branch.
+After verification and review, publish the complete change set on the
+`feat/wgpu4k-v29-snapshot-bindings` branch and open a draft pull request
+against the repository's default branch.
