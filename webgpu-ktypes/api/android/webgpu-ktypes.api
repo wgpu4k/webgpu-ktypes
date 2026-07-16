@@ -595,10 +595,10 @@ public abstract interface class io/ygdrasil/webgpu/GPUDeviceLostInfo {
 }
 
 public final class io/ygdrasil/webgpu/GPUDeviceLostReason : java/lang/Enum {
+	public static final field CallbackCancelled Lio/ygdrasil/webgpu/GPUDeviceLostReason;
 	public static final field Companion Lio/ygdrasil/webgpu/GPUDeviceLostReason$Companion;
 	public static final field Destroyed Lio/ygdrasil/webgpu/GPUDeviceLostReason;
 	public static final field FailedCreation Lio/ygdrasil/webgpu/GPUDeviceLostReason;
-	public static final field InstanceDropped Lio/ygdrasil/webgpu/GPUDeviceLostReason;
 	public static final field Unknown Lio/ygdrasil/webgpu/GPUDeviceLostReason;
 	public static fun getEntries ()Lkotlin/enums/EnumEntries;
 	public final fun getValue-pVg5ArA ()I
@@ -639,19 +639,25 @@ public final class io/ygdrasil/webgpu/GPUFeatureName : java/lang/Enum {
 	public static final field BGRA8UnormStorage Lio/ygdrasil/webgpu/GPUFeatureName;
 	public static final field ClipDistances Lio/ygdrasil/webgpu/GPUFeatureName;
 	public static final field Companion Lio/ygdrasil/webgpu/GPUFeatureName$Companion;
+	public static final field CoreFeaturesAndLimits Lio/ygdrasil/webgpu/GPUFeatureName;
 	public static final field Depth32FloatStencil8 Lio/ygdrasil/webgpu/GPUFeatureName;
 	public static final field DepthClipControl Lio/ygdrasil/webgpu/GPUFeatureName;
 	public static final field DualSourceBlending Lio/ygdrasil/webgpu/GPUFeatureName;
 	public static final field Float32Blendable Lio/ygdrasil/webgpu/GPUFeatureName;
 	public static final field Float32Filterable Lio/ygdrasil/webgpu/GPUFeatureName;
 	public static final field IndirectFirstInstance Lio/ygdrasil/webgpu/GPUFeatureName;
+	public static final field PrimitiveIndex Lio/ygdrasil/webgpu/GPUFeatureName;
 	public static final field RG11B10UfloatRenderable Lio/ygdrasil/webgpu/GPUFeatureName;
 	public static final field ShaderF16 Lio/ygdrasil/webgpu/GPUFeatureName;
+	public static final field Subgroups Lio/ygdrasil/webgpu/GPUFeatureName;
+	public static final field TextureComponentSwizzle Lio/ygdrasil/webgpu/GPUFeatureName;
 	public static final field TextureCompressionASTC Lio/ygdrasil/webgpu/GPUFeatureName;
 	public static final field TextureCompressionASTCSliced3D Lio/ygdrasil/webgpu/GPUFeatureName;
 	public static final field TextureCompressionBC Lio/ygdrasil/webgpu/GPUFeatureName;
 	public static final field TextureCompressionBCSliced3D Lio/ygdrasil/webgpu/GPUFeatureName;
 	public static final field TextureCompressionETC2 Lio/ygdrasil/webgpu/GPUFeatureName;
+	public static final field TextureFormatsTier1 Lio/ygdrasil/webgpu/GPUFeatureName;
+	public static final field TextureFormatsTier2 Lio/ygdrasil/webgpu/GPUFeatureName;
 	public static final field TimestampQuery Lio/ygdrasil/webgpu/GPUFeatureName;
 	public static fun getEntries ()Lkotlin/enums/EnumEntries;
 	public final fun getValue-pVg5ArA ()I
@@ -1316,7 +1322,9 @@ public final class io/ygdrasil/webgpu/GPUTextureFormat : java/lang/Enum {
 	public static final field ETC2RGBA8UnormSrgb Lio/ygdrasil/webgpu/GPUTextureFormat;
 	public static final field R16Float Lio/ygdrasil/webgpu/GPUTextureFormat;
 	public static final field R16Sint Lio/ygdrasil/webgpu/GPUTextureFormat;
+	public static final field R16Snorm Lio/ygdrasil/webgpu/GPUTextureFormat;
 	public static final field R16Uint Lio/ygdrasil/webgpu/GPUTextureFormat;
+	public static final field R16Unorm Lio/ygdrasil/webgpu/GPUTextureFormat;
 	public static final field R32Float Lio/ygdrasil/webgpu/GPUTextureFormat;
 	public static final field R32Sint Lio/ygdrasil/webgpu/GPUTextureFormat;
 	public static final field R32Uint Lio/ygdrasil/webgpu/GPUTextureFormat;
@@ -1327,7 +1335,9 @@ public final class io/ygdrasil/webgpu/GPUTextureFormat : java/lang/Enum {
 	public static final field RG11B10Ufloat Lio/ygdrasil/webgpu/GPUTextureFormat;
 	public static final field RG16Float Lio/ygdrasil/webgpu/GPUTextureFormat;
 	public static final field RG16Sint Lio/ygdrasil/webgpu/GPUTextureFormat;
+	public static final field RG16Snorm Lio/ygdrasil/webgpu/GPUTextureFormat;
 	public static final field RG16Uint Lio/ygdrasil/webgpu/GPUTextureFormat;
+	public static final field RG16Unorm Lio/ygdrasil/webgpu/GPUTextureFormat;
 	public static final field RG32Float Lio/ygdrasil/webgpu/GPUTextureFormat;
 	public static final field RG32Sint Lio/ygdrasil/webgpu/GPUTextureFormat;
 	public static final field RG32Uint Lio/ygdrasil/webgpu/GPUTextureFormat;
@@ -1340,7 +1350,9 @@ public final class io/ygdrasil/webgpu/GPUTextureFormat : java/lang/Enum {
 	public static final field RGB9E5Ufloat Lio/ygdrasil/webgpu/GPUTextureFormat;
 	public static final field RGBA16Float Lio/ygdrasil/webgpu/GPUTextureFormat;
 	public static final field RGBA16Sint Lio/ygdrasil/webgpu/GPUTextureFormat;
+	public static final field RGBA16Snorm Lio/ygdrasil/webgpu/GPUTextureFormat;
 	public static final field RGBA16Uint Lio/ygdrasil/webgpu/GPUTextureFormat;
+	public static final field RGBA16Unorm Lio/ygdrasil/webgpu/GPUTextureFormat;
 	public static final field RGBA32Float Lio/ygdrasil/webgpu/GPUTextureFormat;
 	public static final field RGBA32Sint Lio/ygdrasil/webgpu/GPUTextureFormat;
 	public static final field RGBA32Uint Lio/ygdrasil/webgpu/GPUTextureFormat;
@@ -1402,6 +1414,7 @@ public final class io/ygdrasil/webgpu/GPUTextureUsage$Companion {
 	public final fun getRenderAttachment-vq9ozLU ()J
 	public final fun getStorageBinding-vq9ozLU ()J
 	public final fun getTextureBinding-vq9ozLU ()J
+	public final fun getTransientAttachment-vq9ozLU ()J
 }
 
 public abstract interface class io/ygdrasil/webgpu/GPUTextureView : io/ygdrasil/webgpu/GPUBindingResource, io/ygdrasil/webgpu/GPUObjectBase, java/lang/AutoCloseable {
@@ -1516,7 +1529,6 @@ public final class io/ygdrasil/webgpu/GPUVertexStepMode : java/lang/Enum {
 	public static final field Companion Lio/ygdrasil/webgpu/GPUVertexStepMode$Companion;
 	public static final field Instance Lio/ygdrasil/webgpu/GPUVertexStepMode;
 	public static final field Vertex Lio/ygdrasil/webgpu/GPUVertexStepMode;
-	public static final field VertexBufferNotUsed Lio/ygdrasil/webgpu/GPUVertexStepMode;
 	public static fun getEntries ()Lkotlin/enums/EnumEntries;
 	public final fun getValue-pVg5ArA ()I
 	public static fun valueOf (Ljava/lang/String;)Lio/ygdrasil/webgpu/GPUVertexStepMode;
