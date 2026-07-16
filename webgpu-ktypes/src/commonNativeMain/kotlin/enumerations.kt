@@ -440,11 +440,7 @@ actual enum class GPUDeviceLostReason(val value: UInt) {
 	 * 
 	 */
 	Destroyed(2u),
-	/**
-	 * Indicates that the GPU device was lost because the instance (e.g., the browser tab or worker) was dropped. This can happen if the user navigates away from a page or closes a tab.
-	 * 
-	 */
-	InstanceDropped(3u),
+	CallbackCancelled(3u),
 	/**
 	 * Indicates that the GPU device failed to be created. This can occur due to hardware limitations, driver issues, or other initialization problems.
 	 * 
@@ -517,27 +513,21 @@ actual enum class GPUErrorFilter(val value: UInt) {
  * 
  */
 actual enum class GPUFeatureName(val value: UInt) {
+	CoreFeaturesAndLimits(1u),
 	/**
 	 * The `DepthClipControl` feature allows the use of depth clip control in WebGPU. This feature enables more precise control over depth clipping, which can be useful for advanced rendering techniques.
 	 * 
 	 * [See W3C specification: Depth Clip Control](https://www.w3.org/TR/webgpu/#depth-clip-control)
 	 * 
 	 */
-	DepthClipControl(1u),
+	DepthClipControl(2u),
 	/**
 	 * The `Depth32FloatStencil8` feature indicates support for a depth buffer with 32-bit floating-point precision and an 8-bit stencil buffer. This is useful for high-precision depth testing and stencil operations.
 	 * 
 	 * [See W3C specification: Depth32FloatStencil8](https://www.w3.org/TR/webgpu/#depth32float-stencil8)
 	 * 
 	 */
-	Depth32FloatStencil8(2u),
-	/**
-	 * The `TimestampQuery` feature allows the use of timestamp queries in WebGPU. This can be used to measure the time taken by specific GPU operations, which is useful for performance profiling and optimization.
-	 * 
-	 * [See W3C specification: Timestamp Query](https://www.w3.org/TR/webgpu/#timestamp-query)
-	 * 
-	 */
-	TimestampQuery(3u),
+	Depth32FloatStencil8(3u),
 	/**
 	 * The `TextureCompressionBC` feature indicates support for BC (Block Compression) texture formats. This can significantly reduce the memory footprint of textures, which is beneficial for performance and storage.
 	 * 
@@ -574,61 +564,73 @@ actual enum class GPUFeatureName(val value: UInt) {
 	 */
 	TextureCompressionASTCSliced3D(8u),
 	/**
+	 * The `TimestampQuery` feature allows the use of timestamp queries in WebGPU. This can be used to measure the time taken by specific GPU operations, which is useful for performance profiling and optimization.
+	 * 
+	 * [See W3C specification: Timestamp Query](https://www.w3.org/TR/webgpu/#timestamp-query)
+	 * 
+	 */
+	TimestampQuery(9u),
+	/**
 	 * The `IndirectFirstInstance` feature allows the use of indirect drawing commands with the first instance parameter. This can be used to draw multiple instances of a mesh with different starting points, which is useful for complex scenes.
 	 * 
 	 * [See W3C specification: Indirect First Instance](https://www.w3.org/TR/webgpu/#indirect-first-instance)
 	 * 
 	 */
-	IndirectFirstInstance(9u),
+	IndirectFirstInstance(10u),
 	/**
 	 * The `ShaderF16` feature indicates support for 16-bit floating-point precision in shaders. This can reduce the memory footprint of shader data, which is beneficial for performance and storage.
 	 * 
 	 * [See W3C specification: Shader F16](https://www.w3.org/TR/webgpu/#shader-f16)
 	 * 
 	 */
-	ShaderF16(10u),
+	ShaderF16(11u),
 	/**
 	 * The `RG11B10UfloatRenderable` feature indicates support for rendering to textures with the RG11B10Ufloat format. This is useful for high-dynamic-range (HDR) rendering.
 	 * 
 	 * [See W3C specification: RG11B10Ufloat Renderable](https://www.w3.org/TR/webgpu/#rg11b10ufloat-renderable)
 	 * 
 	 */
-	RG11B10UfloatRenderable(11u),
+	RG11B10UfloatRenderable(12u),
 	/**
 	 * The `BGRA8UnormStorage` feature indicates support for storing textures in the BGRA8Unorm format. This is useful for compatibility with certain graphics APIs and formats.
 	 * 
 	 * [See W3C specification: BGRA8Unorm Storage](https://www.w3.org/TR/webgpu/#bgra8unorm-storage)
 	 * 
 	 */
-	BGRA8UnormStorage(12u),
+	BGRA8UnormStorage(13u),
 	/**
 	 * The `Float32Filterable` feature indicates support for filtering textures with 32-bit floating-point precision. This is useful for high-quality texture sampling in shaders.
 	 * 
 	 * [See W3C specification: Float32 Filterable](https://www.w3.org/TR/webgpu/#float32-filterable)
 	 * 
 	 */
-	Float32Filterable(13u),
+	Float32Filterable(14u),
 	/**
 	 * The `Float32Blendable` feature indicates support for blending textures with 32-bit floating-point precision. This is useful for high-quality blending operations in shaders.
 	 * 
 	 * [See W3C specification: Float32 Blendable](https://www.w3.org/TR/webgpu/#float32-blendable)
 	 * 
 	 */
-	Float32Blendable(14u),
+	Float32Blendable(15u),
 	/**
 	 * The `ClipDistances` feature allows the use of clip distances in WebGPU. This can be used to perform custom clipping operations in shaders, which is useful for advanced rendering techniques.
 	 * 
 	 * [See W3C specification: Clip Distances](https://www.w3.org/TR/webgpu/#clip-distances)
 	 * 
 	 */
-	ClipDistances(15u),
+	ClipDistances(16u),
 	/**
 	 * The `DualSourceBlending` feature indicates support for dual-source blending. This allows for more complex blending operations, which can be useful for advanced rendering techniques.
 	 * 
 	 * [See W3C specification: Dual Source Blending](https://www.w3.org/TR/webgpu/#dual-source-blending)
 	 * 
 	 */
-	DualSourceBlending(16u);
+	DualSourceBlending(17u),
+	Subgroups(18u),
+	TextureFormatsTier1(19u),
+	TextureFormatsTier2(20u),
+	PrimitiveIndex(21u),
+	TextureComponentSwizzle(22u);
 
 
 	companion object {
@@ -1263,461 +1265,467 @@ actual enum class GPUTextureFormat(val value: UInt) {
 	 * 
 	 */
 	R8Sint(4u),
+	R16Unorm(5u),
+	R16Snorm(6u),
 	/**
 	 * Represents a 16-bit unsigned integer format. Each pixel component is stored as a 16-bit unsigned integer.
 	 * 
 	 */
-	R16Uint(5u),
+	R16Uint(7u),
 	/**
 	 * Represents a 16-bit signed integer format. Each pixel component is stored as a 16-bit signed integer.
 	 * 
 	 */
-	R16Sint(6u),
+	R16Sint(8u),
 	/**
 	 * Represents a 16-bit floating-point format. Each pixel component is stored as a 16-bit floating-point value.
 	 * 
 	 */
-	R16Float(7u),
+	R16Float(9u),
 	/**
 	 * Represents an 8-bit unsigned normalized format for two channels (red and green). Each channel is stored as an 8-bit value, where 0 represents the minimum value and 255 represents the maximum value.
 	 * 
 	 */
-	RG8Unorm(8u),
+	RG8Unorm(10u),
 	/**
 	 * Represents an 8-bit signed normalized format for two channels (red and green). Each channel is stored as an 8-bit value, where -128 represents the minimum value and 127 represents the maximum value.
 	 * 
 	 */
-	RG8Snorm(9u),
+	RG8Snorm(11u),
 	/**
 	 * Represents an 8-bit unsigned integer format for two channels (red and green). Each channel is stored as an 8-bit unsigned integer, ranging from 0 to 255.
 	 * 
 	 */
-	RG8Uint(10u),
+	RG8Uint(12u),
 	/**
 	 * Represents an 8-bit signed integer format for two channels (red and green). Each channel is stored as an 8-bit signed integer.
 	 * 
 	 */
-	RG8Sint(11u),
+	RG8Sint(13u),
 	/**
 	 * Represents a 32-bit floating-point format. Each pixel component is stored as a 32-bit floating-point value.
 	 * 
 	 */
-	R32Float(12u),
+	R32Float(14u),
 	/**
 	 * Represents a 32-bit unsigned integer format. Each pixel component is stored as a 32-bit unsigned integer.
 	 * 
 	 */
-	R32Uint(13u),
+	R32Uint(15u),
 	/**
 	 * Represents a 32-bit signed integer format. Each pixel component is stored as a 32-bit signed integer.
 	 * 
 	 */
-	R32Sint(14u),
+	R32Sint(16u),
+	RG16Unorm(17u),
+	RG16Snorm(18u),
 	/**
 	 * Represents a 16-bit unsigned integer format for two channels (red and green). Each channel is stored as a 16-bit unsigned integer.
 	 * 
 	 */
-	RG16Uint(15u),
+	RG16Uint(19u),
 	/**
 	 * Represents a 16-bit signed integer format for two channels (red and green). Each channel is stored as a 16-bit signed integer.
 	 * 
 	 */
-	RG16Sint(16u),
+	RG16Sint(20u),
 	/**
 	 * Represents a 16-bit floating-point format for two channels (red and green). Each channel is stored as a 16-bit floating-point value.
 	 * 
 	 */
-	RG16Float(17u),
+	RG16Float(21u),
 	/**
 	 * Represents an 8-bit unsigned normalized format for four channels (red, green, blue, alpha). Each channel is stored as an 8-bit value, where 0 represents the minimum value and 255 represents the maximum value.
 	 * 
 	 */
-	RGBA8Unorm(18u),
+	RGBA8Unorm(22u),
 	/**
 	 * Represents an 8-bit unsigned normalized format for four channels (red, green, blue, alpha) in sRGB color space. Each channel is stored as an 8-bit value, where 0 represents the minimum value and 255 represents the maximum value.
 	 * 
 	 */
-	RGBA8UnormSrgb(19u),
+	RGBA8UnormSrgb(23u),
 	/**
 	 * Represents an 8-bit signed normalized format for four channels (red, green, blue, alpha). Each channel is stored as an 8-bit value, where -128 represents the minimum value and 127 represents the maximum value.
 	 * 
 	 */
-	RGBA8Snorm(20u),
+	RGBA8Snorm(24u),
 	/**
 	 * Represents an 8-bit unsigned integer format for four channels (red, green, blue, alpha). Each channel is stored as an 8-bit unsigned integer, ranging from 0 to 255.
 	 * 
 	 */
-	RGBA8Uint(21u),
+	RGBA8Uint(25u),
 	/**
 	 * Represents an 8-bit signed integer format for four channels (red, green, blue, alpha). Each channel is stored as an 8-bit signed integer.
 	 * 
 	 */
-	RGBA8Sint(22u),
+	RGBA8Sint(26u),
 	/**
 	 * Represents an 8-bit unsigned normalized format for four channels (blue, green, red, alpha). Each channel is stored as an 8-bit value, where 0 represents the minimum value and 255 represents the maximum value.
 	 * 
 	 */
-	BGRA8Unorm(23u),
+	BGRA8Unorm(27u),
 	/**
 	 * Represents an 8-bit unsigned normalized format for four channels (blue, green, red, alpha) in sRGB color space. Each channel is stored as an 8-bit value, where 0 represents the minimum value and 255 represents the maximum value.
 	 * 
 	 */
-	BGRA8UnormSrgb(24u),
+	BGRA8UnormSrgb(28u),
 	/**
 	 * Represents a packed 32-bit unsigned integer format for four channels (red, green, blue, alpha). The red, green, and blue channels are each 10 bits, and the alpha channel is 2 bits.
 	 * 
 	 */
-	RGB10A2Uint(25u),
+	RGB10A2Uint(29u),
 	/**
 	 * Represents a packed 32-bit unsigned normalized format for four channels (red, green, blue, alpha). The red, green, and blue channels are each 10 bits, and the alpha channel is 2 bits.
 	 * 
 	 */
-	RGB10A2Unorm(26u),
+	RGB10A2Unorm(30u),
 	/**
 	 * Represents a packed 32-bit unsigned floating-point format for three channels (red, green, blue). The red and green channels are each 11 bits, and the blue channel is 10 bits.
 	 * 
 	 */
-	RG11B10Ufloat(27u),
+	RG11B10Ufloat(31u),
 	/**
 	 * Represents a packed 32-bit unsigned floating-point format for three channels (red, green, blue) with a shared exponent. The red, green, and blue channels are each 9 bits, and the shared exponent is 5 bits.
 	 * 
 	 */
-	RGB9E5Ufloat(28u),
+	RGB9E5Ufloat(32u),
 	/**
 	 * Represents a 64-bit floating-point format for two channels (red, green). Each channel is stored as a 32-bit floating-point value.
 	 * 
 	 */
-	RG32Float(29u),
+	RG32Float(33u),
 	/**
 	 * Represents a 64-bit unsigned integer format for two channels (red, green). Each channel is stored as a 32-bit unsigned integer.
 	 * 
 	 */
-	RG32Uint(30u),
+	RG32Uint(34u),
 	/**
 	 * Represents a 64-bit signed integer format for two channels (red, green). Each channel is stored as a 32-bit signed integer.
 	 * 
 	 */
-	RG32Sint(31u),
+	RG32Sint(35u),
+	RGBA16Unorm(36u),
+	RGBA16Snorm(37u),
 	/**
 	 * Represents a 64-bit unsigned integer format for four channels (red, green, blue, alpha). Each channel is stored as a 16-bit unsigned integer.
 	 * 
 	 */
-	RGBA16Uint(32u),
+	RGBA16Uint(38u),
 	/**
 	 * Represents a 64-bit signed integer format for four channels (red, green, blue, alpha). Each channel is stored as a 16-bit signed integer.
 	 * 
 	 */
-	RGBA16Sint(33u),
+	RGBA16Sint(39u),
 	/**
 	 * Represents a 64-bit floating-point format for four channels (red, green, blue, alpha). Each channel is stored as a 16-bit floating-point value.
 	 * 
 	 */
-	RGBA16Float(34u),
+	RGBA16Float(40u),
 	/**
 	 * Represents a 128-bit floating-point format for four channels (red, green, blue, alpha). Each channel is stored as a 32-bit floating-point value.
 	 * 
 	 */
-	RGBA32Float(35u),
+	RGBA32Float(41u),
 	/**
 	 * Represents a 128-bit unsigned integer format for four channels (red, green, blue, alpha). Each channel is stored as a 32-bit unsigned integer.
 	 * 
 	 */
-	RGBA32Uint(36u),
+	RGBA32Uint(42u),
 	/**
 	 * Represents a 128-bit signed integer format for four channels (red, green, blue, alpha). Each channel is stored as a 32-bit signed integer.
 	 * 
 	 */
-	RGBA32Sint(37u),
+	RGBA32Sint(43u),
 	/**
 	 * Represents an 8-bit stencil format. This format is used for storing stencil values in depth-stencil textures.
 	 * 
 	 */
-	Stencil8(38u),
+	Stencil8(44u),
 	/**
 	 * Represents a 16-bit unsigned normalized depth format. This format is used for storing depth values in depth textures.
 	 * 
 	 */
-	Depth16Unorm(39u),
+	Depth16Unorm(45u),
 	/**
 	 * Represents a 24-bit or 32-bit unsigned normalized depth format. This format is used for storing depth values in depth textures.
 	 * 
 	 */
-	Depth24Plus(40u),
+	Depth24Plus(46u),
 	/**
 	 * Represents a combined 24-bit or 32-bit unsigned normalized depth and 8-bit stencil format. This format is used for storing both depth and stencil values in depth-stencil textures.
 	 * 
 	 */
-	Depth24PlusStencil8(41u),
+	Depth24PlusStencil8(47u),
 	/**
 	 * Represents a 32-bit floating-point depth format. This format is used for storing high-precision depth values in depth textures.
 	 * 
 	 */
-	Depth32Float(42u),
+	Depth32Float(48u),
 	/**
 	 * Represents a combined 32-bit floating-point depth and 8-bit stencil format. This format is used for storing both high-precision depth and stencil values in depth-stencil textures.
 	 * 
 	 */
-	Depth32FloatStencil8(43u),
+	Depth32FloatStencil8(49u),
 	/**
 	 * Represents a BC1 (DXT1) compressed format for RGBA textures with unsigned normalized values. This format is used for texture compression in WebGPU.
 	 * 
 	 */
-	BC1RGBAUnorm(44u),
+	BC1RGBAUnorm(50u),
 	/**
 	 * Represents a BC1 (DXT1) compressed format for RGBA textures with unsigned normalized values in sRGB color space. This format is used for texture compression in WebGPU.
 	 * 
 	 */
-	BC1RGBAUnormSrgb(45u),
+	BC1RGBAUnormSrgb(51u),
 	/**
 	 * Represents a BC2 (DXT3) compressed format for RGBA textures with unsigned normalized values. This format is used for texture compression in WebGPU.
 	 * 
 	 */
-	BC2RGBAUnorm(46u),
+	BC2RGBAUnorm(52u),
 	/**
 	 * Represents a BC2 (DXT3) compressed format for RGBA textures with unsigned normalized values in sRGB color space. This format is used for texture compression in WebGPU.
 	 * 
 	 */
-	BC2RGBAUnormSrgb(47u),
+	BC2RGBAUnormSrgb(53u),
 	/**
 	 * Represents a BC3 (DXT5) compressed format for RGBA textures with unsigned normalized values. This format is used for texture compression in WebGPU.
 	 * 
 	 */
-	BC3RGBAUnorm(48u),
+	BC3RGBAUnorm(54u),
 	/**
 	 * Represents a BC3 (DXT5) compressed format for RGBA textures with unsigned normalized values in sRGB color space. This format is used for texture compression in WebGPU.
 	 * 
 	 */
-	BC3RGBAUnormSrgb(49u),
+	BC3RGBAUnormSrgb(55u),
 	/**
 	 * Represents a BC4 compressed format for R textures with unsigned normalized values. This format is used for texture compression in WebGPU.
 	 * 
 	 */
-	BC4RUnorm(50u),
+	BC4RUnorm(56u),
 	/**
 	 * Represents a BC4 compressed format for R textures with signed normalized values. This format is used for texture compression in WebGPU.
 	 * 
 	 */
-	BC4RSnorm(51u),
+	BC4RSnorm(57u),
 	/**
 	 * Represents a BC5 compressed format for RG textures with unsigned normalized values. This format is used for texture compression in WebGPU.
 	 * 
 	 */
-	BC5RGUnorm(52u),
+	BC5RGUnorm(58u),
 	/**
 	 * Represents a BC5 compressed format for RG textures with signed normalized values. This format is used for texture compression in WebGPU.
 	 * 
 	 */
-	BC5RGSnorm(53u),
+	BC5RGSnorm(59u),
 	/**
 	 * Represents a BC6H compressed format for RGB textures with unsigned floating-point values. This format is used for texture compression in WebGPU.
 	 * 
 	 */
-	BC6HRGBUfloat(54u),
+	BC6HRGBUfloat(60u),
 	/**
 	 * Represents a BC6H compressed format for RGB textures with floating-point values. This format is used for texture compression in WebGPU.
 	 * 
 	 */
-	BC6HRGBFloat(55u),
+	BC6HRGBFloat(61u),
 	/**
 	 * Represents a BC7 compressed format for RGBA textures with unsigned normalized values. This format is used for texture compression in WebGPU.
 	 * 
 	 */
-	BC7RGBAUnorm(56u),
+	BC7RGBAUnorm(62u),
 	/**
 	 * Represents a BC7 compressed format for RGBA textures with unsigned normalized values in sRGB color space. This format is used for texture compression in WebGPU.
 	 * 
 	 */
-	BC7RGBAUnormSrgb(57u),
+	BC7RGBAUnormSrgb(63u),
 	/**
 	 * Represents an ETC2 compressed format for RGB textures with unsigned normalized values. This format is used for texture compression in WebGPU.
 	 * 
 	 */
-	ETC2RGB8Unorm(58u),
+	ETC2RGB8Unorm(64u),
 	/**
 	 * Represents an ETC2 compressed format for RGB textures with unsigned normalized values in sRGB color space. This format is used for texture compression in WebGPU.
 	 * 
 	 */
-	ETC2RGB8UnormSrgb(59u),
+	ETC2RGB8UnormSrgb(65u),
 	/**
 	 * Represents an ETC2 compressed format for RGB textures with 1-bit alpha channel and unsigned normalized values. This format is used for texture compression in WebGPU.
 	 * 
 	 */
-	ETC2RGB8A1Unorm(60u),
+	ETC2RGB8A1Unorm(66u),
 	/**
 	 * Represents an ETC2 compressed format for RGB textures with 1-bit alpha channel and unsigned normalized values in sRGB color space. This format is used for texture compression in WebGPU.
 	 * 
 	 */
-	ETC2RGB8A1UnormSrgb(61u),
+	ETC2RGB8A1UnormSrgb(67u),
 	/**
 	 * Represents an ETC2 compressed format for RGBA textures with unsigned normalized values. This format is used for texture compression in WebGPU.
 	 * 
 	 */
-	ETC2RGBA8Unorm(62u),
+	ETC2RGBA8Unorm(68u),
 	/**
 	 * Represents an ETC2 compressed format for RGBA textures with unsigned normalized values in sRGB color space. This format is used for texture compression in WebGPU.
 	 * 
 	 */
-	ETC2RGBA8UnormSrgb(63u),
+	ETC2RGBA8UnormSrgb(69u),
 	/**
 	 * Represents an EAC compressed format for R textures with 11-bit unsigned normalized values. This format is used for texture compression in WebGPU.
 	 * 
 	 */
-	EACR11Unorm(64u),
+	EACR11Unorm(70u),
 	/**
 	 * Represents an EAC compressed format for R textures with 11-bit signed normalized values. This format is used for texture compression in WebGPU.
 	 * 
 	 */
-	EACR11Snorm(65u),
+	EACR11Snorm(71u),
 	/**
 	 * Represents an EAC compressed format for RG textures with 11-bit unsigned normalized values. This format is used for texture compression in WebGPU.
 	 * 
 	 */
-	EACRG11Unorm(66u),
+	EACRG11Unorm(72u),
 	/**
 	 * Represents an EAC compressed format for RG textures with 11-bit signed normalized values. This format is used for texture compression in WebGPU.
 	 * 
 	 */
-	EACRG11Snorm(67u),
+	EACRG11Snorm(73u),
 	/**
 	 * Represents an ASTC compressed format for textures with 4x4 block size and unsigned normalized values. This format is used for texture compression in WebGPU.
 	 * 
 	 */
-	ASTC4x4Unorm(68u),
+	ASTC4x4Unorm(74u),
 	/**
 	 * Represents an ASTC compressed format for textures with 4x4 block size and unsigned normalized values in sRGB color space. This format is used for texture compression in WebGPU.
 	 * 
 	 */
-	ASTC4x4UnormSrgb(69u),
+	ASTC4x4UnormSrgb(75u),
 	/**
 	 * Represents an ASTC compressed format for textures with 5x4 block size and unsigned normalized values. This format is used for texture compression in WebGPU.
 	 * 
 	 */
-	ASTC5x4Unorm(70u),
+	ASTC5x4Unorm(76u),
 	/**
 	 * Represents an ASTC compressed format for textures with 5x4 block size and unsigned normalized values in sRGB color space. This format is used for texture compression in WebGPU.
 	 * 
 	 */
-	ASTC5x4UnormSrgb(71u),
+	ASTC5x4UnormSrgb(77u),
 	/**
 	 * Represents an ASTC compressed format for textures with 5x5 block size and unsigned normalized values. This format is used for texture compression in WebGPU.
 	 * 
 	 */
-	ASTC5x5Unorm(72u),
+	ASTC5x5Unorm(78u),
 	/**
 	 * Represents an ASTC compressed format for textures with 5x5 block size and unsigned normalized values in sRGB color space. This format is used for texture compression in WebGPU.
 	 * 
 	 */
-	ASTC5x5UnormSrgb(73u),
+	ASTC5x5UnormSrgb(79u),
 	/**
 	 * Represents an ASTC compressed format for textures with 6x5 block size and unsigned normalized values. This format is used for texture compression in WebGPU.
 	 * 
 	 */
-	ASTC6x5Unorm(74u),
+	ASTC6x5Unorm(80u),
 	/**
 	 * Represents an ASTC compressed format for textures with 6x5 block size and unsigned normalized values in sRGB color space. This format is used for texture compression in WebGPU.
 	 * 
 	 */
-	ASTC6x5UnormSrgb(75u),
+	ASTC6x5UnormSrgb(81u),
 	/**
 	 * Represents an ASTC compressed format for textures with 6x6 block size and unsigned normalized values. This format is used for texture compression in WebGPU.
 	 * 
 	 */
-	ASTC6x6Unorm(76u),
+	ASTC6x6Unorm(82u),
 	/**
 	 * Represents an ASTC compressed format for textures with 6x6 block size and unsigned normalized values in sRGB color space. This format is used for texture compression in WebGPU.
 	 * 
 	 */
-	ASTC6x6UnormSrgb(77u),
+	ASTC6x6UnormSrgb(83u),
 	/**
 	 * Represents an ASTC compressed format for textures with 8x5 block size and unsigned normalized values. This format is used for texture compression in WebGPU.
 	 * 
 	 */
-	ASTC8x5Unorm(78u),
+	ASTC8x5Unorm(84u),
 	/**
 	 * Represents an ASTC compressed format for textures with 8x5 block size and unsigned normalized values in sRGB color space. This format is used for texture compression in WebGPU.
 	 * 
 	 */
-	ASTC8x5UnormSrgb(79u),
+	ASTC8x5UnormSrgb(85u),
 	/**
 	 * Represents an ASTC compressed format for textures with 8x6 block size and unsigned normalized values. This format is used for texture compression in WebGPU.
 	 * 
 	 */
-	ASTC8x6Unorm(80u),
+	ASTC8x6Unorm(86u),
 	/**
 	 * Represents an ASTC compressed format for textures with 8x6 block size and unsigned normalized values in sRGB color space. This format is used for texture compression in WebGPU.
 	 * 
 	 */
-	ASTC8x6UnormSrgb(81u),
+	ASTC8x6UnormSrgb(87u),
 	/**
 	 * Represents an ASTC compressed format for textures with 8x8 block size and unsigned normalized values. This format is used for texture compression in WebGPU.
 	 * 
 	 */
-	ASTC8x8Unorm(82u),
+	ASTC8x8Unorm(88u),
 	/**
 	 * Represents an ASTC compressed format for textures with 8x8 block size and unsigned normalized values in sRGB color space. This format is used for texture compression in WebGPU.
 	 * 
 	 */
-	ASTC8x8UnormSrgb(83u),
+	ASTC8x8UnormSrgb(89u),
 	/**
 	 * Represents an ASTC compressed format for textures with 10x5 block size and unsigned normalized values. This format is used for texture compression in WebGPU.
 	 * 
 	 */
-	ASTC10x5Unorm(84u),
+	ASTC10x5Unorm(90u),
 	/**
 	 * Represents an ASTC compressed format for textures with 10x5 block size and unsigned normalized values in sRGB color space. This format is used for texture compression in WebGPU.
 	 * 
 	 */
-	ASTC10x5UnormSrgb(85u),
+	ASTC10x5UnormSrgb(91u),
 	/**
 	 * Represents an ASTC compressed format for textures with 10x6 block size and unsigned normalized values. This format is used for texture compression in WebGPU.
 	 * 
 	 */
-	ASTC10x6Unorm(86u),
+	ASTC10x6Unorm(92u),
 	/**
 	 * Represents an ASTC compressed format for textures with 10x6 block size and unsigned normalized values in sRGB color space. This format is used for texture compression in WebGPU.
 	 * 
 	 */
-	ASTC10x6UnormSrgb(87u),
+	ASTC10x6UnormSrgb(93u),
 	/**
 	 * Represents an ASTC compressed format for textures with 10x8 block size and unsigned normalized values. This format is used for texture compression in WebGPU.
 	 * 
 	 */
-	ASTC10x8Unorm(88u),
+	ASTC10x8Unorm(94u),
 	/**
 	 * Represents an ASTC compressed format for textures with 10x8 block size and unsigned normalized values in sRGB color space. This format is used for texture compression in WebGPU.
 	 * 
 	 */
-	ASTC10x8UnormSrgb(89u),
+	ASTC10x8UnormSrgb(95u),
 	/**
 	 * Represents an ASTC compressed format for textures with 10x10 block size and unsigned normalized values. This format is used for texture compression in WebGPU.
 	 * 
 	 */
-	ASTC10x10Unorm(90u),
+	ASTC10x10Unorm(96u),
 	/**
 	 * Represents an ASTC compressed format for textures with 10x10 block size and unsigned normalized values in sRGB color space. This format is used for texture compression in WebGPU.
 	 * 
 	 */
-	ASTC10x10UnormSrgb(91u),
+	ASTC10x10UnormSrgb(97u),
 	/**
 	 * Represents an ASTC compressed format for textures with 12x10 block size and unsigned normalized values. This format is used for texture compression in WebGPU.
 	 * 
 	 */
-	ASTC12x10Unorm(92u),
+	ASTC12x10Unorm(98u),
 	/**
 	 * Represents an ASTC compressed format for textures with 12x10 block size and unsigned normalized values in sRGB color space. This format is used for texture compression in WebGPU.
 	 * 
 	 */
-	ASTC12x10UnormSrgb(93u),
+	ASTC12x10UnormSrgb(99u),
 	/**
 	 * Represents an ASTC compressed format for textures with 12x12 block size and unsigned normalized values. This format is used for texture compression in WebGPU.
 	 * 
 	 */
-	ASTC12x12Unorm(94u),
+	ASTC12x12Unorm(100u),
 	/**
 	 * Represents an ASTC compressed format for textures with 12x12 block size and unsigned normalized values in sRGB color space. This format is used for texture compression in WebGPU.
 	 * 
 	 */
-	ASTC12x12UnormSrgb(95u);
+	ASTC12x12UnormSrgb(101u);
 
 
 	companion object {
@@ -2366,24 +2374,19 @@ actual enum class GPUVertexFormat(val value: UInt) {
  */
 actual enum class GPUVertexStepMode(val value: UInt) {
 	/**
-	 * Indicates that the vertex buffer is not used. This mode is typically used when no vertex data needs to be fetched from a buffer.
-	 * 
-	 */
-	VertexBufferNotUsed(0u),
-	/**
 	 * The address is advanced by `arrayStride` for each vertex, and reset between instances.
 	 * 
 	 * This mode is used when the vertex data should be stepped per vertex. It is useful in scenarios where each vertex in a mesh has its own set of attributes.
 	 * 
 	 */
-	Vertex(2u),
+	Vertex(1u),
 	/**
 	 * The address is advanced by `arrayStride` for each instance.
 	 * 
 	 * This mode is used when the vertex data should be stepped per instance. It is useful in scenarios where multiple instances of a mesh share the same vertex data but have different transformations or attributes.
 	 * 
 	 */
-	Instance(3u);
+	Instance(2u);
 
 
 	companion object {

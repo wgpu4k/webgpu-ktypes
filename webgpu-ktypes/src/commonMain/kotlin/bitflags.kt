@@ -123,6 +123,8 @@ public value class GPUTextureUsage private constructor(
 
     public val RenderAttachment: io.ygdrasil.webgpu.GPUTextureUsage = GPUTextureUsage(16uL)
 
-    public val entries: kotlin.collections.Set<io.ygdrasil.webgpu.GPUTextureUsage> = setOf(None, CopySrc, CopyDst, TextureBinding, StorageBinding, RenderAttachment)
+    public val TransientAttachment: io.ygdrasil.webgpu.GPUTextureUsage = GPUTextureUsage(32uL)
+
+    public val entries: kotlin.collections.Set<io.ygdrasil.webgpu.GPUTextureUsage> = setOf(None, CopySrc, CopyDst, TextureBinding, StorageBinding, RenderAttachment, TransientAttachment)
   }
 }

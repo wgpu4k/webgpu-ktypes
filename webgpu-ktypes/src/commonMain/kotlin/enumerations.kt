@@ -328,11 +328,7 @@ expect enum class GPUDeviceLostReason {
 	 * 
 	 */
 	Destroyed,
-	/**
-	 * Indicates that the GPU device was lost because the instance (e.g., the browser tab or worker) was dropped. This can happen if the user navigates away from a page or closes a tab.
-	 * 
-	 */
-	InstanceDropped,
+	CallbackCancelled,
 	/**
 	 * Indicates that the GPU device failed to be created. This can occur due to hardware limitations, driver issues, or other initialization problems.
 	 * 
@@ -377,6 +373,7 @@ expect enum class GPUErrorFilter {
  * 
  */
 expect enum class GPUFeatureName {
+	CoreFeaturesAndLimits,
 	/**
 	 * The `DepthClipControl` feature allows the use of depth clip control in WebGPU. This feature enables more precise control over depth clipping, which can be useful for advanced rendering techniques.
 	 * 
@@ -391,13 +388,6 @@ expect enum class GPUFeatureName {
 	 * 
 	 */
 	Depth32FloatStencil8,
-	/**
-	 * The `TimestampQuery` feature allows the use of timestamp queries in WebGPU. This can be used to measure the time taken by specific GPU operations, which is useful for performance profiling and optimization.
-	 * 
-	 * [See W3C specification: Timestamp Query](https://www.w3.org/TR/webgpu/#timestamp-query)
-	 * 
-	 */
-	TimestampQuery,
 	/**
 	 * The `TextureCompressionBC` feature indicates support for BC (Block Compression) texture formats. This can significantly reduce the memory footprint of textures, which is beneficial for performance and storage.
 	 * 
@@ -433,6 +423,13 @@ expect enum class GPUFeatureName {
 	 * 
 	 */
 	TextureCompressionASTCSliced3D,
+	/**
+	 * The `TimestampQuery` feature allows the use of timestamp queries in WebGPU. This can be used to measure the time taken by specific GPU operations, which is useful for performance profiling and optimization.
+	 * 
+	 * [See W3C specification: Timestamp Query](https://www.w3.org/TR/webgpu/#timestamp-query)
+	 * 
+	 */
+	TimestampQuery,
 	/**
 	 * The `IndirectFirstInstance` feature allows the use of indirect drawing commands with the first instance parameter. This can be used to draw multiple instances of a mesh with different starting points, which is useful for complex scenes.
 	 * 
@@ -488,7 +485,12 @@ expect enum class GPUFeatureName {
 	 * [See W3C specification: Dual Source Blending](https://www.w3.org/TR/webgpu/#dual-source-blending)
 	 * 
 	 */
-	DualSourceBlending;
+	DualSourceBlending,
+	Subgroups,
+	TextureFormatsTier1,
+	TextureFormatsTier2,
+	PrimitiveIndex,
+	TextureComponentSwizzle;
 }
 
 /**
@@ -913,6 +915,8 @@ expect enum class GPUTextureFormat {
 	 * 
 	 */
 	R8Sint,
+	R16Unorm,
+	R16Snorm,
 	/**
 	 * Represents a 16-bit unsigned integer format. Each pixel component is stored as a 16-bit unsigned integer.
 	 * 
@@ -963,6 +967,8 @@ expect enum class GPUTextureFormat {
 	 * 
 	 */
 	R32Sint,
+	RG16Unorm,
+	RG16Snorm,
 	/**
 	 * Represents a 16-bit unsigned integer format for two channels (red and green). Each channel is stored as a 16-bit unsigned integer.
 	 * 
@@ -1048,6 +1054,8 @@ expect enum class GPUTextureFormat {
 	 * 
 	 */
 	RG32Sint,
+	RGBA16Unorm,
+	RGBA16Snorm,
 	/**
 	 * Represents a 64-bit unsigned integer format for four channels (red, green, blue, alpha). Each channel is stored as a 16-bit unsigned integer.
 	 * 
@@ -1959,11 +1967,6 @@ expect enum class GPUVertexFormat {
  * 
  */
 expect enum class GPUVertexStepMode {
-	/**
-	 * Indicates that the vertex buffer is not used. This mode is typically used when no vertex data needs to be fetched from a buffer.
-	 * 
-	 */
-	VertexBufferNotUsed,
 	/**
 	 * The address is advanced by `arrayStride` for each vertex, and reset between instances.
 	 * 

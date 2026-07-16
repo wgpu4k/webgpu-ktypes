@@ -34,7 +34,9 @@ internal fun MapperContext.loadDictionary(name: String, idlDictionary: IdlDictio
                     var type = if((it.type is IdlSimpleType)) it.type.toKotlinType() else {
                         "${(it.type as IdlUnionType).types.first().toKotlinType()}?"
                     }
-                    if (it.defaultValue == null && it.isRequired.not()) { type += "?" }
+                    if (it.defaultValue == null && it.isRequired.not() && type.endsWith("?").not()) {
+                        type += "?"
+                    }
                     kinterface.attributes += Interface.Attribute(it.name, type, true)
                 }
         }
