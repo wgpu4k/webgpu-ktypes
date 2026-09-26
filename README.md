@@ -1,3 +1,4 @@
+This project has been moved to https://github.com/Graphiks-org/WebGPU
 # webgpu-ktypes
 Kotlin types for webgpu
 
